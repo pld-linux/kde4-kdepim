@@ -19,6 +19,7 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version
 # Source0-md5:	eced8f5bfc539a3b3b10c0ca63ad333a
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
+BuildRequires:	boost-bind-devel
 BuildRequires:	boost-type_traits-devel
 BuildRequires:	cmake
 BuildRequires:	cyrus-sasl-devel
@@ -348,7 +349,7 @@ Miniaplicativo de monitoração da caixa de correio.
 Summary:	A sync tool for palmtops
 Summary(pl.UTF-8):	Narzędzie do synchronizacji z palmtopami
 Group:		X11/Applications
-#Requires:	pilot-link
+Requires:	pilot-link
 
 %description kpilot
 KPilot is an equivalent for the Palm Desktop software from Palm Inc,
@@ -425,7 +426,7 @@ cd build
         -DCMAKE_INSTALL_PREFIX=%{_prefix} \
         ../
 
-%{__make}
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
