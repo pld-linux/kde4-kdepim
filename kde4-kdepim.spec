@@ -4,12 +4,12 @@
 #
 %define		_state		unstable
 
+%define	orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
 Summary(ko.UTF-8):	K 데스크탑 환경 - PIM (개인 정보 관리)
 Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
-%define	orgname	kdepim
 Name:		kde4-kdepim
 Version:	4.0.60
 Release:	0.1
@@ -32,9 +32,9 @@ BuildRequires:	gpgme-devel >= 1:1.0.0
 %{?with_apidocs:BuildRequires:	graphviz}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	libgnokii-devel
-BuildRequires:	libopensync-devel >= 1:0.22
-BuildRequires:	libopensync-devel < 1:0.30
 BuildRequires:	libmal-devel >= 0.31
+BuildRequires:	libopensync-devel < 1:0.30
+BuildRequires:	libopensync-devel >= 1:0.22
 BuildRequires:	lockdev-devel
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
@@ -58,12 +58,14 @@ kdepim jest jest zestawem aplikacji PIM dla K Desktop Environment
 (KDE).
 
 %description -l ru.UTF-8
-kdepim - это набор утилит для управления персональной информацией для
-K Desktop Environment (KDE).
+kdepim - это набор утилит для управления
+персональной информацией для K Desktop
+Environment (KDE).
 
 %description -l uk.UTF-8
-kdepim - це набір утиліт для керування персональною информацією для K
-Desktop Environment (KDE).
+kdepim - це набір утиліт для керування
+персональною информацією для K Desktop
+Environment (KDE).
 
 %package devel
 Summary:	Development files for KDE pim
@@ -83,12 +85,14 @@ Pakiet ten zawiera pliki nagłówkowe potrzebne do budowy aplikacji
 bazujących na kdepim.
 
 %description devel -l uk.UTF-8
-Цей пакет містить файли заголовків необхідні для побудови програм,
+Цей пакет містить файли заголовків
+необхідні для побудови програм,
 базованих на kdepim.
 
 %description devel -l ru.UTF-8
-Этот пакет содержит файлы заголовков необходимые для построения
-программ, основанных на kdepim.
+Этот пакет содержит файлы заголовков
+необходимые для построения программ,
+основанных на kdepim.
 
 %package apidocs
 Summary:	API documentation
@@ -158,10 +162,10 @@ to be sent. Also includes an alarm daemon.
 
 %description kalarm -l pl.UTF-8
 KAlarm to osobisty program do planowania i przypominania poprzez
-uruchomienie polecenia lub pocztą elektroniczną. Umożliwia ustawienie
-własnej wiadomości alarmowej, która wyskoczy na ekranie o wybranym
-czasie albo zaszeregowanie poleceń do wykonania lub poczty do
-wysłania. Zawiera także demona obsługującego przypominanie.
+uruchomienie polecenia lub pocztą elektroniczną. Umożliwia
+ustawienie własnej wiadomości alarmowej, która wyskoczy na ekranie
+o wybranym czasie albo zaszeregowanie poleceń do wykonania lub poczty
+do wysłania. Zawiera także demona obsługującego przypominanie.
 
 %package kandy
 Summary:	A communication program between mobile phone and PC
@@ -188,9 +192,9 @@ tasks. It is useful for tracking hours to be billed to different
 clients.
 
 %description karm -l pl.UTF-8
-KArm (nazwa pochodzi od słowa "praca" w języku punjambi) śledzi czas
-spędzony na różnych zajęciach. Jest przydatny przy obliczaniu godzin
-do wystawiania rachunków wielu klientom.
+KArm (nazwa pochodzi od słowa "praca" w języku punjambi) śledzi
+czas spędzony na różnych zajęciach. Jest przydatny przy obliczaniu
+godzin do wystawiania rachunków wielu klientom.
 
 %package kmail
 Summary:	KDE Mail client
@@ -199,10 +203,10 @@ Summary(pt_BR.UTF-8):	Cliente / leitor de e-mails para o KDE
 Group:		X11/Applications
 URL:		http://kmail.kde.org/
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	kde4-kdebase-core >= %{version}
 Requires:	kde4-kio-imap4 >= %{version}-%{release}
 Requires:	kde4-kio-pop3 >= %{version}
 Requires:	kde4-kio-smtp >= %{version}
-Requires:	kde4-kdebase-core >= %{version}
 
 %description kmail
 This is electronic mail client for KDE with a huge amount of features:
@@ -228,10 +232,10 @@ Program pocztowy dla KDE o olbrzymich możliwościach, obejmujących:
 - automatyczne szyfrowanie przy użyciu OpenPGP (PGP lub GnuPG)
 - potężne filtry pocztowe
 - zagnieżdżone skrzynki pocztowe z obsługą list pocztowych
-- ściąganie na żądanie lub usuwanie bez ściągania dużych listów z
-  serwera POP3
-- pełną obsługę listów we wszystkich językach i zestawach znaków
-  obsługiwanych przez Qt
+- ściąganie na żądanie lub usuwanie bez ściągania dużych
+  listów z serwera POP3
+- pełną obsługę listów we wszystkich językach i zestawach
+  znaków obsługiwanych przez Qt
 - przeszukiwanie wiadomości z prezentacją w wirtualnych folderach
 - usuwanie powtórzonych listów
 - wątkowanie wiadomości
@@ -248,8 +252,8 @@ Summary(pl.UTF-8):	Czytnik newsów dla KDE
 Summary(pt_BR.UTF-8):	Leitor de notícias (news) do KDE
 Group:		X11/Applications
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	kde4-kio-nntp >= %{version}
 Requires:	kde4-kdebase-core >= %{version}
+Requires:	kde4-kio-nntp >= %{version}
 
 %description knode
 KNode is an online newsreader (GKNSA compliant) for the K Desktop
@@ -265,8 +269,8 @@ Environment. It features:
 - and more...
 
 %description knode -l pl.UTF-8
-KNode to czytnik newsów zgodny ze specyfikacją GKNSA przeznaczony dla
-środowiska KDE. Jego możliwości obejmują:
+KNode to czytnik newsów zgodny ze specyfikacją GKNSA przeznaczony
+dla środowiska KDE. Jego możliwości obejmują:
 - wszystkie podstawowe cechy czytnika newsów (czytanie i wysyłanie
   artykułów, wątkowanie...)
 - obsługę wielu serwerów news
@@ -292,9 +296,9 @@ accept drag and drop even from remote sites.
 
 %description knotes -l pl.UTF-8
 KNotes pozwala umieszczać na pulpicie notatki z opcją wysyłania.
-Dodatkowo, aby móc służyć za przypominajkę, KNotes może wysyłać pocztę
-i drukować notatki, a także przyjmować przeciąganie nawet ze zdalnych
-komputerów.
+Dodatkowo, aby móc służyć za przypominajkę, KNotes może
+wysyłać pocztę i drukować notatki, a także przyjmować
+przeciąganie nawet ze zdalnych komputerów.
 
 %package konsolekalendar
 Summary:	A command line ICard tool
@@ -315,11 +319,11 @@ Main features of KonsoleKalendar:
 - export calendar entries to other file formats
 
 %description konsolekalendar -l pl.UTF-8
-KonsoleKalendar to działający z linii poleceń interfejs do kalendarzy
-KDE. Pozwala oglądać, wstawiać, usuwać i modyfikować zdarzenia w
-kalendarzu z linii poleceń lub języka skryptowego. Ponadto
-KonsoleKalendar potrafi wyeksportować kalendarz KDE do wielu innych
-formatów.
+KonsoleKalendar to działający z linii poleceń interfejs do
+kalendarzy KDE. Pozwala oglądać, wstawiać, usuwać i modyfikować
+zdarzenia w kalendarzu z linii poleceń lub języka skryptowego.
+Ponadto KonsoleKalendar potrafi wyeksportować kalendarz KDE do wielu
+innych formatów.
 
 Główne możliwości programu KonsoleKalendar:
 - wypisywanie wpisów kalendarza od daty początkowej do końcowej
@@ -374,30 +378,32 @@ It supports:
 
 %description kpilot -l pl.UTF-8
 KPilot to odpowiednik oprogramowania Palm Desktop firmy Palm Inc,
-umożliwiający wymianę informacji między urządzeniami Palm, Palm Pilot
-i Visor a komputerem z KDE. KPilot jako taki nie zastępuje Palm
-Desktop - łączy i integruje wiele aplikacji KDE 3.x w pakiet, którym
-można zrobić tyle samo, a nawet więcej, co przy użyciu Palm Desktop.
+umożliwiający wymianę informacji między urządzeniami Palm, Palm
+Pilot i Visor a komputerem z KDE. KPilot jako taki nie zastępuje Palm
+Desktop - łączy i integruje wiele aplikacji KDE 3.x w pakiet,
+którym można zrobić tyle samo, a nawet więcej, co przy użyciu
+Palm Desktop.
 
 KPilot ma wtyczki do wymiany informacji między Palmem a innymi
 aplikacjami, takimi jak KOrganizer albo serwery POP3/SMTP. W KPilocie
-można wyświetlać i modyfikować kontakty, pisać notatki lub instalować
-nowe programy na Palmie.
+można wyświetlać i modyfikować kontakty, pisać notatki lub
+instalować nowe programy na Palmie.
 
 Obsługuje urządzenia serii:
 - Palm Pilot, m100, m500, Zire, Tungsten
 - Handspring Visor i Treo
-- Sony Clié (TJ35/E1, TJ25, T415, SJ120/333, S300, T625c, T675c, 665c)
+- Sony Clié (TJ35/E1, TJ25, T415, SJ120/333, S300, T625c, T675c,
+  665c)
 - Garmin iQue 3600
 - mogą działać także inne, ale nie były testowane.
 
 %description kpilot -l ru.UTF-8
-утилита для синхронизации с 3com Palm Pilots и совместимыми с ними
-устройствами,
+утилита для синхронизации с 3com Palm Pilots
+и совместимыми с ними устройствами,
 
 %description kpilot -l uk.UTF-8
-утиліта для синхронізації з 3com Palm Pilots та сумісними з ними
-пристроями.
+утиліта для синхронізації з 3com Palm Pilots
+та сумісними з ними пристроями.
 
 %package libs
 Summary:	Shared kdepim libraries
@@ -423,8 +429,8 @@ export QTDIR=%{_prefix}
 install -d build
 cd build
 %cmake \
-        -DCMAKE_INSTALL_PREFIX=%{_prefix} \
-        ../
+		-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+		../
 
 %{__make} -j1
 
