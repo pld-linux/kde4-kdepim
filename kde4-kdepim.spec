@@ -525,35 +525,46 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_korganizer.so
 #%attr(755,root,root) %{_libdir}/kde4/kcm_korgsummary.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_sdsummary.so
-#%attr(755,root,root) %{_libdir}/kde4/kded_networkstatus.so
-#%attr(755,root,root) %{_libdir}/kde4/kfile_ics.so
-#%attr(755,root,root) %{_libdir}/kde4/libakregatorpart.so*
-#%attr(755,root,root) %{_libdir}/kde4/libexchangewizard.so
-#%attr(755,root,root) %{_libdir}/kde4/libgroupwisewizard.so*
-#%attr(755,root,root) %{_libdir}/kde4/libakregator_mk4storage_plugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkitchensyncpart.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_akregator.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_journalplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_kaddressbookplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_karm.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_kmailplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_knodeplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_knotesplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_korganizerplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_todoplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_kpilotplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_newstickerplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_specialdatesplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_summaryplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkontact_weatherplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/libkorg_*.so
-#%attr(755,root,root) %{_libdir}/kde4/libkorganizerpart.so
-#%attr(755,root,root) %{_libdir}/kde4/libegroupwarewizard.so*
-#%attr(755,root,root) %{_libdir}/kde4/libkolabwizard.so*
-#%attr(755,root,root) %{_libdir}/kde4/libsloxwizard.so*
-#%attr(755,root,root) %{_libdir}/kde4/resourcecalendarexchange.so
+%attr(755,root,root) %{_libdir}/kde4/akregator_config_advanced.so
+%attr(755,root,root) %{_libdir}/kde4/akregator_config_appearance.so
+%attr(755,root,root) %{_libdir}/kde4/akregator_config_archive.so
+%attr(755,root,root) %{_libdir}/kde4/akregator_config_browser.so
+%attr(755,root,root) %{_libdir}/kde4/akregator_config_general.so
+%attr(755,root,root) %{_libdir}/kde4/akregator_mk4storage_plugin.so
+%attr(755,root,root) %{_libdir}/kde4/akregatorpart.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_akregator.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_journalplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_kaddressbookplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletools.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_knodeplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_knotesplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_korganizerplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_newstickerplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_plannerplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_specialdatesplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_summaryplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_todoplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_weatherplugin.so
+%attr(755,root,root) %{_libdir}/kde4/korg_datenums.so
+%attr(755,root,root) %{_libdir}/kde4/korg_hebrew.so
+%attr(755,root,root) %{_libdir}/kde4/korg_journalprint.so
+%attr(755,root,root) %{_libdir}/kde4/korg_picoftheday.so
+%attr(755,root,root) %{_libdir}/kde4/korg_thisdayinhistory.so
+%attr(755,root,root) %{_libdir}/kde4/korg_yearprint.so
+%attr(755,root,root) %{_libdir}/kde4/korganizerpart.so
+%attr(755,root,root) %{_libdir}/kde4/kpartsdesignerplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kpilot_conduit_keyring.so
+%attr(755,root,root) %{_libdir}/kde4/kpilot_conduit_memofile.so
+%attr(755,root,root) %{_libdir}/kde4/kpilot_conduit_notepad.so
+%attr(755,root,root) %{_libdir}/kde4/kpilot_conduit_null.so
+%attr(755,root,root) %{_libdir}/kde4/kpilot_conduit_popmail.so
+%attr(755,root,root) %{_libdir}/kde4/kpilot_conduit_time.so
+%attr(755,root,root) %{_libdir}/kde4/kpilot_conduit_todo.so
+%attr(755,root,root) %{_libdir}/kde4/kpilot_conduit_vcal.so
+%attr(755,root,root) %{_libdir}/kde4/ktexteditorkabcbridge.so
+%attr(755,root,root) %{_libdir}/kde4/plasma_applet_plasmobiff.so
+%attr(755,root,root) %{_libdir}/kde4/plasma_engine_akonadi.so
 %attr(755,root,root) %{_libdir}/kde4/plugins/designer/kdepimwidgets.so
-#%attr(755,root,root) %{_libdir}/kde4/plugins/designer/kpartsdesignerplugin.so
 %{_datadir}/apps/akregator
 %{_datadir}/apps/kconf_update/korganizer.upd
 %{_datadir}/apps/kdepimwidgets
@@ -626,6 +637,9 @@ rm -rf $RPM_BUILD_ROOT
 #%{_iconsdir}/*/*/actions/*rss*
 #%{_iconsdir}/crystalsvg/22x22/actions/button_fewer.png
 #%{_iconsdir}/crystalsvg/22x22/actions/button_more.png
+%{_kdedocdir}/en/korganizer
+%{_kdedocdir}/en/kontact
+%{_kdedocdir}/en/akregator
 
 %files devel
 %defattr(644,root,root,755)
@@ -710,8 +724,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files kaddressbook
 %defattr(644,root,root,755)
-#-f kaddressbook.lang
-%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kabc2mutt
 %attr(755,root,root) %{_bindir}/kaddressbook
 %attr(755,root,root) %{_libdir}/kde4/kcm_kabconfig.so
@@ -738,34 +750,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %{_datadir}/apps/kaddressbook
-%{_datadir}/kde4/services/kaddressbook/aimprotocol.desktop
-%{_datadir}/kde4/services/kaddressbook/bookmark_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/cardview.desktop
-%{_datadir}/kde4/services/kaddressbook/cryptosettings.desktop
-%{_datadir}/kde4/services/kaddressbook/csv_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/distributionlist.desktop
-%{_datadir}/kde4/services/kaddressbook/distributionlistng.desktop
-%{_datadir}/kde4/services/kaddressbook/eudora_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/gaduprotocol.desktop
-%{_datadir}/kde4/services/kaddressbook/gmx_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/gnokii_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/groupwiseprotocol.desktop
-%{_datadir}/kde4/services/kaddressbook/iconview.desktop
-%{_datadir}/kde4/services/kaddressbook/icqprotocol.desktop
-%{_datadir}/kde4/services/kaddressbook/ircprotocol.desktop
-%{_datadir}/kde4/services/kaddressbook/jabberprotocol.desktop
-%{_datadir}/kde4/services/kaddressbook/kde2_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/ldif_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/meanwhileprotocol.desktop
-%{_datadir}/kde4/services/kaddressbook/msnprotocol.desktop
-%{_datadir}/kde4/services/kaddressbook/opera_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/pab_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/resourceselection.desktop
-%{_datadir}/kde4/services/kaddressbook/skypeprotocol.desktop
-%{_datadir}/kde4/services/kaddressbook/smsprotocol.desktop
-%{_datadir}/kde4/services/kaddressbook/tableview.desktop
-%{_datadir}/kde4/services/kaddressbook/vcard_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/yahooprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook
 %{_desktopdir}/kde4/kaddressbook.desktop
 
 %{_datadir}/kde4/servicetypes/kaddressbook_contacteditorwidget.desktop
@@ -777,21 +762,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/addressbook_service.desktop
 %{_iconsdir}/*/*/*/kaddressbook.png
 %{_datadir}/dbus-1/interfaces/org.kde.KAddressbook.Core.xml
+%{_kdedocdir}/en/kaddressbook
 
 %files kalarm
 %defattr(644,root,root,755)
-#-f kalarm.lang
-%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kalarm*
-#%{_datadir}/applnk/.hidden/kalarmd.desktop
+%attr(755,root,root) %{_libdir}/libkalarm_resources.so.4
+%attr(755,root,root) %{_libdir}/libkalarm_resources.so.4.1.0
 %{_datadir}/apps/kalarm*
 %{_datadir}/autostart/kalarm*.desktop
 %{_desktopdir}/kde4/kalarm.desktop
 %{_desktopdir}/kde4/kalarmd.desktop
 %{_iconsdir}/[!l]*/*/*/kalarm.png
 %{_libdir}/libkalarm_resources.so
-%attr(755,root,root) %{_libdir}/libkalarm_resources.so.4
-%attr(755,root,root) %{_libdir}/libkalarm_resources.so.4.1.0
 %{_datadir}/apps/kconf_update/kalarm-1.2.1-general.pl
 %{_datadir}/apps/kconf_update/kalarm-1.9.5-defaults.pl
 %{_datadir}/apps/kconf_update/kalarm-version.pl
@@ -803,10 +786,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/kde4/kalarm_local.so
 %{_libdir}/kde4/kalarm_localdir.so
 %{_libdir}/kde4/kalarm_remote.so
+%{_kdedocdir}/en/kalarm
 
 %files kandy
-%defattr(644,root,root,755)
-#-f kandy.lang
 %defattr(644,root,root,755)
 #%attr(755,root,root) %{_bindir}/kandy*
 #%{_datadir}/apps/kandy
@@ -814,8 +796,6 @@ rm -rf $RPM_BUILD_ROOT
 #%{_desktopdir}/kde/kandy.desktop
 
 %files karm
-%defattr(644,root,root,755)
-#-f karm.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/karm
 %attr(755,root,root) %{_libdir}/kde4/kontact_karm.so
@@ -829,8 +809,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kontact/karmplugin.desktop
 
 %files kmail
-%defattr(644,root,root,755)
-#-f kmail.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kmail
 %attr(755,root,root) %{_bindir}/kmail_antivir.sh
@@ -916,10 +894,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.kde.kmail.kmail.xml
 %{_datadir}/dbus-1/interfaces/org.kde.kmail.kmailpart.xml
 %{_datadir}/dbus-1/interfaces/org.kde.kmail.mailcomposer.xml
+%{_kdedocdir}/en/kmail
 
 %files knode
-%defattr(644,root,root,755)
-#-f knode.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/knode
 %attr(755,root,root) %{_libdir}/kde4/kcm_knode.so
@@ -936,10 +913,9 @@ rm -rf $RPM_BUILD_ROOT
 #%{_desktopdir}/kde/KNode.desktop
 %{_iconsdir}/*/*/*/knode.png
 %{_iconsdir}/*/*/*/knode2.png
+%{_kdedocdir}/en/knode
 
 %files knotes
-%defattr(644,root,root,755)
-#-f knotes.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/knotes
 %attr(755,root,root) %{_libdir}/kde4/knotes_kolab.so
@@ -959,15 +935,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files konsolekalendar
 %defattr(644,root,root,755)
-#-f konsolekalendar.lang
-%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/konsolekalendar
 #%{_desktopdir}/kde/konsolekalendar.desktop
 #%{_iconsdir}/crystalsvg/*/*/konsolekalendar.png
 
 %files korn
-%defattr(644,root,root,755)
-#-f korn.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/korn
 #%{_libdir}/kconf_update_bin/korn-3-4-config_change
@@ -975,10 +947,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/apps/kconf_update/korn-3-5*.pl
 #%{_desktopdir}/kde/KOrn.desktop
 %{_iconsdir}/*/*/*/korn.png
+%{_kdedocdir}/en/korn
 
 %files kpilot
-%defattr(644,root,root,755)
-#-f kpilot.lang
 %defattr(644,root,root,755)
 #%attr(755,root,root) %{_bindir}/kpalmdoc
 %attr(755,root,root) %{_bindir}/kpilot*
@@ -1015,6 +986,7 @@ rm -rf $RPM_BUILD_ROOT
 #%{_desktopdir}/kde/kpilot*.desktop
 #%{_iconsdir}/*/*/apps/kpalmdoc.png
 %{_iconsdir}/[!l]*/*/*/kpilot*.png
+%{_kdedocdir}/en/kpilot
 
 %files libs
 %defattr(644,root,root,755)
