@@ -492,11 +492,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/scalixwizard
 %attr(755,root,root) %{_bindir}/schematest
 %attr(755,root,root) %{_bindir}/thememain
-%attr(755,root,root) /usr/lib/kde4/akonadi_serializer_addressee.so
-%attr(755,root,root) /usr/lib/kde4/akonadi_serializer_bookmark.so
-%attr(755,root,root) /usr/lib/kde4/akonadi_serializer_kcal.so
-%attr(755,root,root) /usr/lib/kde4/akonadi_serializer_mail.so
-%attr(755,root,root) /usr/lib/kde4/akonadi_serializer_sms.so
+%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_addressee.so
+%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_bookmark.so
+%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_kcal.so
+%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_mail.so
+%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_sms.so
 ##################
 
 #%attr(755,root,root) %{_libdir}/kde4/conduit_memofile.so
@@ -738,45 +738,45 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %{_datadir}/apps/kaddressbook
-/usr/share/kde4/services/kaddressbook/aimprotocol.desktop
-/usr/share/kde4/services/kaddressbook/bookmark_xxport.desktop
-/usr/share/kde4/services/kaddressbook/cardview.desktop
-/usr/share/kde4/services/kaddressbook/cryptosettings.desktop
-/usr/share/kde4/services/kaddressbook/csv_xxport.desktop
-/usr/share/kde4/services/kaddressbook/distributionlist.desktop
-/usr/share/kde4/services/kaddressbook/distributionlistng.desktop
-/usr/share/kde4/services/kaddressbook/eudora_xxport.desktop
-/usr/share/kde4/services/kaddressbook/gaduprotocol.desktop
-/usr/share/kde4/services/kaddressbook/gmx_xxport.desktop
-/usr/share/kde4/services/kaddressbook/gnokii_xxport.desktop
-/usr/share/kde4/services/kaddressbook/groupwiseprotocol.desktop
-/usr/share/kde4/services/kaddressbook/iconview.desktop
-/usr/share/kde4/services/kaddressbook/icqprotocol.desktop
-/usr/share/kde4/services/kaddressbook/ircprotocol.desktop
-/usr/share/kde4/services/kaddressbook/jabberprotocol.desktop
-/usr/share/kde4/services/kaddressbook/kde2_xxport.desktop
-/usr/share/kde4/services/kaddressbook/ldif_xxport.desktop
-/usr/share/kde4/services/kaddressbook/meanwhileprotocol.desktop
-/usr/share/kde4/services/kaddressbook/msnprotocol.desktop
-/usr/share/kde4/services/kaddressbook/opera_xxport.desktop
-/usr/share/kde4/services/kaddressbook/pab_xxport.desktop
-/usr/share/kde4/services/kaddressbook/resourceselection.desktop
-/usr/share/kde4/services/kaddressbook/skypeprotocol.desktop
-/usr/share/kde4/services/kaddressbook/smsprotocol.desktop
-/usr/share/kde4/services/kaddressbook/tableview.desktop
-/usr/share/kde4/services/kaddressbook/vcard_xxport.desktop
-/usr/share/kde4/services/kaddressbook/yahooprotocol.desktop
-/usr/share/applications/kde4/kaddressbook.desktop
+%{_datadir}/kde4/services/kaddressbook/aimprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook/bookmark_xxport.desktop
+%{_datadir}/kde4/services/kaddressbook/cardview.desktop
+%{_datadir}/kde4/services/kaddressbook/cryptosettings.desktop
+%{_datadir}/kde4/services/kaddressbook/csv_xxport.desktop
+%{_datadir}/kde4/services/kaddressbook/distributionlist.desktop
+%{_datadir}/kde4/services/kaddressbook/distributionlistng.desktop
+%{_datadir}/kde4/services/kaddressbook/eudora_xxport.desktop
+%{_datadir}/kde4/services/kaddressbook/gaduprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook/gmx_xxport.desktop
+%{_datadir}/kde4/services/kaddressbook/gnokii_xxport.desktop
+%{_datadir}/kde4/services/kaddressbook/groupwiseprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook/iconview.desktop
+%{_datadir}/kde4/services/kaddressbook/icqprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook/ircprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook/jabberprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook/kde2_xxport.desktop
+%{_datadir}/kde4/services/kaddressbook/ldif_xxport.desktop
+%{_datadir}/kde4/services/kaddressbook/meanwhileprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook/msnprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook/opera_xxport.desktop
+%{_datadir}/kde4/services/kaddressbook/pab_xxport.desktop
+%{_datadir}/kde4/services/kaddressbook/resourceselection.desktop
+%{_datadir}/kde4/services/kaddressbook/skypeprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook/smsprotocol.desktop
+%{_datadir}/kde4/services/kaddressbook/tableview.desktop
+%{_datadir}/kde4/services/kaddressbook/vcard_xxport.desktop
+%{_datadir}/kde4/services/kaddressbook/yahooprotocol.desktop
+%{_desktopdir}/kde4/kaddressbook.desktop
 
-/usr/share/kde4/servicetypes/kaddressbook_contacteditorwidget.desktop
-/usr/share/kde4/servicetypes/kaddressbook_extension.desktop
-/usr/share/kde4/servicetypes/kaddressbook_view.desktop
-/usr/share/kde4/servicetypes/kaddressbook_xxport.desktop
-/usr/share/kde4/servicetypes/kaddressbookimprotocol.desktop
+%{_datadir}/kde4/servicetypes/kaddressbook_contacteditorwidget.desktop
+%{_datadir}/kde4/servicetypes/kaddressbook_extension.desktop
+%{_datadir}/kde4/servicetypes/kaddressbook_view.desktop
+%{_datadir}/kde4/servicetypes/kaddressbook_xxport.desktop
+%{_datadir}/kde4/servicetypes/kaddressbookimprotocol.desktop
 
-/usr/share/kde4/services/addressbook_service.desktop
+%{_datadir}/kde4/services/addressbook_service.desktop
 %{_iconsdir}/*/*/*/kaddressbook.png
-/usr/share/dbus-1/interfaces/org.kde.KAddressbook.Core.xml
+%{_datadir}/dbus-1/interfaces/org.kde.KAddressbook.Core.xml
 
 %files kalarm
 %defattr(644,root,root,755)
@@ -789,20 +789,20 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/kalarm.desktop
 %{_desktopdir}/kde4/kalarmd.desktop
 %{_iconsdir}/[!l]*/*/*/kalarm.png
-/usr/lib/libkalarm_resources.so
-/usr/lib/libkalarm_resources.so.4
-/usr/lib/libkalarm_resources.so.4.1.0
-/usr/share/apps/kconf_update/kalarm-1.2.1-general.pl
-/usr/share/apps/kconf_update/kalarm-1.9.5-defaults.pl
-/usr/share/apps/kconf_update/kalarm-version.pl
-/usr/share/apps/kconf_update/kalarm.upd
-/usr/share/config.kcfg/kalarmconfig.kcfg
-/usr/share/dbus-1/interfaces/org.kde.kalarm.kalarm.xml
-/usr/share/dbus-1/interfaces/org.kde.kalarm.kalarmd.Daemon.xml
-/usr/share/dbus-1/interfaces/org.kde.kalarm.notify.xml
-/usr/lib/kde4/kalarm_local.so
-/usr/lib/kde4/kalarm_localdir.so
-/usr/lib/kde4/kalarm_remote.so
+%{_libdir}/libkalarm_resources.so
+%attr(755,root,root) %{_libdir}/libkalarm_resources.so.4
+%attr(755,root,root) %{_libdir}/libkalarm_resources.so.4.1.0
+%{_datadir}/apps/kconf_update/kalarm-1.2.1-general.pl
+%{_datadir}/apps/kconf_update/kalarm-1.9.5-defaults.pl
+%{_datadir}/apps/kconf_update/kalarm-version.pl
+%{_datadir}/apps/kconf_update/kalarm.upd
+%{_datadir}/config.kcfg/kalarmconfig.kcfg
+%{_datadir}/dbus-1/interfaces/org.kde.kalarm.kalarm.xml
+%{_datadir}/dbus-1/interfaces/org.kde.kalarm.kalarmd.Daemon.xml
+%{_datadir}/dbus-1/interfaces/org.kde.kalarm.notify.xml
+%{_libdir}/kde4/kalarm_local.so
+%{_libdir}/kde4/kalarm_localdir.so
+%{_libdir}/kde4/kalarm_remote.so
 
 %files kandy
 %defattr(644,root,root,755)
@@ -825,8 +825,8 @@ rm -rf $RPM_BUILD_ROOT
 #%{_datadir}/services/karm_part.desktop
 #%{_desktopdir}/kde/karm.desktop
 #%{_iconsdir}/*/*/*/karm.png
-/usr/lib/kde4/karmpart.so
-/usr/share/kde4/services/kontact/karmplugin.desktop
+%{_libdir}/kde4/karmpart.so
+%{_datadir}/kde4/services/kontact/karmplugin.desktop
 
 %files kmail
 %defattr(644,root,root,755)
@@ -876,14 +876,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config/kmail.antivirusrc
 %{_datadir}/config/libkleopatrarc
 %{_datadir}/config.kcfg/kmail.kcfg
-/usr/share/kde4/services/kcmkmailsummary.desktop
+%{_datadir}/kde4/services/kcmkmailsummary.desktop
 %{_datadir}/kde4/services/kmail_config_accounts.desktop
 %{_datadir}/kde4/services/kmail_config_appearance.desktop
 %{_datadir}/kde4/services/kmail_config_composer.desktop
 %{_datadir}/kde4/services/kmail_config_identity.desktop
 %{_datadir}/kde4/services/kmail_config_misc.desktop
 %{_datadir}/kde4/services/kmail_config_security.desktop
-/usr/share/kde4/services/kontact/kmailplugin.desktop
+%{_datadir}/kde4/services/kontact/kmailplugin.desktop
 #%{_datadir}/services/kleopatra_config_appear.desktop
 #%{_datadir}/services/kleopatra_config_dirserv.desktop
 #%{_datadir}/services/kleopatra_config_dnorder.desktop
@@ -913,9 +913,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/ktnef
 %{_desktopdir}/kde4/ktnef.desktop
 %{_iconsdir}/hicolor/*/apps/ktnef.png
-/usr/share/dbus-1/interfaces/org.kde.kmail.kmail.xml
-/usr/share/dbus-1/interfaces/org.kde.kmail.kmailpart.xml
-/usr/share/dbus-1/interfaces/org.kde.kmail.mailcomposer.xml
+%{_datadir}/dbus-1/interfaces/org.kde.kmail.kmail.xml
+%{_datadir}/dbus-1/interfaces/org.kde.kmail.kmailpart.xml
+%{_datadir}/dbus-1/interfaces/org.kde.kmail.mailcomposer.xml
 
 %files knode
 %defattr(644,root,root,755)
@@ -1019,7 +1019,7 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libakregatorprivate.so
-/usr/lib/libkaddressbook.so.4
+%attr(755,root,root) %{_libdir}/libkaddressbook.so.4
 #%attr(755,root,root) %{_libdir}/libindex.so.*.*.*
 #%attr(755,root,root) %{_libdir}/libgpgme++.so.*.*.*
 #%attr(755,root,root) %{_libdir}/libgwsoap.so.*.*.*
