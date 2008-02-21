@@ -212,10 +212,7 @@ Summary(pt_BR.UTF-8):	Cliente / leitor de e-mails para o KDE
 Group:		X11/Applications
 URL:		http://kmail.kde.org/
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	kde4-kdebase-core >= %{version}
-Requires:	kde4-kio-imap4 >= %{version}-%{release}
-Requires:	kde4-kio-pop3 >= %{version}
-Requires:	kde4-kio-smtp >= %{version}
+# ? Requires:	kde4-kdebase-core >= %{version}
 
 %description kmail
 This is electronic mail client for KDE with a huge amount of features:
@@ -261,8 +258,7 @@ Summary(pl.UTF-8):	Czytnik newsów dla KDE
 Summary(pt_BR.UTF-8):	Leitor de notícias (news) do KDE
 Group:		X11/Applications
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	kde4-kdebase-core >= %{version}
-Requires:	kde4-kio-nntp >= %{version}
+# ?Requires:	kde4-kdebase-core >= %{version}
 
 %description knode
 KNode is an online newsreader (GKNSA compliant) for the K Desktop
@@ -297,8 +293,7 @@ Summary:	News feed reader for the KDE desktop
 Summary(pl.UTF-8):	Czytnik newsów dla KDE
 Group:		X11/Applications
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	kde4-kdebase-core >= %{version}
-Requires:	kde4-kio-nntp >= %{version}
+#?Requires:	kde4-kdebase-core >= %{version}
 
 %description akregator
 Akregator is a news feed reader for the KDE desktop. It enables you to follow news sites, blogs and other RSS/Atom-enabled websites without the need to manually check for updates using a web browser. Akregator is designed to be both easy to use and to be powerful enough to read hundreds of news sources conveniently. It comes with Konqueror integration for adding news feeds and with an internal browser for easy news reading.
@@ -360,7 +355,7 @@ Summary:	KDE 'biff' application
 Summary(pl.UTF-8):	Wskaźnik skrzynki pocztowej dla KDE
 Summary(pt_BR.UTF-8):	Miniaplicativo de monitoração da caixa de correio
 Group:		X11/Applications
-Requires:	kde4-kdebase-desktop >= %{version}
+#?Requires:	kde4-kdebase-desktop >= %{version}
 
 %description korn
 A simple program showing number of mails in your folders.
@@ -443,7 +438,7 @@ Narzędzie do komunikacji między telefonem komórkowym a PC.
 Summary:	Akonadi
 Summary(pl.UTF-8):	Akonadi
 Group:		X11/Applications
-Requires:	kde4-kdebase-desktop >= %{version}
+#?Requires:	kde4-kdebase-desktop >= %{version}
 
 %description akonadi
 A simple program showing number of mails in your folders.
@@ -456,7 +451,7 @@ pocztowych.
 Summary:	wizards
 Summary(pl.UTF-8):	wizards
 Group:		X11/Applications
-Requires:	kde4-kdebase-desktop >= %{version}
+#?Requires:	kde4-kdebase-desktop >= %{version}
 
 %description wizards
 wizards.
@@ -480,7 +475,7 @@ plugins.
 Summary:	ktnef
 Summary(pl.UTF-8):	ktnef
 Group:		X11/Applications
-Requires:	kde4-kdebase-desktop >= %{version}
+#?Requires:	kde4-kdebase-desktop >= %{version}
 
 %description ktnef
 ktnef.
@@ -492,7 +487,7 @@ ktnef.
 Summary:	kitchensync
 Summary(pl.UTF-8):	kitchensync
 Group:		X11/Applications
-Requires:	kde4-kdebase-desktop >= %{version}
+#?Requires:	kde4-kdebase-desktop >= %{version}
 
 %description kitchensync
 kitchensync.
@@ -575,6 +570,7 @@ rm -rf $RPM_BUILD_ROOT
 ### kontackt-plugins
 ### knode
 %attr(755,root,root) %{_libdir}/kde4/kontact_knodeplugin.so
+%dir %{_datadir}/kde4/services/kontact
 %{_datadir}/kde4/services/kontact/knodeplugin.desktop
 ### ktimetracker
 %attr(755,root,root) %{_libdir}/kde4/kontact_karm.so
@@ -611,6 +607,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_kontactsummary.so
 %{_datadir}/kde4/services/kontact/summaryplugin.desktop
 %{_datadir}/kde4/services/kcmkontactsummary.desktop
+%dir %{_datadir}/apps/kontactsummary
 %{_datadir}/apps/kontactsummary/kontactsummary_part.rc
 ### specialdates
 %attr(755,root,root) %{_libdir}/kde4/kontact_specialdatesplugin.so
@@ -632,6 +629,7 @@ rm -rf $RPM_BUILD_ROOT
 ### knotes
 %attr(755,root,root) %{_libdir}/kde4/kontact_knotesplugin.so
 %{_datadir}/apps/knotes/knotes_part.rc
+%dir %{_datadir}/kde4/services/kontact
 %{_datadir}/kde4/services/kontact/knotesplugin.desktop
 
 %attr(755,root,root) %{_libdir}/strigi/strigiea_ics.so
@@ -654,7 +652,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libschema.so
 %attr(755,root,root) %{_libdir}/libkode.so
 %{_desktopdir}/kde4/kwsdl_compiler.desktop
-%{_datadir}/apps/kxforms/kxformsui.rc
+%{_datadir}/apps/kxforms
 %{_datadir}/config.kcfg/kxforms.kcfg
 ### kresources/featureplan
 %attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so
@@ -688,6 +686,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/scalix.protocol
 %{_datadir}/kde4/services/scalixs.protocol
 %{_datadir}/kde4/services/kresources/kabc/scalix.desktop
+%dir %{_datadir}/kde4/services/kresources/knotes
 %{_datadir}/kde4/services/kresources/knotes/scalix.desktop
 ### kresources/groupd1av
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so
@@ -818,7 +817,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so
 %attr(755,root,root) %{_libdir}/libkorganizerprivate.so
 %{_datadir}/apps/kconf_update/korganizer.upd
-%{_datadir}/apps/korgac/icons/*/*/actions/korgac.png
+%{_datadir}/apps/korgac
 %{_datadir}/apps/korganizer
 %{_datadir}/autostart/korgac.desktop
 %{_datadir}/config.kcfg/korganizer.kcfg
@@ -827,6 +826,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.kde.korganizer.KOrgac.xml
 %{_datadir}/dbus-1/interfaces/org.kde.korganizer.Korganizer.xml
 %{_datadir}/kde4/services/korganizer_*.desktop
+%dir %{_datadir}/kde4/services/korganizer
 %{_datadir}/kde4/services/korganizer/datenums.desktop
 %{_datadir}/kde4/services/korganizer/hebrew.desktop
 %{_datadir}/kde4/services/korganizer/journalprint.desktop
@@ -910,13 +910,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkalarm_resources.so
 %{_desktopdir}/kde4/kalarm.desktop
 %{_desktopdir}/kde4/kalarmd.desktop
-%{_datadir}/apps/kalarm/kalarmui.rc
+%{_datadir}/apps/kalarm
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kalarm-*.pl
 %{_datadir}/apps/kconf_update/kalarm.upd
 %{_datadir}/autostart/kalarm.tray.desktop
 %{_datadir}/autostart/kalarmd.autostart.desktop
 %{_datadir}/config.kcfg/kalarmconfig.kcfg
 %{_datadir}/dbus-1/interfaces/org.kde.kalarm.*.xml
+%dir %{_datadir}/kde4/services/kresources/alarms
 %{_datadir}/kde4/services/kresources/alarms/local.desktop
 %{_datadir}/kde4/services/kresources/alarms/localdir.desktop
 %{_datadir}/kde4/services/kresources/alarms/remote.desktop
@@ -969,7 +970,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/apps/kconf_update/upgrade-signature.pl
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kmail-*.pl
 %{_datadir}/apps/kconf_update/kmail-*.sh
-%{_datadir}/apps/kmailcvt/pics
+%{_datadir}/apps/kmailcvt
 %{_iconsdir}/*/*/apps/kmail*.png
 %{_iconsdir}/*/scalable/apps/kmail.svgz
 ### libkleo
@@ -1051,7 +1052,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkpilot.so
 %attr(755,root,root) %{_libdir}/libtestlib.so
 %{_datadir}/apps/kconf_update/kpilot.upd
-%{_datadir}/apps/kpilot/kpilotui.rc
+%{_datadir}/apps/kpilot
 %{_datadir}/config.kcfg/keyringconduit.kcfg
 %{_datadir}/config.kcfg/kpilot.kcfg
 %{_datadir}/config.kcfg/kpilotlib.kcfg
@@ -1145,14 +1146,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/plasma_applet_plasmobiff.so
 %attr(755,root,root) %{_libdir}/kde4/plasma_engine_akonadi.so
 %attr(755,root,root) %{_libdir}/kde4/kio_akonadi.so
-
+%dir %{_datadir}/apps/akonadi
+%dir %{_datadir}/apps/akonadi/plugins
+%dir %{_datadir}/apps/akonadi/plugins/serializer
 %{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
 %{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_mail.desktop
 %{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_kcal.desktop
 %{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_bookmark.desktop
 %{_datadir}/apps/nepomuk/ontologies/nco.trig
 %{_datadir}/apps/nepomuk/ontologies/nco.desktop
-
+%dir %{_datadir}/akonadi/agents
 %{_datadir}/akonadi/agents/nepomukfeeder.desktop
 %{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
 %{_datadir}/akonadi/agents/mailthreaderagent.desktop
@@ -1175,8 +1178,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.kde.Akonadi.ProfileManager.xml
 %{_datadir}/dbus-1/interfaces/org.kde.Akonadi.Tracer.xml
 %{_datadir}/dbus-1/interfaces/org.kde.Akonadi.TracerNotification.xml
+%dir %{_datadir}/config/akonadi
 %{_datadir}/config/akonadi/mysql-global.conf
 %{_datadir}/kde4/services/akonadi.protocol
+%dir %{_datadir}/apps/kcontactmanager
 %{_datadir}/apps/kcontactmanager/kcontactmanagerui.rc
 %{_desktopdir}/kde4/kcontactmanager.desktop
 
