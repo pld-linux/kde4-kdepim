@@ -969,7 +969,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/apps/kconf_update/upgrade-transport.pl
 %attr(755,root,root) %{_datadir}/apps/kconf_update/upgrade-signature.pl
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kmail-*.pl
-%{_datadir}/apps/kconf_update/kmail-*.sh
+%attr(755,root,root) %{_datadir}/apps/kconf_update/kmail-*.sh
 %{_datadir}/apps/kmailcvt
 %{_iconsdir}/*/*/apps/kmail*.png
 %{_iconsdir}/*/scalable/apps/kmail.svgz
