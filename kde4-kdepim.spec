@@ -1,6 +1,5 @@
 # Conditional build:
 %bcond_without	apidocs			# do not prepare API documentation
-%bcond_without	hidden_visibility	# don't use gcc hidden visibility
 #
 %define		_state		unstable
 
@@ -27,7 +26,6 @@ BuildRequires:	docbook-dtd42-xml
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	ed
 BuildRequires:	flex
-%{?with_hidden_visibility:BuildRequires:	gcc-c++ >= 5:4.1.0-0.20051206r108118.1}
 BuildRequires:	gpgme-devel >= 1:1.0.0
 %{?with_apidocs:BuildRequires:	graphviz}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
@@ -41,7 +39,6 @@ BuildRequires:	pcre-devel
 BuildRequires:	pilot-link-devel >= 0.12.1
 %{?with_apidocs:BuildRequires:	qt4-doc}
 BuildRequires:	rpmbuild(macros) >= 1.129
-#BuildRequires:	unsermake >= 040511
 BuildRequires:	zlib-devel
 BuildConflicts:	indexlib
 BuildConflicts:	kdepim-kontact-libs
@@ -143,11 +140,20 @@ Requires:	%{name}-libs = %{version}-%{release}
 Requires:	kde4-kdelibs >= %{version}
 
 %description korganizer
-KOrganizer is the calendar and scheduling component of Kontact, the integrated personal information manager of KDE.
+KOrganizer is the calendar and scheduling component of Kontact, the
+integrated personal information manager of KDE.
 
-KOrganizer provides management of events and tasks, alarm notification, web export, network transparent handling of data, group scheduling, import and export of calendar files and more. It is able to work together with a wide variety of groupware servers, for example Kolab, Open-Xchange, Citadel or OpenGroupware.org.
+KOrganizer provides management of events and tasks, alarm
+notification, web export, network transparent handling of data, group
+scheduling, import and export of calendar files and more. It is able
+to work together with a wide variety of groupware servers, for example
+Kolab, Open-Xchange, Citadel or OpenGroupware.org.
 
-KOrganizer is fully customizable to your needs and is an integral part of the KDE PIM suite, which aims to be a complete solution for organizing your personal data. KOrganizer supports the two dominant standards for storing and exchanging calendar data, vCalendar and iCalendar.
+KOrganizer is fully customizable to your needs and is an integral part
+of the KDE PIM suite, which aims to be a complete solution for
+organizing your personal data. KOrganizer supports the two dominant
+standards for storing and exchanging calendar data, vCalendar and
+iCalendar.
 
 %description korganizer -l pl.UTF-8
 Korganizer.
@@ -795,7 +801,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config.kcfg/groupwise.kcfg
 #%{_datadir}/services/groupwise.protocol
 #%{_datadir}/services/groupwises.protocol
-      
+
 %files korganizer -f korganizer.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/ical2vcal
@@ -1228,132 +1234,132 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/actions/button_more.png
 %{_iconsdir}/*/*/actions/button_fewer.png
 
-%{_libdir}/libakonadi.so.?
-%{_libdir}/libakonadi.so.*.*.*
-%{_libdir}/libakonadicomponents.so.?
-%{_libdir}/libakonadicomponents.so.*.*.*
-%{_libdir}/libakonadiprivate.so.?
-%{_libdir}/libakonadiprivate.so.*.*.*
-%{_libdir}/libakonadiprotocol.so.?
-%{_libdir}/libakonadiprotocol.so.*.*.*
-%{_libdir}/libakregatorinterfaces.so.?
-%{_libdir}/libakregatorinterfaces.so.*.*.*
-%{_libdir}/libakregatorprivate.so.?
-%{_libdir}/libakregatorprivate.so.*.*.*
-%{_libdir}/libkabc_groupdav.so.?
-%{_libdir}/libkabc_groupdav.so.*.*.*
-%{_libdir}/libkabc_slox.so.?
-%{_libdir}/libkabc_slox.so.*.*.*
-%{_libdir}/libkabc_xmlrpc.so.?
-%{_libdir}/libkabc_xmlrpc.so.*.*.*
-%{_libdir}/libkabcakonadi.so.?
-%{_libdir}/libkabcakonadi.so.*.*.*
-%{_libdir}/libkabckolab.so.?
-%{_libdir}/libkabckolab.so.*.*.*
-%{_libdir}/libkabcommon.so.?
-%{_libdir}/libkabcommon.so.*.*.*
-%{_libdir}/libkabcscalix.so.?
-%{_libdir}/libkabcscalix.so.*.*.*
-%{_libdir}/libkabinterfaces.so.?
-%{_libdir}/libkabinterfaces.so.*.*.*
-%{_libdir}/libkaddressbook.so.?
-%{_libdir}/libkaddressbook.so.*.*.*
-%{_libdir}/libkalarm_resources.so.?
-%{_libdir}/libkalarm_resources.so.*.*.*
-%{_libdir}/libkcal_groupdav.so.?
-%{_libdir}/libkcal_groupdav.so.*.*.*
-%{_libdir}/libkcal_resourceblog.so.?
-%{_libdir}/libkcal_resourceblog.so.*.*.*
-%{_libdir}/libkcal_resourcefeatureplan.so.?
-%{_libdir}/libkcal_resourcefeatureplan.so.*.*.*
-%{_libdir}/libkcal_resourceremote.so.?
-%{_libdir}/libkcal_resourceremote.so.*.*.*
-%{_libdir}/libkcal_slox.so.?
-%{_libdir}/libkcal_slox.so.*.*.*
-%{_libdir}/libkcal_xmlrpc.so.?
-%{_libdir}/libkcal_xmlrpc.so.*.*.*
-%{_libdir}/libkcalakonadi.so.?
-%{_libdir}/libkcalakonadi.so.*.*.*
-%{_libdir}/libkcalkolab.so.?
-%{_libdir}/libkcalkolab.so.*.*.*
-%{_libdir}/libkcalscalix.so.?
-%{_libdir}/libkcalscalix.so.*.*.*
-%{_libdir}/libkdepim.so.?
-%{_libdir}/libkdepim.so.*.*.*
-%{_libdir}/libkfeed.so.?
-%{_libdir}/libkfeed.so.*.*.*
-%{_libdir}/libkgroupwarebase.so.?
-%{_libdir}/libkgroupwarebase.so.*.*.*
-%{_libdir}/libkgroupwaredav.so.?
-%{_libdir}/libkgroupwaredav.so.*.*.*
-%{_libdir}/libkholidays.so.?
-%{_libdir}/libkholidays.so.*.*.*
-%{_libdir}/libkitchensyncprivate.so.?
-%{_libdir}/libkitchensyncprivate.so.*.*.*
-%{_libdir}/libkleo.so.?
-%{_libdir}/libkleo.so.*.*.*
-%{_libdir}/libkmailprivate.so.?
-%{_libdir}/libkmailprivate.so.*.*.*
-%{_libdir}/libkmimeakonadi.so.?
-%{_libdir}/libkmimeakonadi.so.*.*.*
-%{_libdir}/libkmobiletools_fake.so.?
-%{_libdir}/libkmobiletools_fake.so.*.*.*
-%{_libdir}/libkmobiletoolsengineui.so.?
-%{_libdir}/libkmobiletoolsengineui.so.*.*.*
-%{_libdir}/libkmobiletoolslib.so.?
-%{_libdir}/libkmobiletoolslib.so.*.*.*
-%{_libdir}/libkmtaddressbook_service.so.?
-%{_libdir}/libkmtaddressbook_service.so.*.*.*
-%{_libdir}/libknodecommon.so.?
-%{_libdir}/libknodecommon.so.*.*.*
-%{_libdir}/libknotes_xmlrpc.so.?
-%{_libdir}/libknotes_xmlrpc.so.*.*.*
-%{_libdir}/libknoteskolab.so.?
-%{_libdir}/libknoteskolab.so.*.*.*
-%{_libdir}/libknotesscalix.so.?
-%{_libdir}/libknotesscalix.so.*.*.*
-%{_libdir}/libkocorehelper.so.?
-%{_libdir}/libkocorehelper.so.*.*.*
-%{_libdir}/libkode.so.?
-%{_libdir}/libkode.so.*.*.*
-%{_libdir}/libkontact.so.?
-%{_libdir}/libkontact.so.*.*.*
-%{_libdir}/libkorg_stdprinting.so.?
-%{_libdir}/libkorg_stdprinting.so.*.*.*
-%{_libdir}/libkorganizer_calendar.so.?
-%{_libdir}/libkorganizer_calendar.so.*.*.*
-%{_libdir}/libkorganizer_eventviewer.so.?
-%{_libdir}/libkorganizer_eventviewer.so.*.*.*
-%{_libdir}/libkorganizer_interfaces.so.?
-%{_libdir}/libkorganizer_interfaces.so.*.*.*
-%{_libdir}/libkorganizerprivate.so.?
-%{_libdir}/libkorganizerprivate.so.*.*.*
-%{_libdir}/libkpgp.so.?
-%{_libdir}/libkpgp.so.*.*.*
-%{_libdir}/libkpilot.so.?
-%{_libdir}/libkpilot.so.*.*.*
-%{_libdir}/libkpinterfaces.so.?
-%{_libdir}/libkpinterfaces.so.*.*.*
-%{_libdir}/libkschema.so.?
-%{_libdir}/libkschema.so.*.*.*
-%{_libdir}/libkschemawidgets.so.?
-%{_libdir}/libkschemawidgets.so.*.*.*
-%{_libdir}/libksieve.so.?
-%{_libdir}/libksieve.so.*.*.*
-%{_libdir}/libkslox.so.?
-%{_libdir}/libkslox.so.*.*.*
-%{_libdir}/libkxmlcommon.so.?
-%{_libdir}/libkxmlcommon.so.*.*.*
+%attr(755,root,root) %{_libdir}/libakonadi.so.?
+%attr(755,root,root) %{_libdir}/libakonadi.so.*.*.*
+%attr(755,root,root) %{_libdir}/libakonadicomponents.so.?
+%attr(755,root,root) %{_libdir}/libakonadicomponents.so.*.*.*
+%attr(755,root,root) %{_libdir}/libakonadiprivate.so.?
+%attr(755,root,root) %{_libdir}/libakonadiprivate.so.*.*.*
+%attr(755,root,root) %{_libdir}/libakonadiprotocol.so.?
+%attr(755,root,root) %{_libdir}/libakonadiprotocol.so.*.*.*
+%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.?
+%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.*.*.*
+%attr(755,root,root) %{_libdir}/libakregatorprivate.so.?
+%attr(755,root,root) %{_libdir}/libakregatorprivate.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkabc_groupdav.so.?
+%attr(755,root,root) %{_libdir}/libkabc_groupdav.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkabc_slox.so.?
+%attr(755,root,root) %{_libdir}/libkabc_slox.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkabc_xmlrpc.so.?
+%attr(755,root,root) %{_libdir}/libkabc_xmlrpc.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkabcakonadi.so.?
+%attr(755,root,root) %{_libdir}/libkabcakonadi.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkabckolab.so.?
+%attr(755,root,root) %{_libdir}/libkabckolab.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkabcommon.so.?
+%attr(755,root,root) %{_libdir}/libkabcommon.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkabcscalix.so.?
+%attr(755,root,root) %{_libdir}/libkabcscalix.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkabinterfaces.so.?
+%attr(755,root,root) %{_libdir}/libkabinterfaces.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkaddressbook.so.?
+%attr(755,root,root) %{_libdir}/libkaddressbook.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkalarm_resources.so.?
+%attr(755,root,root) %{_libdir}/libkalarm_resources.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcal_groupdav.so.?
+%attr(755,root,root) %{_libdir}/libkcal_groupdav.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcal_resourceblog.so.?
+%attr(755,root,root) %{_libdir}/libkcal_resourceblog.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so.?
+%attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcal_resourceremote.so.?
+%attr(755,root,root) %{_libdir}/libkcal_resourceremote.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcal_slox.so.?
+%attr(755,root,root) %{_libdir}/libkcal_slox.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so.?
+%attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcalakonadi.so.?
+%attr(755,root,root) %{_libdir}/libkcalakonadi.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcalkolab.so.?
+%attr(755,root,root) %{_libdir}/libkcalkolab.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcalscalix.so.?
+%attr(755,root,root) %{_libdir}/libkcalscalix.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkdepim.so.?
+%attr(755,root,root) %{_libdir}/libkdepim.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkfeed.so.?
+%attr(755,root,root) %{_libdir}/libkfeed.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkgroupwarebase.so.?
+%attr(755,root,root) %{_libdir}/libkgroupwarebase.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkgroupwaredav.so.?
+%attr(755,root,root) %{_libdir}/libkgroupwaredav.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkholidays.so.?
+%attr(755,root,root) %{_libdir}/libkholidays.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
+%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkleo.so.?
+%attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkmailprivate.so.?
+%attr(755,root,root) %{_libdir}/libkmailprivate.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkmimeakonadi.so.?
+%attr(755,root,root) %{_libdir}/libkmimeakonadi.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so.?
+%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.?
+%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so.?
+%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so.?
+%attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so.*.*.*
+%attr(755,root,root) %{_libdir}/libknodecommon.so.?
+%attr(755,root,root) %{_libdir}/libknodecommon.so.*.*.*
+%attr(755,root,root) %{_libdir}/libknotes_xmlrpc.so.?
+%attr(755,root,root) %{_libdir}/libknotes_xmlrpc.so.*.*.*
+%attr(755,root,root) %{_libdir}/libknoteskolab.so.?
+%attr(755,root,root) %{_libdir}/libknoteskolab.so.*.*.*
+%attr(755,root,root) %{_libdir}/libknotesscalix.so.?
+%attr(755,root,root) %{_libdir}/libknotesscalix.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkocorehelper.so.?
+%attr(755,root,root) %{_libdir}/libkocorehelper.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkode.so.?
+%attr(755,root,root) %{_libdir}/libkode.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkontact.so.?
+%attr(755,root,root) %{_libdir}/libkontact.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkorg_stdprinting.so.?
+%attr(755,root,root) %{_libdir}/libkorg_stdprinting.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkorganizer_calendar.so.?
+%attr(755,root,root) %{_libdir}/libkorganizer_calendar.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkorganizer_eventviewer.so.?
+%attr(755,root,root) %{_libdir}/libkorganizer_eventviewer.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so.?
+%attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkorganizerprivate.so.?
+%attr(755,root,root) %{_libdir}/libkorganizerprivate.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkpgp.so.?
+%attr(755,root,root) %{_libdir}/libkpgp.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkpilot.so.?
+%attr(755,root,root) %{_libdir}/libkpilot.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkpinterfaces.so.?
+%attr(755,root,root) %{_libdir}/libkpinterfaces.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkschema.so.?
+%attr(755,root,root) %{_libdir}/libkschema.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkschemawidgets.so.?
+%attr(755,root,root) %{_libdir}/libkschemawidgets.so.*.*.*
+%attr(755,root,root) %{_libdir}/libksieve.so.?
+%attr(755,root,root) %{_libdir}/libksieve.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkslox.so.?
+%attr(755,root,root) %{_libdir}/libkslox.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkxmlcommon.so.?
+%attr(755,root,root) %{_libdir}/libkxmlcommon.so.*.*.*
 %{_libdir}/libmaildir.so
-%{_libdir}/libmaildir.so.?
-%{_libdir}/libmaildir.so.*.*.*
-%{_libdir}/libmimelib.so.?
-%{_libdir}/libmimelib.so.*.*.*
-%{_libdir}/libqopensync.so.?
-%{_libdir}/libqopensync.so.*.*.*
-%{_libdir}/libschema.so.?
-%{_libdir}/libschema.so.*.*.*
-%{_libdir}/libwscl.so.?
-%{_libdir}/libwscl.so.*.*.*
-%{_libdir}/libwsdl.so.?
-%{_libdir}/libwsdl.so.*.*.*
+%attr(755,root,root) %{_libdir}/libmaildir.so.?
+%attr(755,root,root) %{_libdir}/libmaildir.so.*.*.*
+%attr(755,root,root) %{_libdir}/libmimelib.so.?
+%attr(755,root,root) %{_libdir}/libmimelib.so.*.*.*
+%attr(755,root,root) %{_libdir}/libqopensync.so.?
+%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
+%attr(755,root,root) %{_libdir}/libschema.so.?
+%attr(755,root,root) %{_libdir}/libschema.so.*.*.*
+%attr(755,root,root) %{_libdir}/libwscl.so.?
+%attr(755,root,root) %{_libdir}/libwscl.so.*.*.*
+%attr(755,root,root) %{_libdir}/libwsdl.so.?
+%attr(755,root,root) %{_libdir}/libwsdl.so.*.*.*
