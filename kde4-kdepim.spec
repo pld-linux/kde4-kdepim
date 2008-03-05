@@ -15,7 +15,7 @@ Release:	0.9
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	93ed9b3198744d2dd2e6d70267644210
+# Source0-md5:	dc319aa9f2e9941601adbaf7afddc939
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-bind-devel
@@ -29,6 +29,7 @@ BuildRequires:	flex
 BuildRequires:	gpgme-devel >= 1:1.0.0
 %{?with_apidocs:BuildRequires:	graphviz}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
+BuildRequires:	kde4-kdepimlibs-devel >= %{version}
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
 BuildRequires:	libopensync-devel < 1:0.37
