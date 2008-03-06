@@ -1,25 +1,16 @@
 # TODO:
-#     Nie można otworzyć pliku /home/users/arekm/rpm/BUILD/kdepim-4.0.64/kde4-kdepim.lang dla %files: Nie ma takiego pliku ani katalogu
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkmobiletools_fake.so
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkitchensyncprivate.so
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libqopensync.so
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkmobiletools_fake.so
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/bin/akonadi_nepomuk_contact_feeder
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/share/akonadi/agents/nepomukcontactfeeder.desktop
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/bin/kitchensync
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkitchensyncprivate.so
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/kde4/kitchensyncpart.so
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libqopensync.so
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/share/applications/kde4/kitchensync.desktop
-#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/share/apps/kitchensync
-#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/share/icons/*/*/apps/kitchensync.png
-#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/share/icons/*/*/actions/sync-start.png
-#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkitchensyncprivate.so.?
-#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkitchensyncprivate.so.*.*.*
-#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkmobiletools_fake.so.?
-#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkmobiletools_fake.so.*.*.*
-#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libqopensync.so.?
-#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libqopensync.so.*.*.*
+# - fix kitchensync
+#   /usr/bin/akonalendar
+#   /usr/lib64/kde4/kcm_akonadi_resources.so
+#   /usr/lib64/sthawWaV
+#   /usr/share/applications/kde4/akonadiconsole.desktop
+#   /usr/share/apps/akonadiconsole/akonadiconsoleui.rc
+#   /usr/share/apps/cmake/modules/FindKode.cmake
+#   /usr/share/apps/cmake/modules/KodeMacros.cmake
+#   /usr/share/apps/kconf_update/kolab-resource.upd
+#   /usr/share/apps/kconf_update/upgrade-resourcetype.pl
+#   /usr/share/kde4/services/kcm_akonadi_resources.desktop
+#
 # Conditional build:
 %bcond_without	apidocs			# do not prepare API documentation
 #
@@ -579,7 +570,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	libs			-p /sbin/ldconfig
 %postun	libs			-p /sbin/ldconfig
 
-%files -f %{name}.lang
+%files -f kontact.lang
 %defattr(644,root,root,755)
 ### kontact
 %attr(755,root,root) %{_bindir}/kontact
@@ -655,7 +646,6 @@ rm -rf $RPM_BUILD_ROOT
 ### knotes
 %attr(755,root,root) %{_libdir}/kde4/kontact_knotesplugin.so
 %{_datadir}/apps/knotes/knotes_part.rc
-%dir %{_datadir}/kde4/services/kontact
 %{_datadir}/kde4/services/kontact/knotesplugin.desktop
 
 %attr(755,root,root) %{_libdir}/strigi/strigiea_ics.so
@@ -805,7 +795,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libakonadiprivate.so
 %{_libdir}/libakonadiprotocol.so
 %{_libdir}/libakonadicomponents.so
-%{_libdir}/libkmobiletools_fake.so
 %{_libdir}/libkmobiletoolsengineui.so
 %{_libdir}/libkmobiletoolslib.so
 %{_libdir}/libkabcakonadi.so
@@ -817,8 +806,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkcalscalix.so
 %{_libdir}/libkfeed.so
 %{_libdir}/libkmimeakonadi.so
-%{_libdir}/libkitchensyncprivate.so
-%{_libdir}/libqopensync.so
+#%{_libdir}/libkitchensyncprivate.so
+#%{_libdir}/libqopensync.so
 
 %files -n kde4-kio-groupwise
 %defattr(644,root,root,755)
@@ -1105,12 +1094,12 @@ rm -rf $RPM_BUILD_ROOT
 %files kmobiletools -f kmobiletools.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kmobiletools
-%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so
 %attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so
 %attr(755,root,root) %{_libdir}/libkmobiletoolslib.so
 %attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so
 %attr(755,root,root) %{_libdir}/kde4/kmobiletoolsmainpart.so
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_sms.so
+%attr(755,root,root) %{_libdir}/kde4/kmobiletools_fake.so
 %{_desktopdir}/kde4/kmobiletools.desktop
 %{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_sms.desktop
 %{_datadir}/apps/kmobiletools
@@ -1145,7 +1134,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadictl
 %attr(755,root,root) %{_bindir}/kcontactmanager
 %attr(755,root,root) %{_bindir}/akonadi_nepomuk_feeder
-%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
+#%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
 %attr(755,root,root) %{_bindir}/akonadi_mailthreader_agent
 %attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
 %attr(755,root,root) %{_bindir}/akonadi_vcard_resource
@@ -1183,7 +1172,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/nepomuk/ontologies/nco.desktop
 %dir %{_datadir}/akonadi/agents
 %{_datadir}/akonadi/agents/nepomukfeeder.desktop
-%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
+#%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
 %{_datadir}/akonadi/agents/mailthreaderagent.desktop
 %{_datadir}/akonadi/agents/strigifeeder.desktop
 %{_datadir}/akonadi/agents/vcardresource.desktop
@@ -1242,6 +1231,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/ktnef
 %{_iconsdir}/*/*/apps/ktnef.png
 
+%if 0
 %files kitchensync
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kitchensync
@@ -1252,6 +1242,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kitchensync
 %{_iconsdir}/*/*/apps/kitchensync.png
 %{_iconsdir}/*/*/actions/sync-start.png
+%endif
 
 %files libs
 %defattr(644,root,root,755)
@@ -1325,16 +1316,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkholidays.so.?
 %attr(755,root,root) %{_libdir}/libkholidays.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
-%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
+#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkleo.so.?
 %attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.?
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmimeakonadi.so.?
 %attr(755,root,root) %{_libdir}/libkmimeakonadi.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so.?
-%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so.?
+#%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.?
 %attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmobiletoolslib.so.?
@@ -1386,8 +1377,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmaildir.so.*.*.*
 %attr(755,root,root) %{_libdir}/libmimelib.so.?
 %attr(755,root,root) %{_libdir}/libmimelib.so.*.*.*
-%attr(755,root,root) %{_libdir}/libqopensync.so.?
-%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libqopensync.so.?
+#%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
 %attr(755,root,root) %{_libdir}/libschema.so.?
 %attr(755,root,root) %{_libdir}/libschema.so.*.*.*
 %attr(755,root,root) %{_libdir}/libwscl.so.?
