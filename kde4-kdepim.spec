@@ -1,3 +1,25 @@
+# TODO:
+#     Nie można otworzyć pliku /home/users/arekm/rpm/BUILD/kdepim-4.0.64/kde4-kdepim.lang dla %files: Nie ma takiego pliku ani katalogu
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkmobiletools_fake.so
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkitchensyncprivate.so
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libqopensync.so
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkmobiletools_fake.so
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/bin/akonadi_nepomuk_contact_feeder
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/share/akonadi/agents/nepomukcontactfeeder.desktop
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/bin/kitchensync
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkitchensyncprivate.so
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/kde4/kitchensyncpart.so
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libqopensync.so
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/share/applications/kde4/kitchensync.desktop
+#    Nie znaleziono pliku: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/share/apps/kitchensync
+#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/share/icons/*/*/apps/kitchensync.png
+#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/share/icons/*/*/actions/sync-start.png
+#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkitchensyncprivate.so.?
+#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkitchensyncprivate.so.*.*.*
+#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkmobiletools_fake.so.?
+#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libkmobiletools_fake.so.*.*.*
+#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libqopensync.so.?
+#    Nie znaleziono pliku poprzez glob: /home/users/arekm/tmp/kde4-kdepim-4.0.64-root-arekm/usr/lib64/libqopensync.so.*.*.*
 # Conditional build:
 %bcond_without	apidocs			# do not prepare API documentation
 #
@@ -10,12 +32,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.0.62
-Release:	0.9
+Version:	4.0.64
+Release:	0.1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	dc319aa9f2e9941601adbaf7afddc939
+# Source0-md5:	af47728c05001a7332fb0e9f10182418
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-bind-devel
