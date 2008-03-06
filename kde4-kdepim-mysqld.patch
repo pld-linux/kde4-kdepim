@@ -1,0 +1,13 @@
+--- ./akonadi/server/CMakeLists.txt.org	2008-03-06 09:33:13.639505907 +0100
++++ ./akonadi/server/CMakeLists.txt	2008-03-06 09:33:45.407691275 +0100
+@@ -28,9 +28,7 @@
+ add_subdirectory( tests )
+ 
+ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS} -DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII" )
+-if ( MYSQLD_EXECUTABLE )
+-  set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DMYSQLD_EXECUTABLE=\"\\\"${MYSQLD_EXECUTABLE}\\\"\"" )
+-endif ( MYSQLD_EXECUTABLE )
++set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DMYSQLD_EXECUTABLE=\"\\\"/usr/sbin/mysqld\\\"\"" )
+ 
+ ########### next target ###############
+ 
