@@ -1,17 +1,35 @@
-# TODO:
-# - fix kitchensync
-#   /usr/bin/akonalendar
+# Conditional build:
+#    /usr/bin/akonalendar
+#   /usr/bin/kgpgconf
+#   /usr/bin/kleopatra
 #   /usr/lib64/kde4/kcm_akonadi_resources.so
-#   /usr/lib64/sthawWaV
+#   /usr/lib64/kde4/kcm_kleopatra.so
 #   /usr/share/applications/kde4/akonadiconsole.desktop
+#   /usr/share/applications/kde4/kleopatra_import.desktop
 #   /usr/share/apps/akonadiconsole/akonadiconsoleui.rc
 #   /usr/share/apps/cmake/modules/FindKode.cmake
 #   /usr/share/apps/cmake/modules/KodeMacros.cmake
 #   /usr/share/apps/kconf_update/kolab-resource.upd
 #   /usr/share/apps/kconf_update/upgrade-resourcetype.pl
+#   /usr/share/apps/kleopatra/kleopatra_newui.rc
+#   /usr/share/apps/kleopatra/kleopatraui.rc
+#   /usr/share/apps/kleopatra/pics/kleopatra_splashscreen.png
+#   /usr/share/apps/kleopatra/pics/kleopatra_splashscreen.svgz
+#   /usr/share/apps/kleopatra/pics/kleopatra_wizard.png
+#   /usr/share/apps/kleopatra/pics/kleopatra_wizard.svgz
+#   /usr/share/icons/oxygen/128x128/apps/kleopatra.png
+#   /usr/share/icons/oxygen/16x16/apps/kleopatra.png
+#   /usr/share/icons/oxygen/22x22/apps/kleopatra.png
+#   /usr/share/icons/oxygen/32x32/apps/kleopatra.png
+#   /usr/share/icons/oxygen/48x48/apps/kleopatra.png
+#   /usr/share/icons/oxygen/64x64/apps/kleopatra.png
+#   /usr/share/icons/oxygen/scalable/apps/kleopatra.svgz
 #   /usr/share/kde4/services/kcm_akonadi_resources.desktop
+#   /usr/share/kde4/services/kleopatra_config_appear.desktop
+#   /usr/share/kde4/services/kleopatra_config_dirserv.desktop
+#   /usr/share/kde4/services/kleopatra_config_dnorder.desktop
+#   /usr/share/kde4/services/kleopatra_config_smimevalidation.desktop
 #
-# Conditional build:
 %bcond_without	apidocs			# do not prepare API documentation
 #
 %define		_state		unstable
@@ -29,9 +47,11 @@ License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	af47728c05001a7332fb0e9f10182418
+Patch0:		%{name}-mysqld.patch
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-bind-devel
+BuildRequires:	boost-graph-devel
 BuildRequires:	boost-type_traits-devel
 BuildRequires:	cmake
 BuildRequires:	cyrus-sasl-devel
@@ -46,8 +66,7 @@ BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
-BuildRequires:	libopensync-devel < 1:0.37
-BuildRequires:	libopensync-devel >= 1:0.22
+BuildRequires:	libopensync-devel >= 1:0.36
 BuildRequires:	lockdev-devel
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
@@ -455,7 +474,8 @@ Narzędzie do komunikacji między telefonem komórkowym a PC.
 Summary:	Akonadi
 Summary(pl.UTF-8):	Akonadi
 Group:		X11/Applications
-#?Requires:	kde4-kdebase-desktop >= %{version}
+# needs mysql server for storage
+Requires:	mysql
 
 %description akonadi
 A simple program showing number of mails in your folders.
@@ -530,6 +550,7 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
+%patch0 -p1
 
 %build
 export QTDIR=%{_prefix}
@@ -806,8 +827,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkcalscalix.so
 %{_libdir}/libkfeed.so
 %{_libdir}/libkmimeakonadi.so
-#%{_libdir}/libkitchensyncprivate.so
-#%{_libdir}/libqopensync.so
+%{_libdir}/libkitchensyncprivate.so
+%{_libdir}/libqopensync.so
 
 %files -n kde4-kio-groupwise
 %defattr(644,root,root,755)
@@ -1231,7 +1252,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/ktnef
 %{_iconsdir}/*/*/apps/ktnef.png
 
-%if 0
 %files kitchensync
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kitchensync
@@ -1242,7 +1262,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kitchensync
 %{_iconsdir}/*/*/apps/kitchensync.png
 %{_iconsdir}/*/*/actions/sync-start.png
-%endif
 
 %files libs
 %defattr(644,root,root,755)
@@ -1316,8 +1335,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkholidays.so.?
 %attr(755,root,root) %{_libdir}/libkholidays.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
-#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
+%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkleo.so.?
 %attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.?
@@ -1377,8 +1396,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmaildir.so.*.*.*
 %attr(755,root,root) %{_libdir}/libmimelib.so.?
 %attr(755,root,root) %{_libdir}/libmimelib.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libqopensync.so.?
-#%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
+%attr(755,root,root) %{_libdir}/libqopensync.so.?
+%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
 %attr(755,root,root) %{_libdir}/libschema.so.?
 %attr(755,root,root) %{_libdir}/libschema.so.*.*.*
 %attr(755,root,root) %{_libdir}/libwscl.so.?
