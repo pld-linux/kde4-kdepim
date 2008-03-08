@@ -365,7 +365,6 @@ Summary:	KDE 'biff' application
 Summary(pl.UTF-8):	Wskaźnik skrzynki pocztowej dla KDE
 Summary(pt_BR.UTF-8):	Miniaplicativo de monitoração da caixa de correio
 Group:		X11/Applications
-#?Requires:	kde4-kdebase-desktop >= %{version}
 
 %description korn
 A simple program showing number of mails in your folders.
@@ -462,7 +461,6 @@ pocztowych.
 Summary:	wizards
 Summary(pl.UTF-8):	wizards
 Group:		X11/Applications
-#?Requires:	kde4-kdebase-desktop >= %{version}
 
 %description wizards
 wizards.
@@ -474,7 +472,6 @@ wizards.
 Summary:	plugins
 Summary(pl.UTF-8):	plugins
 Group:		X11/Applications
-Requires:	kde4-kdebase-desktop >= %{version}
 
 %description plugins
 plugins.
@@ -486,7 +483,6 @@ plugins.
 Summary:	ktnef
 Summary(pl.UTF-8):	ktnef
 Group:		X11/Applications
-#?Requires:	kde4-kdebase-desktop >= %{version}
 
 %description ktnef
 ktnef.
@@ -949,6 +945,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ktimetracker
 %attr(755,root,root) %{_libdir}/kde4/karmpart.so
 %{_desktopdir}/kde4/karm.desktop
+%dir %{_datadir}/apps/karmpart
 %{_datadir}/apps/karmpart/karmui.rc
 %{_datadir}/apps/ktimetracker
 %{_datadir}/dbus-1/interfaces/org.kde.ktimetracker.ktimetracker.xml
@@ -1215,6 +1212,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config/libkleopatrarc
 %{_desktopdir}/kde4/kleopatra_import.desktop
 %dir %{_datadir}/apps/kleopatra
+%dir %{_datadir}/apps/kleopatra/pics
 %{_datadir}/apps/kleopatra/kleopatra_newui.rc
 %{_datadir}/apps/kleopatra/kleopatraui.rc
 %{_datadir}/apps/kleopatra/pics/kleopatra_splashscreen.png
