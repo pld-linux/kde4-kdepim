@@ -41,12 +41,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.0.64
+Version:	4.0.65
 Release:	0.1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	af47728c05001a7332fb0e9f10182418
+# Source0-md5:	f26aaeaa01342a178126949f4bb0487b
 Patch0:		%{name}-mysqld.patch
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
