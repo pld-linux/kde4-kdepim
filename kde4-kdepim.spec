@@ -1,34 +1,8 @@
 # Conditional build:
-#    /usr/bin/akonalendar
-#   /usr/bin/kgpgconf
-#   /usr/bin/kleopatra
-#   /usr/lib64/kde4/kcm_akonadi_resources.so
-#   /usr/lib64/kde4/kcm_kleopatra.so
-#   /usr/share/applications/kde4/akonadiconsole.desktop
-#   /usr/share/applications/kde4/kleopatra_import.desktop
-#   /usr/share/apps/akonadiconsole/akonadiconsoleui.rc
 #   /usr/share/apps/cmake/modules/FindKode.cmake
 #   /usr/share/apps/cmake/modules/KodeMacros.cmake
 #   /usr/share/apps/kconf_update/kolab-resource.upd
 #   /usr/share/apps/kconf_update/upgrade-resourcetype.pl
-#   /usr/share/apps/kleopatra/kleopatra_newui.rc
-#   /usr/share/apps/kleopatra/kleopatraui.rc
-#   /usr/share/apps/kleopatra/pics/kleopatra_splashscreen.png
-#   /usr/share/apps/kleopatra/pics/kleopatra_splashscreen.svgz
-#   /usr/share/apps/kleopatra/pics/kleopatra_wizard.png
-#   /usr/share/apps/kleopatra/pics/kleopatra_wizard.svgz
-#   /usr/share/icons/oxygen/128x128/apps/kleopatra.png
-#   /usr/share/icons/oxygen/16x16/apps/kleopatra.png
-#   /usr/share/icons/oxygen/22x22/apps/kleopatra.png
-#   /usr/share/icons/oxygen/32x32/apps/kleopatra.png
-#   /usr/share/icons/oxygen/48x48/apps/kleopatra.png
-#   /usr/share/icons/oxygen/64x64/apps/kleopatra.png
-#   /usr/share/icons/oxygen/scalable/apps/kleopatra.svgz
-#   /usr/share/kde4/services/kcm_akonadi_resources.desktop
-#   /usr/share/kde4/services/kleopatra_config_appear.desktop
-#   /usr/share/kde4/services/kleopatra_config_dirserv.desktop
-#   /usr/share/kde4/services/kleopatra_config_dnorder.desktop
-#   /usr/share/kde4/services/kleopatra_config_smimevalidation.desktop
 #
 %bcond_without	apidocs			# do not prepare API documentation
 #
@@ -524,13 +498,20 @@ ktnef.
 Summary:	kitchensync
 Summary(pl.UTF-8):	kitchensync
 Group:		X11/Applications
-#?Requires:	kde4-kdebase-desktop >= %{version}
 
 %description kitchensync
 kitchensync.
 
 %description kitchensync -l pl.UTF-8
 kitchensync.
+
+%package kleopatra
+Summary:        Kleopatra
+Group:          X11/Applications
+Requires:       %{name}-libs = %{version}-%{release}
+
+%description kleopatra
+Kleopatra.
 
 %package libs
 Summary:	Shared kdepim libraries
@@ -583,7 +564,6 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang korn --with-kde
 %find_lang kpilot --with-kde
 %find_lang ktimetracker --with-kde
-cat kleopatra.lang >> kmail.lang
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -595,7 +575,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 ### kontact
 %attr(755,root,root) %{_bindir}/kontact
-%attr(755,root,root) %{_libdir}/libkontact.so
+%attr(755,root,root) %{_bindir}/kgpgconf
+%attr(755,root,root) %{_libdir}/libkontactprivate.so
 %attr(755,root,root) %{_libdir}/libkpinterfaces.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_kontact.so
 %{_desktopdir}/kde4/Kontact.desktop
@@ -803,7 +784,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libknoteskolab.so
 %{_libdir}/libkocorehelper.so
 %{_libdir}/libkode.so
-%{_libdir}/libkontact.so
+%{_libdir}/libkontactprivate.so
 %{_libdir}/libkorganizer_eventviewer.so
 %{_libdir}/libkorganizer_calendar.so
 %{_libdir}/libkorg_stdprinting.so
@@ -812,7 +793,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkpinterfaces.so
 %{_libdir}/libksieve.so
 %{_libdir}/libmimelib.so
-%{_libdir}/libakonadi.so
+%{_libdir}/libakonadicore.so
 %{_libdir}/libakonadiprivate.so
 %{_libdir}/libakonadiprotocol.so
 %{_libdir}/libakonadicomponents.so
@@ -1011,8 +992,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/scalable/apps/kmail.svgz
 ### libkleo
 %attr(755,root,root) %{_libdir}/libkleo.so
-%{_datadir}/apps/libkleopatra
-%{_datadir}/config/libkleopatrarc
 
 %files knode -f knode.lang
 %defattr(644,root,root,755)
@@ -1153,6 +1132,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadi_control
 %attr(755,root,root) %{_bindir}/akonadiserver
 %attr(755,root,root) %{_bindir}/akonadictl
+%attr(755,root,root) %{_bindir}/akonalendar
 %attr(755,root,root) %{_bindir}/kcontactmanager
 %attr(755,root,root) %{_bindir}/akonadi_nepomuk_feeder
 #%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
@@ -1170,7 +1150,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkcalakonadi.so
 %attr(755,root,root) %{_libdir}/libkmimeakonadi.so
 %attr(755,root,root) %{_libdir}/libakonadiprotocol.so
-%attr(755,root,root) %{_libdir}/libakonadi.so
+%attr(755,root,root) %{_libdir}/libakonadicore.so
 %attr(755,root,root) %{_libdir}/libakonadicomponents.so
 %attr(755,root,root) %{_libdir}/libakonadiprivate.so
 %attr(755,root,root) %{_libdir}/libkabcakonadi.so
@@ -1182,6 +1162,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/plasma_applet_plasmobiff.so
 %attr(755,root,root) %{_libdir}/kde4/plasma_engine_akonadi.so
 %attr(755,root,root) %{_libdir}/kde4/kio_akonadi.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_resources.so
 %dir %{_datadir}/apps/akonadi
 %dir %{_datadir}/apps/akonadi/plugins
 %dir %{_datadir}/apps/akonadi/plugins/serializer
@@ -1220,6 +1201,30 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/kcontactmanager
 %{_datadir}/apps/kcontactmanager/kcontactmanagerui.rc
 %{_desktopdir}/kde4/kcontactmanager.desktop
+%{_desktopdir}/kde4/akonadiconsole.desktop
+%{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
+%{_datadir}/kde4/services/kcm_akonadi_resources.desktop
+
+%files kleopatra -f kleopatra.lang
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/kleopatra
+%attr(755,root,root) %{_libdir}/kde4/kcm_kleopatra.so
+%{_datadir}/apps/libkleopatra
+%{_datadir}/config/libkleopatrarc
+%{_desktopdir}/kde4/kleopatra_import.desktop
+%dir %{_datadir}/apps/kleopatra
+%{_datadir}/apps/kleopatra/kleopatra_newui.rc
+%{_datadir}/apps/kleopatra/kleopatraui.rc
+%{_datadir}/apps/kleopatra/pics/kleopatra_splashscreen.png
+%{_datadir}/apps/kleopatra/pics/kleopatra_splashscreen.svgz
+%{_datadir}/apps/kleopatra/pics/kleopatra_wizard.png
+%{_datadir}/apps/kleopatra/pics/kleopatra_wizard.svgz
+%{_datadir}/kde4/services/kleopatra_config_appear.desktop
+%{_datadir}/kde4/services/kleopatra_config_dirserv.desktop
+%{_datadir}/kde4/services/kleopatra_config_dnorder.desktop
+%{_datadir}/kde4/services/kleopatra_config_smimevalidation.desktop
+%{_iconsdir}/oxygen/*/apps/kleopatra.png
+%{_iconsdir}/oxygen/scalable/apps/kleopatra.svgz
 
 %files wizards
 %defattr(644,root,root,755)
@@ -1247,7 +1252,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files ktnef
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/ktnef
+%attr(755,root,root) %{_bindir}/ktnefviewer
 %{_desktopdir}/kde4/ktnef.desktop
 %{_datadir}/apps/ktnef
 %{_iconsdir}/*/*/apps/ktnef.png
@@ -1275,8 +1280,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/actions/button_more.png
 %{_iconsdir}/*/*/actions/button_fewer.png
 
-%attr(755,root,root) %{_libdir}/libakonadi.so.?
-%attr(755,root,root) %{_libdir}/libakonadi.so.*.*.*
+%attr(755,root,root) %{_libdir}/libakonadicore.so.?
+%attr(755,root,root) %{_libdir}/libakonadicore.so.*.*.*
 %attr(755,root,root) %{_libdir}/libakonadicomponents.so.?
 %attr(755,root,root) %{_libdir}/libakonadicomponents.so.*.*.*
 %attr(755,root,root) %{_libdir}/libakonadiprivate.so.?
@@ -1363,8 +1368,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkocorehelper.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkode.so.?
 %attr(755,root,root) %{_libdir}/libkode.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkontact.so.?
-%attr(755,root,root) %{_libdir}/libkontact.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkontactprivate.so.?
+%attr(755,root,root) %{_libdir}/libkontactprivate.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkorg_stdprinting.so.?
 %attr(755,root,root) %{_libdir}/libkorg_stdprinting.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkorganizer_calendar.so.?
