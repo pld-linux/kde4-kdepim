@@ -1172,6 +1172,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_bookmark.desktop
 %{_datadir}/apps/nepomuk/ontologies/nco.trig
 %{_datadir}/apps/nepomuk/ontologies/nco.desktop
+%dir %{_datadir}/akonadi
 %dir %{_datadir}/akonadi/agents
 %{_datadir}/akonadi/agents/nepomukfeeder.desktop
 #%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
@@ -1202,6 +1203,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kcontactmanager/kcontactmanagerui.rc
 %{_desktopdir}/kde4/kcontactmanager.desktop
 %{_desktopdir}/kde4/akonadiconsole.desktop
+%dir %{_datadir}/apps/akonadiconsole
 %{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
 %{_datadir}/kde4/services/kcm_akonadi_resources.desktop
 
