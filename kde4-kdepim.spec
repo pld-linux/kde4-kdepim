@@ -15,12 +15,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.0.65
+Version:	4.0.66
 Release:	0.1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	f26aaeaa01342a178126949f4bb0487b
+# Source0-md5:	554a652c06a221ea2dbbe00aeb921d2f
 Patch0:		%{name}-mysqld.patch
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
@@ -588,7 +588,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/kde4/services/kontact
 %{_datadir}/kde4/services/kontact/knodeplugin.desktop
 ### ktimetracker
-%attr(755,root,root) %{_libdir}/kde4/kontact_karm.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_karmplugin.so
 %{_datadir}/kde4/services/kontact/karmplugin.desktop
 ### kmail
 %attr(755,root,root) %{_libdir}/kde4/kontact_kmailplugin.so
@@ -615,7 +615,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kcmapptsummary.desktop
 %{_datadir}/kde4/services/kcmtodosummary.desktop
 ### kmobiletools
-%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletools.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletoolsplugin.so
 %{_datadir}/kde4/services/kontact/kmobiletools.desktop
 ### summary
 %attr(755,root,root) %{_libdir}/kde4/kontact_summaryplugin.so
@@ -635,7 +635,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kontact/newstickerplugin.desktop
 %{_datadir}/kde4/services/kcmkontactknt.desktop
 ### akregator
-%attr(755,root,root) %{_libdir}/kde4/kontact_akregator.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_akregatorplugin.so
 %{_datadir}/kde4/services/kontact/akregatorplugin.desktop
 %{_datadir}/kde4/services/kontact/akregatorplugin3.2.desktop
 ### weather
@@ -766,7 +766,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkabc_xmlrpc.so
 %{_libdir}/libkabckolab.so
 %{_libdir}/libkabinterfaces.so
-%{_libdir}/libkaddressbook.so
+%{_libdir}/libkaddressbookprivate.so
 %{_libdir}/libkcal_resourcefeatureplan.so
 %{_libdir}/libkcal_resourceremote.so
 %{_libdir}/libkcal_slox.so
@@ -806,6 +806,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkmimeakonadi.so
 %{_libdir}/libkitchensyncprivate.so
 %{_libdir}/libqopensync.so
+
+%{_datadir}/apps/cmake/modules/*.cmake
 
 %files -n kde4-kio-groupwise
 %defattr(644,root,root,755)
@@ -870,7 +872,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/ldifvcardthumbnail.so
 %attr(755,root,root) %{_libdir}/libkabcommon.so
 %attr(755,root,root) %{_libdir}/libkabinterfaces.so
-%attr(755,root,root) %{_libdir}/libkaddressbook.so
 %{_desktopdir}/kde4/kaddressbook.desktop
 %{_datadir}/apps/kaddressbook
 %{_datadir}/dbus-1/interfaces/org.kde.KAddressbook.Core.xml
@@ -1308,8 +1309,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkabcscalix.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libkabinterfaces.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkaddressbook.so.?
-%attr(755,root,root) %{_libdir}/libkaddressbook.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkaddressbookprivate.so.?
+%attr(755,root,root) %{_libdir}/libkaddressbookprivate.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkalarm_resources.so.?
 %attr(755,root,root) %{_libdir}/libkalarm_resources.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so.?
