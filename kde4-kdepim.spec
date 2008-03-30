@@ -1,6 +1,4 @@
 # Conditional build:
-#   /usr/share/apps/cmake/modules/FindKode.cmake
-#   /usr/share/apps/cmake/modules/KodeMacros.cmake
 #   /usr/share/apps/kconf_update/kolab-resource.upd
 #   /usr/share/apps/kconf_update/upgrade-resourcetype.pl
 #
@@ -15,12 +13,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.0.66
+Version:	4.0.67
 Release:	0.1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	554a652c06a221ea2dbbe00aeb921d2f
+# Source0-md5:	271828cdc985175a06467fdaf7c7b384
 Patch0:		%{name}-mysqld.patch
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
