@@ -1,6 +1,34 @@
 # Conditional build:
 #   /usr/share/apps/kconf_update/kolab-resource.upd
 #   /usr/share/apps/kconf_update/upgrade-resourcetype.pl
+#   /usr/share/apps/kdepim/icons/oxygen/16x16/actions/meeting-attending-tentative.png
+#   /usr/share/apps/kdepim/icons/oxygen/16x16/actions/meeting-attending.png
+#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/appointment-recurring.png
+#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/appointment-reminder.png
+#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/meeting-organizer.png
+#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/task-complete.png
+#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/task-recurring.png
+#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/task-reminder.png
+#   /usr/share/apps/kdepim/icons/oxygen/22x22/actions/meeting-attending-tentative.png
+#   /usr/share/apps/kdepim/icons/oxygen/22x22/actions/meeting-attending.png
+#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/appointment-recurring.png
+#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/appointment-reminder.png
+#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/meeting-organizer.png
+#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/task-complete.png
+#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/task-recurring.png
+#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/task-reminder.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/actions/appointment-new.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/actions/journal-new.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/actions/meeting-attending-tentative.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/actions/meeting-attending.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/actions/task-new.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/appointment-recurring.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/appointment-reminder.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/meeting-organizer.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/task-complete.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/task-recurring.png
+#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/task-reminder.png
+#   /usr/share/mime/packages/akonadi-mime.xml
 #
 %bcond_without	apidocs			# do not prepare API documentation
 #
@@ -204,14 +232,13 @@ Summary(pl.UTF-8):	Osobisty czasomierz
 Group:		X11/Applications
 
 %description KTimeTracker
-KTimeTracker - tracks time spent on various tasks.
-It is useful for tracking hours to be billed to different
-clients.
+KTimeTracker - tracks time spent on various tasks. It is useful for
+tracking hours to be billed to different clients.
 
 %description KTimeTracker -l pl.UTF-8
-KTimeTracker śledzi czas spędzony na różnych zajęciach.
-Jest przydatny przy obliczaniu godzin do wystawiania
-rachunków wielu klientom.
+KTimeTracker śledzi czas spędzony na różnych zajęciach. Jest
+przydatny przy obliczaniu godzin do wystawiania rachunków wielu
+klientom.
 
 %package kmail
 Summary:	KDE Mail client
@@ -219,8 +246,8 @@ Summary(pl.UTF-8):	Program pocztowy KDE
 Summary(pt_BR.UTF-8):	Cliente / leitor de e-mails para o KDE
 Group:		X11/Applications
 URL:		http://kmail.kde.org/
-Requires:	%{name}-libs = %{version}-%{release}
 # ? Requires:	kde4-kdebase-core >= %{version}
+Requires:	%{name}-libs = %{version}-%{release}
 
 %description kmail
 This is electronic mail client for KDE with a huge amount of features:
@@ -265,8 +292,8 @@ Summary:	KDE News Reader
 Summary(pl.UTF-8):	Czytnik newsów dla KDE
 Summary(pt_BR.UTF-8):	Leitor de notícias (news) do KDE
 Group:		X11/Applications
-Requires:	%{name}-libs = %{version}-%{release}
 # ?Requires:	kde4-kdebase-core >= %{version}
+Requires:	%{name}-libs = %{version}-%{release}
 
 %description knode
 KNode is an online newsreader (GKNSA compliant) for the K Desktop
@@ -300,11 +327,17 @@ Leitor de notícias (news) do KDE.
 Summary:	News feed reader for the KDE desktop
 Summary(pl.UTF-8):	Czytnik newsów dla KDE
 Group:		X11/Applications
-Requires:	%{name}-libs = %{version}-%{release}
 #?Requires:	kde4-kdebase-core >= %{version}
+Requires:	%{name}-libs = %{version}-%{release}
 
 %description akregator
-Akregator is a news feed reader for the KDE desktop. It enables you to follow news sites, blogs and other RSS/Atom-enabled websites without the need to manually check for updates using a web browser. Akregator is designed to be both easy to use and to be powerful enough to read hundreds of news sources conveniently. It comes with Konqueror integration for adding news feeds and with an internal browser for easy news reading.
+Akregator is a news feed reader for the KDE desktop. It enables you to
+follow news sites, blogs and other RSS/Atom-enabled websites without
+the need to manually check for updates using a web browser. Akregator
+is designed to be both easy to use and to be powerful enough to read
+hundreds of news sources conveniently. It comes with Konqueror
+integration for adding news feeds and with an internal browser for
+easy news reading.
 
 %description akregator -l pl.UTF-8
 Czytnik newsów dla KDE.
@@ -500,9 +533,9 @@ kitchensync.
 kitchensync.
 
 %package kleopatra
-Summary:        Kleopatra
-Group:          X11/Applications
-Requires:       %{name}-libs = %{version}-%{release}
+Summary:	Kleopatra
+Group:		X11/Applications
+Requires:	%{name}-libs = %{version}-%{release}
 
 %description kleopatra
 Kleopatra.
@@ -613,8 +646,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kcmapptsummary.desktop
 %{_datadir}/kde4/services/kcmtodosummary.desktop
 ### kmobiletools
-%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletoolsplugin.so
-%{_datadir}/kde4/services/kontact/kmobiletools.desktop
+#%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletoolsplugin.so
+#%{_datadir}/kde4/services/kontact/kmobiletools.desktop
 ### summary
 %attr(755,root,root) %{_libdir}/kde4/kontact_summaryplugin.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_kontactsummary.so
@@ -753,12 +786,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/kpgp
 %{_includedir}/kpilot
 %{_includedir}/ksieve
-%{_includedir}/libakonadi
+%{_includedir}/akonadi
 %{_includedir}/libkmobiletools
 %{_includedir}/libkmobiletoolsengineui
 %{_includedir}/akregator
 %{_includedir}/kaddressbook
 %{_libdir}/libakregatorinterfaces.so
+%{_libdir}/libimap.so
 %{_libdir}/libkabc_groupdav.so
 %{_libdir}/libkabc_slox.so
 %{_libdir}/libkabc_xmlrpc.so
@@ -787,21 +821,20 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkpinterfaces.so
 %{_libdir}/libksieve.so
 %{_libdir}/libmimelib.so
-%{_libdir}/libakonadicore.so
+%{_libdir}/libakonadi-kabc.so
+%{_libdir}/libakonadi-kcal.so
 %{_libdir}/libakonadiprivate.so
-%{_libdir}/libakonadiprotocol.so
-%{_libdir}/libakonadicomponents.so
 %{_libdir}/libkmobiletoolsengineui.so
 %{_libdir}/libkmobiletoolslib.so
-%{_libdir}/libkabcakonadi.so
+#%{_libdir}/libkabcakonadi.so
 %{_libdir}/libkabcommon.so
 %{_libdir}/libkabcscalix.so
 %{_libdir}/libkcal_groupdav.so
 %{_libdir}/libkcal_resourceblog.so
-%{_libdir}/libkcalakonadi.so
+#%{_libdir}/libkcalakonadi.so
 %{_libdir}/libkcalscalix.so
 %{_libdir}/libkfeed.so
-%{_libdir}/libkmimeakonadi.so
+#%{_libdir}/libkmimeakonadi.so
 %{_libdir}/libkitchensyncprivate.so
 %{_libdir}/libqopensync.so
 
@@ -936,7 +969,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/kalarm_manager.desktop
 %{_iconsdir}/*/*/apps/*kalarm.png
 %{_iconsdir}/*/*/actions/document-new-from-template.png
-%{_iconsdir}/*/*/actions/kalarm.png
+#%{_iconsdir}/*/*/actions/kalarm.png
 
 %files KTimeTracker -f ktimetracker.lang
 %defattr(644,root,root,755)
@@ -1119,10 +1152,25 @@ rm -rf $RPM_BUILD_ROOT
 
 %files akonadi
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/akonadi
+%attr(755,root,root) %{_bindir}/akonadi_ical_resource
+%attr(755,root,root) %{_bindir}/akonadi_imaplib_resource
+%attr(755,root,root) %{_bindir}/akonadi_kabc_resource
+%attr(755,root,root) %{_bindir}/akonadi_kcal_resource
+%attr(755,root,root) %{_bindir}/akonadi_knut_resource
+%attr(755,root,root) %{_bindir}/akonadi_localbookmarks_resource
+%attr(755,root,root) %{_bindir}/akonadi_maildir_resource
+%attr(755,root,root) %{_bindir}/akonadi_mailthreader_agent
+%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
+%attr(755,root,root) %{_bindir}/akonadi_nepomuk_email_feeder
+%attr(755,root,root) %{_bindir}/akonadi_nntp_resource
+%attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
+%attr(755,root,root) %{_bindir}/akonadi_vcard_resource
 %attr(755,root,root) %{_bindir}/akonadiconsole
+%attr(755,root,root) %{_bindir}/akonaditray
+#%attr(755,root,root) %{_bindir}/akonadi
+#%attr(755,root,root) %{_bindir}/akonadiconsole
 %attr(755,root,root) %{_bindir}/akonamail
-%attr(755,root,root) %{_bindir}/kagenda
+#%attr(755,root,root) %{_bindir}/kagenda
 %attr(755,root,root) %{_bindir}/kabcviewer
 %attr(755,root,root) %{_bindir}/kabceditor
 %attr(755,root,root) %{_bindir}/akonadi_control
@@ -1130,26 +1178,26 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadictl
 %attr(755,root,root) %{_bindir}/akonalendar
 %attr(755,root,root) %{_bindir}/kcontactmanager
-%attr(755,root,root) %{_bindir}/akonadi_nepomuk_feeder
+#%attr(755,root,root) %{_bindir}/akonadi_nepomuk_feeder
 #%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
-%attr(755,root,root) %{_bindir}/akonadi_mailthreader_agent
-%attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
-%attr(755,root,root) %{_bindir}/akonadi_vcard_resource
-%attr(755,root,root) %{_bindir}/akonadi_nntp_resource
-%attr(755,root,root) %{_bindir}/akonadi_kcal_resource
-%attr(755,root,root) %{_bindir}/akonadi_knut_resource
-%attr(755,root,root) %{_bindir}/akonadi_ical_resource
-%attr(755,root,root) %{_bindir}/akonadi_kabc_resource
-%attr(755,root,root) %{_bindir}/akonadi_localbookmarks_resource
-%attr(755,root,root) %{_bindir}/akonadi_maildir_resource
+#%attr(755,root,root) %{_bindir}/akonadi_mailthreader_agent
+#%attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
+#%attr(755,root,root) %{_bindir}/akonadi_vcard_resource
+#%attr(755,root,root) %{_bindir}/akonadi_nntp_resource
+#%attr(755,root,root) %{_bindir}/akonadi_kcal_resource
+#%attr(755,root,root) %{_bindir}/akonadi_knut_resource
+#%attr(755,root,root) %{_bindir}/akonadi_ical_resource
+#%attr(755,root,root) %{_bindir}/akonadi_kabc_resource
+#%attr(755,root,root) %{_bindir}/akonadi_localbookmarks_resource
+#%attr(755,root,root) %{_bindir}/akonadi_maildir_resource
 
-%attr(755,root,root) %{_libdir}/libkcalakonadi.so
-%attr(755,root,root) %{_libdir}/libkmimeakonadi.so
-%attr(755,root,root) %{_libdir}/libakonadiprotocol.so
-%attr(755,root,root) %{_libdir}/libakonadicore.so
-%attr(755,root,root) %{_libdir}/libakonadicomponents.so
-%attr(755,root,root) %{_libdir}/libakonadiprivate.so
-%attr(755,root,root) %{_libdir}/libkabcakonadi.so
+#%attr(755,root,root) %{_libdir}/libkcalakonadi.so
+#%attr(755,root,root) %{_libdir}/libkmimeakonadi.so
+#%attr(755,root,root) %{_libdir}/libakonadiprotocol.so
+#%attr(755,root,root) %{_libdir}/libakonadicore.so
+#%attr(755,root,root) %{_libdir}/libakonadicomponents.so
+#%attr(755,root,root) %{_libdir}/libakonadiprivate.so
+#%attr(755,root,root) %{_libdir}/libkabcakonadi.so
 
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_addressee.so
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_mail.so
@@ -1170,8 +1218,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/nepomuk/ontologies/nco.desktop
 %dir %{_datadir}/akonadi
 %dir %{_datadir}/akonadi/agents
-%{_datadir}/akonadi/agents/nepomukfeeder.desktop
-#%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
 %{_datadir}/akonadi/agents/mailthreaderagent.desktop
 %{_datadir}/akonadi/agents/strigifeeder.desktop
 %{_datadir}/akonadi/agents/vcardresource.desktop
@@ -1182,16 +1228,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/akonadi/agents/kabcresource.desktop
 %{_datadir}/akonadi/agents/localbookmarksresource.desktop
 %{_datadir}/akonadi/agents/maildirresource.desktop
-
+%{_datadir}/akonadi/agents/imaplibresource.desktop
+%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
+%{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
 %{_datadir}/kde4/services/plasma-applet-plasmobiff.desktop
 %{_datadir}/apps/desktoptheme/default/widgets/akonadi.svg
 %{_datadir}/kde4/services/plasma-engine-akonadi.desktop
 %{_datadir}/dbus-1/services/org.kde.Akonadi.Control.service
-%{_datadir}/dbus-1/interfaces/org.kde.Akonadi.AgentManager.xml
-%{_datadir}/dbus-1/interfaces/org.kde.Akonadi.NotificationManager.xml
-%{_datadir}/dbus-1/interfaces/org.kde.Akonadi.ProfileManager.xml
-%{_datadir}/dbus-1/interfaces/org.kde.Akonadi.Tracer.xml
-%{_datadir}/dbus-1/interfaces/org.kde.Akonadi.TracerNotification.xml
 %dir %{_datadir}/config/akonadi
 %{_datadir}/config/akonadi/mysql-global.conf
 %{_datadir}/kde4/services/akonadi.protocol
@@ -1278,27 +1321,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kdepimwidgets
 %{_iconsdir}/*/*/actions/button_more.png
 %{_iconsdir}/*/*/actions/button_fewer.png
-
-%attr(755,root,root) %{_libdir}/libakonadicore.so.?
-%attr(755,root,root) %{_libdir}/libakonadicore.so.*.*.*
-%attr(755,root,root) %{_libdir}/libakonadicomponents.so.?
-%attr(755,root,root) %{_libdir}/libakonadicomponents.so.*.*.*
+%attr(755,root,root) %{_libdir}/libakonadi-kabc.so.?
+%attr(755,root,root) %{_libdir}/libakonadi-kabc.so.4.*.*
+%attr(755,root,root) %{_libdir}/libakonadi-kcal.so.?
+%attr(755,root,root) %{_libdir}/libakonadi-kcal.so.4.*.*
 %attr(755,root,root) %{_libdir}/libakonadiprivate.so.?
-%attr(755,root,root) %{_libdir}/libakonadiprivate.so.*.*.*
-%attr(755,root,root) %{_libdir}/libakonadiprotocol.so.?
-%attr(755,root,root) %{_libdir}/libakonadiprotocol.so.*.*.*
+%attr(755,root,root) %{_libdir}/libakonadiprivate.so.4.*.*
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.*.*.*
 %attr(755,root,root) %{_libdir}/libakregatorprivate.so.?
 %attr(755,root,root) %{_libdir}/libakregatorprivate.so.*.*.*
+%attr(755,root,root) %{_libdir}/libimap.so.?
+%attr(755,root,root) %{_libdir}/libimap.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabc_groupdav.so.?
 %attr(755,root,root) %{_libdir}/libkabc_groupdav.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabc_slox.so.?
 %attr(755,root,root) %{_libdir}/libkabc_slox.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabc_xmlrpc.so.?
 %attr(755,root,root) %{_libdir}/libkabc_xmlrpc.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkabcakonadi.so.?
-%attr(755,root,root) %{_libdir}/libkabcakonadi.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkabcakonadi.so.?
+#%attr(755,root,root) %{_libdir}/libkabcakonadi.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabckolab.so.?
 %attr(755,root,root) %{_libdir}/libkabckolab.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabcommon.so.?
@@ -1323,8 +1365,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkcal_slox.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so.?
 %attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcalakonadi.so.?
-%attr(755,root,root) %{_libdir}/libkcalakonadi.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkcalakonadi.so.?
+#%attr(755,root,root) %{_libdir}/libkcalakonadi.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcalkolab.so.?
 %attr(755,root,root) %{_libdir}/libkcalkolab.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcalscalix.so.?
@@ -1345,8 +1387,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.?
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkmimeakonadi.so.?
-%attr(755,root,root) %{_libdir}/libkmimeakonadi.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkmimeakonadi.so.?
+#%attr(755,root,root) %{_libdir}/libkmimeakonadi.so.*.*.*
 #%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so.?
 #%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.?
