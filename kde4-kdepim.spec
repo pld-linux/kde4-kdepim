@@ -1,31 +1,3 @@
-# Conditional build:
-#   /usr/share/apps/kdepim/icons/oxygen/16x16/actions/meeting-attending-tentative.png
-#   /usr/share/apps/kdepim/icons/oxygen/16x16/actions/meeting-attending.png
-#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/appointment-recurring.png
-#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/appointment-reminder.png
-#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/meeting-organizer.png
-#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/task-complete.png
-#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/task-recurring.png
-#   /usr/share/apps/kdepim/icons/oxygen/16x16/status/task-reminder.png
-#   /usr/share/apps/kdepim/icons/oxygen/22x22/actions/meeting-attending-tentative.png
-#   /usr/share/apps/kdepim/icons/oxygen/22x22/actions/meeting-attending.png
-#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/appointment-recurring.png
-#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/appointment-reminder.png
-#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/meeting-organizer.png
-#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/task-complete.png
-#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/task-recurring.png
-#   /usr/share/apps/kdepim/icons/oxygen/22x22/status/task-reminder.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/actions/appointment-new.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/actions/journal-new.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/actions/meeting-attending-tentative.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/actions/meeting-attending.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/actions/task-new.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/appointment-recurring.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/appointment-reminder.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/meeting-organizer.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/task-complete.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/task-recurring.png
-#   /usr/share/apps/kdepim/icons/oxygen/32x32/status/task-reminder.png
 #
 %bcond_without	apidocs			# do not prepare API documentation
 #
@@ -776,6 +748,48 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcal_blog.so
 %{_datadir}/kde4/services/kresources/kcal/blog.desktop
 
+### icons that nobody knows where to package ;)
+%dir %{_datadir}/apps/kdepim
+%dir %{_datadir}/apps/kdepim/icons
+%dir %{_datadir}/apps/kdepim/icons/oxygen
+%dir %{_datadir}/apps/kdepim/icons/oxygen/16x16
+%dir %{_datadir}/apps/kdepim/icons/oxygen/16x16/actions
+%dir %{_datadir}/apps/kdepim/icons/oxygen/16x16/status
+%dir %{_datadir}/apps/kdepim/icons/oxygen/22x22
+%dir %{_datadir}/apps/kdepim/icons/oxygen/22x22/actions
+%dir %{_datadir}/apps/kdepim/icons/oxygen/22x22/status
+%dir %{_datadir}/apps/kdepim/icons/oxygen/32x32
+%dir %{_datadir}/apps/kdepim/icons/oxygen/32x32/actions
+%dir %{_datadir}/apps/kdepim/icons/oxygen/32x32/status
+%{_datadir}/apps/kdepim/icons/oxygen/16x16/actions/meeting-attending-tentative.png
+%{_datadir}/apps/kdepim/icons/oxygen/16x16/actions/meeting-attending.png
+%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/appointment-recurring.png
+%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/appointment-reminder.png
+%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/meeting-organizer.png
+%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/task-complete.png
+%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/task-recurring.png
+%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/task-reminder.png
+%{_datadir}/apps/kdepim/icons/oxygen/22x22/actions/meeting-attending-tentative.png
+%{_datadir}/apps/kdepim/icons/oxygen/22x22/actions/meeting-attending.png
+%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/appointment-recurring.png
+%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/appointment-reminder.png
+%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/meeting-organizer.png
+%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/task-complete.png
+%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/task-recurring.png
+%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/task-reminder.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/actions/appointment-new.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/actions/journal-new.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/actions/meeting-attending-tentative.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/actions/meeting-attending.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/actions/task-new.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/appointment-recurring.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/appointment-reminder.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/meeting-organizer.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/task-complete.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/task-recurring.png
+%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/task-reminder.png
+
+
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/*.h
@@ -1214,7 +1228,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/akonadiconsole
 %{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
 %{_datadir}/kde4/services/kcm_akonadi_resources.desktop
-%{_datadir}/applications/kde4/akonaditray.desktop
+%{_desktopdir}/kde4/akonaditray.desktop
 %{_datadir}/mime/packages/akonadi-mime.xml
 
 %files kleopatra -f kleopatra.lang
