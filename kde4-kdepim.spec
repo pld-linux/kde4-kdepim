@@ -1,6 +1,4 @@
 # Conditional build:
-#   /usr/share/apps/kconf_update/kolab-resource.upd
-#   /usr/share/apps/kconf_update/upgrade-resourcetype.pl
 #   /usr/share/apps/kdepim/icons/oxygen/16x16/actions/meeting-attending-tentative.png
 #   /usr/share/apps/kdepim/icons/oxygen/16x16/actions/meeting-attending.png
 #   /usr/share/apps/kdepim/icons/oxygen/16x16/status/appointment-recurring.png
@@ -28,7 +26,6 @@
 #   /usr/share/apps/kdepim/icons/oxygen/32x32/status/task-complete.png
 #   /usr/share/apps/kdepim/icons/oxygen/32x32/status/task-recurring.png
 #   /usr/share/apps/kdepim/icons/oxygen/32x32/status/task-reminder.png
-#   /usr/share/mime/packages/akonadi-mime.xml
 #
 %bcond_without	apidocs			# do not prepare API documentation
 #
@@ -764,6 +761,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/kcal/kolab.desktop
 %{_datadir}/kde4/services/kresources/kabc/kolab.desktop
 %{_datadir}/kde4/services/kresources/knotes/kolabresource.desktop
+%{_datadir}/apps/kconf_update/kolab-resource.upd
+%{_datadir}/apps/kconf_update/upgrade-resourcetype.pl
 ### kresources/lib
 %attr(755,root,root) %{_libdir}/libkgroupwarebase.so
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so
@@ -782,11 +781,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*.h
 %{_includedir}/kleo
 %{_includedir}/kmail
-%{_includedir}/kontact
 %{_includedir}/kpgp
 %{_includedir}/kpilot
 %{_includedir}/ksieve
-%{_includedir}/akonadi
 %{_includedir}/libkmobiletools
 %{_includedir}/libkmobiletoolsengineui
 %{_includedir}/akregator
@@ -950,16 +947,14 @@ rm -rf $RPM_BUILD_ROOT
 %files kalarm -f kalarm.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kalarm
-%attr(755,root,root) %{_bindir}/kalarmd
+%attr(755,root,root) %{_bindir}/kalarmautostart
 %attr(755,root,root) %{_libdir}/kde4/kalarm_*.so
 %attr(755,root,root) %{_libdir}/libkalarm_resources.so
 %{_desktopdir}/kde4/kalarm.desktop
-%{_desktopdir}/kde4/kalarmd.desktop
 %{_datadir}/apps/kalarm
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kalarm-*.pl
 %{_datadir}/apps/kconf_update/kalarm.upd
 %{_datadir}/autostart/kalarm.tray.desktop
-%{_datadir}/autostart/kalarmd.autostart.desktop
 %{_datadir}/config.kcfg/kalarmconfig.kcfg
 %{_datadir}/dbus-1/interfaces/org.kde.kalarm.*.xml
 %dir %{_datadir}/kde4/services/kresources/alarms
@@ -969,7 +964,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/kalarm_manager.desktop
 %{_iconsdir}/*/*/apps/*kalarm.png
 %{_iconsdir}/*/*/actions/document-new-from-template.png
-#%{_iconsdir}/*/*/actions/kalarm.png
 
 %files KTimeTracker -f ktimetracker.lang
 %defattr(644,root,root,755)
@@ -1094,7 +1088,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kpilot_*.so
 %attr(755,root,root) %{_libdir}/libkpilot_conduit_base.so
 %attr(755,root,root) %{_libdir}/libkpilot.so
-%attr(755,root,root) %{_libdir}/libtestlib.so
 %{_datadir}/apps/kconf_update/kpilot.upd
 %{_datadir}/apps/kpilot
 %{_datadir}/config.kcfg/keyringconduit.kcfg
@@ -1167,10 +1160,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadi_vcard_resource
 %attr(755,root,root) %{_bindir}/akonadiconsole
 %attr(755,root,root) %{_bindir}/akonaditray
-#%attr(755,root,root) %{_bindir}/akonadi
-#%attr(755,root,root) %{_bindir}/akonadiconsole
 %attr(755,root,root) %{_bindir}/akonamail
-#%attr(755,root,root) %{_bindir}/kagenda
 %attr(755,root,root) %{_bindir}/kabcviewer
 %attr(755,root,root) %{_bindir}/kabceditor
 %attr(755,root,root) %{_bindir}/akonadi_control
@@ -1178,27 +1168,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadictl
 %attr(755,root,root) %{_bindir}/akonalendar
 %attr(755,root,root) %{_bindir}/kcontactmanager
-#%attr(755,root,root) %{_bindir}/akonadi_nepomuk_feeder
-#%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
-#%attr(755,root,root) %{_bindir}/akonadi_mailthreader_agent
-#%attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
-#%attr(755,root,root) %{_bindir}/akonadi_vcard_resource
-#%attr(755,root,root) %{_bindir}/akonadi_nntp_resource
-#%attr(755,root,root) %{_bindir}/akonadi_kcal_resource
-#%attr(755,root,root) %{_bindir}/akonadi_knut_resource
-#%attr(755,root,root) %{_bindir}/akonadi_ical_resource
-#%attr(755,root,root) %{_bindir}/akonadi_kabc_resource
-#%attr(755,root,root) %{_bindir}/akonadi_localbookmarks_resource
-#%attr(755,root,root) %{_bindir}/akonadi_maildir_resource
-
-#%attr(755,root,root) %{_libdir}/libkcalakonadi.so
-#%attr(755,root,root) %{_libdir}/libkmimeakonadi.so
-#%attr(755,root,root) %{_libdir}/libakonadiprotocol.so
-#%attr(755,root,root) %{_libdir}/libakonadicore.so
-#%attr(755,root,root) %{_libdir}/libakonadicomponents.so
-#%attr(755,root,root) %{_libdir}/libakonadiprivate.so
-#%attr(755,root,root) %{_libdir}/libkabcakonadi.so
-
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_addressee.so
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_mail.so
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_kcal.so
@@ -1245,6 +1214,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/akonadiconsole
 %{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
 %{_datadir}/kde4/services/kcm_akonadi_resources.desktop
+%{_datadir}/applications/kde4/akonaditray.desktop
+%{_datadir}/mime/packages/akonadi-mime.xml
 
 %files kleopatra -f kleopatra.lang
 %defattr(644,root,root,755)
