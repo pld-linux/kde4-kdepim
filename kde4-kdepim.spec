@@ -19,9 +19,7 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version
 Patch0:		%{name}-mysqld.patch
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
-BuildRequires:	boost-bind-devel
-BuildRequires:	boost-graph-devel
-BuildRequires:	boost-type_traits-devel
+BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cmake
 BuildRequires:	cyrus-sasl-devel
 BuildRequires:	docbook-dtd42-xml
