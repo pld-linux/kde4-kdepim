@@ -16,6 +16,7 @@ License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	4a901c7232c070858ead5eb87182b14a
+Patch0:		%{name}-akonadi.patch
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.35.0
@@ -524,6 +525,7 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
+%patch0 -p0
 
 %build
 export QTDIR=%{_prefix}
@@ -744,48 +746,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcal_blog.so
 %{_datadir}/kde4/services/kresources/kcal/blog.desktop
 
-### icons that nobody knows where to package ;)
-%dir %{_datadir}/apps/kdepim
-%dir %{_datadir}/apps/kdepim/icons
-%dir %{_datadir}/apps/kdepim/icons/oxygen
-%dir %{_datadir}/apps/kdepim/icons/oxygen/16x16
-%dir %{_datadir}/apps/kdepim/icons/oxygen/16x16/actions
-%dir %{_datadir}/apps/kdepim/icons/oxygen/16x16/status
-%dir %{_datadir}/apps/kdepim/icons/oxygen/22x22
-%dir %{_datadir}/apps/kdepim/icons/oxygen/22x22/actions
-%dir %{_datadir}/apps/kdepim/icons/oxygen/22x22/status
-%dir %{_datadir}/apps/kdepim/icons/oxygen/32x32
-%dir %{_datadir}/apps/kdepim/icons/oxygen/32x32/actions
-%dir %{_datadir}/apps/kdepim/icons/oxygen/32x32/status
-%{_datadir}/apps/kdepim/icons/oxygen/16x16/actions/meeting-attending-tentative.png
-%{_datadir}/apps/kdepim/icons/oxygen/16x16/actions/meeting-attending.png
-%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/appointment-recurring.png
-%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/appointment-reminder.png
-%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/meeting-organizer.png
-%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/task-complete.png
-%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/task-recurring.png
-%{_datadir}/apps/kdepim/icons/oxygen/16x16/status/task-reminder.png
-%{_datadir}/apps/kdepim/icons/oxygen/22x22/actions/meeting-attending-tentative.png
-%{_datadir}/apps/kdepim/icons/oxygen/22x22/actions/meeting-attending.png
-%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/appointment-recurring.png
-%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/appointment-reminder.png
-%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/meeting-organizer.png
-%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/task-complete.png
-%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/task-recurring.png
-%{_datadir}/apps/kdepim/icons/oxygen/22x22/status/task-reminder.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/actions/appointment-new.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/actions/journal-new.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/actions/meeting-attending-tentative.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/actions/meeting-attending.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/actions/task-new.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/appointment-recurring.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/appointment-reminder.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/meeting-organizer.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/task-complete.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/task-recurring.png
-%{_datadir}/apps/kdepim/icons/oxygen/32x32/status/task-reminder.png
-
-
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/*.h
@@ -830,7 +790,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmimelib.so
 %{_libdir}/libakonadi-kabc.so
 %{_libdir}/libakonadi-kcal.so
-%{_libdir}/libakonadiprivate.so
 %{_libdir}/libkmobiletoolsengineui.so
 %{_libdir}/libkmobiletoolslib.so
 #%{_libdir}/libkabcakonadi.so
@@ -922,7 +881,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kaddressbook/cardview.desktop
 %{_datadir}/kde4/services/kaddressbook/cryptosettings.desktop
 %{_datadir}/kde4/services/kaddressbook/csv_xxport.desktop
-%{_datadir}/kde4/services/kaddressbook/distributionlist.desktop
 %{_datadir}/kde4/services/kaddressbook/distributionlistng.desktop
 %{_datadir}/kde4/services/kaddressbook/eudora_xxport.desktop
 %{_datadir}/kde4/services/kaddressbook/gaduprotocol.desktop
@@ -964,7 +922,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kalarm
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kalarm-*.pl
 %{_datadir}/apps/kconf_update/kalarm.upd
-%{_datadir}/autostart/kalarm.tray.desktop
 %{_datadir}/config.kcfg/kalarmconfig.kcfg
 %{_datadir}/dbus-1/interfaces/org.kde.kalarm.*.xml
 %dir %{_datadir}/kde4/services/kresources/alarms
@@ -1173,9 +1130,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonamail
 %attr(755,root,root) %{_bindir}/kabcviewer
 %attr(755,root,root) %{_bindir}/kabceditor
-%attr(755,root,root) %{_bindir}/akonadi_control
-%attr(755,root,root) %{_bindir}/akonadiserver
-%attr(755,root,root) %{_bindir}/akonadictl
 %attr(755,root,root) %{_bindir}/akonalendar
 %attr(755,root,root) %{_bindir}/kcontactmanager
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_addressee.so
@@ -1213,9 +1167,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/plasma-applet-plasmobiff.desktop
 %{_datadir}/apps/desktoptheme/default/widgets/akonadi.svg
 %{_datadir}/kde4/services/plasma-engine-akonadi.desktop
-%{_datadir}/dbus-1/services/org.kde.Akonadi.Control.service
-%dir %{_datadir}/config/akonadi
-%{_datadir}/config/akonadi/mysql-global.conf
 %{_datadir}/kde4/services/akonadi.protocol
 %dir %{_datadir}/apps/kcontactmanager
 %{_datadir}/apps/kcontactmanager/kcontactmanagerui.rc
@@ -1225,7 +1176,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
 %{_datadir}/kde4/services/kcm_akonadi_resources.desktop
 %{_desktopdir}/kde4/akonaditray.desktop
-%{_datadir}/mime/packages/akonadi-mime.xml
 
 %files kleopatra -f kleopatra.lang
 %defattr(644,root,root,755)
@@ -1236,8 +1186,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/kleopatra_import.desktop
 %dir %{_datadir}/apps/kleopatra
 %dir %{_datadir}/apps/kleopatra/pics
-%{_datadir}/apps/kleopatra/kleopatra_newui.rc
-%{_datadir}/apps/kleopatra/kleopatraui.rc
 %{_datadir}/apps/kleopatra/pics/kleopatra_splashscreen.png
 %{_datadir}/apps/kleopatra/pics/kleopatra_splashscreen.svgz
 %{_datadir}/apps/kleopatra/pics/kleopatra_wizard.png
@@ -1306,8 +1254,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libakonadi-kabc.so.4.*.*
 %attr(755,root,root) %{_libdir}/libakonadi-kcal.so.?
 %attr(755,root,root) %{_libdir}/libakonadi-kcal.so.4.*.*
-%attr(755,root,root) %{_libdir}/libakonadiprivate.so.?
-%attr(755,root,root) %{_libdir}/libakonadiprivate.so.4.*.*
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.*.*.*
 %attr(755,root,root) %{_libdir}/libakregatorprivate.so.?
@@ -1320,8 +1266,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkabc_slox.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabc_xmlrpc.so.?
 %attr(755,root,root) %{_libdir}/libkabc_xmlrpc.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libkabcakonadi.so.?
-#%attr(755,root,root) %{_libdir}/libkabcakonadi.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabckolab.so.?
 %attr(755,root,root) %{_libdir}/libkabckolab.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabcommon.so.?
