@@ -10,16 +10,15 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.0.70
-Release:	0.1
+Version:	4.0.73
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	f3e56ac63e41d1458694cc1547fc95ea
-Patch0:		%{name}-mysqld.patch
+# Source0-md5:	4a901c7232c070858ead5eb87182b14a
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
-BuildRequires:	boost-devel >= 1.35.0
+BuildRequires:	boost-devel >= 1.34.0
 BuildRequires:	cmake
 BuildRequires:	cyrus-sasl-devel
 BuildRequires:	docbook-dtd42-xml
@@ -525,7 +524,6 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
-%patch0 -p1
 
 %build
 export QTDIR=%{_prefix}
