@@ -18,7 +18,7 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version
 # Source0-md5:	4a901c7232c070858ead5eb87182b14a
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
-BuildRequires:	boost-devel >= 1.34.0
+BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cmake
 BuildRequires:	cyrus-sasl-devel
 BuildRequires:	docbook-dtd42-xml
