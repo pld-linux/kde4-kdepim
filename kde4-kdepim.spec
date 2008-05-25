@@ -16,7 +16,6 @@ License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	9d28311aec20e2d5fe949940ef1b3326
-Patch0:		%{name}-akonadi.patch
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.35.0
@@ -31,6 +30,7 @@ BuildRequires:	gpgme-devel >= 1:1.0.0
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
+BuildRequires:	kde4-kdesupport-automoc4 >= %{version}
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
 BuildRequires:	libopensync-devel >= 1:0.36
@@ -525,7 +525,6 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
-%patch0 -p0
 
 %build
 export QTDIR=%{_prefix}
