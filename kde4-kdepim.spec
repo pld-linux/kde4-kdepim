@@ -1,4 +1,12 @@
 #
+# TODO:
+#   /usr/bin/kwatchgnupg   
+#   /usr/share/apps/kwatchgnupg/kwatchgnupgui.rc       
+#   /usr/share/apps/kwatchgnupg/pics/kwatchgnupg.png      
+#   /usr/share/apps/kwatchgnupg/pics/kwatchgnupg2.png      
+#   /usr/share/apps/nepomuk/ontologies/nmo.desktop      
+#   /usr/share/apps/nepomuk/ontologies/nmo.trig      
+#
 %bcond_without	apidocs			# do not prepare API documentation
 #
 %define		_state		unstable
@@ -612,8 +620,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kcmapptsummary.desktop
 %{_datadir}/kde4/services/kcmtodosummary.desktop
 ### kmobiletools
-#%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletoolsplugin.so
-#%{_datadir}/kde4/services/kontact/kmobiletools.desktop
+%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletoolsplugin.so
+%{_datadir}/kde4/services/kontact/kmobiletools.desktop
 ### summary
 %attr(755,root,root) %{_libdir}/kde4/kontact_summaryplugin.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_kontactsummary.so
@@ -636,8 +644,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kontact/akregatorplugin.desktop
 %{_datadir}/kde4/services/kontact/akregatorplugin3.2.desktop
 ### weather
-%attr(755,root,root) %{_libdir}/kde4/kontact_weatherplugin.so
-%{_datadir}/kde4/services/kontact/weatherplugin.desktop
+#%attr(755,root,root) %{_libdir}/kde4/kontact_weatherplugin.so
+#%{_datadir}/kde4/services/kontact/weatherplugin.desktop
 ### knotes
 %attr(755,root,root) %{_libdir}/kde4/kontact_knotesplugin.so
 %{_datadir}/apps/knotes/knotes_part.rc
@@ -753,6 +761,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/kpgp
 %{_includedir}/kpilot
 %{_includedir}/ksieve
+%{_includedir}/libkleopatraclient
 %{_includedir}/libkmobiletools
 %{_includedir}/libkmobiletoolsengineui
 %{_includedir}/akregator
@@ -798,7 +807,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkcal_resourceblog.so
 #%{_libdir}/libkcalakonadi.so
 %{_libdir}/libkcalscalix.so
-%{_libdir}/libkfeed.so
+#%{_libdir}/libkfeed.so
 #%{_libdir}/libkmimeakonadi.so
 %{_libdir}/libkitchensyncprivate.so
 %{_libdir}/libqopensync.so
@@ -919,6 +928,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkalarm_resources.so
 %{_desktopdir}/kde4/kalarm.desktop
 %{_datadir}/apps/kalarm
+%{_datadir}/autostart/kalarm.autostart.desktop
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kalarm-*.pl
 %{_datadir}/apps/kconf_update/kalarm.upd
 %{_datadir}/config.kcfg/kalarmconfig.kcfg
@@ -1180,11 +1190,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kleopatra
 %attr(755,root,root) %{_libdir}/kde4/kcm_kleopatra.so
+%attr(755,root,root) %{_libdir}/libkleopatraclientcore.so
 %{_datadir}/apps/libkleopatra
 %{_datadir}/config/libkleopatrarc
 %{_desktopdir}/kde4/kleopatra_import.desktop
 %dir %{_datadir}/apps/kleopatra
 %dir %{_datadir}/apps/kleopatra/pics
+%{_datadir}/apps/kleopatra/kleopatra.rc
 %{_datadir}/apps/kleopatra/pics/kleopatra_splashscreen.png
 %{_datadir}/apps/kleopatra/pics/kleopatra_splashscreen.svgz
 %{_datadir}/apps/kleopatra/pics/kleopatra_wizard.png
@@ -1297,8 +1309,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkcalscalix.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkdepim.so.?
 %attr(755,root,root) %{_libdir}/libkdepim.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkfeed.so.?
-%attr(755,root,root) %{_libdir}/libkfeed.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkfeed.so.?
+#%attr(755,root,root) %{_libdir}/libkfeed.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkgroupwarebase.so.?
 %attr(755,root,root) %{_libdir}/libkgroupwarebase.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so.?
