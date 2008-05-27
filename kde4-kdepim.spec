@@ -1,11 +1,6 @@
 #
 # TODO:
-#   /usr/bin/kwatchgnupg   
-#   /usr/share/apps/kwatchgnupg/kwatchgnupgui.rc       
-#   /usr/share/apps/kwatchgnupg/pics/kwatchgnupg.png      
-#   /usr/share/apps/kwatchgnupg/pics/kwatchgnupg2.png      
-#   /usr/share/apps/nepomuk/ontologies/nmo.desktop      
-#   /usr/share/apps/nepomuk/ontologies/nmo.trig      
+# - subpackage for kjots?
 #
 %bcond_without	apidocs			# do not prepare API documentation
 #
@@ -18,12 +13,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.0.74
+Version:	4.0.80
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	9d28311aec20e2d5fe949940ef1b3326
+# Source0-md5:	e08922f0620dcc7f35719406c6997c6b
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.35.0
@@ -577,13 +572,21 @@ rm -rf $RPM_BUILD_ROOT
 ### kontact
 %attr(755,root,root) %{_bindir}/kontact
 %attr(755,root,root) %{_bindir}/kgpgconf
+%attr(755,root,root) %{_bindir}/kjots
+%attr(755,root,root) %{_bindir}/kwatchgnupg
 %attr(755,root,root) %{_libdir}/libkontactprivate.so
-%attr(755,root,root) %{_libdir}/libkpinterfaces.so
+%attr(755,root,root) %{_libdir}/libkontactinterfaces.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_kontact.so
+%attr(755,root,root) %{_libdir}/kde4/kjotspart.so
 %{_desktopdir}/kde4/Kontact.desktop
 %{_datadir}/config.kcfg/kontact.kcfg
 %{_datadir}/kde4/services/kontactconfig.desktop
 %{_datadir}/apps/kontact
+%{_desktopdir}/kde4/Kjots.desktop
+%{_desktopdir}/kde4/kjotspart.desktop
+%{_datadir}/apps/kjots
+%{_datadir}/config.kcfg/kjots.kcfg
+%{_datadir}/apps/kwatchgnupg
 %{_datadir}/kde4/servicetypes/kontactplugin.desktop
 %{_iconsdir}/*/*/*/kontact*.png
 %{_datadir}/dbus-1/interfaces/org.kde.kontact.KNotes.xml
@@ -592,6 +595,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kontact_knodeplugin.so
 %dir %{_datadir}/kde4/services/kontact
 %{_datadir}/kde4/services/kontact/knodeplugin.desktop
+### kjotss
+%attr(755,root,root) %{_libdir}/kde4/kontact_kjotsplugin.so
+%{_datadir}/kde4/services/kontact/kjots_plugin.desktop
 ### ktimetracker
 %attr(755,root,root) %{_libdir}/kde4/kontact_karmplugin.so
 %{_datadir}/kde4/services/kontact/karmplugin.desktop
@@ -690,8 +696,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kabc_slox.so
 %{_datadir}/kde4/services/kresources/kabc/kabc_slox.desktop
 %{_datadir}/kde4/services/kresources/kabc/kabc_ox.desktop
+%{_datadir}/kde4/services/kresources/kabc/kabc_groupwise.desktop
 %{_datadir}/kde4/services/kresources/kcal/kcal_slox.desktop
 %{_datadir}/kde4/services/kresources/kcal/kcal_ox.desktop
+%{_datadir}/kde4/services/kresources/kcal/kcal_groupwise.desktop
 ### kresources/scalix
 %attr(755,root,root) %{_bindir}/scalixadmin
 %attr(755,root,root) %{_libdir}/libkcalscalix.so
@@ -768,12 +776,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/kaddressbook
 %{_libdir}/libakregatorinterfaces.so
 %{_libdir}/libimap.so
+%{_libdir}/libgwsoap.so
 %{_libdir}/libkabc_groupdav.so
 %{_libdir}/libkabc_slox.so
 %{_libdir}/libkabc_xmlrpc.so
+%{_libdir}/libkabc_groupwise.so
 %{_libdir}/libkabckolab.so
 %{_libdir}/libkabinterfaces.so
 %{_libdir}/libkaddressbookprivate.so
+%{_libdir}/libkcal_groupwise.so
 %{_libdir}/libkcal_resourcefeatureplan.so
 %{_libdir}/libkcal_resourceremote.so
 %{_libdir}/libkcal_slox.so
@@ -793,7 +804,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkorg_stdprinting.so
 %{_libdir}/libkpgp.so
 %{_libdir}/libkpilot.so
-%{_libdir}/libkpinterfaces.so
 %{_libdir}/libksieve.so
 %{_libdir}/libmimelib.so
 %{_libdir}/libakonadi-kabc.so
@@ -816,10 +826,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n kde4-kio-groupwise
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/kde4/kio_groupwise.so
+%attr(755,root,root) %{_libdir}/kde4/kio_groupwise.so
 %{_datadir}/config.kcfg/groupwise.kcfg
-#%{_datadir}/services/groupwise.protocol
-#%{_datadir}/services/groupwises.protocol
+%{_datadir}/kde4/services/groupwise.protocol
+%{_datadir}/kde4/services/groupwises.protocol
 
 %files korganizer -f korganizer.lang
 %defattr(644,root,root,755)
@@ -1018,6 +1028,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_browser.so
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_advanced.so
 %attr(755,root,root) %{_libdir}/kde4/akregatorpart.so
+%attr(755,root,root) %{_libdir}/kde4/akregator_config_onlinesync.so
+%attr(755,root,root) %{_libdir}/kde4/akregator_onlinesync_plugin.so
 %{_desktopdir}/kde4/akregator.desktop
 %{_datadir}/apps/akregator
 %{_datadir}/kde4/services/akregator_*.desktop
@@ -1191,6 +1203,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/kleopatra
 %attr(755,root,root) %{_libdir}/kde4/kcm_kleopatra.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientcore.so
+%attr(755,root,root) %{_libdir}/libkleopatraclientgui.so
 %{_datadir}/apps/libkleopatra
 %{_datadir}/config/libkleopatrarc
 %{_desktopdir}/kde4/kleopatra_import.desktop
@@ -1271,6 +1284,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libakregatorprivate.so.*.*.*
 %attr(755,root,root) %{_libdir}/libimap.so.?
 %attr(755,root,root) %{_libdir}/libimap.so.*.*.*
+%attr(755,root,root) %{_libdir}/libgwsoap.so.?
+%attr(755,root,root) %{_libdir}/libgwsoap.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabc_groupdav.so.?
 %attr(755,root,root) %{_libdir}/libkabc_groupdav.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabc_slox.so.?
@@ -1283,6 +1298,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkabcommon.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabcscalix.so.?
 %attr(755,root,root) %{_libdir}/libkabcscalix.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkabc_groupwise.so.?
+%attr(755,root,root) %{_libdir}/libkabc_groupwise.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libkabinterfaces.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkaddressbookprivate.so.?
@@ -1291,6 +1308,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkalarm_resources.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so.?
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcal_groupwise.so.?
+%attr(755,root,root) %{_libdir}/libkcal_groupwise.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so.?
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so.?
@@ -1347,6 +1366,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkode.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkontactprivate.so.?
 %attr(755,root,root) %{_libdir}/libkontactprivate.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkontactinterfaces.so.?
+%attr(755,root,root) %{_libdir}/libkontactinterfaces.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkorg_stdprinting.so.?
 %attr(755,root,root) %{_libdir}/libkorg_stdprinting.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkorganizer_calendar.so.?
@@ -1361,8 +1382,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkpgp.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkpilot.so.?
 %attr(755,root,root) %{_libdir}/libkpilot.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkpinterfaces.so.?
-%attr(755,root,root) %{_libdir}/libkpinterfaces.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkschema.so.?
 %attr(755,root,root) %{_libdir}/libkschema.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkschemawidgets.so.?
