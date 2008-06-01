@@ -1,7 +1,4 @@
 #
-# TODO:
-# - subpackage for kjots?
-#
 %bcond_without	apidocs			# do not prepare API documentation
 #
 %define		_state		unstable
