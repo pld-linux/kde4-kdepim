@@ -33,7 +33,7 @@ BuildRequires:	gpgme-devel >= 1:1.0.0
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
-BuildRequires:	kde4-kdesupport-automoc4 >= %{version}
+#BuildRequires:	kde4-kdesupport-automoc4 >= %{version}
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
 BuildRequires:	libopensync-devel >= 1:0.36
@@ -510,6 +510,23 @@ Requires:	%{name}-libs = %{version}-%{release}
 %description kleopatra
 Kleopatra.
 
+%package kjots
+Summary:        KDE Note taker
+Summary(pl.UTF-8):      Notatnik dla KDE
+Summary(pt_BR.UTF-8):   Ferramenta de armazenamento de livros
+Group:          X11/Applications
+Requires:       kde4-kdebase-core >= %{version}
+
+%description kjots
+kjots is a small note taker program. Name and idea are taken from the
+jots program included in the tkgoodstuff package.
+
+%description kjots -l pl.UTF-8
+KJots to mały program do zapisywania notatek.
+
+%description kjots -l pt_BR.UTF-8
+Ferramenta de armazenamento de livros.
+
 %package libs
 Summary:	Shared kdepim libraries
 Summary(pl.UTF-8):	Współdzielone biblioteki kdepim
@@ -560,6 +577,7 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang korn --with-kde
 %find_lang kpilot --with-kde
 %find_lang ktimetracker --with-kde
+%find_lang kjots --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -572,20 +590,14 @@ rm -rf $RPM_BUILD_ROOT
 ### kontact
 %attr(755,root,root) %{_bindir}/kontact
 %attr(755,root,root) %{_bindir}/kgpgconf
-%attr(755,root,root) %{_bindir}/kjots
 %attr(755,root,root) %{_bindir}/kwatchgnupg
 %attr(755,root,root) %{_libdir}/libkontactprivate.so
 %attr(755,root,root) %{_libdir}/libkontactinterfaces.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_kontact.so
-%attr(755,root,root) %{_libdir}/kde4/kjotspart.so
 %{_desktopdir}/kde4/Kontact.desktop
 %{_datadir}/config.kcfg/kontact.kcfg
 %{_datadir}/kde4/services/kontactconfig.desktop
 %{_datadir}/apps/kontact
-%{_desktopdir}/kde4/Kjots.desktop
-%{_desktopdir}/kde4/kjotspart.desktop
-%{_datadir}/apps/kjots
-%{_datadir}/config.kcfg/kjots.kcfg
 %{_datadir}/apps/kwatchgnupg
 %{_datadir}/kde4/servicetypes/kontactplugin.desktop
 %{_iconsdir}/*/*/*/kontact*.png
@@ -595,9 +607,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kontact_knodeplugin.so
 %dir %{_datadir}/kde4/services/kontact
 %{_datadir}/kde4/services/kontact/knodeplugin.desktop
-### kjotss
-%attr(755,root,root) %{_libdir}/kde4/kontact_kjotsplugin.so
-%{_datadir}/kde4/services/kontact/kjots_plugin.desktop
 ### ktimetracker
 %attr(755,root,root) %{_libdir}/kde4/kontact_karmplugin.so
 %{_datadir}/kde4/services/kontact/karmplugin.desktop
@@ -760,6 +769,18 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_blog.so
 %{_datadir}/kde4/services/kresources/kcal/blog.desktop
+
+%files kjots -f kjots.lang
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/kjots
+%attr(755,root,root) %{_libdir}/kde4/kjotspart.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_kjotsplugin.so
+%{_desktopdir}/kde4/kjotspart.desktop
+%{_desktopdir}/kde4/Kjots.desktop
+%{_datadir}/apps/kjots
+%{_datadir}/config.kcfg/kjots.kcfg
+%{_datadir}/kde4/services/kontact/kjots_plugin.desktop
+%{_iconsdir}/*/*/apps/kjots.png
 
 %files devel
 %defattr(644,root,root,755)
