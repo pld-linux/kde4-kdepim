@@ -30,7 +30,7 @@ BuildRequires:	gpgme-devel >= 1:1.0.0
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
-#BuildRequires:	kde4-kdesupport-automoc4 >= %{version}
+BuildRequires:	kde4-kdesupport-automoc4 >= %{version}
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
 BuildRequires:	libopensync-devel >= 1:0.36
@@ -66,6 +66,160 @@ Environment (KDE).
 kdepim - це набір утиліт для керування
 персональною информацією для K Desktop
 Environment (KDE).
+
+%package -n kde4-kontact
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontact
+Kontact Personal Information Management.
+
+%description -n kde4-kontact -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-knode
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-knode
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-knode -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-ktimetracker
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-ktimetracker
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-ktimetracker -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-kmail
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-kmail
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-kmail -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-kaddressbook
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-kaddressbook
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-kaddressbook -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-planner
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-planner
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-planner -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-korganizer
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-korganizer
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-korganizer -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-kmobiletools
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-kmobiletools
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-kmobiletools -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-summary
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-summary
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-summary -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-specialdates
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-specialdates
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-specialdates -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-newsticker
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-newsticker
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-newsticker -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-akregator
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-akregator
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-akregator -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-weather
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-weather
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-weather -l pl.UTF-8
+Kontact Personal Information Management.
+
+%package -n kde4-kontackt-plugin-knotes
+Summary: 	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact Personal Information Management
+Group: 		X11/Applications
+
+%description -n kde4-kontackt-plugin-knotes
+Kontact Personal Information Management.
+
+%description -n kde4-kontackt-plugin-knotes -l pl.UTF-8
+Kontact Personal Information Management.
 
 %package devel
 Summary:	Development files for KDE pim
@@ -193,16 +347,16 @@ ustawienie własnej wiadomości alarmowej, która wyskoczy na ekranie
 o wybranym czasie albo zaszeregowanie poleceń do wykonania lub poczty
 do wysłania. Zawiera także demona obsługującego przypominanie.
 
-%package KTimeTracker
+%package ktimetracker
 Summary:	Personal timetracker
 Summary(pl.UTF-8):	Osobisty czasomierz
 Group:		X11/Applications
 
-%description KTimeTracker
+%description ktimetracker
 KTimeTracker - tracks time spent on various tasks. It is useful for
 tracking hours to be billed to different clients.
 
-%description KTimeTracker -l pl.UTF-8
+%description ktimetracker -l pl.UTF-8
 KTimeTracker śledzi czas spędzony na różnych zajęciach. Jest
 przydatny przy obliczaniu godzin do wystawiania rachunków wielu
 klientom.
@@ -599,69 +753,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/kontactplugin.desktop
 %{_iconsdir}/*/*/*/kontact*.png
 %{_datadir}/dbus-1/interfaces/org.kde.kontact.KNotes.xml
-### kontackt-plugins
-### knode
-%attr(755,root,root) %{_libdir}/kde4/kontact_knodeplugin.so
-%dir %{_datadir}/kde4/services/kontact
-%{_datadir}/kde4/services/kontact/knodeplugin.desktop
-### ktimetracker
-%attr(755,root,root) %{_libdir}/kde4/kontact_karmplugin.so
-%{_datadir}/kde4/services/kontact/karmplugin.desktop
-### kmail
-%attr(755,root,root) %{_libdir}/kde4/kontact_kmailplugin.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_kmailsummary.so
-%{_datadir}/kde4/services/kontact/kmailplugin.desktop
-%{_datadir}/kde4/services/kcmkmailsummary.desktop
-### kaddressbook
-%attr(755,root,root) %{_libdir}/kde4/kontact_kaddressbookplugin.so
-%{_datadir}/kde4/services/kontact/kaddressbookplugin.desktop
-### planner
-%attr(755,root,root) %{_libdir}/kde4/kontact_plannerplugin.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_planner.so
-%{_datadir}/kde4/services/kontact/plannerplugin.desktop
-%{_datadir}/kde4/services/kcmplanner.desktop
-### korganizer
-%attr(755,root,root) %{_libdir}/kde4/kontact_korganizerplugin.so
-%attr(755,root,root) %{_libdir}/kde4/kontact_todoplugin.so
-%attr(755,root,root) %{_libdir}/kde4/kontact_journalplugin.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_apptsummary.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_todosummary.so
-%{_datadir}/kde4/services/kontact/korganizerplugin.desktop
-%{_datadir}/kde4/services/kontact/todoplugin.desktop
-%{_datadir}/kde4/services/kontact/journalplugin.desktop
-%{_datadir}/kde4/services/kcmapptsummary.desktop
-%{_datadir}/kde4/services/kcmtodosummary.desktop
-### kmobiletools
-%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletoolsplugin.so
-%{_datadir}/kde4/services/kontact/kmobiletools.desktop
-### summary
-%attr(755,root,root) %{_libdir}/kde4/kontact_summaryplugin.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_kontactsummary.so
-%{_datadir}/kde4/services/kontact/summaryplugin.desktop
-%{_datadir}/kde4/services/kcmkontactsummary.desktop
-%dir %{_datadir}/apps/kontactsummary
-%{_datadir}/apps/kontactsummary/kontactsummary_part.rc
-### specialdates
-%attr(755,root,root) %{_libdir}/kde4/kontact_specialdatesplugin.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_sdsummary.so
-%{_datadir}/kde4/services/kontact/specialdatesplugin.desktop
-%{_datadir}/kde4/services/kcmsdsummary.desktop
-### newsticker
-%attr(755,root,root) %{_libdir}/kde4/kontact_newstickerplugin.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_kontactknt.so
-%{_datadir}/kde4/services/kontact/newstickerplugin.desktop
-%{_datadir}/kde4/services/kcmkontactknt.desktop
-### akregator
-%attr(755,root,root) %{_libdir}/kde4/kontact_akregatorplugin.so
-%{_datadir}/kde4/services/kontact/akregatorplugin.desktop
-%{_datadir}/kde4/services/kontact/akregatorplugin3.2.desktop
-### weather
-#%attr(755,root,root) %{_libdir}/kde4/kontact_weatherplugin.so
-#%{_datadir}/kde4/services/kontact/weatherplugin.desktop
-### knotes
-%attr(755,root,root) %{_libdir}/kde4/kontact_knotesplugin.so
-%{_datadir}/apps/knotes/knotes_part.rc
-%{_datadir}/kde4/services/kontact/knotesplugin.desktop
 
 %attr(755,root,root) %{_libdir}/strigi/strigiea_ics.so
 %attr(755,root,root) %{_libdir}/strigi/strigiea_rfc822.so
@@ -767,6 +858,95 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcal_blog.so
 %{_datadir}/kde4/services/kresources/kcal/blog.desktop
 
+
+%files -n kde4-kontackt-plugin-knode
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_knodeplugin.so
+%dir %{_datadir}/kde4/services/kontact
+%{_datadir}/kde4/services/kontact/knodeplugin.desktop
+
+%files -n kde4-kontackt-plugin-ktimetracker
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_karmplugin.so
+%{_datadir}/kde4/services/kontact/karmplugin.desktop
+
+%files -n kde4-kontackt-plugin-kmail
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_kmailplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_kmailsummary.so
+%{_datadir}/kde4/services/kontact/kmailplugin.desktop
+%{_datadir}/kde4/services/kcmkmailsummary.desktop
+
+%files -n kde4-kontackt-plugin-kaddressbook
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_kaddressbookplugin.so
+%{_datadir}/kde4/services/kontact/kaddressbookplugin.desktop
+
+%files -n kde4-kontackt-plugin-planner
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_plannerplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_planner.so
+%{_datadir}/kde4/services/kontact/plannerplugin.desktop
+%{_datadir}/kde4/services/kcmplanner.desktop
+
+%files -n kde4-kontackt-plugin-korganizer
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_korganizerplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_todoplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_journalplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_apptsummary.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_todosummary.so
+%{_datadir}/kde4/services/kontact/korganizerplugin.desktop
+%{_datadir}/kde4/services/kontact/todoplugin.desktop
+%{_datadir}/kde4/services/kontact/journalplugin.desktop
+%{_datadir}/kde4/services/kcmapptsummary.desktop
+%{_datadir}/kde4/services/kcmtodosummary.desktop
+
+%files -n kde4-kontackt-plugin-kmobiletools
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletoolsplugin.so
+%{_datadir}/kde4/services/kontact/kmobiletools.desktop
+
+%files -n kde4-kontackt-plugin-summary
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_summaryplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_kontactsummary.so
+%{_datadir}/kde4/services/kontact/summaryplugin.desktop
+%{_datadir}/kde4/services/kcmkontactsummary.desktop
+%dir %{_datadir}/apps/kontactsummary
+%{_datadir}/apps/kontactsummary/kontactsummary_part.rc
+
+%files -n kde4-kontackt-plugin-specialdates
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_specialdatesplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_sdsummary.so
+%{_datadir}/kde4/services/kontact/specialdatesplugin.desktop
+%{_datadir}/kde4/services/kcmsdsummary.desktop
+
+%files -n kde4-kontackt-plugin-newsticker
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_newstickerplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_kontactknt.so
+%{_datadir}/kde4/services/kontact/newstickerplugin.desktop
+%{_datadir}/kde4/services/kcmkontactknt.desktop
+
+%files -n kde4-kontackt-plugin-akregator
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_akregatorplugin.so
+%{_datadir}/kde4/services/kontact/akregatorplugin.desktop
+%{_datadir}/kde4/services/kontact/akregatorplugin3.2.desktop
+
+#%files -n kde4-kontackt-plugin-weather
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_libdir}/kde4/kontact_weatherplugin.so
+#%{_datadir}/kde4/services/kontact/weatherplugin.desktop
+
+%files -n kde4-kontackt-plugin-knotes
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_knotesplugin.so
+%{_datadir}/apps/knotes/knotes_part.rc
+%{_datadir}/kde4/services/kontact/knotesplugin.desktop
+
 %files kjots -f kjots.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kjots
@@ -828,15 +1008,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libakonadi-kcal.so
 %{_libdir}/libkmobiletoolsengineui.so
 %{_libdir}/libkmobiletoolslib.so
-#%{_libdir}/libkabcakonadi.so
 %{_libdir}/libkabcommon.so
 %{_libdir}/libkabcscalix.so
 %{_libdir}/libkcal_groupdav.so
 %{_libdir}/libkcal_resourceblog.so
-#%{_libdir}/libkcalakonadi.so
 %{_libdir}/libkcalscalix.so
-#%{_libdir}/libkfeed.so
-#%{_libdir}/libkmimeakonadi.so
 %{_libdir}/libkitchensyncprivate.so
 %{_libdir}/libqopensync.so
 
@@ -969,7 +1145,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/apps/*kalarm.png
 %{_iconsdir}/*/*/actions/document-new-from-template.png
 
-%files KTimeTracker -f ktimetracker.lang
+%files ktimetracker -f ktimetracker.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/karm
 %attr(755,root,root) %{_bindir}/ktimetracker
@@ -1338,16 +1514,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkcal_slox.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so.?
 %attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libkcalakonadi.so.?
-#%attr(755,root,root) %{_libdir}/libkcalakonadi.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcalkolab.so.?
 %attr(755,root,root) %{_libdir}/libkcalkolab.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcalscalix.so.?
 %attr(755,root,root) %{_libdir}/libkcalscalix.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkdepim.so.?
 %attr(755,root,root) %{_libdir}/libkdepim.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libkfeed.so.?
-#%attr(755,root,root) %{_libdir}/libkfeed.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkgroupwarebase.so.?
 %attr(755,root,root) %{_libdir}/libkgroupwarebase.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so.?
@@ -1360,10 +1532,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.?
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libkmimeakonadi.so.?
-#%attr(755,root,root) %{_libdir}/libkmimeakonadi.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so.?
-#%attr(755,root,root) %{_libdir}/libkmobiletools_fake.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.?
 %attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmobiletoolslib.so.?
