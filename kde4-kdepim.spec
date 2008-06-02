@@ -116,16 +116,17 @@ Leitor de notícias (news) do KDE.
 
 
 %package -n kde4-kontackt-plugin-knode
-Summary: 	knode plugin for Kontact
-Summary(pl.UTF-8):	plugin knode dla Kontact
+Summary: 	Knode plugin for Kontact
+Summary(pl.UTF-8):	plugin Knode dla Kontact
 Group: 		X11/Applications
 Requires:	%{name}-knode = %{version}-%{release}
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-knode
-Kontact Personal Information Management.
+Knode plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-knode -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin Knode dla Kontact.
 
 %package ktimetracker
 Summary:	Personal timetracker
@@ -142,16 +143,17 @@ przydatny przy obliczaniu godzin do wystawiania rachunków wielu
 klientom.
 
 %package -n kde4-kontackt-plugin-ktimetracker
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Ktimetracker plugin for Kontact
+Summary(pl.UTF-8):	plugin Ktimetracker dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-ktimetracker = %{version}-%{release}
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-ktimetracker
-Kontact Personal Information Management.
+Ktimetracker plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-ktimetracker -l pl.UTF-8
-Kontact Personal Information Management.
+plugin Ktimetracker dla Kontakt.
 
 %package kmail
 Summary:	KDE Mail client
@@ -201,16 +203,17 @@ Program pocztowy dla KDE o olbrzymich możliwościach, obejmujących:
 Poderoso cliente / leitor de e-mails para o KDE.
 
 %package -n kde4-kontackt-plugin-kmail
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Kmail plugin for Kontact
+Summary(pl.UTF-8):	plugin Kmail dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-kmail = %{version}-%{release}
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-kmail
-Kontact Personal Information Management.
+Kmail plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-kmail -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin Kmail dla Kontakt.
 
 %package kaddressbook
 Summary:	Address book
@@ -226,27 +229,29 @@ The KDE address book.
 Książka adresowa dla KDE.
 
 %package -n kde4-kontackt-plugin-kaddressbook
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Kaddressbook plugin for Kontact
+Summary(pl.UTF-8):	plugin Kaddressbook dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-kaddressbook = %{version}-%{release}
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-kaddressbook
-Kontact Personal Information Management.
+Kaddressbook plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-kaddressbook -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin Kaddressbook dla Kontakt.
 
 %package -n kde4-kontackt-plugin-planner
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Planner plugin for Kontact
+Summary(pl.UTF-8):	plugin Planner dla Kontakt
 Group: 		X11/Applications
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-planner
-Kontact Personal Information Management.
+Planner plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-planner -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin Planner dla Kontakt.
 
 %package korganizer
 Summary:	Calendar and scheduling component of Kontact
@@ -275,16 +280,17 @@ iCalendar.
 Korganizer.
 
 %package -n kde4-kontackt-plugin-korganizer
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Korganizer plugin for Kontact
+Summary(pl.UTF-8):	plugin korganizer dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-korganizer = %{version}-%{release}
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-korganizer
-Kontact Personal Information Management.
+Korganizer plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-korganizer -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin korganizer dla Kontakt.
 
 %package kmobiletools
 Summary:	Make your mobile phone communicate with your PC
@@ -298,49 +304,53 @@ Make your mobile phone communicate with your PC.
 Narzędzie do komunikacji między telefonem komórkowym a PC.
 
 %package -n kde4-kontackt-plugin-kmobiletools
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Kmobiletools plugin for Kontact
+Summary(pl.UTF-8):	plugin kmobiletools dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-kmobiletools = %{version}-%{release}
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-kmobiletools
-Kontact Personal Information Management.
+Kmobiletools plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-kmobiletools -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin kmobiletools dla Kontakt.
 
 %package -n kde4-kontackt-plugin-summary
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Summary plugin for Kontact
+Summary(pl.UTF-8):	plugin Summary dla Kontakt
 Group: 		X11/Applications
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-summary
-Kontact Personal Information Management.
+Summary plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-summary -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin Summary dla Kontakt.
 
 %package -n kde4-kontackt-plugin-specialdates
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Specialdates plugin for Kontact
+Summary(pl.UTF-8):	plugin Specialdates dla Kontakt.
 Group: 		X11/Applications
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-specialdates
-Kontact Personal Information Management.
+Specialdates plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-specialdates -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin Specialdates dla Kontakt.
 
 %package -n kde4-kontackt-plugin-newsticker
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Newsticker plugin for Kontact
+Summary(pl.UTF-8):	plugin Newsticker dla Kontakt
 Group: 		X11/Applications
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-newsticker
-Kontact Personal Information Management.
+Newsticker plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-newsticker -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin Newsticker dla Kontakt.
 
 %package akregator
 Summary:	News feed reader for the KDE desktop
@@ -361,27 +371,29 @@ easy news reading.
 Czytnik newsów dla KDE.
 
 %package -n kde4-kontackt-plugin-akregator
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Akregator plugin for Kontact
+Summary(pl.UTF-8):	plugin Akregator dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-akregator = %{version}-%{release}
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-akregator
-Kontact Personal Information Management.
+Akregator plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-akregator -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin Akregator dla Kontakt.
 
 %package -n kde4-kontackt-plugin-weather
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Weather plugin for Kontact
+Summary(pl.UTF-8):	plugin Weather dla Kontakt
 Group: 		X11/Applications
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-weather
-Kontact Personal Information Management.
+Weather plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-weather -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin Weather dla Kontakt.
 
 %package knotes
 Summary:	Yellow cards
@@ -401,16 +413,17 @@ wysyłać pocztę i drukować notatki, a także przyjmować
 przeciąganie nawet ze zdalnych komputerów.
 
 %package -n kde4-kontackt-plugin-knotes
-Summary: 	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary: 	Knotes plugin for Kontact
+Summary(pl.UTF-8):	plugin Knotes dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-knotes = %{version}-%{release}
+Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontackt-plugin-knotes
-Kontact Personal Information Management.
+Knotes plugin for Kontact.
 
 %description -n kde4-kontackt-plugin-knotes -l pl.UTF-8
-Kontact Personal Information Management.
+Plugin Knotes dla Kontakt.
 
 %package devel
 Summary:	Development files for KDE pim
