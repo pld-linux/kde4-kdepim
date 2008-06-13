@@ -2,6 +2,7 @@
 %bcond_without	apidocs			# do not prepare API documentation
 #
 %define		_state		unstable
+%define		supportver	4.0.81
 
 %define	orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
@@ -30,7 +31,7 @@ BuildRequires:	gpgme-devel >= 1:1.0.0
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
-BuildRequires:	kde4-kdesupport-automoc4 >= %{version}
+BuildRequires:	kde4-kdesupport-automoc4 >= %{supportver}
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
 BuildRequires:	libopensync-devel >= 1:0.36
