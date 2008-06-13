@@ -1,4 +1,54 @@
 #
+# TODO:
+#    /usr/share/icons/hicolor/scalable/apps/kaddressbook.svgz                                                                     
+#   /usr/share/icons/hicolor/scalable/apps/korganizer.svgz                                                                       
+#   /usr/share/icons/oxygen/16x16/actions/ldap_lookup.png                                                                        
+#   /usr/share/icons/oxygen/16x16/actions/mail-forwarded-replied.png                                                             
+#   /usr/share/icons/oxygen/16x16/actions/mail-forwarded.png                                                                     
+#   /usr/share/icons/oxygen/16x16/actions/mail-replied.png                                                                       
+#   /usr/share/icons/oxygen/16x16/actions/mail-signed-part.png                                                                   
+#   /usr/share/icons/oxygen/16x16/actions/mail-signed-verified.png                                                               
+#   /usr/share/icons/oxygen/16x16/actions/mail-signed.png                                                                        
+#   /usr/share/icons/oxygen/16x16/actions/meeting-attending-tentative.png                                                        
+#   /usr/share/icons/oxygen/16x16/actions/meeting-attending.png                                                                  
+#   /usr/share/icons/oxygen/16x16/actions/smallclock.png                                                                         
+#   /usr/share/icons/oxygen/16x16/actions/upindicator.png                                                                        
+#   /usr/share/icons/oxygen/16x16/status/appointment-recurring.png                                                               
+#   /usr/share/icons/oxygen/16x16/status/appointment-reminder.png                                                                
+#   /usr/share/icons/oxygen/16x16/status/mail-task.png                                                                           
+#   /usr/share/icons/oxygen/16x16/status/meeting-organizer.png                                                                   
+#   /usr/share/icons/oxygen/16x16/status/task-complete.png                                                                       
+#   /usr/share/icons/oxygen/16x16/status/task-recurring.png                                                                      
+#   /usr/share/icons/oxygen/16x16/status/task-reminder.png                                                                       
+#   /usr/share/icons/oxygen/22x22/actions/checkmark.png                                                                          
+#   /usr/share/icons/oxygen/22x22/actions/meeting-attending-tentative.png                                                        
+#   /usr/share/icons/oxygen/22x22/actions/meeting-attending.png                                                                  
+#   /usr/share/icons/oxygen/22x22/status/appointment-recurring.png
+#   /usr/share/icons/oxygen/22x22/status/appointment-reminder.png
+#   /usr/share/icons/oxygen/22x22/status/mail-task.png
+#   /usr/share/icons/oxygen/22x22/status/meeting-organizer.png
+#   /usr/share/icons/oxygen/22x22/status/task-complete.png
+#   /usr/share/icons/oxygen/22x22/status/task-recurring.png
+#   /usr/share/icons/oxygen/22x22/status/task-reminder.png
+#   /usr/share/icons/oxygen/32x32/actions/appointment-new.png
+#   /usr/share/icons/oxygen/32x32/actions/journal-new.png
+#   /usr/share/icons/oxygen/32x32/actions/meeting-attending-tentative.png
+#   /usr/share/icons/oxygen/32x32/actions/meeting-attending.png
+#   /usr/share/icons/oxygen/32x32/actions/task-new.png
+#   /usr/share/icons/oxygen/32x32/status/appointment-recurring.png
+#   /usr/share/icons/oxygen/32x32/status/appointment-reminder.png
+#   /usr/share/icons/oxygen/32x32/status/meeting-organizer.png
+#   /usr/share/icons/oxygen/32x32/status/task-complete.png
+#   /usr/share/icons/oxygen/32x32/status/task-recurring.png
+#   /usr/share/icons/oxygen/32x32/status/task-reminder.png
+#   /usr/share/icons/oxygen/scalable/actions/mail-forwarded-replied.svgz
+#   /usr/share/icons/oxygen/scalable/actions/mail-forwarded.svgz
+#   /usr/share/icons/oxygen/scalable/actions/mail-replied.svgz
+#   /usr/share/icons/oxygen/scalable/actions/mail-signed-part.svgz
+#   /usr/share/icons/oxygen/scalable/actions/mail-signed-verified.svgz
+#   /usr/share/icons/oxygen/scalable/actions/mail-signed.svgz
+#   /usr/share/icons/oxygen/scalable/status/mail-task.svgz
+
 %bcond_without	apidocs			# do not prepare API documentation
 #
 %define		_state		unstable
@@ -742,14 +792,14 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang kalarm --with-kde
 %find_lang kleopatra --with-kde
 %find_lang kmail --with-kde
-%find_lang kmobiletools --with-kde
+#%find_lang kmobiletools --with-kde
 %find_lang knode --with-kde
 %find_lang knotes --with-kde
 %find_lang konsolekalendar --with-kde
 %find_lang kontact --with-kde
 %find_lang korganizer --with-kde
 %find_lang korn --with-kde
-%find_lang kpilot --with-kde
+#%find_lang kpilot --with-kde
 %find_lang ktimetracker --with-kde
 %find_lang kjots --with-kde
 
@@ -907,18 +957,20 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/karm
 %attr(755,root,root) %{_bindir}/ktimetracker
 %attr(755,root,root) %{_libdir}/kde4/karmpart.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_ktimetrackerconfig.so
 %{_desktopdir}/kde4/karm.desktop
 %dir %{_datadir}/apps/karmpart
 %{_datadir}/apps/karmpart/karmui.rc
 %{_datadir}/apps/ktimetracker
 %{_datadir}/dbus-1/interfaces/org.kde.ktimetracker.ktimetracker.xml
 %{_datadir}/kde4/services/karm_part.desktop
+%{_datadir}/kde4/services/ktimetrackerconfig.desktop
 %{_iconsdir}/*/*/apps/ktimetracker.png
 
 %files -n kde4-kontackt-plugin-ktimetracker
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_karmplugin.so
-%{_datadir}/kde4/services/kontact/karmplugin.desktop
+%{_datadir}/kde4/services/kontact/ktimetracker_plugin.desktop
 
 %files kmail -f kmail.lang
 %defattr(644,root,root,755)
@@ -997,12 +1049,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kontact_kaddressbookplugin.so
 %{_datadir}/kde4/services/kontact/kaddressbookplugin.desktop
 
-%files -n kde4-kontackt-plugin-planner
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde4/kontact_plannerplugin.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_planner.so
-%{_datadir}/kde4/services/kontact/plannerplugin.desktop
-%{_datadir}/kde4/services/kcmplanner.desktop
+#%files -n kde4-kontackt-plugin-planner
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_libdir}/kde4/kontact_plannerplugin.so
+#%attr(755,root,root) %{_libdir}/kde4/kcm_planner.so
+#%{_datadir}/kde4/services/kontact/plannerplugin.desktop
+#%{_datadir}/kde4/services/kcmplanner.desktop
 
 %files korganizer -f korganizer.lang
 %defattr(644,root,root,755)
@@ -1056,40 +1108,40 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kcmapptsummary.desktop
 %{_datadir}/kde4/services/kcmtodosummary.desktop
 
-%files kmobiletools -f kmobiletools.lang
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/kmobiletools
-%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so
-%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so
-%attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so
-%attr(755,root,root) %{_libdir}/kde4/kmobiletoolsmainpart.so
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_sms.so
-%attr(755,root,root) %{_libdir}/kde4/kmobiletools_fake.so
-%{_desktopdir}/kde4/kmobiletools.desktop
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_sms.desktop
-%{_datadir}/apps/kmobiletools
-%{_datadir}/config.kcfg/kmobiletools_devices.kcfg
-%{_datadir}/kde4/services/addressbook_service.desktop
-%{_datadir}/kde4/services/fake_engine.desktop
-%{_datadir}/kde4/services/kmobiletools_mainpart.desktop
-%{_datadir}/kde4/servicetypes/kmobiletoolscoreservice.desktop
-%{_datadir}/kde4/servicetypes/kmobiletoolsengine.desktop
-%{_datadir}/kde4/servicetypes/kmobiletoolsenginexp.desktop
-%{_iconsdir}/*/*/apps/kmobiletools.png
-%{_iconsdir}/*/*/actions/exportsms.png
-%{_iconsdir}/*/*/actions/newsms.png
-%{_iconsdir}/*/*/actions/phonecall.png
-%{_iconsdir}/*/*/actions/simcard.png
-%{_iconsdir}/*/*/actions/closedphone.png
-%{_iconsdir}/*/*/actions/*kmobiletoolsAT.png
-%{_iconsdir}/*/*/actions/*kmobiletoolsG.png
-%{_iconsdir}/*/*/actions/overlaydisc.png
-%{_iconsdir}/*/*/actions/smslist.png
+#%files kmobiletools -f kmobiletools.lang
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_bindir}/kmobiletools
+#%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so
+#%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so
+#%attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so
+#%attr(755,root,root) %{_libdir}/kde4/kmobiletoolsmainpart.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_sms.so
+#%attr(755,root,root) %{_libdir}/kde4/kmobiletools_fake.so
+#%{_desktopdir}/kde4/kmobiletools.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_sms.desktop
+#%{_datadir}/apps/kmobiletools
+#%{_datadir}/config.kcfg/kmobiletools_devices.kcfg
+#%{_datadir}/kde4/services/addressbook_service.desktop
+#%{_datadir}/kde4/services/fake_engine.desktop
+#%{_datadir}/kde4/services/kmobiletools_mainpart.desktop
+#%{_datadir}/kde4/servicetypes/kmobiletoolscoreservice.desktop
+#%{_datadir}/kde4/servicetypes/kmobiletoolsengine.desktop
+#%{_datadir}/kde4/servicetypes/kmobiletoolsenginexp.desktop
+#%{_iconsdir}/*/*/apps/kmobiletools.png
+#%{_iconsdir}/*/*/actions/exportsms.png
+#%{_iconsdir}/*/*/actions/newsms.png
+#%{_iconsdir}/*/*/actions/phonecall.png
+#%{_iconsdir}/*/*/actions/simcard.png
+#%{_iconsdir}/*/*/actions/closedphone.png
+#%{_iconsdir}/*/*/actions/*kmobiletoolsAT.png
+#%{_iconsdir}/*/*/actions/*kmobiletoolsG.png
+#%{_iconsdir}/*/*/actions/overlaydisc.png
+#%{_iconsdir}/*/*/actions/smslist.png
 
-%files -n kde4-kontackt-plugin-kmobiletools
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletoolsplugin.so
-%{_datadir}/kde4/services/kontact/kmobiletools.desktop
+#%files -n kde4-kontackt-plugin-kmobiletools
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletoolsplugin.so
+#%{_datadir}/kde4/services/kontact/kmobiletools.desktop
 
 %files -n kde4-kontackt-plugin-summary
 %defattr(644,root,root,755)
@@ -1107,12 +1159,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kontact/specialdatesplugin.desktop
 %{_datadir}/kde4/services/kcmsdsummary.desktop
 
-%files -n kde4-kontackt-plugin-newsticker
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde4/kontact_newstickerplugin.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_kontactknt.so
-%{_datadir}/kde4/services/kontact/newstickerplugin.desktop
-%{_datadir}/kde4/services/kcmkontactknt.desktop
+#%files -n kde4-kontackt-plugin-newsticker
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_libdir}/kde4/kontact_newstickerplugin.so
+#%attr(755,root,root) %{_libdir}/kde4/kcm_kontactknt.so
+#%{_datadir}/kde4/services/kontact/newstickerplugin.desktop
+#%{_datadir}/kde4/services/kcmkontactknt.desktop
 
 %files akregator -f akregator.lang
 %defattr(644,root,root,755)
@@ -1142,7 +1194,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_akregatorplugin.so
 %{_datadir}/kde4/services/kontact/akregatorplugin.desktop
-%{_datadir}/kde4/services/kontact/akregatorplugin3.2.desktop
+#%{_datadir}/kde4/services/kontact/akregatorplugin3.2.desktop
 
 #%files -n kde4-kontackt-plugin-weather
 #%defattr(644,root,root,755)
@@ -1186,11 +1238,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/kleo
 %{_includedir}/kmail
 %{_includedir}/kpgp
-%{_includedir}/kpilot
+#%{_includedir}/kpilot
 %{_includedir}/ksieve
 %{_includedir}/libkleopatraclient
-%{_includedir}/libkmobiletools
-%{_includedir}/libkmobiletoolsengineui
+#%{_includedir}/libkmobiletools
+#%{_includedir}/libkmobiletoolsengineui
 %{_includedir}/akregator
 %{_includedir}/kaddressbook
 %{_libdir}/libakregatorinterfaces.so
@@ -1222,13 +1274,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkorganizer_calendar.so
 %{_libdir}/libkorg_stdprinting.so
 %{_libdir}/libkpgp.so
-%{_libdir}/libkpilot.so
+#%{_libdir}/libkpilot.so
 %{_libdir}/libksieve.so
 %{_libdir}/libmimelib.so
 %{_libdir}/libakonadi-kabc.so
 %{_libdir}/libakonadi-kcal.so
-%{_libdir}/libkmobiletoolsengineui.so
-%{_libdir}/libkmobiletoolslib.so
+#%{_libdir}/libkmobiletoolsengineui.so
+#%{_libdir}/libkmobiletoolslib.so
 %{_libdir}/libkabcommon.so
 %{_libdir}/libkabcscalix.so
 %{_libdir}/libkcal_groupdav.so
@@ -1236,6 +1288,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkcalscalix.so
 %{_libdir}/libkitchensyncprivate.so
 %{_libdir}/libqopensync.so
+%{_libdir}/libkleopatraclientcore.so
+%{_libdir}/libkleopatraclientgui.so
+%{_datadir}/apps/libkleopatra
 
 %{_datadir}/apps/cmake/modules/*.cmake
 
@@ -1245,8 +1300,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config.kcfg/groupwise.kcfg
 %{_datadir}/kde4/services/groupwise.protocol
 %{_datadir}/kde4/services/groupwises.protocol
-
-
 
 %files kalarm -f kalarm.lang
 %defattr(644,root,root,755)
@@ -1269,11 +1322,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/apps/*kalarm.png
 %{_iconsdir}/*/*/actions/document-new-from-template.png
 
-
-
-
-
-
 %files konsolekalendar -f konsolekalendar.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/konsolekalendar
@@ -1289,39 +1337,38 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.kde.korn.*.xml
 %{_iconsdir}/*/*/*/korn.png
 
-%files kpilot -f kpilot.lang
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/kpilot
-%attr(755,root,root) %{_bindir}/kpilotDaemon
-%attr(755,root,root) %{_libdir}/kde4/kcm_kpilot.so
-%attr(755,root,root) %{_libdir}/kde4/kpilot_*.so
-%attr(755,root,root) %{_libdir}/libkpilot_conduit_base.so
-%attr(755,root,root) %{_libdir}/libkpilot.so
-%{_datadir}/apps/kconf_update/kpilot.upd
-%{_datadir}/apps/kpilot
-%{_datadir}/config.kcfg/keyringconduit.kcfg
-%{_datadir}/config.kcfg/kpilot.kcfg
-%{_datadir}/config.kcfg/kpilotlib.kcfg
-%{_datadir}/config.kcfg/memofileconduit.kcfg
-%{_datadir}/config.kcfg/popmail.kcfg
-%{_datadir}/config.kcfg/timeconduit.kcfg
-%{_datadir}/config.kcfg/vcalconduitbase.kcfg
-%{_datadir}/kde4/services/kpilot_config.desktop
-%{_datadir}/kde4/services/kpilot-conduit-keyring.desktop
-%{_datadir}/kde4/services/memofile-conduit.desktop
-%{_datadir}/kde4/services/notepad-conduit.desktop
-%{_datadir}/kde4/services/null-conduit.desktop
-%{_datadir}/kde4/services/popmail-conduit.desktop
-%{_datadir}/kde4/services/time_conduit.desktop
-%{_datadir}/kde4/services/todo-conduit.desktop
-%{_datadir}/kde4/services/vcal-conduit.desktop
-%{_datadir}/kde4/servicetypes/kpilotconduit.desktop
-%{_desktopdir}/kde4/kpilot.desktop
-%{_desktopdir}/kde4/kpilotdaemon.desktop
-%{_iconsdir}/*/*/actions/kpilot_*.png
-%{_iconsdir}/*/*/apps/kpilot.png
-%{_iconsdir}/*/*/apps/kpilotDaemon.png
-
+#%files kpilot -f kpilot.lang
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_bindir}/kpilot
+#%attr(755,root,root) %{_bindir}/kpilotDaemon
+#%attr(755,root,root) %{_libdir}/kde4/kcm_kpilot.so
+#%attr(755,root,root) %{_libdir}/kde4/kpilot_*.so
+#%attr(755,root,root) %{_libdir}/libkpilot_conduit_base.so
+#%attr(755,root,root) %{_libdir}/libkpilot.so
+#%{_datadir}/apps/kconf_update/kpilot.upd
+#%{_datadir}/apps/kpilot
+#%{_datadir}/config.kcfg/keyringconduit.kcfg
+#%{_datadir}/config.kcfg/kpilot.kcfg
+#%{_datadir}/config.kcfg/kpilotlib.kcfg
+#%{_datadir}/config.kcfg/memofileconduit.kcfg
+#%{_datadir}/config.kcfg/popmail.kcfg
+#%{_datadir}/config.kcfg/timeconduit.kcfg
+#%{_datadir}/config.kcfg/vcalconduitbase.kcfg
+#%{_datadir}/kde4/services/kpilot_config.desktop
+#%{_datadir}/kde4/services/kpilot-conduit-keyring.desktop
+#%{_datadir}/kde4/services/memofile-conduit.desktop
+#%{_datadir}/kde4/services/notepad-conduit.desktop
+#%{_datadir}/kde4/services/null-conduit.desktop
+#%{_datadir}/kde4/services/popmail-conduit.desktop
+#%{_datadir}/kde4/services/time_conduit.desktop
+#%{_datadir}/kde4/services/todo-conduit.desktop
+#%{_datadir}/kde4/services/vcal-conduit.desktop
+#%{_datadir}/kde4/servicetypes/kpilotconduit.desktop
+#%{_desktopdir}/kde4/kpilot.desktop
+#%{_desktopdir}/kde4/kpilotdaemon.desktop
+#%{_iconsdir}/*/*/actions/kpilot_*.png
+#%{_iconsdir}/*/*/apps/kpilot.png
+#%{_iconsdir}/*/*/apps/kpilotDaemon.png
 
 %files akonadi
 %defattr(644,root,root,755)
@@ -1362,6 +1409,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_bookmark.desktop
 %{_datadir}/apps/nepomuk/ontologies/nco.trig
 %{_datadir}/apps/nepomuk/ontologies/nco.desktop
+%{_datadir}/apps/nepomuk/ontologies/nmo.desktop
+%{_datadir}/apps/nepomuk/ontologies/nmo.trig
 %dir %{_datadir}/akonadi
 %dir %{_datadir}/akonadi/agents
 %{_datadir}/akonadi/agents/mailthreaderagent.desktop
@@ -1394,8 +1443,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kleopatra
 %attr(755,root,root) %{_libdir}/kde4/kcm_kleopatra.so
-%attr(755,root,root) %{_libdir}/libkleopatraclientcore.so
-%attr(755,root,root) %{_libdir}/libkleopatraclientgui.so
+%attr(755,root,root) %{_libdir}/libkleopatraclientcore.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkleopatraclientgui.so.*.*.*
 %{_datadir}/apps/libkleopatra
 %{_datadir}/config/libkleopatrarc
 %{_desktopdir}/kde4/kleopatra_import.desktop
@@ -1530,12 +1579,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.?
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.?
-%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so.?
-%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so.?
-%attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.?
+#%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so.?
+#%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so.?
+#%attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so.*.*.*
 %attr(755,root,root) %{_libdir}/libknodecommon.so.?
 %attr(755,root,root) %{_libdir}/libknodecommon.so.*.*.*
 %attr(755,root,root) %{_libdir}/libknotes_xmlrpc.so.?
@@ -1564,8 +1613,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkorganizerprivate.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkpgp.so.?
 %attr(755,root,root) %{_libdir}/libkpgp.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkpilot.so.?
-%attr(755,root,root) %{_libdir}/libkpilot.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkpilot.so.?
+#%attr(755,root,root) %{_libdir}/libkpilot.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkschema.so.?
 %attr(755,root,root) %{_libdir}/libkschema.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkschemawidgets.so.?
