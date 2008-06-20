@@ -82,6 +82,7 @@ BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
 BuildRequires:	kde4-kdesupport-automoc4 >= %{supportver}
+BuildRequires:	libassuan-devel
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
 BuildRequires:	libopensync-devel >= 1:0.36
