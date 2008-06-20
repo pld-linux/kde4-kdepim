@@ -771,12 +771,14 @@ libksieve, libmimelib.
 %setup -q -n %{orgname}-%{version}
 
 %build
-export QTDIR=%{_prefix}
 install -d build
 cd build
 %cmake \
-		-DCMAKE_INSTALL_PREFIX=%{_prefix} \
-		../
+	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+%if "%{_lib}" == "lib64"
+	-DLIB_SUFFIX=64 \
+%endif
+	../
 
 %{__make}
 
