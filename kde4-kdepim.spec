@@ -166,17 +166,17 @@ dla środowiska KDE. Jego możliwości obejmują:
 Leitor de notícias (news) do KDE.
 
 
-%package -n kde4-kontackt-plugin-knode
+%package -n kde4-kontact-plugin-knode
 Summary: 	Knode plugin for Kontact
 Summary(pl.UTF-8):	plugin Knode dla Kontact
 Group: 		X11/Applications
 Requires:	%{name}-knode = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-knode
+%description -n kde4-kontact-plugin-knode
 Knode plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-knode -l pl.UTF-8
+%description -n kde4-kontact-plugin-knode -l pl.UTF-8
 Plugin Knode dla Kontact.
 
 %package ktimetracker
@@ -193,17 +193,17 @@ KTimeTracker śledzi czas spędzony na różnych zajęciach. Jest
 przydatny przy obliczaniu godzin do wystawiania rachunków wielu
 klientom.
 
-%package -n kde4-kontackt-plugin-ktimetracker
+%package -n kde4-kontact-plugin-ktimetracker
 Summary: 	Ktimetracker plugin for Kontact
 Summary(pl.UTF-8):	plugin Ktimetracker dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-ktimetracker = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-ktimetracker
+%description -n kde4-kontact-plugin-ktimetracker
 Ktimetracker plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-ktimetracker -l pl.UTF-8
+%description -n kde4-kontact-plugin-ktimetracker -l pl.UTF-8
 plugin Ktimetracker dla Kontakt.
 
 %package kmail
@@ -253,17 +253,17 @@ Program pocztowy dla KDE o olbrzymich możliwościach, obejmujących:
 %description kmail -l pt_BR.UTF-8
 Poderoso cliente / leitor de e-mails para o KDE.
 
-%package -n kde4-kontackt-plugin-kmail
+%package -n kde4-kontact-plugin-kmail
 Summary: 	Kmail plugin for Kontact
 Summary(pl.UTF-8):	plugin Kmail dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-kmail = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-kmail
+%description -n kde4-kontact-plugin-kmail
 Kmail plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-kmail -l pl.UTF-8
+%description -n kde4-kontact-plugin-kmail -l pl.UTF-8
 Plugin Kmail dla Kontakt.
 
 %package kaddressbook
@@ -279,29 +279,29 @@ The KDE address book.
 %description kaddressbook -l pl.UTF-8
 Książka adresowa dla KDE.
 
-%package -n kde4-kontackt-plugin-kaddressbook
+%package -n kde4-kontact-plugin-kaddressbook
 Summary: 	Kaddressbook plugin for Kontact
 Summary(pl.UTF-8):	plugin Kaddressbook dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-kaddressbook = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-kaddressbook
+%description -n kde4-kontact-plugin-kaddressbook
 Kaddressbook plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-kaddressbook -l pl.UTF-8
+%description -n kde4-kontact-plugin-kaddressbook -l pl.UTF-8
 Plugin Kaddressbook dla Kontakt.
 
-%package -n kde4-kontackt-plugin-planner
+%package -n kde4-kontact-plugin-planner
 Summary: 	Planner plugin for Kontact
 Summary(pl.UTF-8):	plugin Planner dla Kontakt
 Group: 		X11/Applications
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-planner
+%description -n kde4-kontact-plugin-planner
 Planner plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-planner -l pl.UTF-8
+%description -n kde4-kontact-plugin-planner -l pl.UTF-8
 Plugin Planner dla Kontakt.
 
 %package korganizer
@@ -330,17 +330,17 @@ iCalendar.
 %description korganizer -l pl.UTF-8
 Korganizer.
 
-%package -n kde4-kontackt-plugin-korganizer
+%package -n kde4-kontact-plugin-korganizer
 Summary: 	Korganizer plugin for Kontact
 Summary(pl.UTF-8):	plugin korganizer dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-korganizer = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-korganizer
+%description -n kde4-kontact-plugin-korganizer
 Korganizer plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-korganizer -l pl.UTF-8
+%description -n kde4-kontact-plugin-korganizer -l pl.UTF-8
 Plugin korganizer dla Kontakt.
 
 %package kmobiletools
@@ -354,53 +354,53 @@ Make your mobile phone communicate with your PC.
 %description kmobiletools -l pl.UTF-8
 Narzędzie do komunikacji między telefonem komórkowym a PC.
 
-%package -n kde4-kontackt-plugin-kmobiletools
+%package -n kde4-kontact-plugin-kmobiletools
 Summary: 	Kmobiletools plugin for Kontact
 Summary(pl.UTF-8):	plugin kmobiletools dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-kmobiletools = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-kmobiletools
+%description -n kde4-kontact-plugin-kmobiletools
 Kmobiletools plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-kmobiletools -l pl.UTF-8
+%description -n kde4-kontact-plugin-kmobiletools -l pl.UTF-8
 Plugin kmobiletools dla Kontakt.
 
-%package -n kde4-kontackt-plugin-summary
+%package -n kde4-kontact-plugin-summary
 Summary: 	Summary plugin for Kontact
 Summary(pl.UTF-8):	plugin Summary dla Kontakt
 Group: 		X11/Applications
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-summary
+%description -n kde4-kontact-plugin-summary
 Summary plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-summary -l pl.UTF-8
+%description -n kde4-kontact-plugin-summary -l pl.UTF-8
 Plugin Summary dla Kontakt.
 
-%package -n kde4-kontackt-plugin-specialdates
+%package -n kde4-kontact-plugin-specialdates
 Summary: 	Specialdates plugin for Kontact
 Summary(pl.UTF-8):	plugin Specialdates dla Kontakt.
 Group: 		X11/Applications
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-specialdates
+%description -n kde4-kontact-plugin-specialdates
 Specialdates plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-specialdates -l pl.UTF-8
+%description -n kde4-kontact-plugin-specialdates -l pl.UTF-8
 Plugin Specialdates dla Kontakt.
 
-%package -n kde4-kontackt-plugin-newsticker
+%package -n kde4-kontact-plugin-newsticker
 Summary: 	Newsticker plugin for Kontact
 Summary(pl.UTF-8):	plugin Newsticker dla Kontakt
 Group: 		X11/Applications
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-newsticker
+%description -n kde4-kontact-plugin-newsticker
 Newsticker plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-newsticker -l pl.UTF-8
+%description -n kde4-kontact-plugin-newsticker -l pl.UTF-8
 Plugin Newsticker dla Kontakt.
 
 %package akregator
@@ -421,29 +421,29 @@ easy news reading.
 %description akregator -l pl.UTF-8
 Czytnik newsów dla KDE.
 
-%package -n kde4-kontackt-plugin-akregator
+%package -n kde4-kontact-plugin-akregator
 Summary: 	Akregator plugin for Kontact
 Summary(pl.UTF-8):	plugin Akregator dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-akregator = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-akregator
+%description -n kde4-kontact-plugin-akregator
 Akregator plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-akregator -l pl.UTF-8
+%description -n kde4-kontact-plugin-akregator -l pl.UTF-8
 Plugin Akregator dla Kontakt.
 
-%package -n kde4-kontackt-plugin-weather
+%package -n kde4-kontact-plugin-weather
 Summary: 	Weather plugin for Kontact
 Summary(pl.UTF-8):	plugin Weather dla Kontakt
 Group: 		X11/Applications
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-weather
+%description -n kde4-kontact-plugin-weather
 Weather plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-weather -l pl.UTF-8
+%description -n kde4-kontact-plugin-weather -l pl.UTF-8
 Plugin Weather dla Kontakt.
 
 %package knotes
@@ -463,17 +463,17 @@ Dodatkowo, aby móc służyć za przypominajkę, KNotes może
 wysyłać pocztę i drukować notatki, a także przyjmować
 przeciąganie nawet ze zdalnych komputerów.
 
-%package -n kde4-kontackt-plugin-knotes
+%package -n kde4-kontact-plugin-knotes
 Summary: 	Knotes plugin for Kontact
 Summary(pl.UTF-8):	plugin Knotes dla Kontakt
 Group: 		X11/Applications
 Requires:	%{name}-knotes = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
-%description -n kde4-kontackt-plugin-knotes
+%description -n kde4-kontact-plugin-knotes
 Knotes plugin for Kontact.
 
-%description -n kde4-kontackt-plugin-knotes -l pl.UTF-8
+%description -n kde4-kontact-plugin-knotes -l pl.UTF-8
 Plugin Knotes dla Kontakt.
 
 %package devel
@@ -949,7 +949,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/apps/knode.png
 %{_iconsdir}/*/*/apps/knode2.png
 
-%files -n kde4-kontackt-plugin-knode
+%files -n kde4-kontact-plugin-knode
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_knodeplugin.so
 %dir %{_datadir}/kde4/services/kontact
@@ -970,7 +970,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/ktimetrackerconfig.desktop
 %{_iconsdir}/*/*/apps/ktimetracker.png
 
-%files -n kde4-kontackt-plugin-ktimetracker
+%files -n kde4-kontact-plugin-ktimetracker
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_karmplugin.so
 %{_datadir}/kde4/services/kontact/ktimetracker_plugin.desktop
@@ -1013,7 +1013,7 @@ rm -rf $RPM_BUILD_ROOT
 ### libkleo
 %attr(755,root,root) %{_libdir}/libkleo.so
 
-%files -n kde4-kontackt-plugin-kmail
+%files -n kde4-kontact-plugin-kmail
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_kmailplugin.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_kmailsummary.so
@@ -1047,12 +1047,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/kaddressbookimprotocol.desktop
 %{_iconsdir}/*/*/apps/kaddressbook.png
 
-%files -n kde4-kontackt-plugin-kaddressbook
+%files -n kde4-kontact-plugin-kaddressbook
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_kaddressbookplugin.so
 %{_datadir}/kde4/services/kontact/kaddressbookplugin.desktop
 
-#%files -n kde4-kontackt-plugin-planner
+#%files -n kde4-kontact-plugin-planner
 #%defattr(644,root,root,755)
 #%attr(755,root,root) %{_libdir}/kde4/kontact_plannerplugin.so
 #%attr(755,root,root) %{_libdir}/kde4/kcm_planner.so
@@ -1098,7 +1098,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkholidays.so
 %{_datadir}/apps/libkholidays
 
-%files -n kde4-kontackt-plugin-korganizer
+%files -n kde4-kontact-plugin-korganizer
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_korganizerplugin.so
 %attr(755,root,root) %{_libdir}/kde4/kontact_todoplugin.so
@@ -1141,12 +1141,12 @@ rm -rf $RPM_BUILD_ROOT
 #%{_iconsdir}/*/*/actions/overlaydisc.png
 #%{_iconsdir}/*/*/actions/smslist.png
 
-#%files -n kde4-kontackt-plugin-kmobiletools
+#%files -n kde4-kontact-plugin-kmobiletools
 #%defattr(644,root,root,755)
 #%attr(755,root,root) %{_libdir}/kde4/kontact_kmobiletoolsplugin.so
 #%{_datadir}/kde4/services/kontact/kmobiletools.desktop
 
-%files -n kde4-kontackt-plugin-summary
+%files -n kde4-kontact-plugin-summary
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_summaryplugin.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_kontactsummary.so
@@ -1155,14 +1155,14 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/kontactsummary
 %{_datadir}/apps/kontactsummary/kontactsummary_part.rc
 
-%files -n kde4-kontackt-plugin-specialdates
+%files -n kde4-kontact-plugin-specialdates
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_specialdatesplugin.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_sdsummary.so
 %{_datadir}/kde4/services/kontact/specialdatesplugin.desktop
 %{_datadir}/kde4/services/kcmsdsummary.desktop
 
-#%files -n kde4-kontackt-plugin-newsticker
+#%files -n kde4-kontact-plugin-newsticker
 #%defattr(644,root,root,755)
 #%attr(755,root,root) %{_libdir}/kde4/kontact_newstickerplugin.so
 #%attr(755,root,root) %{_libdir}/kde4/kcm_kontactknt.so
@@ -1193,13 +1193,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/apps/akregator_empty.png
 %{_iconsdir}/*/*/apps/akregator.*
 
-%files -n kde4-kontackt-plugin-akregator
+%files -n kde4-kontact-plugin-akregator
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_akregatorplugin.so
 %{_datadir}/kde4/services/kontact/akregatorplugin.desktop
 #%{_datadir}/kde4/services/kontact/akregatorplugin3.2.desktop
 
-#%files -n kde4-kontackt-plugin-weather
+#%files -n kde4-kontact-plugin-weather
 #%defattr(644,root,root,755)
 #%attr(755,root,root) %{_libdir}/kde4/kontact_weatherplugin.so
 #%{_datadir}/kde4/services/kontact/weatherplugin.desktop
@@ -1217,7 +1217,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/knotes/local.desktop
 %{_iconsdir}/*/*/apps/knotes.png
 
-%files -n kde4-kontackt-plugin-knotes
+%files -n kde4-kontact-plugin-knotes
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_knotesplugin.so
 %{_datadir}/apps/knotes/knotes_part.rc
