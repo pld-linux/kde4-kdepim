@@ -52,7 +52,6 @@
 %bcond_without	apidocs			# do not prepare API documentation
 #
 %define		_state		unstable
-%define		supportver	4.0.81
 
 %define	orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
@@ -67,6 +66,7 @@ License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	89d76a005705259b2d7470bf6c4449f9
+BuildRequires:	automoc4
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.35.0
@@ -81,7 +81,6 @@ BuildRequires:	gpgme-devel >= 1:1.0.0
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
-BuildRequires:	kde4-kdesupport-automoc4 >= %{supportver}
 BuildRequires:	libassuan-devel
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
