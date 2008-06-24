@@ -1398,8 +1398,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_mail.so
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_kcal.so
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_bookmark.so
-%attr(755,root,root) %{_libdir}/kde4/plasma_applet_plasmobiff.so
-%attr(755,root,root) %{_libdir}/kde4/plasma_engine_akonadi.so
 %attr(755,root,root) %{_libdir}/kde4/kio_akonadi.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_resources.so
 %dir %{_datadir}/apps/akonadi
@@ -1428,9 +1426,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/akonadi/agents/imaplibresource.desktop
 %{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
 %{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
-%{_datadir}/kde4/services/plasma-applet-plasmobiff.desktop
-%{_datadir}/apps/desktoptheme/default/widgets/akonadi.svg
-%{_datadir}/kde4/services/plasma-engine-akonadi.desktop
 %{_datadir}/kde4/services/akonadi.protocol
 %dir %{_datadir}/apps/kcontactmanager
 %{_datadir}/apps/kcontactmanager/kcontactmanagerui.rc
