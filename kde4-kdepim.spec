@@ -482,8 +482,9 @@ Summary(pl.UTF-8):	Pliki nagłówkowe do KDE pim
 Summary(ru.UTF-8):	Файлы разработки для kdepim
 Summary(uk.UTF-8):	Файли розробки для kdepim
 Group:		X11/Development/Libraries
-Requires:	%{name}-libs = %{version}-%{release}
 Requires:	kde4-kdelibs-devel >= %{version}
+Requires:	%{name}-libs = %{version}-%{release}
+Requires:	%{name}-kleopatra = %{version}-%{release}
 
 %description devel
 This package contains header files needed if you wish to build
