@@ -66,7 +66,7 @@ License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	89d76a005705259b2d7470bf6c4449f9
-BuildRequires:	automoc4
+BuildRequires:	automoc4 >= 0.9.83
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.35.0
