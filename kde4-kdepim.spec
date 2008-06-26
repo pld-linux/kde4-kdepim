@@ -90,6 +90,7 @@ BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
 BuildRequires:	pilot-link-devel >= 0.12.1
 BuildRequires:	qca-devel >= 2.0.0
+BuildRequires:	xorg-lib-libXScrnSaver-devel
 %{?with_apidocs:BuildRequires:	qt4-doc}
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	strigi-devel >= 0.5.9
