@@ -60,12 +60,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.0.83
+Version:	4.0.85
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	89d76a005705259b2d7470bf6c4449f9
+# Source0-md5:	b8d0a5a7433b6f4c5fede9487f6fd41a
 BuildRequires:	automoc4 >= 0.9.83
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
@@ -1391,11 +1391,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadi_vcard_resource
 %attr(755,root,root) %{_bindir}/akonadiconsole
 %attr(755,root,root) %{_bindir}/akonaditray
-%attr(755,root,root) %{_bindir}/akonamail
-%attr(755,root,root) %{_bindir}/kabcviewer
-%attr(755,root,root) %{_bindir}/kabceditor
-%attr(755,root,root) %{_bindir}/akonalendar
-%attr(755,root,root) %{_bindir}/kcontactmanager
+#%attr(755,root,root) %{_bindir}/akonamail
+#%attr(755,root,root) %{_bindir}/kabcviewer
+#%attr(755,root,root) %{_bindir}/kabceditor
+#%attr(755,root,root) %{_bindir}/akonalendar
+#%attr(755,root,root) %{_bindir}/kcontactmanager
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_addressee.so
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_mail.so
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_kcal.so
@@ -1429,9 +1429,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
 %{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
 %{_datadir}/kde4/services/akonadi.protocol
-%dir %{_datadir}/apps/kcontactmanager
-%{_datadir}/apps/kcontactmanager/kcontactmanagerui.rc
-%{_desktopdir}/kde4/kcontactmanager.desktop
+#%dir %{_datadir}/apps/kcontactmanager
+#%{_datadir}/apps/kcontactmanager/kcontactmanagerui.rc
+#%{_desktopdir}/kde4/kcontactmanager.desktop
 %{_desktopdir}/kde4/akonadiconsole.desktop
 %dir %{_datadir}/apps/akonadiconsole
 %{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
