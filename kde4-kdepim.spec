@@ -1,28 +1,28 @@
 #
 # TODO:
-#    /usr/share/icons/hicolor/scalable/apps/kaddressbook.svgz                                                                     
-#   /usr/share/icons/hicolor/scalable/apps/korganizer.svgz                                                                       
-#   /usr/share/icons/oxygen/16x16/actions/ldap_lookup.png                                                                        
-#   /usr/share/icons/oxygen/16x16/actions/mail-forwarded-replied.png                                                             
-#   /usr/share/icons/oxygen/16x16/actions/mail-forwarded.png                                                                     
-#   /usr/share/icons/oxygen/16x16/actions/mail-replied.png                                                                       
-#   /usr/share/icons/oxygen/16x16/actions/mail-signed-part.png                                                                   
-#   /usr/share/icons/oxygen/16x16/actions/mail-signed-verified.png                                                               
-#   /usr/share/icons/oxygen/16x16/actions/mail-signed.png                                                                        
-#   /usr/share/icons/oxygen/16x16/actions/meeting-attending-tentative.png                                                        
-#   /usr/share/icons/oxygen/16x16/actions/meeting-attending.png                                                                  
-#   /usr/share/icons/oxygen/16x16/actions/smallclock.png                                                                         
-#   /usr/share/icons/oxygen/16x16/actions/upindicator.png                                                                        
-#   /usr/share/icons/oxygen/16x16/status/appointment-recurring.png                                                               
-#   /usr/share/icons/oxygen/16x16/status/appointment-reminder.png                                                                
-#   /usr/share/icons/oxygen/16x16/status/mail-task.png                                                                           
-#   /usr/share/icons/oxygen/16x16/status/meeting-organizer.png                                                                   
-#   /usr/share/icons/oxygen/16x16/status/task-complete.png                                                                       
-#   /usr/share/icons/oxygen/16x16/status/task-recurring.png                                                                      
-#   /usr/share/icons/oxygen/16x16/status/task-reminder.png                                                                       
-#   /usr/share/icons/oxygen/22x22/actions/checkmark.png                                                                          
-#   /usr/share/icons/oxygen/22x22/actions/meeting-attending-tentative.png                                                        
-#   /usr/share/icons/oxygen/22x22/actions/meeting-attending.png                                                                  
+#    /usr/share/icons/hicolor/scalable/apps/kaddressbook.svgz
+#   /usr/share/icons/hicolor/scalable/apps/korganizer.svgz
+#   /usr/share/icons/oxygen/16x16/actions/ldap_lookup.png
+#   /usr/share/icons/oxygen/16x16/actions/mail-forwarded-replied.png
+#   /usr/share/icons/oxygen/16x16/actions/mail-forwarded.png
+#   /usr/share/icons/oxygen/16x16/actions/mail-replied.png
+#   /usr/share/icons/oxygen/16x16/actions/mail-signed-part.png
+#   /usr/share/icons/oxygen/16x16/actions/mail-signed-verified.png
+#   /usr/share/icons/oxygen/16x16/actions/mail-signed.png
+#   /usr/share/icons/oxygen/16x16/actions/meeting-attending-tentative.png
+#   /usr/share/icons/oxygen/16x16/actions/meeting-attending.png
+#   /usr/share/icons/oxygen/16x16/actions/smallclock.png
+#   /usr/share/icons/oxygen/16x16/actions/upindicator.png
+#   /usr/share/icons/oxygen/16x16/status/appointment-recurring.png
+#   /usr/share/icons/oxygen/16x16/status/appointment-reminder.png
+#   /usr/share/icons/oxygen/16x16/status/mail-task.png
+#   /usr/share/icons/oxygen/16x16/status/meeting-organizer.png
+#   /usr/share/icons/oxygen/16x16/status/task-complete.png
+#   /usr/share/icons/oxygen/16x16/status/task-recurring.png
+#   /usr/share/icons/oxygen/16x16/status/task-reminder.png
+#   /usr/share/icons/oxygen/22x22/actions/checkmark.png
+#   /usr/share/icons/oxygen/22x22/actions/meeting-attending-tentative.png
+#   /usr/share/icons/oxygen/22x22/actions/meeting-attending.png
 #   /usr/share/icons/oxygen/22x22/status/appointment-recurring.png
 #   /usr/share/icons/oxygen/22x22/status/appointment-reminder.png
 #   /usr/share/icons/oxygen/22x22/status/mail-task.png
@@ -66,6 +66,7 @@ License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	b8d0a5a7433b6f4c5fede9487f6fd41a
+BuildRequires:	akonadi-devel
 BuildRequires:	automoc4 >= 0.9.83
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
@@ -90,10 +91,11 @@ BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
 BuildRequires:	pilot-link-devel >= 0.12.1
 BuildRequires:	qca-devel >= 2.0.0
-BuildRequires:	xorg-lib-libXScrnSaver-devel
 %{?with_apidocs:BuildRequires:	qt4-doc}
 BuildRequires:	rpmbuild(macros) >= 1.129
+BuildRequires:	soprano-devel
 BuildRequires:	strigi-devel >= 0.5.9
+BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	zlib-devel
 BuildConflicts:	indexlib
 BuildConflicts:	kdepim-kontact-libs
@@ -168,9 +170,9 @@ Leitor de notícias (news) do KDE.
 
 
 %package -n kde4-kontact-plugin-knode
-Summary: 	Knode plugin for Kontact
+Summary:	Knode plugin for Kontact
 Summary(pl.UTF-8):	plugin Knode dla Kontact
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	%{name}-knode = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
@@ -190,14 +192,13 @@ KTimeTracker - tracks time spent on various tasks. It is useful for
 tracking hours to be billed to different clients.
 
 %description ktimetracker -l pl.UTF-8
-KTimeTracker śledzi czas spędzony na różnych zajęciach. Jest
-przydatny przy obliczaniu godzin do wystawiania rachunków wielu
-klientom.
+KTimeTracker śledzi czas spędzony na różnych zajęciach. Jest przydatny
+przy obliczaniu godzin do wystawiania rachunków wielu klientom.
 
 %package -n kde4-kontact-plugin-ktimetracker
-Summary: 	Ktimetracker plugin for Kontact
+Summary:	Ktimetracker plugin for Kontact
 Summary(pl.UTF-8):	plugin Ktimetracker dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	%{name}-ktimetracker = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
@@ -255,9 +256,9 @@ Program pocztowy dla KDE o olbrzymich możliwościach, obejmujących:
 Poderoso cliente / leitor de e-mails para o KDE.
 
 %package -n kde4-kontact-plugin-kmail
-Summary: 	Kmail plugin for Kontact
+Summary:	Kmail plugin for Kontact
 Summary(pl.UTF-8):	plugin Kmail dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	%{name}-kmail = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
@@ -281,9 +282,9 @@ The KDE address book.
 Książka adresowa dla KDE.
 
 %package -n kde4-kontact-plugin-kaddressbook
-Summary: 	Kaddressbook plugin for Kontact
+Summary:	Kaddressbook plugin for Kontact
 Summary(pl.UTF-8):	plugin Kaddressbook dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	%{name}-kaddressbook = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
@@ -294,9 +295,9 @@ Kaddressbook plugin for Kontact.
 Plugin Kaddressbook dla Kontakt.
 
 %package -n kde4-kontact-plugin-planner
-Summary: 	Planner plugin for Kontact
+Summary:	Planner plugin for Kontact
 Summary(pl.UTF-8):	plugin Planner dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontact-plugin-planner
@@ -332,9 +333,9 @@ iCalendar.
 Korganizer.
 
 %package -n kde4-kontact-plugin-korganizer
-Summary: 	Korganizer plugin for Kontact
+Summary:	Korganizer plugin for Kontact
 Summary(pl.UTF-8):	plugin korganizer dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	%{name}-korganizer = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
@@ -356,9 +357,9 @@ Make your mobile phone communicate with your PC.
 Narzędzie do komunikacji między telefonem komórkowym a PC.
 
 %package -n kde4-kontact-plugin-kmobiletools
-Summary: 	Kmobiletools plugin for Kontact
+Summary:	Kmobiletools plugin for Kontact
 Summary(pl.UTF-8):	plugin kmobiletools dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	%{name}-kmobiletools = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
@@ -369,9 +370,9 @@ Kmobiletools plugin for Kontact.
 Plugin kmobiletools dla Kontakt.
 
 %package -n kde4-kontact-plugin-summary
-Summary: 	Summary plugin for Kontact
+Summary:	Summary plugin for Kontact
 Summary(pl.UTF-8):	plugin Summary dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontact-plugin-summary
@@ -381,9 +382,9 @@ Summary plugin for Kontact.
 Plugin Summary dla Kontakt.
 
 %package -n kde4-kontact-plugin-specialdates
-Summary: 	Specialdates plugin for Kontact
+Summary:	Specialdates plugin for Kontact
 Summary(pl.UTF-8):	plugin Specialdates dla Kontakt.
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontact-plugin-specialdates
@@ -393,9 +394,9 @@ Specialdates plugin for Kontact.
 Plugin Specialdates dla Kontakt.
 
 %package -n kde4-kontact-plugin-newsticker
-Summary: 	Newsticker plugin for Kontact
+Summary:	Newsticker plugin for Kontact
 Summary(pl.UTF-8):	plugin Newsticker dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontact-plugin-newsticker
@@ -423,9 +424,9 @@ easy news reading.
 Czytnik newsów dla KDE.
 
 %package -n kde4-kontact-plugin-akregator
-Summary: 	Akregator plugin for Kontact
+Summary:	Akregator plugin for Kontact
 Summary(pl.UTF-8):	plugin Akregator dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	%{name}-akregator = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
@@ -436,9 +437,9 @@ Akregator plugin for Kontact.
 Plugin Akregator dla Kontakt.
 
 %package -n kde4-kontact-plugin-weather
-Summary: 	Weather plugin for Kontact
+Summary:	Weather plugin for Kontact
 Summary(pl.UTF-8):	plugin Weather dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	kde4-kontact = %{version}-%{release}
 
 %description -n kde4-kontact-plugin-weather
@@ -483,9 +484,9 @@ Summary(pl.UTF-8):	Pliki nagłówkowe do KDE pim
 Summary(ru.UTF-8):	Файлы разработки для kdepim
 Summary(uk.UTF-8):	Файли розробки для kdepim
 Group:		X11/Development/Libraries
-Requires:	kde4-kdelibs-devel >= %{version}
-Requires:	%{name}-libs = %{version}-%{release}
 Requires:	%{name}-kleopatra = %{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
+Requires:	kde4-kdelibs-devel >= %{version}
 
 %description devel
 This package contains header files needed if you wish to build
@@ -737,11 +738,11 @@ Requires:	%{name}-libs = %{version}-%{release}
 Kleopatra.
 
 %package kjots
-Summary:        KDE Note taker
-Summary(pl.UTF-8):      Notatnik dla KDE
-Summary(pt_BR.UTF-8):   Ferramenta de armazenamento de livros
-Group:          X11/Applications
-Requires:       kde4-kdebase-core >= %{version}
+Summary:	KDE Note taker
+Summary(pl.UTF-8):	Notatnik dla KDE
+Summary(pt_BR.UTF-8):	Ferramenta de armazenamento de livros
+Group:		X11/Applications
+Requires:	kde4-kdebase-core >= %{version}
 
 %description kjots
 kjots is a small note taker program. Name and idea are taken from the
@@ -1011,6 +1012,27 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kmailcvt
 %{_iconsdir}/*/*/apps/kmail*.png
 %{_iconsdir}/*/scalable/apps/kmail.svgz
+%{_iconsdir}/oxygen/*/actions/mail-*.*
+%{_iconsdir}/oxygen/*/mimetypes/x-mail-distribution-list.*
+%{_iconsdir}/oxygen/*/status/mail-sent.png
+%{_iconsdir}/oxygen/*/status/mail-task.*
+
+%{_iconsdir}/oxygen/*/actions/ldap_lookup.png
+%{_iconsdir}/oxygen/*/actions/meeting-*.*
+%{_iconsdir}/oxygen/*/actions/smallclock.png
+%{_iconsdir}/oxygen/*/actions/upindicator.png
+%{_iconsdir}/oxygen/*/actions/checkmark.png
+%{_iconsdir}/oxygen/*/actions/appointment-new.png
+%{_iconsdir}/oxygen/*/actions/journal-new.png
+%{_iconsdir}/oxygen/*/actions/task-new.png
+
+%{_iconsdir}/oxygen/*/status/appointment-recurring.png
+%{_iconsdir}/oxygen/*/status/appointment-reminder.png
+%{_iconsdir}/oxygen/*/status/meeting-organizer.png
+%{_iconsdir}/oxygen/*/status/task-complete.png
+%{_iconsdir}/oxygen/*/status/task-recurring.png
+%{_iconsdir}/oxygen/*/status/task-reminder.png
+
 ### libkleo
 %attr(755,root,root) %{_libdir}/libkleo.so
 
@@ -1046,7 +1068,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/kaddressbook_view.desktop
 %{_datadir}/kde4/servicetypes/kaddressbook_xxport.desktop
 %{_datadir}/kde4/servicetypes/kaddressbookimprotocol.desktop
-%{_iconsdir}/*/*/apps/kaddressbook.png
+%{_iconsdir}/*/*/apps/kaddressbook.*
 
 %files -n kde4-kontact-plugin-kaddressbook
 %defattr(644,root,root,755)
@@ -1094,7 +1116,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/korgprintplugin.desktop
 %{_desktopdir}/kde4/korganizer-import.desktop
 %{_desktopdir}/kde4/korganizer.desktop
-%{_iconsdir}/*/*/apps/korganizer.png
+%{_iconsdir}/*/*/apps/korganizer.*
 ### libkholidays
 %attr(755,root,root) %{_libdir}/libkholidays.so
 %{_datadir}/apps/libkholidays
