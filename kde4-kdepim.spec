@@ -10,12 +10,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.0.85
+Version:	4.0.98
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	b8d0a5a7433b6f4c5fede9487f6fd41a
+# Source0-md5:	71d7396490f27ca4c5d9687515a3d8a9
 BuildRequires:	akonadi-devel
 BuildRequires:	automoc4 >= 0.9.83
 BuildRequires:	bison
@@ -1430,6 +1430,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kleopatra_config_dirserv.desktop
 %{_datadir}/kde4/services/kleopatra_config_dnorder.desktop
 %{_datadir}/kde4/services/kleopatra_config_smimevalidation.desktop
+%{_datadir}/kde4/services/kleopatra_decryptverifyfiles.desktop
+%{_datadir}/kde4/services/kleopatra_decryptverifyfolders.desktop
+%{_datadir}/kde4/services/kleopatra_signencryptfiles.desktop
+%{_datadir}/kde4/services/kleopatra_signencryptfolders.desktop
 %{_iconsdir}/oxygen/*/apps/kleopatra.png
 %{_iconsdir}/oxygen/scalable/apps/kleopatra.svgz
 
