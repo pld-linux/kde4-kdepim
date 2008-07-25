@@ -1,7 +1,7 @@
 #
 %bcond_without	apidocs			# do not prepare API documentation
 #
-%define		_state		unstable
+%define		_state		stable
 
 %define	orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
