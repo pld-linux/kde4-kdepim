@@ -16,6 +16,8 @@ License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	5ccd9ca2bf92c0f94ac3b0bf5a5a1344
+Patch0:		%{name}-korn.patch
+URL:		http://www.kde.org/
 BuildRequires:	akonadi-devel
 BuildRequires:	automoc4 >= 0.9.83
 BuildRequires:	bison
@@ -722,6 +724,7 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
+%patch0 -p0
 
 %build
 install -d build
@@ -1203,7 +1206,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/kjots
 %attr(755,root,root) %{_libdir}/kde4/kjotspart.so
 %attr(755,root,root) %{_libdir}/kde4/kontact_kjotsplugin.so
-%{_desktopdir}/kde4/kjotspart.desktop
+%{_datadir}/kde4/services/kjotspart.desktop
 %{_desktopdir}/kde4/Kjots.desktop
 %{_datadir}/apps/kjots
 %{_datadir}/config.kcfg/kjots.kcfg
