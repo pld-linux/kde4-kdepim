@@ -980,7 +980,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/oxygen/*/actions/edit-delete-page.png
 %{_iconsdir}/oxygen/*/actions/journal-new.png
 %{_iconsdir}/oxygen/*/actions/task-new.png
-
+%{_iconsdir}/oxygen/*/status/mail-tagged.png
 %{_iconsdir}/oxygen/*/status/appointment-recurring.png
 %{_iconsdir}/oxygen/*/status/appointment-reminder.png
 %{_iconsdir}/oxygen/*/status/meeting-organizer.png
