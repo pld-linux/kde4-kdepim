@@ -165,7 +165,7 @@ Summary:	KDE Mail client
 Summary(pl.UTF-8):	Program pocztowy KDE
 Summary(pt_BR.UTF-8):	Cliente / leitor de e-mails para o KDE
 Group:		X11/Applications
-URL:		http://kmail.kde.org/
+URL:		http://kontact.kde.org/kmail/
 # ? Requires:	kde4-kdebase-core >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
 
