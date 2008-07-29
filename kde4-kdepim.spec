@@ -11,7 +11,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.1.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -627,6 +627,7 @@ Obsługuje urządzenia serii:
 Summary:	Akonadi
 Summary(pl.UTF-8):	Akonadi
 Group:		X11/Applications
+Requires:	akonadi
 # needs mysql server for storage
 Requires:	mysql
 
