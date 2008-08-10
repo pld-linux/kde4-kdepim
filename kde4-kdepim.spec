@@ -1,7 +1,8 @@
 #
 %bcond_without	apidocs			# do not prepare API documentation
 #
-%define		_state		stable
+%define		_state		unstable
+%define		qtver		4.4.1
 
 %define	orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
@@ -10,20 +11,20 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.1.0
-Release:	3
+Version:	4.1.61
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	5ccd9ca2bf92c0f94ac3b0bf5a5a1344
+# Source0-md5:	a0b209152726a40d9ed81820065f5f88
 Patch0:		%{name}-korn.patch
 URL:		http://www.kde.org/
 BuildRequires:	akonadi-devel >= 1.0.0
-BuildRequires:	automoc4 >= 0.9.83
+BuildRequires:	automoc4 >= 0.9.84
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.35.0
-BuildRequires:	cmake
+BuildRequires:	cmake >= 2.6.0
 BuildRequires:	cyrus-sasl-devel
 BuildRequires:	docbook-dtd42-xml
 %{?with_apidocs:BuildRequires:	doxygen}
@@ -43,10 +44,10 @@ BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
 BuildRequires:	pilot-link-devel >= 0.12.1
 BuildRequires:	qca-devel >= 2.0.0
-%{?with_apidocs:BuildRequires:	qt4-doc}
+%{?with_apidocs:BuildRequires:	qt4-doc >= %{qtver}}
 BuildRequires:	rpmbuild(macros) >= 1.129
-BuildRequires:	soprano-devel
-BuildRequires:	strigi-devel >= 0.5.9
+BuildRequires:	soprano-devel >= 2.1
+BuildRequires:	strigi-devel >= 0.5.12
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	zlib-devel
 BuildConflicts:	indexlib
@@ -731,6 +732,7 @@ install -d build
 cd build
 %cmake \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	-DCMAKE_AR=/usr/bin/ar \
 %if "%{_lib}" == "lib64"
 	-DLIB_SUFFIX=64 \
 %endif
