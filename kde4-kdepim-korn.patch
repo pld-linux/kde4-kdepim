@@ -1,22 +1,26 @@
---- CMakeLists.txt.old	2008-07-25 13:28:52.000000000 +0200
-+++ CMakeLists.txt	2008-07-25 13:29:01.000000000 +0200
-@@ -242,7 +242,7 @@
+diff -ur kdepim-4.1.61/CMakeLists.txt kdepim-4.1.61.new/CMakeLists.txt
+--- kdepim-4.1.61/CMakeLists.txt	2008-08-07 15:22:11.000000000 +0000
++++ kdepim-4.1.61.new/CMakeLists.txt	2008-08-12 11:29:27.000000000 +0000
+@@ -238,7 +238,7 @@
    endif(NOT WIN32)
  
- #enable korn for 4.2
--#  macro_optional_add_subdirectory(korn)
-+  macro_optional_add_subdirectory(korn)
+ #enable korn in 4.2 if there is interest
+-# macro_optional_add_subdirectory(korn)
++ macro_optional_add_subdirectory(korn)
    add_subdirectory(kresources)
-   macro_optional_add_subdirectory(ktnef)
    macro_optional_add_subdirectory(kontact)
---- doc/CMakeLists.txt.old	2008-07-25 13:29:23.000000000 +0200
-+++ doc/CMakeLists.txt	2008-07-25 13:29:30.000000000 +0200
+ 
+Tylko w kdepim-4.1.61.new/: CMakeLists.txt~
+diff -ur kdepim-4.1.61/doc/CMakeLists.txt kdepim-4.1.61.new/doc/CMakeLists.txt
+--- kdepim-4.1.61/doc/CMakeLists.txt	2008-08-07 15:21:53.000000000 +0000
++++ kdepim-4.1.61.new/doc/CMakeLists.txt	2008-08-12 11:29:46.000000000 +0000
 @@ -29,7 +29,7 @@
    add_subdirectory(kleopatra)
  endif(QGPGME_FOUND)
- # disable korn for KDE 4.1
-- #add_subdirectory(korn)
+ #korn is currently disabled until we find a new maintainer
+-#add_subdirectory(korn)
 +add_subdirectory(korn)
- add_subdirectory(ktnef)
  add_subdirectory(kwatchgnupg)
  
+ endif ( ONLY_KLEO )
+Tylko w kdepim-4.1.61.new/doc: CMakeLists.txt~
