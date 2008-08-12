@@ -18,6 +18,7 @@ Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	a0b209152726a40d9ed81820065f5f88
 Patch0:		%{name}-korn.patch
+Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
 BuildRequires:	akonadi-devel >= 1.0.0
 BuildRequires:	automoc4 >= 0.9.84
@@ -720,6 +721,7 @@ libksieve, libmimelib.
 %prep
 %setup -q -n %{orgname}-%{version}
 %patch0 -p0
+%patch1 -p0
 
 %build
 install -d build
@@ -753,7 +755,7 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang kontact --with-kde
 %find_lang korganizer --with-kde
 %find_lang korn --with-kde
-#%find_lang kpilot --with-kde
+%find_lang kpilot --with-kde
 %find_lang ktimetracker --with-kde
 %find_lang kjots --with-kde
 
@@ -1316,7 +1318,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.kde.korn.*.xml
 %{_iconsdir}/*/*/*/korn.png
 
-%files kpilot
+%files kpilot -f kpilot.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kpilot
 %attr(755,root,root) %{_bindir}/kpilotDaemon
