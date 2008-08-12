@@ -1215,7 +1215,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/kleo
 %{_includedir}/kmail
 %{_includedir}/kpgp
-#%{_includedir}/kpilot
+%{_includedir}/kpilot
 %{_includedir}/ksieve
 %{_includedir}/libkleopatraclient
 #%{_includedir}/libkmobiletools
