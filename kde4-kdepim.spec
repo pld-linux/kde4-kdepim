@@ -719,7 +719,7 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
-#%patch0 -p0
+%patch0 -p0
 
 %build
 install -d build
@@ -752,7 +752,7 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang konsolekalendar --with-kde
 %find_lang kontact --with-kde
 %find_lang korganizer --with-kde
-#%find_lang korn --with-kde
+%find_lang korn --with-kde
 #%find_lang kpilot --with-kde
 %find_lang ktimetracker --with-kde
 %find_lang kjots --with-kde
@@ -1307,14 +1307,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/kabcclient
 %{_desktopdir}/kde4/konsolekalendar.desktop
 
-%files korn
+%files korn -f korn.lang
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/korn
-#%attr(755,root,root) %{_datadir}/apps/kconf_update/korn-3-5*.pl
-#%{_desktopdir}/kde4/KOrn.desktop
-#%{_datadir}/apps/kconf_update/korn-*.upd
-#%{_datadir}/dbus-1/interfaces/org.kde.korn.*.xml
-#%{_iconsdir}/*/*/*/korn.png
+%attr(755,root,root) %{_bindir}/korn
+%attr(755,root,root) %{_datadir}/apps/kconf_update/korn-3-5*.pl
+%{_desktopdir}/kde4/KOrn.desktop
+%{_datadir}/apps/kconf_update/korn-*.upd
+%{_datadir}/dbus-1/interfaces/org.kde.korn.*.xml
+%{_iconsdir}/*/*/*/korn.png
 
 %files kpilot
 %defattr(644,root,root,755)
