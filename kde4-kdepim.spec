@@ -720,7 +720,7 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
-%patch0 -p0
+%patch0 -p1
 %patch1 -p0
 
 %build
