@@ -25,7 +25,7 @@ BuildRequires:	automoc4 >= 0.9.84
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.35.0
-BuildRequires:	cmake >= 2.6.0
+BuildRequires:	cmake >= 2.6.1-2
 BuildRequires:	cyrus-sasl-devel
 BuildRequires:	docbook-dtd42-xml
 %{?with_apidocs:BuildRequires:	doxygen}
@@ -728,7 +728,6 @@ install -d build
 cd build
 %cmake \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
-	-DCMAKE_AR=%{_bindir}/ar \
 %if "%{_lib}" == "lib64"
 	-DLIB_SUFFIX=64 \
 %endif
