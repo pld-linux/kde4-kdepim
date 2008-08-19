@@ -768,6 +768,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kgpgconf
 %attr(755,root,root) %{_bindir}/kwatchgnupg
+%attr(755,root,root) %{_bindir}/kres-migrator
 %attr(755,root,root) %{_libdir}/libkontactinterfaces.so
 %{_datadir}/apps/kwatchgnupg
 %attr(755,root,root) %{_libdir}/strigi/strigiea_ics.so
@@ -1328,7 +1329,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kconf_update/kpilot.upd
 %{_datadir}/apps/kpilot
 %{_datadir}/config.kcfg/calendarsettings.kcfg
-%{_datadir}/config.kcfg/contacts.kcfg
+%{_datadir}/config.kcfg/contactssettings.kcfg
 %{_datadir}/config.kcfg/keyringconduit.kcfg
 %{_datadir}/config.kcfg/kpilot.kcfg
 %{_datadir}/config.kcfg/kpilotlib.kcfg
@@ -1336,9 +1337,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config.kcfg/popmail.kcfg
 %{_datadir}/config.kcfg/timeconduit.kcfg
 %{_datadir}/config.kcfg/todosettings.kcfg
-%{_datadir}/config.kcfg/vcalconduitbase.kcfg
-%{_datadir}/kde4/services/contacts-conduit.desktop
 %{_datadir}/kde4/services/kpilot-conduit-calendar.desktop
+%{_datadir}/kde4/services/kpilot-conduit-contacts.desktop
 %{_datadir}/kde4/services/kpilot-conduit-keyring.desktop
 %{_datadir}/kde4/services/kpilot-conduit-todo.desktop
 %{_datadir}/kde4/services/kpilot_config.desktop
@@ -1347,8 +1347,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/null-conduit.desktop
 %{_datadir}/kde4/services/popmail-conduit.desktop
 %{_datadir}/kde4/services/time_conduit.desktop
-%{_datadir}/kde4/services/todo-conduit.desktop
-%{_datadir}/kde4/services/vcal-conduit.desktop
 %{_datadir}/kde4/servicetypes/kpilotconduit.desktop
 %{_desktopdir}/kde4/kpilot.desktop
 %{_desktopdir}/kde4/kpilotdaemon.desktop
