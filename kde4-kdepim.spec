@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.1.62
+Version:	4.1.63
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	60e145a9347ee910f4b556bbd85fd8d4
+# Source0-md5:	854138ba3d4c38bcdf59bfacc3cd0f83
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
@@ -771,9 +771,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/kres-migrator
 %attr(755,root,root) %{_libdir}/libkontactinterfaces.so
 %{_datadir}/apps/kwatchgnupg
-%attr(755,root,root) %{_libdir}/strigi/strigiea_ics.so
-%attr(755,root,root) %{_libdir}/strigi/strigiea_rfc822.so
-%attr(755,root,root) %{_libdir}/strigi/strigiea_vcf.so
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kpgp-3.1-upgrade-address-data.pl
 %{_datadir}/apps/kconf_update/kpgp.upd
 ### kode
@@ -1028,12 +1025,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kontact_kaddressbookplugin.so
 %{_datadir}/kde4/services/kontact/kaddressbookplugin.desktop
 
-#%files -n kde4-kontact-plugin-planner
-#%defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/kde4/kontact_plannerplugin.so
-#%attr(755,root,root) %{_libdir}/kde4/kcm_planner.so
-#%{_datadir}/kde4/services/kontact/plannerplugin.desktop
-#%{_datadir}/kde4/services/kcmplanner.desktop
+%files -n kde4-kontact-plugin-planner
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_plannerplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_planner.so
+%{_datadir}/kde4/services/kontact/plannerplugin.desktop
+%{_datadir}/kde4/services/kcmplanner.desktop
 
 %files korganizer -f korganizer.lang
 %defattr(644,root,root,755)
@@ -1330,22 +1327,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kpilot
 %{_datadir}/config.kcfg/calendarsettings.kcfg
 %{_datadir}/config.kcfg/contactssettings.kcfg
-%{_datadir}/config.kcfg/keyringconduit.kcfg
 %{_datadir}/config.kcfg/kpilot.kcfg
 %{_datadir}/config.kcfg/kpilotlib.kcfg
 %{_datadir}/config.kcfg/memofileconduit.kcfg
-%{_datadir}/config.kcfg/popmail.kcfg
 %{_datadir}/config.kcfg/timeconduit.kcfg
 %{_datadir}/config.kcfg/todosettings.kcfg
 %{_datadir}/kde4/services/kpilot-conduit-calendar.desktop
 %{_datadir}/kde4/services/kpilot-conduit-contacts.desktop
-%{_datadir}/kde4/services/kpilot-conduit-keyring.desktop
 %{_datadir}/kde4/services/kpilot-conduit-todo.desktop
 %{_datadir}/kde4/services/kpilot_config.desktop
 %{_datadir}/kde4/services/memofile-conduit.desktop
-%{_datadir}/kde4/services/notepad-conduit.desktop
-%{_datadir}/kde4/services/null-conduit.desktop
-%{_datadir}/kde4/services/popmail-conduit.desktop
 %{_datadir}/kde4/services/time_conduit.desktop
 %{_datadir}/kde4/servicetypes/kpilotconduit.desktop
 %{_desktopdir}/kde4/kpilot.desktop
