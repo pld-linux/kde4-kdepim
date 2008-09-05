@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.1.64
+Version:	4.1.65
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	1e1b8031037603540a36d9a0a61758ca
+# Source0-md5:	d021aaed75f198441231af2f8b4712ef
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
@@ -723,7 +723,7 @@ libksieve, libmimelib.
 %patch0 -p1
 %patch1 -p0
 
-rm -r `find . -type d -name '.svn'`
+#rm -r `find . -type d -name '.svn'`
 
 %build
 install -d build
@@ -1264,8 +1264,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkcal_groupdav.so
 %{_libdir}/libkcal_resourceblog.so
 %{_libdir}/libkcalscalix.so
-%{_libdir}/libkitchensyncprivate.so
-%{_libdir}/libqopensync.so
+#%{_libdir}/libkitchensyncprivate.so
+#%{_libdir}/libqopensync.so
 %{_libdir}/libkleopatraclientcore.so
 %{_libdir}/libkleopatraclientgui.so
 %{_datadir}/apps/libkleopatra
@@ -1357,8 +1357,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadi_localbookmarks_resource
 %attr(755,root,root) %{_bindir}/akonadi_maildir_resource
 %attr(755,root,root) %{_bindir}/akonadi_mailthreader_agent
-#%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
-#%attr(755,root,root) %{_bindir}/akonadi_nepomuk_email_feeder
+%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
+%attr(755,root,root) %{_bindir}/akonadi_nepomuk_email_feeder
+%attr(755,root,root) %{_bindir}/akonadi_nepomuktag_resource
 %attr(755,root,root) %{_bindir}/akonadi_nntp_resource
 %attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
 %attr(755,root,root) %{_bindir}/akonadi_vcard_resource
@@ -1399,8 +1400,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/akonadi/agents/localbookmarksresource.desktop
 %{_datadir}/akonadi/agents/maildirresource.desktop
 %{_datadir}/akonadi/agents/imaplibresource.desktop
-#%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
-#%{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
+%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
+%{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
+%{_datadir}/akonadi/agents/nepomuktagresource.desktop
 %{_datadir}/kde4/services/akonadi.protocol
 #%dir %{_datadir}/apps/kcontactmanager
 #%{_datadir}/apps/kcontactmanager/kcontactmanagerui.rc
@@ -1472,14 +1474,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files kitchensync
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/kitchensync
-%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so
-%attr(755,root,root) %{_libdir}/kde4/kitchensyncpart.so
-%attr(755,root,root) %{_libdir}/libqopensync.so
-%{_desktopdir}/kde4/kitchensync.desktop
-%{_datadir}/apps/kitchensync
-%{_iconsdir}/*/*/apps/kitchensync.png
-%{_iconsdir}/*/*/actions/sync-start.png
+#%attr(755,root,root) %{_bindir}/kitchensync
+#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so
+#%attr(755,root,root) %{_libdir}/kde4/kitchensyncpart.so
+#%attr(755,root,root) %{_libdir}/libqopensync.so
+#%{_desktopdir}/kde4/kitchensync.desktop
+#%{_datadir}/apps/kitchensync
+#%{_iconsdir}/*/*/apps/kitchensync.png
+#%{_iconsdir}/*/*/actions/sync-start.png
 
 %files libs
 %defattr(644,root,root,755)
@@ -1550,8 +1552,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkholidays.so.?
 %attr(755,root,root) %{_libdir}/libkholidays.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
-%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
+#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkleo.so.?
 %attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.?
@@ -1607,8 +1609,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmaildir.so.*.*.*
 %attr(755,root,root) %{_libdir}/libmimelib.so.?
 %attr(755,root,root) %{_libdir}/libmimelib.so.*.*.*
-%attr(755,root,root) %{_libdir}/libqopensync.so.?
-%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libqopensync.so.?
+#%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
 %attr(755,root,root) %{_libdir}/libschema.so.?
 %attr(755,root,root) %{_libdir}/libschema.so.*.*.*
 %attr(755,root,root) %{_libdir}/libwscl.so.?
