@@ -10,12 +10,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.1.0
-Release:	3
+Version:	4.1.1
+Release:	0.1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	5ccd9ca2bf92c0f94ac3b0bf5a5a1344
+# Source0-md5:	792ddf463a7ade5b4dbade0f8b7c3085
 Patch0:		%{name}-korn.patch
 URL:		http://www.kde.org/
 BuildRequires:	akonadi-devel >= 1.0.0
@@ -1232,11 +1232,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkabc_groupdav.so
 %{_libdir}/libkabc_slox.so
 %{_libdir}/libkabc_xmlrpc.so
-%{_libdir}/libkabc_groupwise.so
+%{_libdir}/libkabcgroupwise.so
 %{_libdir}/libkabckolab.so
 %{_libdir}/libkabinterfaces.so
 %{_libdir}/libkaddressbookprivate.so
-%{_libdir}/libkcal_groupwise.so
+%{_libdir}/libkcalgroupwise.so
 %{_libdir}/libkcal_resourcefeatureplan.so
 %{_libdir}/libkcal_resourceremote.so
 %{_libdir}/libkcal_slox.so
@@ -1489,6 +1489,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkdepim.so
 %attr(755,root,root) %{_libdir}/kde4/plugins/designer/kdepimwidgets.so
 %attr(755,root,root) %{_libdir}/kde4/kpartsdesignerplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kabc_groupwise.so
+%attr(755,root,root) %{_libdir}/kde4/kcal_groupwise.so
 %{_datadir}/dbus-1/interfaces/org.kde.addressbook.service.xml
 %{_datadir}/dbus-1/interfaces/org.kde.mailtransport.service.xml
 %{_datadir}/apps/libkdepim
@@ -1519,8 +1521,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkabcommon.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabcscalix.so.?
 %attr(755,root,root) %{_libdir}/libkabcscalix.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkabc_groupwise.so.?
-%attr(755,root,root) %{_libdir}/libkabc_groupwise.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkabcgroupwise.so.?
+%attr(755,root,root) %{_libdir}/libkabcgroupwise.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkabinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libkabinterfaces.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkaddressbookprivate.so.?
@@ -1529,8 +1531,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkalarm_resources.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so.?
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcal_groupwise.so.?
-%attr(755,root,root) %{_libdir}/libkcal_groupwise.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkcalgroupwise.so.?
+%attr(755,root,root) %{_libdir}/libkcalgroupwise.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so.?
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so.?
