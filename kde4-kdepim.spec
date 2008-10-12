@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.1.68
+Version:	4.1.69
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	780a7f364d04df454063e9df605adb68
+# Source0-md5:	0ed414b4a62cf97c92e080a2d6a3d0d1
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
@@ -918,8 +918,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_ktimetrackerconfig.so
 %attr(755,root,root) %{_libdir}/kde4/ktimetrackerpart.so
 %{_desktopdir}/kde4/karm.desktop
-%dir %{_datadir}/apps/karmpart
-%{_datadir}/apps/karmpart/karmui.rc
 %{_datadir}/apps/ktimetracker
 %{_datadir}/dbus-1/interfaces/org.kde.ktimetracker.ktimetracker.xml
 %{_datadir}/kde4/services/ktimetrackerconfig.desktop
@@ -1172,6 +1170,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config.kcfg/akregator.kcfg
 %{_iconsdir}/*/*/apps/akregator_empty.png
 %{_iconsdir}/*/*/apps/akregator.*
+%dir %{_datadir}/apps/akregator_onlinesync_plugin
+%{_datadir}/apps/akregator_onlinesync_plugin/akregator_onlinesync_plugin.rc
 
 %files -n kde4-kontact-plugin-akregator
 %defattr(644,root,root,755)
