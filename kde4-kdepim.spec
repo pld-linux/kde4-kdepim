@@ -2,7 +2,7 @@
 %bcond_without	apidocs			# do not prepare API documentation
 #
 %define		_state		unstable
-%define		qtver		4.4.1
+%define		qtver		4.4.3
 
 %define	orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.1.65
+Version:	4.1.68
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	d021aaed75f198441231af2f8b4712ef
+# Source0-md5:	780a7f364d04df454063e9df605adb68
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
@@ -792,6 +792,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/kwsdl_compiler.desktop
 %{_datadir}/apps/kxforms
 %{_datadir}/config.kcfg/kxforms.kcfg
+### strigi
+%attr(755,root,root) %{_libdir}/strigi/strigiea_ics.so
+%attr(755,root,root) %{_libdir}/strigi/strigiea_rfc822.so
+%attr(755,root,root) %{_libdir}/strigi/strigiea_vcf.so
 ### kresources/featureplan
 %attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_resourcefeatureplan_plugin.so
@@ -911,20 +915,20 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/karm
 %attr(755,root,root) %{_bindir}/ktimetracker
-%attr(755,root,root) %{_libdir}/kde4/karmpart.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_ktimetrackerconfig.so
+%attr(755,root,root) %{_libdir}/kde4/ktimetrackerpart.so
 %{_desktopdir}/kde4/karm.desktop
 %dir %{_datadir}/apps/karmpart
 %{_datadir}/apps/karmpart/karmui.rc
 %{_datadir}/apps/ktimetracker
 %{_datadir}/dbus-1/interfaces/org.kde.ktimetracker.ktimetracker.xml
-%{_datadir}/kde4/services/karm_part.desktop
 %{_datadir}/kde4/services/ktimetrackerconfig.desktop
+%{_datadir}/kde4/services/ktimetrackerpart.desktop
 %{_iconsdir}/*/*/apps/ktimetracker.png
 
 %files -n kde4-kontact-plugin-ktimetracker
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde4/kontact_karmplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kontact_ktimetrackerplugin.so
 %{_datadir}/kde4/services/kontact/ktimetracker_plugin.desktop
 
 %files kmail -f kmail.lang
@@ -1013,6 +1017,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kabcustomfields.desktop
 %{_datadir}/kde4/services/kabldapconfig.desktop
 %{_datadir}/kde4/services/kaddressbook
+%{_datadir}/kde4/services/kaddressbookpart.desktop
 %{_datadir}/kde4/services/ldifvcardthumbnail.desktop
 %{_datadir}/kde4/servicetypes/dbusaddressbook.desktop
 %{_datadir}/kde4/servicetypes/kaddressbook_contacteditorwidget.desktop
@@ -1255,7 +1260,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkpilot.so
 %{_libdir}/libksieve.so
 %{_libdir}/libmimelib.so
-%{_libdir}/libakonadi-kabc.so
+%{_libdir}/libakonadi-kabccommon.so
 %{_libdir}/libakonadi-kcal.so
 #%{_libdir}/libkmobiletoolsengineui.so
 #%{_libdir}/libkmobiletoolslib.so
@@ -1363,6 +1368,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadi_nntp_resource
 %attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
 %attr(755,root,root) %{_bindir}/akonadi_vcard_resource
+%attr(755,root,root) %{_bindir}/akonadi_vcarddir_resource
 %attr(755,root,root) %{_bindir}/akonadiconsole
 %attr(755,root,root) %{_bindir}/akonaditray
 #%attr(755,root,root) %{_bindir}/akonamail
@@ -1376,6 +1382,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_bookmark.so
 %attr(755,root,root) %{_libdir}/kde4/kio_akonadi.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_resources.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_server.so
 %dir %{_datadir}/apps/akonadi
 %dir %{_datadir}/apps/akonadi/plugins
 %dir %{_datadir}/apps/akonadi/plugins/serializer
@@ -1403,6 +1411,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
 %{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
 %{_datadir}/akonadi/agents/nepomuktagresource.desktop
+%{_datadir}/akonadi/agents/vcarddirresource.desktop
 %{_datadir}/kde4/services/akonadi.protocol
 #%dir %{_datadir}/apps/kcontactmanager
 #%{_datadir}/apps/kcontactmanager/kcontactmanagerui.rc
@@ -1411,6 +1420,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/akonadiconsole
 %{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
 %{_datadir}/kde4/services/kcm_akonadi_resources.desktop
+%{_datadir}/kde4/services/kcm_akonadi.desktop
+%{_datadir}/kde4/services/kcm_akonadi_server.desktop
 %{_desktopdir}/kde4/akonaditray.desktop
 
 %files kleopatra -f kleopatra.lang
@@ -1494,8 +1505,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kdepimwidgets
 %{_iconsdir}/*/*/actions/button_more.png
 %{_iconsdir}/*/*/actions/button_fewer.png
-%attr(755,root,root) %{_libdir}/libakonadi-kabc.so.?
-%attr(755,root,root) %{_libdir}/libakonadi-kabc.so.4.*.*
+%attr(755,root,root) %{_libdir}/libakonadi-kabccommon.so.?
+%attr(755,root,root) %{_libdir}/libakonadi-kabccommon.so.4.*.*
 %attr(755,root,root) %{_libdir}/libakonadi-kcal.so.?
 %attr(755,root,root) %{_libdir}/libakonadi-kcal.so.4.*.*
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.?
