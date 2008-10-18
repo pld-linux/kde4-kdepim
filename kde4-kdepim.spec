@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.1.69
+Version:	4.1.70
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	0ed414b4a62cf97c92e080a2d6a3d0d1
+# Source0-md5:	63a65335f43ad75a08da1bd5aa0f4e4f
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
@@ -771,6 +771,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/kgpgconf
 %attr(755,root,root) %{_bindir}/kwatchgnupg
 %attr(755,root,root) %{_bindir}/kres-migrator
+%attr(755,root,root) %{_bindir}/kabcdistlistupdater
 %attr(755,root,root) %{_libdir}/libkontactinterfaces.so
 %{_datadir}/apps/kwatchgnupg
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kpgp-3.1-upgrade-address-data.pl
@@ -826,6 +827,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kabc_scalix.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_scalix.so
 %attr(755,root,root) %{_libdir}/kde4/kio_scalix.so
+%{_datadir}/autostart/kabcdistlistupdater.desktop
 %{_datadir}/kde4/services/kresources/kcal/scalix.desktop
 %{_datadir}/kde4/services/scalix.protocol
 %{_datadir}/kde4/services/scalixs.protocol
@@ -917,7 +919,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ktimetracker
 %attr(755,root,root) %{_libdir}/kde4/kcm_ktimetrackerconfig.so
 %attr(755,root,root) %{_libdir}/kde4/ktimetrackerpart.so
-%{_desktopdir}/kde4/karm.desktop
+#%{_desktopdir}/kde4/karm.desktop
+%{_desktopdir}/kde4/ktimetracker.desktop                                                                                                             
 %{_datadir}/apps/ktimetracker
 %{_datadir}/dbus-1/interfaces/org.kde.ktimetracker.ktimetracker.xml
 %{_datadir}/kde4/services/ktimetrackerconfig.desktop
