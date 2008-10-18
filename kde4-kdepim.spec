@@ -76,6 +76,8 @@ Desktop Environment (KDE).
 %package kontact
 Summary:	Kontact Personal Information Management
 Summary(pl.UTF-8):	Kontact Personal Information Management
+Obsoletes:	kde4-kontact
+Provides:	kde4-kontact
 Group:		X11/Applications
 
 %description kontact
@@ -212,6 +214,7 @@ Summary:	Kmail plugin for Kontact
 Summary(pl.UTF-8):	plugin Kmail dla Kontakt
 Group:		X11/Applications
 Obsoletes:	kde4-kontact-plugin-kmail
+Provides:	kde4-kontact-plugin-kmail
 Requires:	%{name}-kmail = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 
@@ -239,6 +242,7 @@ Summary:	Kaddressbook plugin for Kontact
 Summary(pl.UTF-8):	plugin Kaddressbook dla Kontakt
 Group:		X11/Applications
 Obsoletes:	kde4-kontact-plugin-kaddressbook
+Provides:	kde4-kontact-plugin-kaddressbook
 Requires:	%{name}-kaddressbook = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 
@@ -252,7 +256,7 @@ Plugin Kaddressbook dla Kontakt.
 Summary:	Planner plugin for Kontact
 Summary(pl.UTF-8):	plugin Planner dla Kontakt
 Group:		X11/Applications
-Obsoletes:	kde4-kontact-plugin-planner
+Provides:	kde4-kontact-plugin-planner
 Requires:	%{name}-kontact = %{version}-%{release}
 
 %description kontact-plugin-planner
@@ -292,6 +296,7 @@ Summary:	Korganizer plugin for Kontact
 Summary(pl.UTF-8):	plugin korganizer dla Kontakt
 Group:		X11/Applications
 Obsoletes:	kde4-kontact-plugin-korganizer
+Provides:	kde4-kontact-plugin-korganizer
 Requires:	%{name}-korganizer = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 
@@ -317,6 +322,7 @@ Summary:	Kmobiletools plugin for Kontact
 Summary(pl.UTF-8):	plugin kmobiletools dla Kontakt
 Group:		X11/Applications
 Obsoletes:	kde4-kontact-plugin-kmobiletools
+Provides:	kde4-kontact-plugin-kmobiletools
 Requires:	%{name}-kmobiletools = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 
@@ -331,6 +337,7 @@ Summary:	Summary plugin for Kontact
 Summary(pl.UTF-8):	plugin Summary dla Kontakt
 Group:		X11/Applications
 Obsoletes:	kde4-kontact-plugin-summary
+Provides:	kde4-kontact-plugin-summary
 Requires:	%{name}-kontact = %{version}-%{release}
 
 %description kontact-plugin-summary
@@ -344,6 +351,7 @@ Summary:	Specialdates plugin for Kontact
 Summary(pl.UTF-8):	plugin Specialdates dla Kontakt.
 Group:		X11/Applications
 Obsoletes:	kde4-kontact-plugin-specialdates
+Provides:	kde4-kontact-plugin-specialdates
 Requires:	%{name}-kontact = %{version}-%{release}
 
 %description kontact-plugin-specialdates
@@ -357,6 +365,7 @@ Summary:	Newsticker plugin for Kontact
 Summary(pl.UTF-8):	plugin Newsticker dla Kontakt
 Group:		X11/Applications
 Obsoletes:	kde4-kontact-plugin-newsticker
+Provides:	kde4-kontact-plugin-newsticker
 Requires:	%{name}-kontact = %{version}-%{release}
 
 %description kontact-plugin-newsticker
@@ -388,6 +397,7 @@ Summary:	Akregator plugin for Kontact
 Summary(pl.UTF-8):	plugin Akregator dla Kontakt
 Group:		X11/Applications
 Obsoletes:	kde4-kontact-plugin-akregator
+Provides:	kde4-kontact-plugin-akregator
 Requires:	%{name}-akregator = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 
@@ -402,6 +412,7 @@ Summary:	Weather plugin for Kontact
 Summary(pl.UTF-8):	plugin Weather dla Kontakt
 Group:		X11/Applications
 Obsoletes:	kde4-kontact-plugin-weather
+Provides:	kde4-kontact-plugin-weather
 Requires:	%{name}-kontact = %{version}-%{release}
 
 %description kontact-plugin-weather
@@ -432,6 +443,7 @@ Summary:	Knotes plugin for Kontact
 Summary(pl.UTF-8):	plugin Knotes dla Kontakt
 Group:		X11/Applications
 Obsoletes:	kde4-kontact-plugin-knotes
+Provides:	kde4-kontact-plugin-knotes
 Requires:	%{name}-knotes = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 
