@@ -91,7 +91,7 @@ Summary:	KDE News Reader
 Summary(pl.UTF-8):	Czytnik newsów dla KDE
 Summary(pt_BR.UTF-8):	Leitor de notícias (news) do KDE
 Group:		X11/Applications
-# ?Requires:	kde4-kdebase-core >= %{version}
+# ?Requires:	kde4-kdebase >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
 
 %description knode
@@ -168,7 +168,7 @@ Summary(pl.UTF-8):	Program pocztowy KDE
 Summary(pt_BR.UTF-8):	Cliente / leitor de e-mails para o KDE
 Group:		X11/Applications
 URL:		http://kontact.kde.org/kmail/
-# ? Requires:	kde4-kdebase-core >= %{version}
+# ? Requires:	kde4-kdebase >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
 
 %description kmail
@@ -715,7 +715,7 @@ Summary:	KDE Note taker
 Summary(pl.UTF-8):	Notatnik dla KDE
 Summary(pt_BR.UTF-8):	Ferramenta de armazenamento de livros
 Group:		X11/Applications
-Requires:	kde4-kdebase-core >= %{version}
+Requires:	kde4-kdebase >= %{version}
 
 %description kjots
 kjots is a small note taker program. Name and idea are taken from the
