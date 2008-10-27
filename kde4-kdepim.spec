@@ -39,7 +39,7 @@ BuildRequires:	kde4-kdepimlibs-devel >= %{version}
 BuildRequires:	libassuan-devel
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
-BuildRequires:	libopensync-devel >= 1:0.36
+BuildRequires:	libopensync-devel >= 1:0.38
 BuildRequires:	lockdev-devel
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
@@ -1297,8 +1297,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkcal_groupdav.so
 %{_libdir}/libkcal_resourceblog.so
 %{_libdir}/libkcalscalix.so
-#%{_libdir}/libkitchensyncprivate.so
-#%{_libdir}/libqopensync.so
+%{_libdir}/libkitchensyncprivate.so
+%{_libdir}/libqopensync.so
 %{_libdir}/libkleopatraclientcore.so
 %{_libdir}/libkleopatraclientgui.so
 %{_datadir}/apps/libkleopatra
@@ -1513,14 +1513,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files kitchensync
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/kitchensync
-#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so
-#%attr(755,root,root) %{_libdir}/kde4/kitchensyncpart.so
-#%attr(755,root,root) %{_libdir}/libqopensync.so
-#%{_desktopdir}/kde4/kitchensync.desktop
-#%{_datadir}/apps/kitchensync
-#%{_iconsdir}/*/*/apps/kitchensync.png
-#%{_iconsdir}/*/*/actions/sync-start.png
+%attr(755,root,root) %{_bindir}/kitchensync
+%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so
+%attr(755,root,root) %{_libdir}/kde4/kitchensyncpart.so
+%attr(755,root,root) %{_libdir}/libqopensync.so
+%{_desktopdir}/kde4/kitchensync.desktop
+%{_datadir}/apps/kitchensync
+%{_iconsdir}/*/*/apps/kitchensync.png
+%{_iconsdir}/*/*/actions/sync-start.png
 
 %files libs
 %defattr(644,root,root,755)
@@ -1591,8 +1591,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkholidays.so.?
 %attr(755,root,root) %{_libdir}/libkholidays.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
-#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
+%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
+%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkleo.so.?
 %attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.?
@@ -1648,8 +1648,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmaildir.so.*.*.*
 %attr(755,root,root) %{_libdir}/libmimelib.so.?
 %attr(755,root,root) %{_libdir}/libmimelib.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libqopensync.so.?
-#%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
+%attr(755,root,root) %{_libdir}/libqopensync.so.?
+%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
 %attr(755,root,root) %{_libdir}/libschema.so.?
 %attr(755,root,root) %{_libdir}/libschema.so.*.*.*
 %attr(755,root,root) %{_libdir}/libwscl.so.?
