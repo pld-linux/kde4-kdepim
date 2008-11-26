@@ -932,6 +932,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/knode_*.desktop
 %{_iconsdir}/*/*/apps/knode.png
 %{_iconsdir}/*/*/apps/knode2.png
+%lang(en) %{_kdedocdir}/en/kioslave/news
 
 %files kontact-plugin-knode
 %defattr(644,root,root,755)
