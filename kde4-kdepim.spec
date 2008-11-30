@@ -12,7 +12,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.1.81
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -821,7 +821,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config/kres-migratorrc
 ### strigi
 %attr(755,root,root) %{_libdir}/strigi/strigiea_ics.so
-%attr(755,root,root) %{_libdir}/strigi/strigiea_rfc822.so
 %attr(755,root,root) %{_libdir}/strigi/strigiea_vcf.so
 ### kresources/featureplan
 %attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so
@@ -1343,6 +1342,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/konsolekalendar
 %attr(755,root,root) %{_bindir}/kabcclient
 %{_desktopdir}/kde4/konsolekalendar.desktop
+%lang(en) %{_kdedocdir}/en/kabcclient
+%{_mandir}/man1/kabcclient.1.*
 
 %files korn -f korn.lang
 %defattr(644,root,root,755)
