@@ -64,19 +64,17 @@ kdepim jest jest zestawem aplikacji PIM dla K Desktop Environment
 (KDE).
 
 %description -l ru.UTF-8
-kdepim - это набор утилит для управления
-персональной информацией для K Desktop
-Environment (KDE).
+kdepim - это набор утилит для управления персональной информацией для
+K Desktop Environment (KDE).
 
 %description -l uk.UTF-8
-kdepim - це набір утиліт для керування
-персональною информацією для K Desktop
-Environment (KDE).
+kdepim - це набір утиліт для керування персональною информацією для K
+Desktop Environment (KDE).
 
 %package -n kde4-kontact
-Summary: 	Kontact Personal Information Management
+Summary:	Kontact Personal Information Management
 Summary(pl.UTF-8):	Kontact Personal Information Management
-Group: 		X11/Applications
+Group:		X11/Applications
 
 %description -n kde4-kontact
 Kontact Personal Information Management.
@@ -413,14 +411,14 @@ accept drag and drop even from remote sites.
 
 %description knotes -l pl.UTF-8
 KNotes pozwala umieszczać na pulpicie notatki z opcją wysyłania.
-Dodatkowo, aby móc służyć za przypominajkę, KNotes może
-wysyłać pocztę i drukować notatki, a także przyjmować
-przeciąganie nawet ze zdalnych komputerów.
+Dodatkowo, aby móc służyć za przypominajkę, KNotes może wysyłać pocztę
+i drukować notatki, a także przyjmować przeciąganie nawet ze zdalnych
+komputerów.
 
 %package -n kde4-kontact-plugin-knotes
-Summary: 	Knotes plugin for Kontact
+Summary:	Knotes plugin for Kontact
 Summary(pl.UTF-8):	plugin Knotes dla Kontakt
-Group: 		X11/Applications
+Group:		X11/Applications
 Requires:	%{name}-knotes = %{version}-%{release}
 Requires:	kde4-kontact = %{version}-%{release}
 
@@ -449,14 +447,12 @@ Pakiet ten zawiera pliki nagłówkowe potrzebne do budowy aplikacji
 bazujących na kdepim.
 
 %description devel -l uk.UTF-8
-Цей пакет містить файли заголовків
-необхідні для побудови програм,
+Цей пакет містить файли заголовків необхідні для побудови програм,
 базованих на kdepim.
 
 %description devel -l ru.UTF-8
-Этот пакет содержит файлы заголовков
-необходимые для построения программ,
-основанных на kdepim.
+Этот пакет содержит файлы заголовков необходимые для построения
+программ, основанных на kdepim.
 
 %package apidocs
 Summary:	API documentation
@@ -513,10 +509,10 @@ to be sent. Also includes an alarm daemon.
 
 %description kalarm -l pl.UTF-8
 KAlarm to osobisty program do planowania i przypominania poprzez
-uruchomienie polecenia lub pocztą elektroniczną. Umożliwia
-ustawienie własnej wiadomości alarmowej, która wyskoczy na ekranie
-o wybranym czasie albo zaszeregowanie poleceń do wykonania lub poczty
-do wysłania. Zawiera także demona obsługującego przypominanie.
+uruchomienie polecenia lub pocztą elektroniczną. Umożliwia ustawienie
+własnej wiadomości alarmowej, która wyskoczy na ekranie o wybranym
+czasie albo zaszeregowanie poleceń do wykonania lub poczty do
+wysłania. Zawiera także demona obsługującego przypominanie.
 
 %package konsolekalendar
 Summary:	A command line ICard tool
@@ -627,6 +623,7 @@ Obsługuje urządzenia serii:
 Summary:	Akonadi
 Summary(pl.UTF-8):	Akonadi
 Group:		X11/Applications
+Requires:	QtSql-mysql
 # needs mysql server for storage
 Requires:	mysql
 
