@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.1.82
-Release:	1
+Version:	4.1.85
+Release:	0.1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	5760a1a80e2ca57ae21f21f04f9d1349
+# Source0-md5:	73ab9aef5017936e6e0d6f17506ab32d
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
@@ -746,7 +746,7 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p0
 
 #rm -r `find . -type d -name '.svn'`
@@ -781,7 +781,7 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang konsolekalendar --with-kde
 %find_lang kontact --with-kde
 %find_lang korganizer --with-kde
-%find_lang korn --with-kde
+#%find_lang korn --with-kde
 %find_lang kpilot --with-kde
 %find_lang ktimetracker --with-kde
 %find_lang kjots --with-kde
@@ -1259,51 +1259,51 @@ rm -rf $RPM_BUILD_ROOT
 #%{_includedir}/libkmobiletoolsengineui
 %{_includedir}/akregator
 %{_includedir}/kaddressbook
-%{_libdir}/libakregatorinterfaces.so
-%{_libdir}/libimap.so
-%{_libdir}/libgwsoap.so
-%{_libdir}/libkabc_groupdav.so
-%{_libdir}/libkabc_slox.so
-%{_libdir}/libkabc_xmlrpc.so
-%{_libdir}/libkabcgroupwise.so
-%{_libdir}/libkabckolab.so
-%{_libdir}/libkabinterfaces.so
-%{_libdir}/libkaddressbookprivate.so
-%{_libdir}/libkcalgroupwise.so
-%{_libdir}/libkcal_resourcefeatureplan.so
-%{_libdir}/libkcal_resourceremote.so
-%{_libdir}/libkcal_slox.so
-%{_libdir}/libkcal_xmlrpc.so
-%{_libdir}/libkcalkolab.so
-%{_libdir}/libkdepim.so
-%{_libdir}/libkgroupwarebase.so
-%{_libdir}/libkgroupwaredav.so
-%{_libdir}/libkholidays.so
-%{_libdir}/libknotes_xmlrpc.so
-%{_libdir}/libknoteskolab.so
-%{_libdir}/libkocorehelper.so
-%{_libdir}/libkode.so
-%{_libdir}/libkontactprivate.so
-%{_libdir}/libkorganizer_eventviewer.so
-%{_libdir}/libkorganizer_calendar.so
-%{_libdir}/libkorg_stdprinting.so
-%{_libdir}/libkpgp.so
-%{_libdir}/libkpilot.so
-%{_libdir}/libksieve.so
-%{_libdir}/libmimelib.so
-%{_libdir}/libakonadi-kabccommon.so
-%{_libdir}/libakonadi-kcal.so
-#%{_libdir}/libkmobiletoolsengineui.so
-#%{_libdir}/libkmobiletoolslib.so
-%{_libdir}/libkabcommon.so
-%{_libdir}/libkabcscalix.so
-%{_libdir}/libkcal_groupdav.so
-%{_libdir}/libkcal_resourceblog.so
-%{_libdir}/libkcalscalix.so
-%{_libdir}/libkitchensyncprivate.so
-%{_libdir}/libqopensync.so
-%{_libdir}/libkleopatraclientcore.so
-%{_libdir}/libkleopatraclientgui.so
+%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
+%attr(755,root,root) %{_libdir}/libimap.so
+%attr(755,root,root) %{_libdir}/libgwsoap.so
+%attr(755,root,root) %{_libdir}/libkabc_groupdav.so
+%attr(755,root,root) %{_libdir}/libkabc_slox.so
+%attr(755,root,root) %{_libdir}/libkabc_xmlrpc.so
+%attr(755,root,root) %{_libdir}/libkabcgroupwise.so
+%attr(755,root,root) %{_libdir}/libkabckolab.so
+%attr(755,root,root) %{_libdir}/libkabinterfaces.so
+%attr(755,root,root) %{_libdir}/libkaddressbookprivate.so
+%attr(755,root,root) %{_libdir}/libkcalgroupwise.so
+%attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so
+%attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
+%attr(755,root,root) %{_libdir}/libkcal_slox.so
+%attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so
+%attr(755,root,root) %{_libdir}/libkcalkolab.so
+%attr(755,root,root) %{_libdir}/libkdepim.so
+%attr(755,root,root) %{_libdir}/libkgroupwarebase.so
+%attr(755,root,root) %{_libdir}/libkgroupwaredav.so
+%attr(755,root,root) %{_libdir}/libkholidays.so
+%attr(755,root,root) %{_libdir}/libknotes_xmlrpc.so
+%attr(755,root,root) %{_libdir}/libknoteskolab.so
+%attr(755,root,root) %{_libdir}/libkocorehelper.so
+%attr(755,root,root) %{_libdir}/libkode.so
+%attr(755,root,root) %{_libdir}/libkontactprivate.so
+%attr(755,root,root) %{_libdir}/libkorganizer_eventviewer.so
+%attr(755,root,root) %{_libdir}/libkorganizer_calendar.so
+%attr(755,root,root) %{_libdir}/libkorg_stdprinting.so
+%attr(755,root,root) %{_libdir}/libkpgp.so
+%attr(755,root,root) %{_libdir}/libkpilot.so
+%attr(755,root,root) %{_libdir}/libksieve.so
+%attr(755,root,root) %{_libdir}/libmimelib.so
+%attr(755,root,root) %{_libdir}/libakonadi-kabccommon.so
+%attr(755,root,root) %{_libdir}/libakonadi-kcal.so
+#%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so
+#%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so
+%attr(755,root,root) %{_libdir}/libkabcommon.so
+%attr(755,root,root) %{_libdir}/libkabcscalix.so
+%attr(755,root,root) %{_libdir}/libkcal_groupdav.so
+%attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
+%attr(755,root,root) %{_libdir}/libkcalscalix.so
+#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so
+#%{_libdir}ttr(755,root,root) /libqopensync.so
+%attr(755,root,root) %{_libdir}/libkleopatraclientcore.so
+%attr(755,root,root) %{_libdir}/libkleopatraclientgui.so
 %{_datadir}/apps/libkleopatra
 
 %{_datadir}/apps/cmake/modules/*.cmake
@@ -1346,14 +1346,14 @@ rm -rf $RPM_BUILD_ROOT
 %lang(en) %{_kdedocdir}/en/kabcclient
 %{_mandir}/man1/kabcclient.1.*
 
-%files korn -f korn.lang
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/korn
-%attr(755,root,root) %{_datadir}/apps/kconf_update/korn-3-5*.pl
-%{_desktopdir}/kde4/KOrn.desktop
-%{_datadir}/apps/kconf_update/korn-*.upd
-%{_datadir}/dbus-1/interfaces/org.kde.korn.*.xml
-%{_iconsdir}/*/*/*/korn.png
+#%files korn -f korn.lang
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_bindir}/korn
+#%attr(755,root,root) %{_datadir}/apps/kconf_update/korn-3-5*.pl
+#%{_desktopdir}/kde4/KOrn.desktop
+#%{_datadir}/apps/kconf_update/korn-*.upd
+#%{_datadir}/dbus-1/interfaces/org.kde.korn.*.xml
+#%{_iconsdir}/*/*/*/korn.png
 
 %files kpilot -f kpilot.lang
 %defattr(644,root,root,755)
@@ -1419,8 +1419,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_resources.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_akonadi.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_server.so
-%attr(755,root,root) %{_libdir}/libopensync1/plugins/akonadi_opensync_plugin.so
-%{_datadir}/libopensync1/defaults/akonadi-sync
+#%attr(755,root,root) %{_libdir}/libopensync1/plugins/akonadi_opensync_plugin.so
+#%{_datadir}/libopensync1/defaults/akonadi-sync
 %dir %{_datadir}/apps/akonadi
 %dir %{_datadir}/apps/akonadi/plugins
 %dir %{_datadir}/apps/akonadi/plugins/serializer
@@ -1522,16 +1522,17 @@ rm -rf $RPM_BUILD_ROOT
 #%{_datadir}/apps/ktnef
 #%{_iconsdir}/*/*/apps/ktnef.png
 
-%files kitchensync
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/kitchensync
-%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so
-%attr(755,root,root) %{_libdir}/kde4/kitchensyncpart.so
-%attr(755,root,root) %{_libdir}/libqopensync.so
-%{_desktopdir}/kde4/kitchensync.desktop
-%{_datadir}/apps/kitchensync
-%{_iconsdir}/*/*/apps/kitchensync.png
-%{_iconsdir}/*/*/actions/sync-start.png
+#%files kitchensync
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_bindir}/kitchensync
+#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
+#%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
+#%attr(755,root,root) %{_libdir}/kde4/kitchensyncpart.so
+#%attr(755,root,root) %{_libdir}/libqopensync.so
+#%{_desktopdir}/kde4/kitchensync.desktop
+#%{_datadir}/apps/kitchensync
+#%{_iconsdir}/*/*/apps/kitchensync.png
+#%{_iconsdir}/*/*/actions/sync-start.png
 
 %files libs
 %defattr(644,root,root,755)
@@ -1602,8 +1603,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkholidays.so.?
 %attr(755,root,root) %{_libdir}/libkholidays.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.?
-%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkleo.so.?
 %attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.?
@@ -1654,13 +1653,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkslox.so.*.*.*
 %attr(755,root,root) %{_libdir}/libkxmlcommon.so.?
 %attr(755,root,root) %{_libdir}/libkxmlcommon.so.*.*.*
-%{_libdir}/libmaildir.so
+%attr(755,root,root) %{_libdir}/libmaildir.so
 %attr(755,root,root) %{_libdir}/libmaildir.so.?
 %attr(755,root,root) %{_libdir}/libmaildir.so.*.*.*
 %attr(755,root,root) %{_libdir}/libmimelib.so.?
 %attr(755,root,root) %{_libdir}/libmimelib.so.*.*.*
-%attr(755,root,root) %{_libdir}/libqopensync.so.?
-%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
+#%attr(755,root,root) %{_libdir}/libqopensync.so.?
+#%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
 %attr(755,root,root) %{_libdir}/libschema.so.?
 %attr(755,root,root) %{_libdir}/libschema.so.*.*.*
 %attr(755,root,root) %{_libdir}/libwscl.so.?
