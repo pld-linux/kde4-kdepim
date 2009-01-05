@@ -15,7 +15,7 @@ Version:	4.1.87
 Release:	0.1
 License:	GPL
 Group:		X11/Applications
-Source0:	ftp://ftp.pbone.net/mirror/ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
+Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	2df94fd43dee269ce018b278b9b57628
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
