@@ -11,16 +11,16 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.1.87
-Release:	0.1
+Version:	4.1.96
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	2df94fd43dee269ce018b278b9b57628
+# Source0-md5:	4dceae1e430dfef40551f94495cb1f53
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
-BuildRequires:	akonadi-devel >= 1.0.0
+BuildRequires:	akonadi-devel >= 1.1.0
 BuildRequires:	automoc4 >= 0.9.84
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
@@ -991,7 +991,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kmail-*.sh
 %{_datadir}/apps/kmailcvt
 %{_iconsdir}/*/*/apps/kmail*.png
-%{_iconsdir}/*/scalable/apps/kmail.svgz
+#%{_iconsdir}/*/scalable/apps/kmail.svgz
 %{_iconsdir}/oxygen/*/actions/mail-*.*
 %{_iconsdir}/oxygen/*/mimetypes/x-mail-distribution-list.*
 %{_iconsdir}/oxygen/*/status/mail-sent.png
@@ -1481,7 +1481,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kleopatra_signencryptfiles.desktop
 %{_datadir}/kde4/services/kleopatra_signencryptfolders.desktop
 %{_iconsdir}/oxygen/*/apps/kleopatra.png
-%{_iconsdir}/oxygen/scalable/apps/kleopatra.svgz
+#%{_iconsdir}/oxygen/scalable/apps/kleopatra.svgz
 
 %files wizards
 %defattr(644,root,root,755)
