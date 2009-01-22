@@ -12,7 +12,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.2.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -21,7 +21,7 @@ Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
 BuildRequires:	akonadi-devel >= 1.1.1
-BuildRequires:	automoc4 >= 0.9.84
+BuildRequires:	automoc4 >= 0.9.88
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.35.0
