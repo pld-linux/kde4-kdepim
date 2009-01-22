@@ -11,16 +11,16 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.1.96
-Release:	2
+Version:	4.2.0
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	4dceae1e430dfef40551f94495cb1f53
+# Source0-md5:	a80631de21930b2544c86722138aaa6c
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
-BuildRequires:	akonadi-devel >= 1.1.0
+BuildRequires:	akonadi-devel >= 1.1.1
 BuildRequires:	automoc4 >= 0.9.84
 BuildRequires:	bison
 BuildRequires:	bluez-libs-devel
@@ -47,7 +47,7 @@ BuildRequires:	pilot-link-devel >= 0.12.1
 BuildRequires:	qca-devel >= 2.0.0
 %{?with_apidocs:BuildRequires:	qt4-doc >= %{qtver}}
 BuildRequires:	rpmbuild(macros) >= 1.129
-BuildRequires:	soprano-devel >= 2.1.64
+BuildRequires:	soprano-devel >= 2.1.67
 BuildRequires:	strigi-devel >= 0.5.12
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	zlib-devel
@@ -1069,7 +1069,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ical2vcal
 %attr(755,root,root) %{_bindir}/korgac
 %attr(755,root,root) %{_bindir}/korganizer
-%attr(755,root,root) %{_bindir}/thememain
 %attr(755,root,root) %{_libdir}/kde4/kcm_korganizer.so
 %attr(755,root,root) %{_libdir}/kde4/korg_*.so
 %attr(755,root,root) %{_libdir}/kde4/korganizerpart.so
