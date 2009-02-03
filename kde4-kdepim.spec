@@ -12,7 +12,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.2.0
-Release:	4
+Release:	5
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -992,8 +992,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kmail-*.pl
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kmail-*.sh
 %{_datadir}/apps/kmailcvt
+%exclude %{_iconsdir}/*/scalable
 %{_iconsdir}/*/*/apps/kmail*.png
-#%{_iconsdir}/*/scalable/apps/kmail.svgz
 %{_iconsdir}/oxygen/*/actions/mail-*.*
 %{_iconsdir}/oxygen/*/mimetypes/x-mail-distribution-list.*
 %{_iconsdir}/oxygen/*/status/mail-sent.png
