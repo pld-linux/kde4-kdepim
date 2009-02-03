@@ -1,7 +1,7 @@
 #
 %bcond_without	apidocs			# do not prepare API documentation
 #
-%define		_state		unstable
+%define		_state		stable
 %define		qtver		4.4.3
 
 %define	orgname	kdepim
@@ -12,11 +12,12 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.2.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	a80631de21930b2544c86722138aaa6c
+Patch100:	%{name}-branch.diff
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
@@ -746,6 +747,7 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
+%patch100 -p0
 #%patch0 -p1
 %patch1 -p0
 
