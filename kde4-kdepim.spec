@@ -41,6 +41,7 @@ BuildRequires:	libassuan-devel
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
 BuildRequires:	libopensync-devel >= 1:0.38
+BuildRequires:	libxslt-progs
 BuildRequires:	lockdev-devel
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
