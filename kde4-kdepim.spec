@@ -710,6 +710,7 @@ kitchensync.
 Summary:	Kleopatra
 Group:		X11/Applications
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	dirmngr
 
 %description kleopatra
 Kleopatra.
