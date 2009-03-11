@@ -1,7 +1,7 @@
 Index: akregator/Messages.sh
 ===================================================================
---- akregator/Messages.sh	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ akregator/Messages.sh	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- akregator/Messages.sh	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ akregator/Messages.sh	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -1,3 +1,3 @@
  #! /bin/sh
  $EXTRACTRC `find . -name "*.rc" -o -name "*.ui" -o -name "*.kcfg"` >> rc.cpp || exit 11
@@ -9,8 +9,8 @@ Index: akregator/Messages.sh
 +$XGETTEXT $(find . -name "*.cpp" -o -name "*.h") -o $podir/akregator.pot
 Index: akregator/src/subscriptionlistmodel.cpp
 ===================================================================
---- akregator/src/subscriptionlistmodel.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ akregator/src/subscriptionlistmodel.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- akregator/src/subscriptionlistmodel.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ akregator/src/subscriptionlistmodel.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -447,6 +447,9 @@
      {
          const TreeNode* const droppedOnNode = qobject_cast<const TreeNode*>( nodeForIndex( parent, m_feedList ) );
@@ -23,8 +23,8 @@ Index: akregator/src/subscriptionlistmodel.cpp
              return false;
 Index: libkleo/libkleopatrarc.desktop
 ===================================================================
---- libkleo/libkleopatrarc.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ libkleo/libkleopatrarc.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- libkleo/libkleopatrarc.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ libkleo/libkleopatrarc.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -288,6 +288,7 @@
  Name[it]=Chiavi per le firme qualificate
  Name[ja]=適格電子署名用の鍵
@@ -35,8 +35,8 @@ Index: libkleo/libkleopatrarc.desktop
  Name[nds]=Slötels för pröövt Ünnerschriften
 Index: kode/kwsdl/kwsdl_compiler.desktop
 ===================================================================
---- kode/kwsdl/kwsdl_compiler.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kode/kwsdl/kwsdl_compiler.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kode/kwsdl/kwsdl_compiler.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kode/kwsdl/kwsdl_compiler.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -14,6 +14,7 @@
  Name[kk]=KWSDL компиляторы
  Name[km]=កម្មវិធី​ចងក្រង KWSDL
@@ -47,8 +47,8 @@ Index: kode/kwsdl/kwsdl_compiler.desktop
  Name[nds]=KWSDL-Kompilerer
 Index: kode/kxforms/kxforms.desktop
 ===================================================================
---- kode/kxforms/kxforms.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kode/kxforms/kxforms.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kode/kxforms/kxforms.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kode/kxforms/kxforms.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -23,6 +23,7 @@
  GenericName[kk]=XML пішін өңдегіші
  GenericName[km]=កម្មវិធី​និពន្ធ​សំណុំ​បែបបទ​របស់ XML
@@ -59,8 +59,8 @@ Index: kode/kxforms/kxforms.desktop
  GenericName[nds]=XML-Kiekwarkeditor
 Index: kresources/scalix/kabc/scalix.desktop
 ===================================================================
---- kresources/scalix/kabc/scalix.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kresources/scalix/kabc/scalix.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kresources/scalix/kabc/scalix.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kresources/scalix/kabc/scalix.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -44,6 +44,7 @@
  Comment[it]=Consente l'accesso ai contatti memorizzati su un server Scalix che usa IMAP tramite KMail o Kontact
  Comment[ja]=KMail または Kontact 経由で IMAP を使って、Scalix サーバに保存されている連絡先へのアクセスを提供します
@@ -71,8 +71,8 @@ Index: kresources/scalix/kabc/scalix.desktop
  Comment[nds]=Stellt mit KMail oder Kontact över IMAP Topgriep op Kontakten op en Scalix-Server praat
 Index: kresources/slox/kabc_ox.desktop
 ===================================================================
---- kresources/slox/kabc_ox.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kresources/slox/kabc_ox.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kresources/slox/kabc_ox.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kresources/slox/kabc_ox.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -57,6 +57,7 @@
  Comment[it]=Consente l'accesso ai contatti memorizzati su un server Open-Xchange
  Comment[ja]=Open-Xchange サーバに保存されている連絡先へのアクセスを提供します
@@ -83,8 +83,8 @@ Index: kresources/slox/kabc_ox.desktop
  Comment[nds]=Stellt Togriep op de op en Open-Xchange-Server wohrten Kontakten praat
 Index: kresources/akonadi/kabc/akonadi.desktop
 ===================================================================
---- kresources/akonadi/kabc/akonadi.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kresources/akonadi/kabc/akonadi.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kresources/akonadi/kabc/akonadi.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kresources/akonadi/kabc/akonadi.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -13,6 +13,7 @@
  Name[it]=Rubrica indirizzi di Akonadi
  Name[ja]=Akonadi アドレス帳
@@ -95,8 +95,8 @@ Index: kresources/akonadi/kabc/akonadi.desktop
  Name[nds]=Akonadi-Adressbook instellen
 Index: kmail/dbusmail.desktop
 ===================================================================
---- kmail/dbusmail.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kmail/dbusmail.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kmail/dbusmail.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kmail/dbusmail.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -20,6 +20,7 @@
  Comment[kk]=DBUS интерфейсті пошта бағдарламасы
  Comment[km]=កម្មវិធី​សំបុត្រ​ដែល​មាន​ចំណុច​ប្រទាក់ DBUS
@@ -107,8 +107,8 @@ Index: kmail/dbusmail.desktop
  Comment[nds]=Nettpostprogramm mit en D-Bus-Koppelsteed
 Index: kmail/messagelistview/core/model.cpp
 ===================================================================
---- kmail/messagelistview/core/model.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kmail/messagelistview/core/model.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kmail/messagelistview/core/model.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kmail/messagelistview/core/model.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -2926,9 +2926,9 @@
        // Handle saving the current selection: if this item was the current before the step
        // then zero it out. We have killed it and it's OK for the current item to change.
@@ -149,8 +149,8 @@ Index: kmail/messagelistview/core/model.cpp
  
 Index: kmail/kmail_config_composer.desktop
 ===================================================================
---- kmail/kmail_config_composer.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kmail/kmail_config_composer.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kmail/kmail_config_composer.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kmail/kmail_config_composer.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -80,6 +80,7 @@
  Comment[ja]=メール作成の設定
  Comment[km]=ការ​កំណត់​កម្មវិធី​តែង​សារ
@@ -161,8 +161,8 @@ Index: kmail/kmail_config_composer.desktop
  Comment[nds]=Narichteneditor instellen
 Index: kmail/dbusimap.desktop
 ===================================================================
---- kmail/dbusimap.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kmail/dbusimap.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kmail/dbusimap.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kmail/dbusimap.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -20,6 +20,7 @@
  Comment[kk]=DBUS интерфейсті пошта бағдарламасы
  Comment[km]=កម្មវិធី​សំបុត្រ​ដែល​មាន​ចំណុច​ប្រទាក់ DBUS
@@ -173,8 +173,8 @@ Index: kmail/dbusimap.desktop
  Comment[nds]=Nettpostprogramm mit en D-Bus-Koppelsteed
 Index: kmail/kmfoldercachedimap.cpp
 ===================================================================
---- kmail/kmfoldercachedimap.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kmail/kmfoldercachedimap.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kmail/kmfoldercachedimap.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kmail/kmfoldercachedimap.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -202,7 +202,8 @@
      /*mHoldSyncs( false ),*/
      mFolderRemoved( false ),
@@ -303,8 +303,8 @@ Index: kmail/kmfoldercachedimap.cpp
    serverSyncInternal();
 Index: kmail/kmfoldercachedimap.h
 ===================================================================
---- kmail/kmfoldercachedimap.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kmail/kmfoldercachedimap.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kmail/kmfoldercachedimap.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kmail/kmfoldercachedimap.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -627,12 +627,18 @@
      bool mFolderRemoved;
      bool mRecurse;
@@ -331,8 +331,8 @@ Index: kmail/kmfoldercachedimap.h
      /**
 Index: kmail/kmail_view.desktop
 ===================================================================
---- kmail/kmail_view.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kmail/kmail_view.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kmail/kmail_view.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kmail/kmail_view.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -13,6 +13,7 @@
  Name[ja]=KMail ビュー
  Name[km]=ទិដ្ឋភាព KMail
@@ -343,8 +343,8 @@ Index: kmail/kmail_view.desktop
  Name[nds]=KMail-Ansicht
 Index: knode/kncomposerview.cpp
 ===================================================================
---- knode/kncomposerview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ knode/kncomposerview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- knode/kncomposerview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ knode/kncomposerview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -93,6 +93,7 @@
    e_dit=new KNComposerEditor(this);
    e_dit->switchToPlainText();
@@ -353,10 +353,26 @@ Index: knode/kncomposerview.cpp
  
    QVBoxLayout *notL=new QVBoxLayout(e_dit);
    notL->addStretch(1);
+Index: knode/knarticle.cpp
+===================================================================
+--- knode/knarticle.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ knode/knarticle.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -70,8 +70,10 @@
+ {
+   // filter out internal headers
+   for ( Headers::Base::List::Iterator it = h_eaders.begin(); it != h_eaders.end(); ) {
+-    if ( (*it)->isXHeader() && ( strncasecmp( (*it)->type(), "X-KNode", 7 ) == 0 ) )
++    if ( (*it)->isXHeader() && ( strncasecmp( (*it)->type(), "X-KNode", 7 ) == 0 ) ) {
++      delete *it;
+       it = h_eaders.erase( it );
++    }
+     else
+       ++it;
+   }
 Index: dependency-graph.dot
 ===================================================================
---- dependency-graph.dot	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ dependency-graph.dot	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- dependency-graph.dot	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ dependency-graph.dot	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -48,7 +48,6 @@
          "konsolekalendar"[style=filled, fillcolor=lightcyan, URL="konsolekalendar/html/index.html"];
          "kontact"[style=filled, fillcolor=lightcyan, URL="kontact/html/index.html"];
@@ -365,10 +381,1454 @@ Index: dependency-graph.dot
          "kresources"[style=filled, fillcolor=palegreen];
          "libakonadi"[style=filled, fillcolor=lightyellow, URL="akonadi/libakonadi/html/index.html"];
          "libkdepim"[style=filled, fillcolor=lightyellow, URL="libkdepim/html/index.html"];
+Index: doc/kleopatra/index.docbook
+===================================================================
+--- doc/kleopatra/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ doc/kleopatra/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -13,48 +13,6 @@
+ 
+   <!ENTITY dn "<acronym>DN</acronym>">
+   <!ENTITY ca "<acronym>CA</acronym>">
+-
+-  <!-- Expanded all entities to make them translatable - lueck
+-    FILE menu 
+-  <!ENTITY file-new-key-pair "<menuchoice><guimenu>File</guimenu><guimenuitem>New Key Pair...</guimenuitem></menuchoice>">
+-  <!ENTITY file-export-certificates "<menuchoice><guimenu>File</guimenu><guimenuitem>Export Certificates...</guimenuitem></menuchoice>">
+-  <!ENTITY file-export-secret-key "<menuchoice><guimenu>File</guimenu><guimenuitem>Export Secret key...</guimenuitem></menuchoice>">
+-  <!ENTITY file-import-certificates "<menuchoice><guimenu>File</guimenu><guimenuitem>Import Certificates...</guimenuitem></menuchoice>">
+-  <!ENTITY file-import-crls "<menuchoice><guimenu>File</guimenu><guimenuitem>Import CRLs...</guimenuitem></menuchoice>">
+-  <!ENTITY file-quit "<menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></shortcut><guimenu>File</guimenu><guimenuitem>Quit</guimenuitem></menuchoice>">
+-
+-   VIEW menu
+-  <!ENTITY view-redisplay "<menuchoice><shortcut><keycombo action="simul"><keycap>F5</keycap></keycombo></shortcut><guimenu>View</guimenu><guimenuitem>Redisplay</guimenuitem></menuchoice>">
+-  <!ENTITY view-stop-operation "<menuchoice><shortcut><keycombo action="simul"><keycap>Esc</keycap></keycombo></shortcut><guimenu>View</guimenu><guimenuitem>Stop Operation</guimenuitem></menuchoice>">
+-  <!ENTITY view-certificate-details "<menuchoice><guimenu>View</guimenu><guimenuitem>Certificate Details</guimenuitem></menuchoice>">
+-  <!ENTITY view-hierarchical-key-list "<menuchoice><guimenu>View</guimenu><guimenuitem>Hierarchical Key List</guimenuitem></menuchoice>">
+-  <!ENTITY view-expand-all "<menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>.</keycap></keycombo></shortcut><guimenu>View</guimenu><guimenuitem>Expand All</guimenuitem></menuchoice>">
+-  <!ENTITY view-collapse-all "<menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>,</keycap></keycombo></shortcut><guimenu>View</guimenu><guimenuitem>Collapse All</guimenuitem></menuchoice>">
+-
+-   CERTIFICATES menu 
+- <!ENTITY certificates-validate "<menuchoice><shortcut><keycombo action="simul">&Shift;<keycap>F5</keycap></keycombo></shortcut><guimenu>Certificates</guimenu><guimenuitem>Validate</guimenuitem></menuchoice>">
+-  <!ENTITY certificates-refresh-crls "<menuchoice><guimenu>Certificates</guimenu><guimenuitem>Refresh CRLs</guimenuitem></menuchoice>">
+-  <!ENTITY certificates-delete "<menuchoice><shortcut><keycombo action="simul"><keycap>Delete</keycap></keycombo></shortcut><guimenu>Certificates</guimenu><guimenuitem>Delete</guimenuitem></menuchoice>">
+-  <!ENTITY certificates-download "<menuchoice><guimenu>Certificates</guimenu><guimenuitem>Download</guimenuitem></menuchoice>">
+-
+-   CRLS menu
+-  <!ENTITY crls-clear-crl-cache "<menuchoice><guimenu>CRLs</guimenu><guimenuitem>Clear CRL Cache</guimenuitem></menuchoice>">
+-  <!ENTITY crls-dump-crl-cache "<menuchoice><guimenu>CRLs</guimenu><guimenuitem>Dump CRL Cache</guimenuitem></menuchoice>">
+-
+-   TOOLS menu 
+-  <!ENTITY tools-gnupg-log-viewer "<menuchoice><guimenu>Tools</guimenu><guimenuitem>GnuPG Log Viewer...</guimenuitem></menuchoice>">
+-
+-   SETTINGS menu 
+-  <!ENTITY settings-show-statusbar "<menuchoice><guimenu>Settings</guimenu><guimenuitem>Show Statusbar</guimenuitem></menuchoice>">
+-  <!ENTITY settings-configure-shortcuts "<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Shortcuts...</guimenuitem></menuchoice>">
+-  <!ENTITY settings-configure-kleopatra "<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &kleopatra;...</guimenuitem></menuchoice>">
+-  <!ENTITY settings-configure-gpgme-backend "<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure GpgME Backend...</guimenuitem></menuchoice>">
+-   -->
+-
+-  <!-- Command line options -->
+-  <!ENTITY commandline-option-external "<option>--external</option>">
+-  <!ENTITY commandline-option-query "<option>--query</option>">
+-  <!ENTITY commandline-option-import-certificate "<option>--import-certificate</option>">
+ ]>
+ 
+ <book lang="&language;">
+@@ -114,12 +72,12 @@
+ 
+ <legalnotice>&GPLNotice;</legalnotice>
+ 
+-<date>2007-12-19</date>
+-<releaseinfo>1.9.0</releaseinfo>
++<date>2009-02-19</date>
++<releaseinfo>2.0.5</releaseinfo>
+ 
+ <abstract>
+ <para>
+-&kleopatra; is a tool for managing X.509 certificates.
++&kleopatra; is a tool for managing X.509 and OpenPGP certificates.
+ </para>
+ </abstract>
+ 
+@@ -137,11 +95,12 @@
+ 
+ <chapter id="introduction"> <title>Introduction</title> 
+ 
+-<para>&kleopatra; is the &kde; tool for managing X.509 certificates in
++<para>&kleopatra; is the &kde; tool for managing X.509 and OpenPGP certificates in
+ the &gpgsm; keybox and for retrieving certificates from
+ <acronym>LDAP</acronym> servers.</para>
+ 
+-<para>&kleopatra; can be started from &kmail;'s <guimenu>Tools</guimenu>
++<para>&kleopatra; can be started from &kmail;'s <menuchoice><guimenu>Tools</guimenu>
++<guimenuitem>Certificate Manager</guimenuitem></menuchoice>
+ menu, as well as from the command line. The &kleopatra; executable is
+ named <userinput><command>kleopatra</command></userinput>.</para>
+ 
+@@ -166,7 +125,7 @@
+ of the local keybox, which is similar to &gpg;'s concept of keyrings,
+ albeit one should not stretch this analogy too much.</para>
+ 
+-<para>The main window is divided into the large key listing area, the
++<para>The main window is divided into the large key listing area consisting of several tabs, the
+ menubar and the <link linkend="functions-search">search bar</link> on
+ top, and a status bar at the bottom.</para>
+ 
+@@ -181,8 +140,7 @@
+ certificates, but usually the terms <quote>certificate</quote> and
+ <quote>(public) key</quote> are used interchangeably, and we will not
+ distinguish between them in this manual either, except when explicitly
+-noted. The name of the &ca; which issued the certificate (its &dn;)
+-is shown in the <guilabel>Issuer &dn;</guilabel> column.</para>
++noted.</para>
+ 
+ <para>&ca;s must in turn be signed by other &ca;s to be valid. Of
+ course, this must end somewhere, so the top-level &ca; (root-&ca;)
+@@ -193,11 +151,10 @@
+ the vendor of a product using certificates, but can be done by the
+ user via &gpgsm;'s command line interface.</para>
+ 
+-<para>To see which of the certificates are root certificates, you can
+-either compare <guilabel>Subject &dn;</guilabel> and <guilabel>Issuer
+-&dn;</guilabel>, or you switch to hierarchical keylist mode with <link
++<para>To see which of the certificates are root certificates, you
++switch to the hierarchical keylist mode with <link
+ linkend="view-hierarchical-key-list"><menuchoice><guimenu>View</guimenu>
+-<guimenuitem>Hierarchical Key List</guimenuitem></menuchoice></link>.</para>
++<guimenuitem>Hierarchical Certificate List</guimenuitem></menuchoice></link>.</para>
+ 
+ <para>You can see the details of any certificate by double-clicking it
+ or using <link linkend="view-certificate-details"><menuchoice><guimenu>View</guimenu>
+@@ -213,17 +170,18 @@
+ <keycap>F5</keycap></keycombo></shortcut><guimenu>View</guimenu>
+ <guimenuitem>Redisplay</guimenuitem></menuchoice></link>.</para>
+ 
+-<para>Since validating a key may take some time (&eg; CRLs might need
++<!-- no longer in kde 4
++para>Since validating a key may take some time (&eg; CRLs might need
+ to be fetched), the normal keylisting does not attempt to check the
+ validity of keys. For this, <link linkend="certificates-validate">
+ <menuchoice><shortcut><keycombo action="simul">&Shift;<keycap>F5</keycap></keycombo>
+-</shortcut><guimenu>Certificates</guimenu><guimenuitem>Validate</guimenuitem></menuchoice></link>, a
+-special variant of <link
++</shortcut><guimenu>Certificates</guimenu><guimenuitem>Validate</guimenuitem></menuchoice></link>,
++a special variant of <link
+ linkend="view-redisplay"><menuchoice><shortcut><keycombo action="simul">
+ <keycap>F5</keycap></keycombo></shortcut><guimenu>View</guimenu>
+ <guimenuitem>Redisplay</guimenuitem></menuchoice></link>, is provided. It
+ either checks the selected certificates, or all keys if none are
+-selected.</para>
++selected.</para-->
+ 
+ </sect1>
+ 
+@@ -233,30 +191,31 @@
+ signatures in emails, since certificates are embedded in the
+ signatures made using them most of the time. However, if you need to
+ send a mail to someone you have not yet had contact with, you need to
+-fetch the certificate from an LDAP directory (although &gpgsm; can do
++fetch the certificate from an LDAP folder (although &gpgsm; can do
+ this automatically), or from a file. You also need to import your own
+ certificate after receiving the &ca; answer to your certification
+ request.</para>
+ 
+-<para>To search for a certificate in an LDAP directory, switch the
+-dropdown menu of the search bar from <guilabel>in Local
+-Certificates</guilabel> to <guilabel>in External
+-Certificates</guilabel>, enter some text (&eg; the name of the person
+-you want the certificate for) into the line edit, and click on the
+-<guilabel>Find</guilabel> icon. The results will be displayed in the
++<para>To search for a certificate in an LDAP directory, select 
++<menuchoice><guimenu>File</guimenu><guimenuitem>Lookup Certificates on Server</guimenuitem></menuchoice>
++and enter some text (&eg; the name of the person
++you want the certificate for) into the line edit of the <guilabel>Keyserver 
++Certificate Lookup</guilabel> dialog, then click on the
++<guilabel>Search</guilabel> button. The results will be displayed in the
+ key list below the search bar, where you can select certificates to
+-either look at them with <link linkend="view-certificate-details">
+-<menuchoice><guimenu>View</guimenu><guimenuitem>Certificate Details</guimenuitem></menuchoice></link> or
+-download them with <link linkend="certificates-download">
+-<menuchoice><guimenu>Certificates</guimenu><guimenuitem>Download</guimenuitem></menuchoice></link> into the
+-local keybox. Note that you can also download the certificate from the
++look at them by clicking the <guibutton>Details</guibutton> button
++or download them with <guibutton>Import</guibutton> into the
++local keybox.</para>
++<!--
++Note that you can also download the certificate from the
+ details dialog, using the <guilabel>Import to Local</guilabel>
+ button.</para>
++not found in 4.2
++-->
+ 
+ <para>You can configure the list of LDAP servers to search in the
+ <link linkend="configuration-directory-services"><guilabel>Directory
+-Services</guilabel></link> page of &kleopatra;'s <link
+-linkend="configuration">configure dialog</link>.</para>
++Services</guilabel></link> page of &kleopatra;'s configure dialog.</para>
+ 
+ <para>If you received the certificate as a file, try <link
+ linkend="file-import-certificates"><menuchoice><guimenu>File</guimenu>
+@@ -269,7 +228,7 @@
+ public key (as well as the secret key) from the PKCS#12 file you got from
+ the &ca;. You can do this on the command line with <link
+ linkend="commandline-option-import-certificate"><userinput><command>kleopatra
+-&commandline-option-import-certificate;
++<option>--import-certificate</option>
+ <filename>filename</filename></command></userinput></link> or from
+ within &kleopatra; with <link
+ linkend="file-import-certificates"><menuchoice><guimenu>File</guimenu>
+@@ -281,49 +240,71 @@
+ <sect1 id="functions-newkey"><title>Creating New Key Pairs</title>
+ 
+ <para>The menu item <link linkend="file-new-key-pair"><menuchoice>
+-<guimenu>File</guimenu><guimenuitem>New Key Pair...</guimenuitem></menuchoice></link> starts the
+-certificate-request-creating wizard which will guide you through a
+-number of steps to create a certificate request; this request can, on the 
+-last page of the wizard, either be sent to a certificate authority (&ca;)
+-to be signed or saved to a file (for example to a floppy, so it can be
+-shipped to the &ca;).</para> <para>Whenever you are done with a step in
++<guimenu>File</guimenu><guimenuitem>New Certificate...</guimenuitem></menuchoice></link> starts the
++<guilabel>Certificate Creation Wizard</guilabel> which will guide you through a
++number of steps to create a certificate request.</para> 
++<para>Whenever you are done with a step in
+ the wizard, press <guibutton>Next</guibutton> to go to the next step
+ (or <guibutton>Back</guibutton> to review steps that are already
+ completed). The certificate request creation can be canceled at any
+ time by pressing the <guibutton>Cancel</guibutton> button.
+ </para>
+-<para>The first step in the wizard is to type in your personal data
++<para>On the first page of the wizard choose which type of certificate you want to create:</para>
++
++<variablelist>
++
++<varlistentry>
++<term><guilabel>Create a personal OpenPGP key pair</guilabel></term>
++<listitem><para>OpenPGP key pairs are created locally, and certified by your friends and 
++acquaintances. There is no central certification authority; instead, every 
++individual creates a personal Web Of Trust by certifying other user's key 
++pairs with his own certificate.</para>
++<para>You have to enter a <guilabel>Name</guilabel>, <guilabel>EMail</guilabel> and 
++optional a <guilabel>Comment</guilabel>.</para>
++</listitem>
++</varlistentry>
++<varlistentry>
++<term><guilabel>Create a personal X.509 key pair and certification request</guilabel></term>
++<listitem>
++<para>X.509 key pairs are created locally, but certified centrally by a 
++certification authority (&ca;). CAs can certify other CAs, creating a central, 
++hierarchical chain of trust.</para>
++<para>The next step in the wizard is to type in your personal data
+ for the certificate. The fields to fill out are:
+ <itemizedlist>
+ <listitem>
+-<para><guilabel>Name:</guilabel> Your name;</para>
++<para><guilabel>Common Name (CN): </guilabel>Your name;</para>
+ </listitem>
+ <listitem>
+-<para><guilabel>Location:</guilabel>The town or city in which you live;</para>
++<para><guilabel>Email address (EMAIL): </guilabel>Your email address; be sure
++to type this in correctly&mdash;this will be the address people will be
++sending mail to when they use your certificate.</para>
+ </listitem>
+ <listitem>
+-<para><guilabel>Organization:</guilabel>The organization you represent
+-(for example, the company you work for);</para>
++<para><guilabel>Location (L): </guilabel>The town or city in which you live;</para>
+ </listitem>
+ <listitem>
+-<para><guilabel>Department:</guilabel>The organizational unit you are
++<para><guilabel>Organizational unit (OU): </guilabel>The organizational unit you are
+ in (for example, "Logistics");</para> 
+ </listitem>
+ <listitem>
+-<para><guilabel>Country code:</guilabel>The two letter code for the
+-country in which you are living (for example, "US");</para>
++<para><guilabel>Organization (O): </guilabel>The organization you represent
++(for example, the company you work for);</para>
+ </listitem>
+ <listitem>
+-<para><guilabel>Email address:</guilabel>Your email address; be sure
+-to type this in correctly&mdash;this will be the address people will be
+-sending mail to when they use your certificate.</para>
++<para><guilabel>Country code (C): </guilabel>The two letter code for the
++country in which you are living (for example, "US");</para>
+ </listitem>
+ </itemizedlist>
+ </para><para>
+ The next step in the wizard is to select whether to store the
+ certificate in a file or send it directly to a &ca;. You will have to
+ specify the filename or email address to send the certificate request to.
+-</para></sect1>
++</para>
++</listitem>
++</varlistentry>
++</variablelist>
++</sect1>
+ 
+ 
+ <sect1 id="functions-keybox-management"><title>Keybox Management</title>
+@@ -337,13 +318,13 @@
+ 
+ <para>These functions include deleting certificates from the local
+ keybox with <link linkend="certificates-delete"><menuchoice><shortcut>
+-<keycombo action="simul"><keycap>Delete</keycap></keycombo></shortcut>
++<keycombo action="simul"><keycap>Del</keycap></keycombo></shortcut>
+ <guimenu>Certificates</guimenu><guimenuitem>Delete</guimenuitem></menuchoice></link>, as well 
+ as manual handling of CRLs (<link linkend="certificates-refresh-crls">
+-<menuchoice><guimenu>Certificates</guimenu><guimenuitem>Refresh CRLs</guimenuitem>
+-</menuchoice></link>, <link linkend="crls-clear-crl-cache"><menuchoice><guimenu>CRLs</guimenu>
++<menuchoice><guimenu>Tools</guimenu><guimenuitem>Refresh Certificates</guimenuitem> <!--???-->
++</menuchoice></link>, <link linkend="crls-clear-crl-cache"><menuchoice><guimenu>Tools</guimenu>
+ <guimenuitem>Clear CRL Cache</guimenuitem></menuchoice></link>, <link
+-linkend="crls-dump-crl-cache"><menuchoice><guimenu>CRLs</guimenu>
++linkend="crls-dump-crl-cache"><menuchoice><guimenu>Tools</guimenu>
+ <guimenuitem>Dump CRL Cache</guimenuitem></menuchoice></link>).</para>
+ 
+ </sect1>
+@@ -357,7 +338,8 @@
+ <variablelist>
+ 
+ <varlistentry id="file-new-key-pair">
+-<term><menuchoice><guimenu>File</guimenu><guimenuitem>New Key Pair...</guimenuitem></menuchoice></term>
++<term><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo></shortcut>
++<guimenu>File</guimenu><guimenuitem>New Certificate...</guimenuitem></menuchoice></term>
+ 
+ <listitem>
+ <para><action>Creates a new key pair (public and private)</action> and
+@@ -375,17 +357,39 @@
+ <guimenuitem>Import Certificates...</guimenuitem></menuchoice>.</para>
+ </listitem>
+ </varlistentry>
++<!-- missing menu item
++<varlistentry>
++<term><menuchoice><shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>I</keycap></keycombo></shortcut>
++<guimenu>File</guimenu><guimenuitem>Lookup Certificates on Server</guimenuitem></menuchoice></term>
++<listitem>
++<para>???</para>
++</listitem>
++</varlistentry>
++-->
++<varlistentry id="file-import-certificates">
++<term><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>I</keycap></keycombo></shortcut>
++<guimenu>File</guimenu><guimenuitem>Import Certificates...</guimenuitem></menuchoice></term>
+ 
++<listitem>
++<para><action>Imports certificates and/or secret keys from files into
++the local keybox.</action></para>
+ 
++<para>The format of the certificate file must be supported by
++&gpgsm;. Please refer to the &gpgsm; manual for a list of supported
++formats.</para>
++</listitem>
++</varlistentry>
++
+ <varlistentry id="file-export-certificates">
+-<term><menuchoice><guimenu>File</guimenu><guimenuitem>Export Certificates...</guimenuitem></menuchoice></term>
++<term><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo></shortcut>
++<guimenu>File</guimenu><guimenuitem>Export Certificates...</guimenuitem></menuchoice></term>
+ 
+ <listitem>
+ <para><action>Exports the selected certificates</action> into a file.</para>
+ 
+ <note><para>This exports only the public keys, even if the
+ secret key is available. Use <menuchoice><guimenu>File</guimenu><guimenuitem>Export 
+-Secret key...</guimenuitem></menuchoice> to export both
++Secret Key...</guimenuitem></menuchoice> to export both
+ public and secret keys into a file, but note that this is almost
+ always a bad idea.</para></note>
+ </listitem>
+@@ -393,7 +397,7 @@
+ 
+ 
+ <varlistentry id="file-export-secret-key">
+-<term><menuchoice><guimenu>File</guimenu><guimenuitem>Export Secret key...</guimenuitem></menuchoice></term>
++<term><menuchoice><guimenu>File</guimenu><guimenuitem>Export Secret Key...</guimenuitem></menuchoice></term>
+ 
+ <listitem>
+ <para><action>Exports both the public and the secret key to a
+@@ -406,22 +410,38 @@
+ among other things.</para></warning>
+ </listitem>
+ </varlistentry>
++<!--missing menu items
++<varlistentry>
++<term><menuchoice><shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>E</keycap></keycombo></shortcut>
++<guimenu>File</guimenu><guimenuitem>Export Certificates to Server...</guimenuitem></menuchoice></term>
++<listitem>
++<para>???</para>
++</listitem>
++</varlistentry>
+ 
+-
+-<varlistentry id="file-import-certificates">
+-<term><menuchoice><guimenu>File</guimenu><guimenuitem>Import Certificates...</guimenuitem></menuchoice></term>
+-
++<varlistentry>
++<term><menuchoice>
++<guimenu>File</guimenu><guimenuitem>Decrypt/Verify Files...</guimenuitem></menuchoice></term>
+ <listitem>
+-<para><action>Imports certificates and/or secret keys from files into
+-the local keybox.</action></para>
+-
+-<para>The format of the certificate file must be supported by
+-&gpgsm;. Please refer to the &gpgsm; manual for a list of supported
+-formats.</para>
++<para>???</para>
+ </listitem>
+ </varlistentry>
+-
+-
++<varlistentry>
++<term><menuchoice>
++<guimenu>File</guimenu><guimenuitem>Sign/Encrypt Files...</guimenuitem></menuchoice></term>
++<listitem>
++<para>???</para>
++</listitem>
++</varlistentry>
++<varlistentry>
++<term><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>W</keycap></keycombo></shortcut>
++<guimenu>File</guimenu><guimenuitem>Close...</guimenuitem></menuchoice></term>
++<listitem>
++<para>???</para>
++</listitem>
++</varlistentry>
++-->
++<!--not in 4.2
+ <varlistentry id="file-import-crls">
+ <term><menuchoice><guimenu>File</guimenu><guimenuitem>Import CRLs...</guimenuitem></menuchoice></term>
+ 
+@@ -447,8 +467,8 @@
+ </para>
+ </listitem>
+ </varlistentry>
++-->
+ 
+-
+ <varlistentry id="file-quit">
+ <term><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></shortcut>
+ <guimenu>File</guimenu><guimenuitem>Quit</guimenuitem></menuchoice></term>
+@@ -525,7 +545,7 @@
+ 
+ 
+ <varlistentry id="view-hierarchical-key-list">
+-<term><menuchoice><guimenu>View</guimenu><guimenuitem>Hierarchical Key List</guimenuitem></menuchoice></term>
++<term><menuchoice><guimenu>View</guimenu><guimenuitem>Hierarchical Certificate List</guimenuitem></menuchoice></term>
+ 
+ <listitem>
+ <para><action> Toggles between hierarchical and flat keylist mode.
+@@ -552,7 +572,7 @@
+ <listitem>
+ <para>(This function is only available when <link
+ linkend="view-hierarchical-key-list"><menuchoice><guimenu>View</guimenu>
+-<guimenuitem>Hierarchical Key List</guimenuitem></menuchoice></link> is on.)</para>
++<guimenuitem>Hierarchical Certificate List</guimenuitem></menuchoice></link> is on.)</para>
+ 
+ <para><action>Expands all list items in the certificate list
+ view,</action> &ie; makes all items visible.</para>
+@@ -565,8 +585,6 @@
+ </listitem>
+ </varlistentry>
+ 
+-
+-
+ <varlistentry id="view-collapse-all">
+ <term><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>,</keycap>
+ </keycombo></shortcut><guimenu>View</guimenu><guimenuitem>Collapse All</guimenuitem></menuchoice></term>
+@@ -574,7 +592,7 @@
+ <listitem>
+ <para>(This function is only available when <link
+ linkend="view-hierarchical-key-list"><menuchoice><guimenu>View</guimenu>
+-<guimenuitem>Hierarchical Key List</guimenuitem></menuchoice></link> is on.)</para>
++<guimenuitem>Hierarchical Certificate List</guimenuitem></menuchoice></link> is on.)</para>
+ 
+ <para><action>Collapses all list items in the certificate list
+ view,</action> &ie; hides all but the top-level items.</para>
+@@ -591,14 +609,14 @@
+ <sect1 id="menucertificates"><title><guimenu>Certificates</guimenu> Menu</title>
+ 
+ <variablelist>
+-
+-<varlistentry id="certificates-validate">
+-<term><menuchoice><shortcut><keycombo action="simul">&Shift;<keycap>F5</keycap></keycombo>
+-</shortcut><guimenu>Certificates</guimenu><guimenuitem>Validate</guimenuitem></menuchoice></term>
+-
++<!-- missing menu item
++<varlistentry id="certificates-certify">
++<term><menuchoice>
++<guimenu>Certificates</guimenu><guimenuitem>Certify Certificate...</guimenuitem></menuchoice></term>
+ <listitem>
+-<para><action>Validates selected (or all) keys.</action></para>
++<para><action>???</action></para>
+ 
++no longer in kde4
+ <para>This is similar to <link
+ linkend="view-redisplay"><menuchoice><shortcut><keycombo action="simul">
+ <keycap>F5</keycap></keycombo></shortcut><guimenu>View</guimenu>
+@@ -619,10 +637,9 @@
+ decryption).</para></warning>
+ </listitem>
+ </varlistentry>
+-
+-
+-
+-<varlistentry id="certificates-refresh-crls">
++-->
++<!--not in 4.2
++varlistentry id="certificates-refresh-crls">
+ <term><menuchoice><guimenu>Certificates</guimenu><guimenuitem>Refresh CRLs</guimenuitem></menuchoice></term>
+ 
+ <listitem>
+@@ -646,12 +663,42 @@
+ 
+ <para>Use this function scarcely.</para></warning>
+ </listitem>
++</varlistentry-->
++<!-- missing menu items
++<varlistentry>
++<term><menuchoice>
++<guimenu>Certificates</guimenu><guimenuitem>Change Ownertrust...</guimenuitem></menuchoice></term>
++<listitem>
++<para>???</para>
++</listitem>
+ </varlistentry>
+ 
++<varlistentry>
++<term><menuchoice>
++<guimenu>Certificates</guimenu><guimenuitem>Expire Date...</guimenuitem></menuchoice></term>
++<listitem>
++<para>???</para>
++</listitem>
++</varlistentry>
+ 
++<varlistentry>
++<term><menuchoice>
++<guimenu>Certificates</guimenu><guimenuitem>Change Passphrase...</guimenuitem></menuchoice></term>
++<listitem>
++<para>???</para>
++</listitem>
++</varlistentry>
+ 
++<varlistentry>
++<term><menuchoice>
++<guimenu>Certificates</guimenu><guimenuitem>Add User-ID...</guimenuitem></menuchoice></term>
++<listitem>
++<para>???</para>
++</listitem>
++</varlistentry>
++-->
+ <varlistentry id="certificates-delete">
+-<term><menuchoice><shortcut><keycombo action="simul"><keycap>Delete</keycap></keycombo></shortcut>
++<term><menuchoice><shortcut><keycombo action="simul"><keycap>Del</keycap></keycombo></shortcut>
+ <guimenu>Certificates</guimenu><guimenuitem>Delete</guimenuitem></menuchoice></term>
+ 
+ <listitem>
+@@ -669,40 +716,65 @@
+ </listitem>
+ </varlistentry>
+ 
++<varlistentry>
++<term><menuchoice><guimenu>Certificates</guimenu><guimenuitem>Dump Certificate</guimenuitem></menuchoice></term>
++<listitem>
++<para>Shows the detailed contents of the &gpgsm; CRL cache.</para>
++</listitem>
++</varlistentry>
+ 
+-
+-<varlistentry id="certificates-download">
++<!--not in 4.2
++varlistentry id="certificates-download">
+ <term><menuchoice><guimenu>Certificates</guimenu><guimenuitem>Download</guimenuitem></menuchoice></term>
+ 
+ <listitem>
+ <para><action>Downloads the selected certificate(s) from the LDAP to the local keybox.</action></para>
+ </listitem>
+-</varlistentry>
++</varlistentry-->
+ 
+ </variablelist>
+ 
+ </sect1>
+ 
++<sect1 id="menutools"><title><guimenu>Tools</guimenu> Menu</title>
+ 
++<variablelist>
+ 
+-<sect1 id="menucrls"><title><guimenu>CRLs</guimenu> Menu</title>
++<varlistentry id="tools-gnupg-log-viewer">
++<term><menuchoice><guimenu>Tools</guimenu><guimenuitem>GnuPG Log Viewer...</guimenuitem></menuchoice></term>
+ 
+-<variablelist>
++<listitem>
++<para><action>Starts <ulink url="help:/kwatchgnupg/index.html">&kwatchgnupg;</ulink></action>, a tool to present the debug output of GnuPG application. If signing, encryption, or verification mysteriously stop working, you might find out why by looking at the log.</para>
++</listitem>
++</varlistentry>
+ 
++<varlistentry id="certificates-refresh-crls">
++<term><menuchoice><guimenu>Tools</guimenu><guimenuitem>Refresh X.509 or OpenPGP Certificates</guimenuitem></menuchoice></term>
++
++<listitem>
++<para>Refreshing X.509 or OpenPGP certificates implies downloading all certificates
++and CRLs, to check if any of them have been revoked in the meantime.</para>
++<para>This can put a severe strain on your own as well as other
++people's network connections, and can take up to an hour or more to
++complete, depending on your network connection, and the number of
++certificates to check.</para>
++</listitem>
++</varlistentry>
++
+ <varlistentry id="crls-clear-crl-cache">
+-<term><menuchoice><guimenu>CRLs</guimenu><guimenuitem>Clear CRL Cache</guimenuitem></menuchoice></term>
++<term><menuchoice><guimenu>Tools</guimenu><guimenuitem>Clear CRL Cache</guimenuitem></menuchoice></term>
+ 
+ <listitem>
+ <para><action>Clears the &gpgsm; CRL cache.</action></para>
+ 
+ <para>You probably never need this. You can force a refresh of the CRL
+ cache by selecting all certificates and using <link linkend="certificates-refresh-crls"><menuchoice>
+-<guimenu>Certificates</guimenu><guimenuitem>Refresh CRLs</guimenuitem></menuchoice></link> instead.</para>
++<guimenu>Tools</guimenu><guimenuitem>Refresh Certificates</guimenuitem></menuchoice></link> instead.</para>
+ </listitem>
+ </varlistentry>
+ 
+ <varlistentry id="crls-dump-crl-cache">
+-<term><menuchoice><guimenu>CRLs</guimenu><guimenuitem>Dump CRL Cache</guimenuitem></menuchoice></term>
++<term><menuchoice><guimenu>Tools</guimenu><guimenuitem>Dump CRL Cache</guimenuitem></menuchoice></term>
+ 
+ <listitem>
+ <para><action>Shows the detailed contents of the &gpgsm; CRL
+@@ -710,22 +782,20 @@
+ </listitem>
+ </varlistentry>
+ 
+-</variablelist>
++<varlistentry id="settings-configure-gpgme-backend">
++<term><menuchoice><guimenu>Tools</guimenu><guimenuitem>Configure GnuPG Backend...</guimenuitem></menuchoice></term>
+ 
+-</sect1>
++<listitem>
++<para><action>Opens a dialog that allows you to configure every aspect of
++&gpgsm; and other backend modules.</action></para>
+ 
+-<sect1 id="menutools"><title><guimenu>Tools</guimenu> Menu</title>
+-
+-<variablelist>
+-
+-<varlistentry id="tools-gnupg-log-viewer">
+-<term><menuchoice><guimenu>Tools</guimenu><guimenuitem>GnuPG Log Viewer...</guimenuitem></menuchoice></term>
+-
+-<listitem>
+-<para><action>Starts <ulink url="help:/kwatchgnupg/index.html">&kwatchgnupg;</ulink></action></para>
++<para>This dialog is dynamically built from the output of the
++&gpgconf; utility and may thus change when backend modules are
++updated.</para>
+ </listitem>
+ </varlistentry>
+ 
++
+ </variablelist>
+ 
+ </sect1>
+@@ -733,20 +803,23 @@
+ <sect1 id="menusettings"><title><guimenu>Settings</guimenu> Menu</title>
+ 
+ <variablelist>
++<!-- missing items
++<varlistentry>
++<term><menuchoice>
++<guimenu>Settings</guimenu><guimenuitem>Perform Selftest</guimenuitem></menuchoice></term>
++<listitem>
++<para>???</para>
++</listitem>
++</varlistentry>
+ 
+-<varlistentry id="settings-configure-gpgme-backend">
+-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure GpgME Backend...</guimenuitem></menuchoice></term>
+-
++<varlistentry>
++<term><menuchoice>
++<guimenu>Settings</guimenu><guisubmenu>Toolbars</guisubmenu></menuchoice></term>
+ <listitem>
+-<para><action>Opens a dialog that allows you to configure every aspect of
+-&gpgsm; and other backend modules.</action></para>
+-
+-<para>This dialog is dynamically built from the output of the
+-&gpgconf; utility and may thus change when backend modules are
+-updated.</para>
++<para>???</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry id="settings-show-statusbar">
+ <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Show Statusbar</guimenuitem></menuchoice></term>
+ 
+@@ -754,7 +827,14 @@
+ <para><action>Toggles the visibility of the bottom status bar.</action></para>
+ </listitem>
+ </varlistentry>
+-
++<!-- missing item
++<varlistentry>
++<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Toolbars...</guimenuitem></menuchoice></term>
++<listitem>
++<para>???</para>
++</listitem>
++</varlistentry>
++-->
+ <varlistentry id="settings-configure-shortcuts">
+ <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Shortcuts...</guimenuitem></menuchoice></term>
+ 
+@@ -779,9 +859,15 @@
+ 
+ </sect1>
+ 
++<sect1 id="menuwindow"><title><guimenu>Window</guimenu> Menu</title>
++<para>The <guimenu>Window</guimenu> menu allows you to manage the tabs.
++Using the items in this menu you can rename a tab, add a new tab, duplicate the current tab, close the current tab, and move the current tab to the left or right.</para>
++
++<para>By clicking with the &RMB; click on a tab you open a context menu, where you can also select the same actions.</para>
++</sect1>
++
+ <sect1 id="menuhelp"><title><guimenu>Help</guimenu> Menu</title>
+ 
+-
+ <para>The <guimenu>Help</guimenu> menu contains the standard &kde;
+ help menu.</para>
+ 
+@@ -800,28 +886,29 @@
+ 
+ <variablelist>
+ 
+-<varlistentry id="commandline-option-external">
+-<term>&commandline-option-external;</term>
++<varlistentry>
++<term><option>--external</option></term>
++<listitem>
++<para>Run UI server only, hide main window</para>
++</listitem>
++</varlistentry>
+ 
++<varlistentry>
++<term><option>-p</option> <option>--openpgp</option></term>
+ <listitem>
+-<para><action>Specifies that &commandline-option-query; shall search
+-remotely instead of in the local keybox.</action></para>
++<para>Use OpenPGP for the following operation</para>
+ </listitem>
+ </varlistentry>
+ 
+-<varlistentry id="commandline-option-query">
+-<term>&commandline-option-query;</term>
+-
++<varlistentry>
++<term><option>-c</option> <option>--cms</option></term>
+ <listitem>
+-<para><action>Specifies that &kleopatra; shall start with the given
+-query string instead of listing the complete local
+-keybox.</action></para>
++<para>Use CMS (X.509, S/MIME) for the following operation</para>
+ </listitem>
+ </varlistentry>
+ 
+ <varlistentry id="commandline-option-import-certificate">
+-<term>&commandline-option-import-certificate;</term>
+-
++<term><option>-i</option> <option>--import-certificate</option></term>
+ <listitem>
+ <para><action>Specifies a file or &URL; from which to import
+ certificates (or secret keys) from.</action></para>
+@@ -832,6 +919,48 @@
+ </listitem>
+ </varlistentry>
+ 
++<varlistentry>
++<term><option>-e</option> <option>--encrypt</option></term>
++<listitem>
++<para>Encrypt file(s)</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term><option>-s</option> <option>--sign</option></term>
++<listitem>
++<para>Sign file(s)</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term><option>-E</option> <option>--encrypt-sign</option></term>
++<listitem>
++<para>Encrypt and/or sign file(s)</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term><option>-d</option> <option>--decrypt</option></term>
++<listitem>
++<para>Decrypt file(s)</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term><option>-V</option> <option>--verify</option></term>
++<listitem>
++<para>Verify file/signature</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term><option>-D</option> <option>--decrypt-verify</option></term>
++<listitem>
++<para>Decrypt and/or verify file(s)</para>
++</listitem>
++</varlistentry>
++
+ </variablelist>
+ 
+ </chapter>
+@@ -850,30 +979,29 @@
+ certificate searches. You can also configure their order, as well as
+ some selected LDAP-related settings from the dynamic backend
+ configuration dialog, available via <link
+-linkend="settings-configure-gpgme-backend"><menuchoice><guimenu>Settings</guimenu>
+-<guimenuitem>Configure GpgME Backend...</guimenuitem></menuchoice></link>.</para>
++linkend="settings-configure-gpgme-backend"><menuchoice><guimenu>Tools</guimenu>
++<guimenuitem>Configure GnuPG Backend...</guimenuitem></menuchoice></link>.</para>
+ 
+-<para>To add a new server, click on the <guilabel>Add
+-Service...</guilabel> button. In the dialog that appears, you can set
+-the <guilabel>Server name</guilabel>, the <guilabel>Port</guilabel>
++<para>To add a new server, click on the <guilabel>New</guilabel> button. 
++Then you can set
++the <guilabel>Server Name</guilabel>, the <guilabel>Server Port</guilabel>
+ (preset to the default LDAP port), the <guilabel>Base &dn;</guilabel>
+ (sometimes referred to as the search root or search base), and the
+-usual <guilabel>User name</guilabel> and
++usual <guilabel>User Name</guilabel> and
+ <guilabel>Password</guilabel>, both of which are only needed if the
+-server requires authentication. Clicking <guilabel>OK</guilabel> adds
+-the server details to the list of servers, while
+-<guilabel>Cancel</guilabel> dismisses the input.</para>
++server requires authentication.</para>
+ 
+ <para>To remove a server from the search list, select it in the list,
+-then press the <guilabel>Remove Service</guilabel> button.</para>
++then press the <guilabel>Delete</guilabel> button.</para>
+ 
++<!-- not in 4.2
+ <para>To change the relative search order of servers, select one of
+ them and move it up or down with the arrow buttons right next to the
+ list.</para>
+-
++-->
+ <para>To set the LDAP timeout, &ie; the maximum time the backend will
+ wait for a server to respond, simply use the corresponding input field
+-labelled <guilabel>LDAP timeout</guilabel>.</para>
++labeled <guilabel>LDAP timeout (minutes:seconds)</guilabel>.</para>
+ 
+ <para>If one of your servers has a large database, so that even
+ reasonable searches like <userinput>Smith</userinput> hit the
+@@ -938,7 +1066,7 @@
+ 
+ </sect1>
+ 
+-<sect1 id="configuration-dn-order"><title>Configuring the <guilabel>&dn;Attribute Order</guilabel></title>
++<sect1 id="configuration-dn-order"><title>Configuring the <guilabel>&dn; Attribute Order</guilabel></title>
+ 
+ <para>Although &dn;s are hierarchical, the order of the individual
+ components (called relative &dn;s (RDNs), or &dn; attributes) is not
+@@ -1097,7 +1225,7 @@
+ 	linkend="configuration-appearance">visual appearance</link> of
+ 	keys based on a concept called <guilabel>Key
+ 	Categories</guilabel>. <guilabel>Key Categories</guilabel> are
+-	also used to filter the list of certificates.This section
++	also used to filter the list of certificates. This section
+ 	describes how you can edit the available categories and add
+ 	new ones.
+       </para>
+@@ -1303,9 +1431,7 @@
+ 	      <entry><varname>was-validated</varname></entry>
+ 	      <entry>boolean</entry>
+ 	      <entry>
+-		the key has been validated (see <link
+-		linkend="certificates-validate"><menuchoice><shortcut><keycombo action="simul">&Shift;<keycap>F5</keycap></keycombo></shortcut>
+-		<guimenu>Certificates</guimenu><guimenuitem>Validate</guimenuitem></menuchoice></link>).
++		the key has been validated.
+ 	      </entry>
+ 	    </row>
+ 	    <row>
+@@ -1403,7 +1529,7 @@
+         by an exclamation point (<literal>!</literal>), indicating negation. The tokens act
+         in order on an internal list of contexts, which starts out
+         empty. This is best explained by an example: <literal>any
+-        !apperance</literal> is the same as
++        !appearance</literal> is the same as
+         <literal>filtering</literal>, and <literal>appearance
+         !appearance</literal> is producing the empty set, as is
+         <literal>!any</literal>. However, the last two will be
+@@ -1424,7 +1550,7 @@
+         wins over less specific ones. If two filters have the same
+         specificity, the one that comes first in the config file
+         wins. A filter's specificity is proportional to the number of
+-        critera it contains.
++        criteria it contains.
+       </para>
+ 
+       <example>
+Index: doc/ktimetracker/index.docbook
+===================================================================
+--- doc/ktimetracker/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ doc/ktimetracker/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -99,12 +99,13 @@
+ <sect1 id="starting">
+ <title>Starting &karm;</title>
+ 
+-<para>Type <command>karm</command> at a command prompt or select
+-<guimenuitem>Personal Time Tracker</guimenuitem> from the
+-<guisubmenu>Utilities</guisubmenu> group in the <guimenu>KDE start
++<para>Type <command>ktimetracker</command> at a command prompt or select
++<guimenuitem>Personal Time Tracker</guimenuitem> from the <menuchoice>
++<guimenu>Applications</guimenu><guisubmenu>Utilities</guisubmenu> 
++</menuchoice> group in the <guimenu>KDE start
+ menu</guimenu>. The standard &Qt; and &kde; command options are
+ available, and can be listed by entering
+-<userinput><command>karm</command> <option>--help</option></userinput>
++<userinput><command>ktimetracker</command> <option>--help</option></userinput>
+ at the command line.</para>
+ 
+ <para>&karm; provides an additional command option that allows you to enter
+@@ -921,7 +922,7 @@
+ <term>
+ <menuchoice>
+ <guimenu>Settings</guimenu>
+-<guimenuitem>Configure KArm</guimenuitem>
++<guimenuitem>Configure &karm;</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem><para><action>Opens</action> a dialog to allow the user to
+@@ -997,7 +998,7 @@
+ 
+ <para>Contributors (in alphabetical order)</para>
+ <itemizedlist>
+-<listitem><para>Allen Winter <email>winterz@verizon.net</email></para></listitem>
++<listitem><para>Allen Winter <email>winter@kde.org</email></para></listitem>
+ <listitem><para>&David.Faure; &David.Faure.mail;</para></listitem>
+ <listitem><para>&Espen.Sand; <email>espen@kde.org</email></para></listitem>
+ <listitem><para>Gioele Barabucci <email>gioele@gioelebarabucci.com</email></para></listitem>
+Index: doc/kjots/index.docbook
+===================================================================
+--- doc/kjots/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ doc/kjots/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -155,12 +155,12 @@
+ <guimenuitem>Delete Page</guimenuitem></menuchoice>.</para>
+ 
+ <tip><para>If you need to insert the current date and time while you are 
+-writing a note, you can use  <keycombo action="simul">&Ctrl;<keycap>I
++writing a note, you can use  <keycombo action="simul">&Ctrl;&Shift;<keycap>I
+ </keycap></keycombo>.</para></tip>
+ 
+ <para>So that you can get to the page you want to see, pages can (and
+ should) be given a name. This can be done in the way you are used to: 
+-select the page you want to rename, wait a second and click it once more. 
++double click the page you want to rename.
+ You are then able to rename the page. Of course there is also a keyboard 
+ shortcut, you can use that at any time while writing a note. The shortcut 
+ is: <keycombo action="simul">&Ctrl;<keycap>M</keycap></keycombo>.</para>
+Index: doc/knode/using-morefeatures.docbook
+===================================================================
+--- doc/knode/using-morefeatures.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ doc/knode/using-morefeatures.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -644,7 +644,7 @@
+ the rules which are shown &mdash; you have the choice whether to show all
+ rules or only the rules for a specific <glossterm>newsgroup</glossterm>.</para> 
+ 
+-<para>If you chose a rule-name in the list you the rule will be displayed
++<para>If you choose a rule-name in the list the rule will be displayed
+ on the right-hand side; now you can edit the rule. At the top you can change
+ the name of the rule and set the newsgroups to which this rule applies.
+ You can choose one or
+@@ -725,7 +725,7 @@
+ raise or lower the score, by the configured value, for articles to which
+ this rule applies.  &knode; can also show you a little message when finding
+ such an article or colorize the header in the article list; for example, you could make
+-interesting articles scraeming pink so you would notice them very
++interesting articles screaming pink so you would notice them very
+ quickly.</para> 
+ 
+ <para>When leaving the editor, or when the 
+Index: doc/knode/using-firststart.docbook
+===================================================================
+--- doc/knode/using-firststart.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ doc/knode/using-firststart.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -246,7 +246,7 @@
+ <para>If this option is activated, the signature file is not handled
+ as a text file, but as a program. The signature file will be started
+ as a program and the output will be used as a signature. Through that
+-you'll be able to chose a signature by accident or to use fortune to
++you'll be able to choose a signature by accident or to use fortune to
+ generate a cool slogan every time.</para>
+ 
+ </sect3>
+@@ -825,7 +825,7 @@
+ it as read.</para>
+ 
+ <para>If <guilabel>Go to next unread thread</guilabel> is
+-checked, &knode; automatically shows the next thread if you mark the
++checked, &knode; automatically shows the next thread if you mark
+ the previous thread as read.</para>
+ 
+ </sect3>
+@@ -942,7 +942,7 @@
+ 
+ <para>The <guibutton>Down</guibutton> button does the opposite
+ action: select the filter you just shifted one up and
+-press<guibutton>Down</guibutton> until it reaches its old
++press <guibutton>Down</guibutton> until it reaches its old
+ position.</para>
+ 
+ <para>With the two buttons <guibutton>Add Separator</guibutton> and
+Index: doc/knode/using-subscribing.docbook
+===================================================================
+--- doc/knode/using-subscribing.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ doc/knode/using-subscribing.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -184,7 +184,7 @@
+ </tip> 
+ 
+ <para>Unfortunately there is no guarantee that your newsserver is
+-providing all available newsgroups: many newsserver refuse groups
++providing all available newsgroups: many newsservers refuse groups
+ publishing binary attachments; other groups are only available from
+ special servers. &knode; provides you the possibility to use more than
+ one news-server if you want to access alternative servers providing
+@@ -446,7 +446,7 @@
+ <varlistentry> 
+ <term><guilabel>From</guilabel></term> 
+ <listitem> 
+-<para>The <guilabel>From</guilabel> column shows the author, or their
++<para>The <guilabel>From</guilabel> column shows the author, or his
+ e-mail address if the author didn't give a name. You can configure
+ your settings in
+ <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+@@ -578,7 +578,7 @@
+ <para>You can navigate in articles, display an article and open or
+ close threads with your mouse or keyboard.</para> 
+ 
+-<para>When you select an article with your mouse its entry in the the
++<para>When you select an article with your mouse its entry in the
+ article view gets colored; at the same time the header and body of
+ this article appear in in the article window. If you want to read
+ another article you can use the mouse to select it, or you can use
+Index: doc/kalarm/index.docbook
+===================================================================
+--- doc/kalarm/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ doc/kalarm/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -261,20 +261,10 @@
+ </listitem>
+ 
+ <listitem>
+-<para>Click the <mousebutton>Middle</mousebutton> mouse button on the
+-system tray icon.</para>
+-</listitem>
+-
+-<listitem>
+ <para><mousebutton>Right</mousebutton> click in the alarm list and
+ choose <menuchoice><guimenuitem>New</guimenuitem></menuchoice> from
+ the context menu.</para>
+ </listitem>
+-
+-<listitem>
+-<para>Double click on empty space below the last entry in the alarm
+-list.</para>
+-</listitem>
+ </itemizedlist>
+ 
+ <para>Alternatively, you can create new alarms preconfigured from
+@@ -423,32 +413,6 @@
+ </sect2>
+ 
+ <sect2>
+-<title>Viewing an Alarm</title>
+-
+-<para>To view an existing alarm without the ability to modify it, do
+-one of the following:</para>
+-
+-<itemizedlist>
+-<listitem>
+-<para>Select it by clicking on its entry in the alarm list. Then choose
+-<menuchoice>
+-<guimenu>Actions</guimenu><guimenuitem>View</guimenuitem>
+-</menuchoice>.</para>
+-</listitem>
+-<listitem>
+-<para><mousebutton>Right</mousebutton> click on its entry in the alarm
+-list and choose
+-<menuchoice><guimenuitem>View</guimenuitem></menuchoice>
+-from the context menu.</para>
+-</listitem>
+-</itemizedlist>
+-
+-<para>This displays the <link linkend="alarm-edit-dlg">Alarm Edit
+-dialog</link> in read-only mode.</para>
+-
+-</sect2>
+-
+-<sect2>
+ <title>Acknowledging an Alarm</title>
+ 
+ <para>See <link linkend="message-window">Alarm Message Window</link>
+@@ -1745,7 +1709,7 @@
+ when the message is to be redisplayed, or select <guilabel>Defer for
+ time interval</guilabel> to enter how long after now (in hours and
+ minutes) the message should be redisplayed. Then click
+-<guibutton>Defer</guibutton> to defer the alarm message and close its
++<guibutton>OK</guibutton> to defer the alarm message and close its
+ window.</para>
+ 
+ <note><para>The time the alarm is deferred to must be earlier than its
+@@ -1848,8 +1812,7 @@
+ <variablelist>
+ <varlistentry>
+ <term><menuchoice><guimenuitem>Enable Alarms</guimenuitem></menuchoice></term>
+-<listitem><para><action>Enables monitoring of alarms. This option
+-only appears if alarms are currently disabled.</action></para>
++<listitem><para><action>Enables or disables monitoring of alarms.</action></para>
+ <para>See
+ <link linkend="enable-disable">Enabling and Disabling Alarms</link>
+ for details.</para>
+@@ -1857,16 +1820,6 @@
+ </varlistentry>
+ 
+ <varlistentry>
+-<term><menuchoice><guimenuitem>Disable Alarms</guimenuitem></menuchoice></term>
+-<listitem><para><action>Disables monitoring of alarms. This option
+-only appears if alarms are currently enabled.</action></para>
+-<para>See
+-<link linkend="enable-disable">Enabling and Disabling Alarms</link>
+-for details.</para>
+-</listitem>
+-</varlistentry>
+-
+-<varlistentry>
+ <term><menuchoice><guimenuitem>New Alarm</guimenuitem></menuchoice></term>
+ <listitem><para><action>After you select the alarm type from the list
+ which appears, opens the Alarm Edit dialog to create a new
+@@ -2029,14 +1982,14 @@
+ 
+ <itemizedlist>
+ <listitem>
+-<para>Select <menuchoice><guimenu>Actions</guimenu>
+-<guimenuitem>Disable Alarms</guimenuitem></menuchoice>.</para>
++<para>Unselect <menuchoice><guimenu>Actions</guimenu>
++<guimenuitem>Enable Alarms</guimenuitem></menuchoice>.</para>
+ </listitem>
+ 
+ <listitem>
+ <para><mousebutton>Right</mousebutton> click on the system tray icon
+-and choose
+-<menuchoice><guimenuitem>Disable Alarms</guimenuitem></menuchoice>
++and uncheck
++<menuchoice><guimenuitem>Enable Alarms</guimenuitem></menuchoice>
+ from the context menu.</para>
+ </listitem>
+ 
+Index: doc/kaddressbook/index.docbook
+===================================================================
+--- doc/kaddressbook/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ doc/kaddressbook/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -544,8 +544,8 @@
+ <para>The Photo will be shown in the contact preview and in the Icon view mode. However the Logo picture will only be shown in Icon view and only if there's no photo available.</para>
+ <para>To reset a photo or logo simply click on it with the &RMB; and select <guilabel>Reset</guilabel>.</para>
+ </sect3>
+-<sect3 id="managing-contacts-misc-free-busy-informations">
+-<title>Location of Free/Busy informations</title>
++<sect3 id="managing-contacts-misc-free-busy-information">
++<title>Location of Free/Busy information</title>
+ <para>Here you can select a path to a contact's Free/Busy information, which are used when you add him to an event in &korganizer; or &kontact;'s calendar view.</para>
+ </sect3>
+ </sect2>
+@@ -813,7 +813,7 @@
+ <varlistentry>
+ <term><guilabel>CSV List</guilabel></term>
+ <listitem><para>CSV (comma separated value) is a format that is used
+-by many (address book) applications, it stores the contact informations in a plaintext field separated by commas. This makes CSV very flexible and good for interaction with scripts.</para></listitem>
++by many (address book) applications, it stores the contact information in a plaintext field separated by commas. This makes CSV very flexible and good for interaction with scripts.</para></listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+Index: doc/korganizer/index.docbook
+===================================================================
+--- doc/korganizer/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ doc/korganizer/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -454,7 +454,7 @@
+ </procedure>
+ 
+ <para>Alternatively, you can configure the &korganizer; resources (plus all
+-other &kde; resources), in the &kcontrolcenter;, using the <guilabel>&kde;
++other &kde; resources), in the &systemsettings;, using the <guilabel>&kde;
+ Resources</guilabel> configuration module.</para>
+ 
+ <para>Among the existing resources, you can find:</para>
+@@ -512,7 +512,7 @@
+ <listitem><para>
+ If you have access to a server that supports the
+ <ulink url="http://www.groupdav.org">GroupDav protocol</ulink>, add this
+-resource in order to be able to to save (and load) events<!--, journals, free/busy information?--> and to-dos
++resource in order to be able to save (and load) events<!--, journals, free/busy information?--> and to-dos
+ to the server. To add the resource, you will need to know the server &URL;, your
+ user name and your password. The GroupDav protocol supports the storage of 
+ contacts, so you may want to add and configure the &kaddressbook;
+@@ -530,7 +530,7 @@
+ <listitem><para>
+ If you have access to a
+ <ulink url="http://www.novell.com/products/groupwise">Novell GroupWise Server</ulink>
+-(version 6.5 or later), add this resource in order to be able to to save (and load)
++(version 6.5 or later), add this resource in order to be able to save (and load)
+ events, free/busy information <!--,journals ?-->and to-dos to the server. To add the resource, you will
+ need to know the server &URL;, your user name and your password. There is
+ support for storage of contacts, so you may want to configure &kaddressbook;
+@@ -550,7 +550,7 @@
+ <term><guilabel>Calendar on IMAP Server via &kmail;</guilabel></term>
+ <listitem><para>
+ If you have access to a server that shares calendar data via IMAP, add this
+-resource in order to be able to to save (and load) events, to-dos, free/busy
++resource in order to be able to save (and load) events, to-dos, free/busy
+ information and journal entries to the IMAP server. To enable IMAP access, you
+ will need to configure &kmail; first, then add the &korganizer; resource.
+ Also, since you are using &kmail; to contact the server, &korganizer; will
+@@ -615,7 +615,7 @@
+ <listitem><para>
+ If you have access to a
+ <ulink url="http://www.microsoft.com/exchange">Exchange 2000 Server</ulink>,
+-add this resource in order to be able to to save (and load)
++add this resource in order to be able to save (and load)
+ events FIXME:,journals, free/busy information and to-dos? to the server. To add the resource, you will
+ need to know the server &URL;, FIXME:port? your user name and your password. There
+ is support for (read only) contacts, so you may want to configure &kaddressbook;
+@@ -704,13 +704,13 @@
+ <term><guilabel>SUSE &Linux; OpenExchange Server</guilabel></term>
+ <listitem><para>
+ If you have access to a
+-<ulink url="http://www.novell.com/products/groupwise">SUSE &Linux; OpenExchange
+-Server</ulink>, version 4.1, add this resource in order to be able to to save
++<ulink url="http://www.novell.com/coolsolutions/openexchange/">SUSE &Linux; OpenExchange
++Server</ulink>, version 4.1, add this resource in order to be able to save
+ (and load) events, free/busy information <!--,journals ?-->and to-dos to the server. To add the
+ resource, you will need to know the server &URL;, your user name and your
+ password. There is support for storage of contacts, so you may want to configure
+ &kaddressbook; resource.</para>
+-<para>The most practical way to configure the access to a GroupWise server is
++<para>The most practical way to configure the access to an OpenExchange server is
+ to use the <application>sloxwizard</application> wizard. You can start it
+ from the command line prompt:
+ 
+@@ -728,7 +728,7 @@
+ <listitem><para>
+ If you have access to a
+ <ulink url="http://www.egroupware.org">eGroupware
+-Server</ulink>, version 1.0, add this resource in order to be able to to save
++Server</ulink>, version 1.0, add this resource in order to be able to save
+ (and load) events, free/busy information <!--,journals ?-->and to-dos to the server. To add the
+ resource, you will need to know the server &URL;, your user name and your
+ password. There is support for storage of contacts, so you may want to configure
+@@ -1060,7 +1060,7 @@
+ times. Hovering the mouse over an calendar item will bring up a tooltip
+ with the item detailed information. To make &korganizer; show a red line
+ marking the current-time on the current day (the Marcus Bains line),
+-check the <guilabel>Show current-time (Marcus Bains Line)</guilabel> box in the
++check the <guilabel>Show current-time (Marcus Bains) line</guilabel> box in the
+ <link linkend="config-main-views">&korganizer; view
+ configuration</link>.</para>
+ 
+@@ -1334,7 +1334,7 @@
+ <para>The <menuchoice><guimenu>View</guimenu>
+ <guisubmenu>Filter</guisubmenu></menuchoice> submenu and the filter toolbar drop
+ down offer access to all available filters  created using
+-the <link linkend="menu-settings-edit-filters"><guilabel>Edit
++the <link linkend="menu-settings-edit-filters"><guilabel>Edit Calendar 
+ Filters</guilabel></link> dialog. To toggle the display of the filters toolbar
+ on and off, choose the <menuchoice><guimenu>Settings</guimenu>
+ <guisubmenu>Toolbars</guisubmenu><guimenuitem>Filter toolbar</guimenuitem></menuchoice>.
+@@ -1429,7 +1429,7 @@
+ 
+ <para>This is a thorough description of the individual event window fields and
+ widgets. Not all fields have to be filled in; some can be left empty. Read the
+-<link linkend="entering-data-required-fields">Required fields section</link>
++<link linkend="entering-data-required-fields">Required fields</link> section 
+ for detailed information. And if you prefer to learn by example, there's one
+ in the <link linkend="examples-entering-event">Entering event</link> section.
+ </para>
+@@ -1491,7 +1491,7 @@
+ reminded, or click the <guibutton>Advanced</guibutton> button to open the
+ <guilabel>Edit Reminders</guilabel> dialog. Using this dialog, you can set
+ repeating intervals for your reminders, and create special reminders that play
+-sounds, run programs, or send emails.</para>
++sounds, or run programs.</para>
+ 
+ <!--Click the musical <guiicon>Note</guiicon> symbol to choose the
+ alarm sound. Click the <guiicon>Gear</guiicon> icon to browse for a
+@@ -1502,7 +1502,7 @@
+ <term><guilabel>Show Time As:</guilabel></term>
+ <listitem><para>The duration of the event may be shown as Busy or Free in your
+ schedule. Choose it from the <guilabel>Show Time As</guilabel>
+-menu.</para></listitem>
++drop down box.</para></listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+@@ -1520,7 +1520,7 @@
+ <term><guilabel>Select Categories</guilabel></term>
+ <listitem><para>You can assign several
+ <link linkend="categories-view">categories</link> to a calendar item. Click the
+-<guilabel>Select Categories</guilabel> button to open the
++<guilabel>Select</guilabel> button to open the
+ <guilabel>Select Categories</guilabel> dialog. Check the category boxes to
+ assign suitable categories to the event. You can also add a new category, modify
+ a category or delete a category by pressing the button
+@@ -1552,7 +1552,7 @@
+ 
+ </variablelist>
+ 
+-<para>When you want to confirm, call off or revert the entered data, choose
++<para>When you want to confirm, apply or call off the entered data, choose
+ among the <link linkend="reference-action-buttons">Action Buttons</link>,
+ <guibutton>OK</guibutton>, <guibutton>Apply</guibutton> and
+ <guibutton>Cancel</guibutton>.</para>
+@@ -1629,7 +1629,7 @@
+ <para>This is similar to Monthly.  You need to choose whether or not you
+ are indicating a calendar day of the year (&eg;, the 250th day of the
+ year) - <guilabel>Recur on day <replaceable>#</replaceable> of the
+-year</guilabel>, in in a specific week on a specific day of the week of a month
++year</guilabel>, in a specific week on a specific day of the week of a month
+ (&eg;, the 2nd Tuesday of March), or the day of the month in a
+ particular month of the year - <guilabel>Recur on day <replaceable>#</replaceable>
+ of the <replaceable>month</replaceable></guilabel>.  By default, &korganizer;
+@@ -1695,9 +1695,9 @@
+ identity can be set in the <guilabel>Personal</guilabel> section of the
+ &korganizer; configuration, other identities in the <guilabel>Security &amp;
+ Privacy</guilabel>-&gt;<guilabel>Password &amp; User Account</guilabel> section
+-of the &kcontrolcenter;. In addition, identities are gathered from your &kmail;
++of the &systemsettings;. In addition, identities are gathered from your &kmail;
+ settings and from your address book. If you choose to set it globally for &kde;
+-in the &kcontrolcenter;, be sure to check the <guilabel>Use email settings from
++in the &systemsettings;, be sure to check the <guilabel>Use email settings from
+ Control Center</guilabel>' box in the <guilabel>Personal</guilabel> section of
+ the &korganizer; configuration.</para></listitem>
+ </varlistentry>
+@@ -1953,7 +1953,7 @@
+ <varlistentry>
+ <term><guilabel>Priority</guilabel></term>
+ <listitem><para>Assign a priority to your to-do.  This drop down menu offers
+-priorities from one to five, one being the highest.  Initially to-dos are set
++priorities from one to nine, one being the highest.  Initially to-dos are set
+ to priority five (medium).</para></listitem>
+ </varlistentry>
+ 
+@@ -1969,7 +1969,7 @@
+ reminded, or click the <guibutton>Advanced</guibutton> button to open the
+ <guilabel>Edit Reminders</guilabel> dialog. Using this dialog, you can set
+ repeating intervals for your reminders, and create special reminders that play
+-sounds, run programs, or send emails.</para>
++sounds, or run programs.</para>
+ 
+ <!--Click the musical <guiicon>Note</guiicon> symbol to choose the
+ alarm sound. Click the <guiicon>Gear</guiicon> icon to browse for a
+@@ -2469,13 +2469,13 @@
+ &korganizer; window.</para>
+ 
+ <para>Localization information like date and time formats can be
+-configured from &kcontrolcenter; within the <menuchoice>
++configured from &systemsettings; within the <menuchoice>
+ <guisubmenu>Regional &amp; Accessibility</guisubmenu> <guimenuitem>Country/Region &amp;
+ Language</guimenuitem> </menuchoice> module.  This control module can be
+ accessed from within &korganizer;: just choose the <menuchoice><guimenu>
+ Settings</guimenu><guimenuitem>Configure Date &amp;
+ Time...</guimenuitem></menuchoice> menu item.  &korganizer; has to be restarted
+-for changes done in &kcontrolcenter; to take effect.</para>
++for changes done in &systemsettings; to take effect.</para>
+ 
+ <para>To configure where &korganizer; stores and retrieves calendar events,
+ journal entries and to-dos, (in local files, groupware servers, journal entries as blogs,
+@@ -2499,7 +2499,7 @@
+ <varlistentry>
+ <term><guilabel>Use email settings from control center</guilabel></term>
+ <listitem><para>Check this box to use your name and email address as set in
+-&kcontrolcenter; (<menuchoice><guimenuitem>Security &amp; Privacy</guimenuitem>
++&systemsettings; (<menuchoice><guimenuitem>Security &amp; Privacy</guimenuitem>
+ <guimenuitem>Password &amp; User Account</guimenuitem></menuchoice>).</para>
+ </listitem>
+ </varlistentry>
+@@ -2509,7 +2509,7 @@
+ <listitem><para><guilabel>Full name</guilabel> is initially set to
+ <quote>Anonymous</quote> with an email address of
+ <quote>nobody@nowhere</quote>. You can change your name by directly
+-entering it here or you can use your Email Settings from &kcontrolcenter; (see
++entering it here or you can use your Email Settings from &systemsettings; (see
+ above).  This name will be displayed by default as
+ <guilabel>Organizer</guilabel> in to-dos and Events.</para></listitem> 
+ </varlistentry>
+@@ -2649,10 +2649,10 @@
+ <variablelist>
+ 
+ <varlistentry>
+-<term><guilabel>Enable tooltips displaying summary of events</guilabel></term>
++<term><guilabel>Enable tooltips for displaying summaries</guilabel></term>
+ <listitem><para>If your summary for an event is longer than would fit in the
+-current View, the remaining characters are not displayed. Check <guilabel>Enable
+-tooltips displaying summary of events</guilabel> if you want the full summary
++current View, the remaining characters are not displayed. Check <guilabel>Enable 
++tooltips for dispaying summaries</guilabel> if you want the full summary
+ displayed when the hovering the mouse pointer over the appointment for a few
+ seconds.</para></listitem>
+ </varlistentry>
+@@ -2884,7 +2884,7 @@
+ <varlistentry>
+ <term><guilabel>Working hours color</guilabel></term>
+ <listitem><para>This button opens the <guilabel>Select Color</guilabel> dialog,
+-allowing you to select the agenda view.</para></listitem>
++allowing you to select color of the working hours background in the agenda view.</para></listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+@@ -3029,7 +3029,7 @@
+ <variablelist>
+ 
+ <varlistentry>
+-<term><guilabel>Publish free/busy information</guilabel></term>
++<term><guilabel>Publish free/busy information automatically</guilabel></term>
+ <listitem><para>Enable this option if you wish your Free/Busy information to be
+ uploaded automatically. Note that you may skip this option and choose to mail or
+ upload your Free/Busy information via the <guilabel>Schedule</guilabel> menu of
+@@ -3043,7 +3043,7 @@
+ </varlistentry>
+ 
+ <varlistentry>
+-<term><guilabel>Minimum time between uploads in minutes</guilabel></term>
++<term><guilabel>Minimum time between uploads (in minutes)</guilabel></term>
+ <listitem><para>In case you choose to publish your information automatically,
+ you may configure the interval of time in minutes between each upload.</para>
+ </listitem>
+@@ -3205,7 +3205,7 @@
+ <itemizedlist>
+ <listitem><para>The tool set is configured in the <menuchoice><guimenu>
+ Settings</guimenu><guimenuitem>Configure
+-Toolbars....</guimenuitem></menuchoice> menu item.
++Toolbars...</guimenuitem></menuchoice> menu item.
+ </para></listitem>
+ <listitem><para>The graphic style (icon size, text position, &etc;) is
+ adjusted through the <guimenu>Toolbar Context Menu</guimenu>. Right click the
+@@ -4001,7 +4001,7 @@
+ <guimenuitem>New Sub-to-do...</guimenuitem>
+ </menuchoice></term>
+ <listitem><para>Choose <guilabel>New Sub-to-do...</guilabel> to <action>start
+-writing a new sub-to-do. The currently selected to-do will be the the
++writing a new sub-to-do. The currently selected to-do will be the
+ sub-to-do parent.</action>. Initially the to-do has no due date, but you can
+ specify one.</para>
+ <para>You can get a detailed description of the to-do window in <link
 Index: kalarm/kalarm.h
 ===================================================================
---- kalarm/kalarm.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kalarm/kalarm.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kalarm/kalarm.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kalarm/kalarm.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -23,7 +23,7 @@
  
  #undef QT3_SUPPORT
@@ -380,8 +1840,8 @@ Index: kalarm/kalarm.h
  
 Index: kalarm/mainwindow.cpp
 ===================================================================
---- kalarm/mainwindow.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kalarm/mainwindow.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kalarm/mainwindow.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kalarm/mainwindow.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -51,6 +51,7 @@
  #include <QDropEvent>
  #include <QResizeEvent>
@@ -427,8 +1887,8 @@ Index: kalarm/mainwindow.cpp
  		}
 Index: kalarm/Changelog
 ===================================================================
---- kalarm/Changelog	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kalarm/Changelog	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kalarm/Changelog	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kalarm/Changelog	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -1,6 +1,9 @@
  KAlarm Change Log
  
@@ -442,8 +1902,8 @@ Index: kalarm/Changelog
  - Fix possible crash on alarm refresh, or removal or disabling of a resource.
 Index: kalarm/kalarmapp.cpp
 ===================================================================
---- kalarm/kalarmapp.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kalarm/kalarmapp.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kalarm/kalarmapp.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kalarm/kalarmapp.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -1021,7 +1021,6 @@
  void KAlarmApp::removeWindow(TrayWindow*)
  {
@@ -454,8 +1914,8 @@ Index: kalarm/kalarmapp.cpp
  /******************************************************************************
 Index: kalarm/resources/kalarm_manager.desktop
 ===================================================================
---- kalarm/resources/kalarm_manager.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kalarm/resources/kalarm_manager.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kalarm/resources/kalarm_manager.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kalarm/resources/kalarm_manager.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -18,6 +18,7 @@
  Name[kk]=Ескертулер
  Name[km]=ជូន​ដំណឹង
@@ -466,8 +1926,8 @@ Index: kalarm/resources/kalarm_manager.desktop
  Name[ne]=संसूचक
 Index: kalarm/traywindow.h
 ===================================================================
---- kalarm/traywindow.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kalarm/traywindow.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kalarm/traywindow.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kalarm/traywindow.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -1,7 +1,7 @@
  /*
   *  traywindow.h  -  the KDE system tray applet
@@ -497,8 +1957,8 @@ Index: kalarm/traywindow.h
  		QString      tooltipAlarmText() const;
 Index: kalarm/traywindow.cpp
 ===================================================================
---- kalarm/traywindow.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kalarm/traywindow.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kalarm/traywindow.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kalarm/traywindow.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -39,6 +39,7 @@
  #include <QToolTip>
  #include <QMouseEvent>
@@ -531,8 +1991,8 @@ Index: kalarm/traywindow.cpp
  {
 Index: Mainpage.dox
 ===================================================================
---- Mainpage.dox	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ Mainpage.dox	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- Mainpage.dox	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ Mainpage.dox	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -30,8 +30,6 @@
          * - <a href="kmail/html/index.html"><b>kmail</b></a>
          *   (<a href="kmail/html/classes.html">classes</a>)\n
@@ -544,8 +2004,8 @@ Index: Mainpage.dox
          *   (<a href="knode/html/classes.html">classes</a>)\n
 Index: CMakeLists.txt
 ===================================================================
---- CMakeLists.txt	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ CMakeLists.txt	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- CMakeLists.txt	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ CMakeLists.txt	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -89,15 +89,6 @@
      macro_log_feature(X11_Xscreensaver_FOUND "X11 screensaver extension" "X Window Screen Saver Development Library" "http://xorg.freedesktop.org" FALSE "" "Required for building the KTimeTracker Program")
    endif(X11_FOUND)
@@ -606,10 +2066,37 @@ Index: CMakeLists.txt
    add_subdirectory(kresources)
    macro_optional_add_subdirectory(kontact)
  
+Index: libkholidays/holidays/holiday_se
+===================================================================
+--- libkholidays/holidays/holiday_se	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ libkholidays/holidays/holiday_se	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -23,8 +23,8 @@
+ :Before 2005
+ :black "Nationaldagen" black on 6.6
+ weekend "Nationaldagen" weekend on 6.6
+-black "Midsommarafton" black on friday before 26.6
+-weekend "Midsommardagen" weekend on saturday before 27.6
++black "Midsommarafton" black on friday before 25.6
++weekend "Midsommardagen" weekend on saturday before 26.6
+ blue "Vintertid" on last sunday in october
+ weekend "Alla helgons dag" weekend on first sunday in november minus 1
+ black "1. Advent" on sunday before 24.12 minus 21 days
+Index: ktimetracker/timetrackerwidget.cpp
+===================================================================
+--- ktimetracker/timetrackerwidget.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ ktimetracker/timetrackerwidget.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -692,6 +692,7 @@
+   dialog->addPage( storagePage, i18n( "Storage" ), "system-file-manager" );
+ 
+   dialog->exec();
++  delete dialog;
+   showSearchBar( !KTimeTrackerSettings::configPDA() );
+   reconfigureFiles();
+ }
 Index: kjots/Kjots.desktop
 ===================================================================
---- kjots/Kjots.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kjots/Kjots.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kjots/Kjots.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kjots/Kjots.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -20,7 +20,7 @@
  GenericName[ja]=メモ帳
  GenericName[km]=កម្មវិធី​ទទួល​ចំណាំ
@@ -621,8 +2108,8 @@ Index: kjots/Kjots.desktop
  GenericName[nds]=Notizenprogramm
 Index: kjots/kjotspart.desktop
 ===================================================================
---- kjots/kjotspart.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kjots/kjotspart.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kjots/kjotspart.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kjots/kjotspart.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -1,5 +1,6 @@
  [Desktop Entry]
  Name=KJotsPart
@@ -632,8 +2119,8 @@ Index: kjots/kjotspart.desktop
  Name[pl]=Moduł Notatek
 Index: README
 ===================================================================
---- README	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ README	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- README	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ README	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -22,7 +22,6 @@
  * kaddressbook: The KDE addressbook application.
  * kmail: the KDE mail client
@@ -652,16 +2139,16 @@ Index: README
  
 Index: kpilot/Messages.sh
 ===================================================================
---- kpilot/Messages.sh	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kpilot/Messages.sh	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kpilot/Messages.sh	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kpilot/Messages.sh	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -1,2 +1,3 @@
  #! /usr/bin/env bash
 +$EXTRACTRC `find . -name \*.rc -o -name \*.ui -o -name \*.kcfg` >> rc.cpp
  $XGETTEXT `find . -name \*.cc -o -name \*.cpp -o -name \*.h` -o $podir/kpilot.pot
 Index: kpilot/conduits/todo/kpilot-conduit-todo.desktop
 ===================================================================
---- kpilot/conduits/todo/kpilot-conduit-todo.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kpilot/conduits/todo/kpilot-conduit-todo.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kpilot/conduits/todo/kpilot-conduit-todo.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kpilot/conduits/todo/kpilot-conduit-todo.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -42,6 +42,7 @@
  Name[ja]=To-Do
  Name[km]=​ការងារ​ត្រូវ​ធ្វើ
@@ -672,8 +2159,8 @@ Index: kpilot/conduits/todo/kpilot-conduit-todo.desktop
  Name[nds]=Opgaav
 Index: kpilot/conduits/calendar/calendarconduit.cc
 ===================================================================
---- kpilot/conduits/calendar/calendarconduit.cc	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kpilot/conduits/calendar/calendarconduit.cc	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kpilot/conduits/calendar/calendarconduit.cc	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kpilot/conduits/calendar/calendarconduit.cc	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -205,6 +205,11 @@
  			}
  			else
@@ -688,8 +2175,8 @@ Index: kpilot/conduits/calendar/calendarconduit.cc
  				QDateTime pcDtEnd = pcEvent->dtEnd().dateTime().toLocalTime();
 Index: kontact/plugins/akregator/akregator.setdlg
 ===================================================================
---- kontact/plugins/akregator/akregator.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/akregator/akregator.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/akregator/akregator.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/akregator/akregator.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -66,6 +66,7 @@
  Comment[ja]=フィードリーダー
  Comment[km]=កម្មវិធី​អាន​មតិព័ត៌មាន
@@ -700,8 +2187,8 @@ Index: kontact/plugins/akregator/akregator.setdlg
  Comment[nds]=Mellenstroom-Kieker
 Index: kontact/plugins/planner/planner.setdlg
 ===================================================================
---- kontact/plugins/planner/planner.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/planner/planner.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/planner/planner.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/planner/planner.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -12,6 +12,7 @@
  Name[ja]=スケジュール帳
  Name[km]=កម្មវិធីធ្វើ​គម្រោង
@@ -720,8 +2207,8 @@ Index: kontact/plugins/planner/planner.setdlg
  Comment[nds]=Planer-Översicht
 Index: kontact/plugins/planner/kcmplanner.desktop
 ===================================================================
---- kontact/plugins/planner/kcmplanner.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/planner/kcmplanner.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/planner/kcmplanner.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/planner/kcmplanner.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -24,6 +24,7 @@
  Name[ja]=スケジュール帳
  Name[km]=កម្មវិធីធ្វើ​គម្រោង
@@ -740,8 +2227,8 @@ Index: kontact/plugins/planner/kcmplanner.desktop
  Comment[nds]=Planner inrichten
 Index: kontact/plugins/planner/plannerplugin.desktop
 ===================================================================
---- kontact/plugins/planner/plannerplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/planner/plannerplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/planner/plannerplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/planner/plannerplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -26,6 +26,7 @@
  Name[ja]=スケジュール帳
  Name[km]=កម្មវិធីធ្វើ​គម្រោង
@@ -760,8 +2247,8 @@ Index: kontact/plugins/planner/plannerplugin.desktop
  Comment[nds]=Planner-Moduul
 Index: kontact/plugins/knode/knode.setdlg
 ===================================================================
---- kontact/plugins/knode/knode.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/knode/knode.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/knode/knode.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/knode/knode.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -24,6 +24,7 @@
  Comment[kk]=Пошта компоненті
  Comment[km]=មាសភាគ​របស់ Usenet
@@ -772,8 +2259,8 @@ Index: kontact/plugins/knode/knode.setdlg
  Comment[nds]=Usenet-Komponent
 Index: kontact/plugins/specialdates/kcmsdsummary.desktop
 ===================================================================
---- kontact/plugins/specialdates/kcmsdsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/specialdates/kcmsdsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/specialdates/kcmsdsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/specialdates/kcmsdsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -30,6 +30,7 @@
  Name[kk]=Болашақ ерекше күндер
  Name[km]=កាលបរិច្ឆេទ​ពិសេស​ដែលនឹង​កើត​ឡើង
@@ -792,8 +2279,8 @@ Index: kontact/plugins/specialdates/kcmsdsummary.desktop
  Comment[nds]=De Översicht för anstahn besünner Daten instellen
 Index: kontact/plugins/kmobiletools/kmobiletools.setdlg
 ===================================================================
---- kontact/plugins/kmobiletools/kmobiletools.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/kmobiletools/kmobiletools.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/kmobiletools/kmobiletools.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/kmobiletools/kmobiletools.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -16,6 +16,7 @@
  Name[ja]=携帯電話
  Name[km]=ទូរស័ព្ទ​ចល័ត
@@ -812,8 +2299,8 @@ Index: kontact/plugins/kmobiletools/kmobiletools.setdlg
  Comment[nds]=Mobiltelefoon-Komponent
 Index: kontact/plugins/kmobiletools/kmobiletools.desktop
 ===================================================================
---- kontact/plugins/kmobiletools/kmobiletools.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/kmobiletools/kmobiletools.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/kmobiletools/kmobiletools.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/kmobiletools/kmobiletools.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -27,6 +27,7 @@
  Comment[ja]=KMobileTools プラグイン
  Comment[km]=កម្មវិធី​ជំនួយ​របស់ KMmobileTools
@@ -832,8 +2319,8 @@ Index: kontact/plugins/kmobiletools/kmobiletools.desktop
  Name[nds]=Mobiltelefonen
 Index: kontact/plugins/knotes/knotes.setdlg
 ===================================================================
---- kontact/plugins/knotes/knotes.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/knotes/knotes.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/knotes/knotes.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/knotes/knotes.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -14,6 +14,7 @@
  Name[ja]=ポップアップメモ
  Name[km]=ចំណាំ​លេច​ឡើង
@@ -852,8 +2339,8 @@ Index: kontact/plugins/knotes/knotes.setdlg
  Comment[nds]=Opduknotiz-Komponent
 Index: kontact/plugins/knotes/knotesplugin.desktop
 ===================================================================
---- kontact/plugins/knotes/knotesplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/knotes/knotesplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/knotes/knotesplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/knotes/knotesplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -84,6 +84,7 @@
  Name[ja]=ポップアップメモ
  Name[km]=ចំណាំ​លេច​ឡើង
@@ -864,8 +2351,8 @@ Index: kontact/plugins/knotes/knotesplugin.desktop
  Name[nds]=Opduk-Notizen
 Index: kontact/plugins/knotes/knotes_part_p.h
 ===================================================================
---- kontact/plugins/knotes/knotes_part_p.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/knotes/knotes_part_p.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/knotes/knotes_part_p.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/knotes/knotes_part_p.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -155,7 +155,7 @@
        hbl->addWidget( mTitleEdit, 1, Qt::AlignVCenter );
  
@@ -887,8 +2374,8 @@ Index: kontact/plugins/knotes/knotes_part_p.h
  
 Index: kontact/plugins/knotes/knotetip.cpp
 ===================================================================
---- kontact/plugins/knotes/knotetip.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/knotes/knotetip.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/knotes/knotetip.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/knotes/knotetip.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -31,6 +31,7 @@
  */
  
@@ -928,8 +2415,8 @@ Index: kontact/plugins/knotes/knotetip.cpp
  
 Index: kontact/plugins/ktimetracker/ktimetracker.setdlg
 ===================================================================
---- kontact/plugins/ktimetracker/ktimetracker.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/ktimetracker/ktimetracker.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/ktimetracker/ktimetracker.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/ktimetracker/ktimetracker.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -14,6 +14,7 @@
  Name[ja]=タイムトラッカー
  Name[km]=កម្មវិធី​តាមដាន​ពេលវេលា
@@ -948,8 +2435,8 @@ Index: kontact/plugins/ktimetracker/ktimetracker.setdlg
  Comment[nds]=Tietlogbook-Komponent
 Index: kontact/plugins/ktimetracker/ktimetracker_plugin.desktop
 ===================================================================
---- kontact/plugins/ktimetracker/ktimetracker_plugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/ktimetracker/ktimetracker_plugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/ktimetracker/ktimetracker_plugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/ktimetracker/ktimetracker_plugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -29,6 +29,7 @@
  Comment[ja]=タイムトラッカープラグイン
  Comment[km]=កម្មវិធី​ជំនួយ TimeTracker
@@ -968,8 +2455,8 @@ Index: kontact/plugins/ktimetracker/ktimetracker_plugin.desktop
  Name[nds]=Tietlogbook
 Index: kontact/plugins/kjots/kjots_plugin.desktop
 ===================================================================
---- kontact/plugins/kjots/kjots_plugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/kjots/kjots_plugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/kjots/kjots_plugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/kjots/kjots_plugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -62,6 +62,7 @@
  Name[ja]=メモ帳
  Name[km]=សៀវភៅ​ចំណាំ
@@ -980,8 +2467,8 @@ Index: kontact/plugins/kjots/kjots_plugin.desktop
  Name[nds]=Notizböker
 Index: kontact/plugins/kjots/kjots.setdlg
 ===================================================================
---- kontact/plugins/kjots/kjots.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/kjots/kjots.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/kjots/kjots.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/kjots/kjots.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -13,6 +13,7 @@
  Name[ja]=メモ帳
  Name[km]=សៀវភៅ​ចំណាំ
@@ -1000,8 +2487,8 @@ Index: kontact/plugins/kjots/kjots.setdlg
  Comment[nds]=Notizbook-Komponent
 Index: kontact/plugins/korganizer/kcmapptsummary.desktop
 ===================================================================
---- kontact/plugins/korganizer/kcmapptsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/korganizer/kcmapptsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/korganizer/kcmapptsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/korganizer/kcmapptsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -28,6 +28,7 @@
  Name[kk]=Болашақ оқиғалар
  Name[km]=ព្រឹត្តិការណ៍​ដែល​នឹង​កើតឡើង
@@ -1020,8 +2507,8 @@ Index: kontact/plugins/korganizer/kcmapptsummary.desktop
  Comment[nds]=De Översicht för anstahn Begeefnissen instellen
 Index: kontact/plugins/korganizer/kcmtodosummary.desktop
 ===================================================================
---- kontact/plugins/korganizer/kcmtodosummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/korganizer/kcmtodosummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/korganizer/kcmtodosummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/korganizer/kcmtodosummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -28,6 +28,7 @@
  Name[kk]=Кейінге қалдырылған жоспарлар
  Name[km]=ការងារ​ត្រូវធ្វើ​ដែល​មិនទាន់​សម្រេច
@@ -1040,8 +2527,8 @@ Index: kontact/plugins/korganizer/kcmtodosummary.desktop
  Comment[nds]=De Översicht för anstahn Opgaven instellen
 Index: kontact/plugins/kmail/summarywidget.cpp
 ===================================================================
---- kontact/plugins/kmail/summarywidget.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/kmail/summarywidget.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/kmail/summarywidget.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/kmail/summarywidget.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -88,9 +88,13 @@
  {
    // check whether we need to update the message counts
@@ -1207,8 +2694,8 @@ Index: kontact/plugins/kmail/summarywidget.cpp
    }
 Index: kontact/plugins/kmail/kcmkmailsummary.desktop
 ===================================================================
---- kontact/plugins/kmail/kcmkmailsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/kmail/kcmkmailsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/kmail/kcmkmailsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/kmail/kcmkmailsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -31,6 +31,7 @@
  Name[kk]=Жаңа хабарламалар
  Name[km]=សារ​ថ្មី
@@ -1219,8 +2706,8 @@ Index: kontact/plugins/kmail/kcmkmailsummary.desktop
  Name[nds]=Nieg Narichten
 Index: kontact/plugins/summary/kcmkontactsummary.desktop
 ===================================================================
---- kontact/plugins/summary/kcmkontactsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/summary/kcmkontactsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/summary/kcmkontactsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/summary/kcmkontactsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -26,6 +26,7 @@
  Name[ja]=要約
  Name[km]=សេចក្ដីសង្ខេប
@@ -1239,8 +2726,8 @@ Index: kontact/plugins/summary/kcmkontactsummary.desktop
  Comment[nds]=Tosamenfaten utsöken
 Index: kontact/plugins/newsticker/kcmkontactknt.desktop
 ===================================================================
---- kontact/plugins/newsticker/kcmkontactknt.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ kontact/plugins/newsticker/kcmkontactknt.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- kontact/plugins/newsticker/kcmkontactknt.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ kontact/plugins/newsticker/kcmkontactknt.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -30,6 +30,7 @@
  Name[kk]=Ақпарлар
  Name[km]=មតិ​ព័ត៌មាន
@@ -1249,10 +2736,22 @@ Index: kontact/plugins/newsticker/kcmkontactknt.desktop
  Name[lv]=Ziņu barotnes
  Name[nb]=Nyhetskilder
  Name[nds]=Mellenströöm
+Index: knotes/knote.cpp
+===================================================================
+--- knotes/knote.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ knotes/knote.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+@@ -1166,6 +1166,7 @@
+                fe->reason() != Qt::MouseFocusReason ) {
+             updateFocus();
+             if ( isModified() ) {
++              saveConfig();
+               saveData();
+             }
+           }
 Index: MAINTAINERS
 ===================================================================
---- MAINTAINERS	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ MAINTAINERS	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- MAINTAINERS	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ MAINTAINERS	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -7,13 +7,11 @@
                    Lutz Rogowski <lutz@klaralvdalens-datakonsult.se>
  kfile-plugins     ?
@@ -1277,8 +2776,8 @@ Index: MAINTAINERS
  kresources        ?
 Index: korganizer/koeditorgeneralevent.h
 ===================================================================
---- korganizer/koeditorgeneralevent.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorgeneralevent.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorgeneralevent.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorgeneralevent.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -70,7 +70,7 @@
      */
      void readEvent( Event *event, bool tmpl = false );
@@ -1290,8 +2789,8 @@ Index: korganizer/koeditorgeneralevent.h
      bool validateInput();
 Index: korganizer/koattendeeeditor.cpp
 ===================================================================
---- korganizer/koattendeeeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koattendeeeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koattendeeeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koattendeeeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -304,7 +304,7 @@
    }
  }
@@ -1303,8 +2802,8 @@ Index: korganizer/koattendeeeditor.cpp
      // TODO: Don't take a string and split it up... Is there a better way?
 Index: korganizer/koeditorgeneraltodo.cpp
 ===================================================================
---- korganizer/koeditorgeneraltodo.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorgeneraltodo.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorgeneraltodo.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorgeneraltodo.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -304,6 +304,7 @@
      mDueDateEdit->setDate( QDate::currentDate() );
      mDueTimeEdit->setTime( QTime::currentTime() );
@@ -1335,8 +2834,8 @@ Index: korganizer/koeditorgeneraltodo.cpp
    QString tmpStr;
 Index: korganizer/koeditorgeneral.cpp
 ===================================================================
---- korganizer/koeditorgeneral.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorgeneral.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorgeneral.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorgeneral.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -493,7 +493,7 @@
    }
  }
@@ -1357,8 +2856,8 @@ Index: korganizer/koeditorgeneral.cpp
  void KOEditorGeneral::setSummary( const QString &text )
 Index: korganizer/koeventeditor.cpp
 ===================================================================
---- korganizer/koeventeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeventeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeventeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeventeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -66,6 +66,16 @@
    }
  }
@@ -1444,8 +2943,8 @@ Index: korganizer/koeventeditor.cpp
  }
 Index: korganizer/koeditorfreebusy.cpp
 ===================================================================
---- korganizer/koeditorfreebusy.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorfreebusy.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorfreebusy.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorfreebusy.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -760,7 +760,7 @@
    dialog.exec();
  }
@@ -1466,8 +2965,8 @@ Index: korganizer/koeditorfreebusy.cpp
    qDeleteAll( toBeDeleted );
 Index: korganizer/koattendeeeditor.h
 ===================================================================
---- korganizer/koattendeeeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koattendeeeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koattendeeeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koattendeeeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -56,7 +56,7 @@
      virtual void insertAttendee( KCal::Attendee *attendee, bool fetchFB = true ) = 0;
  
@@ -1479,8 +2978,8 @@ Index: korganizer/koattendeeeditor.h
      void cancelAttendeeIncidence( KCal::Incidence *incidence );
 Index: korganizer/dbuscalendar.desktop
 ===================================================================
---- korganizer/dbuscalendar.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/dbuscalendar.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/dbuscalendar.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/dbuscalendar.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -35,6 +35,7 @@
  Comment[kk]=D-BUS интерфейсті Ұйымдастырғыш
  Comment[km]=កម្មវិធី​រៀបចំ​ដែល​មាន​ចំណុច​ប្រទាក់ D-BUS
@@ -1491,8 +2990,8 @@ Index: korganizer/dbuscalendar.desktop
  Comment[nds]=En Daagpleger mit en D-Bus-Koppelsteed
 Index: korganizer/koeditorgeneral.h
 ===================================================================
---- korganizer/koeditorgeneral.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorgeneral.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorgeneral.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorgeneral.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -88,7 +88,7 @@
      void readIncidence( Incidence *incidence );
  
@@ -1504,8 +3003,8 @@ Index: korganizer/koeditorgeneral.h
      bool validateInput();
 Index: korganizer/koeventeditor.h
 ===================================================================
---- korganizer/koeventeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeventeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeventeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeventeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -95,7 +95,7 @@
      /**
        Write event settings to event object
@@ -1525,8 +3024,8 @@ Index: korganizer/koeventeditor.h
      Event *mEvent;
 Index: korganizer/koeditorgeneralevent.cpp
 ===================================================================
---- korganizer/koeditorgeneralevent.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorgeneralevent.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorgeneralevent.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorgeneralevent.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -432,9 +432,9 @@
    readIncidence( event );
  }
@@ -1541,8 +3040,8 @@ Index: korganizer/koeditorgeneralevent.cpp
    QTime tmpTime;
 Index: korganizer/koeditorattachments.h
 ===================================================================
---- korganizer/koeditorattachments.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorattachments.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorattachments.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorattachments.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -104,7 +104,7 @@
      /** Read event object and setup widgets accordingly */
      void readIncidence( KCal::Incidence * );
@@ -1554,8 +3053,8 @@ Index: korganizer/koeditorattachments.h
  
 Index: korganizer/korgac/alarmdialog.cpp
 ===================================================================
---- korganizer/korgac/alarmdialog.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/korgac/alarmdialog.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/korgac/alarmdialog.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/korgac/alarmdialog.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -413,8 +413,17 @@
        // FIXME: Check whether this should be done for all multiple alarms
        if ( alarm->type() == Alarm::Procedure ) {
@@ -1578,8 +3077,8 @@ Index: korganizer/korgac/alarmdialog.cpp
          Phonon::MediaObject *player =
 Index: korganizer/interfaces/calendar/calendarplugin.desktop
 ===================================================================
---- korganizer/interfaces/calendar/calendarplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/interfaces/calendar/calendarplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/interfaces/calendar/calendarplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/interfaces/calendar/calendarplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -14,6 +14,7 @@
  Name[ja]=カレンダープラグインインターフェース
  Name[km]=ប្រតិទិន​កម្មវិធី​ជំនួយ​ប្រតិទិន
@@ -1590,8 +3089,8 @@ Index: korganizer/interfaces/calendar/calendarplugin.desktop
  Name[nds]=Kalennermoduul-Koppelsteed
 Index: korganizer/interfaces/calendar/calendardecoration.desktop
 ===================================================================
---- korganizer/interfaces/calendar/calendardecoration.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/interfaces/calendar/calendardecoration.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/interfaces/calendar/calendardecoration.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/interfaces/calendar/calendardecoration.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -14,6 +14,7 @@
  Name[ja]=カレンダー装飾インターフェース
  Name[km]=ចំណុច​ប្រទាក់​តុបតែង​ប្រតិទិន
@@ -1602,8 +3101,8 @@ Index: korganizer/interfaces/calendar/calendardecoration.desktop
  Name[nds]=Kalennerdekoratschoon-Koppelsteed
 Index: korganizer/kotodoeditor.cpp
 ===================================================================
---- korganizer/kotodoeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/kotodoeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/kotodoeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/kotodoeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -62,6 +62,16 @@
    emit dialogClose( mTodo );
  }
@@ -1675,8 +3174,8 @@ Index: korganizer/kotodoeditor.cpp
  
 Index: korganizer/koeditorgeneraljournal.cpp
 ===================================================================
---- korganizer/koeditorgeneraljournal.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorgeneraljournal.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorgeneraljournal.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorgeneraljournal.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -176,7 +176,7 @@
    setCategories( journal->categories() );
  }
@@ -1688,8 +3187,8 @@ Index: korganizer/koeditorgeneraljournal.cpp
    if ( mRichDescription->isChecked() ) {
 Index: korganizer/koeditordetails.cpp
 ===================================================================
---- korganizer/koeditordetails.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditordetails.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditordetails.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditordetails.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -281,7 +281,7 @@
    emit updateAttendeeSummary( mListView->childCount() );
  }
@@ -1710,8 +3209,8 @@ Index: korganizer/koeditordetails.cpp
    qDeleteAll( toBeDeleted );
 Index: korganizer/koeditorfreebusy.h
 ===================================================================
---- korganizer/koeditorfreebusy.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorfreebusy.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorfreebusy.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorfreebusy.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -60,7 +60,7 @@
      void clearAttendees();
  
@@ -1723,8 +3222,8 @@ Index: korganizer/koeditorfreebusy.h
      void cancelReload();
 Index: korganizer/koeditorrecurrence.cpp
 ===================================================================
---- korganizer/koeditorrecurrence.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorrecurrence.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorrecurrence.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorrecurrence.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -1407,7 +1407,7 @@
    mExceptions->setDates( incidence->recurrence()->exDates() );
  }
@@ -1736,8 +3235,8 @@ Index: korganizer/koeditorrecurrence.cpp
      if ( incidence->recurs() ) {
 Index: korganizer/kotodoeditor.h
 ===================================================================
---- korganizer/kotodoeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/kotodoeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/kotodoeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/kotodoeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -82,7 +82,7 @@
      void readTodo( Todo *todo, bool tmpl = false );
  
@@ -1757,8 +3256,8 @@ Index: korganizer/kotodoeditor.h
      Todo *mTodo;
 Index: korganizer/views/monthview/monthgraphicsitems.cpp
 ===================================================================
---- korganizer/views/monthview/monthgraphicsitems.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/views/monthview/monthgraphicsitems.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/views/monthview/monthgraphicsitems.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/views/monthview/monthgraphicsitems.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -164,7 +164,10 @@
  
  QPainterPath MonthGraphicsItem::shape() const
@@ -1773,8 +3272,8 @@ Index: korganizer/views/monthview/monthgraphicsitems.cpp
  // TODO: remove this method.
 Index: korganizer/views/todoview/kotodomodel.cpp
 ===================================================================
---- korganizer/views/todoview/kotodomodel.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/views/todoview/kotodomodel.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/views/todoview/kotodomodel.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/views/todoview/kotodomodel.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -800,8 +800,10 @@
      if ( role == Qt::EditRole ) {
        switch ( index.column() ) {
@@ -1790,8 +3289,8 @@ Index: korganizer/views/todoview/kotodomodel.cpp
            todo->setPriority( value.toInt() );
 Index: korganizer/views/todoview/kotodoview.cpp
 ===================================================================
---- korganizer/views/todoview/kotodoview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/views/todoview/kotodoview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/views/todoview/kotodoview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/views/todoview/kotodoview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -233,6 +233,8 @@
    }
    connect( mPercentageCompletedPopupMenu, SIGNAL(triggered(QAction *)),
@@ -1803,8 +3302,8 @@ Index: korganizer/views/todoview/kotodoview.cpp
  KOTodoView::~KOTodoView()
 Index: korganizer/views/whatsnextview/kowhatsnextview.cpp
 ===================================================================
---- korganizer/views/whatsnextview/kowhatsnextview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/views/whatsnextview/kowhatsnextview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/views/whatsnextview/kowhatsnextview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/views/whatsnextview/kowhatsnextview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -104,10 +104,10 @@
  
    Event::List events;
@@ -1821,8 +3320,8 @@ Index: korganizer/views/whatsnextview/kowhatsnextview.cpp
      kil.loadIcon( "view-calendar-day", KIconLoader::NoGroup, 22,
 Index: korganizer/views/agendaview/koagendaview.cpp
 ===================================================================
---- korganizer/views/agendaview/koagendaview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/views/agendaview/koagendaview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/views/agendaview/koagendaview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/views/agendaview/koagendaview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -1244,8 +1244,15 @@
      }
      if ( todo ) {
@@ -1866,8 +3365,8 @@ Index: korganizer/views/agendaview/koagendaview.cpp
  
 Index: korganizer/kojournaleditor.h
 ===================================================================
---- korganizer/kojournaleditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/kojournaleditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/kojournaleditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/kojournaleditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -97,7 +97,7 @@
      void readJournal( Journal *journal, bool tmpl = false );
  
@@ -1887,8 +3386,8 @@ Index: korganizer/kojournaleditor.h
      Journal *mJournal;
 Index: korganizer/koeditordetails.h
 ===================================================================
---- korganizer/koeditordetails.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditordetails.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditordetails.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditordetails.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -95,7 +95,7 @@
      void readIncidence( Incidence * );
  
@@ -1900,8 +3399,8 @@ Index: korganizer/koeditordetails.h
      bool validateInput();
 Index: korganizer/koeditorrecurrence.h
 ===================================================================
---- korganizer/koeditorrecurrence.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorrecurrence.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorrecurrence.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorrecurrence.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -314,7 +314,7 @@
      void readIncidence( Incidence * );
  
@@ -1913,8 +3412,8 @@ Index: korganizer/koeditorrecurrence.h
      bool validateInput();
 Index: korganizer/calendarview.cpp
 ===================================================================
---- korganizer/calendarview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/calendarview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/calendarview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/calendarview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -1256,6 +1256,7 @@
    if ( alarms.isEmpty() ) {
      // Add an alarm if it didn't have one
@@ -1925,8 +3424,8 @@ Index: korganizer/calendarview.cpp
    mChanger->changeIncidence( oldincidence, incidence, KOGlobals::ALARM_MODIFIED );
 Index: korganizer/koeditorgeneraltodo.h
 ===================================================================
---- korganizer/koeditorgeneraltodo.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorgeneraltodo.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorgeneraltodo.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorgeneraltodo.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -65,7 +65,7 @@
      void readTodo( Todo *todo, bool tmpl = false );
  
@@ -1938,8 +3437,8 @@ Index: korganizer/koeditorgeneraltodo.h
      bool validateInput();
 Index: korganizer/kojournaleditor.cpp
 ===================================================================
---- korganizer/kojournaleditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/kojournaleditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/kojournaleditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/kojournaleditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -136,7 +136,7 @@
  
    if ( mJournal ) {
@@ -2000,8 +3499,8 @@ Index: korganizer/kojournaleditor.cpp
  
 Index: korganizer/koeditorattachments.cpp
 ===================================================================
---- korganizer/koeditorattachments.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorattachments.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorattachments.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorattachments.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -775,7 +775,7 @@
    }
  }
@@ -2013,8 +3512,8 @@ Index: korganizer/koeditorattachments.cpp
  
 Index: korganizer/koincidenceeditor.cpp
 ===================================================================
---- korganizer/koincidenceeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koincidenceeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koincidenceeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koincidenceeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -86,8 +86,13 @@
  {
  }
@@ -2055,8 +3554,8 @@ Index: korganizer/koincidenceeditor.cpp
      KPageDialog::slotButtonClicked( button );
 Index: korganizer/resourceview.cpp
 ===================================================================
---- korganizer/resourceview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/resourceview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/resourceview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/resourceview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -308,6 +308,8 @@
    connect( mDeleteButton, SIGNAL( clicked() ), SLOT( removeResource() ) );
    connect( mEditButton, SIGNAL( clicked() ), SLOT( editResource() ) );
@@ -2068,8 +3567,8 @@ Index: korganizer/resourceview.cpp
  
 Index: korganizer/koeventpopupmenu.cpp
 ===================================================================
---- korganizer/koeventpopupmenu.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeventpopupmenu.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeventpopupmenu.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeventpopupmenu.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -103,6 +103,7 @@
      }
      for ( it = mRecurrenceItems.begin(); it != mRecurrenceItems.end(); ++it ) {
@@ -2080,8 +3579,8 @@ Index: korganizer/koeventpopupmenu.cpp
    } else {
 Index: korganizer/koeventviewer.cpp
 ===================================================================
---- korganizer/koeventviewer.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeventviewer.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeventviewer.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeventviewer.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -46,6 +46,7 @@
  {
    mIncidence = 0;
@@ -2092,8 +3591,8 @@ Index: korganizer/koeventviewer.cpp
  KOEventViewer::~KOEventViewer()
 Index: korganizer/kcmconfigs/korganizer_configtime.desktop
 ===================================================================
---- korganizer/kcmconfigs/korganizer_configtime.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/kcmconfigs/korganizer_configtime.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/kcmconfigs/korganizer_configtime.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/kcmconfigs/korganizer_configtime.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -29,6 +29,7 @@
  Name[ja]=日付と時間
  Name[km]=កាលបរិច្ឆេទ និង​ពេលវេលា
@@ -2104,8 +3603,8 @@ Index: korganizer/kcmconfigs/korganizer_configtime.desktop
  Name[nds]=Tiet un Datum
 Index: korganizer/koeditorgeneraljournal.h
 ===================================================================
---- korganizer/koeditorgeneraljournal.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditorgeneraljournal.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditorgeneraljournal.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditorgeneraljournal.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -69,7 +69,7 @@
      /** Read journal object and setup widgets accordingly */
      void readJournal( Journal *, bool tmpl = false );
@@ -2117,8 +3616,8 @@ Index: korganizer/koeditorgeneraljournal.h
      bool validateInput();
 Index: korganizer/koeditoralarms.cpp
 ===================================================================
---- korganizer/koeditoralarms.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koeditoralarms.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koeditoralarms.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koeditoralarms.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -199,6 +199,7 @@
    connect( this, SIGNAL(okClicked()), SLOT(slotOk()) );
    connect( this, SIGNAL(applyClicked()), SLOT(slotApply()) );
@@ -2147,8 +3646,8 @@ Index: korganizer/koeditoralarms.cpp
    }
 Index: korganizer/koincidenceeditor.h
 ===================================================================
---- korganizer/koincidenceeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 936453)
-+++ korganizer/koincidenceeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 936453)
+--- korganizer/koincidenceeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
++++ korganizer/koincidenceeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
 @@ -133,6 +133,11 @@
      void readDesignerFields( Incidence *i );
      void writeDesignerFields( Incidence *i );
