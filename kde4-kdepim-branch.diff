@@ -1,7 +1,7 @@
 Index: akregator/Messages.sh
 ===================================================================
---- akregator/Messages.sh	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ akregator/Messages.sh	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- akregator/Messages.sh	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ akregator/Messages.sh	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -1,3 +1,3 @@
  #! /bin/sh
  $EXTRACTRC `find . -name "*.rc" -o -name "*.ui" -o -name "*.kcfg"` >> rc.cpp || exit 11
@@ -9,8 +9,8 @@ Index: akregator/Messages.sh
 +$XGETTEXT $(find . -name "*.cpp" -o -name "*.h") -o $podir/akregator.pot
 Index: akregator/src/subscriptionlistmodel.cpp
 ===================================================================
---- akregator/src/subscriptionlistmodel.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ akregator/src/subscriptionlistmodel.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- akregator/src/subscriptionlistmodel.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ akregator/src/subscriptionlistmodel.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -447,6 +447,9 @@
      {
          const TreeNode* const droppedOnNode = qobject_cast<const TreeNode*>( nodeForIndex( parent, m_feedList ) );
@@ -23,8 +23,8 @@ Index: akregator/src/subscriptionlistmodel.cpp
              return false;
 Index: libkleo/libkleopatrarc.desktop
 ===================================================================
---- libkleo/libkleopatrarc.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ libkleo/libkleopatrarc.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- libkleo/libkleopatrarc.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ libkleo/libkleopatrarc.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -288,6 +288,7 @@
  Name[it]=Chiavi per le firme qualificate
  Name[ja]=適格電子署名用の鍵
@@ -35,8 +35,8 @@ Index: libkleo/libkleopatrarc.desktop
  Name[nds]=Slötels för pröövt Ünnerschriften
 Index: kode/kwsdl/kwsdl_compiler.desktop
 ===================================================================
---- kode/kwsdl/kwsdl_compiler.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kode/kwsdl/kwsdl_compiler.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kode/kwsdl/kwsdl_compiler.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kode/kwsdl/kwsdl_compiler.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -14,6 +14,7 @@
  Name[kk]=KWSDL компиляторы
  Name[km]=កម្មវិធី​ចងក្រង KWSDL
@@ -47,8 +47,8 @@ Index: kode/kwsdl/kwsdl_compiler.desktop
  Name[nds]=KWSDL-Kompilerer
 Index: kode/kxforms/kxforms.desktop
 ===================================================================
---- kode/kxforms/kxforms.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kode/kxforms/kxforms.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kode/kxforms/kxforms.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kode/kxforms/kxforms.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -23,6 +23,7 @@
  GenericName[kk]=XML пішін өңдегіші
  GenericName[km]=កម្មវិធី​និពន្ធ​សំណុំ​បែបបទ​របស់ XML
@@ -57,10 +57,36 @@ Index: kode/kxforms/kxforms.desktop
  GenericName[lv]=XML formu redaktors
  GenericName[nb]=XML skjemaredigerer
  GenericName[nds]=XML-Kiekwarkeditor
+Index: kleopatra/kwatchgnupg/kwatchgnupgmainwin.cpp
+===================================================================
+--- kleopatra/kwatchgnupg/kwatchgnupgmainwin.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kleopatra/kwatchgnupg/kwatchgnupgmainwin.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -105,7 +105,7 @@
+ 
+ void KWatchGnuPGMainWindow::createActions()
+ {
+-  QAction *action = actionCollection()->addAction( "clear_log" );
++  KAction *action = actionCollection()->addAction( "clear_log" );
+   action->setIcon( KIcon("edit-clear-history") );
+   action->setText( i18n("C&lear History") );
+   connect(action, SIGNAL(triggered()), SLOT( slotClear() ));
+Index: kleopatra/kleopatra_import.desktop
+===================================================================
+--- kleopatra/kleopatra_import.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kleopatra/kleopatra_import.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -16,7 +16,7 @@
+ Comment[ca]=Gestor de certificats i IGU criptogràfica unificada
+ Comment[cs]=Správce certifikátů a rozhraní pro šifrování
+ Comment[da]=Certifikathåndtering og forenet krypterings-GUI
+-Comment[de]=Zertifikatsverwaltung und Kryptographie-Oberfläche
++Comment[de]=Zertifikatsverwaltung und Kryptografie-Oberfläche
+ Comment[el]=Διαχειριστής πιστοποιητικών και GUI ενοποιημένης κρυπτογράφησης
+ Comment[es]=Gestor de certificados e interfaz gráfica unificada de criptografía
+ Comment[et]=Sertifikaadihaldur ja ühendatud krüptimise graafiline kasutajaliides
 Index: kresources/scalix/kabc/scalix.desktop
 ===================================================================
---- kresources/scalix/kabc/scalix.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kresources/scalix/kabc/scalix.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kresources/scalix/kabc/scalix.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kresources/scalix/kabc/scalix.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -44,6 +44,7 @@
  Comment[it]=Consente l'accesso ai contatti memorizzati su un server Scalix che usa IMAP tramite KMail o Kontact
  Comment[ja]=KMail または Kontact 経由で IMAP を使って、Scalix サーバに保存されている連絡先へのアクセスを提供します
@@ -71,8 +97,8 @@ Index: kresources/scalix/kabc/scalix.desktop
  Comment[nds]=Stellt mit KMail oder Kontact över IMAP Topgriep op Kontakten op en Scalix-Server praat
 Index: kresources/slox/kabc_ox.desktop
 ===================================================================
---- kresources/slox/kabc_ox.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kresources/slox/kabc_ox.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kresources/slox/kabc_ox.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kresources/slox/kabc_ox.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -57,6 +57,7 @@
  Comment[it]=Consente l'accesso ai contatti memorizzati su un server Open-Xchange
  Comment[ja]=Open-Xchange サーバに保存されている連絡先へのアクセスを提供します
@@ -83,8 +109,8 @@ Index: kresources/slox/kabc_ox.desktop
  Comment[nds]=Stellt Togriep op de op en Open-Xchange-Server wohrten Kontakten praat
 Index: kresources/akonadi/kabc/akonadi.desktop
 ===================================================================
---- kresources/akonadi/kabc/akonadi.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kresources/akonadi/kabc/akonadi.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kresources/akonadi/kabc/akonadi.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kresources/akonadi/kabc/akonadi.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -13,6 +13,7 @@
  Name[it]=Rubrica indirizzi di Akonadi
  Name[ja]=Akonadi アドレス帳
@@ -93,10 +119,22 @@ Index: kresources/akonadi/kabc/akonadi.desktop
  Name[lv]=Akonadi adrešu grāmatas
  Name[nb]=Akonadi adressebøker
  Name[nds]=Akonadi-Adressbook instellen
+Index: kresources/featureplan/kcal_resourcefeatureplan.desktop
+===================================================================
+--- kresources/featureplan/kcal_resourcefeatureplan.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kresources/featureplan/kcal_resourcefeatureplan.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -23,6 +23,7 @@
+ Name[lt]=XML bruožų planas
+ Name[lv]=XML iespēju plāns
+ Name[ms]=Pelan Cirian XML 
++Name[nb]=XML-funksjonsplan
+ Name[nds]=XML-Funkschonenplaan
+ Name[ne]=एक्सएमएल विशेषता योजना
+ Name[nl]=Functionaliteitsplanning in XML
 Index: kmail/dbusmail.desktop
 ===================================================================
---- kmail/dbusmail.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kmail/dbusmail.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kmail/dbusmail.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/dbusmail.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -20,6 +20,7 @@
  Comment[kk]=DBUS интерфейсті пошта бағдарламасы
  Comment[km]=កម្មវិធី​សំបុត្រ​ដែល​មាន​ចំណុច​ប្រទាក់ DBUS
@@ -105,11 +143,211 @@ Index: kmail/dbusmail.desktop
  Comment[lv]=Pasta programma ar DBUS saskarni
  Comment[nb]=E-postprogram med DBUS-grensesnitt
  Comment[nds]=Nettpostprogramm mit en D-Bus-Koppelsteed
+Index: kmail/messagelistview/storagemodel.cpp
+===================================================================
+--- kmail/messagelistview/storagemodel.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/messagelistview/storagemodel.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -87,6 +87,9 @@
+   connect( mFolder, SIGNAL( msgHeaderChanged( KMFolder * , int ) ),
+            SLOT( slotMessageHeaderChanged( KMFolder *, int ) ) );
+ 
++  connect( mFolder, SIGNAL( viewConfigChanged() ),
++           SLOT( slotViewConfigChanged() ) );
++
+ #if 0
+   // FIXME: Do we need to handle these remaining signals ?
+ 
+@@ -109,8 +112,6 @@
+   /** Emitted when a folder was removed */
+   void removed(KMFolder*, bool);
+ 
+-  /** Emitted when the variables for the config of the view have changed */
+-  void viewConfigChanged();
+ #endif
+ 
+   mMessageCount = mFolder->count();
+@@ -179,6 +180,12 @@
+       this, SLOT( slotMessageHeaderChanged( KMFolder *, int ) )
+     );
+ 
++  disconnect(
++      mFolder, SIGNAL( viewConfigChanged() ),
++      this, SLOT( slotViewConfigChanged() )
++    );
++
++
+   //mFolder->markNewAsUnread(); <-- do we REALLY need to do this ?.. couldn't we use a timed-expire instead ?
+   if ( mFolder->dirty() )
+     mFolder->writeIndex(); // this is straight from KMHeaders...
+@@ -596,6 +603,11 @@
+   reset();
+ }
+ 
++void StorageModel::slotViewConfigChanged()
++{
++  reset();
++}
++
+ void StorageModel::slotFolderExpunged()
+ {
+   slotFolderClosed();
 Index: kmail/messagelistview/core/model.cpp
 ===================================================================
---- kmail/messagelistview/core/model.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kmail/messagelistview/core/model.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
-@@ -2926,9 +2926,9 @@
+--- kmail/messagelistview/core/model.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/messagelistview/core/model.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -472,7 +472,7 @@
+ 
+   if ( mStorageModel && column->isSenderOrReceiver() )
+   {
+-    if ( mStorageModel->containsOutboundMessages() )
++    if ( mStorageModelContainsOutboundMessages )
+       return QVariant( i18n( "Receiver" ) );
+     return QVariant( i18n( "Sender" ) );
+   }
+@@ -648,6 +648,7 @@
+ 
+   mPreSelectionMode = preSelectionMode;
+   mUniqueIdOfLastSelectedMessageInFolder = Manager::instance()->preSelectedMessageForStorageModel( mStorageModel );
++  mStorageModelContainsOutboundMessages = mStorageModel->containsOutboundMessages();
+ 
+   connect( mStorageModel, SIGNAL( rowsInserted( const QModelIndex &, int, int ) ),
+            this, SLOT( slotStorageModelRowsInserted( const QModelIndex &, int, int ) ) );
+@@ -808,6 +809,37 @@
+   viewItemJobStep();
+ }
+ 
++void Model::checkIfDateChanged()
++{
++  // This function is called by MessageListView::Core::Manager once in a while (every 1 minute or sth).
++  // It is used to check if the current date has changed (with respect to mTodayDate).
++  //
++  // Our message items cache the formatted dates (as formatting them
++  // on the fly would be too expensive). We also cache the labels of the groups which often display dates.
++  // When the date changes we would need to fix all these strings.
++  //
++  // A dedicated algorithm to refresh the labels of the items would be either too complex
++  // or would block on large trees. Fixing the labels of the groups is also quite hard...
++  //
++  // So to keep the things simple we just reload the view.
++
++  if ( !mStorageModel )
++    return; // nothing to do
++
++  if ( mLoading )
++    return; // not now
++
++  if ( !mViewItemJobs->isEmpty() )
++    return; // not now
++
++  if ( mTodayDate.day() == QDate::currentDate().day() )
++    return; // date not changed
++
++  // date changed, reload the view (and try to preserve the current selection)
++  setStorageModel( mStorageModel, PreSelectLastSelected );
++}
++
++
+ void Model::abortMessagePreSelection()
+ {
+   // This is used to abort a message pre-selection before we actually could apply it.
+@@ -1535,6 +1567,49 @@
+ 
+ // Subject threading cache stuff
+ 
++#if 0
++// Debug helpers
++void dump_iterator_and_list( QList< MessageItem * >::Iterator &iter, QList< MessageItem * > *list )
++{
++  kDebug() << "Threading cache part dump" << endl;
++  if ( iter == list->end() )
++    kDebug() << "Iterator pointing to end of the list" << endl;
++  else
++    kDebug() << "Iterator pointing to " << *iter << " subject [" << (*iter)->subject() << "] date [" << (*iter)->date() << "]" << endl;
++
++  for ( QList< MessageItem * >::Iterator it = list->begin(); it != list->end(); ++it )
++  {
++    kDebug() << "List element " << *it << " subject [" << (*it)->subject() << "] date [" << (*it)->date() << "]" << endl;
++  }
++
++  kDebug() << "End of threading cache part dump" << endl;
++}
++
++void dump_list( QList< MessageItem * > *list )
++{
++  kDebug() << "Threading cache part dump" << endl;
++
++  for ( QList< MessageItem * >::Iterator it = list->begin(); it != list->end(); ++it )
++  {
++    kDebug() << "List element " << *it << " subject [" << (*it)->subject() << "] date [" << (*it)->date() << "]" << endl;
++  }
++
++  kDebug() << "End of threading cache part dump" << endl;
++}
++#endif // debug helpers
++
++// a helper class used in a qLowerBound() call below
++class MessageLessThanByDate
++{
++public:
++  inline bool operator()( const MessageItem * mi1, const MessageItem * mi2 ) const
++  {
++    if ( mi1->date() == mi2->date() )
++      return mi1 < mi2;
++    return mi1->date() < mi2->date();
++  }
++};
++
+ void Model::addMessageToSubjectBasedThreadingCache( MessageItem * mi )
+ {
+   // Unfortunately the entries in the cache can't be sorted by date. This is
+@@ -1554,35 +1629,16 @@
+   Q_ASSERT( !messagesWithTheSameStrippedSubject->contains( mi ) );
+ 
+   // Binary search based insertion
+-  QList< MessageItem * >::Iterator it = qLowerBound( messagesWithTheSameStrippedSubject->begin(), messagesWithTheSameStrippedSubject->end(), mi );
++  QList< MessageItem * >::Iterator it = qLowerBound( messagesWithTheSameStrippedSubject->begin(), messagesWithTheSameStrippedSubject->end(), mi, MessageLessThanByDate() );
+   messagesWithTheSameStrippedSubject->insert( it, mi );
+ }
+ 
+-#if 0
+-// Debug helper
+-void dump_iterator_and_list( QList< MessageItem * >::Iterator &iter, QList< MessageItem * > *list )
+-{
+-  kDebug() << "Threading cache part dump" << endl;
+-  if ( iter == list->end() )
+-    kDebug() << "Iterator pointing to end of the list" << endl;
+-  else
+-    kDebug() << "Iterator pointing to " << *iter << " subject [" << (*iter)->subject() << "] date [" << (*iter)->date() << "]" << endl;
+-
+-  for ( QList< MessageItem * >::Iterator it = list->begin(); it != list->end(); ++it )
+-  {
+-    kDebug() << "List element " << *it << " subject [" << (*it)->subject() << "] date [" << (*it)->date() << "]" << endl;
+-  }
+-
+-  kDebug() << "End of threading cache part dump" << endl;
+-}
+-#endif
+-
+ void Model::removeMessageFromSubjectBasedThreadingCache( MessageItem * mi )
+ {
+   QList< MessageItem * > * messagesWithTheSameStrippedSubject = mThreadingCacheMessageSubjectMD5ToMessageItem->value( mi->strippedSubjectMD5(), 0 );
+   Q_ASSERT( messagesWithTheSameStrippedSubject );
+ 
+-  QList< MessageItem * >::Iterator it = qLowerBound( messagesWithTheSameStrippedSubject->begin(), messagesWithTheSameStrippedSubject->end(), mi );
++  QList< MessageItem * >::Iterator it = qLowerBound( messagesWithTheSameStrippedSubject->begin(), messagesWithTheSameStrippedSubject->end(), mi, MessageLessThanByDate() );
+   Q_ASSERT( it != messagesWithTheSameStrippedSubject->end() );
+   Q_ASSERT( *it == mi );
+ 
+@@ -2619,7 +2675,7 @@
+   int elapsed;
+ 
+   // Should we use the receiver or the sender field for sorting ?
+-  bool bUseReceiver = ( mStorageModel->containsOutboundMessages() );
++  bool bUseReceiver = mStorageModelContainsOutboundMessages;
+ 
+   // The begin storage index of our work
+   int curIndex = job->currentIndex();
+@@ -2926,9 +2982,9 @@
        // Handle saving the current selection: if this item was the current before the step
        // then zero it out. We have killed it and it's OK for the current item to change.
  
@@ -121,7 +359,7 @@ Index: kmail/messagelistview/core/model.cpp
          // Try to select the item below the removed one as it helps in doing a "readon" of emails:
          // you read a message, decide to delete it and then go to the next.
          // Qt tends to select the message above the removed one instead (this is a hardcoded logic in
-@@ -3028,12 +3028,21 @@
+@@ -3028,12 +3084,21 @@
        // Parent is gone
        childMessage->setThreadingStatus( MessageItem::ParentMissing );
  
@@ -147,10 +385,486 @@ Index: kmail/messagelistview/core/model.cpp
        {
          attachMessageToGroupHeader( childMessage );
  
+Index: kmail/messagelistview/core/view.cpp
+===================================================================
+--- kmail/messagelistview/core/view.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/messagelistview/core/view.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -230,6 +230,9 @@
+   if ( !mTheme )
+     return;
+ 
++  kDebug() << "Apply theme columns";
++
++
+   const QList< Theme::Column * > & columns = mTheme->columns();
+ 
+   if ( columns.count() < 1 )
+@@ -278,12 +281,15 @@
+   {
+     if ( ( *it )->currentlyVisible() || ( idx == 0 ) )
+     {
++      kDebug() << "Column " << idx << " will be visible";
+       // Column visible
+       int savedWidth = ( *it )->currentWidth();
+       int hintWidth = mDelegate->sizeHintForItemTypeAndColumn( Item::Message, idx ).width();
+       totalVisibleWidthHint += savedWidth > 0 ? savedWidth : hintWidth;
+       lColumnSizeHints.append( hintWidth );
++      kDebug() << "Column " << idx << " size hint is " << hintWidth;
+     } else {
++      kDebug() << "Column " << idx << " will be not visible";
+       // The column is not visible
+       lColumnSizeHints.append( -1 ); // dummy
+     }
+@@ -422,9 +428,12 @@
+ 
+   idx = 0;
+ 
++  kDebug() << "Entering colum show/hide loop";
++
+   for ( it = columns.begin(); it != columns.end(); ++it )
+   {
+     bool visible = ( idx == 0 ) || ( *it )->currentlyVisible();
++    kDebug() << "Column " << idx << " visible " << visible;
+     ( *it )->setCurrentlyVisible( visible );
+     header()->setSectionHidden( idx, !visible );
+     idx++;
+@@ -441,7 +450,7 @@
+   {
+     if ( ( *it )->currentlyVisible() )
+     {
+-      // kDebug() << "Resize section " << idx << " to " << lColumnWidths[ idx ];
++      kDebug() << "Resize section " << idx << " to " << lColumnWidths[ idx ];
+       ( *it )->setCurrentWidth( lColumnWidths[ idx ] );
+       header()->resizeSection( idx, lColumnWidths[ idx ] );
+       totalVisibleWidth += lColumnWidths[ idx ];
+@@ -501,6 +510,11 @@
+   if ( !mTheme )
+     return;
+ 
++  if ( mNeedToApplyThemeColumns )
++    return; // don't save the state if it hasn't been applied at all
++
++  kDebug() << "Save theme column state";
++
+   const QList< Theme::Column * > & columns = mTheme->columns();
+ 
+   if ( columns.count() < 1 )
+@@ -513,9 +527,11 @@
+   {
+     if ( header()->isSectionHidden( idx ) )
+     {
++      kDebug() << "Section " << idx << " is hidden";
+       ( *it )->setCurrentlyVisible( false );
+       ( *it )->setCurrentWidth( -1 ); // reset (hmmm... we could use the "don't touch" policy here too...)
+     } else {
++      kDebug() << "Section " << idx << " is visible and has size " << header()->sectionSize( idx );
+       ( *it )->setCurrentlyVisible( true );
+       ( *it )->setCurrentWidth( header()->sectionSize( idx ) );
+     }
+@@ -872,9 +888,51 @@
+ 
+ void View::setAllThreadsExpanded( bool expand )
+ {
+-  setChildrenExpanded( mModel->rootItem(), expand );
++  if ( mAggregation->grouping() == Aggregation::NoGrouping )
++  {
++    // we have no groups so threads start under the root item: just expand/unexpand all
++    setChildrenExpanded( mModel->rootItem(), expand );
++    return;
++  }
++
++  // grouping is in effect: must expand/unexpand one level lower
++
++  QList< Item * > * childList = mModel->rootItem()->childItems();
++  if ( !childList )
++    return;
++
++  foreach ( Item * item, *childList )
++    setChildrenExpanded( item, expand );
+ }
+ 
++void View::setAllGroupsExpanded( bool expand )
++{
++  if ( mAggregation->grouping() == Aggregation::NoGrouping )
++    return; // no grouping in effect
++
++  Item * item = mModel->rootItem();
++
++  QList< Item * > * childList = item->childItems();
++  if ( !childList )
++    return;
++
++  foreach ( Item * item, *childList )
++  {
++    Q_ASSERT( item->type() == Item::GroupHeader );
++    QModelIndex idx = mModel->index( item, 0 );
++    Q_ASSERT( idx.isValid() );
++    Q_ASSERT( static_cast< Item * >( idx.internalPointer() ) == item );
++    if ( expand )
++    {
++      if ( !isExpanded( idx ) )
++        setExpanded( idx, true );
++    } else {
++      if ( isExpanded( idx ) )
++        setExpanded( idx, false );
++    }
++  }
++}
++
+ void View::selectMessageItems( const QList< MessageItem * > &list )
+ {
+   QItemSelection selection;
+@@ -2252,46 +2310,12 @@
+ 
+ void View::slotCollapseAllGroups()
+ {
+-  if ( mAggregation->grouping() == Aggregation::NoGrouping )
+-    return;
+-
+-  Item * item = mModel->rootItem();
+-
+-  QList< Item * > * childList = item->childItems();
+-  if ( !childList )
+-    return;
+-
+-  for ( QList< Item * >::Iterator it = childList->begin(); it != childList->end(); ++it )
+-  {
+-    Q_ASSERT( ( *it )->type() == Item::GroupHeader );
+-    QModelIndex idx = mModel->index( *it, 0 );
+-    Q_ASSERT( idx.isValid() );
+-    Q_ASSERT( static_cast< Item * >( idx.internalPointer() ) == ( *it ) );
+-    if ( isExpanded( idx ) )
+-      setExpanded( idx, false );
+-  }
++  setAllGroupsExpanded( false );
+ }
+ 
+ void View::slotExpandAllGroups()
+ {
+-  if ( mAggregation->grouping() == Aggregation::NoGrouping )
+-    return;
+-
+-  Item * item = mModel->rootItem();
+-
+-  QList< Item * > * childList = item->childItems();
+-  if ( !childList )
+-    return;
+-
+-  for ( QList< Item * >::Iterator it = childList->begin(); it != childList->end(); ++it )
+-  {
+-    Q_ASSERT( ( *it )->type() == Item::GroupHeader );
+-    QModelIndex idx = mModel->index( *it, 0 );
+-    Q_ASSERT( idx.isValid() );
+-    Q_ASSERT( static_cast< Item * >( idx.internalPointer() ) == ( *it ) );
+-    if ( !isExpanded( idx ) )
+-      setExpanded( idx, true );
+-  }
++  setAllGroupsExpanded( true );
+ }
+ 
+ } // namespace Core
+Index: kmail/messagelistview/core/manager.h
+===================================================================
+--- kmail/messagelistview/core/manager.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/messagelistview/core/manager.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -24,8 +24,10 @@
+ #include "messagelistview/core/sortorder.h"
+ #include <QList>
+ #include <QHash>
++#include <QObject>
+ 
+ class QPixmap;
++class QTimer;
+ 
+ namespace KMime
+ {
+@@ -63,20 +65,22 @@
+  * before the first MessageListView::Widget and destroyed after the last MessageListView::Widget.
+  * But in KMail this is always the case :)
+  */
+-class Manager
++class Manager : public QObject
+ {
++  Q_OBJECT
+ protected:
+   Manager();
+   ~Manager();
+ 
+ private:
+-  static Manager *mInstance;
++  static Manager * mInstance;
+   QList< Widget * > mWidgetList;
+   QHash< QString, Aggregation * > mAggregations;
+   QHash< QString, Theme * > mThemes;
+   KMime::DateFormatter * mDateFormatter;
+   bool mDisplayMessageToolTips;
+   QString mCachedLocalizedUnknownText;
++  QTimer * mHeartBeatTimer;
+ 
+   // pixmaps, never null
+ 
+@@ -258,6 +262,15 @@
+    */
+   void reloadAllWidgets();
+ 
++protected slots:
++  /**
++   * This slot is connected to a very slow timer (1 minute).
++   * It actually sweeps through the registered models calling
++   * checkIfDateChanged() in order to fix date displays.
++   * Later we could find other uses for the heartbeat.
++   */
++  void slotHeartBeat();
++
+ private:
+   // internal configuration stuff
+   void loadConfiguration();
+Index: kmail/messagelistview/core/model.h
+===================================================================
+--- kmail/messagelistview/core/model.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/messagelistview/core/model.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -51,6 +51,7 @@
+ class Filter;
+ class GroupHeaderItem;
+ class Item;
++class Manager;
+ class MessageItem;
+ class Theme;
+ class StorageModel;
+@@ -76,6 +77,7 @@
+ class Model : public QAbstractItemModel
+ {
+   friend class Item;
++  friend class Manager;
+ 
+   Q_OBJECT
+ public:
+@@ -183,7 +185,7 @@
+ 
+   /**
+    * Owned invisible root item, useful to implement algorithms that not need
+-   * to handle the special case of parentless items
++   * to handle the special case of parentless items. This is never 0.
+    */
+   Item *mRootItem;
+ 
+@@ -339,6 +341,13 @@
+    */
+   Model * mModelForItemFunctions;
+ 
++  /**
++   * The cached result of StorageModel::containsOutboundMessages().
++   * We access this property at each incoming message and StorageModel::containsOutboundMessages() is
++   * virtual (so it's always an indirect function call). Caching makes sense.
++   */
++  bool mStorageModelContainsOutboundMessages;
++
+ public:
+ 
+   /**
+@@ -389,6 +398,7 @@
+ 
+   /**
+    * Returns the hidden root item that all the messages are (or will be) attached to.
++   * The returned value is never 0.
+    */
+   Item * rootItem() const
+     { return mRootItem; };
+@@ -466,8 +476,16 @@
+   void deletePersistentSet( MessageItemSetReference ref );
+ 
+ protected:
++
+   void fillView();
+ 
++  /**
++   * This is called by MessageListView::Manager once in a while.
++   * It is a good place to check if the date has changed and
++   * trigger a view reload.
++   */
++  void checkIfDateChanged();
++
+ protected slots:
+   void viewItemJobStep();
+ 
+Index: kmail/messagelistview/core/manager.cpp
+===================================================================
+--- kmail/messagelistview/core/manager.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/messagelistview/core/manager.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -27,8 +27,10 @@
+ #include "messagelistview/core/configurethemesdialog.h"
+ #include "messagelistview/core/widgetbase.h"
+ #include "messagelistview/core/storagemodelbase.h"
++#include "messagelistview/core/model.h"
+ 
+ #include <QPixmap>
++#include <QTimer>
+ 
+ #include <kmime/kmime_dateformatter.h> // kdepimlibs
+ 
+@@ -53,6 +55,7 @@
+ Manager * Manager::mInstance = 0;
+ 
+ Manager::Manager()
++  : QObject()
+ {
+   mInstance = this;
+ 
+@@ -96,14 +99,26 @@
+ 
+   mCachedLocalizedUnknownText = i18nc( "Unknown date", "Unknown" ) ;
+ 
++  mHeartBeatTimer = new QTimer(this);
++  QObject::connect(
++      mHeartBeatTimer,SIGNAL(timeout()),
++      this,SLOT(slotHeartBeat())
++    );
++
++  mHeartBeatTimer->start(60000); // 1 minute
++
+   loadConfiguration();
+ }
+ 
+ Manager::~Manager()
+ {
++  mHeartBeatTimer->stop();
++
+   saveConfiguration();
+   removeAllAggregations();
+ 
++  delete mHeartBeatTimer;
++
+   delete mPixmapMessageNew;
+   delete mPixmapMessageUnread;
+   delete mPixmapMessageRead;
+@@ -138,10 +153,22 @@
+   ConfigureAggregationsDialog::cleanup(); // make sure it's dead
+   ConfigureThemesDialog::cleanup(); // make sure it's dead
+ 
+-
+   mInstance = 0;
+ }
+ 
++void Manager::slotHeartBeat()
++{
++  // sweep through all the models asking them to check their dates
++  for( QList< Widget * >::Iterator it = mWidgetList.begin(); it != mWidgetList.end(); ++it )
++  {
++    if ( !( *it )->view() )
++      continue;
++    if ( !( *it )->view()->model() )
++      continue;
++    ( *it )->view()->model()->checkIfDateChanged();
++  }
++}
++
+ void Manager::showConfigureAggregationsDialog( Widget *requester, const QString &preselectAggregationId )
+ {
+   ConfigureAggregationsDialog::display( requester ? requester->window() : 0, preselectAggregationId );
+Index: kmail/messagelistview/core/view.h
+===================================================================
+--- kmail/messagelistview/core/view.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/messagelistview/core/view.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -260,6 +260,14 @@
+   void setAllThreadsExpanded( bool expand );
+ 
+   /**
++   * If expand is true then it expands all the groups (only the toplevel
++   * group item: inner threads are NOT expanded). If expand is false
++   * then it collapses all the groups. If no grouping is in effect
++   * then this function does nothing.
++   */
++  void setAllGroupsExpanded( bool expand );
++
++  /**
+    * Selects the next message item in the view.
+    *
+    * messageTypeFilter can be used to limit the selection to
+Index: kmail/messagelistview/core/themedelegate.cpp
+===================================================================
+--- kmail/messagelistview/core/themedelegate.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/messagelistview/core/themedelegate.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -65,6 +65,10 @@
+ void ThemeDelegate::setTheme( const Theme * theme )
+ {
+   mTheme = theme;
++
++  if ( !mTheme )
++    return; // hum
++
+   // yep..we're violating const here
+   // But most of the QStyledItemDelegate virtual methods are const and expect
+   // const behaviour. So we need the const pointer to avoid compiler complains
+Index: kmail/messagelistview/storagemodel.h
+===================================================================
+--- kmail/messagelistview/storagemodel.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/messagelistview/storagemodel.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -227,6 +227,11 @@
+   /**
+    * Internal handler of KMFolder signal.
+    */
++  void slotViewConfigChanged();
++
++  /**
++   * Internal handler of KMFolder signal.
++   */
+   void slotMessageHeaderChanged( KMFolder *folder, int idx );
+ 
+ };
+Index: kmail/mainfolderview.cpp
+===================================================================
+--- kmail/mainfolderview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/mainfolderview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -174,6 +174,7 @@
+ 
+       popup->setObjectName( "subMenu" );
+       popup->setTitle( label );
++      popup->setIcon( KIcon( fvi->normalIcon() ) );
+ 
+       folderToPopupMenuInternal( action, target, popup, fvi );
+ 
+@@ -199,12 +200,13 @@
+ 
+       if ( subMenu )
+       {
++        popup->addSeparator();
++
+         QAction* act;
+         if ( action == MoveMessage || action == MoveFolder )
+           act = popup->addAction( i18n("Move to This Folder") );
+         else
+           act = popup->addAction( i18n("Copy to This Folder") );
+-        popup->addSeparator();
+ 
+         act->setData( QVariant::fromValue<void *>( (void *)( fvi->folder() ) ) );
+       }
+@@ -214,7 +216,7 @@
+     } else {
+ 
+       // insert an item
+-      QAction* act = menu->addAction( label );
++      QAction* act = menu->addAction( KIcon( fvi->normalIcon() ), label );
+       if ( fvi->folder() )
+         act->setData( QVariant::fromValue<void *>( (void *)( fvi->folder() ) ) );
+       bool enabled = (fvi->folder() ? true : false);
+Index: kmail/identitylistview.cpp
+===================================================================
+--- kmail/identitylistview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/identitylistview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -113,7 +113,8 @@
+     header()->setMovable( false );
+     setAllColumnsShowFocus( true );
+     setAlternatingRowColors( true );
+-    setSortingEnabled( false ); // disabled
++    setSortingEnabled( true );
++    sortByColumn( 0, Qt::AscendingOrder );
+     setSelectionMode( SingleSelection ); // ### Extended would be nicer...
+     setColumnWidth( 0, 175 );
+ 
 Index: kmail/kmail_config_composer.desktop
 ===================================================================
---- kmail/kmail_config_composer.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kmail/kmail_config_composer.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kmail/kmail_config_composer.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/kmail_config_composer.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -80,6 +80,7 @@
  Comment[ja]=メール作成の設定
  Comment[km]=ការ​កំណត់​កម្មវិធី​តែង​សារ
@@ -159,10 +873,23 @@ Index: kmail/kmail_config_composer.desktop
  Comment[lv]=Vēstuļu rastītāja iestatījumi
  Comment[nb]=Innstillinger for meldingskomposer
  Comment[nds]=Narichteneditor instellen
+Index: kmail/kmreaderwin.cpp
+===================================================================
+--- kmail/kmreaderwin.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/kmreaderwin.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -699,7 +699,7 @@
+   connect( mCopyURLAction, SIGNAL(triggered(bool)), SLOT(slotUrlCopy()) );
+ 
+   // open URL
+-  mUrlOpenAction = new KAction( i18n( "Open URL" ), this );
++  mUrlOpenAction = new KAction( KIcon( "document-open" ), i18n( "Open URL" ), this );
+   ac->addAction( "open_url", mUrlOpenAction );
+   connect( mUrlOpenAction, SIGNAL(triggered(bool)), SLOT(slotUrlOpen()) );
+ 
 Index: kmail/dbusimap.desktop
 ===================================================================
---- kmail/dbusimap.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kmail/dbusimap.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kmail/dbusimap.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/dbusimap.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -20,6 +20,7 @@
  Comment[kk]=DBUS интерфейсті пошта бағдарламасы
  Comment[km]=កម្មវិធី​សំបុត្រ​ដែល​មាន​ចំណុច​ប្រទាក់ DBUS
@@ -171,10 +898,23 @@ Index: kmail/dbusimap.desktop
  Comment[lv]=Pasta programma ar DBUS saskarni
  Comment[nb]=E-postprogram med DBUS-grensesnitt
  Comment[nds]=Nettpostprogramm mit en D-Bus-Koppelsteed
+Index: kmail/kmcommands.cpp
+===================================================================
+--- kmail/kmcommands.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/kmcommands.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -2937,7 +2937,7 @@
+ 
+   KTemporaryFile *linkFile = new KTemporaryFile();
+   linkFile->setPrefix(atmFileInfo.fileName() +"_[");
+-  linkFile->setSuffix("]."+ atmFileInfo.suffix());
++  linkFile->setSuffix( "]." + KMimeType::extractKnownExtension( atmFileInfo.fileName() ) );
+   linkFile->open();
+   QString linkName = linkFile->fileName();
+   delete linkFile;
 Index: kmail/kmfoldercachedimap.cpp
 ===================================================================
---- kmail/kmfoldercachedimap.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kmail/kmfoldercachedimap.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kmail/kmfoldercachedimap.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/kmfoldercachedimap.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -202,7 +202,8 @@
      /*mHoldSyncs( false ),*/
      mFolderRemoved( false ),
@@ -303,8 +1043,8 @@ Index: kmail/kmfoldercachedimap.cpp
    serverSyncInternal();
 Index: kmail/kmfoldercachedimap.h
 ===================================================================
---- kmail/kmfoldercachedimap.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kmail/kmfoldercachedimap.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kmail/kmfoldercachedimap.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/kmfoldercachedimap.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -627,12 +627,18 @@
      bool mFolderRemoved;
      bool mRecurse;
@@ -329,10 +1069,22 @@ Index: kmail/kmfoldercachedimap.h
      bool mStatusChangedLocally;
  
      /**
+Index: kmail/kmmainwidget.cpp
+===================================================================
+--- kmail/kmmainwidget.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/kmmainwidget.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -1277,6 +1277,7 @@
+   KMFolderDialog props( folder, folder->parent(), mMainFolderView,
+                         i18n("Properties of Folder %1", folder->label() ) );
+   props.exec();
++
+   updateFolderMenu();
+ }
+ 
 Index: kmail/kmail_view.desktop
 ===================================================================
---- kmail/kmail_view.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kmail/kmail_view.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kmail/kmail_view.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/kmail_view.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -13,6 +13,7 @@
  Name[ja]=KMail ビュー
  Name[km]=ទិដ្ឋភាព KMail
@@ -341,10 +1093,107 @@ Index: kmail/kmail_view.desktop
  Name[lv]=KMail skats
  Name[nb]=KMail-visning
  Name[nds]=KMail-Ansicht
+Index: kmail/configuredialog.cpp
+===================================================================
+--- kmail/configuredialog.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/configuredialog.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -2036,14 +2036,16 @@
+            this, SLOT( slotEmitChanged() ) );
+ 
+   // "Show expand/collaps quote marks" check box;
+-  QHBoxLayout *hlay= new QHBoxLayout(); // inherits spacing
+-  vlay->addLayout( hlay );
+   populateCheckBox( mShowExpandQuotesMark= new QCheckBox( this ), showExpandQuotesMark);
+-  hlay->addWidget( mShowExpandQuotesMark);
++  vlay->addWidget( mShowExpandQuotesMark);
+   connect( mShowExpandQuotesMark, SIGNAL ( stateChanged( int ) ),
+            this, SLOT( slotEmitChanged() ) );
+ 
+-  hlay->addStretch( 1 );
++  //New HBoxLayout to show the collapseQuoteLevel spin+label one line down
++  QHBoxLayout * hlay = new QHBoxLayout();
++  vlay->addLayout( hlay );
++  hlay->addSpacing( 40 );
++
+   mCollapseQuoteLevelSpin = new KIntSpinBox( 0/*min*/,10/*max*/,1/*step*/,
+       3/*init*/,this );
+ 
+@@ -2061,6 +2063,8 @@
+   connect( mShowExpandQuotesMark, SIGNAL( toggled( bool ) ),
+       mCollapseQuoteLevelSpin, SLOT( setEnabled( bool ) ) );
+ 
++  hlay->addStretch();
++
+   // Fallback Character Encoding
+   hlay = new QHBoxLayout(); // inherits spacing
+   vlay->addLayout( hlay );
+Index: kmail/accountmanager.cpp
+===================================================================
+--- kmail/accountmanager.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/accountmanager.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -94,6 +94,32 @@
+     uint id = group.readEntry( "Id", 0 );
+     KAccount::Type acctType = KAccount::typeForName( group.readEntry( "Type" ) );
+     QString accountName = group.readEntry( "Name" );
++
++    // Fixes for config compatibilty: We do have an update script, but that is not reliable, because
++    // sometimes the scripts don't run (or already run in KDE3, but don't actually change anything)
++    // This is a big problem, since incorrect account type values make you loose your account settings,
++    // which in case of disconnected IMAP means you'll loose your cache.
++    // So for extra saftey, convert the account type values here as well.
++    // See also kmail-4.0-misc.pl
++    if ( acctType == -1 ) {
++      kWarning() << "Config upgrade failed! Danger! Trying to convert old account type for account" << accountName;
++      const QString accountTypeName = group.readEntry( "Type" );
++      if ( accountTypeName == "cachedimap" )
++        acctType = KAccount::DImap;
++      if ( accountTypeName == "pop" )
++        acctType = KAccount::Pop;
++      if ( accountTypeName == "local" )
++        acctType = KAccount::Local;
++      if ( accountTypeName == "maildir" )
++        acctType = KAccount::Maildir;
++      if ( accountTypeName == "imap" )
++        acctType = KAccount::Imap;
++      if ( acctType == -1 )
++        kWarning() << "Unrecognized account type. Your account settings are now lost, sorry.";
++      else
++        kDebug() << "Account type upgraded.";
++    }
++
+     if ( accountName.isEmpty() )
+       accountName = i18n( "Account %1", accountNum++ );
+     KMAccount *account = create( acctType, accountName, id );
+Index: kmail/objecttreeparser.cpp
+===================================================================
+--- kmail/objecttreeparser.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kmail/objecttreeparser.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -2099,12 +2099,16 @@
+   if ( auditLog.isEmpty() )
+     return i18n("No Audit Log available");
+ 
+-  KUrl url;
+-  url.setProtocol( "kmail" );
+-  url.setPath( "showAuditLog" );
+-  url.addQueryItem( "log", auditLog );
++  if ( !auditLog.isEmpty() ) {
++    KUrl url;
++    url.setProtocol( "kmail" );
++    url.setPath( "showAuditLog" );
++    url.addQueryItem( "log", auditLog );
+ 
+-  return "<a href=\"" + url.url() + "\">" + i18nc("The Audit Log is a detailed error log from the gnupg backend", "Show Audit Log") + "</a>";
++    return "<a href=\"" + url.url() + "\">" + i18nc("The Audit Log is a detailed error log from the gnupg backend", "Show Audit Log") + "</a>";
++  }
++
++  return QString();
+ }
+ 
+ static QString endVerboseSigstatHeader( const PartMetaData & pmd )
 Index: knode/kncomposerview.cpp
 ===================================================================
---- knode/kncomposerview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ knode/kncomposerview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- knode/kncomposerview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knode/kncomposerview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -93,6 +93,7 @@
    e_dit=new KNComposerEditor(this);
    e_dit->switchToPlainText();
@@ -355,8 +1204,8 @@ Index: knode/kncomposerview.cpp
    notL->addStretch(1);
 Index: knode/knarticle.cpp
 ===================================================================
---- knode/knarticle.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ knode/knarticle.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- knode/knarticle.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knode/knarticle.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -70,8 +70,10 @@
  {
    // filter out internal headers
@@ -371,8 +1220,8 @@ Index: knode/knarticle.cpp
    }
 Index: dependency-graph.dot
 ===================================================================
---- dependency-graph.dot	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ dependency-graph.dot	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- dependency-graph.dot	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ dependency-graph.dot	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -48,7 +48,6 @@
          "konsolekalendar"[style=filled, fillcolor=lightcyan, URL="konsolekalendar/html/index.html"];
          "kontact"[style=filled, fillcolor=lightcyan, URL="kontact/html/index.html"];
@@ -383,8 +1232,8 @@ Index: dependency-graph.dot
          "libkdepim"[style=filled, fillcolor=lightyellow, URL="libkdepim/html/index.html"];
 Index: doc/kleopatra/index.docbook
 ===================================================================
---- doc/kleopatra/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ doc/kleopatra/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- doc/kleopatra/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ doc/kleopatra/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -13,48 +13,6 @@
  
    <!ENTITY dn "<acronym>DN</acronym>">
@@ -1277,8 +2126,8 @@ Index: doc/kleopatra/index.docbook
        <example>
 Index: doc/ktimetracker/index.docbook
 ===================================================================
---- doc/ktimetracker/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ doc/ktimetracker/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- doc/ktimetracker/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ doc/ktimetracker/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -99,12 +99,13 @@
  <sect1 id="starting">
  <title>Starting &karm;</title>
@@ -1317,8 +2166,8 @@ Index: doc/ktimetracker/index.docbook
  <listitem><para>Gioele Barabucci <email>gioele@gioelebarabucci.com</email></para></listitem>
 Index: doc/kjots/index.docbook
 ===================================================================
---- doc/kjots/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ doc/kjots/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- doc/kjots/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ doc/kjots/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -155,12 +155,12 @@
  <guimenuitem>Delete Page</guimenuitem></menuchoice>.</para>
  
@@ -1336,8 +2185,8 @@ Index: doc/kjots/index.docbook
  is: <keycombo action="simul">&Ctrl;<keycap>M</keycap></keycombo>.</para>
 Index: doc/knode/using-morefeatures.docbook
 ===================================================================
---- doc/knode/using-morefeatures.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ doc/knode/using-morefeatures.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- doc/knode/using-morefeatures.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ doc/knode/using-morefeatures.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -644,7 +644,7 @@
  the rules which are shown &mdash; you have the choice whether to show all
  rules or only the rules for a specific <glossterm>newsgroup</glossterm>.</para> 
@@ -1358,8 +2207,8 @@ Index: doc/knode/using-morefeatures.docbook
  <para>When leaving the editor, or when the 
 Index: doc/knode/using-firststart.docbook
 ===================================================================
---- doc/knode/using-firststart.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ doc/knode/using-firststart.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- doc/knode/using-firststart.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ doc/knode/using-firststart.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -246,7 +246,7 @@
  <para>If this option is activated, the signature file is not handled
  as a text file, but as a program. The signature file will be started
@@ -1389,8 +2238,8 @@ Index: doc/knode/using-firststart.docbook
  <para>With the two buttons <guibutton>Add Separator</guibutton> and
 Index: doc/knode/using-subscribing.docbook
 ===================================================================
---- doc/knode/using-subscribing.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ doc/knode/using-subscribing.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- doc/knode/using-subscribing.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ doc/knode/using-subscribing.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -184,7 +184,7 @@
  </tip> 
  
@@ -1418,10 +2267,23 @@ Index: doc/knode/using-subscribing.docbook
  article view gets colored; at the same time the header and body of
  this article appear in in the article window. If you want to read
  another article you can use the mouse to select it, or you can use
+Index: doc/kpilot/faq.docbook
+===================================================================
+--- doc/kpilot/faq.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ doc/kpilot/faq.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -334,7 +334,7 @@
+ </sect1>
+ 
+ 
+-<sect1>
++<sect1 id="faq-dcop">
+ <title>&kpilot;'s &DCOP; interface</title>
+ 
+ <qandaset>
 Index: doc/kalarm/index.docbook
 ===================================================================
---- doc/kalarm/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ doc/kalarm/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- doc/kalarm/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ doc/kalarm/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -261,20 +261,10 @@
  </listitem>
  
@@ -1533,8 +2395,8 @@ Index: doc/kalarm/index.docbook
  
 Index: doc/kaddressbook/index.docbook
 ===================================================================
---- doc/kaddressbook/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ doc/kaddressbook/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- doc/kaddressbook/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ doc/kaddressbook/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -544,8 +544,8 @@
  <para>The Photo will be shown in the contact preview and in the Icon view mode. However the Logo picture will only be shown in Icon view and only if there's no photo available.</para>
  <para>To reset a photo or logo simply click on it with the &RMB; and select <guilabel>Reset</guilabel>.</para>
@@ -1557,8 +2419,8 @@ Index: doc/kaddressbook/index.docbook
  <varlistentry>
 Index: doc/korganizer/index.docbook
 ===================================================================
---- doc/korganizer/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ doc/korganizer/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- doc/korganizer/index.docbook	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ doc/korganizer/index.docbook	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -454,7 +454,7 @@
  </procedure>
  
@@ -1827,8 +2689,8 @@ Index: doc/korganizer/index.docbook
  <para>You can get a detailed description of the to-do window in <link
 Index: kalarm/kalarm.h
 ===================================================================
---- kalarm/kalarm.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kalarm/kalarm.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kalarm/kalarm.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kalarm/kalarm.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -23,7 +23,7 @@
  
  #undef QT3_SUPPORT
@@ -1840,8 +2702,8 @@ Index: kalarm/kalarm.h
  
 Index: kalarm/mainwindow.cpp
 ===================================================================
---- kalarm/mainwindow.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kalarm/mainwindow.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kalarm/mainwindow.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kalarm/mainwindow.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -51,6 +51,7 @@
  #include <QDropEvent>
  #include <QResizeEvent>
@@ -1887,8 +2749,8 @@ Index: kalarm/mainwindow.cpp
  		}
 Index: kalarm/Changelog
 ===================================================================
---- kalarm/Changelog	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kalarm/Changelog	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kalarm/Changelog	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kalarm/Changelog	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -1,6 +1,9 @@
  KAlarm Change Log
  
@@ -1902,8 +2764,8 @@ Index: kalarm/Changelog
  - Fix possible crash on alarm refresh, or removal or disabling of a resource.
 Index: kalarm/kalarmapp.cpp
 ===================================================================
---- kalarm/kalarmapp.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kalarm/kalarmapp.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kalarm/kalarmapp.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kalarm/kalarmapp.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -1021,7 +1021,6 @@
  void KAlarmApp::removeWindow(TrayWindow*)
  {
@@ -1912,10 +2774,127 @@ Index: kalarm/kalarmapp.cpp
  }
  
  /******************************************************************************
+Index: kalarm/resources/resourcelocaldir.cpp
+===================================================================
+--- kalarm/resources/resourcelocaldir.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kalarm/resources/resourcelocaldir.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -1,8 +1,8 @@
+ /*
+  *  resourcelocaldir.cpp  -  KAlarm local directory calendar resource
+  *  Program:  kalarm
+- *  Copyright © 2006-2008 by David Jarvie <djarvie@kde.org>
+- *  Based on resourcelocaldir.cpp in libkcal (updated to rev 779953),
++ *  Copyright © 2006-2009 by David Jarvie <djarvie@kde.org>
++ *  Based on resourcelocaldir.cpp in libkcal (updated to rev 779953,938673,938806),
+  *  Copyright (c) 2003 Cornelius Schumacher <schumacher@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+@@ -149,6 +149,9 @@
+ #ifdef __GNUC__
+ #warning Only reload the individual file which has changed
+ #endif
++	if (filepath.contains(QRegExp("(~|\\.new|\\.tmp)$"))
++	||  filepath.startsWith(mURL.path() + "/qt_temp."))
++		return;   // ignore backup or temporary file
+ 	doLoad(false);
+ }
+ /******************************************************************************
+@@ -203,8 +206,9 @@
+ 		{
+ 			// Check the next file in the directory
+ 			QString id = entries[i];
+-			if (id.endsWith('~'))   // backup file, ignore it
+-				continue;
++			if (id.contains(QRegExp("(~|\\.new|\\.tmp)$"))
++			||  id.startsWith("qt_temp."))
++				continue;   // ignore backup or temporary file
+ 			QString fileName = dirName + '/' + id;
+ 			foundFile = true;
+ 
+@@ -218,7 +222,6 @@
+ 				Event* ev = calendar()->event(id);
+ 				if (ev  &&  changes.indexOf(ev) < 0)
+ 				{
+-kDebug(KARES_DEBUG) << "Loading" << id;
+ 					ModifiedMap::ConstIterator mit = oldLastModified.constFind(id);
+ 					if (mit != oldLastModified.constEnd()  &&  mit.value() == readLastModified(fileName))
+ 					{
+@@ -367,6 +370,12 @@
+ 
+ bool KAResourceLocalDir::doSave(bool, Incidence* incidence)
+ {
++	if (mDeletedIncidences.contains(incidence))
++	{
++		mDeletedIncidences.removeAll(incidence);
++		return true;
++	}
++
+ 	QString id = incidence->uid();
+ 	QString fileName = mURL.path() + '/' + id;
+ 	kDebug(KARES_DEBUG) << fileName;
+@@ -404,6 +413,8 @@
+ 	clearChange(event);
+ 	disableChangeNotification();    // don't record this deletion as pending
+ 	bool success = calendar()->deleteEvent(event);
++	if (success)
++		mDeletedIncidences.append(event);
+ 	enableChangeNotification();
+ 	return success;
+ }
+Index: kalarm/resources/resourcelocalwidget.cpp
+===================================================================
+--- kalarm/resources/resourcelocalwidget.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kalarm/resources/resourcelocalwidget.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -40,6 +40,7 @@
+ 	QLabel* label = new QLabel(i18nc("@label:textbox", "Location:"), this);
+ 	layout->addWidget(label, 1, 0);
+ 	mURL = new KUrlRequester(this);
++	mURL->setFilter(QString::fromLatin1("*.vcs *.ics|%1").arg(i18nc("@info/plain", "Calendar Files")));
+ 	layout->addWidget(mURL, 1, 1);
+ }
+ 
+Index: kalarm/resources/resourcelocaldir.h
+===================================================================
+--- kalarm/resources/resourcelocaldir.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kalarm/resources/resourcelocaldir.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -1,7 +1,7 @@
+ /*
+  *  resourcelocaldir.h  -  KAlarm local directory alarm calendar resource
+  *  Program:  kalarm
+- *  Copyright © 2006-2008 by David Jarvie <djarvie@kde.org>
++ *  Copyright © 2006-2009 by David Jarvie <djarvie@kde.org>
+  *  Based on resourcelocaldir.h in libkcal,
+  *  Copyright (c) 2003 Cornelius Schumacher <schumacher@kde.org>
+  *
+@@ -25,12 +25,13 @@
+ 
+ /* @file resourcelocaldir.h - KAlarm local directory alarm calendar resource */
+ 
+-#include <QMap>
++#include "alarmresource.h"
++
+ #include <kurl.h>
+ #include <kdirwatch.h>
++#include <QMap>
++#include <QList>
+ 
+-#include "alarmresource.h"
+-
+ namespace KCal {
+     class Incidence;
+ }
+@@ -94,6 +95,7 @@
+ 		KDirWatch   mDirWatch;
+ 		typedef QMap<QString, QDateTime> ModifiedMap;
+ 		ModifiedMap mLastModified;
++		QList<KCal::Incidence*> mDeletedIncidences;
+ 		bool        mDirReadOnly;  // directory is read-only
+ };
+ 
 Index: kalarm/resources/kalarm_manager.desktop
 ===================================================================
---- kalarm/resources/kalarm_manager.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kalarm/resources/kalarm_manager.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kalarm/resources/kalarm_manager.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kalarm/resources/kalarm_manager.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -18,6 +18,7 @@
  Name[kk]=Ескертулер
  Name[km]=ជូន​ដំណឹង
@@ -1926,8 +2905,8 @@ Index: kalarm/resources/kalarm_manager.desktop
  Name[ne]=संसूचक
 Index: kalarm/traywindow.h
 ===================================================================
---- kalarm/traywindow.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kalarm/traywindow.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kalarm/traywindow.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kalarm/traywindow.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -1,7 +1,7 @@
  /*
   *  traywindow.h  -  the KDE system tray applet
@@ -1957,8 +2936,8 @@ Index: kalarm/traywindow.h
  		QString      tooltipAlarmText() const;
 Index: kalarm/traywindow.cpp
 ===================================================================
---- kalarm/traywindow.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kalarm/traywindow.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kalarm/traywindow.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kalarm/traywindow.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -39,6 +39,7 @@
  #include <QToolTip>
  #include <QMouseEvent>
@@ -1991,8 +2970,8 @@ Index: kalarm/traywindow.cpp
  {
 Index: Mainpage.dox
 ===================================================================
---- Mainpage.dox	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ Mainpage.dox	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- Mainpage.dox	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ Mainpage.dox	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -30,8 +30,6 @@
          * - <a href="kmail/html/index.html"><b>kmail</b></a>
          *   (<a href="kmail/html/classes.html">classes</a>)\n
@@ -2002,10 +2981,106 @@ Index: Mainpage.dox
          *   <i>An application specially designed to manage mobile phones.</i>
          * - <a href="knode/html/index.html"><b>knode</b></a>
          *   (<a href="knode/html/classes.html">classes</a>)\n
+Index: kaddressbook/printing/kabentrypainter.cpp
+===================================================================
+--- kaddressbook/printing/kabentrypainter.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kaddressbook/printing/kabentrypainter.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -220,8 +220,10 @@
+   y += fmBody.lineSpacing() / 2;
+ 
+   painter->setPen( mForegroundColor );
+-  if ( !addr.prefix().isEmpty() ) {
+-    line1 = addr.prefix().trimmed();
++  // This used to be addr.prefix(), but that makes no sense, it's part of the formattedName already.
++  // The role, OTOH, can be useful. E.g. formattedName="Dr Foo Bar", role="Dentist"                 
++  if ( !addr.role().isEmpty() ) {                                                                   
++    const QString line1 = addr.role().trimmed();                                                    
+ 
+     if ( fake ) {
+       rect = painter->boundingRect( Ruler1, y, Width-Ruler1, Height,
+Index: kaddressbook/printing/detailledstyle.cpp
+===================================================================
+--- kaddressbook/printing/detailledstyle.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kaddressbook/printing/detailledstyle.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -215,7 +215,6 @@
+ 
+   QPrinter *printer = wizard()->printer();
+ 
+-  QPainter painter;
+   progress->addMessage( i18n( "Setting up margins and spacing" ) );
+   int marginTop = 0,
+       marginLeft = 64, // to allow stapling, need refinement with two-side prints
+@@ -224,15 +223,14 @@
+ 
+   register int left, top, width, height;
+ 
+-  painter.begin( printer );
+-  printer->setFullPage( true ); // use whole page
++  QPainter painter( printer );
+ 
+-
+-  left = qMax( printer->paperRect().left() - printer->pageRect().left(), marginLeft );
+-  top = qMax( printer->paperRect().top() - printer->pageRect().top(), marginTop );
++  left = qMax( printer->pageRect().left() - printer->paperRect().left(), marginLeft );
++  top = qMax( printer->pageRect().top() - printer->paperRect().top(), marginTop );
+   width = printer->width() - left - qMax( printer->paperRect().right() - printer->pageRect().right(), marginRight );
+   height = printer->height() - top - qMax( printer->paperRect().bottom() - printer->pageRect().bottom(), marginBottom );
+ 
++  printer->setFullPage( true ); // use whole page
+   painter.setViewport( left, top, width, height );
+   progress->addMessage( i18n( "Printing" ) );
+ 
+@@ -240,7 +238,6 @@
+                 QRect( 0, 0, printer->width(), printer->height() ) );
+ 
+   progress->addMessage( i18n( "Done" ) );
+-  painter.end();
+ 
+   config.sync();
+ }
+Index: kaddressbook/xxport/vcard_xxport.desktop
+===================================================================
+--- kaddressbook/xxport/vcard_xxport.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kaddressbook/xxport/vcard_xxport.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -30,7 +30,7 @@
+ Name[lt]=KAB vCard XXPort priedas
+ Name[lv]=KAB vCard XXPort spraudnis
+ Name[ms]=Plugin KAB vCard XXPort 
+-Name[nb]=KAB-programtillegg for vCard
++Name[nb]=KAB-programtillegg for vCard XXPort
+ Name[nds]=vCard-Im-/Exportmoduul för KAdressbook
+ Name[ne]=KAB भीकार्ड XXPort प्लगइन
+ Name[nl]=KAB vCard XXPort-plugin
+Index: kaddressbook/xxport/pab_xxport.desktop
+===================================================================
+--- kaddressbook/xxport/pab_xxport.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kaddressbook/xxport/pab_xxport.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -27,7 +27,7 @@
+ Name[lt]=KAB MS Exchange asmeninės adresų knygelės XXPort priedas
+ Name[lv]=KAB MS Exchange personīgo adrešu grāmatu XXPort spraudnis
+ Name[ms]=Plugin Buku Alamat Peribadi KAB MS Exchange  XXPort Plugin
+-Name[nb]=KAB-programtillegg for import fra MS Exchange
++Name[nb]=KAB-programtillegg for import fra MS Exchange XXPort personlig adressebok
+ Name[nds]=MSExchange-Importmoduul för KAdressbook
+ Name[ne]=KAB MS विनिमय व्यक्तिगत ठेगाना पुस्तिका XXPort प्लगइन
+ Name[nl]=KAB MS Exchange Personal Addressbook XXPort-plugin
+Index: kaddressbook/editors/cryptosettings.desktop
+===================================================================
+--- kaddressbook/editors/cryptosettings.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kaddressbook/editors/cryptosettings.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -7,7 +7,7 @@
+ Name[ca]=Preferències de criptografia
+ Name[cs]=Nastavení šifrování
+ Name[da]=Krypto-indstillinger
+-Name[de]=Kryptographie-Einstellungen
++Name[de]=Kryptografie-Einstellungen
+ Name[el]=Προτιμήσεις κρυπτογραφίας
+ Name[eo]=Agordoj pri Ĉifrado
+ Name[es]=Preferencias de cifrado
 Index: CMakeLists.txt
 ===================================================================
---- CMakeLists.txt	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ CMakeLists.txt	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- CMakeLists.txt	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ CMakeLists.txt	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -89,15 +89,6 @@
      macro_log_feature(X11_Xscreensaver_FOUND "X11 screensaver extension" "X Window Screen Saver Development Library" "http://xorg.freedesktop.org" FALSE "" "Required for building the KTimeTracker Program")
    endif(X11_FOUND)
@@ -2068,8 +3143,8 @@ Index: CMakeLists.txt
  
 Index: libkholidays/holidays/holiday_se
 ===================================================================
---- libkholidays/holidays/holiday_se	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ libkholidays/holidays/holiday_se	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- libkholidays/holidays/holiday_se	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ libkholidays/holidays/holiday_se	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -23,8 +23,8 @@
  :Before 2005
  :black "Nationaldagen" black on 6.6
@@ -2083,8 +3158,8 @@ Index: libkholidays/holidays/holiday_se
  black "1. Advent" on sunday before 24.12 minus 21 days
 Index: ktimetracker/timetrackerwidget.cpp
 ===================================================================
---- ktimetracker/timetrackerwidget.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ ktimetracker/timetrackerwidget.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- ktimetracker/timetrackerwidget.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ ktimetracker/timetrackerwidget.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -692,6 +692,7 @@
    dialog->addPage( storagePage, i18n( "Storage" ), "system-file-manager" );
  
@@ -2093,10 +3168,23 @@ Index: ktimetracker/timetrackerwidget.cpp
    showSearchBar( !KTimeTrackerSettings::configPDA() );
    reconfigureFiles();
  }
+Index: ktimetracker/kcmconfigs/ktimetrackerconfig.desktop
+===================================================================
+--- ktimetracker/kcmconfigs/ktimetrackerconfig.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ ktimetracker/kcmconfigs/ktimetrackerconfig.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -35,7 +35,7 @@
+ Comment[ko]=KTimeTracker 설정
+ Comment[lt]=Konfigūruoti ktimetracker
+ Comment[lv]=Konfigurēt ktimetracker
+-Comment[nb]=Oppsett for ktimettracker
++Comment[nb]=Oppsett for ktimetracker
+ Comment[nds]=Tietlogbook instellen
+ Comment[nl]=KTimeTracker instellen
+ Comment[nn]=Set opp KTidtakar
 Index: kjots/Kjots.desktop
 ===================================================================
---- kjots/Kjots.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kjots/Kjots.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kjots/Kjots.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kjots/Kjots.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -20,7 +20,7 @@
  GenericName[ja]=メモ帳
  GenericName[km]=កម្មវិធី​ទទួល​ចំណាំ
@@ -2108,8 +3196,8 @@ Index: kjots/Kjots.desktop
  GenericName[nds]=Notizenprogramm
 Index: kjots/kjotspart.desktop
 ===================================================================
---- kjots/kjotspart.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kjots/kjotspart.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kjots/kjotspart.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kjots/kjotspart.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -1,5 +1,6 @@
  [Desktop Entry]
  Name=KJotsPart
@@ -2119,8 +3207,8 @@ Index: kjots/kjotspart.desktop
  Name[pl]=Moduł Notatek
 Index: README
 ===================================================================
---- README	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ README	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- README	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ README	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -22,7 +22,6 @@
  * kaddressbook: The KDE addressbook application.
  * kmail: the KDE mail client
@@ -2137,18 +3225,135 @@ Index: README
  * akregator: Feed reader
  * kjots: manager for several "books" with a subject and notes
  
+Index: libkdepim/utils.cpp
+===================================================================
+--- libkdepim/utils.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ libkdepim/utils.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -57,7 +57,7 @@
+ 
+ static PPERF_INSTANCE_DEFINITION NextInstance( PPERF_INSTANCE_DEFINITION PerfInst )
+ {
+-  PPERF_COUNTER_BLOCK PerfCntrBlk 
++  PPERF_COUNTER_BLOCK PerfCntrBlk
+     = (PPERF_COUNTER_BLOCK)((PBYTE)PerfInst + PerfInst->ByteLength);
+   return (PPERF_INSTANCE_DEFINITION)((PBYTE)PerfCntrBlk + PerfCntrBlk->ByteLength);
+ }
+@@ -110,6 +110,7 @@
+ 
+   // Get the first object type.
+   perfObject = FirstObject( perfData );
++  if ( !perfObject ) return;
+ 
+   // Process all objects.
+   for( uint i = 0; i < perfData->NumObjectTypes; i++ ) {
+@@ -124,7 +125,7 @@
+     qDebug() << "INSTANCES: " << perfObject->NumInstances;
+     for( int instance = 0; instance < perfObject->NumInstances; instance++ ) {
+       curCounter = perfCounter;
+-      const QString foundProcessName( 
++      const QString foundProcessName(
+         fromWChar( (wchar_t *)( (PBYTE)perfInstance + perfInstance->NameOffset ) ) );
+       qDebug() << "foundProcessName: " << foundProcessName;
+       if ( foundProcessName == processName ) {
 Index: kpilot/Messages.sh
 ===================================================================
---- kpilot/Messages.sh	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kpilot/Messages.sh	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kpilot/Messages.sh	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/Messages.sh	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -1,2 +1,3 @@
  #! /usr/bin/env bash
 +$EXTRACTRC `find . -name \*.rc -o -name \*.ui -o -name \*.kcfg` >> rc.cpp
  $XGETTEXT `find . -name \*.cc -o -name \*.cpp -o -name \*.h` -o $podir/kpilot.pot
+Index: kpilot/conduits/notepadconduit/notepad-conduit.desktop
+===================================================================
+--- kpilot/conduits/notepadconduit/notepad-conduit.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/conduits/notepadconduit/notepad-conduit.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -47,7 +47,7 @@
+ Comment[lt]=Šis kanalas padaro NotePad piešinių atsargines kopijas į vietinį aplanką.
+ Comment[lv]=Šī ķēde saglabā piezīmju zīmējumu rezerves kopijas datora mapē.
+ Comment[ms]=Saluran ini menyandarkan lukisan NotePad ke folder setempat.
+-Comment[nb]=Denne kanalen tar sikkerhetskopi av NotePad tegninger til en lokal mappe.
++Comment[nb]=Denne koblingen tar sikkerhetskopi av NotePad tegninger til en lokal mappe.
+ Comment[nds]=Sekert NotePad-Teken binnen en lokaal Orner.
+ Comment[ne]=यो कन्ड्युटले स्थानीय फाइलमा नोटप्याड रेखाचित्र ब्याकअप गर्छ ।
+ Comment[nl]=Dit conduit maakt een backup van de notitie-aantekeningen naar een lokale map.
+Index: kpilot/conduits/sysinfoconduit/sysinfo_conduit.desktop
+===================================================================
+--- kpilot/conduits/sysinfoconduit/sysinfo_conduit.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/conduits/sysinfoconduit/sysinfo_conduit.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -26,7 +26,7 @@
+ Comment[lt]=Šis kanalas įrašo informaciją apie Jūsų delninuką ir sinchronizavimą į failą.
+ Comment[lv]=Šī ķēde ieraksta failā informācijau par jūsu pārnēsājamo ierīci un tās sinhronizāciju.
+ Comment[ms]=Saluran ini menulis maklumat tentang komputer telapak dan segerakan ke fail.
+-Comment[nb]=Denne kanalen skriver informasjon om hånddatoren og synkroniseringen til en fil.
++Comment[nb]=Denne koblingen skriver informasjon om hånddatoren og synkroniseringen til en fil.
+ Comment[nds]=De Kanaal schrifft Informatschonen över den Handreekner un de Synkroniseren na en Datei.
+ Comment[ne]=यो कन्ड्युटले ह्यान्डहेल्ड बारेमा सूचना लेख्दछ र फाइलमा समक्रमण गर्दछ ।
+ Comment[nl]=Dit conduit slaat informatie over uw handheld en de synchronisatie op in een bestand.
+Index: kpilot/conduits/memofileconduit/memofile-conduit.desktop
+===================================================================
+--- kpilot/conduits/memofileconduit/memofile-conduit.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/conduits/memofileconduit/memofile-conduit.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -74,7 +74,7 @@
+ Comment[lt]=Šis kanalas sinchronizuoja Jūsų užrašus su vietiniu aplanku.
+ Comment[lv]=Šī ķēde sinhronizē jūsu rokas datora piezīmes ar mapi datorā.
+ Comment[ms]=Saluran ini mensegerakkan memo komputer telapak anda dengan direktori setempat.
+-Comment[nb]=Denne kanalen synkroniserer hånddatorens notater med en lokal mappe.
++Comment[nb]=Denne koblingen synkroniserer hånddatorens notater med en lokal mappe.
+ Comment[nds]=Synkroniseert de Notizen op den Handreekner mit en lokaal Orner.
+ Comment[ne]=यो कन्ड्युटले स्थानीय डाइरेक्टरीमा तपाईँका ह्यान्डहेल्ड मेमो समक्रमण गर्दछ ।
+ Comment[nl]=Dit conduit synchroniseert de memo's van uw handheld met een lokale map.
+Index: kpilot/conduits/timeconduit/time_conduit.desktop
+===================================================================
+--- kpilot/conduits/timeconduit/time_conduit.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/conduits/timeconduit/time_conduit.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -29,7 +29,7 @@
+ Comment[lv]=Šī ķēde uzstāda jūsu rokas datora pulksteni, izmantojot datora pulksteni.
+ Comment[mk]=Овој канал го поставува времето на рачниот уред според времето на компјутерот.
+ Comment[ms]=Saluran ini mengeset waktu pada komputer telapak anda dari jam PC.
+-Comment[nb]=Denne kanalen stiller klokka på hånddatoren fra PC-klokka.
++Comment[nb]=Denne koblingen stiller klokka på hånddatoren fra PC-klokka.
+ Comment[nds]=Synkroniseert stellt Handreekner-Klock na de PC-Klock.
+ Comment[ne]=यो कन्ड्युटले पीसी घडीबाट ह्यान्डहेल्डमा समय सेट गर्दछ ।
+ Comment[nl]=Dit conduit stelt de tijd van uw handheld in aan de hand van de pc-klok.
+Index: kpilot/conduits/memofile/kpilot-conduit-memofile.desktop
+===================================================================
+--- kpilot/conduits/memofile/kpilot-conduit-memofile.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/conduits/memofile/kpilot-conduit-memofile.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -74,7 +74,7 @@
+ Comment[lt]=Šis kanalas sinchronizuoja Jūsų užrašus su vietiniu aplanku.
+ Comment[lv]=Šī ķēde sinhronizē jūsu rokas datora piezīmes ar mapi datorā.
+ Comment[ms]=Saluran ini mensegerakkan memo komputer telapak anda dengan direktori setempat.
+-Comment[nb]=Denne kanalen synkroniserer hånddatorens notater med en lokal mappe.
++Comment[nb]=Denne koblingen synkroniserer hånddatorens notater med en lokal mappe.
+ Comment[nds]=Synkroniseert de Notizen op den Handreekner mit en lokaal Orner.
+ Comment[ne]=यो कन्ड्युटले स्थानीय डाइरेक्टरीमा तपाईँका ह्यान्डहेल्ड मेमो समक्रमण गर्दछ ।
+ Comment[nl]=Dit conduit synchroniseert de memo's van uw handheld met een lokale map.
+Index: kpilot/conduits/keyringconduit/kpilot-conduit-keyring.desktop
+===================================================================
+--- kpilot/conduits/keyringconduit/kpilot-conduit-keyring.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/conduits/keyringconduit/kpilot-conduit-keyring.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -15,7 +15,7 @@
+ Comment[km]=conduit syncs នេះ​មូលដ្ឋាន​ទិន្នន័យ keyring របស់​ឧបករណ៍​យួរដៃ​ជា​មួយ​មូលដ្ឋាន​ទិន្នន័យ​ដែល​បាន​ផ្ទុក​នៅ​ក្នុង​កុំព្យូទ័រ ។
+ Comment[lt]=Šis kanalas sinchronizuoja delninuko raktų rato duomenų bazę su duomenų baze, esančia pc.
+ Comment[lv]=Šī ķēde sinhronizē jūsu rokas datora un datora atslēgu saišķi.
+-Comment[nb]=Denne kanalen synkroniserer hånddatorens nøkkelring-database med en database lagret på maskinen.
++Comment[nb]=Denne koblingen synkroniserer hånddatorens nøkkelring-database med en database lagret på maskinen.
+ Comment[nds]=Disse Kanaal synkroniseert dat Slötelbund op den Handreekner mit een op den Reekner.
+ Comment[nl]=Dit conduit synchroniseert de sleuteldatabase op de handheld met de database op uw PC.
+ Comment[nn]=Denne koplinga synkroniserer den handhaldne nøkkelringdatabasen med ein database lagra på maskina.
 Index: kpilot/conduits/todo/kpilot-conduit-todo.desktop
 ===================================================================
---- kpilot/conduits/todo/kpilot-conduit-todo.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kpilot/conduits/todo/kpilot-conduit-todo.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kpilot/conduits/todo/kpilot-conduit-todo.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/conduits/todo/kpilot-conduit-todo.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -13,7 +13,7 @@
+ Comment[ja]=このコンジットはハンドヘルドの To-Do データベースを Akonadi の To-Do コレクションと同期させます。
+ Comment[km]=conduit syncs នេះ​ជា​មូលដ្ឋាន​ទិន្នន័យ​ការងារ​ត្រូវ​ធ្វើ​ជា​មួយ​នឹង​ការ​ប្រមូលផ្ដុំ​ការងារ​ត្រូវ​ធ្វើ​របស់ Akonadi ។
+ Comment[lv]=Šī ķēde sinhronizē jūsu rokas datora darāmo darbu sarakstu ar Akonadi darbu kolekciju.
+-Comment[nb]=Denne kanalen synkroniserer hånddatorens  gjøremål-database med en Akonadi gjøremålssamling.
++Comment[nb]=Denne koblingen synkroniserer hånddatorens  gjøremål-database med en Akonadi gjøremålssamling.
+ Comment[nds]=Disse Kanaal synkroniseert de Handreekner-Opgavenlist mit en Akonadi-Opgavenlist.
+ Comment[nl]=Dit conduit synchroniseert de takendatabase op de handheld met een Akonadi-takenverzameling.
+ Comment[nn]=Denne koplinga synkroniserer den handhaldne hugselistedatabasen med ei Akonadi-hugselistesamling.
 @@ -42,6 +42,7 @@
  Name[ja]=To-Do
  Name[km]=​ការងារ​ត្រូវ​ធ្វើ
@@ -2159,8 +3364,8 @@ Index: kpilot/conduits/todo/kpilot-conduit-todo.desktop
  Name[nds]=Opgaav
 Index: kpilot/conduits/calendar/calendarconduit.cc
 ===================================================================
---- kpilot/conduits/calendar/calendarconduit.cc	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kpilot/conduits/calendar/calendarconduit.cc	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kpilot/conduits/calendar/calendarconduit.cc	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/conduits/calendar/calendarconduit.cc	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -205,6 +205,11 @@
  			}
  			else
@@ -2173,10 +3378,75 @@ Index: kpilot/conduits/calendar/calendarconduit.cc
  				QDateTime hhDtEnd = hhEntry.dtEnd();
  				QDateTime hhDtStart = hhEntry.dtStart();
  				QDateTime pcDtEnd = pcEvent->dtEnd().dateTime().toLocalTime();
+Index: kpilot/conduits/null/null-conduit.desktop
+===================================================================
+--- kpilot/conduits/null/null-conduit.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/conduits/null/null-conduit.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -43,7 +43,7 @@
+ Comment[lv]=Šī ķēde nedara neko.
+ Comment[mk]=Овој канал не прави ништо.
+ Comment[ms]=Saluran ini tidak berbuat apa-apa.
+-Comment[nb]=Denne kanalen gjør ingenting.
++Comment[nb]=Denne koblingen gjør ingenting.
+ Comment[nds]=Disse Kanaal deit gor nix.
+ Comment[ne]=यो कन्ड्युटले केही पनि गर्दैन ।
+ Comment[nl]=Dit conduit doet niets.
+Index: kpilot/conduits/contacts/kpilot-conduit-contacts.desktop
+===================================================================
+--- kpilot/conduits/contacts/kpilot-conduit-contacts.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/conduits/contacts/kpilot-conduit-contacts.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -14,7 +14,7 @@
+ Comment[ja]=このコンジットはハンドヘルドのアドレス帳データベースを Akonadi のコレクションと同期させます。
+ Comment[km]=conduit syncs នេះ​ជា​មូលដ្ឋាន​​សៀវភៅ​អាសយដ្ឋាន​ឧបករណ៍​​​យួរដៃ​ដែល​មាន​បណ្ដុំ Akonadi ។
+ Comment[lv]=Šī ķēde sinhronizē jūsu rokas datora adrešu grāmatu ar Akonadi kolekciju.
+-Comment[nb]=Denne kanalen synkroniserer hånddatorens adressebok-database med en Akonadi-samling.
++Comment[nb]=Denne koblingen synkroniserer hånddatorens adressebok-database med en Akonadi-samling.
+ Comment[nds]=Disse Kanaal synkroniseert dat Handreekner-Adressbook mit en Akonadi-Sammeln.
+ Comment[nl]=Dit conduit synchroniseert de adresboekdatabase op de handheld met eenAkonadi-verzameling.
+ Comment[nn]=Denne koplinga synkroniserer den handhaldne adressedatabasen med ei Akonadi-samling.
+Index: kpilot/kpilot/kpilotconduit.desktop
+===================================================================
+--- kpilot/kpilot/kpilotconduit.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/kpilot/kpilotconduit.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -31,7 +31,7 @@
+ Comment[lv]=KPilot ķēde
+ Comment[mk]=Канал за КПилот
+ Comment[ms]=Saluran KPilot 
+-Comment[nb]=KPilot-kanal
++Comment[nb]=KPilot-kobling
+ Comment[nds]=KPilot-Kanaal (Synkroniseren)
+ Comment[ne]=केडीई पाइलट कन्ड्युट
+ Comment[nn]=KPilot-kopling
+Index: kpilot/Documentation/base-conduit-template/kpilot-conduit-contacts.desktop
+===================================================================
+--- kpilot/Documentation/base-conduit-template/kpilot-conduit-contacts.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/Documentation/base-conduit-template/kpilot-conduit-contacts.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -15,7 +15,7 @@
+ Comment[km]=conduit syncs នេះ​មូលដ្ឋាន​ទិន្នន័យ keyring របស់​ឧបករណ៍​យួរដៃ​ជា​មួយ​មូលដ្ឋាន​ទិន្នន័យ​ដែល​បាន​ផ្ទុក​នៅ​ក្នុង​កុំព្យូទ័រ ។
+ Comment[lt]=Šis kanalas sinchronizuoja delninuko raktų rato duomenų bazę su duomenų baze, esančia pc.
+ Comment[lv]=Šī ķēde sinhronizē jūsu rokas datora un datora atslēgu saišķi.
+-Comment[nb]=Denne kanalen synkroniserer hånddatorens nøkkelring-database med en database lagret på maskinen.
++Comment[nb]=Denne koblingen synkroniserer hånddatorens nøkkelring-database med en database lagret på maskinen.
+ Comment[nds]=Disse Kanaal synkroniseert dat Slötelbund op den Handreekner mit een op den Reekner.
+ Comment[nl]=Dit conduit synchroniseert de sleuteldatabase op de handheld met de database op uw PC.
+ Comment[nn]=Denne koplinga synkroniserer den handhaldne nøkkelringdatabasen med ein database lagra på maskina.
+Index: kpilot/Documentation/base-conduit-template/contacts-conduit.desktop
+===================================================================
+--- kpilot/Documentation/base-conduit-template/contacts-conduit.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kpilot/Documentation/base-conduit-template/contacts-conduit.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -14,7 +14,7 @@
+ Comment[ja]=このコンジットはハンドヘルドのアドレス帳を PC のデータベースと同期させます。
+ Comment[km]=conduit syncs នេះ​ជា​សៀវភៅ​អាសយដ្ឋាន​ដែល​មាន​ទិន្នន័យ​បាន​ផ្ទុក​នៅ​ក្នុង​កុំព្យូទ័រ ។
+ Comment[lv]=Šī ķēde sinhronizē jūsu rokas datora un datora adrešu grāmatu.
+-Comment[nb]=Denne kanalen synkroniserer hånddatorens adressebok med en database lagret på PC-en.
++Comment[nb]=Denne koblingen synkroniserer hånddatorens adressebok med en database lagret på PC-en.
+ Comment[nds]=Disse Kanaal synkroniseert dat Adressbook op den Handreekner mit een op den Reekner.
+ Comment[nl]=Dit conduit synchroniseert het adresboek op de handheld met de database op uw PC.
+ Comment[nn]=Denne koplinga synkroniserer den handhaldne adresseboka med ein database lagra på maskina.
 Index: kontact/plugins/akregator/akregator.setdlg
 ===================================================================
---- kontact/plugins/akregator/akregator.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/akregator/akregator.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/akregator/akregator.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/akregator/akregator.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -66,6 +66,7 @@
  Comment[ja]=フィードリーダー
  Comment[km]=កម្មវិធី​អាន​មតិព័ត៌មាន
@@ -2187,8 +3457,8 @@ Index: kontact/plugins/akregator/akregator.setdlg
  Comment[nds]=Mellenstroom-Kieker
 Index: kontact/plugins/planner/planner.setdlg
 ===================================================================
---- kontact/plugins/planner/planner.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/planner/planner.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/planner/planner.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/planner/planner.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -12,6 +12,7 @@
  Name[ja]=スケジュール帳
  Name[km]=កម្មវិធីធ្វើ​គម្រោង
@@ -2207,8 +3477,8 @@ Index: kontact/plugins/planner/planner.setdlg
  Comment[nds]=Planer-Översicht
 Index: kontact/plugins/planner/kcmplanner.desktop
 ===================================================================
---- kontact/plugins/planner/kcmplanner.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/planner/kcmplanner.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/planner/kcmplanner.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/planner/kcmplanner.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -24,6 +24,7 @@
  Name[ja]=スケジュール帳
  Name[km]=កម្មវិធីធ្វើ​គម្រោង
@@ -2227,8 +3497,8 @@ Index: kontact/plugins/planner/kcmplanner.desktop
  Comment[nds]=Planner inrichten
 Index: kontact/plugins/planner/plannerplugin.desktop
 ===================================================================
---- kontact/plugins/planner/plannerplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/planner/plannerplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/planner/plannerplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/planner/plannerplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -26,6 +26,7 @@
  Name[ja]=スケジュール帳
  Name[km]=កម្មវិធីធ្វើ​គម្រោង
@@ -2247,8 +3517,8 @@ Index: kontact/plugins/planner/plannerplugin.desktop
  Comment[nds]=Planner-Moduul
 Index: kontact/plugins/knode/knode.setdlg
 ===================================================================
---- kontact/plugins/knode/knode.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/knode/knode.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/knode/knode.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/knode/knode.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -24,6 +24,7 @@
  Comment[kk]=Пошта компоненті
  Comment[km]=មាសភាគ​របស់ Usenet
@@ -2259,8 +3529,8 @@ Index: kontact/plugins/knode/knode.setdlg
  Comment[nds]=Usenet-Komponent
 Index: kontact/plugins/specialdates/kcmsdsummary.desktop
 ===================================================================
---- kontact/plugins/specialdates/kcmsdsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/specialdates/kcmsdsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/specialdates/kcmsdsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/specialdates/kcmsdsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -30,6 +30,7 @@
  Name[kk]=Болашақ ерекше күндер
  Name[km]=កាលបរិច្ឆេទ​ពិសេស​ដែលនឹង​កើត​ឡើង
@@ -2279,8 +3549,8 @@ Index: kontact/plugins/specialdates/kcmsdsummary.desktop
  Comment[nds]=De Översicht för anstahn besünner Daten instellen
 Index: kontact/plugins/kmobiletools/kmobiletools.setdlg
 ===================================================================
---- kontact/plugins/kmobiletools/kmobiletools.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/kmobiletools/kmobiletools.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/kmobiletools/kmobiletools.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/kmobiletools/kmobiletools.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -16,6 +16,7 @@
  Name[ja]=携帯電話
  Name[km]=ទូរស័ព្ទ​ចល័ត
@@ -2299,8 +3569,8 @@ Index: kontact/plugins/kmobiletools/kmobiletools.setdlg
  Comment[nds]=Mobiltelefoon-Komponent
 Index: kontact/plugins/kmobiletools/kmobiletools.desktop
 ===================================================================
---- kontact/plugins/kmobiletools/kmobiletools.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/kmobiletools/kmobiletools.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/kmobiletools/kmobiletools.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/kmobiletools/kmobiletools.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -27,6 +27,7 @@
  Comment[ja]=KMobileTools プラグイン
  Comment[km]=កម្មវិធី​ជំនួយ​របស់ KMmobileTools
@@ -2317,10 +3587,22 @@ Index: kontact/plugins/kmobiletools/kmobiletools.desktop
  Name[lv]=Mobilie telefoni
  Name[nb]=Mobiltelefoner
  Name[nds]=Mobiltelefonen
+Index: kontact/plugins/knotes/knotes_part.h
+===================================================================
+--- kontact/plugins/knotes/knotes_part.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/knotes/knotes_part.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -92,6 +92,7 @@
+ 
+     KNotesResourceManager *mManager;
+     Q3Dict<KNotesIconViewItem> mNoteList;
++    QString mOldName;
+ };
+ 
+ #endif
 Index: kontact/plugins/knotes/knotes.setdlg
 ===================================================================
---- kontact/plugins/knotes/knotes.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/knotes/knotes.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/knotes/knotes.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/knotes/knotes.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -14,6 +14,7 @@
  Name[ja]=ポップアップメモ
  Name[km]=ចំណាំ​លេច​ឡើង
@@ -2337,10 +3619,30 @@ Index: kontact/plugins/knotes/knotes.setdlg
  Comment[lv]=Piezīmju lapiņu komponente
  Comment[nb]=Komponent for sprettoppnotater
  Comment[nds]=Opduknotiz-Komponent
+Index: kontact/plugins/knotes/knotes_part.cpp
+===================================================================
+--- kontact/plugins/knotes/knotes_part.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/knotes/knotes_part.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -382,12 +382,14 @@
+ 
+ void KNotesPart::renameNote()
+ {
++  mOldName = mNotesView->currentItem()->text();
+   mNotesView->currentItem()->rename();
+ }
+ 
+ void KNotesPart::renamedNote( Q3IconViewItem * )
+ {
+-  mManager->save();
++  if ( mOldName != mNotesView->currentItem()->text() )
++    mManager->save();
+ }
+ 
+ void KNotesPart::slotOnCurrentChanged( Q3IconViewItem * )
 Index: kontact/plugins/knotes/knotesplugin.desktop
 ===================================================================
---- kontact/plugins/knotes/knotesplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/knotes/knotesplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/knotes/knotesplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/knotes/knotesplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -84,6 +84,7 @@
  Name[ja]=ポップアップメモ
  Name[km]=ចំណាំ​លេច​ឡើង
@@ -2351,8 +3653,8 @@ Index: kontact/plugins/knotes/knotesplugin.desktop
  Name[nds]=Opduk-Notizen
 Index: kontact/plugins/knotes/knotes_part_p.h
 ===================================================================
---- kontact/plugins/knotes/knotes_part_p.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/knotes/knotes_part_p.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/knotes/knotes_part_p.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/knotes/knotes_part_p.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -155,7 +155,7 @@
        hbl->addWidget( mTitleEdit, 1, Qt::AlignVCenter );
  
@@ -2374,8 +3676,8 @@ Index: kontact/plugins/knotes/knotes_part_p.h
  
 Index: kontact/plugins/knotes/knotetip.cpp
 ===================================================================
---- kontact/plugins/knotes/knotetip.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/knotes/knotetip.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/knotes/knotetip.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/knotes/knotetip.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -31,6 +31,7 @@
  */
  
@@ -2415,8 +3717,8 @@ Index: kontact/plugins/knotes/knotetip.cpp
  
 Index: kontact/plugins/ktimetracker/ktimetracker.setdlg
 ===================================================================
---- kontact/plugins/ktimetracker/ktimetracker.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/ktimetracker/ktimetracker.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/ktimetracker/ktimetracker.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/ktimetracker/ktimetracker.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -14,6 +14,7 @@
  Name[ja]=タイムトラッカー
  Name[km]=កម្មវិធី​តាមដាន​ពេលវេលា
@@ -2435,8 +3737,8 @@ Index: kontact/plugins/ktimetracker/ktimetracker.setdlg
  Comment[nds]=Tietlogbook-Komponent
 Index: kontact/plugins/ktimetracker/ktimetracker_plugin.desktop
 ===================================================================
---- kontact/plugins/ktimetracker/ktimetracker_plugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/ktimetracker/ktimetracker_plugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/ktimetracker/ktimetracker_plugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/ktimetracker/ktimetracker_plugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -29,6 +29,7 @@
  Comment[ja]=タイムトラッカープラグイン
  Comment[km]=កម្មវិធី​ជំនួយ TimeTracker
@@ -2455,8 +3757,8 @@ Index: kontact/plugins/ktimetracker/ktimetracker_plugin.desktop
  Name[nds]=Tietlogbook
 Index: kontact/plugins/kjots/kjots_plugin.desktop
 ===================================================================
---- kontact/plugins/kjots/kjots_plugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/kjots/kjots_plugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/kjots/kjots_plugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/kjots/kjots_plugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -62,6 +62,7 @@
  Name[ja]=メモ帳
  Name[km]=សៀវភៅ​ចំណាំ
@@ -2467,8 +3769,8 @@ Index: kontact/plugins/kjots/kjots_plugin.desktop
  Name[nds]=Notizböker
 Index: kontact/plugins/kjots/kjots.setdlg
 ===================================================================
---- kontact/plugins/kjots/kjots.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/kjots/kjots.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/kjots/kjots.setdlg	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/kjots/kjots.setdlg	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -13,6 +13,7 @@
  Name[ja]=メモ帳
  Name[km]=សៀវភៅ​ចំណាំ
@@ -2487,8 +3789,8 @@ Index: kontact/plugins/kjots/kjots.setdlg
  Comment[nds]=Notizbook-Komponent
 Index: kontact/plugins/korganizer/kcmapptsummary.desktop
 ===================================================================
---- kontact/plugins/korganizer/kcmapptsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/korganizer/kcmapptsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/korganizer/kcmapptsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/korganizer/kcmapptsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -28,6 +28,7 @@
  Name[kk]=Болашақ оқиғалар
  Name[km]=ព្រឹត្តិការណ៍​ដែល​នឹង​កើតឡើង
@@ -2507,8 +3809,8 @@ Index: kontact/plugins/korganizer/kcmapptsummary.desktop
  Comment[nds]=De Översicht för anstahn Begeefnissen instellen
 Index: kontact/plugins/korganizer/kcmtodosummary.desktop
 ===================================================================
---- kontact/plugins/korganizer/kcmtodosummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/korganizer/kcmtodosummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/korganizer/kcmtodosummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/korganizer/kcmtodosummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -28,6 +28,7 @@
  Name[kk]=Кейінге қалдырылған жоспарлар
  Name[km]=ការងារ​ត្រូវធ្វើ​ដែល​មិនទាន់​សម្រេច
@@ -2527,8 +3829,8 @@ Index: kontact/plugins/korganizer/kcmtodosummary.desktop
  Comment[nds]=De Översicht för anstahn Opgaven instellen
 Index: kontact/plugins/kmail/summarywidget.cpp
 ===================================================================
---- kontact/plugins/kmail/summarywidget.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/kmail/summarywidget.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/kmail/summarywidget.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/kmail/summarywidget.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -88,9 +88,13 @@
  {
    // check whether we need to update the message counts
@@ -2694,8 +3996,8 @@ Index: kontact/plugins/kmail/summarywidget.cpp
    }
 Index: kontact/plugins/kmail/kcmkmailsummary.desktop
 ===================================================================
---- kontact/plugins/kmail/kcmkmailsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/kmail/kcmkmailsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/kmail/kcmkmailsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/kmail/kcmkmailsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -31,6 +31,7 @@
  Name[kk]=Жаңа хабарламалар
  Name[km]=សារ​ថ្មី
@@ -2706,8 +4008,8 @@ Index: kontact/plugins/kmail/kcmkmailsummary.desktop
  Name[nds]=Nieg Narichten
 Index: kontact/plugins/summary/kcmkontactsummary.desktop
 ===================================================================
---- kontact/plugins/summary/kcmkontactsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/summary/kcmkontactsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/summary/kcmkontactsummary.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/summary/kcmkontactsummary.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -26,6 +26,7 @@
  Name[ja]=要約
  Name[km]=សេចក្ដីសង្ខេប
@@ -2726,8 +4028,8 @@ Index: kontact/plugins/summary/kcmkontactsummary.desktop
  Comment[nds]=Tosamenfaten utsöken
 Index: kontact/plugins/newsticker/kcmkontactknt.desktop
 ===================================================================
---- kontact/plugins/newsticker/kcmkontactknt.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ kontact/plugins/newsticker/kcmkontactknt.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- kontact/plugins/newsticker/kcmkontactknt.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ kontact/plugins/newsticker/kcmkontactknt.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -30,6 +30,7 @@
  Name[kk]=Ақпарлар
  Name[km]=មតិ​ព័ត៌មាន
@@ -2736,22 +4038,1800 @@ Index: kontact/plugins/newsticker/kcmkontactknt.desktop
  Name[lv]=Ziņu barotnes
  Name[nb]=Nyhetskilder
  Name[nds]=Mellenströöm
+Index: knotes/knotes_export.h
+===================================================================
+--- knotes/knotes_export.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knotes_export.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -1,40 +0,0 @@
+-/*  This file is part of the KDE project
+-    Copyright (C) 2007 David Faure <faure@kde.org>
+-
+-    This library is free software; you can redistribute it and/or
+-    modify it under the terms of the GNU Library General Public
+-    License as published by the Free Software Foundation; either
+-    version 2 of the License, or (at your option) any later version.
+-
+-    This library is distributed in the hope that it will be useful,
+-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-    Library General Public License for more details.
+-
+-    You should have received a copy of the GNU Library General Public License
+-    along with this library; see the file COPYING.LIB.  If not, write to
+-    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+-    Boston, MA 02110-1301, USA.
+-*/
+-
+-#ifndef KNOTES_EXPORT_H
+-#define KNOTES_EXPORT_H
+-
+-/* needed for KDE_EXPORT and KDE_IMPORT macros */
+-#include <kdemacros.h>
+-
+-#ifndef KNOTES_EXPORT
+-# if defined(MAKE_KNOTES_LIB)
+-   /* We are building this library */
+-#  define KNOTES_EXPORT KDE_EXPORT
+-# else
+-   /* We are using this library */
+-#  define KNOTES_EXPORT KDE_IMPORT
+-# endif
+-#endif
+-
+-# ifndef KNOTES_EXPORT_DEPRECATED
+-#  define KNOTES_EXPORT_DEPRECATED KDE_DEPRECATED KNOTES_EXPORT
+-# endif
+-
+-#endif
+Index: knotes/knotesnetrecv.h
+===================================================================
+--- knotes/knotesnetrecv.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knotesnetrecv.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -45,22 +45,22 @@
+   public:
+     KNotesNetworkReceiver( QTcpSocket * );
+     ~KNotesNetworkReceiver();
+-    
++
+   signals:
+     void sigNoteReceived( const QString &, const QString & );
+-    
++
+   private slots:
+     void slotDataAvailable();
+     void slotReceptionTimeout();
+     void slotConnectionClosed();
+-    void slotError( int err );
+-    
++    void slotError( QAbstractSocket::SocketError );
++
+   private:
+     QTimer *m_timer;       // to avoid memory and connection floods
+-    
++
+     QByteArray *m_buffer;
+     QTcpSocket *m_sock;
+-    
++
+     QString m_titleAddon;
+ };
+ 
+Index: knotes/resourcenotes.h
+===================================================================
+--- knotes/resourcenotes.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/resourcenotes.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -36,8 +36,6 @@
+ #include <kcal/alarm.h>
+ #include <kresources/resource.h>
+ 
+-#include "knotes_export.h"
+-
+ class KNotesResourceManager;
+ 
+ namespace KCal {
+Index: knotes/knotesapp.h
+===================================================================
+--- knotes/knotesapp.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knotesapp.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -57,79 +57,80 @@
+   public:
+     KNotesApp();
+     ~KNotesApp();
+-    
++
+     void showNote( const QString &id ) const;
+     void hideNote( const QString &id ) const;
+-    
++
+     void killNote( const QString &id );
+     void killNote( const QString &id, bool force );
+-    
++
+     QString name( const QString &id ) const;
+     QString text( const QString &id ) const;
+-    
++
+     void setName( const QString &id, const QString &newName );
+     void setText( const QString &id, const QString &newText );
+-    
++
+     QMap<QString,QString> notes() const;
+-    
++
+     bool commitData( QSessionManager & );
+-    
++
+   public slots:
+     QString newNote( const QString &name = QString(),
+                      const QString &text = QString() );
+     QString newNoteFromClipboard( const QString &name = QString() );
+-    
++
+     void hideAllNotes() const;
+     void showAllNotes() const;
+-    
++
+   protected slots:
+     void slotActivated( QSystemTrayIcon::ActivationReason );
+     void slotShowNote();
+     void slotWalkThroughNotes();
+-    
++
+     void slotOpenFindDialog();
+     void slotFindNext();
+-    
++
+     void slotPreferences();
+     void slotConfigureAccels();
+-    
++
+     void slotNoteKilled( KCal::Journal *journal );
+-    
++
+     void slotQuit();
+-    
++
+   private:
+     void showNote( KNote *note ) const;
+     void saveConfigs();
+-    
++
+   private slots:
+     void acceptConnection();
+     void saveNotes();
+     void updateNoteActions();
+     void updateNetworkListener();
+     void updateStyle();
+-    
++
+     void createNote( KCal::Journal *journal );
+     void killNote( KCal::Journal *journal );
+-    
++
+   private:
+     QMap<QString, KNote *> m_notes;
+     QList<QAction *>       m_noteActions;
+-    
++
+     KNotesResourceManager  *m_manager;
+     KNotesAlarm            *m_alarm;
+     QTcpServer             *m_listener;
+     DNSSD::PublicService   *m_publisher;
+-    
++
+     KFind           *m_find;
+     QMap<QString, KNote *>::iterator *m_findPos;
+-    
++
+     KMenu           *m_noteMenu;
+     KMenu           *m_contextMenu;
+-    
++
+     KXMLGUIFactory  *m_guiFactory;
+     KXMLGUIBuilder  *m_guiBuilder;
+     KSystemTrayIcon *m_tray;
+-    
++    KAction         *m_findAction;
++
+     QDomDocument    m_noteGUI;
+ };
+ 
 Index: knotes/knote.cpp
 ===================================================================
---- knotes/knote.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ knotes/knote.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
-@@ -1166,6 +1166,7 @@
+--- knotes/knote.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knote.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -31,7 +31,6 @@
+ #include <QVBoxLayout>
+ #include <QDesktopWidget>
+ 
+-#include <k3colordrag.h>
+ #include <kaction.h>
+ #include <kactioncollection.h>
+ #include <kapplication.h>
+@@ -82,29 +81,28 @@
+ using namespace KCal;
+ 
+ 
+-KNote::KNote( QDomDocument buildDoc, Journal *j, QWidget *parent )
++KNote::KNote( const QDomDocument& buildDoc, Journal *j, QWidget *parent )
+   : QFrame( parent, Qt::FramelessWindowHint ), m_label( 0 ), m_grip( 0 ),
+     m_button( 0 ), m_tool( 0 ), m_editor( 0 ), m_config( 0 ), m_journal( j ),
+-    m_find( 0 ), m_kwinConf( KSharedConfig::openConfig( "kwinrc" ) )
++    m_find( 0 ), m_kwinConf( KSharedConfig::openConfig( "kwinrc" ) ), m_blockEmitDataChanged( false )
+ {
+   setAcceptDrops( true );
+   setAttribute( Qt::WA_DeleteOnClose );
+   setDOMDocument( buildDoc );
+-  setObjectName( m_journal->uid() );  
++  setObjectName( m_journal->uid() );
+   setXMLFile( componentData().componentName() + "ui.rc", false, false );
+-  
++
+   // create the main layout
+   m_noteLayout = new QVBoxLayout( this );
+-  setLayout( m_noteLayout );
+   m_noteLayout->setMargin( 0 );
+-   
++
+   // if there is no title yet, use the start date if valid
+   // (KOrganizer's journals don't have titles but a valid start date)
+   if ( m_journal->summary().isNull() && m_journal->dtStart().isValid() ) {
+     QString s = KGlobal::locale()->formatDateTime( m_journal->dtStart() );
+     m_journal->setSummary( s );
+   }
+-  
++
+   createActions();
+ 
+   buildGui();
+@@ -122,6 +120,7 @@
+ 
+ void KNote::slotKill( bool force )
+ {
++  m_blockEmitDataChanged = true;
+   if ( !force &&
+        ( KMessageBox::warningContinueCancel( this,
+          i18n( "<qt>Do you really want to delete note <b>%1</b>?</qt>",
+@@ -130,20 +129,19 @@
+          KGuiItem( i18n( "&Delete" ), "edit-delete" ),
+          KStandardGuiItem::cancel(),
+          "ConfirmDeleteNote" ) != KMessageBox::Continue ) ) {
+-    return;
++     m_blockEmitDataChanged = false;
++     return;
+   }
+-  
+   // delete the configuration first, then the corresponding file
+   delete m_config;
+   m_config = 0;
+-  
++
+   QString configFile = KGlobal::dirs()->saveLocation( "appdata", "notes/" );
+   configFile += m_journal->uid();
+-  
+   if ( !KIO::NetAccess::del( KUrl( configFile ), this ) ) {
+     kError( 5500 ) <<"Can't remove the note config:" << configFile;
+   }
+-  
++
+   emit sigKillNote( m_journal );
+ }
+ 
+@@ -160,7 +158,7 @@
+                                 m_config->bgColor().name() );
+   m_journal->setCustomProperty( "KNotes", "RichText",
+                                 m_config->richText() ? "true" : "false" );
+-  
++
+   emit sigDataChanged();
+   m_editor->document()->setModified( false );
+ }
+@@ -175,7 +173,7 @@
+     m_config->setHeight( 0 );
+   }
+   m_config->setPosition( pos() );
+-  
++
+ #ifdef Q_WS_X11
+   NETWinInfo wm_client( QX11Info::display(), winId(),
+                         QX11Info::appRootWindow(), NET::WMDesktop );
+@@ -184,7 +182,7 @@
+     m_config->setDesktop( wm_client.desktop() );
+   }
+ #endif
+-  
++
+   // actually store the config on disk
+   m_config->writeConfig();
+ }
+@@ -208,7 +206,7 @@
+ {
+   m_label->setText( name );
+   updateLabelAlignment();
+-  
++
+   if ( m_editor ) {    // not called from CTOR?
+     saveData();
+   }
+@@ -218,25 +216,25 @@
+                        NET::WMDesktop );
+   note_win.setName( name.toUtf8() );
+ #endif
+-  
++
+   emit sigNameChanged();
+ }
+ 
+ void KNote::setText( const QString& text )
+ {
+   m_editor->setText( text );
+-  
++
+   saveData();
+ }
+ 
+ void KNote::find( KFind* kfind )
+ {
+   m_find = kfind;
+-  disconnect( m_find ); 
++  disconnect( m_find );
+   connect( m_find, SIGNAL( highlight( const QString &, int, int ) ),
+            this, SLOT( slotHighlight( const QString &, int, int ) ) );
+   connect( m_find, SIGNAL( findNext() ), this, SLOT( slotFindNext() ) );
+-  
++
+   m_find->setData( m_editor->toPlainText() );
+   slotFindNext();
+ }
+@@ -244,13 +242,13 @@
+ void KNote::slotFindNext()
+ {
+   // TODO: honor FindBackwards
+- 
++
+   // Let KFind inspect the text fragment, and display a dialog if a match is
+   // found
+   KFind::Result res = m_find->find();
+- 
++
+   if ( res == KFind::NoMatch ) { // i.e. at end-pos
+-   
++
+     QTextCursor c = m_editor->textCursor(); //doesn't return by reference, so we use setTextCursor
+     c.clearSelection();
+     m_editor->setTextCursor( c );
+@@ -258,7 +256,7 @@
+     disconnect( m_find, 0, this, 0 );
+     emit sigFindFinished();
+   } else {
+-	
++
+     show();
+ #ifdef Q_WS_X11
+     KWindowSystem::setCurrentDesktop( KWindowSystem::windowInfo( winId(),
+@@ -284,31 +282,33 @@
+ 
+ void KNote::slotRename()
+ {
++    m_blockEmitDataChanged = true;
+   // pop up dialog to get the new name
+   bool ok;
++  QString oldName = m_label->text();
+   QString newName = KInputDialog::getText( QString::null,
+     //krazy:exclude=nullstrassign for old broken gcc
+     i18n( "Please enter the new name:" ), m_label->text(), &ok, this );
+-  
+-  if ( !ok ) { // handle cancel
++  m_blockEmitDataChanged = false;
++  if ( !ok || (oldName == newName) ) { // handle cancel
+     return;
+   }
+-  
++
+   setName( newName );
+ }
+ 
+ void KNote::slotUpdateReadOnly()
+ {
+   const bool readOnly = m_readOnly->isChecked();
+-  
++
+   m_editor->setReadOnly( readOnly );
+   m_config->setReadOnly( readOnly );
+-  
++
+   // enable/disable actions accordingly
+   actionCollection()->action( "configure_note" )->setEnabled( !readOnly );
+   actionCollection()->action( "insert_date" )->setEnabled( !readOnly );
+   actionCollection()->action( "delete_note" )->setEnabled( !readOnly );
+-  
++
+   actionCollection()->action( "edit_undo" )->setEnabled( !readOnly &&
+                               m_editor->document()->isUndoAvailable() );
+   actionCollection()->action( "edit_redo" )->setEnabled( !readOnly &&
+@@ -317,7 +317,8 @@
+                               m_editor->textCursor().hasSelection() );
+   actionCollection()->action( "edit_paste" )->setEnabled( !readOnly );
+   actionCollection()->action( "edit_clear" )->setEnabled( !readOnly );
+-  
++
++  actionCollection()->action( "rename_note" )->setEnabled( !readOnly);
+   updateFocus();
+ }
+ 
+@@ -331,11 +332,11 @@
+     m_config->setDesktop( wm_client.desktop() );
+   }
+ #endif
+-  
++
+   m_editor->clearFocus();
+   m_config->setHideNote( true );
+   m_config->setPosition( pos() );
+-  
++  m_config->writeConfig();
+   // just hide the note so it's still available from the dock window
+   hide();
+ }
+@@ -348,12 +349,14 @@
+ 
+ void KNote::slotSetAlarm()
+ {
++    m_blockEmitDataChanged = true;
+   KNoteAlarmDlg dlg( name(), this );
+   dlg.setIncidence( m_journal );
+-  
++
+   if ( dlg.exec() == QDialog::Accepted ) {
+     emit sigDataChanged();
+   }
++  m_blockEmitDataChanged = false;
+ }
+ 
+ void KNote::slotPreferences()
+@@ -362,7 +365,7 @@
+   if ( KNoteConfigDlg::showDialog( noteId() ) ) {
+     return;
+   }
+-  
++
+   // create a new preferences dialog...
+   KNoteConfigDlg *dialog = new KNoteConfigDlg( m_config, name(), this, noteId() );
+   connect( dialog, SIGNAL( settingsChanged( const QString & ) ) , this,
+@@ -374,16 +377,18 @@
+ 
+ void KNote::slotSend()
+ {
++    m_blockEmitDataChanged = true;
+   // pop up dialog to get the IP
+   KNoteHostDlg hostDlg( i18n( "Send \"%1\"", name() ), this );
+   bool ok = ( hostDlg.exec() == QDialog::Accepted );
+-  
++
++  m_blockEmitDataChanged = false;
+   if ( !ok ) { // handle cancel
+     return;
+   }
+   QString host = hostDlg.host();
+   quint16 port = hostDlg.port();
+-  
++
+   if ( !port ) { // not specified, use default
+     port = KNotesGlobalConfig::port();
+   }
+@@ -392,9 +397,9 @@
+     KMessageBox::sorry( this, i18n( "The host cannot be empty." ) );
+     return;
+   }
+-  
++
+   // Send the note
+-  
++
+   KNotesNetworkSender *sender = new KNotesNetworkSender(
+     KSocketFactory::connectToHost( "knotes", host, port ) );
+   sender->setSenderId( KNotesGlobalConfig::senderID() );
+@@ -404,9 +409,9 @@
+ void KNote::slotMail()
+ {
+   // get the mail action command
+-  QStringList cmd_list = KNotesGlobalConfig::mailAction().split( QChar(' '),
++  const QStringList cmd_list = KNotesGlobalConfig::mailAction().split( QChar(' '),
+       QString::SkipEmptyParts );
+-  
++
+   KProcess mail;
+   foreach ( const QString& cmd, cmd_list ) {
+     if ( cmd == "%f" ) {
+@@ -417,7 +422,7 @@
+       mail << cmd;
+     }
+   }
+-  
++
+   if ( !mail.startDetached() ) {
+     KMessageBox::sorry( this, i18n( "Unable to start the mail process." ) );
+   }
+@@ -440,35 +445,37 @@
+ void KNote::slotSaveAs()
+ {
+   // TODO: where to put pdf file support? In the printer??!??!
+-  
++
+   QCheckBox *convert = 0;
+-  
++
+   if ( m_editor->acceptRichText() ) {
+     convert = new QCheckBox( 0 );
+     convert->setText( i18n( "Save note as plain text" ) );
+   }
+-  
++  m_blockEmitDataChanged = true;
+   KUrl url;
+   KFileDialog dlg( url, QString(), this, convert );
+   dlg.setOperationMode( KFileDialog::Saving );
+   dlg.setCaption( i18n( "Save As" ) );
+   dlg.exec();
+-  
++
+   QString fileName = dlg.selectedFile();
+   if ( fileName.isEmpty() ) {
++      m_blockEmitDataChanged = false;
+     return;
+   }
+-  
++
+   QFile file( fileName );
+-  
++
+   if ( file.exists() &&
+        KMessageBox::warningContinueCancel( this,
+           i18n( "<qt>A file named <b>%1</b> already exists.<br />"
+                 "Are you sure you want to overwrite it?</qt>",
+                 QFileInfo( file ).fileName() ) ) != KMessageBox::Continue ) {
++      m_blockEmitDataChanged = false;
+     return;
+   }
+-  
++
+   if ( file.open( QIODevice::WriteOnly ) ) {
+     QTextStream stream( &file );
+     if ( convert && !convert->isChecked() ) {
+@@ -477,6 +484,7 @@
+       stream << m_editor->toPlainText();
+     }
+   }
++  m_blockEmitDataChanged = false;
+ }
+ 
+ void KNote::slotPopupActionToDesktop( int id )
+@@ -494,15 +502,15 @@
+   m_editor->setTextFont( m_config->font() );
+   m_editor->setTabStop( m_config->tabSize() );
+   m_editor->setAutoIndentMode( m_config->autoIndent() );
+-  
++
+   // if called as a slot, save the text, we might have changed the
+   // text format - otherwise the journal will not be updated
+   if ( sender() ) {
+     saveData();
+   }
+-  
++
+   setColor( m_config->fgColor(), m_config->bgColor() );
+-  
++
+   updateLayout();
+   slotUpdateShowInTaskbar();
+ }
+@@ -567,20 +575,20 @@
+                        NET::DesktopNames );
+   NETWinInfo wm_client( QX11Info::display(), winId(),
+                         QX11Info::appRootWindow(), NET::WMDesktop );
+-  
++
+   QStringList desktops;
+   desktops.append( i18n( "&All Desktops" ) );
+   desktops.append( QString::null );           // Separator
+                                               // krazy:exclude=nullstrassign
+                                               // for old broken gcc
+-  
++
+   int count = wm_root.numberOfDesktops();
+   for ( int n = 1; n <= count; n++ ) {
+     desktops.append( QString( "&%1 %2" ).arg( n ).arg(
+       QString::fromUtf8( wm_root.desktopName( n ) ) ) );
+   }
+   m_toDesktop->setItems( desktops );
+-  
++
+   if ( wm_client.desktop() == NETWinInfo::OnAllDesktops ) {
+     m_toDesktop->setCurrentItem( 0 );
+   } else {
+@@ -595,13 +603,13 @@
+ 
+ void KNote::buildGui()
+ {
+-  createNoteHeader();  
++  createNoteHeader();
+   createNoteEditor();
+-  
++
+   KXMLGUIBuilder builder( this );
+   KXMLGUIFactory factory( &builder, this );
+   factory.addClient( this );
+-  
++
+   m_menu = dynamic_cast<KMenu*>( factory.container( "note_context", this ) );
+   m_editor->setContextMenu( dynamic_cast<KMenu *>(
+                               factory.container( "note_edit", this ) ) );
+@@ -624,12 +632,12 @@
+   actionCollection()->addAction( "rename_note", action );
+   connect( action, SIGNAL( triggered( bool ) ), SLOT( slotRename() ) );
+ 
+-  m_readOnly  = new KToggleAction( KIcon( "system-lock-screen" ),
++  m_readOnly  = new KToggleAction( KIcon( "object-locked" ),
+                                    i18n( "Lock" ), this );
+   actionCollection()->addAction( "lock_note", m_readOnly );
+   connect( m_readOnly, SIGNAL( triggered( bool ) ),
+           SLOT( slotUpdateReadOnly() ) );
+-  m_readOnly->setCheckedState( KGuiItem( i18n( "Unlock" ), "unlock" ) );
++  m_readOnly->setCheckedState( KGuiItem( i18n( "Unlock" ), "object-unlocked" ) );
+ 
+   action  = new KAction( KIcon( "window-close" ), i18n( "Hide" ), this );
+   actionCollection()->addAction( "hide_note", action );
+@@ -638,8 +646,8 @@
+ 
+   action  = new KAction( KIcon( "edit-delete" ), i18n( "Delete" ), this );
+   actionCollection()->addAction( "delete_note", action );
+-  connect( action, SIGNAL( triggered( bool ) ), SLOT( slotKill() ) );
+-  
++  connect( action, SIGNAL( triggered( bool ) ), SLOT( slotKill() ) ,Qt::QueuedConnection);
++
+   action  = new KAction( KIcon( "knotes_date" ), i18n( "Insert Date" ), this );
+   actionCollection()->addAction( "insert_date", action );
+   connect( action, SIGNAL( triggered( bool ) ), SLOT( slotInsDate() ) );
+@@ -648,7 +656,7 @@
+                          this );
+   actionCollection()->addAction( "set_alarm", action );
+   connect( action, SIGNAL( triggered( bool ) ), SLOT( slotSetAlarm() ) );
+-  
++
+   action  = new KAction( KIcon( "network-wired" ), i18n( "Send..." ), this );
+   actionCollection()->addAction( "send_note", action );
+   connect( action, SIGNAL( triggered( bool ) ), SLOT( slotSend() ) );
+@@ -667,20 +675,20 @@
+   action  = new KAction( KIcon( "configure" ), i18n( "Preferences..." ), this );
+   actionCollection()->addAction( "configure_note", action );
+   connect( action, SIGNAL( triggered( bool ) ), SLOT( slotPreferences() ) );
+-  
+-  
++
++
+   m_keepAbove  = new KToggleAction( KIcon( "go-up" ),
+                                     i18n( "Keep Above Others" ), this );
+   actionCollection()->addAction( "keep_above", m_keepAbove );
+   connect( m_keepAbove, SIGNAL( triggered( bool ) ),
+            SLOT( slotKeepAbove() ) );
+-  
++
+   m_keepBelow  = new KToggleAction( KIcon( "go-down" ),
+                                     i18n( "Keep Below Others" ), this );
+   actionCollection()->addAction( "keep_below", m_keepBelow );
+   connect( m_keepBelow, SIGNAL( triggered( bool ) ),
+            SLOT( slotKeepBelow() ) );
+-  
++
+ #ifdef Q_WS_X11
+   m_toDesktop  = new KSelectAction( i18n( "To Desktop" ), this );
+   actionCollection()->addAction( "to_desktop", m_toDesktop );
+@@ -689,7 +697,7 @@
+   connect( m_toDesktop->menu(), SIGNAL( aboutToShow() ),
+            SLOT( slotUpdateDesktopActions() ) );
+ #endif
+-  
++
+   // invisible action to walk through the notes to make this configurable
+   action  = new KAction( i18n( "Walk Through Notes" ), this );
+   actionCollection()->addAction( "walk_notes", action );
+@@ -705,18 +713,18 @@
+ {
+   // load style configuration
+   KConfigGroup styleGroup( m_kwinConf, "Style" );
+-  
++
+   QBoxLayout::Direction headerLayoutDirection = QBoxLayout::LeftToRight;
+-  
++
+   if ( styleGroup.readEntry( "CustomButtonPositions", false ) ) {
+     if ( styleGroup.readEntry( "ButtonsOnLeft" ).contains( 'X' ) ) {
+       headerLayoutDirection = QBoxLayout::RightToLeft;
+     }
+   }
+-  
+-  QBoxLayout *headerLayout = new QBoxLayout( headerLayoutDirection, this );
+-  
+-  
++
++  QBoxLayout *headerLayout = new QBoxLayout( headerLayoutDirection);
++
++
+   // create header label
+   m_label = new QLabel( this );
+   headerLayout->addWidget( m_label );
+@@ -730,9 +738,9 @@
+                                         // connected at this stage yet
+   m_button = new KNoteButton( "knotes_close", this );
+   headerLayout->addWidget( m_button );
+-  
++
+   connect( m_button, SIGNAL( clicked() ), this, SLOT( slotClose() ) );
+-  
++
+   m_noteLayout->addItem( headerLayout );
+ }
+ 
+@@ -741,7 +749,7 @@
+   m_editor = new KNoteEdit( actionCollection(), this );
+   m_noteLayout->addWidget( m_editor );
+   m_editor->installEventFilter( this ); // receive focus events for modified
+-  setFocusProxy( m_editor );  
++  setFocusProxy( m_editor );
+ }
+ 
+ void KNote::createNoteFooter()
+@@ -751,22 +759,22 @@
+     m_tool->setFixedHeight( 24 );
+     m_tool->setToolButtonStyle( Qt::ToolButtonIconOnly );
+   }
+-  
++
+   // create size grip
+-  QHBoxLayout *gripLayout = new QHBoxLayout( this );
++  QHBoxLayout *gripLayout = new QHBoxLayout;
+   m_grip = new QSizeGrip( this );
+   m_grip->setFixedSize( m_grip->sizeHint() );
+-  
++
+   if ( m_tool ) {
+     gripLayout->addWidget( m_tool );
+     gripLayout->setAlignment( m_tool, Qt::AlignBottom | Qt::AlignLeft );
+     m_tool->hide();
+   }
+-  
++
+   gripLayout->addWidget( m_grip );
+   gripLayout->setAlignment( m_grip, Qt::AlignBottom | Qt::AlignRight );
+   m_noteLayout->addItem( gripLayout );
+-  
++
+   // if there was just a way of making KComboBox adhere the toolbar height...
+   if ( m_tool ) {
+     foreach ( KComboBox *combo, m_tool->findChildren<KComboBox *>() ) {
+@@ -783,17 +791,17 @@
+   // the config file location
+   QString configFile = KGlobal::dirs()->saveLocation( "appdata", "notes/" );
+   configFile += m_journal->uid();
+-  
++
+   // no config file yet? -> use the default display config if available
+   // we want to write to configFile, so use "false"
+   bool newNote = !KIO::NetAccess::exists( KUrl( configFile ),
+                                           KIO::NetAccess::DestinationSide, 0 );
+-  
++
+   m_config = new KNoteConfig( KSharedConfig::openConfig( configFile,
+                                                          KConfig::NoGlobals ) );
+   m_config->readConfig();
+   m_config->setVersion( KNOTES_VERSION );
+-  
++
+   if ( newNote ) {
+     // until kdelibs provides copying of KConfigSkeletons (KDE 3.4)
+     KNotesGlobalConfig *globalConfig = KNotesGlobalConfig::self();
+@@ -801,14 +809,14 @@
+     m_config->setFgColor( globalConfig->fgColor() );
+     m_config->setWidth( globalConfig->width() );
+     m_config->setHeight( globalConfig->height() );
+-    
++
+     m_config->setFont( globalConfig->font() );
+     m_config->setTitleFont( globalConfig->titleFont() );
+     m_config->setAutoIndent( globalConfig->autoIndent() );
+     m_config->setRichText( globalConfig->richText() );
+     m_config->setTabSize( globalConfig->tabSize() );
+     m_config->setReadOnly( globalConfig->readOnly() );
+-    
++
+     m_config->setDesktop( globalConfig->desktop() );
+     m_config->setHideNote( globalConfig->hideNote() );
+     m_config->setPosition( globalConfig->position() );
+@@ -816,26 +824,25 @@
+     m_config->setRememberDesktop( globalConfig->rememberDesktop() );
+     m_config->setKeepAbove( globalConfig->keepAbove() );
+     m_config->setKeepBelow( globalConfig->keepBelow() );
+-    
++
+     m_config->writeConfig();
+   }
+-  
++
+   // set up the look&feel of the note
+   setFrameStyle( Panel | Raised );
+   setMinimumSize( 20, 20 );
+   setBackgroundRole( QPalette::Base );
+-  
++
+   m_editor->setContentsMargins( 0, 0, 0, 0 );
+   m_editor->setBackgroundRole( QPalette::Base );
+   m_editor->setFrameStyle( NoFrame );
+   m_editor->setText( m_journal->description() );
+-  m_editor->document()->setModified( false );
+-  
++
+   // load the display configuration of the note
+   uint width = m_config->width();
+   uint height = m_config->height();
+   resize( width, height );
+-  
++
+   // let KWin do the placement if the position is illegal--at least 10 pixels
+   // of a note need to be visible
+   const QPoint& position = m_config->position();
+@@ -844,7 +851,7 @@
+   if ( desk.intersects( QRect( position, QSize( width, height ) ) ) ) {
+     move( position );           // do before calling show() to avoid flicker
+   }
+-  
++
+   // config items in the journal have priority
+   QString property = m_journal->customProperty( "KNotes", "FgColor" );
+   if ( !property.isNull() ) {
+@@ -853,7 +860,7 @@
+     m_journal->setCustomProperty( "KNotes", "FgColor",
+                                   m_config->fgColor().name() );
+   }
+-  
++
+   property = m_journal->customProperty( "KNotes", "BgColor" );
+   if ( !property.isNull() ) {
+     m_config->setBgColor( QColor( property ) );
+@@ -868,26 +875,26 @@
+     m_journal->setCustomProperty( "KNotes", "RichText",
+                                   m_config->richText() ? "true" : "false" );
+   }
+-  
++
+   // read configuration settings...
+   slotApplyConfig();
+-  
++
+   // if this is a new note put on current desktop - we can't use defaults
+   // in KConfig XT since only _changes_ will be stored in the config file
+   int desktop = m_config->desktop();
+-  
++
+ #ifdef Q_WS_X11
+   if ( ( desktop < 0 && desktop != NETWinInfo::OnAllDesktops ) ||
+        !m_config->rememberDesktop() )
+     desktop = KWindowSystem::currentDesktop();
+ #endif
+-  
++
+   // show the note if desired
+   if ( desktop != 0 && !m_config->hideNote() ) {
+     // to avoid flicker, call this before show()
+     toDesktop( desktop );
+     show();
+-    
++
+     // because KWin forgets about that for hidden windows
+ #ifdef Q_WS_X11
+     if ( desktop == NETWinInfo::OnAllDesktops ) {
+@@ -895,10 +902,10 @@
+     }
+ #endif
+   }
+-  
++
+   m_readOnly->setChecked( m_config->readOnly() );
+   slotUpdateReadOnly();
+-  
++
+   if ( m_config->keepAbove() ) {
+     m_keepAbove->setChecked( true );
+   } else if ( m_config->keepBelow() ) {
+@@ -908,7 +915,7 @@
+     m_keepBelow->setChecked( false );
+   }
+   slotUpdateKeepAboveBelow();
+-  
++
+   // HACK: update the icon color - again after showing the note, to make kicker
+   // aware of the new colors
+   KIconEffect effect;
+@@ -925,6 +932,7 @@
+ #ifdef Q_WS_X11
+   KWindowSystem::setIcons( winId(), icon, miniIcon );
+ #endif
++  m_editor->document()->setModified( false );
+ }
+ 
+ void KNote::toDesktop( int desktop )
+@@ -932,7 +940,7 @@
+   if ( desktop == 0 ) {
+     return;
+   }
+-  
++
+ #ifdef Q_WS_X11
+   if ( desktop == NETWinInfo::OnAllDesktops ) {
+     KWindowSystem::setOnAllDesktops( winId(), true );
+@@ -945,45 +953,45 @@
+ void KNote::setColor( const QColor &fg, const QColor &bg )
+ {
+   QPalette p = palette();
+-  
++
+   // better: from light(150) to light(100) to light(75)
+   // QLinearGradient g( width()/2, 0, width()/2, height() );
+   // g.setColorAt( 0, bg );
+   // g.setColorAt( 1, bg.dark(150) );
+-  
++
+   p.setColor( QPalette::Window,     bg );
+   // p.setBrush( QPalette::Window,     g );
+   p.setColor( QPalette::Base,       bg );
+   // p.setBrush( QPalette::Base,       g );
+-  
++
+   p.setColor( QPalette::WindowText, fg );
+   p.setColor( QPalette::Text,       fg );
+-  
++
+   p.setColor( QPalette::Button,     bg.dark( 116 ) );
+   p.setColor( QPalette::ButtonText, fg );
+-  
++
+   //p.setColor( QPalette::Highlight,  bg );
+   //p.setColor( QPalette::HighlightedText, fg );
+-  
++
+   // order: Light, Midlight, Button, Mid, Dark, Shadow
+-  
++
+   // the shadow
+   p.setColor( QPalette::Light, bg.light( 180 ) );
+   p.setColor( QPalette::Midlight, bg.light( 150 ) );
+   p.setColor( QPalette::Mid, bg.light( 150 ) );
+   p.setColor( QPalette::Dark, bg.dark( 108 ) );
+   p.setColor( QPalette::Shadow, bg.dark( 116 ) );
+-  
++
+   setPalette( p );
+-  
++
+   // darker values for the active label
+   p.setColor( QPalette::Active, QPalette::Base, bg.dark( 116 ) );
+-  
++
+   m_label->setPalette( p );
+-  
++
+   // set the text color
+   m_editor->setTextColor( fg );
+-  
++
+   // update the icon color
+   KIconEffect effect;
+   QPixmap icon = effect.apply( qApp->windowIcon().pixmap(
+@@ -1018,11 +1026,11 @@
+ {
+   if ( hasFocus() ) {
+     m_button->show();
+-    m_grip->show();
+-    
++
+     if ( !m_editor->isReadOnly() ) {
+       if ( m_tool && m_tool->isHidden() && m_editor->acceptRichText() ) {
+         m_tool->show();
++	m_grip->show();
+         setGeometry( x(), y(), width(), height() + m_tool->height() );
+       }
+     } else if ( m_tool && !m_tool->isHidden() ) {
+@@ -1033,7 +1041,7 @@
+   } else {
+     m_button->hide();
+     m_grip->hide();
+-    
++
+     if ( m_tool && !m_tool->isHidden() ) {
+       m_tool->hide();
+       setGeometry( x(), y(), width(), height() - m_tool->height() );
+@@ -1092,7 +1100,7 @@
+   if ( m_config->readOnly() ) {
+     return;
+   }
+-  
++
+   const QMimeData *md = e->mimeData();
+   if ( md->hasColor() ) {
+        QColor bg =  qvariant_cast<QColor>( md->colorData() );
+@@ -1119,26 +1127,27 @@
+     dragEnterEvent( static_cast<QDragEnterEvent *>( ev ) );
+     return true;
+   }
+-  
++
+   if ( ev->type() == QEvent::Drop &&
+        static_cast<QDropEvent *>( ev )->mimeData()->hasColor() ) {
+     dropEvent( static_cast<QDropEvent *>( ev ) );
+     return true;
+   }
+-  
++
+   if ( o == m_label ) {
+     QMouseEvent *e = ( QMouseEvent * )ev;
+-    
++
+     if ( ev->type() == QEvent::MouseButtonDblClick ) {
+-      slotRename();
++       if(!m_editor->isReadOnly())
++          slotRename();
+     }
+-    
++
+     if ( ev->type() == QEvent::MouseButtonPress &&
+         ( e->button() == Qt::LeftButton || e->button() == Qt::MidButton ) ) {
+ #ifdef Q_WS_X11
+       e->button() == Qt::LeftButton ? KWindowSystem::raiseWindow( winId() )
+                                     : KWindowSystem::lowerWindow( winId() );
+-      
++
+       XUngrabPointer( QX11Info::display(), QX11Info::appTime() );
+       NETRootInfo wm_root( QX11Info::display(), NET::WMMoveResize );
+       wm_root.moveResizeRequest( winId(), e->globalX(), e->globalY(),
+@@ -1146,7 +1155,7 @@
+ #endif
+       return true;
+     }
+-    
++
+     if ( ev->type() == QEvent::MouseButtonRelease ) {
+ #ifdef Q_WS_X11
+         NETRootInfo wm_root( QX11Info::display(), NET::WMMoveResize );
+@@ -1155,10 +1164,10 @@
+ #endif
+         return false;
+     }
+-    
++
+     return false;
+   }
+-  
++
+   if ( o == m_editor ) {
+     if ( ev->type() == QEvent::FocusOut ) {
+           QFocusEvent *fe = static_cast<QFocusEvent *>( ev );
+@@ -1166,16 +1175,18 @@
                 fe->reason() != Qt::MouseFocusReason ) {
              updateFocus();
              if ( isModified() ) {
+-              saveData();
 +              saveConfig();
-               saveData();
++              if ( !m_blockEmitDataChanged )
++                  saveData();
              }
            }
+     } else if ( ev->type() == QEvent::FocusIn ) {
+       updateFocus();
+     }
+-    
++
+     return false;
+   }
+-  
++
+   return false;
+ }
+ 
+Index: knotes/knoteslegacy.cpp
+===================================================================
+--- knotes/knoteslegacy.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knoteslegacy.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -71,9 +71,9 @@
+   bool converted = false;
+   
+   QDir noteDir( KGlobal::dirs()->saveLocation( "appdata", "notes/" ) );
+-  QStringList notes = noteDir.entryList( QDir::Files, QDir::Name );
+-  for ( QStringList::Iterator note = notes.begin(); note != notes.end();
+-        note++ ) {
++  const QStringList notes = noteDir.entryList( QDir::Files, QDir::Name );
++  for ( QStringList::ConstIterator note = notes.constBegin(); note != notes.constEnd();
++        ++note ) {
+     QString file = noteDir.absoluteFilePath( *note );
+     KConfig *test = new KConfig( file, KConfig::SimpleConfig );
+     KConfigGroup grp( test, "General" );
+@@ -260,7 +260,7 @@
+   grp.deleteEntry( "state" );
+   
+   // load the saved text and put it in the journal
+-  QFile infile( noteDir.absoluteFilePath( "." + file + "_data" ) );
++  QFile infile( noteDir.absoluteFilePath( '.' + file + "_data" ) );
+   if ( infile.open( QIODevice::ReadOnly ) ) {
+     QTextStream input( &infile );
+     input.setCodec( "UTF-8" );
+Index: knotes/knotesnetrecv.cpp
+===================================================================
+--- knotes/knotesnetrecv.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knotesnetrecv.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -58,18 +58,18 @@
+   QString date =
+     KGlobal::locale()->formatDateTime( QDateTime::currentDateTime(),
+                                        KLocale::ShortDate, false );
+-  
++
+   // Add the remote IP or hostname and the date to the title, to help the
+   // user guess who wrote it.
+   m_titleAddon = QString( " [%1, %2]" )
+                   .arg( m_sock->peerAddress().toString() )
+                   .arg( date );
+-  
++
+   // Setup the communications
+   connect( m_sock, SIGNAL( readyRead() ), SLOT( slotDataAvailable() ) );
+   connect( m_sock, SIGNAL( disconnected() ), SLOT( slotConnectionClosed() ) );
+-  connect( m_sock, SIGNAL( error( int ) ), SLOT( slotError( int ) ) );
+-  
++  connect( m_sock, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(slotError(QAbstractSocket::SocketError)));
++
+   // Setup the timer
+   m_timer = new QTimer( this );
+   m_timer->setSingleShot( true );
+@@ -87,22 +87,22 @@
+ {
+   char smallBuffer[SBSIZE];
+   int smallBufferLen;
+-  
++
+   do {
+     // Append to "big buffer" only if we have some space left.
+     int curLen = m_buffer->count();
+-    
++
+     smallBufferLen = m_sock->read( smallBuffer, SBSIZE );
+-    
++
+     // Limit max transfer over buffer, to avoid overflow.
+     smallBufferLen = qMin( smallBufferLen, MAXBUFFER - curLen );
+-    
++
+     if ( smallBufferLen > 0 ) {
+       m_buffer->resize( curLen + smallBufferLen );
+       memcpy( m_buffer->data() + curLen, smallBuffer, smallBufferLen );
+     }
+   } while ( smallBufferLen == SBSIZE );
+-  
++
+   // If we are overflowing, close connection.
+   if ( m_buffer->count() == MAXBUFFER ) {
+     m_sock->close();
+@@ -120,24 +120,24 @@
+ {
+   if ( m_timer->isActive() ) {
+     QString noteText = QString( *m_buffer ).trimmed();
+-    
++
+     // First line is the note title or, in case of ATnotes, the id
+     int pos = noteText.indexOf( QRegExp( "[\r\n]" ) );
+     QString noteTitle = noteText.left( pos ).trimmed() + m_titleAddon;
+-    
++
+     noteText = noteText.mid( pos ).trimmed();
+-    
++
+     if ( !noteText.isEmpty() ) {
+         emit sigNoteReceived( noteTitle, noteText );
+     }
+   }
+-  
++
+   deleteLater();
+ }
+ 
+-void KNotesNetworkReceiver::slotError( int err )
++void KNotesNetworkReceiver::slotError( QAbstractSocket::SocketError error )
+ {
+-  kWarning( 5500 ) << err << m_sock->errorString();
++    kWarning( 5500 ) <<"error type :"<< ( int ) error <<" error string : "<<m_sock->errorString();
+ }
+ 
+ #include "knotesnetrecv.moc"
+Index: knotes/knoteedit.h
+===================================================================
+--- knotes/knoteedit.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knoteedit.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -51,7 +51,6 @@
+     QString text() const;
+     
+     void setTextFont( const QFont &font );
+-    void setTextColor( const QColor &color );
+     void setTabStop( int tabs );
+     void setAutoIndentMode( bool newmode );
+     
+Index: knotes/knotesapp.cpp
+===================================================================
+--- knotes/knotesapp.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knotesapp.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -69,25 +69,25 @@
+     {
+       setCaption( i18n( "Configure Shortcuts" ) );
+       setButtons( Default | Ok | Cancel );
+-      
++
+       m_keyChooser = new KShortcutsEditor( globals, this );
+       setMainWidget( m_keyChooser );
+       connect( this, SIGNAL( defaultClicked() ),
+                m_keyChooser, SLOT( allDefault() ) );
+     }
+-    
++
+     void insert( KActionCollection *actions )
+     {
+         m_keyChooser->addCollection( actions, i18n( "Note Actions" ) );
+     }
+-    
++
+     void configure()
+     {
+         if ( exec() == Accepted ) {
+             m_keyChooser->save();
+         }
+     }
+-    
++
+   private:
+     KShortcutsEditor *m_keyChooser;
+ };
+@@ -108,18 +108,18 @@
+ 
+   // create the dock widget...
+   m_tray = new KSystemTrayIcon();
+-  
++
+   m_tray->setToolTip( i18n( "KNotes: Sticky notes for KDE" ) );
+   m_tray->setIcon( KSystemTrayIcon::loadIcon( "knotes" ) );
+   connect( m_tray, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ),
+            SLOT( slotActivated( QSystemTrayIcon::ActivationReason ) ) );
+-  
++
+   // set the initial style
+ #ifdef __GNUC__
+ #warning FIXME
+ #endif
+   //    KNote::setStyle( KNotesGlobalConfig::style() );
+-  
++
+   // create the GUI...
+   KAction *action  = new KAction( KIcon( "document-new" ),
+                                   i18n( "New Note" ), this );
+@@ -127,31 +127,31 @@
+                              KAction::DefaultShortcut );
+   actionCollection()->addAction( "new_note", action );
+   connect( action, SIGNAL( triggered() ), SLOT( newNote() ) );
+-  
++
+   action  = new KAction( KIcon( "edit-paste" ),
+                          i18n( "New Note From Clipboard" ), this );
+   action->setGlobalShortcut( KShortcut( Qt::ALT + Qt::SHIFT + Qt::Key_C ),
+                              KAction::DefaultShortcut );
+   actionCollection()->addAction( "new_note_clipboard", action );
+   connect( action, SIGNAL( triggered() ), SLOT( newNoteFromClipboard() ) );
+-  
++
+   action  = new KAction( KIcon( "knotes" ), i18n( "Show All Notes" ), this );
+   action->setGlobalShortcut( KShortcut( Qt::ALT + Qt::SHIFT + Qt::Key_S ),
+                              KAction::DefaultShortcut );
+   actionCollection()->addAction( "show_all_notes", action );
+   connect( action, SIGNAL( triggered() ), SLOT( showAllNotes() ) );
+-  
++
+   action  = new KAction( KIcon( "window-close" ),
+                          i18n( "Hide All Notes" ), this );
+   action->setGlobalShortcut( KShortcut( Qt::ALT + Qt::SHIFT + Qt::Key_H ),
+                              KAction::DefaultShortcut );
+   actionCollection()->addAction( "hide_all_notes", action );
+   connect( action, SIGNAL( triggered() ), SLOT( hideAllNotes() ) );
+-  
++
+   new KHelpMenu( this, KGlobal::mainComponent().aboutData(), false,
+                  actionCollection() );
+-  
+-  KStandardAction::find( this, SLOT( slotOpenFindDialog() ),
++
++  m_findAction = KStandardAction::find( this, SLOT( slotOpenFindDialog() ),
+                          actionCollection() );
+   KStandardAction::preferences( this, SLOT( slotPreferences() ),
+                          actionCollection() );
+@@ -160,13 +160,13 @@
+   //FIXME: no shortcut removing!?
+   KStandardAction::quit( this, SLOT( slotQuit() ),
+                          actionCollection() )->setShortcut( 0 );
+-  
++
+   setXMLFile( componentData().componentName() + "appui.rc" );
+-  
++
+   m_guiBuilder = new KXMLGUIBuilder( this );
+   m_guiFactory = new KXMLGUIFactory( m_guiBuilder, this );
+   m_guiFactory->addClient( this );
+-  
++
+   m_contextMenu = static_cast<KMenu *>( m_guiFactory->container(
+                                         "knotes_context",
+                                         this ) );
+@@ -179,26 +179,26 @@
+   QStringList fileList =
+       componentData().dirs()->findAllResources( "data", filter ) +
+       componentData().dirs()->findAllResources( "data", xmlFileName );
+-  
++
+   QString doc;
+   KXMLGUIClient::findMostRecentXMLFile( fileList, doc );
+   m_noteGUI.setContent( doc );
+-  
++
+   KConfigGroup config( KGlobal::config(), "Global Keybindings" );
+-  
++
+   // clean up old config files
+   KNotesLegacy::cleanUp();
+-  
++
+   // create the resource manager
+   m_manager = new KNotesResourceManager();
+   connect( m_manager, SIGNAL( sigRegisteredNote( KCal::Journal * ) ),
+            this,      SLOT( createNote( KCal::Journal * ) ) );
+   connect( m_manager, SIGNAL( sigDeregisteredNote( KCal::Journal * ) ),
+            this,      SLOT( killNote( KCal::Journal * ) ) );
+-  
++
+   // read the notes
+   m_manager->load();
+-  
++
+   // read the old config files, convert and add them
+   KCal::CalendarLocal calendar( QString::fromLatin1( "UTC" ) );
+   if ( KNotesLegacy::convert( &calendar ) ) {
+@@ -207,20 +207,20 @@
+     for ( it = notes.constBegin(); it != notes.constEnd(); ++it ) {
+       m_manager->addNewNote( *it );
+     }
+-    
++
+     m_manager->save();
+   }
+-  
++
+   // set up the alarm reminder - do it after loading the notes because this
+   // is used as a check if updateNoteActions has to be called for a new note
+   m_alarm = new KNotesAlarm( m_manager, this );
+-  
++
+    updateNetworkListener();
+-  
++
+   if ( m_notes.size() == 0 && !kapp->isSessionRestored() ) {
+       newNote();
+   }
+-  
++
+   updateNoteActions();
+   m_tray->show();
+ }
+@@ -228,14 +228,20 @@
+ KNotesApp::~KNotesApp()
+ {
+   saveNotes();
+-  
++
+   blockSignals( true );
+   qDeleteAll( m_notes );
+   m_notes.clear();
+   qDeleteAll( m_noteActions );
+   m_noteActions.clear();
+   blockSignals( false );
+-  
++
++  delete m_listener;
++  m_listener=0;
++  delete m_publisher;
++  m_publisher=0;
++  delete m_findPos;
++  m_findPos = 0;
+   //delete m_listener;
+   delete m_manager;
+   delete m_guiBuilder;
+@@ -254,7 +260,7 @@
+ {
+   // create the new note
+   KCal::Journal *journal = new KCal::Journal();
+-  
++
+   // new notes have the current date/time as title if none was given
+   if ( !name.isEmpty() ) {
+     journal->setSummary( name );
+@@ -262,14 +268,14 @@
+     journal->setSummary( KGlobal::locale()->formatDateTime(
+                                                QDateTime::currentDateTime() ) );
+   }
+-  
++
+   // the body of the note
+   journal->setDescription( text );
+-  
++
+   m_manager->addNewNote( journal );
+-  
++
+   showNote( journal->uid() );
+-  
++
+   return journal->uid();
+ }
+ 
+@@ -282,7 +288,7 @@
+ void KNotesApp::hideAllNotes() const
+ {
+   foreach ( KNote *note, m_notes ) {
+-    note->hide();
++    note->slotClose();
+   }
+ }
+ 
+@@ -291,7 +297,7 @@
+   foreach ( KNote *note, m_notes ) {
+     // workaround to BUG 149116
+     note->hide();
+-    
++
+     note->show();
+     note->setFocus();
+   }
+@@ -336,11 +342,11 @@
+ QMap<QString, QString> KNotesApp::notes() const
+ {
+   QMap<QString, QString> notes;
+-  
++
+   foreach ( KNote *note, m_notes ) {
+     notes.insert( note->noteId(), note->name() );
+   }
+-  
++
+   return notes;
+ }
+ 
+@@ -393,7 +399,7 @@
+     case QSystemTrayIcon::Trigger:
+       if ( m_notes.size() == 1 ) {
+         showNote( *m_notes.begin() );
+-      } else if ( m_notes.size() > 1 ) {
++      } else if ( m_notes.size() != 1 ) {
+         m_noteMenu->popup( QCursor::pos () );
+       }
+       break;
+@@ -437,20 +443,20 @@
+   findDia.setHasSelection( false );
+   findDia.setHasCursor( false );
+   findDia.setSupportsBackwardsFind( false );
+-  
+-  if ( findDia.exec() != QDialog::Accepted ) {
++
++  if ( (findDia.exec() != QDialog::Accepted) || findDia.pattern().isEmpty() ) {
+     return;
+   }
+-  
++
+   delete m_findPos;
+   m_findPos = new QMap<QString, KNote *>::iterator();
+   *m_findPos = m_notes.begin();
+-  
++
+   // this could be in an own method if searching without a dialog
+   // should be possible
+   delete m_find;
+   m_find = new KFind( findDia.pattern(), findDia.options(), this );
+-  
++
+   slotFindNext();
+ }
+ 
+@@ -488,25 +494,25 @@
+ void KNotesApp::slotConfigureAccels()
+ {
+   KNotesKeyDialog keys( actionCollection(), this );
+-  
++
+   QMap<QString, KNote *>::const_iterator it = m_notes.constBegin();
+-  
++
+   if ( !m_notes.isEmpty() ) {
+     keys.insert( ( *it )->actionCollection() );
+   }
+-  
++
+   keys.configure();
+-  
++
+   // update GUI doc for new notes
+   m_noteGUI.setContent(
+     KXMLGUIFactory::readConfigFile( componentData().componentName() + "ui.rc",
+                                     componentData() )
+                       );
+-  
++
+   if ( m_notes.isEmpty() ) {
+     return;
+   }
+-  
++
+   foreach ( QAction *action, ( *it )->actionCollection()->actions() ) {
+     it = m_notes.constBegin();
+     for ( ++it; it != m_notes.constEnd(); ++it ) {
+@@ -521,7 +527,7 @@
+ */
+       QAction *toChange =
+         ( *it )->actionCollection()->action( action->objectName() );
+-      
++
+       if ( toChange ) {
+         toChange->setShortcuts( action->shortcuts() );
+       }
+@@ -542,7 +548,7 @@
+       note->saveData();
+     }
+   }
+-  
++
+   saveConfigs();
+   kapp->quit();
+ }
+@@ -564,7 +570,7 @@
+ {
+   KNote *newNote = new KNote( m_noteGUI, journal, 0 );
+   m_notes.insert( newNote->noteId(), newNote );
+-  
++
+   connect( newNote, SIGNAL( sigRequestNewNote() ),
+            SLOT( newNote() ) );
+   connect( newNote, SIGNAL( sigShowNextNote() ),
+@@ -579,7 +585,7 @@
+            SLOT( updateNoteActions() ) );
+   connect( newNote, SIGNAL( sigFindFinished() ),
+            SLOT( slotFindNext() ) );
+-  
++
+   // don't call this during startup for each and every loaded note
+   if ( m_alarm ) {
+     updateNoteActions();
+@@ -601,7 +607,7 @@
+ {
+   // Accept the connection and make KNotesNetworkReceiver do the job
+   QTcpSocket *s = m_listener->nextPendingConnection();
+-  
++
+   if ( s ) {
+     KNotesNetworkReceiver *recv = new KNotesNetworkReceiver( s );
+     connect( recv,
+@@ -644,18 +650,26 @@
+                     1,
+                     note->palette().color( note->backgroundRole() ),
+                     false );
+-    
++
+     action->setIcon( icon );
+     m_noteActions.append( action );
+   }
+-  
+-	qSort( m_noteActions.begin(), m_noteActions.end(), qActionLessThan );
+-  
++
+   if ( m_noteActions.isEmpty() ) {
++      actionCollection()->action( "hide_all_notes" )->setEnabled( false );
++      actionCollection()->action( "show_all_notes" )->setEnabled( false );
++      m_findAction->setEnabled( false );
+     KAction *action = new KAction( i18n( "No Notes" ), this );
+     m_noteActions.append( action );
+   }
+-  
++  else
++  {
++      qSort( m_noteActions.begin(), m_noteActions.end(), qActionLessThan );
++      actionCollection()->action( "hide_all_notes" )->setEnabled( true );
++      actionCollection()->action( "show_all_notes" )->setEnabled( true );
++      m_findAction->setEnabled( true );
++  }
++
+   plugActionList( "notes", m_noteActions );
+ }
+ 
+@@ -665,7 +679,7 @@
+     m_listener=0;
+     delete m_publisher;
+     m_publisher=0;
+-    
++
+     if ( KNotesGlobalConfig::receiveNotes() ) {
+         // create the socket and start listening for connections
+         m_listener=KSocketFactory::listen( "knotes" , QHostAddress::Any,
+@@ -683,7 +697,7 @@
+ #warning FIXME!
+ #endif
+   //    KNote::setStyle( KNotesGlobalConfig::style() );
+-  
++
+   foreach ( KNote *note, m_notes ) {
+     QApplication::postEvent( note, new QEvent( QEvent::LayoutRequest ) );
+   }
+Index: knotes/knotesalarm.cpp
+===================================================================
+--- knotes/knotesalarm.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knotesalarm.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -48,9 +48,9 @@
+ {
+   setObjectName( name );
+   // TODO: fix timezone stuff?
+-  
++
+   connect( &m_checkTimer, SIGNAL( timeout() ), SLOT( checkAlarms() ) );
+-  
++
+   // interval in seconds
+   m_checkTimer.start( 1000 * KNotesGlobalConfig::self()->checkInterval() );
+ }
+@@ -61,19 +61,21 @@
+   if ( !from.isValid() ) {
+     from.setTime_t( 0 );
+   }
+-  
++
+   KDateTime now = KDateTime::currentLocalDateTime();
+   KNotesGlobalConfig::self()->setAlarmsLastChecked( now.dateTime() );
+   QList<KCal::Alarm *> alarms = m_manager->alarms( KDateTime( from,
+ KDateTime::LocalZone ), now );
+-  
++  if ( alarms.isEmpty() )
++      return;
++
+   QStringList notes;
+   QList<KCal::Alarm *>::ConstIterator it;
+   for ( it = alarms.constBegin(); it != alarms.constEnd(); ++it ) {
+     KCal::Incidence *incidence = ( *it )->parent();
+     notes += incidence->summary();
+   }
+-  
++
+   if ( !notes.isEmpty() ) {
+     KMessageBox::informationList( 0,
+                                   i18n( "The following notes triggered "
+Index: knotes/knotes_manager.desktop
+===================================================================
+--- knotes/knotes_manager.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knotes_manager.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -32,6 +32,7 @@
+ Name[lv]=Piezīmes
+ Name[mk]=Белешки
+ Name[ms]=Nota
++Name[nb]=Notater
+ Name[nds]=Notizen
+ Name[ne]=टिपोट
+ Name[nl]=Notities
+Index: knotes/knote.h
+===================================================================
+--- knotes/knote.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knote.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -53,7 +53,7 @@
+ {
+   Q_OBJECT
+   public:
+-    KNote( QDomDocument buildDoc, KCal::Journal *journal, QWidget *parent = 0 );
++    KNote( const QDomDocument& buildDoc, KCal::Journal *journal, QWidget *parent = 0 );
+     ~KNote();
+ 
+     void saveData();
+@@ -69,10 +69,11 @@
+     void find( KFind* kfind );
+ 
+     bool isModified() const;
++    void blockEmitDataChanged( bool _b ) { m_blockEmitDataChanged = _b;}
+ 
+   public slots:
+     void slotKill( bool force = false );
+-
++    void slotClose();
+   signals:
+     void sigRequestNewNote();
+     void sigShowNextNote();
+@@ -97,7 +98,6 @@
+   private slots:
+     void slotRename();
+     void slotUpdateReadOnly();
+-    void slotClose();
+ 
+     void slotSend();
+     void slotMail();
+@@ -160,6 +160,7 @@
+     KToggleAction *m_keepBelow;
+ 
+     KSharedConfig::Ptr m_kwinConf;
++    bool m_blockEmitDataChanged;
+ };
+ 
+ #endif
+Index: knotes/knoteedit.cpp
+===================================================================
+--- knotes/knoteedit.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ knotes/knoteedit.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -178,7 +178,7 @@
+   pix.fill( Qt::black ); // just a dummy, gets updated before widget is shown
+   m_textColor  = new KAction( i18n( "Text Color..." ), this );
+   actions->addAction( "format_color", m_textColor );
+-  ( ( QAction * )m_textColor )->setIcon( pix );
++  m_textColor->setIcon( pix );
+   connect( m_textColor, SIGNAL( triggered( bool ) ), SLOT( slotTextColor() ) );
+   
+   m_textFont  = new KFontAction( i18n( "Text Font" ), this );
+@@ -235,13 +235,6 @@
+   setTextFormat( f );
+ }
+ 
+-void KNoteEdit::setTextColor( const QColor &color )
+-{
+-  QTextCharFormat f;
+-  f.setForeground( QBrush( color ) );
+-  setTextFormat( f );
+-}
+-
+ void KNoteEdit::setTabStop( int tabs )
+ {
+   QFontMetrics fm( font() );
+@@ -427,7 +420,9 @@
+       }
+       insertPlainText( ( *it ).prettyUrl() );
+     }
+-  } else { KTextEdit::dropEvent( e ); }
++  } else {
++      KTextEdit::dropEvent( e );
++  }
+ }
+ 
+ void KNoteEdit::keyPressEvent( QKeyEvent *e )
+@@ -462,7 +457,7 @@
+ {
+   // font changes
+   m_textFont->setFont( f.fontFamily() );
+-  m_textSize->setFontSize( ( int ) f.fontPointSize() );
++  m_textSize->setFontSize( (f.fontPointSize()>0 ) ?  ( int ) f.fontPointSize() :10);
+   
+   m_textBold->setChecked( f.font().bold() );
+   m_textItalic->setChecked( f.fontItalic() );
+Index: akonadi/resources/localbookmarks/localbookmarksresource.desktop
+===================================================================
+--- akonadi/resources/localbookmarks/localbookmarksresource.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ akonadi/resources/localbookmarks/localbookmarksresource.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -14,6 +14,7 @@
+ Name[km]=ចំណាំ​មូលដ្ឋាន
+ Name[ko]=로컬 책갈피
+ Name[lv]=Lokālās grāmatzīmes
++Name[nb]=Lokale bokmerker
+ Name[nds]=Lokaalleestekens
+ Name[nl]=Lokale bladwijzers
+ Name[nn]=Lokalbokmerke
 Index: MAINTAINERS
 ===================================================================
---- MAINTAINERS	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ MAINTAINERS	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- MAINTAINERS	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ MAINTAINERS	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -7,13 +7,11 @@
                    Lutz Rogowski <lutz@klaralvdalens-datakonsult.se>
  kfile-plugins     ?
@@ -2776,8 +5856,8 @@ Index: MAINTAINERS
  kresources        ?
 Index: korganizer/koeditorgeneralevent.h
 ===================================================================
---- korganizer/koeditorgeneralevent.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorgeneralevent.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorgeneralevent.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorgeneralevent.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -70,7 +70,7 @@
      */
      void readEvent( Event *event, bool tmpl = false );
@@ -2789,8 +5869,8 @@ Index: korganizer/koeditorgeneralevent.h
      bool validateInput();
 Index: korganizer/koattendeeeditor.cpp
 ===================================================================
---- korganizer/koattendeeeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koattendeeeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koattendeeeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koattendeeeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -304,7 +304,7 @@
    }
  }
@@ -2800,10 +5880,23 @@ Index: korganizer/koattendeeeditor.cpp
  {
    if ( mOrganizerCombo ) {
      // TODO: Don't take a string and split it up... Is there a better way?
+Index: korganizer/history.cpp
+===================================================================
+--- korganizer/history.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/history.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -105,7 +105,7 @@
+ 
+ void History::addEntry( Entry *entry )
+ {
+-  if ( mCurrentMultiEntry ) {
++  if ( mCurrentMultiEntry && mCurrentMultiEntry != entry ) {
+     mCurrentMultiEntry->appendEntry( entry );
+   } else {
+     truncate();
 Index: korganizer/koeditorgeneraltodo.cpp
 ===================================================================
---- korganizer/koeditorgeneraltodo.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorgeneraltodo.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorgeneraltodo.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorgeneraltodo.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -304,6 +304,7 @@
      mDueDateEdit->setDate( QDate::currentDate() );
      mDueTimeEdit->setTime( QTime::currentTime() );
@@ -2834,9 +5927,18 @@ Index: korganizer/koeditorgeneraltodo.cpp
    QString tmpStr;
 Index: korganizer/koeditorgeneral.cpp
 ===================================================================
---- korganizer/koeditorgeneral.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorgeneral.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
-@@ -493,7 +493,7 @@
+--- korganizer/koeditorgeneral.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorgeneral.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -327,6 +327,8 @@
+ {
+   KPIM::CategorySelectDialog *categoryDialog =
+     new KPIM::CategorySelectDialog( KOPrefs::instance(), mCategoriesButton );
++  categoryDialog->setHelp( "categories-view", "korganizer" );
++  categoryDialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Help );
+   KOGlobals::fitDialogToScreen( categoryDialog );
+   categoryDialog->setSelected( mCategories );
+ 
+@@ -493,7 +495,7 @@
    }
  }
  
@@ -2845,7 +5947,7 @@ Index: korganizer/koeditorgeneral.cpp
  {
    incidence->setSummary( mSummaryEdit->text() );
    incidence->setLocation( mLocationEdit->text() );
-@@ -532,7 +532,7 @@
+@@ -532,7 +534,7 @@
        incidence->addAlarm( al );
      }
    }
@@ -2856,8 +5958,8 @@ Index: korganizer/koeditorgeneral.cpp
  void KOEditorGeneral::setSummary( const QString &text )
 Index: korganizer/koeventeditor.cpp
 ===================================================================
---- korganizer/koeventeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeventeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeventeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeventeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -66,6 +66,16 @@
    }
  }
@@ -2943,8 +6045,8 @@ Index: korganizer/koeventeditor.cpp
  }
 Index: korganizer/koeditorfreebusy.cpp
 ===================================================================
---- korganizer/koeditorfreebusy.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorfreebusy.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorfreebusy.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorfreebusy.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -760,7 +760,7 @@
    dialog.exec();
  }
@@ -2965,8 +6067,8 @@ Index: korganizer/koeditorfreebusy.cpp
    qDeleteAll( toBeDeleted );
 Index: korganizer/koattendeeeditor.h
 ===================================================================
---- korganizer/koattendeeeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koattendeeeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koattendeeeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koattendeeeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -56,7 +56,7 @@
      virtual void insertAttendee( KCal::Attendee *attendee, bool fetchFB = true ) = 0;
  
@@ -2978,8 +6080,8 @@ Index: korganizer/koattendeeeditor.h
      void cancelAttendeeIncidence( KCal::Incidence *incidence );
 Index: korganizer/dbuscalendar.desktop
 ===================================================================
---- korganizer/dbuscalendar.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/dbuscalendar.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/dbuscalendar.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/dbuscalendar.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -35,6 +35,7 @@
  Comment[kk]=D-BUS интерфейсті Ұйымдастырғыш
  Comment[km]=កម្មវិធី​រៀបចំ​ដែល​មាន​ចំណុច​ប្រទាក់ D-BUS
@@ -2990,8 +6092,8 @@ Index: korganizer/dbuscalendar.desktop
  Comment[nds]=En Daagpleger mit en D-Bus-Koppelsteed
 Index: korganizer/koeditorgeneral.h
 ===================================================================
---- korganizer/koeditorgeneral.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorgeneral.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorgeneral.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorgeneral.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -88,7 +88,7 @@
      void readIncidence( Incidence *incidence );
  
@@ -3003,8 +6105,8 @@ Index: korganizer/koeditorgeneral.h
      bool validateInput();
 Index: korganizer/koeventeditor.h
 ===================================================================
---- korganizer/koeventeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeventeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeventeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeventeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -95,7 +95,7 @@
      /**
        Write event settings to event object
@@ -3024,8 +6126,8 @@ Index: korganizer/koeventeditor.h
      Event *mEvent;
 Index: korganizer/koeditorgeneralevent.cpp
 ===================================================================
---- korganizer/koeditorgeneralevent.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorgeneralevent.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorgeneralevent.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorgeneralevent.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -432,9 +432,9 @@
    readIncidence( event );
  }
@@ -3040,8 +6142,8 @@ Index: korganizer/koeditorgeneralevent.cpp
    QTime tmpTime;
 Index: korganizer/koeditorattachments.h
 ===================================================================
---- korganizer/koeditorattachments.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorattachments.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorattachments.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorattachments.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -104,7 +104,7 @@
      /** Read event object and setup widgets accordingly */
      void readIncidence( KCal::Incidence * );
@@ -3053,8 +6155,8 @@ Index: korganizer/koeditorattachments.h
  
 Index: korganizer/korgac/alarmdialog.cpp
 ===================================================================
---- korganizer/korgac/alarmdialog.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/korgac/alarmdialog.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/korgac/alarmdialog.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/korgac/alarmdialog.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -413,8 +413,17 @@
        // FIXME: Check whether this should be done for all multiple alarms
        if ( alarm->type() == Alarm::Procedure ) {
@@ -3077,32 +6179,56 @@ Index: korganizer/korgac/alarmdialog.cpp
          Phonon::MediaObject *player =
 Index: korganizer/interfaces/calendar/calendarplugin.desktop
 ===================================================================
---- korganizer/interfaces/calendar/calendarplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/interfaces/calendar/calendarplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
-@@ -14,6 +14,7 @@
+--- korganizer/interfaces/calendar/calendarplugin.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/interfaces/calendar/calendarplugin.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -14,8 +14,9 @@
  Name[ja]=カレンダープラグインインターフェース
  Name[km]=ប្រតិទិន​កម្មវិធី​ជំនួយ​ប្រតិទិន
  Name[ko]=달력 플러그인 인터페이스
 +Name[lt]=Kalendoriaus priedo sąsaja
  Name[lv]=Kalendāra spraudņa saskarne
- Name[nb]=Calendar-grensesnitt for programtillegg
+-Name[nb]=Calendar-grensesnitt for programtillegg
++Name[nb]=Grensesnitt til kalender-programtillegg
  Name[nds]=Kalennermoduul-Koppelsteed
+ Name[nl]=Agendapluginuiterlijk
+ Name[nn]=Grensesnitt til kalender-programtillegg
+@@ -67,7 +68,7 @@
+ Comment[lv]=Kalendāra spraudnis
+ Comment[mk]=Приклучок за календар
+ Comment[ms]=Plugin Kalendar
+-Comment[nb]=Calendar-programtillegg
++Comment[nb]=Kalender-programtillegg
+ Comment[nds]=Kalenner-Moduul
+ Comment[ne]=क्यालेन्डर प्लगइन
+ Comment[nl]=Agendaplugin
 Index: korganizer/interfaces/calendar/calendardecoration.desktop
 ===================================================================
---- korganizer/interfaces/calendar/calendardecoration.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/interfaces/calendar/calendardecoration.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
-@@ -14,6 +14,7 @@
+--- korganizer/interfaces/calendar/calendardecoration.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/interfaces/calendar/calendardecoration.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -14,8 +14,9 @@
  Name[ja]=カレンダー装飾インターフェース
  Name[km]=ចំណុច​ប្រទាក់​តុបតែង​ប្រតិទិន
  Name[ko]=달력 장식 인터페이스
 +Name[lt]=Kalendoriaus dekoracijų sąsaja
  Name[lv]=Kalendāra dekorāciju saskarne
- Name[nb]=Calendar dekorasjonsgrensesnitt
+-Name[nb]=Calendar dekorasjonsgrensesnitt
++Name[nb]=Grensesnitt til kalenderpynt
  Name[nds]=Kalennerdekoratschoon-Koppelsteed
+ Name[nl]=Agendadecoratie-uiterlijk
+ Name[nn]=Grensesnitt til kalenderpynt
+@@ -67,7 +68,7 @@
+ Comment[lv]=Kalendāra dekorāciju spraudnis
+ Comment[mk]=Приклучок за декорација на календар
+ Comment[ms]=Plugin Hiasan Kalendar
+-Comment[nb]=Calendar dekorasjonsprogramtillegg
++Comment[nb]=Programtillegg for kalenderpynt
+ Comment[nds]=Dekoratschoon för den Kalenner
+ Comment[ne]=क्यालेन्डर सजावट प्लगइन
+ Comment[nl]=Agendadecoratieplugin
 Index: korganizer/kotodoeditor.cpp
 ===================================================================
---- korganizer/kotodoeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/kotodoeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/kotodoeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/kotodoeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -62,6 +62,16 @@
    emit dialogClose( mTodo );
  }
@@ -3120,7 +6246,16 @@ Index: korganizer/kotodoeditor.cpp
  void KOTodoEditor::init()
  {
    setupGeneral();
-@@ -220,13 +230,13 @@
+@@ -75,6 +85,8 @@
+ 
+   connect( mGeneral, SIGNAL(openCategoryDialog()),
+            SIGNAL(editCategories()) );
++  connect( this, SIGNAL(updateCategoryConfig()),
++           mGeneral, SIGNAL(updateCategoryConfig()) );
+ 
+   connect( mDetails, SIGNAL(updateAttendeeSummary(int)),
+            mGeneral, SLOT(updateAttendeeSummary(int)) );
+@@ -220,13 +232,13 @@
      Todo *oldTodo = mTodo->clone();
      Todo *todo = mTodo->clone();
  
@@ -3136,7 +6271,7 @@ Index: korganizer/kotodoeditor.cpp
        mChanger->changeIncidence( oldTodo, mTodo );
      }
      delete todo;
-@@ -237,7 +247,7 @@
+@@ -237,7 +249,7 @@
      mTodo = new Todo;
      mTodo->setOrganizer( Person( KOPrefs::instance()->fullName(), KOPrefs::instance()->email() ) );
  
@@ -3145,7 +6280,7 @@ Index: korganizer/kotodoeditor.cpp
  
      if ( !mChanger->addIncidence( mTodo, this ) ) {
        delete mTodo;
-@@ -298,13 +308,13 @@
+@@ -298,13 +310,13 @@
    readDesignerFields( todo );
  }
  
@@ -3163,7 +6298,7 @@ Index: korganizer/kotodoeditor.cpp
  
    if ( *( oldIncidence->recurrence() ) != *( todo->recurrence() ) ) {
      todo->setDtDue( todo->dtDue(), true );
-@@ -367,7 +377,7 @@
+@@ -367,7 +379,7 @@
  void KOTodoEditor::slotSaveTemplate( const QString &templateName )
  {
    Todo *todo = new Todo;
@@ -3174,8 +6309,8 @@ Index: korganizer/kotodoeditor.cpp
  
 Index: korganizer/koeditorgeneraljournal.cpp
 ===================================================================
---- korganizer/koeditorgeneraljournal.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorgeneraljournal.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorgeneraljournal.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorgeneraljournal.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -176,7 +176,7 @@
    setCategories( journal->categories() );
  }
@@ -3187,8 +6322,8 @@ Index: korganizer/koeditorgeneraljournal.cpp
    if ( mRichDescription->isChecked() ) {
 Index: korganizer/koeditordetails.cpp
 ===================================================================
---- korganizer/koeditordetails.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditordetails.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditordetails.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditordetails.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -281,7 +281,7 @@
    emit updateAttendeeSummary( mListView->childCount() );
  }
@@ -3209,8 +6344,8 @@ Index: korganizer/koeditordetails.cpp
    qDeleteAll( toBeDeleted );
 Index: korganizer/koeditorfreebusy.h
 ===================================================================
---- korganizer/koeditorfreebusy.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorfreebusy.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorfreebusy.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorfreebusy.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -60,7 +60,7 @@
      void clearAttendees();
  
@@ -3220,10 +6355,49 @@ Index: korganizer/koeditorfreebusy.h
  
      void triggerReload();
      void cancelReload();
+Index: korganizer/kodaymatrix.cpp
+===================================================================
+--- korganizer/kodaymatrix.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/kodaymatrix.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -289,8 +289,10 @@
+          !( recurType == Recurrence::rWeekly && !KOPrefs::instance()->mWeeklyRecur ) ) {
+ 
+       DateTimeList timeDateList;
++      bool isRecurrent = event->recurs();
++      int eventDuration = event->dtStart().daysTo( event->dtEnd() );
+ 
+-      if ( event->recurs() ) {
++      if ( isRecurrent ) {
+         //Its a recurring event, find out in which days it occurs
+         timeDateList = event->recurrence()->timesInInterval(
+           *new KDateTime( mDays[0], mCalendar->timeSpec() ),
+@@ -310,6 +312,13 @@
+         QDate d = t->date();
+         int j   = 0;
+ 
++        QDate occurrenceEnd;
++        if ( isRecurrent ) {
++          occurrenceEnd = d.addDays( eventDuration );
++        } else {
++          occurrenceEnd = event->dtEnd().date();
++        }
++
+         do {
+ 
+           mEvents.append( d );
+@@ -317,7 +326,7 @@
+           ++j;
+           d = d.addDays( 1 );
+ 
+-        } while ( d <= event->dtEnd().date() && j < NUMDAYS );
++        } while ( d <= occurrenceEnd && j < NUMDAYS );
+       }
+     }
+   }
 Index: korganizer/koeditorrecurrence.cpp
 ===================================================================
---- korganizer/koeditorrecurrence.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorrecurrence.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorrecurrence.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorrecurrence.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -1407,7 +1407,7 @@
    mExceptions->setDates( incidence->recurrence()->exDates() );
  }
@@ -3235,8 +6409,8 @@ Index: korganizer/koeditorrecurrence.cpp
      if ( incidence->recurs() ) {
 Index: korganizer/kotodoeditor.h
 ===================================================================
---- korganizer/kotodoeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/kotodoeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/kotodoeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/kotodoeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -82,7 +82,7 @@
      void readTodo( Todo *todo, bool tmpl = false );
  
@@ -3254,10 +6428,23 @@ Index: korganizer/kotodoeditor.h
  
    private:
      Todo *mTodo;
+Index: korganizer/filtereditdialog.cpp
+===================================================================
+--- korganizer/filtereditdialog.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/filtereditdialog.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -292,6 +292,8 @@
+ 
+   if ( !mCategorySelectDialog ) {
+     mCategorySelectDialog = new KPIM::CategorySelectDialog( KOPrefs::instance(), this );
++    mCategorySelectDialog->setHelp( "categories-view", "korganizer" );
++    mCategorySelectDialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Help );
+     connect( mCategorySelectDialog, SIGNAL(categoriesSelected(const QStringList&)),
+              SLOT(updateCategorySelection(const QStringList&)) );
+     connect( mCategorySelectDialog, SIGNAL(editCategories()),
 Index: korganizer/views/monthview/monthgraphicsitems.cpp
 ===================================================================
---- korganizer/views/monthview/monthgraphicsitems.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/views/monthview/monthgraphicsitems.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/views/monthview/monthgraphicsitems.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/views/monthview/monthgraphicsitems.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -164,7 +164,10 @@
  
  QPainterPath MonthGraphicsItem::shape() const
@@ -3272,8 +6459,8 @@ Index: korganizer/views/monthview/monthgraphicsitems.cpp
  // TODO: remove this method.
 Index: korganizer/views/todoview/kotodomodel.cpp
 ===================================================================
---- korganizer/views/todoview/kotodomodel.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/views/todoview/kotodomodel.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/views/todoview/kotodomodel.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/views/todoview/kotodomodel.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -800,8 +800,10 @@
      if ( role == Qt::EditRole ) {
        switch ( index.column() ) {
@@ -3289,8 +6476,8 @@ Index: korganizer/views/todoview/kotodomodel.cpp
            todo->setPriority( value.toInt() );
 Index: korganizer/views/todoview/kotodoview.cpp
 ===================================================================
---- korganizer/views/todoview/kotodoview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/views/todoview/kotodoview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/views/todoview/kotodoview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/views/todoview/kotodoview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -233,6 +233,8 @@
    }
    connect( mPercentageCompletedPopupMenu, SIGNAL(triggered(QAction *)),
@@ -3302,8 +6489,8 @@ Index: korganizer/views/todoview/kotodoview.cpp
  KOTodoView::~KOTodoView()
 Index: korganizer/views/whatsnextview/kowhatsnextview.cpp
 ===================================================================
---- korganizer/views/whatsnextview/kowhatsnextview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/views/whatsnextview/kowhatsnextview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/views/whatsnextview/kowhatsnextview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/views/whatsnextview/kowhatsnextview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -104,10 +104,10 @@
  
    Event::List events;
@@ -3318,10 +6505,97 @@ Index: korganizer/views/whatsnextview/kowhatsnextview.cpp
    if ( events.count() > 0 ) {
      mText += "<p></p>";
      kil.loadIcon( "view-calendar-day", KIconLoader::NoGroup, 22,
+Index: korganizer/views/timespentview/kotimespentview.cpp
+===================================================================
+--- korganizer/views/timespentview/kotimespentview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/views/timespentview/kotimespentview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -79,16 +79,62 @@
+       QMap<QString, int> secondsSpent;
+ 
+       int total = 0;
++
+       foreach ( Event *e, mEventList ) {
++
++        KDateTime selectedStart( mTimeSpentView->mStartDate,
++                                 QTime( 0, 0 ),
++                                 e->dtStart().timeSpec() );
++
++        KDateTime selectedEnd( mTimeSpentView->mEndDate.addDays( 1 ),
++                               QTime( 0, 0 ),
++                               e->dtEnd().timeSpec() );
++
++        KDateTime start;
++        KDateTime end;
++
++        // duration of all occurrences added
++        int totalDuration = 0;
++
++        if ( e->recurs() ) {
++          int eventDuration = e->dtStart().secsTo( e->dtEnd() );
++
++          // timesInInterval only return events that have their start inside the interval
++          // so we resize the interval by -eventDuration
++          DateTimeList times = e->recurrence()->timesInInterval( selectedStart.addSecs( -eventDuration ), selectedEnd );
++
++          foreach ( KDateTime kdt, times ) {
++            // either the event's start or the event's end must be in the view's interval
++            if ( kdt >= selectedStart ||
++                 kdt.addSecs( eventDuration ) >= selectedStart ) {
++
++              start = kdt > selectedStart ? kdt : selectedStart;
++              end   = kdt.addSecs( eventDuration ) < selectedEnd ? kdt.addSecs( eventDuration ) : selectedEnd;
++              totalDuration += start.secsTo( end );
++            }
++          }
++
++        } else {
++          // The event's start can be before the view's start date or end after the view's end
++          start  = e->dtStart() > selectedStart ? e->dtStart() : selectedStart;
++          end    = e->dtEnd()   < selectedEnd   ? e->dtEnd()   : selectedEnd;
++
++          totalDuration += start.secsTo( end );
++        }
++
++        if ( totalDuration == 0 ) {
++          continue;
++        }
++
+         if ( e->categories().count() ) {
+           foreach ( const QString &s, e->categories() ) {
+-            secondsSpent[ s ] += e->dtStart().secsTo( e->dtEnd() );
++            secondsSpent[ s ] += totalDuration;
+           }
+         } else {
+-          secondsSpent[ i18n( "No category" ) ] += e->dtStart().secsTo( e->dtEnd() );
++          secondsSpent[ i18n( "No category" ) ] += totalDuration;
+         }
+ 
+-        total += e->dtStart().secsTo( e->dtEnd() );
++        total += totalDuration;
+       }
+ 
+       QMapIterator<QString, int> i( secondsSpent );
+@@ -201,14 +247,9 @@
+   }
+   text+="</h2>\n";
+   */
+-  Event::List events;
++
+   KDateTime::Spec timeSpec = KOPrefs::instance()->timeSpec();
+-  for ( QDate date = mStartDate; date <= mEndDate; date = date.addDays( 1 ) ) {
+-    events += calendar()->events( date, timeSpec,
+-                                  EventSortStartDate, SortDirectionAscending );
+-  }
+-
+-  mView->mEventList = events;
++  mView->mEventList = calendar()->events( mStartDate, mEndDate, timeSpec );
+   mView->repaint();
+ }
+ 
 Index: korganizer/views/agendaview/koagendaview.cpp
 ===================================================================
---- korganizer/views/agendaview/koagendaview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/views/agendaview/koagendaview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/views/agendaview/koagendaview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/views/agendaview/koagendaview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -1244,8 +1244,15 @@
      }
      if ( todo ) {
@@ -3363,10 +6637,32 @@ Index: korganizer/views/agendaview/koagendaview.cpp
    updateConfig();
  }
  
+Index: korganizer/views/agendaview/koagendaitem.cpp
+===================================================================
+--- korganizer/views/agendaview/koagendaitem.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/views/agendaview/koagendaitem.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -879,16 +879,7 @@
+   QColor textColor = getTextColor( bgColor );
+   p.setPen( textColor );
+ 
+-  p.setFont( KOPrefs::instance()->agendaCalendarItemsFont() );
+-  if ( mIncidence ) {
+-    if ( mIncidence->type() == "Event" ) {
+-      p.setFont( KOPrefs::instance()->agendaCalendarItemsEventsFont() );
+-    }
+-    if ( mIncidence->type() == "Todo" ) {
+-      p.setFont( KOPrefs::instance()->agendaCalendarItemsToDosFont() );
+-    }
+-  }
+-
++  p.setFont( KOPrefs::instance()->agendaViewFont() );
+   QFontMetrics fm = p.fontMetrics();
+ 
+   int singleLineHeight = fm.boundingRect( mLabelText ).height();
 Index: korganizer/kojournaleditor.h
 ===================================================================
---- korganizer/kojournaleditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/kojournaleditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/kojournaleditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/kojournaleditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -97,7 +97,7 @@
      void readJournal( Journal *journal, bool tmpl = false );
  
@@ -3386,8 +6682,8 @@ Index: korganizer/kojournaleditor.h
      Journal *mJournal;
 Index: korganizer/koeditordetails.h
 ===================================================================
---- korganizer/koeditordetails.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditordetails.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditordetails.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditordetails.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -95,7 +95,7 @@
      void readIncidence( Incidence * );
  
@@ -3399,8 +6695,8 @@ Index: korganizer/koeditordetails.h
      bool validateInput();
 Index: korganizer/koeditorrecurrence.h
 ===================================================================
---- korganizer/koeditorrecurrence.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorrecurrence.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorrecurrence.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorrecurrence.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -314,7 +314,7 @@
      void readIncidence( Incidence * );
  
@@ -3412,9 +6708,18 @@ Index: korganizer/koeditorrecurrence.h
      bool validateInput();
 Index: korganizer/calendarview.cpp
 ===================================================================
---- korganizer/calendarview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/calendarview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
-@@ -1256,6 +1256,7 @@
+--- korganizer/calendarview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/calendarview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -145,8 +145,6 @@
+   mDateNavigator->setObjectName( "CalendarView::DateNavigator" );
+ 
+ //  mLeftSplitter->setResizeMode( mDateNavigator, QSplitter::Stretch );
+-  mLeftSplitter->setCollapsible( mLeftSplitter->indexOf(mDateNavigator), true );
+-
+   mTodoList = new KOTodoView( CalendarNull::self(), mLeftSplitter );
+   mTodoList->setObjectName( "todolist" );
+ 
+@@ -1256,6 +1254,7 @@
    if ( alarms.isEmpty() ) {
      // Add an alarm if it didn't have one
      Alarm *alm = incidence->newAlarm();
@@ -3422,10 +6727,51 @@ Index: korganizer/calendarview.cpp
      alm->setEnabled( true );
    }
    mChanger->changeIncidence( oldincidence, incidence, KOGlobals::ALARM_MODIFIED );
+@@ -2141,18 +2140,28 @@
+           i18n( "KOrganizer Confirmation" ),
+           KGuiItem( i18n( "Delete All" ) ) );
+       } else {
+-        km = KOMessageBox::fourBtnMsgBox(
+-          this,
+-          QMessageBox::Warning,
+-          i18n( "The calendar item \"%1\" recurs over multiple dates. "
+-                "Do you want to delete only the current one on %2, only all "
+-                "future recurrences, or all its recurrences?",
+-                incidence->summary(),
+-                KGlobal::locale()->formatDate( itemDate ) ),
+-          i18n( "KOrganizer Confirmation" ),
+-          KGuiItem( i18n( "Delete C&urrent" ) ),
+-          KGuiItem( i18n( "Delete &Future" ) ),
+-          KGuiItem( i18n( "Delete &All" ) ) );
++        KDateTime itemDateTime( itemDate, KOPrefs::instance()->timeSpec() );
++        bool isFirst = !incidence->recurrence()->getPreviousDateTime( itemDateTime ).isValid();
++        bool isLast  = !incidence->recurrence()->getNextDateTime( itemDateTime ).isValid();
++        KGuiItem itemFuture( i18n( "Delete &Future" ) );
++        itemFuture.setEnabled( !isFirst && !isLast );
++
++        if ( !( isFirst && isLast ) ) {
++          km = KOMessageBox::fourBtnMsgBox(
++            this,
++            QMessageBox::Warning,
++            i18n( "The calendar item \"%1\" recurs over multiple dates. "
++                  "Do you want to delete only the current one on %2, only all "
++                  "future recurrences, or all its recurrences?",
++                  incidence->summary(),
++                  KGlobal::locale()->formatDate( itemDate ) ),
++            i18n( "KOrganizer Confirmation" ),
++            KGuiItem( i18n( "Delete C&urrent" ) ),
++            itemFuture,
++            KGuiItem( i18n( "Delete &All" ) ) );
++        } else {
++          km = msgItemDelete( incidence );
++        }
+       }
+     }
+     switch( km ) {
 Index: korganizer/koeditorgeneraltodo.h
 ===================================================================
---- korganizer/koeditorgeneraltodo.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorgeneraltodo.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorgeneraltodo.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorgeneraltodo.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -65,7 +65,7 @@
      void readTodo( Todo *todo, bool tmpl = false );
  
@@ -3437,8 +6783,8 @@ Index: korganizer/koeditorgeneraltodo.h
      bool validateInput();
 Index: korganizer/kojournaleditor.cpp
 ===================================================================
---- korganizer/kojournaleditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/kojournaleditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/kojournaleditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/kojournaleditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -136,7 +136,7 @@
  
    if ( mJournal ) {
@@ -3499,8 +6845,8 @@ Index: korganizer/kojournaleditor.cpp
  
 Index: korganizer/koeditorattachments.cpp
 ===================================================================
---- korganizer/koeditorattachments.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorattachments.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorattachments.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorattachments.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -775,7 +775,7 @@
    }
  }
@@ -3512,8 +6858,8 @@ Index: korganizer/koeditorattachments.cpp
  
 Index: korganizer/koincidenceeditor.cpp
 ===================================================================
---- korganizer/koincidenceeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koincidenceeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koincidenceeditor.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koincidenceeditor.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -86,8 +86,13 @@
  {
  }
@@ -3554,8 +6900,8 @@ Index: korganizer/koincidenceeditor.cpp
      KPageDialog::slotButtonClicked( button );
 Index: korganizer/resourceview.cpp
 ===================================================================
---- korganizer/resourceview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/resourceview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/resourceview.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/resourceview.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -308,6 +308,8 @@
    connect( mDeleteButton, SIGNAL( clicked() ), SLOT( removeResource() ) );
    connect( mEditButton, SIGNAL( clicked() ), SLOT( editResource() ) );
@@ -3567,8 +6913,8 @@ Index: korganizer/resourceview.cpp
  
 Index: korganizer/koeventpopupmenu.cpp
 ===================================================================
---- korganizer/koeventpopupmenu.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeventpopupmenu.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeventpopupmenu.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeventpopupmenu.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -103,6 +103,7 @@
      }
      for ( it = mRecurrenceItems.begin(); it != mRecurrenceItems.end(); ++it ) {
@@ -3579,8 +6925,8 @@ Index: korganizer/koeventpopupmenu.cpp
    } else {
 Index: korganizer/koeventviewer.cpp
 ===================================================================
---- korganizer/koeventviewer.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeventviewer.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeventviewer.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeventviewer.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -46,6 +46,7 @@
  {
    mIncidence = 0;
@@ -3591,8 +6937,8 @@ Index: korganizer/koeventviewer.cpp
  KOEventViewer::~KOEventViewer()
 Index: korganizer/kcmconfigs/korganizer_configtime.desktop
 ===================================================================
---- korganizer/kcmconfigs/korganizer_configtime.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/kcmconfigs/korganizer_configtime.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/kcmconfigs/korganizer_configtime.desktop	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/kcmconfigs/korganizer_configtime.desktop	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -29,6 +29,7 @@
  Name[ja]=日付と時間
  Name[km]=កាលបរិច្ឆេទ និង​ពេលវេលា
@@ -3601,10 +6947,46 @@ Index: korganizer/kcmconfigs/korganizer_configtime.desktop
  Name[lv]=Laiks un datums
  Name[nb]=Dato og klokkeslett
  Name[nds]=Tiet un Datum
+Index: korganizer/incidencechanger.cpp
+===================================================================
+--- korganizer/incidencechanger.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/incidencechanger.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -314,21 +314,22 @@
+     //        for group cheduling. Each implementation could then just do what
+     //        it wants with the event. If no groupware is used,use the null
+     //        pattern...
+-    bool revert = KOPrefs::instance()->mUseGroupwareCommunication;
+-    if ( revert &&
+-        KOGroupware::instance()->sendICalMessage( 0,
+-                                                  KCal::iTIPRequest,
+-                                                  newinc, false, statusChanged ) ) {
++    bool success = true;
++    if ( KOPrefs::instance()->mUseGroupwareCommunication ) {
++      success = KOGroupware::instance()->sendICalMessage( 0,
++                                                          KCal::iTIPRequest,
++                                                          newinc, false, statusChanged );
++    }
++
++    if ( success ) {
+       // Accept the event changes
+       if ( action < 0 ) {
+         emit incidenceChanged( oldinc, newinc );
+       } else {
+         emit incidenceChanged( oldinc, newinc, action );
+       }
+-      revert = false;
+-    }
+-
+-    if ( revert ) {
++    } else {
++      // revert changes
+       assignIncidence( newinc, oldinc );
+       return false;
+     }
 Index: korganizer/koeditorgeneraljournal.h
 ===================================================================
---- korganizer/koeditorgeneraljournal.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditorgeneraljournal.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditorgeneraljournal.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditorgeneraljournal.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -69,7 +69,7 @@
      /** Read journal object and setup widgets accordingly */
      void readJournal( Journal *, bool tmpl = false );
@@ -3616,8 +6998,8 @@ Index: korganizer/koeditorgeneraljournal.h
      bool validateInput();
 Index: korganizer/koeditoralarms.cpp
 ===================================================================
---- korganizer/koeditoralarms.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koeditoralarms.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koeditoralarms.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koeditoralarms.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -199,6 +199,7 @@
    connect( this, SIGNAL(okClicked()), SLOT(slotOk()) );
    connect( this, SIGNAL(applyClicked()), SLOT(slotApply()) );
@@ -3646,8 +7028,8 @@ Index: korganizer/koeditoralarms.cpp
    }
 Index: korganizer/koincidenceeditor.h
 ===================================================================
---- korganizer/koincidenceeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 938089)
-+++ korganizer/koincidenceeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 938089)
+--- korganizer/koincidenceeditor.h	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koincidenceeditor.h	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
 @@ -133,6 +133,11 @@
      void readDesignerFields( Incidence *i );
      void writeDesignerFields( Incidence *i );
@@ -3660,6 +7042,113 @@ Index: korganizer/koincidenceeditor.h
      // Returns the page widget. To remove the tab, just delete that one.
      QWidget *addDesignerTab( const QString &uifile );
  
+Index: korganizer/koprefsdialog.cpp
+===================================================================
+--- korganizer/koprefsdialog.cpp	(.../tags/KDE/4.2.1/kdepim)	(wersja 940158)
++++ korganizer/koprefsdialog.cpp	(.../branches/KDE/4.2/kdepim)	(wersja 940158)
+@@ -220,8 +220,14 @@
+       QGridLayout *regionalLayout = new QGridLayout( regionalPage );
+       regionalLayout->setSpacing( KDialog::spacingHint() );
+ 
++      QGroupBox *datetimeGroupBox =
++        new QGroupBox( i18nc( "@title:group", "General Time and Date" ), regionalPage );
++      regionalLayout->addWidget( datetimeGroupBox, 0, 0 );
++
++      QGridLayout *datetimeLayout = new QGridLayout( datetimeGroupBox );
++
+       KHBox *timeZoneBox = new KHBox( regionalPage );
+-      regionalLayout->addWidget( timeZoneBox, 0, 0, 1, 2 );
++      datetimeLayout->addWidget( timeZoneBox, 0, 0, 1, 2 );
+ 
+       QLabel *timeZoneLabel = new QLabel( i18nc( "@label", "Time zone:" ), timeZoneBox );
+       QString whatsThis = i18nc( "@info:whatsthis",
+@@ -265,9 +271,20 @@
+       mTimeZoneCombo->setCurrentIndex( nCurrentlySet );
+       mTimeZoneCombo->setWhatsThis( whatsThis );
+ 
++      KPrefsWidTime *dayBegins =
++        addWidTime( KOPrefs::instance()->dayBeginsItem(), regionalPage );
++      datetimeLayout->addWidget( dayBegins->label(), 1, 0 );
++      datetimeLayout->addWidget( dayBegins->timeEdit(), 1, 1 );
++
++      QGroupBox *holidaysGroupBox =
++        new QGroupBox( i18nc( "@title:group", "Holidays" ), regionalPage );
++      regionalLayout->addWidget( holidaysGroupBox, 1, 0 );
++
++      QGridLayout *holidaysLayout = new QGridLayout( holidaysGroupBox );
++
+       // holiday region selection
+       KHBox *holidayRegBox = new KHBox( regionalPage );
+-      regionalLayout->addWidget( holidayRegBox, 1, 0, 1, 2 );
++      holidaysLayout->addWidget( holidayRegBox, 1, 0, 1, 2 );
+ 
+       QLabel *holidayLabel = new QLabel(
+         i18nc( "@label", "Use holiday region:" ), holidayRegBox );
+@@ -316,14 +333,9 @@
+         }
+       }
+ 
+-      KPrefsWidTime *dayBegins =
+-        addWidTime( KOPrefs::instance()->dayBeginsItem(), regionalPage );
+-      regionalLayout->addWidget( dayBegins->label(), 2, 0 );
+-      regionalLayout->addWidget( dayBegins->timeEdit(), 2, 1 );
+-
+       QGroupBox *workingHoursGroupBox =
+         new QGroupBox( i18nc( "@title:group", "Working Hours" ), regionalPage );
+-      regionalLayout->addWidget( workingHoursGroupBox, 3, 0, 1, 2 );
++      regionalLayout->addWidget( workingHoursGroupBox, 2, 0 );
+ 
+       QBoxLayout *workingHoursLayout = new QVBoxLayout( workingHoursGroupBox );
+ 
+@@ -385,16 +397,28 @@
+       QGridLayout *defaultLayout = new QGridLayout( defaultPage );
+       defaultLayout->setSpacing( KDialog::spacingHint() );
+ 
++      QGroupBox *timesGroupBox =
++        new QGroupBox( i18nc( "@title:group", "Appointments" ), defaultPage );
++      defaultLayout->addWidget( timesGroupBox, 0, 0 );
++
++      QGridLayout *timesLayout = new QGridLayout( timesGroupBox );
++
+       KPrefsWidTime *defaultTime =
+         addWidTime( KOPrefs::instance()->startTimeItem(), defaultPage );
+-      defaultLayout->addWidget( defaultTime->label(), 0, 0 );
+-      defaultLayout->addWidget( defaultTime->timeEdit(), 0, 1 );
++      timesLayout->addWidget( defaultTime->label(), 0, 0 );
++      timesLayout->addWidget( defaultTime->timeEdit(), 0, 1 );
+ 
+       KPrefsWidDuration *defaultDuration =
+         addWidDuration( KOPrefs::instance()->defaultDurationItem(), defaultPage );
+-      defaultLayout->addWidget( defaultDuration->label(), 1, 0 );
+-      defaultLayout->addWidget( defaultDuration->timeEdit(), 1, 1 );
++      timesLayout->addWidget( defaultDuration->label(), 1, 0 );
++      timesLayout->addWidget( defaultDuration->timeEdit(), 1, 1 );
+ 
++      QGroupBox *remindersGroupBox =
++        new QGroupBox( i18nc( "@title:group", "Reminders" ), defaultPage );
++      defaultLayout->addWidget( remindersGroupBox, 1, 0 );
++
++      QGridLayout *remindersLayout = new QGridLayout( remindersGroupBox );
++
+       QStringList alarmList;
+       alarmList << i18nc( "@item:inlistbox", "1 minute" )
+                 << i18nc( "@item:inlistbox", "5 minutes" )
+@@ -402,13 +426,13 @@
+                 << i18nc( "@item:inlistbox", "15 minutes" )
+                 << i18nc( "@item:inlistbox", "30 minutes" );
+       QLabel *alarmLabel = new QLabel( i18nc( "@label", "Default reminder time:" ), defaultPage );
+-      defaultLayout->addWidget( alarmLabel, 2, 0 );
++      remindersLayout->addWidget( alarmLabel, 0, 0 );
+       alarmLabel->setWhatsThis( KOPrefs::instance()->alarmTimeItem()->whatsThis() );
+       mAlarmTimeCombo = new KComboBox( defaultPage );
+       mAlarmTimeCombo->setWhatsThis( KOPrefs::instance()->alarmTimeItem()->whatsThis() );
+       connect( mAlarmTimeCombo, SIGNAL(activated(int)), SLOT(slotWidChanged()) );
+       mAlarmTimeCombo->addItems( alarmList );
+-      defaultLayout->addWidget( mAlarmTimeCombo, 2, 1 );
++      remindersLayout->addWidget( mAlarmTimeCombo, 0, 1 );
+ 
+       defaultLayout->setRowStretch( 3, 1 );
+       load();
 
 Zmiany atrybutów dla: .
 ___________________________________________________________________
