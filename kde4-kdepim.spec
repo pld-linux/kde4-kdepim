@@ -2,7 +2,7 @@
 %bcond_without	apidocs			# do not prepare API documentation
 #
 %define		_state		stable
-%define		qtver		4.4.3
+%define		qtver		4.5.0
 
 %define	orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.2.1
-Release:	4
+Version:	4.2.2
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	2ebc3730aaee53f494e8e6abd26029bd
+# Source0-md5:	964208d570845c75e0c482bb3d33892f
 Patch100:	%{name}-branch.diff
 Patch0:		%{name}-korn.patch
 Patch1:		%{name}-kpilot.patch
@@ -751,7 +751,7 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
-%patch100 -p0
+#%patch100 -p0
 #%patch0 -p1
 %patch1 -p0
 %patch2 -p3
@@ -1467,7 +1467,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kleopatra
 %attr(755,root,root) %{_libdir}/kde4/kcm_kleopatra.so
+%attr(755,root,root) %ghost %{_libdir}/libkleopatraclientcore.so.?
 %attr(755,root,root) %{_libdir}/libkleopatraclientcore.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libkleopatraclientgui.so.?
 %attr(755,root,root) %{_libdir}/libkleopatraclientgui.so.*.*.*
 %{_datadir}/apps/libkleopatra
 %{_datadir}/config/libkleopatrarc
