@@ -11,16 +11,15 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.2.2
-Release:	2
+Version:	4.2.3
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	964208d570845c75e0c482bb3d33892f
+# Source0-md5:	a141915b7e97ad16e5601281ab3e4976
 Patch100:	%{name}-branch.diff
-Patch0:		%{name}-korn.patch
-Patch1:		%{name}-kpilot.patch
-Patch2:		%{name}-filtersearch.patch
+Patch0:		%{name}-kpilot.patch
+Patch1:		%{name}-filtersearch.patch
 URL:		http://www.kde.org/
 BuildRequires:	QtDesigner-devel
 BuildRequires:	akonadi-devel >= 1.1.1
@@ -751,10 +750,9 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
-%patch100 -p0
-#%patch0 -p1
-%patch1 -p0
-%patch2 -p3
+#%patch100 -p0
+%patch0 -p0
+%patch1 -p3
 
 #rm -r `find . -type d -name '.svn'`
 
