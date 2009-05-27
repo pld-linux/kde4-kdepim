@@ -1,8 +1,9 @@
 #
 %bcond_without	apidocs			# do not prepare API documentation
 #
-%define		_state		stable
+%define		_state		unstable
 %define		qtver		4.5.0
+%define		svn		969966
 
 %define	orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
@@ -11,15 +12,15 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.2.3
-Release:	2
+Version:	4.2.87
+Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	94ad0eb531eb8ca03e3355ea9e2e90d6
-Patch100:	%{name}-branch.diff
+Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}svn%{svn}.tar.bz2
+# Source0-md5:	c904c1444abd47a1b264a4af410a2a52
+#Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
+#Patch100:	%{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
-Patch1:		%{name}-filtersearch.patch
 URL:		http://www.kde.org/
 BuildRequires:	QtDesigner-devel
 BuildRequires:	akonadi-devel >= 1.1.2
@@ -38,6 +39,7 @@ BuildRequires:	gpgme-devel >= 1:1.0.0
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
+BuildRequires:	kde4-kdeedu-devel >= %{version}
 BuildRequires:	libassuan-devel
 BuildRequires:	libgnokii-devel
 BuildRequires:	libmal-devel >= 0.31
@@ -112,8 +114,8 @@ Environment. It features:
 - and more...
 
 %description knode -l pl.UTF-8
-KNode to czytnik newsów zgodny ze specyfikacją GKNSA przeznaczony dla
-środowiska KDE. Jego możliwości obejmują:
+KNode to czytnik newsów zgodny ze specyfikacją GKNSA przeznaczony
+dla środowiska KDE. Jego możliwości obejmują:
 - wszystkie podstawowe cechy czytnika newsów (czytanie i wysyłanie
   artykułów, wątkowanie...)
 - obsługę wielu serwerów news
@@ -150,8 +152,9 @@ KTimeTracker - tracks time spent on various tasks. It is useful for
 tracking hours to be billed to different clients.
 
 %description ktimetracker -l pl.UTF-8
-KTimeTracker śledzi czas spędzony na różnych zajęciach. Jest przydatny
-przy obliczaniu godzin do wystawiania rachunków wielu klientom.
+KTimeTracker śledzi czas spędzony na różnych zajęciach. Jest
+przydatny przy obliczaniu godzin do wystawiania rachunków wielu
+klientom.
 
 %package kontact-plugin-ktimetracker
 Summary:	Ktimetracker plugin for Kontact
@@ -174,7 +177,7 @@ Group:		X11/Applications
 URL:		http://kontact.kde.org/kmail/
 # ? Requires:	kde4-kdebase >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	pinentry-qt	
+Requires:	pinentry-qt
 
 %description kmail
 This is electronic mail client for KDE with a huge amount of features:
@@ -200,10 +203,10 @@ Program pocztowy dla KDE o olbrzymich możliwościach, obejmujących:
 - automatyczne szyfrowanie przy użyciu OpenPGP (PGP lub GnuPG)
 - potężne filtry pocztowe
 - zagnieżdżone skrzynki pocztowe z obsługą list pocztowych
-- ściąganie na żądanie lub usuwanie bez ściągania dużych listów z
-  serwera POP3
-- pełną obsługę listów we wszystkich językach i zestawach znaków
-  obsługiwanych przez Qt
+- ściąganie na żądanie lub usuwanie bez ściągania dużych
+  listów z serwera POP3
+- pełną obsługę listów we wszystkich językach i zestawach
+  znaków obsługiwanych przez Qt
 - przeszukiwanie wiadomości z prezentacją w wirtualnych folderach
 - usuwanie powtórzonych listów
 - wątkowanie wiadomości
@@ -439,9 +442,9 @@ accept drag and drop even from remote sites.
 
 %description knotes -l pl.UTF-8
 KNotes pozwala umieszczać na pulpicie notatki z opcją wysyłania.
-Dodatkowo, aby móc służyć za przypominajkę, KNotes może wysyłać pocztę
-i drukować notatki, a także przyjmować przeciąganie nawet ze zdalnych
-komputerów.
+Dodatkowo, aby móc służyć za przypominajkę, KNotes może
+wysyłać pocztę i drukować notatki, a także przyjmować
+przeciąganie nawet ze zdalnych komputerów.
 
 %package kontact-plugin-knotes
 Summary:	Knotes plugin for Kontact
@@ -541,10 +544,10 @@ to be sent. Also includes an alarm daemon.
 
 %description kalarm -l pl.UTF-8
 KAlarm to osobisty program do planowania i przypominania poprzez
-uruchomienie polecenia lub pocztą elektroniczną. Umożliwia ustawienie
-własnej wiadomości alarmowej, która wyskoczy na ekranie o wybranym
-czasie albo zaszeregowanie poleceń do wykonania lub poczty do
-wysłania. Zawiera także demona obsługującego przypominanie.
+uruchomienie polecenia lub pocztą elektroniczną. Umożliwia
+ustawienie własnej wiadomości alarmowej, która wyskoczy na ekranie
+o wybranym czasie albo zaszeregowanie poleceń do wykonania lub poczty
+do wysłania. Zawiera także demona obsługującego przypominanie.
 
 %package konsolekalendar
 Summary:	A command line ICard tool
@@ -565,11 +568,11 @@ Main features of KonsoleKalendar:
 - export calendar entries to other file formats
 
 %description konsolekalendar -l pl.UTF-8
-KonsoleKalendar to działający z linii poleceń interfejs do kalendarzy
-KDE. Pozwala oglądać, wstawiać, usuwać i modyfikować zdarzenia w
-kalendarzu z linii poleceń lub języka skryptowego. Ponadto
-KonsoleKalendar potrafi wyeksportować kalendarz KDE do wielu innych
-formatów.
+KonsoleKalendar to działający z linii poleceń interfejs do
+kalendarzy KDE. Pozwala oglądać, wstawiać, usuwać i modyfikować
+zdarzenia w kalendarzu z linii poleceń lub języka skryptowego.
+Ponadto KonsoleKalendar potrafi wyeksportować kalendarz KDE do wielu
+innych formatów.
 
 Główne możliwości programu KonsoleKalendar:
 - wypisywanie wpisów kalendarza od daty początkowej do końcowej
@@ -751,10 +754,9 @@ libkdenetwork, libkdepim, libkmailprivate, libknodecommon, libkpilot,
 libksieve, libmimelib.
 
 %prep
-%setup -q -n %{orgname}-%{version}
+%setup -q -n %{orgname}-%{version}svn%{svn}
 #%patch100 -p0
-%patch0 -p0
-%patch1 -p3
+#%patch0 -p0
 
 #rm -r `find . -type d -name '.svn'`
 
@@ -769,7 +771,7 @@ cd build
 %endif
 	../
 
-%{__make}
+%{__make} 
 
 %install
 rm -rf $RPM_BUILD_ROOT
