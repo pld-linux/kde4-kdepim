@@ -21,6 +21,7 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 #Patch100:	%{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
+Patch1:		%{name}-libknotification.patch
 URL:		http://www.kde.org/
 BuildRequires:	QtDesigner-devel
 BuildRequires:	akonadi-devel >= 1.1.2
@@ -757,6 +758,7 @@ libksieve, libmimelib.
 %setup -q -n %{orgname}-%{version}svn%{svn}
 #%patch100 -p0
 #%patch0 -p0
+%patch1 -p1
 
 #rm -r `find . -type d -name '.svn'`
 
@@ -788,7 +790,7 @@ rm -rf $RPM_BUILD_ROOT
 #%find_lang kmobiletools --with-kde
 %find_lang knode --with-kde
 %find_lang knotes --with-kde
-%find_lang konsolekalendar --with-kde
+#%find_lang konsolekalendar --with-kde
 %find_lang kontact --with-kde
 %find_lang korganizer --with-kde
 #%find_lang korn --with-kde
