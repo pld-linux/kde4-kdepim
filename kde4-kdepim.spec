@@ -3,7 +3,7 @@
 #
 %define		_state		unstable
 %define		qtver		4.5.0
-%define		svn		969966
+%define		svn		973768
 
 %define	orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
@@ -12,16 +12,15 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.2.87
+Version:	4.2.88
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}svn%{svn}.tar.bz2
-# Source0-md5:	c904c1444abd47a1b264a4af410a2a52
+# Source0-md5:	4eaa5d14b0d0681832809b0d9e3dd6e9
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 #Patch100: %{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
-Patch1:		%{name}-libknotification.patch
 URL:		http://www.kde.org/
 BuildRequires:	QtDesigner-devel
 BuildRequires:	akonadi-devel >= 1.1.2
@@ -745,7 +744,6 @@ libksieve, libmimelib.
 %setup -q -n %{orgname}-%{version}svn%{svn}
 #%patch100 -p0
 #%patch0 -p0
-%patch1 -p1
 
 #rm -r `find . -type d -name '.svn'`
 
@@ -1156,8 +1154,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_browser.so
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_advanced.so
 %attr(755,root,root) %{_libdir}/kde4/akregatorpart.so
-%attr(755,root,root) %{_libdir}/kde4/akregator_config_onlinesync.so
-%attr(755,root,root) %{_libdir}/kde4/akregator_onlinesync_plugin.so
 %{_desktopdir}/kde4/akregator.desktop
 %{_datadir}/apps/akregator
 %{_datadir}/kde4/services/akregator_*.desktop
@@ -1167,8 +1163,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config.kcfg/akregator.kcfg
 %{_iconsdir}/*/*/apps/akregator_empty.png
 %{_iconsdir}/*/*/apps/akregator.*
-%dir %{_datadir}/apps/akregator_onlinesync_plugin
-%{_datadir}/apps/akregator_onlinesync_plugin/akregator_onlinesync_plugin.rc
 
 %files kontact-plugin-akregator
 %defattr(644,root,root,755)
