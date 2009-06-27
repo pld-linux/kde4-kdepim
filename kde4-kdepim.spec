@@ -85,7 +85,7 @@ Summary(pl.UTF-8):	Kontact Personal Information Management
 Group:		X11/Applications
 Provides:	kde4-kontact
 Obsoletes:	kde4-kontact
-Requires:	pinentry-qt
+Requires:	pinentry-qt4
 
 %description kontact
 Kontact Personal Information Management.
@@ -165,7 +165,7 @@ Group:		X11/Applications
 URL:		http://kontact.kde.org/kmail/
 # ? Requires:	kde4-kdebase >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	pinentry-qt
+Requires:	pinentry-qt4
 
 %description kmail
 This is electronic mail client for KDE with a huge amount of features:
