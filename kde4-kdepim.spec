@@ -21,6 +21,7 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 #Patch100: %{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
+Patch1:		%{name}-kleopatra_hack.patch
 URL:		http://www.kde.org/
 BuildRequires:	QtDesigner-devel
 BuildRequires:	akonadi-devel >= 1.1.2
@@ -744,6 +745,8 @@ libksieve, libmimelib.
 %setup -q -n %{orgname}-%{version}svn%{svn}
 #%patch100 -p0
 #%patch0 -p0
+# just to build hack, could broke kleopatra sorting
+%patch1 -p0
 
 #rm -r `find . -type d -name '.svn'`
 
@@ -890,6 +893,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/kontactplugin.desktop
 %{_iconsdir}/*/*/*/kontact*.png
 %{_datadir}/dbus-1/interfaces/org.kde.kontact.KNotes.xml
+# subpackage this:
+%{_datadir}/kde4/services/kontact/ktimetracker_plugin.desktop
+%attr(755,root,root) %{_libdir}/kde4/kontact_ktimetrackerplugin.so
 
 %files knode -f knode.lang
 %defattr(644,root,root,755)
@@ -970,21 +976,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/oxygen/*/status/mail-task.*
 
 %{_iconsdir}/oxygen/*/actions/ldap_lookup.png
-%{_iconsdir}/oxygen/*/actions/meeting-*.*
 %{_iconsdir}/oxygen/*/actions/smallclock.png
 %{_iconsdir}/oxygen/*/actions/upindicator.png
 %{_iconsdir}/oxygen/*/actions/checkmark.png
 # conflicts with kde-icons-oxygen
 %{_iconsdir}/oxygen/*/actions/edit-delete-page.png
-%{_iconsdir}/oxygen/*/actions/journal-new.png
-%{_iconsdir}/oxygen/*/actions/task-new.png
 %{_iconsdir}/oxygen/*/status/mail-tagged.png
-%{_iconsdir}/oxygen/*/status/appointment-recurring.png
-%{_iconsdir}/oxygen/*/status/appointment-reminder.png
-%{_iconsdir}/oxygen/*/status/meeting-organizer.png
-%{_iconsdir}/oxygen/*/status/task-complete.png
-%{_iconsdir}/oxygen/*/status/task-recurring.png
-%{_iconsdir}/oxygen/*/status/task-reminder.png
 
 ### libkleo
 %attr(755,root,root) %{_libdir}/libkleo.so
@@ -1309,6 +1306,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/konsolekalendar
 %attr(755,root,root) %{_bindir}/kabcclient
 %{_desktopdir}/kde4/konsolekalendar.desktop
+%dir %{_datadir}/apps
+%dir %{_datadir}/apps/konsolekalendar
+%dir %{_datadir}/apps/konsolekalendar/pics
+%{_datadir}/apps/konsolekalendar/pics/*.png
 #%lang(en) %{_kdedocdir}/en/kabcclient
 #%{_mandir}/man1/kabcclient.1.*
 
@@ -1349,7 +1350,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/kpilotdaemon.desktop
 %{_iconsdir}/*/*/actions/kpilot_*.png
 %{_iconsdir}/*/*/apps/kpilot.png
-%{_iconsdir}/*/*/apps/kpilotDaemon.png
+%{_iconsdir}/*/*/apps/kpilotdaemon.png
 
 %files akonadi
 %defattr(644,root,root,755)
@@ -1389,6 +1390,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcal_akonadi.so
 %dir %{_datadir}/apps/akonadi
 %{_datadir}/apps/akonadi/akonadi-xml.xsd
+%dir %{_datadir}/apps/akonadi_knut_resource
+%{_datadir}/apps/akonadi_knut_resource/knut-template.xml
 %dir %{_datadir}/apps/akonadi/plugins
 %dir %{_datadir}/apps/akonadi/plugins/serializer
 %{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
@@ -1432,6 +1435,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kcm_akonadi_server.desktop
 %{_desktopdir}/kde4/akonaditray.desktop
 %{_datadir}/kde4/services/kresources/kcal/akonadi.desktop
+%{_datadir}/dbus-1/interfaces/org.kde.Akonadi.Maildir.Settings.xml
+%{_iconsdir}/*/*/apps/kolab.png
 
 %files kleopatra -f kleopatra.lang
 %defattr(644,root,root,755)
