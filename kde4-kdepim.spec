@@ -746,7 +746,7 @@ libksieve, libmimelib.
 #%patch100 -p0
 #%patch0 -p0
 # just to build hack, could broke kleopatra sorting
-%patch1 -p0
+%patch1 -p1
 
 #rm -r `find . -type d -name '.svn'`
 
