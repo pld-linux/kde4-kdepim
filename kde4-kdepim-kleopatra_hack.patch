@@ -1,0 +1,24 @@
+--- kdepim-4.2.91svn979380/kleopatra/models/keylistmodel.cpp.orig	2009-03-10 13:25:10.000000000 +0100
++++ kdepim-4.2.91svn979380/kleopatra/models/keylistmodel.cpp	2009-06-27 15:38:59.000000000 +0200
+@@ -684,7 +684,7 @@
+ 
+ // sorts 'keys' such that parent always come before their children:
+ static std::vector<Key> topological_sort( const std::vector<Key> & keys ) {
+-
++/*
+     adjacency_list<> graph( keys.size() );
+ 
+     // add edges from children to parents:
+@@ -698,10 +698,10 @@
+             continue;
+         add_edge( i, std::distance( keys.begin(), it ), graph );
+     }
+-
++*/
+     std::vector<int> order;
+     order.reserve( keys.size() );
+-    topological_sort( graph, std::back_inserter( order ) );
++    //topological_sort( graph, std::back_inserter( order ) );
+ 
+     assert( order.size() == keys.size() );
+ 
