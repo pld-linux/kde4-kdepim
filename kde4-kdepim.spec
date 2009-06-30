@@ -12,16 +12,15 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.2.91
+Version:	4.2.95
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}svn%{svn}.tar.bz2
-# Source0-md5:	7ac2dadac96d3cdf01151578be512765
+Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
+# Source0-md5:	ed66d18ce69e43e48a29ffe4cb00407b
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 #Patch100: %{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
-Patch1:		%{name}-kleopatra_hack.patch
 URL:		http://www.kde.org/
 BuildRequires:	QtDesigner-devel
 BuildRequires:	akonadi-devel >= 1.1.2
@@ -38,7 +37,6 @@ BuildRequires:	flex
 BuildRequires:	gpgme-devel >= 1:1.0.0
 %{?with_apidocs:BuildRequires:	graphviz}
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
-BuildRequires:	kde4-kdeedu-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
 BuildRequires:	libassuan-devel
@@ -742,11 +740,9 @@ libkdenetwork, libkdepim, libkmailprivate, libknodecommon, libkpilot,
 libksieve, libmimelib.
 
 %prep
-%setup -q -n %{orgname}-%{version}svn%{svn}
+%setup -q -n %{orgname}-%{version}
 #%patch100 -p0
 #%patch0 -p0
-# just to build hack, could broke kleopatra sorting
-%patch1 -p1
 
 #rm -r `find . -type d -name '.svn'`
 
@@ -796,20 +792,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kgpgconf
 %attr(755,root,root) %{_bindir}/kwatchgnupg
-%attr(755,root,root) %{_bindir}/kres-migrator
 %attr(755,root,root) %{_bindir}/kabcdistlistupdater
 %attr(755,root,root) %{_libdir}/libkontactinterfaces.so
 %{_datadir}/apps/kwatchgnupg
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kpgp-3.1-upgrade-address-data.pl
 %{_datadir}/apps/kconf_update/kpgp.upd
-%{_datadir}/config/kres-migratorrc
 ### strigi
 %attr(755,root,root) %{_libdir}/strigi/strigiea_ics.so
 %attr(755,root,root) %{_libdir}/strigi/strigiea_vcf.so
-### kresources/featureplan
-### kresources/akonadi
-%attr(755,root,root) %{_libdir}/kde4/kabc_akonadi.so
-%{_datadir}/kde4/services/kresources/kabc/akonadi.desktop
 ### kresources/slox/
 %attr(755,root,root) %{_libdir}/libkslox.so
 %attr(755,root,root) %{_libdir}/libkabc_slox.so
@@ -893,9 +883,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/kontactplugin.desktop
 %{_iconsdir}/*/*/*/kontact*.png
 %{_datadir}/dbus-1/interfaces/org.kde.kontact.KNotes.xml
-# subpackage this:
-%{_datadir}/kde4/services/kontact/ktimetracker_plugin.desktop
-%attr(755,root,root) %{_libdir}/kde4/kontact_ktimetrackerplugin.so
 
 %files knode -f knode.lang
 %defattr(644,root,root,755)
@@ -946,8 +933,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_kmail.so
 %attr(755,root,root) %{_libdir}/kde4/kmailpart.so
 %attr(755,root,root) %{_libdir}/kde4/kmail_bodypartformatter_application_octetstream.so
-%attr(755,root,root) %ghost %{_libdir}/libmbox.so.?
-%attr(755,root,root) %{_libdir}/libmbox.so.4.*.*
 %{_desktopdir}/kde4/KMail.desktop
 %{_desktopdir}/kde4/kmail_view.desktop
 %{_datadir}/apps/kmail
@@ -1212,7 +1197,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/akonadi
 %{_includedir}/kleo
 %{_includedir}/kmail
 %{_includedir}/kpgp
@@ -1231,7 +1215,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkabcgroupwise.so
 %attr(755,root,root) %{_libdir}/libkabckolab.so
 %attr(755,root,root) %{_libdir}/libkabinterfaces.so
-#%attr(755,root,root) %{_libdir}/libkaddressbookprivate.so
 %attr(755,root,root) %{_libdir}/libkcalgroupwise.so
 %attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
 %attr(755,root,root) %{_libdir}/libkcal_slox.so
@@ -1242,7 +1225,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so
 %attr(755,root,root) %{_libdir}/libknotes_xmlrpc.so
 %attr(755,root,root) %{_libdir}/libknoteskolab.so
-#%attr(755,root,root) %{_libdir}/libkontactprivate.so
 %attr(755,root,root) %{_libdir}/libkorganizer_eventviewer.so
 %attr(755,root,root) %{_libdir}/libkorganizer_calendar.so
 %attr(755,root,root) %{_libdir}/libkorg_stdprinting.so
@@ -1250,10 +1232,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkpilot.so
 %attr(755,root,root) %{_libdir}/libksieve.so
 %attr(755,root,root) %{_libdir}/libmimelib.so
-%attr(755,root,root) %{_libdir}/libakonadi-kabccommon.so
-%attr(755,root,root) %{_libdir}/libakonadi-kcal.so
-#%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so
-#%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so
 %attr(755,root,root) %{_libdir}/libkabcommon.so
 %attr(755,root,root) %{_libdir}/libkabcscalix.so
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so
@@ -1263,11 +1241,8 @@ rm -rf $RPM_BUILD_ROOT
 #%{_libdir}ttr(755,root,root) /libqopensync.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientcore.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientgui.so
-%attr(755,root,root) %{_libdir}/libakonadi-xml.so
-%attr(755,root,root) %{_libdir}/libakonadi_next.so
 %attr(755,root,root) %{_libdir}/libknodecommon.so
 %attr(755,root,root) %{_libdir}/libkorganizer_core.so
-%attr(755,root,root) %{_libdir}/libmbox.so
 %{_datadir}/apps/libkleopatra
 
 %files kio-groupwise
@@ -1352,91 +1327,91 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/apps/kpilot.png
 %{_iconsdir}/*/*/apps/kpilotdaemon.png
 
-%files akonadi
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/akonadi_distlist_resource
-%attr(755,root,root) %{_bindir}/akonadi_ical_resource
-%attr(755,root,root) %{_bindir}/akonadi_kabc_resource
-%attr(755,root,root) %{_bindir}/akonadi_kcal_resource
-%attr(755,root,root) %{_bindir}/akonadi_knut_resource
-%attr(755,root,root) %{_bindir}/akonadi_localbookmarks_resource
-%attr(755,root,root) %{_bindir}/akonadi_maildir_resource
-%attr(755,root,root) %{_bindir}/akonadi_mailthreader_agent
-%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
-%attr(755,root,root) %{_bindir}/akonadi_nepomuk_email_feeder
-%attr(755,root,root) %{_bindir}/akonadi_nepomuktag_resource
-%attr(755,root,root) %{_bindir}/akonadi_nntp_resource
-%attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
-%attr(755,root,root) %{_bindir}/akonadi_vcard_resource
-%attr(755,root,root) %{_bindir}/akonadi_vcarddir_resource
-%attr(755,root,root) %{_bindir}/akonadiconsole
-%attr(755,root,root) %{_bindir}/akonaditray
-%attr(755,root,root) %{_bindir}/akonadi2xml
-%attr(755,root,root) %{_bindir}/akonadi_birthdays_resource
-%attr(755,root,root) %{_bindir}/akonadi_imap_resource
-%attr(755,root,root) %{_bindir}/akonadi_kolabproxy_resource
-%attr(755,root,root) %{_bindir}/akonadi_mbox_resource
-%attr(755,root,root) %{_bindir}/akonadi_microblog_resource
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_addressee.so
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_contactgroup.so
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_mail.so
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_microblog.so
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_kcal.so
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_bookmark.so
-%attr(755,root,root) %{_libdir}/kde4/kio_akonadi.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_resources.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_server.so
-%attr(755,root,root) %{_libdir}/kde4/kcal_akonadi.so
-%dir %{_datadir}/apps/akonadi
-%{_datadir}/apps/akonadi/akonadi-xml.xsd
-%dir %{_datadir}/apps/akonadi_knut_resource
-%{_datadir}/apps/akonadi_knut_resource/knut-template.xml
-%dir %{_datadir}/apps/akonadi/plugins
-%dir %{_datadir}/apps/akonadi/plugins/serializer
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_mail.desktop
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_kcal.desktop
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_bookmark.desktop
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_microblog.desktop
-%dir %{_datadir}/akonadi
-%dir %{_datadir}/akonadi/agents
-%{_datadir}/akonadi/agents/distlistresource.desktop
-%{_datadir}/akonadi/agents/mailthreaderagent.desktop
-%{_datadir}/akonadi/agents/strigifeeder.desktop
-%{_datadir}/akonadi/agents/vcardresource.desktop
-%{_datadir}/akonadi/agents/nntpresource.desktop
-%{_datadir}/akonadi/agents/kcalresource.desktop
-%{_datadir}/akonadi/agents/knutresource.desktop
-%{_datadir}/akonadi/agents/icalresource.desktop
-%{_datadir}/akonadi/agents/kabcresource.desktop
-%{_datadir}/akonadi/agents/localbookmarksresource.desktop
-%{_datadir}/akonadi/agents/maildirresource.desktop
-%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
-%{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
-%{_datadir}/akonadi/agents/nepomuktagresource.desktop
-%{_datadir}/akonadi/agents/vcarddirresource.desktop
-%{_datadir}/akonadi/agents/birthdaysresource.desktop
-%{_datadir}/akonadi/agents/imapresource.desktop
-%{_datadir}/akonadi/agents/kolabproxyresource.desktop
-%{_datadir}/akonadi/agents/mboxresource.desktop
-%{_datadir}/akonadi/agents/microblog.desktop
-%{_datadir}/akonadi/agents/notesresource.desktop
-%dir %{_datadir}/apps/akonadi/firstrun
-%{_datadir}/apps/akonadi/firstrun/defaultaddressbook
-%{_datadir}/apps/akonadi/firstrun/defaultcalendar
-%{_datadir}/kde4/services/akonadi.protocol
-%{_desktopdir}/kde4/akonadiconsole.desktop
-%dir %{_datadir}/apps/akonadiconsole
-%{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
-%{_datadir}/kde4/services/kcm_akonadi_resources.desktop
-%{_datadir}/kde4/services/kcm_akonadi.desktop
-%{_datadir}/kde4/services/kcm_akonadi_server.desktop
-%{_desktopdir}/kde4/akonaditray.desktop
-%{_datadir}/kde4/services/kresources/kcal/akonadi.desktop
-%{_datadir}/dbus-1/interfaces/org.kde.Akonadi.Maildir.Settings.xml
-%{_iconsdir}/*/*/apps/kolab.png
+#%files akonadi
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_bindir}/akonadi_distlist_resource
+#%attr(755,root,root) %{_bindir}/akonadi_ical_resource
+#%attr(755,root,root) %{_bindir}/akonadi_kabc_resource
+#%attr(755,root,root) %{_bindir}/akonadi_kcal_resource
+#%attr(755,root,root) %{_bindir}/akonadi_knut_resource
+#%attr(755,root,root) %{_bindir}/akonadi_localbookmarks_resource
+#%attr(755,root,root) %{_bindir}/akonadi_maildir_resource
+#%attr(755,root,root) %{_bindir}/akonadi_mailthreader_agent
+#%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
+#%attr(755,root,root) %{_bindir}/akonadi_nepomuk_email_feeder
+#%attr(755,root,root) %{_bindir}/akonadi_nepomuktag_resource
+#%attr(755,root,root) %{_bindir}/akonadi_nntp_resource
+#%attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
+#%attr(755,root,root) %{_bindir}/akonadi_vcard_resource
+#%attr(755,root,root) %{_bindir}/akonadi_vcarddir_resource
+#%attr(755,root,root) %{_bindir}/akonadiconsole
+#%attr(755,root,root) %{_bindir}/akonaditray
+#%attr(755,root,root) %{_bindir}/akonadi2xml
+#%attr(755,root,root) %{_bindir}/akonadi_birthdays_resource
+#%attr(755,root,root) %{_bindir}/akonadi_imap_resource
+#%attr(755,root,root) %{_bindir}/akonadi_kolabproxy_resource
+#%attr(755,root,root) %{_bindir}/akonadi_mbox_resource
+#%attr(755,root,root) %{_bindir}/akonadi_microblog_resource
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_addressee.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_contactgroup.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_mail.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_microblog.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_kcal.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_bookmark.so
+#%attr(755,root,root) %{_libdir}/kde4/kio_akonadi.so
+#%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_resources.so
+#%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi.so
+#%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_server.so
+#%attr(755,root,root) %{_libdir}/kde4/kcal_akonadi.so
+#%dir %{_datadir}/apps/akonadi
+#%{_datadir}/apps/akonadi/akonadi-xml.xsd
+#%dir %{_datadir}/apps/akonadi_knut_resource
+#%{_datadir}/apps/akonadi_knut_resource/knut-template.xml
+#%dir %{_datadir}/apps/akonadi/plugins
+#%dir %{_datadir}/apps/akonadi/plugins/serializer
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_mail.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_kcal.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_bookmark.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_microblog.desktop
+#%dir %{_datadir}/akonadi
+#%dir %{_datadir}/akonadi/agents
+#%{_datadir}/akonadi/agents/distlistresource.desktop
+#%{_datadir}/akonadi/agents/mailthreaderagent.desktop
+#%{_datadir}/akonadi/agents/strigifeeder.desktop
+#%{_datadir}/akonadi/agents/vcardresource.desktop
+#%{_datadir}/akonadi/agents/nntpresource.desktop
+#%{_datadir}/akonadi/agents/kcalresource.desktop
+#%{_datadir}/akonadi/agents/knutresource.desktop
+#%{_datadir}/akonadi/agents/icalresource.desktop
+#%{_datadir}/akonadi/agents/kabcresource.desktop
+#%{_datadir}/akonadi/agents/localbookmarksresource.desktop
+#%{_datadir}/akonadi/agents/maildirresource.desktop
+#%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
+#%{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
+#%{_datadir}/akonadi/agents/nepomuktagresource.desktop
+#%{_datadir}/akonadi/agents/vcarddirresource.desktop
+#%{_datadir}/akonadi/agents/birthdaysresource.desktop
+#%{_datadir}/akonadi/agents/imapresource.desktop
+#%{_datadir}/akonadi/agents/kolabproxyresource.desktop
+#%{_datadir}/akonadi/agents/mboxresource.desktop
+#%{_datadir}/akonadi/agents/microblog.desktop
+#%{_datadir}/akonadi/agents/notesresource.desktop
+#%dir %{_datadir}/apps/akonadi/firstrun
+#%{_datadir}/apps/akonadi/firstrun/defaultaddressbook
+#%{_datadir}/apps/akonadi/firstrun/defaultcalendar
+#%{_datadir}/kde4/services/akonadi.protocol
+#%{_desktopdir}/kde4/akonadiconsole.desktop
+#%dir %{_datadir}/apps/akonadiconsole
+#%{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
+#%{_datadir}/kde4/services/kcm_akonadi_resources.desktop
+#%{_datadir}/kde4/services/kcm_akonadi.desktop
+#%{_datadir}/kde4/services/kcm_akonadi_server.desktop
+#%{_desktopdir}/kde4/akonaditray.desktop
+#%{_datadir}/kde4/services/kresources/kcal/akonadi.desktop
+#%{_datadir}/dbus-1/interfaces/org.kde.Akonadi.Maildir.Settings.xml
+#%{_iconsdir}/*/*/apps/kolab.png
 
 %files kleopatra -f kleopatra.lang
 %defattr(644,root,root,755)
@@ -1524,14 +1499,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kdepimwidgets
 %{_iconsdir}/*/*/actions/button_more.png
 %{_iconsdir}/*/*/actions/button_fewer.png
-%attr(755,root,root) %ghost %{_libdir}/libakonadi-kabccommon.so.?
-%attr(755,root,root) %{_libdir}/libakonadi-kabccommon.so.4.*.*
-%attr(755,root,root) %ghost %{_libdir}/libakonadi-kcal.so.?
-%attr(755,root,root) %{_libdir}/libakonadi-kcal.so.4.*.*
-%attr(755,root,root) %ghost %{_libdir}/libakonadi-xml.so.?
-%attr(755,root,root) %{_libdir}/libakonadi-xml.so.4.*.*
-%attr(755,root,root) %ghost %{_libdir}/libakonadi_next.so.?
-%attr(755,root,root) %{_libdir}/libakonadi_next.so.4.*.*
 %attr(755,root,root) %ghost %{_libdir}/libakregatorinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libakregatorprivate.so.?
@@ -1612,8 +1579,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libksieve.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkslox.so.?
 %attr(755,root,root) %{_libdir}/libkslox.so.*.*.*
-%attr(755,root,root) %{_libdir}/libmaildir.so
-%attr(755,root,root) %ghost %{_libdir}/libmaildir.so.?
-%attr(755,root,root) %{_libdir}/libmaildir.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmimelib.so.?
 %attr(755,root,root) %{_libdir}/libmimelib.so.*.*.*
