@@ -12,12 +12,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.2.95
-Release:	2
+Version:	4.2.96
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	ed66d18ce69e43e48a29ffe4cb00407b
+# Source0-md5:	a5f65d943c9bdf50d07fd6a2d43f3b31
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 #Patch100: %{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
@@ -218,6 +218,22 @@ Kmail plugin for Kontact.
 
 %description kontact-plugin-kmail -l pl.UTF-8
 Plugin Kmail dla Kontakt.
+
+%package kontact-plugin-ktimetracker
+Summary:        Ktimer plugin for Kontact
+Summary(pl.UTF-8):      plugin Ktimer dla Kontakt
+Group:          X11/Applications
+Requires:	%{name}-ktimetracker = %{version}-%{release}
+Requires:       %{name}-kontact = %{version}-%{release}
+Provides:       kde4-kontact-plugin-ktimetracker
+Obsoletes:      kde4-kontact-plugin-ktimetracker
+
+%description kontact-plugin-ktimetracker
+Ktimer plugin for Kontact.
+
+%description kontact-plugin-ktimetracker -l pl.UTF-8
+Plugin Ktimer dla Kontakt.
+
 
 %package kaddressbook
 Summary:	Address book
@@ -979,6 +995,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_kmailsummary.so
 %{_datadir}/kde4/services/kontact/kmailplugin.desktop
 %{_datadir}/kde4/services/kcmkmailsummary.desktop
+
+%files kontact-plugin-ktimetracker
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_ktimetrackerplugin.so
+%{_datadir}/kde4/services/kontact/ktimetracker_plugin.desktop
 
 %files kaddressbook -f kaddressbook.lang
 %defattr(644,root,root,755)
