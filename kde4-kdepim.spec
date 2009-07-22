@@ -2,7 +2,7 @@
 %bcond_without	apidocs			# do not prepare API documentation
 #
 %define		_state		unstable
-%define		qtver		4.5.0
+%define		qtver		4.5.2
 %define		svn		979380
 
 %define	orgname	kdepim
@@ -12,12 +12,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.2.96
+Version:	4.2.98
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	a5f65d943c9bdf50d07fd6a2d43f3b31
+# Source0-md5:	1a266323caa03371e345782c74260642
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 #Patch100: %{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
@@ -51,8 +51,8 @@ BuildRequires:	pilot-link-devel >= 0.12.1
 BuildRequires:	qca-devel >= 2.0.0
 %{?with_apidocs:BuildRequires:	qt4-doc >= %{qtver}}
 BuildRequires:	rpmbuild(macros) >= 1.129
-BuildRequires:	soprano-devel >= 2.1.67
-BuildRequires:	strigi-devel >= 0.5.12
+BuildRequires:	soprano-devel >= 2.3.0
+BuildRequires:	strigi-devel >= 0.6.5
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	zlib-devel
 BuildConflicts:	indexlib
