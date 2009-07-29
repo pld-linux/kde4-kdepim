@@ -2,7 +2,7 @@
 %bcond_without	apidocs			# do not prepare API documentation
 #
 %define		_state		stable
-%define		qtver		4.5.1
+%define		qtver		4.5.2
 
 %define	orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
@@ -11,15 +11,15 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.2.4
-Release:	4
+Version:	4.3.0
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	e3b14bea173511628767475f0dbfb6ac
-Patch100:	%{name}-branch.diff
+# Source0-md5:	ddc887f19ef9cd454f4f3226c955aaaf
+#Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
+#Patch100: %{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
-Patch1:		%{name}-filtersearch.patch
 URL:		http://www.kde.org/
 BuildRequires:	QtDesigner-devel
 BuildRequires:	akonadi-devel >= 1.1.2
@@ -50,13 +50,14 @@ BuildRequires:	pilot-link-devel >= 0.12.1
 BuildRequires:	qca-devel >= 2.0.0
 %{?with_apidocs:BuildRequires:	qt4-doc >= %{qtver}}
 BuildRequires:	rpmbuild(macros) >= 1.129
-BuildRequires:	soprano-devel >= 2.1.67
-BuildRequires:	strigi-devel >= 0.5.12
+BuildRequires:	soprano-devel >= 2.3.0
+BuildRequires:	strigi-devel >= 0.6.5
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	zlib-devel
 BuildConflicts:	indexlib
 BuildConflicts:	kdepim-kontact-libs
 BuildConflicts:	kdepim-libkmailprivate
+Obsoletes:	kde4-kdepim-akonadi
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -112,8 +113,8 @@ Environment. It features:
 - and more...
 
 %description knode -l pl.UTF-8
-KNode to czytnik newsów zgodny ze specyfikacją GKNSA przeznaczony dla
-środowiska KDE. Jego możliwości obejmują:
+KNode to czytnik newsów zgodny ze specyfikacją GKNSA przeznaczony
+dla środowiska KDE. Jego możliwości obejmują:
 - wszystkie podstawowe cechy czytnika newsów (czytanie i wysyłanie
   artykułów, wątkowanie...)
 - obsługę wielu serwerów news
@@ -150,21 +151,9 @@ KTimeTracker - tracks time spent on various tasks. It is useful for
 tracking hours to be billed to different clients.
 
 %description ktimetracker -l pl.UTF-8
-KTimeTracker śledzi czas spędzony na różnych zajęciach. Jest przydatny
-przy obliczaniu godzin do wystawiania rachunków wielu klientom.
-
-%package kontact-plugin-ktimetracker
-Summary:	Ktimetracker plugin for Kontact
-Summary(pl.UTF-8):	plugin Ktimetracker dla Kontakt
-Group:		X11/Applications
-Requires:	%{name}-kontact = %{version}-%{release}
-Requires:	%{name}-ktimetracker = %{version}-%{release}
-
-%description kontact-plugin-ktimetracker
-Ktimetracker plugin for Kontact.
-
-%description kontact-plugin-ktimetracker -l pl.UTF-8
-plugin Ktimetracker dla Kontakt.
+KTimeTracker śledzi czas spędzony na różnych zajęciach. Jest
+przydatny przy obliczaniu godzin do wystawiania rachunków wielu
+klientom.
 
 %package kmail
 Summary:	KDE Mail client
@@ -200,10 +189,10 @@ Program pocztowy dla KDE o olbrzymich możliwościach, obejmujących:
 - automatyczne szyfrowanie przy użyciu OpenPGP (PGP lub GnuPG)
 - potężne filtry pocztowe
 - zagnieżdżone skrzynki pocztowe z obsługą list pocztowych
-- ściąganie na żądanie lub usuwanie bez ściągania dużych listów z
-  serwera POP3
-- pełną obsługę listów we wszystkich językach i zestawach znaków
-  obsługiwanych przez Qt
+- ściąganie na żądanie lub usuwanie bez ściągania dużych
+  listów z serwera POP3
+- pełną obsługę listów we wszystkich językach i zestawach
+  znaków obsługiwanych przez Qt
 - przeszukiwanie wiadomości z prezentacją w wirtualnych folderach
 - usuwanie powtórzonych listów
 - wątkowanie wiadomości
@@ -228,6 +217,22 @@ Kmail plugin for Kontact.
 
 %description kontact-plugin-kmail -l pl.UTF-8
 Plugin Kmail dla Kontakt.
+
+%package kontact-plugin-ktimetracker
+Summary:        Ktimer plugin for Kontact
+Summary(pl.UTF-8):      plugin Ktimer dla Kontakt
+Group:          X11/Applications
+Requires:	%{name}-ktimetracker = %{version}-%{release}
+Requires:       %{name}-kontact = %{version}-%{release}
+Provides:       kde4-kontact-plugin-ktimetracker
+Obsoletes:      kde4-kontact-plugin-ktimetracker
+
+%description kontact-plugin-ktimetracker
+Ktimer plugin for Kontact.
+
+%description kontact-plugin-ktimetracker -l pl.UTF-8
+Plugin Ktimer dla Kontakt.
+
 
 %package kaddressbook
 Summary:	Address book
@@ -439,9 +444,9 @@ accept drag and drop even from remote sites.
 
 %description knotes -l pl.UTF-8
 KNotes pozwala umieszczać na pulpicie notatki z opcją wysyłania.
-Dodatkowo, aby móc służyć za przypominajkę, KNotes może wysyłać pocztę
-i drukować notatki, a także przyjmować przeciąganie nawet ze zdalnych
-komputerów.
+Dodatkowo, aby móc służyć za przypominajkę, KNotes może
+wysyłać pocztę i drukować notatki, a także przyjmować
+przeciąganie nawet ze zdalnych komputerów.
 
 %package kontact-plugin-knotes
 Summary:	Knotes plugin for Kontact
@@ -541,10 +546,10 @@ to be sent. Also includes an alarm daemon.
 
 %description kalarm -l pl.UTF-8
 KAlarm to osobisty program do planowania i przypominania poprzez
-uruchomienie polecenia lub pocztą elektroniczną. Umożliwia ustawienie
-własnej wiadomości alarmowej, która wyskoczy na ekranie o wybranym
-czasie albo zaszeregowanie poleceń do wykonania lub poczty do
-wysłania. Zawiera także demona obsługującego przypominanie.
+uruchomienie polecenia lub pocztą elektroniczną. Umożliwia
+ustawienie własnej wiadomości alarmowej, która wyskoczy na ekranie
+o wybranym czasie albo zaszeregowanie poleceń do wykonania lub poczty
+do wysłania. Zawiera także demona obsługującego przypominanie.
 
 %package konsolekalendar
 Summary:	A command line ICard tool
@@ -565,11 +570,11 @@ Main features of KonsoleKalendar:
 - export calendar entries to other file formats
 
 %description konsolekalendar -l pl.UTF-8
-KonsoleKalendar to działający z linii poleceń interfejs do kalendarzy
-KDE. Pozwala oglądać, wstawiać, usuwać i modyfikować zdarzenia w
-kalendarzu z linii poleceń lub języka skryptowego. Ponadto
-KonsoleKalendar potrafi wyeksportować kalendarz KDE do wielu innych
-formatów.
+KonsoleKalendar to działający z linii poleceń interfejs do
+kalendarzy KDE. Pozwala oglądać, wstawiać, usuwać i modyfikować
+zdarzenia w kalendarzu z linii poleceń lub języka skryptowego.
+Ponadto KonsoleKalendar potrafi wyeksportować kalendarz KDE do wielu
+innych formatów.
 
 Główne możliwości programu KonsoleKalendar:
 - wypisywanie wpisów kalendarza od daty początkowej do końcowej
@@ -753,8 +758,7 @@ libksieve, libmimelib.
 %prep
 %setup -q -n %{orgname}-%{version}
 #%patch100 -p0
-%patch0 -p0
-%patch1 -p3
+#%patch0 -p0
 
 #rm -r `find . -type d -name '.svn'`
 
@@ -763,6 +767,7 @@ install -d build
 cd build
 %cmake \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	-DLIB_INSTALL_DIR=%{_libdir} \
 	-DCMAKE_BUILD_TYPE=%{!?debug:release}%{?debug:debug} \
 %if "%{_lib}" == "lib64"
 	-DLIB_SUFFIX=64 \
@@ -786,7 +791,7 @@ rm -rf $RPM_BUILD_ROOT
 #%find_lang kmobiletools --with-kde
 %find_lang knode --with-kde
 %find_lang knotes --with-kde
-%find_lang konsolekalendar --with-kde
+#%find_lang konsolekalendar --with-kde
 %find_lang kontact --with-kde
 %find_lang korganizer --with-kde
 #%find_lang korn --with-kde
@@ -804,65 +809,31 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kgpgconf
 %attr(755,root,root) %{_bindir}/kwatchgnupg
-%attr(755,root,root) %{_bindir}/kres-migrator
 %attr(755,root,root) %{_bindir}/kabcdistlistupdater
 %attr(755,root,root) %{_libdir}/libkontactinterfaces.so
 %{_datadir}/apps/kwatchgnupg
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kpgp-3.1-upgrade-address-data.pl
 %{_datadir}/apps/kconf_update/kpgp.upd
-### kode
-%attr(755,root,root) %{_bindir}/kode
-%attr(755,root,root) %{_bindir}/kxforms
-%attr(755,root,root) %{_bindir}/kxml_compiler
-%attr(755,root,root) %{_bindir}/kung
-%attr(755,root,root) %{_bindir}/kwsdl_compiler
-%attr(755,root,root) %{_bindir}/schematest
-%attr(755,root,root) %{_libdir}/libkxmlcommon.so
-%attr(755,root,root) %{_libdir}/libkschema.so
-%attr(755,root,root) %{_libdir}/libkschemawidgets.so
-%attr(755,root,root) %{_libdir}/libwscl.so
-%attr(755,root,root) %{_libdir}/libwsdl.so
-%attr(755,root,root) %{_libdir}/libschema.so
-%attr(755,root,root) %{_libdir}/libkode.so
-%{_desktopdir}/kde4/kwsdl_compiler.desktop
-%{_datadir}/apps/kxforms
-%{_datadir}/config.kcfg/kxforms.kcfg
-%{_datadir}/config/kres-migratorrc
 ### strigi
 %attr(755,root,root) %{_libdir}/strigi/strigiea_ics.so
 %attr(755,root,root) %{_libdir}/strigi/strigiea_vcf.so
-### kresources/featureplan
-%attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so
-%attr(755,root,root) %{_libdir}/kde4/kcal_resourcefeatureplan_plugin.so
-%{_datadir}/kde4/services/kresources/kcal/kcal_resourcefeatureplan.desktop
-### kresources/akonadi
-%attr(755,root,root) %{_libdir}/kde4/kcal_akonadi.so
-%{_datadir}/kde4/services/kresources/kcal/akonadi.desktop
-%attr(755,root,root) %{_libdir}/kde4/kabc_akonadi.so
-%{_datadir}/kde4/services/kresources/kabc/akonadi.desktop
 ### kresources/slox/
 %attr(755,root,root) %{_libdir}/libkslox.so
 %attr(755,root,root) %{_libdir}/libkabc_slox.so
-%attr(755,root,root) %{_libdir}/libkcal_slox.so
-%attr(755,root,root) %{_libdir}/kde4/kcal_slox.so
 %attr(755,root,root) %{_libdir}/kde4/kabc_slox.so
+%attr(755,root,root) %{_libdir}/kde4/kcal_slox.so
 %{_datadir}/kde4/services/kresources/kabc/kabc_slox.desktop
 %{_datadir}/kde4/services/kresources/kabc/kabc_ox.desktop
 %{_datadir}/kde4/services/kresources/kabc/kabc_groupwise.desktop
-%{_datadir}/kde4/services/kresources/kcal/kcal_slox.desktop
-%{_datadir}/kde4/services/kresources/kcal/kcal_ox.desktop
-%{_datadir}/kde4/services/kresources/kcal/kcal_groupwise.desktop
 ### kresources/scalix
 %attr(755,root,root) %{_bindir}/scalixadmin
-%attr(755,root,root) %{_libdir}/libkcalscalix.so
 %attr(755,root,root) %{_libdir}/libkabcscalix.so
 %attr(755,root,root) %{_libdir}/libknotesscalix.so
 %attr(755,root,root) %{_libdir}/kde4/knotes_scalix.so
 %attr(755,root,root) %{_libdir}/kde4/kabc_scalix.so
-%attr(755,root,root) %{_libdir}/kde4/kcal_scalix.so
 %attr(755,root,root) %{_libdir}/kde4/kio_scalix.so
+%attr(755,root,root) %{_libdir}/kde4/kcal_scalix.so
 %{_datadir}/autostart/kabcdistlistupdater.desktop
-%{_datadir}/kde4/services/kresources/kcal/scalix.desktop
 %{_datadir}/kde4/services/scalix.protocol
 %{_datadir}/kde4/services/scalixs.protocol
 %{_datadir}/kde4/services/kresources/kabc/scalix.desktop
@@ -875,6 +846,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kabc_groupdav.so
 %{_datadir}/kde4/services/kresources/kabc/kabc_groupdav.desktop
 %{_datadir}/kde4/services/kresources/kcal/kcal_groupdav.desktop
+%{_datadir}/kde4/services/kresources/kcal/kcal_groupwise.desktop
+%{_datadir}/kde4/services/kresources/kcal/kcal_ox.desktop
+%{_datadir}/kde4/services/kresources/kcal/kcal_slox.desktop
+%{_datadir}/kde4/services/kresources/kcal/scalix.desktop
 ### kresources/remote
 %attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_remote.so
@@ -931,7 +906,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/knode
 %attr(755,root,root) %{_libdir}/kde4/kcm_knode.so
 %attr(755,root,root) %{_libdir}/kde4/knodepart.so
-%attr(755,root,root) %{_libdir}/libknodecommon.so
+%attr(755,root,root) %ghost %{_libdir}/libknodecommon.so.?
+%attr(755,root,root) %{_libdir}/libknodecommon.so.4.*.*
 %{_desktopdir}/kde4/KNode.desktop
 %{_datadir}/apps/knode
 %{_datadir}/dbus-1/interfaces/org.kde.knode.xml
@@ -939,7 +915,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/knode_*.desktop
 %{_iconsdir}/*/*/apps/knode.png
 %{_iconsdir}/*/*/apps/knode2.png
-%lang(en) %{_kdedocdir}/en/kioslave/news
 
 %files kontact-plugin-knode
 %defattr(644,root,root,755)
@@ -951,19 +926,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/karm
 %attr(755,root,root) %{_bindir}/ktimetracker
-%attr(755,root,root) %{_libdir}/kde4/kcm_ktimetrackerconfig.so
 %attr(755,root,root) %{_libdir}/kde4/ktimetrackerpart.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_ktimetracker.so
 %{_desktopdir}/kde4/ktimetracker.desktop
 %{_datadir}/apps/ktimetracker
 %{_datadir}/dbus-1/interfaces/org.kde.ktimetracker.ktimetracker.xml
-%{_datadir}/kde4/services/ktimetrackerconfig.desktop
 %{_datadir}/kde4/services/ktimetrackerpart.desktop
+%{_datadir}/kde4/services/ktimetracker_config_behavior.desktop
+%{_datadir}/kde4/services/ktimetracker_config_display.desktop
+%{_datadir}/kde4/services/ktimetracker_config_storage.desktop
 %{_iconsdir}/*/*/apps/ktimetracker.png
-
-%files kontact-plugin-ktimetracker
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde4/kontact_ktimetrackerplugin.so
-%{_datadir}/kde4/services/kontact/ktimetracker_plugin.desktop
 
 %files kmail -f kmail.lang
 %defattr(644,root,root,755)
@@ -1006,21 +978,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/oxygen/*/status/mail-task.*
 
 %{_iconsdir}/oxygen/*/actions/ldap_lookup.png
-%{_iconsdir}/oxygen/*/actions/meeting-*.*
 %{_iconsdir}/oxygen/*/actions/smallclock.png
 %{_iconsdir}/oxygen/*/actions/upindicator.png
 %{_iconsdir}/oxygen/*/actions/checkmark.png
 # conflicts with kde-icons-oxygen
 %{_iconsdir}/oxygen/*/actions/edit-delete-page.png
-%{_iconsdir}/oxygen/*/actions/journal-new.png
-%{_iconsdir}/oxygen/*/actions/task-new.png
 %{_iconsdir}/oxygen/*/status/mail-tagged.png
-%{_iconsdir}/oxygen/*/status/appointment-recurring.png
-%{_iconsdir}/oxygen/*/status/appointment-reminder.png
-%{_iconsdir}/oxygen/*/status/meeting-organizer.png
-%{_iconsdir}/oxygen/*/status/task-complete.png
-%{_iconsdir}/oxygen/*/status/task-recurring.png
-%{_iconsdir}/oxygen/*/status/task-reminder.png
 
 ### libkleo
 %attr(755,root,root) %{_libdir}/libkleo.so
@@ -1031,6 +994,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_kmailsummary.so
 %{_datadir}/kde4/services/kontact/kmailplugin.desktop
 %{_datadir}/kde4/services/kcmkmailsummary.desktop
+
+%files kontact-plugin-ktimetracker
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kontact_ktimetrackerplugin.so
+%{_datadir}/kde4/services/kontact/ktimetracker_plugin.desktop
 
 %files kaddressbook -f kaddressbook.lang
 %defattr(644,root,root,755)
@@ -1080,8 +1048,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_korganizer.so
 %attr(755,root,root) %{_libdir}/kde4/korg_*.so
 %attr(755,root,root) %{_libdir}/kde4/korganizerpart.so
-%attr(755,root,root) %{_libdir}/libkocorehelper.so
 %attr(755,root,root) %{_libdir}/libkorg_stdprinting.so
+%attr(755,root,root) %ghost %{_libdir}/libkorganizer_core.so.?
+%attr(755,root,root) %{_libdir}/libkorganizer_core.so.4.*.*
 %attr(755,root,root) %{_libdir}/libkorganizer_calendar.so
 %attr(755,root,root) %{_libdir}/libkorganizer_eventviewer.so
 %attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so
@@ -1105,9 +1074,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/korganizer-import.desktop
 %{_desktopdir}/kde4/korganizer.desktop
 %{_iconsdir}/*/*/apps/korganizer.*
-### libkholidays
-%attr(755,root,root) %{_libdir}/libkholidays.so
-%{_datadir}/apps/libkholidays
 
 %files kontact-plugin-korganizer
 %defattr(644,root,root,755)
@@ -1183,6 +1149,7 @@ rm -rf $RPM_BUILD_ROOT
 %files akregator -f akregator.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/akregator
+%attr(755,root,root) %{_bindir}/akregatorstorageexporter
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
 %attr(755,root,root) %{_libdir}/kde4/akregator_mk4storage_plugin.so
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_general.so
@@ -1191,8 +1158,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_browser.so
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_advanced.so
 %attr(755,root,root) %{_libdir}/kde4/akregatorpart.so
-%attr(755,root,root) %{_libdir}/kde4/akregator_config_onlinesync.so
-%attr(755,root,root) %{_libdir}/kde4/akregator_onlinesync_plugin.so
 %{_desktopdir}/kde4/akregator.desktop
 %{_datadir}/apps/akregator
 %{_datadir}/kde4/services/akregator_*.desktop
@@ -1202,8 +1167,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config.kcfg/akregator.kcfg
 %{_iconsdir}/*/*/apps/akregator_empty.png
 %{_iconsdir}/*/*/apps/akregator.*
-%dir %{_datadir}/apps/akregator_onlinesync_plugin
-%{_datadir}/apps/akregator_onlinesync_plugin/akregator_onlinesync_plugin.rc
 
 %files kontact-plugin-akregator
 %defattr(644,root,root,755)
@@ -1219,6 +1182,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/knotes
 %attr(755,root,root) %{_libdir}/kde4/knotes_local.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_knote.so
 %{_desktopdir}/kde4/knotes.desktop
 %{_datadir}/apps/knotes
 %{_datadir}/config.kcfg/knoteconfig.kcfg
@@ -1226,6 +1190,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.kde.KNotes.xml
 %{_datadir}/kde4/services/kresources/knotes_manager.desktop
 %{_datadir}/kde4/services/kresources/knotes/local.desktop
+%{_datadir}/kde4/services/knote_config_action.desktop
+%{_datadir}/kde4/services/knote_config_display.desktop
+%{_datadir}/kde4/services/knote_config_editor.desktop
+%{_datadir}/kde4/services/knote_config_network.desktop
+%{_datadir}/kde4/services/knote_config_style.desktop
 %{_iconsdir}/*/*/apps/knotes.png
 
 %files kontact-plugin-knotes
@@ -1239,16 +1208,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/kjots
 %attr(755,root,root) %{_libdir}/kde4/kjotspart.so
 %attr(755,root,root) %{_libdir}/kde4/kontact_kjotsplugin.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_kjots.so
 %{_datadir}/kde4/services/kjotspart.desktop
 %{_desktopdir}/kde4/Kjots.desktop
 %{_datadir}/apps/kjots
 %{_datadir}/config.kcfg/kjots.kcfg
 %{_datadir}/kde4/services/kontact/kjots_plugin.desktop
+%{_datadir}/kde4/services/kjots_config_misc.desktop
 %{_iconsdir}/*/*/apps/kjots.png
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/*.h
 %{_includedir}/kleo
 %{_includedir}/kmail
 %{_includedir}/kpgp
@@ -1260,7 +1230,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/akregator
 %{_includedir}/kaddressbook
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
-%attr(755,root,root) %{_libdir}/libimap.so
 %attr(755,root,root) %{_libdir}/libgwsoap.so
 %attr(755,root,root) %{_libdir}/libkabc_groupdav.so
 %attr(755,root,root) %{_libdir}/libkabc_slox.so
@@ -1268,9 +1237,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkabcgroupwise.so
 %attr(755,root,root) %{_libdir}/libkabckolab.so
 %attr(755,root,root) %{_libdir}/libkabinterfaces.so
-#%attr(755,root,root) %{_libdir}/libkaddressbookprivate.so
 %attr(755,root,root) %{_libdir}/libkcalgroupwise.so
-%attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so
 %attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
 %attr(755,root,root) %{_libdir}/libkcal_slox.so
 %attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so
@@ -1278,12 +1245,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkdepim.so
 %attr(755,root,root) %{_libdir}/libkgroupwarebase.so
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so
-%attr(755,root,root) %{_libdir}/libkholidays.so
 %attr(755,root,root) %{_libdir}/libknotes_xmlrpc.so
 %attr(755,root,root) %{_libdir}/libknoteskolab.so
-%attr(755,root,root) %{_libdir}/libkocorehelper.so
-%attr(755,root,root) %{_libdir}/libkode.so
-#%attr(755,root,root) %{_libdir}/libkontactprivate.so
 %attr(755,root,root) %{_libdir}/libkorganizer_eventviewer.so
 %attr(755,root,root) %{_libdir}/libkorganizer_calendar.so
 %attr(755,root,root) %{_libdir}/libkorg_stdprinting.so
@@ -1291,10 +1254,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkpilot.so
 %attr(755,root,root) %{_libdir}/libksieve.so
 %attr(755,root,root) %{_libdir}/libmimelib.so
-%attr(755,root,root) %{_libdir}/libakonadi-kabccommon.so
-%attr(755,root,root) %{_libdir}/libakonadi-kcal.so
-#%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so
-#%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so
 %attr(755,root,root) %{_libdir}/libkabcommon.so
 %attr(755,root,root) %{_libdir}/libkabcscalix.so
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so
@@ -1304,9 +1263,9 @@ rm -rf $RPM_BUILD_ROOT
 #%{_libdir}ttr(755,root,root) /libqopensync.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientcore.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientgui.so
+%attr(755,root,root) %{_libdir}/libknodecommon.so
+%attr(755,root,root) %{_libdir}/libkorganizer_core.so
 %{_datadir}/apps/libkleopatra
-
-%{_datadir}/apps/cmake/modules/*.cmake
 
 %files kio-groupwise
 %defattr(644,root,root,755)
@@ -1337,14 +1296,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/kalarm_manager.desktop
 %{_iconsdir}/*/*/apps/*kalarm.png
 %{_iconsdir}/*/*/actions/document-new-from-template.png
+%{_iconsdir}/oxygen/*x*/actions/*alarm*.png
 
-%files konsolekalendar -f konsolekalendar.lang
+%files konsolekalendar
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/konsolekalendar
 %attr(755,root,root) %{_bindir}/kabcclient
 %{_desktopdir}/kde4/konsolekalendar.desktop
-%lang(en) %{_kdedocdir}/en/kabcclient
-%{_mandir}/man1/kabcclient.1.*
+%dir %{_datadir}/apps
+%dir %{_datadir}/apps/konsolekalendar
+%dir %{_datadir}/apps/konsolekalendar/pics
+%{_datadir}/apps/konsolekalendar/pics/*.png
+#%lang(en) %{_kdedocdir}/en/kabcclient
+#%{_mandir}/man1/kabcclient.1.*
 
 #%files korn -f korn.lang
 #%defattr(644,root,root,755)
@@ -1383,85 +1347,93 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/kpilotdaemon.desktop
 %{_iconsdir}/*/*/actions/kpilot_*.png
 %{_iconsdir}/*/*/apps/kpilot.png
-%{_iconsdir}/*/*/apps/kpilotDaemon.png
+%{_iconsdir}/*/*/apps/kpilotdaemon.png
 
-%files akonadi
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/akonadi_distlist_resource
-%attr(755,root,root) %{_bindir}/akonadi_ical_resource
-%attr(755,root,root) %{_bindir}/akonadi_imaplib_resource
-%attr(755,root,root) %{_bindir}/akonadi_kabc_resource
-%attr(755,root,root) %{_bindir}/akonadi_kcal_resource
-%attr(755,root,root) %{_bindir}/akonadi_knut_resource
-%attr(755,root,root) %{_bindir}/akonadi_localbookmarks_resource
-%attr(755,root,root) %{_bindir}/akonadi_maildir_resource
-%attr(755,root,root) %{_bindir}/akonadi_mailthreader_agent
-%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
-%attr(755,root,root) %{_bindir}/akonadi_nepomuk_email_feeder
-%attr(755,root,root) %{_bindir}/akonadi_nepomuktag_resource
-%attr(755,root,root) %{_bindir}/akonadi_nntp_resource
-%attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
-%attr(755,root,root) %{_bindir}/akonadi_vcard_resource
-%attr(755,root,root) %{_bindir}/akonadi_vcarddir_resource
-%attr(755,root,root) %{_bindir}/akonadiconsole
-%attr(755,root,root) %{_bindir}/akonaditray
-#%attr(755,root,root) %{_bindir}/akonamail
-#%attr(755,root,root) %{_bindir}/kabcviewer
-#%attr(755,root,root) %{_bindir}/kabceditor
-#%attr(755,root,root) %{_bindir}/akonalendar
-#%attr(755,root,root) %{_bindir}/kcontactmanager
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_addressee.so
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_contactgroup.so
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_mail.so
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_kcal.so
-%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_bookmark.so
-%attr(755,root,root) %{_libdir}/kde4/kio_akonadi.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_resources.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi.so
-%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_server.so
-#%attr(755,root,root) %{_libdir}/libopensync1/plugins/akonadi_opensync_plugin.so
-#%{_datadir}/libopensync1/defaults/akonadi-sync
-%dir %{_datadir}/apps/akonadi
-%dir %{_datadir}/apps/akonadi/plugins
-%dir %{_datadir}/apps/akonadi/plugins/serializer
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_mail.desktop
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_kcal.desktop
-%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_bookmark.desktop
-%{_datadir}/apps/nepomuk/ontologies/nco.trig
-%{_datadir}/apps/nepomuk/ontologies/nco.desktop
-%{_datadir}/apps/nepomuk/ontologies/nmo.desktop
-%{_datadir}/apps/nepomuk/ontologies/nmo.trig
-%dir %{_datadir}/akonadi
-%dir %{_datadir}/akonadi/agents
-%{_datadir}/akonadi/agents/distlistresource.desktop
-%{_datadir}/akonadi/agents/mailthreaderagent.desktop
-%{_datadir}/akonadi/agents/strigifeeder.desktop
-%{_datadir}/akonadi/agents/vcardresource.desktop
-%{_datadir}/akonadi/agents/nntpresource.desktop
-%{_datadir}/akonadi/agents/kcalresource.desktop
-%{_datadir}/akonadi/agents/knutresource.desktop
-%{_datadir}/akonadi/agents/icalresource.desktop
-%{_datadir}/akonadi/agents/kabcresource.desktop
-%{_datadir}/akonadi/agents/localbookmarksresource.desktop
-%{_datadir}/akonadi/agents/maildirresource.desktop
-%{_datadir}/akonadi/agents/imaplibresource.desktop
-%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
-%{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
-%{_datadir}/akonadi/agents/nepomuktagresource.desktop
-%{_datadir}/akonadi/agents/vcarddirresource.desktop
-%{_datadir}/kde4/services/akonadi.protocol
-#%dir %{_datadir}/apps/kcontactmanager
-#%{_datadir}/apps/kcontactmanager/kcontactmanagerui.rc
-#%{_desktopdir}/kde4/kcontactmanager.desktop
-%{_desktopdir}/kde4/akonadiconsole.desktop
-%dir %{_datadir}/apps/akonadiconsole
-%{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
-%{_datadir}/kde4/services/kcm_akonadi_resources.desktop
-%{_datadir}/kde4/services/kcm_akonadi.desktop
-%{_datadir}/kde4/services/kcm_akonadi_server.desktop
-%{_desktopdir}/kde4/akonaditray.desktop
+#%files akonadi
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_bindir}/akonadi_distlist_resource
+#%attr(755,root,root) %{_bindir}/akonadi_ical_resource
+#%attr(755,root,root) %{_bindir}/akonadi_kabc_resource
+#%attr(755,root,root) %{_bindir}/akonadi_kcal_resource
+#%attr(755,root,root) %{_bindir}/akonadi_knut_resource
+#%attr(755,root,root) %{_bindir}/akonadi_localbookmarks_resource
+#%attr(755,root,root) %{_bindir}/akonadi_maildir_resource
+#%attr(755,root,root) %{_bindir}/akonadi_mailthreader_agent
+#%attr(755,root,root) %{_bindir}/akonadi_nepomuk_contact_feeder
+#%attr(755,root,root) %{_bindir}/akonadi_nepomuk_email_feeder
+#%attr(755,root,root) %{_bindir}/akonadi_nepomuktag_resource
+#%attr(755,root,root) %{_bindir}/akonadi_nntp_resource
+#%attr(755,root,root) %{_bindir}/akonadi_strigi_feeder
+#%attr(755,root,root) %{_bindir}/akonadi_vcard_resource
+#%attr(755,root,root) %{_bindir}/akonadi_vcarddir_resource
+#%attr(755,root,root) %{_bindir}/akonadiconsole
+#%attr(755,root,root) %{_bindir}/akonaditray
+#%attr(755,root,root) %{_bindir}/akonadi2xml
+#%attr(755,root,root) %{_bindir}/akonadi_birthdays_resource
+#%attr(755,root,root) %{_bindir}/akonadi_imap_resource
+#%attr(755,root,root) %{_bindir}/akonadi_kolabproxy_resource
+#%attr(755,root,root) %{_bindir}/akonadi_mbox_resource
+#%attr(755,root,root) %{_bindir}/akonadi_microblog_resource
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_addressee.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_contactgroup.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_mail.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_microblog.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_kcal.so
+#%attr(755,root,root) %{_libdir}/kde4/akonadi_serializer_bookmark.so
+#%attr(755,root,root) %{_libdir}/kde4/kio_akonadi.so
+#%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_resources.so
+#%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi.so
+#%attr(755,root,root) %{_libdir}/kde4/kcm_akonadi_server.so
+#%attr(755,root,root) %{_libdir}/kde4/kcal_akonadi.so
+#%dir %{_datadir}/apps/akonadi
+#%{_datadir}/apps/akonadi/akonadi-xml.xsd
+#%dir %{_datadir}/apps/akonadi_knut_resource
+#%{_datadir}/apps/akonadi_knut_resource/knut-template.xml
+#%dir %{_datadir}/apps/akonadi/plugins
+#%dir %{_datadir}/apps/akonadi/plugins/serializer
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_mail.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_kcal.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_bookmark.desktop
+#%{_datadir}/apps/akonadi/plugins/serializer/akonadi_serializer_microblog.desktop
+#%dir %{_datadir}/akonadi
+#%dir %{_datadir}/akonadi/agents
+#%{_datadir}/akonadi/agents/distlistresource.desktop
+#%{_datadir}/akonadi/agents/mailthreaderagent.desktop
+#%{_datadir}/akonadi/agents/strigifeeder.desktop
+#%{_datadir}/akonadi/agents/vcardresource.desktop
+#%{_datadir}/akonadi/agents/nntpresource.desktop
+#%{_datadir}/akonadi/agents/kcalresource.desktop
+#%{_datadir}/akonadi/agents/knutresource.desktop
+#%{_datadir}/akonadi/agents/icalresource.desktop
+#%{_datadir}/akonadi/agents/kabcresource.desktop
+#%{_datadir}/akonadi/agents/localbookmarksresource.desktop
+#%{_datadir}/akonadi/agents/maildirresource.desktop
+#%{_datadir}/akonadi/agents/nepomukcontactfeeder.desktop
+#%{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
+#%{_datadir}/akonadi/agents/nepomuktagresource.desktop
+#%{_datadir}/akonadi/agents/vcarddirresource.desktop
+#%{_datadir}/akonadi/agents/birthdaysresource.desktop
+#%{_datadir}/akonadi/agents/imapresource.desktop
+#%{_datadir}/akonadi/agents/kolabproxyresource.desktop
+#%{_datadir}/akonadi/agents/mboxresource.desktop
+#%{_datadir}/akonadi/agents/microblog.desktop
+#%{_datadir}/akonadi/agents/notesresource.desktop
+#%dir %{_datadir}/apps/akonadi/firstrun
+#%{_datadir}/apps/akonadi/firstrun/defaultaddressbook
+#%{_datadir}/apps/akonadi/firstrun/defaultcalendar
+#%{_datadir}/kde4/services/akonadi.protocol
+#%{_desktopdir}/kde4/akonadiconsole.desktop
+#%dir %{_datadir}/apps/akonadiconsole
+#%{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
+#%{_datadir}/kde4/services/kcm_akonadi_resources.desktop
+#%{_datadir}/kde4/services/kcm_akonadi.desktop
+#%{_datadir}/kde4/services/kcm_akonadi_server.desktop
+#%{_desktopdir}/kde4/akonaditray.desktop
+#%{_datadir}/kde4/services/kresources/kcal/akonadi.desktop
+#%{_datadir}/dbus-1/interfaces/org.kde.Akonadi.Maildir.Settings.xml
+#%{_iconsdir}/*/*/apps/kolab.png
 
 %files kleopatra -f kleopatra.lang
 %defattr(644,root,root,755)
@@ -1481,16 +1453,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kleopatra/pics/kleopatra_splashscreen.svgz
 %{_datadir}/apps/kleopatra/pics/kleopatra_wizard.png
 %{_datadir}/apps/kleopatra/pics/kleopatra_wizard.svgz
+%{_datadir}/apps/kleopatra/pics/gpg4win-compact.png
+%{_datadir}/apps/kleopatra/pics/gpg4win.png
 %{_datadir}/kde4/services/kleopatra_config_appear.desktop
 %{_datadir}/kde4/services/kleopatra_config_dirserv.desktop
 %{_datadir}/kde4/services/kleopatra_config_dnorder.desktop
+%{_datadir}/kde4/services/kleopatra_config_gnupgsystem.desktop
 %{_datadir}/kde4/services/kleopatra_config_smimevalidation.desktop
 %{_datadir}/kde4/services/kleopatra_decryptverifyfiles.desktop
 %{_datadir}/kde4/services/kleopatra_decryptverifyfolders.desktop
 %{_datadir}/kde4/services/kleopatra_signencryptfiles.desktop
 %{_datadir}/kde4/services/kleopatra_signencryptfolders.desktop
 %{_iconsdir}/oxygen/*/apps/kleopatra.png
-#%{_iconsdir}/oxygen/scalable/apps/kleopatra.svgz
 
 %files wizards
 %defattr(644,root,root,755)
@@ -1547,124 +1521,85 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kdepimwidgets
 %{_iconsdir}/*/*/actions/button_more.png
 %{_iconsdir}/*/*/actions/button_fewer.png
-%attr(755,root,root) %{_libdir}/libakonadi-kabccommon.so.?
-%attr(755,root,root) %{_libdir}/libakonadi-kabccommon.so.4.*.*
-%attr(755,root,root) %{_libdir}/libakonadi-kcal.so.?
-%attr(755,root,root) %{_libdir}/libakonadi-kcal.so.4.*.*
-%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.?
+%attr(755,root,root) %ghost %{_libdir}/libakregatorinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.*.*.*
-%attr(755,root,root) %{_libdir}/libakregatorprivate.so.?
+%attr(755,root,root) %ghost %{_libdir}/libakregatorprivate.so.?
 %attr(755,root,root) %{_libdir}/libakregatorprivate.so.*.*.*
-%attr(755,root,root) %{_libdir}/libimap.so.?
-%attr(755,root,root) %{_libdir}/libimap.so.*.*.*
-%attr(755,root,root) %{_libdir}/libgwsoap.so.?
+%attr(755,root,root) %ghost %{_libdir}/libgwsoap.so.?
 %attr(755,root,root) %{_libdir}/libgwsoap.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkabc_groupdav.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkabc_groupdav.so.?
 %attr(755,root,root) %{_libdir}/libkabc_groupdav.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkabc_slox.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkabc_slox.so.?
 %attr(755,root,root) %{_libdir}/libkabc_slox.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkabc_xmlrpc.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkabc_xmlrpc.so.?
 %attr(755,root,root) %{_libdir}/libkabc_xmlrpc.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkabckolab.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkabckolab.so.?
 %attr(755,root,root) %{_libdir}/libkabckolab.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkabcommon.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkabcommon.so.?
 %attr(755,root,root) %{_libdir}/libkabcommon.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkabcscalix.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkabcscalix.so.?
 %attr(755,root,root) %{_libdir}/libkabcscalix.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkabcgroupwise.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkabcgroupwise.so.?
 %attr(755,root,root) %{_libdir}/libkabcgroupwise.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkabinterfaces.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkabinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libkabinterfaces.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkaddressbookprivate.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkaddressbookprivate.so.?
 %attr(755,root,root) %{_libdir}/libkaddressbookprivate.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkalarm_resources.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkalarm_resources.so.?
 %attr(755,root,root) %{_libdir}/libkalarm_resources.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcal_groupdav.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkcal_groupdav.so.?
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcalgroupwise.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkcalgroupwise.so.?
 %attr(755,root,root) %{_libdir}/libkcalgroupwise.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcal_resourceblog.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkcal_resourceblog.so.?
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so.?
-%attr(755,root,root) %{_libdir}/libkcal_resourcefeatureplan.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcal_resourceremote.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkcal_resourceremote.so.?
 %attr(755,root,root) %{_libdir}/libkcal_resourceremote.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcal_slox.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkcal_slox.so.?
 %attr(755,root,root) %{_libdir}/libkcal_slox.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkcal_xmlrpc.so.?
 %attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcalkolab.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkcalkolab.so.?
 %attr(755,root,root) %{_libdir}/libkcalkolab.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkcalscalix.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkcalscalix.so.?
 %attr(755,root,root) %{_libdir}/libkcalscalix.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkdepim.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkdepim.so.?
 %attr(755,root,root) %{_libdir}/libkdepim.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkgroupwarebase.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkgroupwarebase.so.?
 %attr(755,root,root) %{_libdir}/libkgroupwarebase.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkgroupwaredav.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkgroupwaredav.so.?
 %attr(755,root,root) %{_libdir}/libkgroupwaredav.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkholidays.so.?
-%attr(755,root,root) %{_libdir}/libkholidays.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkleo.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkleo.so.?
 %attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkmailprivate.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkmailprivate.so.?
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.?
-#%attr(755,root,root) %{_libdir}/libkmobiletoolsengineui.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so.?
-#%attr(755,root,root) %{_libdir}/libkmobiletoolslib.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so.?
-#%attr(755,root,root) %{_libdir}/libkmtaddressbook_service.so.*.*.*
-%attr(755,root,root) %{_libdir}/libknodecommon.so.?
-%attr(755,root,root) %{_libdir}/libknodecommon.so.*.*.*
-%attr(755,root,root) %{_libdir}/libknotes_xmlrpc.so.?
+%attr(755,root,root) %ghost %{_libdir}/libknotes_xmlrpc.so.?
 %attr(755,root,root) %{_libdir}/libknotes_xmlrpc.so.*.*.*
-%attr(755,root,root) %{_libdir}/libknoteskolab.so.?
+%attr(755,root,root) %ghost %{_libdir}/libknoteskolab.so.?
 %attr(755,root,root) %{_libdir}/libknoteskolab.so.*.*.*
-%attr(755,root,root) %{_libdir}/libknotesscalix.so.?
+%attr(755,root,root) %ghost %{_libdir}/libknotesscalix.so.?
 %attr(755,root,root) %{_libdir}/libknotesscalix.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkocorehelper.so.?
-%attr(755,root,root) %{_libdir}/libkocorehelper.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkode.so.?
-%attr(755,root,root) %{_libdir}/libkode.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkontactprivate.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkontactprivate.so.?
 %attr(755,root,root) %{_libdir}/libkontactprivate.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkontactinterfaces.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkontactinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libkontactinterfaces.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkorg_stdprinting.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkorg_stdprinting.so.?
 %attr(755,root,root) %{_libdir}/libkorg_stdprinting.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkorganizer_calendar.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkorganizer_calendar.so.?
 %attr(755,root,root) %{_libdir}/libkorganizer_calendar.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkorganizer_eventviewer.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkorganizer_eventviewer.so.?
 %attr(755,root,root) %{_libdir}/libkorganizer_eventviewer.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkorganizer_interfaces.so.?
 %attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkorganizerprivate.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkorganizerprivate.so.?
 %attr(755,root,root) %{_libdir}/libkorganizerprivate.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkpgp.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkpgp.so.?
 %attr(755,root,root) %{_libdir}/libkpgp.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkpilot.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkpilot.so.?
 %attr(755,root,root) %{_libdir}/libkpilot.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkschema.so.?
-%attr(755,root,root) %{_libdir}/libkschema.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkschemawidgets.so.?
-%attr(755,root,root) %{_libdir}/libkschemawidgets.so.*.*.*
-%attr(755,root,root) %{_libdir}/libksieve.so.?
+%attr(755,root,root) %ghost %{_libdir}/libksieve.so.?
 %attr(755,root,root) %{_libdir}/libksieve.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkslox.so.?
+%attr(755,root,root) %ghost %{_libdir}/libkslox.so.?
 %attr(755,root,root) %{_libdir}/libkslox.so.*.*.*
-%attr(755,root,root) %{_libdir}/libkxmlcommon.so.?
-%attr(755,root,root) %{_libdir}/libkxmlcommon.so.*.*.*
-%attr(755,root,root) %{_libdir}/libmaildir.so
-%attr(755,root,root) %{_libdir}/libmaildir.so.?
-%attr(755,root,root) %{_libdir}/libmaildir.so.*.*.*
-%attr(755,root,root) %{_libdir}/libmimelib.so.?
+%attr(755,root,root) %ghost %{_libdir}/libmimelib.so.?
 %attr(755,root,root) %{_libdir}/libmimelib.so.*.*.*
-#%attr(755,root,root) %{_libdir}/libqopensync.so.?
-#%attr(755,root,root) %{_libdir}/libqopensync.so.*.*.*
-%attr(755,root,root) %{_libdir}/libschema.so.?
-%attr(755,root,root) %{_libdir}/libschema.so.*.*.*
-%attr(755,root,root) %{_libdir}/libwscl.so.?
-%attr(755,root,root) %{_libdir}/libwscl.so.*.*.*
-%attr(755,root,root) %{_libdir}/libwsdl.so.?
-%attr(755,root,root) %{_libdir}/libwsdl.so.*.*.*
