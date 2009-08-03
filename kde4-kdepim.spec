@@ -33,7 +33,7 @@ BuildRequires:	docbook-dtd42-xml
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	ed
 BuildRequires:	flex
-BuildRequires:	gpgme-devel >= 1:1.0.0
+BuildRequires:	gpgme-devel >= 1:1.2.0
 %{?with_apidocs:BuildRequires:	graphviz}
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
@@ -59,6 +59,7 @@ BuildConflicts:	kdepim-kontact-libs
 BuildConflicts:	kdepim-libkmailprivate
 Obsoletes:	kde4-kdepim-akonadi
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	gpgme >= 1:1.2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
