@@ -59,7 +59,6 @@ BuildConflicts:	kdepim-kontact-libs
 BuildConflicts:	kdepim-libkmailprivate
 Obsoletes:	kde4-kdepim-akonadi
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	gpgme >= 1:1.2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
