@@ -1,6 +1,4 @@
 #
-%bcond_without	apidocs			# do not prepare API documentation
-#
 %define		_state		stable
 %define		qtver		4.5.2
 
@@ -30,11 +28,9 @@ BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cmake >= 2.6.3
 BuildRequires:	cyrus-sasl-devel
 BuildRequires:	docbook-dtd42-xml
-%{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	ed
 BuildRequires:	flex
 BuildRequires:	gpgme-devel >= 1:1.2.0
-%{?with_apidocs:BuildRequires:	graphviz}
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
@@ -48,7 +44,6 @@ BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
 BuildRequires:	pilot-link-devel >= 0.12.1
 BuildRequires:	qca-devel >= 2.0.0
-%{?with_apidocs:BuildRequires:	qt4-doc >= %{qtver}}
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	soprano-devel >= 2.3.0
 BuildRequires:	strigi-devel >= 0.6.5
@@ -487,25 +482,6 @@ bazujących na kdepim.
 %description devel -l ru.UTF-8
 Этот пакет содержит файлы заголовков необходимые для построения
 программ, основанных на kdepim.
-
-%package apidocs
-Summary:	API documentation
-Summary(pl.UTF-8):	Dokumentacja API
-Group:		Documentation
-Requires:	kde4-kdelibs >= %{version}
-
-%description apidocs
-Annotated reference of libkdepim, libkdenetwork, libkmailprivate,
-libknodecommon and the other kdepim's programming interfaces':
-- class lists
-- class members
-- namespaces
-
-%description apidocs -l pl.UTF-8
-Dokumentacja interfejsów programowania libkdepim, libkdenetwork,
-libkmailprivate, libknodecommon i innych z kdepim wraz z przypisami:
-- listy klas i ich składników
-- listę przestrzeni nazw (namespace)
 
 %package kio-groupwise
 Summary:	Groupwise protocol service
