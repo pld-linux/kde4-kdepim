@@ -9,12 +9,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.3.0
-Release:	4
+Version:	4.3.1
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	ddc887f19ef9cd454f4f3226c955aaaf
+# Source0-md5:	1029bc586f29c262f5f60eb079623e62
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 Patch100:	%{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
@@ -27,7 +27,6 @@ BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cmake >= 2.6.3
 BuildRequires:	cyrus-sasl-devel
-BuildRequires:	docbook-dtd42-xml
 BuildRequires:	ed
 BuildRequires:	flex
 BuildRequires:	gpgme-devel >= 1:1.2.0
@@ -717,7 +716,7 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
-%patch100 -p0
+#%patch100 -p0
 #%patch0 -p0
 
 #rm -r `find . -type d -name '.svn'`
@@ -1255,8 +1254,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/alarms/remote.desktop
 %{_datadir}/kde4/services/kresources/kalarm_manager.desktop
 %{_iconsdir}/*/*/apps/*kalarm.png
-%{_iconsdir}/*/*/actions/document-new-from-template.png
-%{_iconsdir}/oxygen/*x*/actions/*alarm*.png
 
 %files konsolekalendar
 %defattr(644,root,root,755)
