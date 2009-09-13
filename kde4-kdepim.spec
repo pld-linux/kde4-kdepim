@@ -10,7 +10,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.3.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -32,6 +32,7 @@ BuildRequires:	flex
 BuildRequires:	gpgme-devel >= 1:1.2.0
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
+BuildRequires:	kde4-kdelibs-experimental-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
 BuildRequires:	libassuan-devel
 BuildRequires:	libgnokii-devel
