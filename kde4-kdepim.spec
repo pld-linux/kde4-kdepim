@@ -866,8 +866,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/knode
 %attr(755,root,root) %{_libdir}/kde4/kcm_knode.so
 %attr(755,root,root) %{_libdir}/kde4/knodepart.so
-%attr(755,root,root) %ghost %{_libdir}/libknodecommon.so.?
-%attr(755,root,root) %{_libdir}/libknodecommon.so.4.*.*
 %{_desktopdir}/kde4/KNode.desktop
 %{_datadir}/apps/knode
 %{_datadir}/dbus-1/interfaces/org.kde.knode.xml
@@ -1445,6 +1443,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkleo.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkmailprivate.so.?
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libknodecommon.so.?
+%attr(755,root,root) %{_libdir}/libknodecommon.so.4.*.*
 %attr(755,root,root) %ghost %{_libdir}/libknotes_xmlrpc.so.?
 %attr(755,root,root) %{_libdir}/libknotes_xmlrpc.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libknoteskolab.so.?
