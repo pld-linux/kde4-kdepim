@@ -10,7 +10,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.3.2
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -930,10 +930,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kmailcvt
 %exclude %{_iconsdir}/*/scalable
 %{_iconsdir}/*/*/apps/kmail*.png
-%{_iconsdir}/oxygen/*/actions/mail-*.*
 %{_iconsdir}/oxygen/*/mimetypes/x-mail-distribution-list.*
-%{_iconsdir}/oxygen/*/status/mail-sent.png
-%{_iconsdir}/oxygen/*/status/mail-task.*
 
 %{_iconsdir}/oxygen/*/actions/ldap_lookup.png
 %{_iconsdir}/oxygen/*/actions/smallclock.png
@@ -941,7 +938,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/oxygen/*/actions/checkmark.png
 # conflicts with kde-icons-oxygen
 %{_iconsdir}/oxygen/*/actions/edit-delete-page.png
-%{_iconsdir}/oxygen/*/status/mail-tagged.png
 
 ### libkleo
 %attr(755,root,root) %{_libdir}/libkleo.so
