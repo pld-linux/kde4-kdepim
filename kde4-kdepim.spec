@@ -1,20 +1,22 @@
 #
-%define		_state		stable
+%define		_state		unstable
 %define		qtver		4.5.3
+%define         orgname         kdepim
+%define         snap            svn1027298
 
-%define	orgname	kdepim
+
 Summary:	Personal Information Management (PIM) for KDE
 Summary(ko.UTF-8):	K 데스크탑 환경 - PIM (개인 정보 관리)
 Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.3.2
-Release:	3
+Version:	4.3.69
+Release:	0.1
 License:	GPL
 Group:		X11/Applications
-Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	7e6a672bd681b2f19502798d7ed73fe8
+Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}%{snap}.tar.bz2
+# Source0-md5:	dfc5038c8fba29c12ea54f2388c13335
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 Patch100:	%{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
@@ -32,7 +34,7 @@ BuildRequires:	flex
 BuildRequires:	gpgme-devel >= 1:1.2.0
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
-BuildRequires:	kde4-kdelibs-experimental-devel >= %{version}
+#BuildRequires:	kde4-kdelibs-experimental-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
 BuildRequires:	libassuan-devel
 BuildRequires:	libgnokii-devel
@@ -716,7 +718,7 @@ libkdenetwork, libkdepim, libkmailprivate, libknodecommon, libkpilot,
 libksieve, libmimelib.
 
 %prep
-%setup -q -n %{orgname}-%{version}
+%setup -q -n %{orgname}-%{version}%{snap}
 #%patch100 -p0
 #%patch0 -p0
 
