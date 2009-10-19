@@ -1479,5 +1479,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libksieve.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkslox.so.?
 %attr(755,root,root) %{_libdir}/libkslox.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmessagecore.so.?
+%attr(755,root,root) %{_libdir}//libmessagecore.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmessagelist.so.?
+%attr(755,root,root) %{_libdir}//libmessagelist.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmimelib.so.?
 %attr(755,root,root) %{_libdir}/libmimelib.so.*.*.*
