@@ -1,8 +1,8 @@
 #
-%define		_state		unstable
-%define		qtver		4.6.0
-%define         orgname         kdepim
-%define         snap            svn1035674
+%define		_state      unstable
+%define		qtver       4.6.0
+%define     orgname     kdepim
+%define     snap        svn1040395
 
 
 Summary:	Personal Information Management (PIM) for KDE
@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.3.72
+Version:	4.3.73
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}%{snap}.tar.bz2
-# Source0-md5:	dee558f170db352295c6411185fdd403
+# Source0-md5:	c399b0ed637031e7105670f6cd4fe581
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 Patch100:	%{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
@@ -788,19 +788,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/kabc/kabc_ox.desktop
 %{_datadir}/kde4/services/kresources/kabc/kabc_groupwise.desktop
 ### kresources/scalix
-%attr(755,root,root) %{_bindir}/scalixadmin
-%attr(755,root,root) %{_libdir}/libkabcscalix.so
-%attr(755,root,root) %{_libdir}/libknotesscalix.so
-%attr(755,root,root) %{_libdir}/kde4/knotes_scalix.so
-%attr(755,root,root) %{_libdir}/kde4/kabc_scalix.so
-%attr(755,root,root) %{_libdir}/kde4/kio_scalix.so
-%attr(755,root,root) %{_libdir}/kde4/kcal_scalix.so
+#%attr(755,root,root) %{_bindir}/scalixadmin
+#%attr(755,root,root) %{_libdir}/libkabcscalix.so
+#%attr(755,root,root) %{_libdir}/libknotesscalix.so
+#%attr(755,root,root) %{_libdir}/kde4/knotes_scalix.so
+#%attr(755,root,root) %{_libdir}/kde4/kabc_scalix.so
+#%attr(755,root,root) %{_libdir}/kde4/kio_scalix.so
+#%attr(755,root,root) %{_libdir}/kde4/kcal_scalix.so
 #%{_datadir}/autostart/kabcdistlistupdater.desktop
-%{_datadir}/kde4/services/scalix.protocol
-%{_datadir}/kde4/services/scalixs.protocol
-%{_datadir}/kde4/services/kresources/kabc/scalix.desktop
+#%{_datadir}/kde4/services/scalix.protocol
+#%{_datadir}/kde4/services/scalixs.protocol
+#%{_datadir}/kde4/services/kresources/kabc/scalix.desktop
 %dir %{_datadir}/kde4/services/kresources/knotes
-%{_datadir}/kde4/services/kresources/knotes/scalix.desktop
+#%{_datadir}/kde4/services/kresources/knotes/scalix.desktop
 ### kresources/groupd1av
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so
 %attr(755,root,root) %{_libdir}/libkabc_groupdav.so
@@ -811,7 +811,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/kcal/kcal_groupwise.desktop
 %{_datadir}/kde4/services/kresources/kcal/kcal_ox.desktop
 %{_datadir}/kde4/services/kresources/kcal/kcal_slox.desktop
-%{_datadir}/kde4/services/kresources/kcal/scalix.desktop
+#%{_datadir}/kde4/services/kresources/kcal/scalix.desktop
 ### kresources/remote
 %attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_remote.so
@@ -975,6 +975,7 @@ rm -rf $RPM_BUILD_ROOT
 #%{_datadir}/kde4/services/kabconfig.desktop
 #%{_datadir}/kde4/services/kabcustomfields.desktop
 #%{_datadir}/kde4/services/kabldapconfig.desktop
+%{_datadir}/kde4/services/kcmldap.desktop
 #%{_datadir}/kde4/services/kaddressbook
 %{_datadir}/kde4/services/kaddressbookpart.desktop
 #%{_datadir}/kde4/services/ldifvcardthumbnail.desktop
@@ -1217,10 +1218,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmessageviewer.so
 %attr(755,root,root) %{_libdir}/libmimelib.so
 #%attr(755,root,root) %{_libdir}/libkabcommon.so
-%attr(755,root,root) %{_libdir}/libkabcscalix.so
+#%attr(755,root,root) %{_libdir}/libkabcscalix.so
 %attr(755,root,root) %{_libdir}/libkcal_groupdav.so
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
-%attr(755,root,root) %{_libdir}/libkcalscalix.so
+#%attr(755,root,root) %{_libdir}/libkcalscalix.so
 #%attr(755,root,root) %{_libdir}/libkitchensyncprivate.so
 #%{_libdir}ttr(755,root,root) /libqopensync.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientcore.so
@@ -1349,13 +1350,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/groupwisewizard
 %attr(755,root,root) %{_bindir}/sloxwizard
 %attr(755,root,root) %{_bindir}/kolabwizard
-%attr(755,root,root) %{_bindir}/scalixwizard
+#%attr(755,root,root) %{_bindir}/scalixwizard
 %{_desktopdir}/kde4/groupwarewizard.desktop
 #%{_datadir}/config.kcfg/egroupware.kcfg
 %{_datadir}/config.kcfg/slox.kcfg
 %{_datadir}/config.kcfg/kolab.kcfg
 %{_datadir}/config.kcfg/groupwise.kcfg
-%{_datadir}/config.kcfg/scalix.kcfg
+#%{_datadir}/config.kcfg/scalix.kcfg
 
 %files plugins
 %defattr(644,root,root,755)
@@ -1413,8 +1414,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkabckolab.so.*.*.*
 #%attr(755,root,root) %ghost %{_libdir}/libkabcommon.so.?
 #%attr(755,root,root) %{_libdir}/libkabcommon.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libkabcscalix.so.?
-%attr(755,root,root) %{_libdir}/libkabcscalix.so.*.*.*
+#%attr(755,root,root) %ghost %{_libdir}/libkabcscalix.so.?
+#%attr(755,root,root) %{_libdir}/libkabcscalix.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkabcgroupwise.so.?
 %attr(755,root,root) %{_libdir}/libkabcgroupwise.so.*.*.*
 #%attr(755,root,root) %ghost %{_libdir}/libkabinterfaces.so.?
@@ -1437,8 +1438,8 @@ rm -rf $RPM_BUILD_ROOT
 #%attr(755,root,root) %{_libdir}/libkcal_xmlrpc.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkcalkolab.so.?
 %attr(755,root,root) %{_libdir}/libkcalkolab.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libkcalscalix.so.?
-%attr(755,root,root) %{_libdir}/libkcalscalix.so.*.*.*
+#%attr(755,root,root) %ghost %{_libdir}/libkcalscalix.so.?
+#%attr(755,root,root) %{_libdir}/libkcalscalix.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkdepim.so.?
 %attr(755,root,root) %{_libdir}/libkdepim.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkgroupwarebase.so.?
@@ -1455,8 +1456,8 @@ rm -rf $RPM_BUILD_ROOT
 #%attr(755,root,root) %{_libdir}/libknotes_xmlrpc.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libknoteskolab.so.?
 %attr(755,root,root) %{_libdir}/libknoteskolab.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libknotesscalix.so.?
-%attr(755,root,root) %{_libdir}/libknotesscalix.so.*.*.*
+#%attr(755,root,root) %ghost %{_libdir}/libknotesscalix.so.?
+#%attr(755,root,root) %{_libdir}/libknotesscalix.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkontactprivate.so.?
 %attr(755,root,root) %{_libdir}/libkontactprivate.so.*.*.*
 #%attr(755,root,root) %ghost %{_libdir}/libkontactinterfaces.so.?
