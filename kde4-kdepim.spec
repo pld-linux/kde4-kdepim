@@ -153,7 +153,7 @@ przy obliczaniu godzin do wystawiania rachunków wielu klientom.
 Summary:	KDE Mail client
 Summary(pl.UTF-8):	Program pocztowy KDE
 Summary(pt_BR.UTF-8):	Cliente / leitor de e-mails para o KDE
-Group:		X11/Applications
+Group:		X11/Applications/Mail
 URL:		http://kontact.kde.org/kmail/
 # ? Requires:	kde4-kdebase >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
