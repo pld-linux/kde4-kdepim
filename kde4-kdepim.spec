@@ -10,7 +10,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.3.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -762,8 +762,14 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	libs			-p /sbin/ldconfig
-%postun	libs			-p /sbin/ldconfig
+%post	libs		-p /sbin/ldconfig
+%postun	libs		-p /sbin/ldconfig
+
+%post	kleopatra	-p /sbin/ldconfig
+%postun	kleopatra	-p /sbin/ldconfig
+
+%post	korganizer	-p /sbin/ldconfig
+%postun	korganizer	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
