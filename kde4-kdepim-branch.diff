@@ -1,2957 +1,1852 @@
-Index: akregator/plugins/mk4storage/akregator_mk4storage_plugin.desktop
+Index: kmail/stringutil.h
 ===================================================================
---- akregator/plugins/mk4storage/akregator_mk4storage_plugin.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ akregator/plugins/mk4storage/akregator_mk4storage_plugin.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -18,7 +18,7 @@
- Name[fr]=Stockage avec Metakit
- Name[fy]=Metakit-opslachefterein
- Name[ga]=Inneall stórála Metakit
--Name[gl]=Manexador do almacenador Metakit
-+Name[gl]=Infraestrutura do almacenador Metakit
- Name[hu]=Metakit tároló
- Name[is]=Metakit geymslu bakendi
- Name[it]=Backend archiviazione metakit
-Index: akregator/configuration/akregator_config_browser.desktop
-===================================================================
---- akregator/configuration/akregator_config_browser.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ akregator/configuration/akregator_config_browser.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -56,7 +56,7 @@
- Comment[es]=Configurar el componente navegador interno
- Comment[et]=Sisemise sirvimiskomponendi seadistamine
- Comment[fr]=Configurer le navigateur web interne
--Comment[gl]=Configurar o componente navegador interno
-+Comment[gl]=Configurar o compoñente do navegador interno
- Comment[hu]=A belső böngészőkomponens beállítása
- Comment[it]=Configura il componente interno di navigazione internet
- Comment[ja]=内部ブラウザコンポーネントの設定
-Index: libkleo/libkleopatrarc.desktop
-===================================================================
---- libkleo/libkleopatrarc.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ libkleo/libkleopatrarc.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -185,7 +185,7 @@
- Name[fi]=Luotettu juurivarmenne
- Name[fr]=Certificat racine de confiance
- Name[fy]=Fertroude haadsertifikaat
--Name[gl]=Certificado raiz autentificado
-+Name[gl]=Certificado raíz autenticado
- Name[hu]=Megbízható gyökértanúsítvány
- Name[is]=Treyst rótarskilríki
- Name[it]=Certificato radice affidabile
-@@ -243,7 +243,7 @@
- Name[fi]=Ei-luotettu juurivarmenne
- Name[fr]=Certificat racine non fiable
- Name[fy]=Net fertroude haadsertifikaat
--Name[gl]=Certificado raiz non autentificado
-+Name[gl]=Certificado raíz non autenticado
- Name[hu]=Nem megbízható gyökértanúsítvány
- Name[is]=Ekki traust rótarskilríki
- Name[it]=Certificato radice non affidabile
-Index: kresources/slox/kcal_slox.desktop
-===================================================================
---- kresources/slox/kcal_slox.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kresources/slox/kcal_slox.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -38,7 +38,7 @@
- Name[pa]=SUSE LINUX Openexchange ਸਰਵਰ
- Name[pl]=Serwer SUSE LINUX Openexchange
- Name[pt]=Servidor SUSE LINUX Openexchange
--Name[pt_BR]=Servidor OpenExchange do SUSE Linux (SLOX)
-+Name[pt_BR]=Servidor Openexchange do SUSE Linux (SLOX)
- Name[ru]=Сервер SUSE LINUX Openexchange
- Name[sl]=Strežnik SUSE LINUX Openexchange
- Name[sv]=SUSE Linux Openexchange-server
-Index: kresources/slox/kabc_slox.desktop
-===================================================================
---- kresources/slox/kabc_slox.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kresources/slox/kabc_slox.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -38,7 +38,7 @@
- Name[pa]=SUSE LINUX Openexchange ਸਰਵਰ
- Name[pl]=Serwer SUSE LINUX Openexchange
- Name[pt]=Servidor SUSE LINUX Openexchange
--Name[pt_BR]=Servidor OpenExchange do SUSE Linux (SLOX)
-+Name[pt_BR]=Servidor Openexchange do SUSE Linux (SLOX)
- Name[ru]=Сервер SUSE LINUX Openexchange
- Name[sl]=Strežnik SUSE LINUX Openexchange
- Name[sv]=SUSE Linux Openexchange-server
-Index: kmail/kmail.antispamrc
-===================================================================
---- kmail/kmail.antispamrc	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmail.antispamrc	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -56,13 +56,13 @@
- Version=1
- Priority=30
- VisibleName=Annoyance-Filter
--Executable=$HOME/.annoyance-filter/annoyance-filter --version
-+Executable=PATH=$HOME/.annoyance-filter:${PATH} annoyance-filter --version
- URL=http://www.fourmilab.ch/annoyance-filter
- PipeFilterName=Annoyance-Filter Check
--PipeCmdDetect=$HOME/.annoyance-filter/annoyance-filter --fread $HOME/.annoyance-filter/FastDict.bin --phrasemin 1 --phrasemax 2 --transcript - --test -
-+PipeCmdDetect=PATH=$HOME/.annoyance-filter:${PATH} annoyance-filter --fread $HOME/.annoyance-filter/FastDict.bin --phrasemin 1 --phrasemax 2 --transcript - --test -
- PipeCmdNoSpam=
--ExecCmdSpam=$HOME/.annoyance-filter/annoyance-filter --read $HOME/.annoyance-filter/Dict.bin --phrasemin 1 --phrasemax 2 --junk - --prune --write $HOME/.annoyance-filter/Dict.bin --fwrite $HOME/.annoyance-filter/FastDict.bin
--ExecCmdHam=$HOME/.annoyance-filter/annoyance-filter --read $HOME/.annoyance-filter/Dict.bin --phrasemin 1 --phrasemax 2 --mail - --prune --write $HOME/.annoyance-filter/Dict.bin --fwrite $HOME/.annoyance-filter/FastDict.bin
-+ExecCmdSpam=PATH=$HOME/.annoyance-filter:${PATH} annoyance-filter --read $HOME/.annoyance-filter/Dict.bin --phrasemin 1 --phrasemax 2 --junk - --prune --write $HOME/.annoyance-filter/Dict.bin --fwrite $HOME/.annoyance-filter/FastDict.bin
-+ExecCmdHam=PATH=$HOME/.annoyance-filter:${PATH} annoyance-filter --read $HOME/.annoyance-filter/Dict.bin --phrasemin 1 --phrasemax 2 --mail - --prune --write $HOME/.annoyance-filter/Dict.bin --fwrite $HOME/.annoyance-filter/FastDict.bin
- DetectionHeader=X-Annoyance-Filter-Classification
- DetectionPattern=Junk
- DetectionPattern2=
-Index: kmail/kmailicalifaceimpl.cpp
-===================================================================
---- kmail/kmailicalifaceimpl.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmailicalifaceimpl.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -1712,6 +1712,21 @@
-   }
+--- kmail/stringutil.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kmail/stringutil.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -20,6 +20,7 @@
+ #define KMAIL_STRINGUTIL_H
+ 
+ #include <QString>
++#include <QMap>
+ 
+ class KUrl;
+ namespace KMime
+@@ -157,10 +158,9 @@
+   QString smartQuote( const QString &msg, int maxLineLength );
+ 
+   /**
+-   * Parses a mailto: url and extracts the information about to, cc, subject and body out into
+-   * the QStrings given as argument.
++   * Parses a mailto: url and extracts the information in the QMap (field name as key).
+    */
+-  void parseMailtoUrl( const KUrl &url, QString &to, QString &cc, QString &subject, QString &body );
++  QMap<QString, QString> parseMailtoUrl( const KUrl &url );
  }
  
-+// Builds a folder list from the dimap and the local folder list.
-+static void createFolderList( QStringList &folderNames, QList<QPointer<KMFolder> > &folderList )
-+{
-+  QStringList dimapFolderNames;
-+  QStringList localFolderNames;
-+  QList<QPointer<KMFolder> > dimapFolderList;
-+  QList<QPointer<KMFolder> > localFolderList;
-+  kmkernel->dimapFolderMgr()->createFolderList( &dimapFolderNames, &dimapFolderList );
-+  kmkernel->folderMgr()->createFolderList( &localFolderNames, &localFolderList );
-+  folderNames += dimapFolderNames;
-+  folderNames += localFolderNames;
-+  folderList += dimapFolderList;
-+  folderList += localFolderList;
-+}
-+
- /****************************
-  * The config stuff
-  */
-@@ -1882,9 +1897,6 @@
-     if ( mNotes->folderType() == KMFolderTypeCachedImap )
-       static_cast<KMFolderCachedImap *>( mNotes->storage() )->updateAnnotationFolderType();
- 
--    // BEGIN TILL TODO The below only uses the dimap folder manager, which
--    // will fail for all other folder types. Adjust.
--
-     kDebug() << "mCalendar=" << mCalendar << mCalendar->location();
-     kDebug() << "mContacts=" << mContacts << mContacts->location();
-     kDebug() << "mNotes=" << mNotes << mNotes->location();
-@@ -1892,13 +1904,15 @@
-     // Find all extra folders
-     QStringList folderNames;
-     QList<QPointer<KMFolder> > folderList;
--    kmkernel->dimapFolderMgr()->createFolderList(&folderNames, &folderList);
-+    createFolderList( folderNames, folderList );
-     for(QList<QPointer<KMFolder> >::iterator it = folderList.begin();
-         it != folderList.end(); ++it)
-     {
--      KMFolderCachedImap* storage = dynamic_cast<KMFolderCachedImap*>( (*it)->storage() );
-+      FolderStorage *storage = (*it)->storage();
-+      KMFolderCachedImap* dimapStorage = dynamic_cast<KMFolderCachedImap*>( storage );
-       if ( storage && storage->contentsType() != 0 ) {
--        storage->updateAnnotationFolderType();
-+        if ( dimapStorage )
-+          dimapStorage->updateAnnotationFolderType();
-         folderContentsTypeChanged( *it, storage->contentsType() );
-       }
-     }
-@@ -1916,8 +1930,6 @@
-     if ( mExtraFolders.contains( mNotes->location() ) )
-       delete mExtraFolders.take( mNotes->location() );
- 
--    // END TILL TODO
--
-     emit subresourceAdded( folderContentsType( KMail::ContentsTypeCalendar ),
-                            mCalendar->location(), mCalendar->label(), true, true );
-     emit subresourceAdded( folderContentsType( KMail::ContentsTypeTask ),
-Index: kmail/messagelistview/core/model.cpp
+ }
+Index: kmail/stringutil.cpp
 ===================================================================
---- kmail/messagelistview/core/model.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/messagelistview/core/model.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -60,6 +60,7 @@
- #include <QScrollBar>
+--- kmail/stringutil.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kmail/stringutil.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -997,15 +997,14 @@
+ }
  
- #include <KLocale>
-+#include <KCalendarSystem>
- #include <KGlobal>
- #include <KDebug>
- #include <kcursorsaver.h>
-@@ -309,7 +310,8 @@
- void Model::setAggregation( const Aggregation * aggregation )
+ #ifndef KMAIL_UNITTESTS
+-void parseMailtoUrl ( const KUrl& url, QString& to, QString& cc, QString& subject, QString& body )
++QMap<QString, QString> parseMailtoUrl ( const KUrl& url )
  {
-   mAggregation = aggregation;
--  mView->setRootIsDecorated( mAggregation->grouping() == Aggregation::NoGrouping );
-+  mView->setRootIsDecorated( ( mAggregation->grouping() == Aggregation::NoGrouping ) &&
-+                             ( mAggregation->threading() != Aggregation::NoThreading ) );
+   kDebug() << url.pathOrUrl();
+-  to = decodeMailtoUrl( url.path() );
+   QMap<QString, QString> values = url.queryItems( KUrl::CaseInsensitiveKeys );
+-  to += ", " + values.value( "to" );
+-  body = values.value( "body" );
+-  subject = values.value( "subject" );
+-  cc = values.value( "cc" );
++  QString to = decodeMailtoUrl( url.path() );
++  to = to.isEmpty() ?  values.value( "to" ) : to + QString( ", " ) + values.value( "to" );
++  values.insert( "to", to );
++  return values;
  }
+ #endif
  
- void Model::setTheme( const Theme * theme )
-@@ -1182,34 +1184,6 @@
-   }
- }
- 
--static inline QString get_capitalized_long_day_name( int dayOfWeek )
--{
--  // The day name should be capitalized in the group labels
--  // This fixes some complaints from translators that have mapped
--  // their standard day names to lowercase versions for general
--  // use but still want them to be capitalized in the headers...
--  QString name = QDate::longDayName( dayOfWeek );
--  if ( name.isEmpty() )
--    return name;
--  QString copy = name;
--  copy[ 0 ] = name.at( 0 ).toUpper();
--  return copy;
--}
--
--static inline QString get_capitalized_month_name( int month )
--{
--  // The month name should be capitalized in the group labels
--  // This fixes some complaints from translators that have mapped
--  // their standard month names to lowercase versions for general
--  // use but still want them to be capitalized in the headers...
--  QString name = QDate::longMonthName( month );
--  if ( name.isEmpty() )
--    return name;
--  QString copy = name;
--  copy[ 0 ] = name.at( 0 ).toUpper();
--  return copy;
--}
--
- void Model::attachMessageToGroupHeader( MessageItem *mi )
- {
-   QString groupLabel;
-@@ -1265,24 +1239,12 @@
-         if ( dateWeekNumber == todayWeekNumber )
-         {
-           // within this week
--          groupLabel = get_capitalized_long_day_name( dDate.dayOfWeek() );
-+          groupLabel = KGlobal::locale()->calendar()->weekDayName( dDate );
-         } else {
--          // not this week
--          // FIXME: After 4.2 think about a configurable date format.
--          //        At the moment KMime::DateFormatter doesn't support date-only formatting.
--          //        KDateTime is not better than QDate in this case.
--          //        A configurable date-only format should be probably tweaked into KMime::DateFormatter
--          //        but this can't be done with the string freeze in effect.
--          groupLabel = dDate.toString( Qt::DefaultLocaleShortDate );
-+          groupLabel = KGlobal::locale()->formatDate( dDate, KLocale::ShortDate );
-         }
-       } else {
--        // not within this month
--        // FIXME: After 4.2 think about a configurable date format.
--        //        At the moment KMime::DateFormatter doesn't support date-only formatting.
--        //        KDateTime is not better than QDate in this case.
--        //        A configurable date-only format should be probably tweaked into KMime::DateFormatter
--        //        but this can't be done with the string freeze in effect.
--        groupLabel = dDate.toString( Qt::DefaultLocaleShortDate );
-+        groupLabel = KGlobal::locale()->formatDate( dDate, KLocale::ShortDate );
-       }
- 
-     }
-@@ -1335,7 +1297,7 @@
-         if ( dateWeekNumber == todayWeekNumber )
-         {
-           // within this week
--          groupLabel = get_capitalized_long_day_name( dDate.dayOfWeek() );
-+          groupLabel = KGlobal::locale()->calendar()->weekDayName( dDate );
-         } else {
-           // previous weeks
-           int weekDiff = todayWeekNumber - dateWeekNumber;
-@@ -1364,10 +1326,12 @@
-         )
-         {
-           // group by months, this year (so no year appended)
--          groupLabel = get_capitalized_month_name( dDate.month() );
-+          groupLabel = KGlobal::locale()->calendar()->monthName( dDate );
-         } else {
-           // group by months
--          groupLabel = QString( "%1 %2" ).arg( get_capitalized_month_name( dDate.month() ) ).arg( dDate.year() );
-+          groupLabel = QString( "%1 %2" )
-+            .arg( KGlobal::locale()->calendar()->monthName( dDate ) )
-+            .arg( dDate.year() );
-         }
-       }
-     }
-Index: kmail/kmpopfiltercnfrmdlg.cpp
-===================================================================
---- kmail/kmpopfiltercnfrmdlg.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmpopfiltercnfrmdlg.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -55,9 +55,6 @@
-               << i18nc("@title:column", "Sender") << i18nc("@title:column", "Receiver")
-               << i18nc("@title:column", "Date") << i18nc("@title:column", "Size");
-   QTreeWidgetItem *headerItem = new QTreeWidgetItem( headerNames );
--  headerItem->setTextAlignment( 0, Qt::AlignHCenter );
--  headerItem->setTextAlignment( 1, Qt::AlignHCenter );
--  headerItem->setTextAlignment( 2, Qt::AlignHCenter );
-   headerItem->setTextAlignment( 7, Qt::AlignRight );
-   headerItem->setToolTip( 0, i18nc("@action:button", "Download all messages now") );
-   headerItem->setToolTip( 1, i18nc("@action:button", "Download all messages later") );
-@@ -76,9 +73,9 @@
-   //    Disable it for now.
-   //header()->setResizeMode( 3, QHeaderView::Stretch );
-   header()->setStretchLastSection( false );
--  setColumnWidth( 0, 22 );    // Download Now icon
--  setColumnWidth( 1, 22 );    // Download Later icon
--  setColumnWidth( 2, 22 );    // Delete icon
-+  setColumnWidth( 0, IconSize( KIconLoader::Small ) + 6 );    // Download Now icon
-+  setColumnWidth( 1, IconSize( KIconLoader::Small ) + 6 );    // Download Later icon
-+  setColumnWidth( 2, IconSize( KIconLoader::Small ) + 6 );    // Delete icon
-   setColumnWidth( 3, 180 );   // Subject
-   setColumnWidth( 4, 140 );   // Sender
-   setColumnWidth( 5, 140);    // Receiver
-@@ -150,7 +147,8 @@
-   }
- }
- 
--void KMPopHeadersView::slotRadioButtonClicked( QTreeWidgetItem* item, int column ) {
-+void KMPopHeadersView::slotRadioButtonClicked( QTreeWidgetItem* item, int column )
-+{
-   assert( item && column >= 0 && column < NoAction );
-   mDialog->setAction( item, mapToAction( column ) );
- 
-Index: kmail/cachedimapjob.cpp
-===================================================================
---- kmail/cachedimapjob.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/cachedimapjob.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -510,7 +510,7 @@
-         bool b = kmkernel->iCalIface().isResourceQuiet();
-         kmkernel->iCalIface().setResourceQuiet( true );
- 
--        mFolder->take( i );
-+        mFolder->takeTemporarily( i );
-         mFolder->addMsgKeepUID( mMsg );
-         mMsg->setTransferInProgress( false );
- 
-Index: kmail/kmlineeditspell.cpp
-===================================================================
---- kmail/kmlineeditspell.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmlineeditspell.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -97,7 +97,7 @@
-   const QAction *result = menu.exec( QCursor::pos() );
-   if ( !result )
-     return;
--  setText( contents + result->text() );
-+  setText( contents + KGlobal::locale()->removeAcceleratorMarker( result->text() ) );
- }
- 
- void KMLineEdit::dropEvent(QDropEvent *event)
-@@ -202,8 +202,13 @@
-       int idx = addCompletionSource( i18n( "Recent Addresses" ) );
-       for ( ; it != recent.end(); ++it ) {
-         KABC::Addressee addr;
--        KPIMUtils::extractEmailAddressAndName(*it, email, name);
--        addr.setNameFromString( KPIMUtils::quoteNameIfNecessary( name ));
-+        KPIMUtils::extractEmailAddressAndName( *it, email, name );
-+        name = KPIMUtils::quoteNameIfNecessary( name );
-+        if ( ( name[0] == '"' ) && ( name[name.length() - 1] == '"' ) ) {
-+          name.remove( 0, 1 );
-+          name.truncate( name.length() - 1 );
-+        }
-+        addr.setNameFromString( name );
-         addr.insertEmail( email, true );
-         addContact( addr, 120, idx ); // more weight than kabc entries and more than ldap results
-       }
-Index: kmail/kmreaderwin.cpp
-===================================================================
---- kmail/kmreaderwin.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmreaderwin.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -2489,13 +2489,13 @@
- //-----------------------------------------------------------------------------
- void KMReaderWin::slotScrollPrior()
- {
--  mViewer->view()->scrollBy( 0, -(int)(height() * 0.8 ) );
-+  mViewer->view()->scrollBy( 0, -(int)(mViewer->widget()->height() * 0.8 ) );
- }
- 
- //-----------------------------------------------------------------------------
- void KMReaderWin::slotScrollNext()
- {
--  mViewer->view()->scrollBy( 0, (int)(height() * 0.8 ) );
-+  mViewer->view()->scrollBy( 0, (int)(mViewer->widget()->height() * 0.8 ) );
- }
- 
- //-----------------------------------------------------------------------------
-Index: kmail/kmmessage.cpp
-===================================================================
---- kmail/kmmessage.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmmessage.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -3237,18 +3237,17 @@
- }
- 
- //-----------------------------------------------------------------------------
--void KMMessage::updateAttachmentState( DwBodyPart *part )
-+void KMMessage::updateAttachmentState( DwBodyPart *partGiven )
- {
-+  DwEntity *part = partGiven;
-+  DwBodyPart *firstPart = partGiven;
-+
-   if ( !part ) {
--    part = getFirstDwBodyPart();
-+    part = firstPart = getFirstDwBodyPart();
-   }
- 
-   if ( !part ) {
--    // kDebug() <<"updateAttachmentState - no part!";
--    if ( mStatus.hasAttachment() ) {
--      toggleStatus( MessageStatus::statusHasAttachment() );
--    }
--    return;
-+    part = mMsg;  // no part, use message itself
-   }
- 
-   bool filenameEmpty = true;
-@@ -3294,8 +3293,8 @@
-   }
- 
-   // next part
--  if ( part->Next() ) {
--    updateAttachmentState( part->Next() );
-+  if ( firstPart && firstPart->Next() ) {
-+    updateAttachmentState( firstPart->Next() );
-   } else if ( attachmentState() == KMMsgAttachmentUnknown &&
-               mStatus.hasAttachment() ) {
-     toggleStatus( MessageStatus::statusHasAttachment() );
-Index: kmail/messageactions.cpp
-===================================================================
---- kmail/messageactions.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/messageactions.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -149,28 +149,29 @@
-   mForwardActionMenu  = new KActionMenu(KIcon("mail-forward"), i18nc("Message->","&Forward"), this);
-   mActionCollection->addAction("message_forward", mForwardActionMenu );
- 
--  mForwardAttachedAction  = new KAction(KIcon("mail-forward"), i18nc("Message->Forward->","As &Attachment..."), this);
--  mActionCollection->addAction("message_forward_as_attachment", mForwardAttachedAction );
--  mForwardAttachedAction->setShortcut(QKeySequence(Qt::Key_F));
--  connect( mForwardAttachedAction, SIGNAL(triggered(bool) ),
--           parent, SLOT(slotForwardAttachedMsg()) );
-+  mForwardAttachedAction = new KAction( KIcon("mail-forward"),
-+                                        i18nc( "@action:inmenu Message->Forward->",
-+                                               "As &Attachment..." ),
-+                                        this );
-+  connect( mForwardAttachedAction, SIGNAL( triggered( bool ) ),
-+           parent, SLOT( slotForwardAttachedMsg() ) );
-+  mActionCollection->addAction( "message_forward_as_attachment", mForwardAttachedAction );
- 
--  mForwardInlineAction  = new KAction( KIcon( "mail-forward" ),
-+  mForwardInlineAction = new KAction( KIcon( "mail-forward" ),
-                                        i18nc( "@action:inmenu Message->Forward->",
-                                               "&Inline..." ),
-                                        this );
-+  connect( mForwardInlineAction, SIGNAL( triggered( bool ) ),
-+           parent, SLOT( slotForwardInlineMsg() ) );
-   mActionCollection->addAction( "message_forward_inline", mForwardInlineAction );
--  mForwardInlineAction->setShortcut( QKeySequence( Qt::SHIFT + Qt::Key_F ) );
--  connect( mForwardInlineAction, SIGNAL(triggered(bool) ),
--           parent, SLOT(slotForwardInlineMsg()) );
- 
-   setupForwardActions();
- 
--  mRedirectAction  = new KAction(i18nc("Message->Forward->", "&Redirect..."), this);
--  mActionCollection->addAction("message_forward_redirect", mRedirectAction );
--  connect( mRedirectAction, SIGNAL(triggered(bool)),
--           parent, SLOT(slotRedirectMsg()));
--  mRedirectAction->setShortcut(QKeySequence(Qt::Key_E));
-+  mRedirectAction  = new KAction(i18nc("Message->Forward->", "&Redirect..."), this );
-+  mActionCollection->addAction( "message_forward_redirect", mRedirectAction );
-+  connect( mRedirectAction, SIGNAL( triggered( bool ) ),
-+           parent, SLOT( slotRedirectMsg() ) );
-+  mRedirectAction->setShortcut( QKeySequence( Qt::Key_E ) );
-   mForwardActionMenu->addAction( mRedirectAction );
- 
-   updateActions();
-@@ -269,18 +270,18 @@
- 
- void MessageActions::setupForwardingActionsList( KXMLGUIClient *guiClient )
- {
--  QList<QAction*> mForwardActionList;
-+  QList<QAction*> forwardActionList;
-   guiClient->unplugActionList( "forward_action_list" );
-   if ( GlobalSettings::self()->forwardingInlineByDefault() ) {
--    mForwardActionList.append( mForwardInlineAction );
--    mForwardActionList.append( mForwardAttachedAction );
-+    forwardActionList.append( mForwardInlineAction );
-+    forwardActionList.append( mForwardAttachedAction );
-   }
-   else {
--    mForwardActionList.append( mForwardAttachedAction );
--    mForwardActionList.append( mForwardInlineAction );
-+    forwardActionList.append( mForwardAttachedAction );
-+    forwardActionList.append( mForwardInlineAction );
-   }
--  mForwardActionList.append( mRedirectAction );
--  guiClient->plugActionList( "forward_action_list", mForwardActionList );
-+  forwardActionList.append( mRedirectAction );
-+  guiClient->plugActionList( "forward_action_list", forwardActionList );
- }
- 
- 
-Index: kmail/kmaccount.cpp
-===================================================================
---- kmail/kmaccount.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmaccount.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -395,7 +395,6 @@
-           SLOT(precommandExited(bool)));
- 
-   kDebug() << "Running precommand" << precommand;
--  mPrecommandEventLoop = new QEventLoop();
-   if ( !precommandProcess.start() )
-     return false;
- 
-@@ -403,9 +402,10 @@
-   // the precommand is running (which may take a while).
-   // The exec call will block until the event loop is exited, which happens in
-   // precommandExited().
--  if ( mPrecommandEventLoop ) { // yes it can be 0 due to races with precommandProcess.start()
--    mPrecommandEventLoop->exec();
--  }
-+  mPrecommandEventLoop = new QEventLoop();
-+  mPrecommandEventLoop->exec();
-+  delete mPrecommandEventLoop;
-+  mPrecommandEventLoop = 0;
- 
-   return mPrecommandSuccess;
- }
-@@ -413,18 +413,12 @@
- //-----------------------------------------------------------------------------
- void KMAccount::precommandExited(bool success)
- {
--  Q_ASSERT( mPrecommandEventLoop != 0 );
-   mPrecommandSuccess = success;
--
--  // Exit and delete the event loop. This makes sure the execution continues
--  // in runPrecommand(), where the event loop was entered.
--  mPrecommandEventLoop->exit();
--
--  // Use deleteLater, because we are called inside of this very eventloop
--  mPrecommandEventLoop->deleteLater();
--  mPrecommandEventLoop = 0;
-+  if ( mPrecommandEventLoop )  // don't crash when kmail exits while mPrecommandEventLoop runs
-+    mPrecommandEventLoop->exit();
- }
- 
-+//-----------------------------------------------------------------------------
- void KMAccount::slotIdentitiesChanged()
- {
-   // Fall back to the default identity if the one used currently is invalid
 Index: kmail/kmcommands.cpp
 ===================================================================
---- kmail/kmcommands.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmcommands.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -767,11 +767,16 @@
-   return OK;
- }
+--- kmail/kmcommands.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kmail/kmcommands.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -2294,16 +2294,15 @@
+     msg->initHeader(mIdentity);
+     msg->setCharset("utf-8");
  
--static KUrl subjectToUrl( const QString &subject ) {
-+static KUrl subjectToUrl( const QString &subject )
-+{
-+  QString fileName = KMCommand::cleanFileName( subject.trimmed() );
+-    QString to, body, subject, cc;
+-    KMail::StringUtil::parseMailtoUrl( mUrl, to, cc, subject, body );
++    QMap<QString, QString> fields =  KMail::StringUtil::parseMailtoUrl( mUrl );
  
--  return KFileDialog::getSaveUrl( KUrl::fromPath( subject.trimmed()
--                                  .replace( QDir::separator(), '_' ) ),
--                                  "*.mbox" );
-+  // avoid stripping off the last part of the subject after a "."
-+  // by KFileDialog, which thinks it's an extension
-+  if ( !fileName.endsWith( ".mbox" ) )
-+    fileName += ".mbox";
-+
-+  return KFileDialog::getSaveUrl( KUrl::fromPath( fileName ), "*.mbox" );
- }
+-    msg->setTo( to );
+-    if ( !subject.isEmpty() )
+-      msg->setSubject( subject );
+-    if ( !body.isEmpty() )
+-      msg->setBodyFromUnicode( body );
+-    if ( !cc.isEmpty() )
+-      msg->setCc( cc );
++    msg->setTo( fields.value( "to" ) );
++    if ( !fields.value( "subject" ).isEmpty() )
++      msg->setSubject( fields.value( "subject" ) );
++    if ( !fields.value( "body" ).isEmpty() )
++      msg->setBodyFromUnicode( fields.value( "body" ) );
++    if ( !fields.value( "cc" ).isEmpty() )
++      msg->setCc( fields.value( "cc" ) );
  
- KMSaveMsgCommand::KMSaveMsgCommand( QWidget *parent, KMMessage *msg )
-@@ -2434,13 +2439,14 @@
-   else {
-     // only one item, get the desired filename
-     partNode *node = mAttachmentMap.begin().key();
--    // replace all ':' with '_' because ':' isn't allowed on FAT volumes
--    QString s =
--      node->msgPart().fileName().trimmed().replace( ':', '_' );
-+    QString s = node->msgPart().fileName().trimmed();
-     if ( s.isEmpty() )
--      s = node->msgPart().name().trimmed().replace( ':', '_' );
-+      s = node->msgPart().name().trimmed();
-     if ( s.isEmpty() )
-       s = i18nc("filename for an unnamed attachment", "attachment.1");
-+    else
-+      s = cleanFileName( s );
-+
-     url = KFileDialog::getSaveUrl( KUrl( "kfiledialog:///saveAttachment/" + s ),
-                                    QString(),
-                                    parentWidget(),
-@@ -2464,16 +2470,18 @@
-     KUrl curUrl;
-     if ( !dirUrl.isEmpty() ) {
-       curUrl = dirUrl;
--      QString s =
--        it.key()->msgPart().fileName().trimmed().replace( ':', '_' );
-+      QString s = it.key()->msgPart().fileName().trimmed();
-       if ( s.isEmpty() )
--        s = it.key()->msgPart().name().trimmed().replace( ':', '_' );
-+        s = it.key()->msgPart().name().trimmed();
-       if ( s.isEmpty() ) {
-         ++unnamedAtmCount;
-         s = i18nc("filename for the %1-th unnamed attachment",
-                  "attachment.%1",
-               unnamedAtmCount );
-       }
-+      else
-+        s = cleanFileName( s );
-+
-       curUrl.setFileName( s );
-     } else {
-       curUrl = url;
-@@ -2541,6 +2549,18 @@
-   deleteLater();
- }
- 
-+QString KMCommand::cleanFileName( const QString &name )
-+{
-+  QString fileName = name.trimmed();
-+  // replace all ':' with '_' because ':' isn't allowed on FAT volumes
-+  fileName.replace( ':', '_' );
-+  // better not use a dir-delimiter in a filename
-+  fileName.replace( '/', '_' );
-+  fileName.replace( '\\', '_' );
-+
-+  return fileName;
-+}
-+
- KMCommand::Result KMSaveAttachmentsCommand::saveItem( partNode *node,
-                                                       const KUrl& url )
- {
-Index: kmail/kmfoldercachedimap.cpp
-===================================================================
---- kmail/kmfoldercachedimap.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmfoldercachedimap.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -527,6 +527,11 @@
-   return KMFolderMaildir::take( idx );
- }
- 
-+void KMFolderCachedImap::takeTemporarily( int idx )
-+{
-+  KMFolderMaildir::take( idx );
-+}
-+
- int KMFolderCachedImap::addMsgInternal( KMMessage *msg, bool newMail, int *index_return )
- {
-   // Possible optimization: Only dirty if not filtered below
-@@ -1628,7 +1633,7 @@
- bool KMFolderCachedImap::deleteMessages()
- {
-   /* Delete messages from cache that are gone from the server */
--  QList<KMMessage*> msgsForDeletion;
-+  QList<KMMsgBase*> msgsForDeletion;
- 
-   /*
-    * It is not possible to just go over all indices and remove
-@@ -1641,7 +1646,7 @@
-     ulong uid ( it.key() );
-     if ( uid != 0 && !uidsOnServer.contains( uid ) ) {
-       uids << QString::number( uid );
--      msgsForDeletion.append( getMsg( *it ) );
-+      msgsForDeletion.append( getMsgBase( *it ) );
-     }
-   }
- 
-@@ -1673,6 +1678,11 @@
-     job->start();
-     return true;
-   } else {
-+
-+    // Nothing to delete on the server, make sure the map is clear again.
-+    // Normally this wouldn't be necessary, but there can be stale maps because of
-+    // https://issues.kolab.org/issue3833.
-+    mDeletedUIDsSinceLastSync.clear();
-     return false;
-   }
- }
-Index: kmail/isubject.cpp
-===================================================================
---- kmail/isubject.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/isubject.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -25,8 +25,11 @@
- 
-   void ISubject::notify()
-   {
--    for ( QVector<Interface::Observer*>::iterator it = mObserverList.begin() ; it != mObserverList.end() ; ++it )
--      (*it)->update( this );
-+    for ( QVector<Interface::Observer*>::iterator it = mObserverList.begin() ; it != mObserverList.end() ; ++it ) {
-+      if ( (*it) ) {
-+        (*it)->update( this );
-+      }
-+    }
-   }
- 
- }
+     KMail::Composer * win = KMail::makeComposer( msg, mIdentity );
+     win->setCharset("", true);
 Index: kmail/kmkernel.cpp
 ===================================================================
---- kmail/kmkernel.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmkernel.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -738,6 +738,7 @@
-                               const QString & messageFile,
-                               const QString & MsgStatusFlags)
- {
-+  // FIXME: Remove code duplication between this method and dbusAddMessage_fastImport()!
-   kDebug();
- 
-   if ( foldername.isEmpty() || foldername.startsWith('.'))
-@@ -751,7 +752,6 @@
-   if ( foldername != mAddMessageLastFolder ) {
-     mAddMessageMsgIds.clear();
-     readFolderMsgIds = true;
--    mAddMessageLastFolder = foldername;
-   }
- 
-   KUrl msgUrl( messageFile );
-@@ -804,6 +804,8 @@
-       else {
-         mAddMsgCurrentFolder = the_folderMgr->findOrCreate(_foldername, false);
+--- kmail/kmkernel.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kmail/kmkernel.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -307,16 +307,17 @@
+     for(int i= 0; i < args->count(); i++)
+     {
+       if ( args->arg(i).startsWith( QLatin1String( "mailto:" ), Qt::CaseInsensitive ) ) {
+-        QString mailtoTo, mailtoBody, mailtoSubject, mailtoCC;
+-        KMail::StringUtil::parseMailtoUrl( args->url( i ), mailtoTo, mailtoCC, mailtoSubject, mailtoBody );
+-        if ( !mailtoTo.isEmpty() )
+-          to += mailtoTo + ", ";
+-        if ( !mailtoCC.isEmpty() )
+-          cc += mailtoCC + ", ";
+-        if ( !mailtoSubject.isEmpty() )
+-          subj = mailtoSubject;
+-        if ( !mailtoBody.isEmpty() )
+-          body = mailtoBody;
++        QMap<QString, QString> values = KMail::StringUtil::parseMailtoUrl( args->url( i ) );
++        if ( !values.value( "to" ).isEmpty() )
++          to += values.value( "to" ) + ", ";
++        if ( !values.value( "cc" ).isEmpty() )
++          cc += values.value( "cc" ) + ", ";
++        if ( !values.value( "subject" ).isEmpty() )
++          subj = values.value( "subject" );
++        if ( !values.value( "body" ).isEmpty() )
++          body = values.value( "body" );
++        if ( !values.value( "in-reply-to" ).isEmpty() )
++          customHeaders << "In-Reply-To:" + values.value( "in-reply-to" );
        }
-+
-+      mAddMessageLastFolder = foldername;
-     }
- 
-     if ( mAddMsgCurrentFolder ) {
-@@ -917,16 +919,10 @@
-     return -1;
- 
-   int retval;
--  bool createNewFolder = false;
- 
-   QString _foldername = foldername.trimmed();
-   _foldername = _foldername.remove( '\\' ); //try to prevent ESCAPE Sequences
- 
--  if ( foldername != mAddMessageLastFolder ) {
--    createNewFolder = true;
--    mAddMessageLastFolder = foldername;
--  }
--
-   KUrl msgUrl( messageFile );
-   if ( !msgUrl.isEmpty() && msgUrl.isLocalFile() ) {
-     const QByteArray messageText =
-@@ -937,7 +933,7 @@
-     KMMessage *msg = new KMMessage();
-     msg->fromString( messageText );
- 
--    if (createNewFolder) {
-+    if ( foldername != mAddMessageLastFolder ) {
-       if ( foldername.contains("/")) {
-         QString tmp_fname = "";
-         KMFolder *folder = NULL;
-@@ -975,6 +971,7 @@
        else {
-         mAddMsgCurrentFolder = the_folderMgr->findOrCreate(_foldername, false);
-       }
-+      mAddMessageLastFolder = foldername;
-     }
- 
-     if ( mAddMsgCurrentFolder ) {
-Index: kmail/headerstyle.cpp
+         QString tmpArg = args->arg(i);
+Index: kmail/mailsourceviewer.cpp
 ===================================================================
---- kmail/headerstyle.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/headerstyle.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -758,7 +758,7 @@
-         "background-image: url("+imgpath+"shadow_right.png); width: 10px; min-height: 100%;\">&nbsp;</div>";
+--- kmail/mailsourceviewer.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kmail/mailsourceviewer.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -78,6 +78,7 @@
+   setAttribute( Qt::WA_DeleteOnClose );
+   setLineWrapMode( QTextEdit::NoWrap );
+   setTextInteractionFlags( Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard );
++  setLayoutDirection( Qt::LeftToRight );
  
-     headerStr +=
--      "<div style=\"margin-left: 8px; top: 0px;\"><span style=\"font-size: 10px; font-weight: bold;\">"+dateString+"</span></div>"
-+      "<div style=\"margin-left: 10px; top: 0px;\"><span style=\"font-size: 10px; font-weight: bold;\">"+dateString+"</span></div>"
-       // #0057ae
-       "<table style=\"background: "+activeColorDark.name()+"; border-collapse:collapse; top: 14px; min-width: 200px; \" cellpadding=0> \n"
-       "  <tr> \n"
-@@ -836,7 +836,13 @@
-         "</div>\n";
+   // combining the shortcuts in one qkeysequence() did not work...
+   QShortcut* shortcut = new QShortcut( this );
+Index: kmail/kmacctimap.cpp
+===================================================================
+--- kmail/kmacctimap.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kmail/kmacctimap.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -179,11 +179,17 @@
+       (*it).progressItem->setComplete();
      }
- 
--    headerStr += "<div style=\"padding: 6px;\">";
-+    if ( printing ) {
-+      //provide a bit more left padding when printing
-+      //kolab/issue3254 (printed mail cut at the left side)
-+      headerStr += "<div style=\"padding: 6px; padding-left: 10px;\">";
-+    } else {
-+      headerStr += "<div style=\"padding: 6px;\">";
+   }
+-  if (mSlave && mapJobData.begin() != mapJobData.end())
+-  {
+-    mSlave->kill();
++
++  if ( slave() ) {
++    if ( disconnectSlave ) {
++      KIO::Scheduler::disconnectSlave( slave() );
 +    }
- 
-     // TODO
-     // spam status
-Index: kmail/kmfoldercachedimap.h
-===================================================================
---- kmail/kmfoldercachedimap.h	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmfoldercachedimap.h	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -228,10 +228,23 @@
-     /** Reimplemented from KMFolder. Moving is not supported, so aParent must be 0. */
-     virtual int rename( const QString &aName, KMFolderDir *aParent = 0 );
- 
--    /** Reimplemented from KMFolderMaildir */
--    virtual KMMessage *take( int idx );
-     bool canDeleteMessages() const;
- 
-+    /**
-+     * Reimplemented from KMFolderMaildir
-+     * This deletes the message permanently, also from the server. For this,
-+     * rememberDeletion() is called, so that the message can be deleted from
-+     * the server on the next sync.
-+     */
-+    virtual KMMessage* take( int idx );
-+
-+    /**
-+     * Like take(), only that the deletion is not remembered, i.e. the
-+     * message will not be deleted from the server. Calling this can cause
-+     * inconsistencies, so make sure you re-add the message later!
-+     */
-+    void takeTemporarily( int idx );
-+
-     /** Reimplemented from KMFolderMaildir */
-     virtual int addMsg( KMMessage *msg, int *index_return = 0 );
- 
-Index: kmail/kmmainwidget.cpp
-===================================================================
---- kmail/kmmainwidget.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmmainwidget.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -3546,7 +3546,6 @@
- {
-   mMsgActions = new KMail::MessageActions( actionCollection(), this );
-   mMsgActions->setMessageView( mMsgView );
--  mMsgActions->setupForwardingActionsList( mGUIClient );
- 
-   //----- File Menu
-   mSaveAsAction = new KAction(KIcon("document-save"), i18n("Save &As..."), this);
-@@ -4503,14 +4502,13 @@
-   connect( kmkernel->msgTagMgr(), SIGNAL( msgTagListChanged() ),
-            this, SLOT( initializeMessageTagActions() ) );
- 
--  // plug shortcut filter actions now
-+  // Plug various action lists. This can't be done in the constructor, as that is called before
-+  // the main window or Kontact calls createGUI().
-+  // This function however is called with a single shot timer.
-   initializeFilterActions();
--
--  // plug folder shortcut actions
-   initializeFolderShortcutActions();
--
--  // plug tag actions now
-   initializeMessageTagActions();
-+  messageActions()->setupForwardingActionsList( mGUIClient );
- 
-   QString newFeaturesMD5 = KMReaderWin::newFeaturesMD5();
-   if ( kmkernel->firstStart() ||
-Index: kmail/kmcommands.h
-===================================================================
---- kmail/kmcommands.h	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmcommands.h	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -72,6 +72,11 @@
-   */
-   Result result() const;
- 
-+  /** cleans a filename by replacing characters not allowed or wanted on the filesystem
-+      e.g. ':', '/', '\' with '_'
-+  */
-+  static QString cleanFileName( const QString &fileName );
-+
- public slots:
-   // Retrieve messages then calls execute
-   void start();
-Index: kmail/kmcomposewin.cpp
-===================================================================
---- kmail/kmcomposewin.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmcomposewin.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -2824,6 +2824,8 @@
-   msgPart->setSubtypeStr( "zip" );
- 
-   msgPartToItem( msgPart, attachmentItem, false );
-+
-+  setModified( true );
- }
- 
- //-----------------------------------------------------------------------------
-@@ -2892,6 +2894,8 @@
-   msgPart->setSubtypeStr( subtype );
- 
-   msgPartToItem( msgPart, attachmentItem, false );
-+
-+  setModified( true );
- }
- 
- //-----------------------------------------------------------------------------
-Index: kmail/folderstorage.cpp
-===================================================================
---- kmail/folderstorage.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/folderstorage.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -1173,7 +1173,7 @@
-   if ( !mSearchPattern )
-     return;
-   QList<quint32> matchingSerNums;
--  const int end = qMin( mCurrentSearchedMsg + 100, count() );
-+  const int end = qMin( mCurrentSearchedMsg + 10, count() );
-   for ( int i = mCurrentSearchedMsg; i < end; ++i )
-   {
-     quint32 serNum = KMMsgDict::instance()->getMsgSerNum( folder(), i );
-Index: kmail/recipientseditor.cpp
-===================================================================
---- kmail/recipientseditor.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/recipientseditor.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -934,8 +934,8 @@
-     if ( count++ > GlobalSettings::self()->maximumRecipients() ) {
-       KMessageBox::sorry( this,
-         i18nc("@info:status", "Truncating recipients list to %1 of %2 entries.",
--          GlobalSettings::self()->maximumRecipients(),
--          r.count() ) );
-+              GlobalSettings::self()->maximumRecipients(),
-+              r.count() ) );
-       break;
-     }
-     addRecipient( *it, type );
-@@ -947,14 +947,15 @@
-   QString str;
- 
-   Recipient::List recipients = mRecipientsView->recipients();
--  Recipient::List::ConstIterator it;
--  for( it = recipients.constBegin(); it != recipients.constEnd(); ++it ) {
--    if ( (*it).type() == type ) {
--      if ( !str.isEmpty() ) str += ", ";
--      str.append( (*it).email() );
-+  if ( !recipients.isEmpty() ) {
-+    Recipient::List::ConstIterator it;
-+    for( it = recipients.constBegin(); it != recipients.constEnd(); ++it ) {
-+      if ( (*it).type() == type ) {
-+        if ( !str.isEmpty() ) str += ", ";
-+        str.append( (*it).email() );
-+      }
-     }
++    if ( mapJobData.begin() != mapJobData.end() ) {
++      mSlave->kill();
++    }
+     mSlave = 0;
    }
--
-   return str;
++
+   // remove the jobs
+   mapJobData.clear();
+   KMAccount::deleteFolderJobs();
+@@ -198,10 +204,6 @@
+     checkDone( false, CheckOK ); // returned 0 new messages
+     mCountRemainChecks = 0;
+   }
+-  if ( disconnectSlave && slave() ) {
+-    KIO::Scheduler::disconnectSlave( slave() );
+-    mSlave = 0;
+-  }
  }
  
-Index: kmail/regexplineedit.cpp
+ //-----------------------------------------------------------------------------
+Index: kmail/objecttreeparser.cpp
 ===================================================================
---- kmail/regexplineedit.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/regexplineedit.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -71,6 +71,7 @@
-     hlay->setMargin( 0 );
- 
-     mLineEdit = new KLineEdit( str, this );
-+    mLineEdit->setClearButtonShown( true );
-     setFocusProxy( mLineEdit );
-     hlay->addWidget( mLineEdit );
- 
+--- kmail/objecttreeparser.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kmail/objecttreeparser.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -1179,7 +1179,7 @@
+       // here.
+       // Do this only when prefering HTML mail, though, since otherwise the attachments are hidden
+       // when displaying plain text.
+-      if ( !dataHtml && mReader->htmlMail() ) {
++      if ( !dataHtml && mReader && mReader->htmlMail() ) {
+         dataHtml = child->findType( DwMime::kTypeMultipart, DwMime::kSubtypeMixed, false, true );
+       }
+     }
 Index: kmail/kmversion.h
 ===================================================================
---- kmail/kmversion.h	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kmail/kmversion.h	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
+--- kmail/kmversion.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kmail/kmversion.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
 @@ -3,6 +3,6 @@
  #ifndef kmversion_h
  #define kmversion_h
  
--#define KMAIL_VERSION "1.12.1"
-+#define KMAIL_VERSION "1.12.2"
+-#define KMAIL_VERSION "1.12.3"
++#define KMAIL_VERSION "1.12.4"
  
  #endif /*kmversion_h*/
-Index: doc/kleopatra/index.docbook
+Index: kalarm/kalarm.h
 ===================================================================
---- doc/kleopatra/index.docbook	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ doc/kleopatra/index.docbook	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -1246,11 +1246,14 @@
-       </para>
+--- kalarm/kalarm.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/kalarm.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -23,7 +23,7 @@
  
-       <para>
--	The only mandatory key in a <literal>Key Filter
--	#<replaceable>n</replaceable></literal> group is
-+	The only mandatory keys in a <literal>Key Filter
-+	#<replaceable>n</replaceable></literal> group are
- 	<varname>Name</varname>, containing the name of the category
- 	as displayed in the <link
--	linkend="configuration-appearance">config dialog</link>.
-+	linkend="configuration-appearance">config dialog</link>, and
-+	<varname>id</varname>, which is used as a reference for the
-+	filter in other configuration sections (such as <literal>View
-+	#<replaceable>n</replaceable></literal>).
-       </para>
+ #undef QT3_SUPPORT
  
-       <para>
-@@ -1362,6 +1365,21 @@
- 	      <entry>the key has been revoked.</entry>
- 	    </row>
- 	    <row>
-+	      <entry><varname>match-context</varname></entry>
-+	      <entry>
-+                context<footnote>
-+                  <para>
-+                    Context is an enumeration with the following
-+                    allowed values:
-+                    <literal>appearance</literal>,
-+                    <literal>filtering</literal>
-+                    and <literal>any</literal>.
-+                  </para>
-+                </footnote>
-+              </entry>
-+	      <entry>the context in which this filter matches.</entry>
-+	    </row>
-+	    <row>
- 	      <entry><varname>is-expired</varname></entry>
- 	      <entry>boolean</entry>
- 	      <entry>the key is expired.</entry>
-@@ -1413,6 +1431,22 @@
- 	      </entry>
- 	    </row>
- 	    <row>
-+	      <entry><varname>is-qualified</varname></entry>
-+	      <entry>boolean</entry>
-+	      <entry>
-+		the key can be used to make Qualified Signatures (as
-+		defined by the German Digital Signature Law).
-+	      </entry>
-+	    </row>
-+	    <row>
-+	      <entry><varname>is-cardkey</varname></entry>
-+	      <entry>boolean</entry>
-+	      <entry>
-+		the key material is stored on a smartcard (instead of
-+		on the computer).
-+	      </entry>
-+	    </row>
-+	    <row>
- 	      <entry><varname>has-secret-key</varname></entry>
- 	      <entry>boolean</entry>
- 	      <entry>
-Index: doc/ktimetracker/index.docbook
+-#define KALARM_VERSION "2.2.9"
++#define KALARM_VERSION "2.2.10"
+ #define KALARM_NAME "KAlarm"
+ #define KALARM_DBUS_SERVICE  "org.kde.kalarm"  // D-Bus service name of KAlarm application
+ 
+Index: kalarm/editdlg.h
 ===================================================================
---- doc/ktimetracker/index.docbook	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ doc/ktimetracker/index.docbook	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -470,41 +470,28 @@
- 
- </sect2>
- 
--<sect2 id="dcop"><title>&DCOP;</title>
-+<sect2 id="dcop"><title>&DBus;</title>
- 
--<para>&DCOP; is the mechanism &kde; programs use to communicate with each
-+<para>&DBus; is the mechanism &kde; programs use to communicate with each
- other.  A &kde; program provides a list of functions that other programs (a Bash
- script, for example) can use.</para>
- 
- <example><title>Bash script that echo's &karm;'s version</title>
- <programlisting>
--	DCOPID=`dcop | grep karm`
--	if [ $DCOPID ]
--	then
--		VERS=`dcop $DCOPID KarmDCOPIface version`
--		echo "&karm; version is $VERS"
--	else
--		echo "&karm; not running"
--	fi
-+qdbus org.kde.ktimetracker /KTimeTracker version 2>/dev/null || echo "ktimetracker not running"
- </programlisting>
- </example>
- 
--<para>&karm;'s current &DCOP; interface is currently used mainly for automated
-+<para>&karm;'s current &DBus; interface is currently used mainly for automated
- 	testing, so it is very limited.  For the full interface definition, see
--	<link linkend="dcopappendix">&DCOP; Interface Appendix</link>.</para>
-+	<link linkend="dcopappendix">&DBus; Interface Appendix</link>.</para>
- 
--<para>To see the full &DCOP; interface of the &karm; version installed on your
-+<para>To see the full &DBus; interface of the &karm; version installed on your
- 	system, run the following Bash script:</para>
- 
--<example><title>List &karm;'s &DCOP; interface to console</title>
-+<example><title>List &karm;'s &DBus; interface to console</title>
- <programlisting>
--	DCOPID=`dcop | grep karm`
--	if [ $DCOPID ]
--	then
--		dcop $DCOPID KarmDCOPIface
--	else
--		echo "&karm; not running"
--	fi
-+qdbus org.kde.ktimetracker /KTimeTracker 2>/dev/null || echo "ktimetracker not running"
- </programlisting>
- </example>
- </sect2>
-@@ -642,312 +629,6 @@
- 
- </sect1>
- 
--<sect1 id="menus">
--<title>The &karm; menubar</title>
--<sect2>
--<title>The <guimenu>File</guimenu> menu</title>
--
--<variablelist>
--<varlistentry>
--<term>
--<menuchoice><shortcut>
--<keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo>
--</shortcut>
--<guimenu>File</guimenu>
--<guimenuitem>Save</guimenuitem>
--</menuchoice></term>
--<listitem>
--<para><action>Saves the current tasks and subtasks with their accumulated
--times</action></para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term>
--<menuchoice>
--<shortcut>
--<keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo>
--</shortcut>
--<guimenu>File</guimenu>
--<guimenuitem>Print</guimenuitem>
--</menuchoice></term>
--<listitem><para>
--<action>Prints</action> the &karm; window</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term><menuchoice>
--<guimenu>File</guimenu>
--<guimenuitem>Start New Session</guimenuitem>
--</menuchoice></term>
--<listitem>
--<para><action>Resets </action>all session times to zero</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term><menuchoice>
--<guimenu>File</guimenu>
--<guimenuitem>Reset All Times</guimenuitem>
--</menuchoice></term>
--<listitem>
--<para><action>Resets </action>all times to zero</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term><menuchoice>
--<guimenu>File</guimenu>
--<guisubmenu>Import/Export</guisubmenu>
--<guimenuitem>Import Legacy Flat File...</guimenuitem>
--</menuchoice></term>
--<listitem>
--<para><action>Import </action>old style &karm; save files (&karm; 
--now uses iCalendar-style save files.)</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term><menuchoice>
--<guimenu>File</guimenu>
--<guisubmenu>Import/Export</guisubmenu>
--<guimenuitem>Import Tasks from Planner...</guimenuitem>
--</menuchoice></term>
--<listitem>
--<para><action>Import </action>an imendio planner project (see <ulink
--url="http://planner.imendio.org">planner.imendio.org</ulink>). All tasks, subtasks and their "completed" flag will be imported from a .planner-file. You can import them as a subtask by creating a subtask, leaving it marked, and then importing. </para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term>
--<menuchoice>
--<guimenu>File</guimenu>
--<guisubmenu>Import/Export</guisubmenu>
--<guimenuitem>Export to CSV file...</guimenuitem>
--</menuchoice></term>
--<listitem>
--<para><action>Export </action>
--<guilabel>Total Session Time</guilabel>,
--<guilabel>Session Time</guilabel>, <guilabel>Time</guilabel>, and
--<guilabel>Total Time</guilabel> to a text file.</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term><menuchoice>
--<guimenu>File</guimenu>
--<guisubmenu>Import/Export</guisubmenu>
--<guimenuitem>Export History to CSV file...</guimenuitem>
--</menuchoice></term>
--<listitem>
--<para><action>Export </action> task history to a text file.
--</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term><menuchoice>
--<shortcut>
--<keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>
--</shortcut>
--<guimenu>File</guimenu>
--<guimenuitem>Copy Totals to Clipboard</guimenuitem>
--</menuchoice></term>
--<listitem>
--<para><action>Copies </action> the current total time for a 
--task or all tasks to the &kde; clipboard</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term><menuchoice>
--<shortcut>
--<keycombo action="simul">&Ctrl;&Alt;<keycap>C</keycap></keycombo>
--</shortcut>
--<guimenu>File</guimenu>
--<guimenuitem>Copy History to Clipboard</guimenuitem>
--</menuchoice></term>
--<listitem>
--<para><action>Copies </action> daily times for a 
--given period to the &kde; clipboard</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term><menuchoice>
--<shortcut>
--<keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
--</shortcut>
--<guimenu>File</guimenu>
--<guimenuitem>Quit</guimenuitem>
--</menuchoice></term>
--<listitem>
--<para><action>Closes</action> &karm;</para>
--</listitem>
--</varlistentry>
--</variablelist>
--
--</sect2>
--
--<sect2>
--<title>The <guimenu>Clock</guimenu> menu</title>
--
--<variablelist>
--<varlistentry>
--<term>
--<menuchoice>
--<shortcut><keycap>S</keycap></shortcut>
--<guimenu>Clock</guimenu>
--<guimenuitem>Start</guimenuitem>
--</menuchoice>
--</term>
--<listitem>
--<para><action>Starts</action> timing the selected task</para></listitem>
--</varlistentry>
--
--<varlistentry>
--<term>
--<menuchoice>
--<guimenu>Clock</guimenu>
--<guimenuitem>Stop</guimenuitem>
--</menuchoice>
--</term>
--<listitem>
--<para><action>Stops</action> timing the selected task</para></listitem>
--</varlistentry>
--
--<varlistentry>
--<term>
--<menuchoice>
--<shortcut><keycap>&Esc;</keycap></shortcut>
--<guimenu>Clock</guimenu>
--<guimenuitem>Stop All Timers</guimenuitem>
--</menuchoice>
--</term>
--<listitem><para><action>Stops</action> timing all tasks</para></listitem>
--</varlistentry>
--</variablelist>
--</sect2>
--
--<sect2>
--<title>The <guimenu>Task</guimenu> menu</title>
--
--<variablelist>
--<varlistentry>
--<term>
--<menuchoice>
--<shortcut>
--<keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
--</shortcut>
--<guimenu>Task</guimenu>
--<guimenuitem>New</guimenuitem>
--</menuchoice>
--</term>
--<listitem><para><action>Add</action> a new task</para></listitem>
--</varlistentry>
--
--<varlistentry>
--<term>
--<menuchoice>
--<shortcut>
--<keycombo action="simul">&Ctrl;&Alt;<keycap>N</keycap></keycombo>
--</shortcut>
--<guimenu>Task</guimenu>
--<guimenuitem>New Subtask</guimenuitem>
--</menuchoice>
--</term>
--<listitem>
--<para><action>Add</action> a new subtask to the selected task</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term>
--<menuchoice>
--<shortcut>
--<keycap>Del</keycap>
--</shortcut>
--<guimenu>Task</guimenu>
--<guimenuitem>Delete</guimenuitem>
--</menuchoice>
--</term>
--<listitem>
--<para><action>Delete</action> the selected task or subtask</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term>
--<menuchoice>
--<shortcut>
--<keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo>
--</shortcut>
--<guimenu>Task</guimenu>
--<guimenuitem>Edit</guimenuitem>
--</menuchoice>
--</term>
--<listitem>
--<para><action>Change the name or accumulated time</action> for the
--current task</para><para>There are two options for changing the time: Edit
--Absolute, in which the session and total times can be changed separately;
--and Edit Relative, in which a certain change is added to or subtracted from
--both the session and total times.</para><para>The Auto tracking option allows 
--timing to start and stop automatically when you switch to or from a particular 
--&kde; desktop.</para>
--</listitem>
--</varlistentry>
--</variablelist>
--</sect2>
--
--<sect2>
--<title>The <guimenu>Settings</guimenu> menu</title>
--<variablelist>
--
--
--<varlistentry>
--<term>
--<menuchoice>
--<guimenu>Settings</guimenu>
--<guimenuitem>Configure Shortcuts</guimenuitem>
--</menuchoice>
--</term>
--<listitem><para><action>Opens</action> a dialog to allow the user to customize
--the keyboard shortcuts</para>
--</listitem>
--</varlistentry>
--
--<varlistentry>
--<term>
--<menuchoice>
--<guimenu>Settings</guimenu>
--<guimenuitem>Configure &karm;</guimenuitem>
--</menuchoice>
--</term>
--<listitem><para><action>Opens</action> a dialog to allow the user to
--configure &karm;</para>
--
--<para>The dialog has three tabbed panes: <guilabel>Behavior </guilabel>, which 
--allows you to specify an alert for no activity and a warning message when you 
--delete a task set, <guilabel>Display </guilabel>, which configures the fields 
--shown in the main window and <guilabel>Storage</guilabel>,
--which configures the location of the save file, whether auto saving is
--enabled and the auto save interval.</para> </listitem>
--</varlistentry>
--
--</variablelist>
--</sect2>
--
--<sect2>
--<title>The <guimenu>Help</guimenu> menu</title>
--
--&help.menu.documentation;
--
--</sect2>
--
--</sect1>
--
- <sect1 id="tool-bar">
- <title>The Toolbar</title>
- <para>The toolbar contains icons for the following commands:</para>
-@@ -1033,7 +714,7 @@
- </glossentry>
- 
- <glossentry id="gloss-dcop">
--<glossterm>&DCOP;</glossterm>
-+<glossterm>&DBus;</glossterm>
- <glossdef><para>The interprocess communication protocol used in &kde;.  Short
- for Desktop COmmunication Protocol.</para></glossdef>
- </glossentry>
-@@ -1106,7 +787,7 @@
- 
- </appendix>
- 
--<appendix id="dcopappendix"><title>&DCOP; Interface</title>
-+<appendix id="dcopappendix"><title>&DBus; Interface</title>
- 
- <refentry id="dcop-version">
- <refmeta>
-@@ -1123,7 +804,7 @@
- </refsynopsisdiv>
- <refsect1>
- <title>Description</title>
--<para><function>version()</function> is a &DCOP; call that returns &karm;'s
-+<para><function>version()</function> is a &DBus; call that returns &karm;'s
- version number; for example 1.5.0.  The version number is returned as a string
- in the typical &GNU; format of major.minor.bugfix.</para>
- </refsect1>
-@@ -1144,7 +825,7 @@
- </refsynopsisdiv>
- <refsect1>
- <title>Description</title>
--<para><function>quit()</function> is a &DCOP; call that provides a way that an
-+<para><function>quit()</function> is a &DBus; call that provides a way that an
- external program can gracefully shutdown &karm;.
- </para>
- </refsect1>
-@@ -1176,7 +857,7 @@
- </refsynopsisdiv>
- <refsect1>
- <title>Description</title>
--<para><function>hastodo(QString taskname)</function> is a &DCOP; call that
-+<para><function>hastodo(QString taskname)</function> is a &DBus; call that
- 	looks for a of the given name.  If found, it returns the
- 	iCalendar UID that identifies that to-do.  If not found, it returns an empty
- 	string.
-@@ -1214,7 +895,7 @@
- 
- <refsect1>
- <title>Description</title>
--<para><function>addtodo(QString todoname)</function> is a &DCOP; call that
-+<para><function>addtodo(QString todoname)</function> is a &DBus; call that
- 	adds a new top-level to-do to the current storage.  The UID of the new to-do
- 	is returned.
- </para>
-Index: doc/kmail/configure.docbook
-===================================================================
---- doc/kmail/configure.docbook	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ doc/kmail/configure.docbook	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -1930,6 +1930,21 @@
- <para>Invitations use to be send as attachments to a mail. By enabling this option, you let the invitation mails to be sent in the text of the mail, which is necessary to send invitations and replies to Microsoft Outlook(tm).</para>
- </listitem>
- </varlistentry>
-+<varlistentry>
-+<term><guilabel>Exchange compatible invitations naming</guilabel></term>
-+<listitem>
-+<para>Microsoft Outlook, when used in combination with a Microsoft Exchange
-+server, has a problem understanding standards-compliant groupware e-mail.
-+Enable this option to send groupware invitations in a way that Microsoft
-+Exchange understands. The invitation will be sent as an attachment with name <filename>ical.ics</filename>.</para>
-+</listitem>
-+</varlistentry>
-+<varlistentry>
-+<term><guilabel>Outlook compatible invitation reply comments</guilabel></term>
-+<listitem>
-+<para>When the user provides comments when responding to invitations, send the comment in way that Microsoft Outlook(tm) understands. If this option is not enabled, the reponse comments will not be seen in Outlook.</para>
-+</listitem>
-+</varlistentry>
- </variablelist>
- </sect2>
- 
-Index: doc/knode/more.docbook
-===================================================================
---- doc/knode/more.docbook	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ doc/knode/more.docbook	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -98,10 +98,10 @@
- url="http://www.kirchwitz.de/~amk/dni/usenet-einfuehrung">http://www.kirchwitz.de/~amk/dni/usenet-einfuehrung</ulink>
- (German)</member> 
- <member>Why should I take the rules seriously? <ulink
--url="http://www.kirchwitz.de/~amk/dni/warum-regel">http://www.kirchwitz.de/~amk/dni/warum-regel</ulink>
-+url="http://www.kirchwitz.de/~amk/dni/warum-regeln">http://www.kirchwitz.de/~amk/dni/warum-regeln</ulink>
- (German)</member> 
- <member>The newsreader <acronym>FAQ</acronym>: <ulink
--url="http://www.crosswinds.net/~cgarbers/faq/newsreaderFAQ.htm">http://www.crosswinds.net/~cgarbers/faq/newsreaderFAQ.htm</ulink></member> 
-+url="http://www.thomas-huehn.de/usenet/newsreaderFAQ.txt">http://www.thomas-huehn.de/usenet/newsreaderFAQ.txt</ulink> (German)</member> 
- <member>The correct quoting: <ulink
- url="http://www.afaik.de/usenet/faq/zitieren">http://www.afaik.de/usenet/faq/zitieren</ulink>
- (German)</member> 
-@@ -122,13 +122,13 @@
- <simplelist> 
- <member>Header entries: <ulink url="http://www.kirchwitz.de/~amk/dni/headerzeilen"> 
- http://www.kirchwitz.de/~amk/dni/headerzeilen</ulink> (German)</member> 
--<member>A very useful message-ID <acronym>FAQ</acronym>: <ulink url="http://www.qad.org/faq/faq-messageid.html"> 
--http://www.qad.org/faq/faq-messageid.html</ulink></member> 
-+<member>A very useful message-ID <acronym>FAQ</acronym>: <ulink url="http://www.hanau.net/usenet/faq/messageid.php"> 
-+http://www.hanau.net/usenet/faq/messageid.php (German)</ulink></member> 
- <member>A lot of links about newsreaders and related topics: <ulink
--url="http://www.leafnode.org/links">http://www.leafnode.org/links</ulink></member> 
-+url="http://www.leafnode.org/links.shtml">http://www.leafnode.org/links.shtml</ulink></member> 
- <member><acronym>RFC</acronym>s, Drafts and documents for the technical
--interested: <ulink url="http://www.landfield.com/usefor/"> 
--http://www.landfield.com/usefor/</ulink></member> 
-+interested: <ulink url="http://tools.ietf.org/wg/usefor/">
-+http://tools.ietf.org/wg/usefor/</ulink></member> 
- </simplelist> 
- </sect1> 
- </chapter> 
-Index: doc/kpilot/usage.docbook
-===================================================================
---- doc/kpilot/usage.docbook	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ doc/kpilot/usage.docbook	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -8,7 +8,7 @@
- </para>
- 
- <para>
--On the first start &kpilot; opens the configuration dialog which allows to you adjust its 
-+On the first start &kpilot; opens the configuration dialog which allows you to adjust its 
- settings and select and configure the conduits to be used.
- Click the <guibutton>OK</guibutton> button to switch to the
- &HotSync;-log, as shown <link linkend="main-app">here</link>.
-Index: doc/kalarm/index.docbook
-===================================================================
---- doc/kalarm/index.docbook	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ doc/kalarm/index.docbook	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -41,8 +41,8 @@
- 
- <!-- Don't change format of date and version of the documentation -->
- 
--<date>2009-05-25</date>
--<releaseinfo>2.02.00</releaseinfo>
-+<date>2008-09-25</date>
-+<releaseinfo>2.2.7</releaseinfo>
- 
- <abstract>
- <para>&kalarm; is a personal alarm message, command and email scheduler for &kde;.</para>
-@@ -423,21 +423,25 @@
- <sect2>
- <title>Deleting/Reactivating an Alarm</title>
- 
--<para>To delete existing alarms, do one of the following:</para>
-+<para>To delete existing alarms, select one or more by clicking on
-+their entries in the alarm list. Then do one of the following:</para>
- 
- <itemizedlist>
- <listitem>
--<para>Select one or more alarms by clicking on their entries in the
--alarm list. Then choose <menuchoice>
-+<para>Choose <menuchoice>
- <guimenu>Actions</guimenu><guimenuitem>Delete</guimenuitem>
- </menuchoice>.</para>
- </listitem>
- <listitem>
--<para><mousebutton>Right</mousebutton> click on the desired entries in
--the alarm list and choose
-+<para><mousebutton>Right</mousebutton> click on the selected entries
-+and choose
- <menuchoice><guimenuitem>Delete</guimenuitem></menuchoice>
- from the context menu.</para>
- </listitem>
-+<listitem>
-+<para>To delete them without a confirmation prompt, type
-+&Shift;-<keycap>Delete</keycap>.</para>
-+</listitem>
- </itemizedlist>
- 
- <para>When you delete an active alarm, it is archived, provided that
-@@ -2833,7 +2837,7 @@
-   <replaceable>period</replaceable></option></entry>
-   <entry>Cancel the alarm if it cannot be triggered within the
-   specified <replaceable>period</replaceable> after the correct
--  time. The <replaceable>period</replaceable> period is specified in
-+  time. The <replaceable>period</replaceable> is specified in
-   the same format as described for <option>--reminder</option>.
-   The default value of <replaceable>period</replaceable> is 1
-   minute.</entry>
-Index: kalarm/functions.h
-===================================================================
---- kalarm/functions.h	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kalarm/functions.h	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -141,21 +141,7 @@
- KDateTime           applyTimeZone(const QString& tzstring, const QDate& date, const QTime& time,
-                                   bool haveTime, const KDateTime& defaultDt = KDateTime());
- bool                isWorkingTime(const KDateTime&, const KAEvent*);
--int                 localeFirstDayOfWeek();
--QString             weekDayName(int day, const KLocale*);
- 
--/* Given a standard KDE day number, return the day number in the week for the user's locale.
-- * Standard day number = 1 (Mon) .. 7 (Sun)
-- * Locale day number in week = 0 .. 6
-- */
--inline int          weekDay_to_localeDayInWeek(int weekDay)  { return (weekDay + 7 - localeFirstDayOfWeek()) % 7; }
--
--/* Given a day number in the week for the user's locale, return the standard KDE day number.
-- * 'index' = 0 .. 6
-- * Standard day number = 1 (Mon) .. 7 (Sun)
-- */
--inline int          localeDayInWeek_to_weekDay(int index)  { return (index + localeFirstDayOfWeek() - 1) % 7 + 1; }
--
- #ifndef NDEBUG
- void                setTestModeConditions();
- void                setSimulatedSystemTime(const KDateTime&);
+--- kalarm/editdlg.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/editdlg.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -90,6 +90,7 @@
+ 		void            init(const KAEvent* event, bool newAlarm);
+ 		virtual void    resizeEvent(QResizeEvent*);
+ 		virtual void    showEvent(QShowEvent*);
++		virtual void    closeEvent(QCloseEvent*);
+ 		virtual QString type_caption(bool newAlarm) const = 0;
+ 		virtual void    type_init(QWidget* parent, QVBoxLayout* frameLayout) = 0;
+ 		virtual void    type_initValues(const KAEvent*) = 0;
 Index: kalarm/Changelog
 ===================================================================
---- kalarm/Changelog	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kalarm/Changelog	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -1,5 +1,8 @@
+--- kalarm/Changelog	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/Changelog	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -1,5 +1,15 @@
  KAlarm Change Log
  
-+=== Version 2.2.8 --- 19 August 2009 ===
-+- Use KDE system settings to determine default working days in the week.
++=== Version 2.2.10 --- 23 November 2009 ===
++- If dual screens, show alarm in other screen if any full screen window exists.
++- Fix crash if editing alarm from alarm window Edit button, and window changes
++  from reminder to normal, or window changes from at-login to final at-login
++  trigger time, or window auto-closes.
++- Prevent infinite loop if NEXTRECUR time in alarm is before alarm start time.
++- Fix error saving the alarm after editing a repeat-at-login alarm.
++- Don't set reminder/late-cancel/show-in-KOrganizer when saving repeat-at-login
++  alarms.
 +
- === Version 2.2.7 (KDE 4.3.1) --- 19 August 2009 ===
- - Shift-Delete now deletes alarms without showing confirmation prompt.
- - Disable edit alarm dialogue OK button if no changes have been made.
-Index: kalarm/lib/kalocale.h
+ === Version 2.2.9 (KDE 4.3.3) --- 29 October 2009 ===
+ - Fix recurring date-only alarm triggering repeatedly and eating up CPU, if the
+   start-of-day time is after midnight and the alarm is due, but current UTC time
+@@ -11,7 +21,6 @@
+ - Interpret '~' properly in entered file names.
+ - Prevent sound file configuration dialogue closing after showing error message.
+ - Fix crash if calendar formats are updated at login, during session restoration.
+-- If dual screens, show alarm in other screen if active window is full screen.
+ 
+ === Version 2.2.8 (KDE 4.3.2) --- 28 September 2009 ===
+ - Use KDE system settings to determine default working days in the week.
+Index: kalarm/kalarmapp.cpp
 ===================================================================
---- kalarm/lib/kalocale.h	(.../tags/KDE/4.3.1/kdepim)	(wersja 0)
-+++ kalarm/lib/kalocale.h	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -0,0 +1,54 @@
-+/*
-+ *  kalocale.h  -  miscellaneous locale functions
-+ *  Program:  kalarm
-+ *  Copyright © 2004-2009 by David Jarvie <djarvie@kde.org>
-+ *
-+ *  This program is free software; you can redistribute it and/or modify
-+ *  it under the terms of the GNU General Public License as published by
-+ *  the Free Software Foundation; either version 2 of the License, or
-+ *  (at your option) any later version.
-+ *
-+ *  This program is distributed in the hope that it will be useful,
-+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-+ *  GNU General Public License for more details.
-+ *
-+ *  You should have received a copy of the GNU General Public License along
-+ *  with this program; if not, write to the Free Software Foundation, Inc.,
-+ *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-+ */
+--- kalarm/kalarmapp.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/kalarmapp.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -212,7 +212,7 @@
+ 	{
+ 		--mActiveCount;
+ 		quitIf(1, true);    // error opening the main calendar - quit
+-		return true;
++		return false;
+ 	}
+ 	MainWindow* trayParent = 0;
+ 	for (int i = 1;  KMainWindow::canBeRestored(i);  ++i)
+@@ -254,7 +254,8 @@
+ 	}
+ 
+ 	--mActiveCount;
+-	quitIf(0);           // quit if no windows are open
++	if (quitIf(0))           // quit if no windows are open
++		return false;    // quitIf() can sometimes return, despite calling exit()
+ 
+ 	startProcessQueue();      // start processing the execution queue
+ 	return true;
+@@ -1357,6 +1358,9 @@
+ 				// It's not a reminder or a deferred alarm, and there is no message window
+ 				// (other than a reminder window) currently displayed for this alarm,
+ 				// and we need to execute a command before displaying the new window.
++				//
++				// NOTE: The pre-action is not executed for a recurring alarm if an
++				// alarm message window for a previous occurrence is still visible.
+ 				if (!ShellProcess::authorised())
+ 					setEventCommandError(event, KAEvent::CMD_ERROR_PRE);
+ 				else
+@@ -1392,22 +1396,32 @@
+ 					// Display the message even though it failed
+ 				}
+ 			}
+-			if (!win
+-			     ||  (!win->hasDefer() && !alarm.repeatAtLogin())
+-			     ||  replaceReminder)
 +
-+#ifndef LOCALE_H
-+#define LOCALE_H
-+
-+#include <QString>
-+class KLocale;
-+
-+namespace KAlarm
-+{
-+
-+/** Return the first day of the week for the user's locale.
-+*   Reply = 1 (Mon) .. 7 (Sun).
-+*/
-+int        localeFirstDayOfWeek();
-+
-+/** Return the week day name (Monday = 1). */
-+QString    weekDayName(int day, const KLocale*);
-+
-+/* Given a standard KDE day number, return the day number in the week for the user's locale.
-+ * Standard day number = 1 (Mon) .. 7 (Sun)
-+ * Locale day number in week = 0 .. 6
-+ */
-+inline int weekDay_to_localeDayInWeek(int weekDay)  { return (weekDay + 7 - localeFirstDayOfWeek()) % 7; }
-+
-+/* Given a day number in the week for the user's locale, return the standard KDE day number.
-+ * 'index' = 0 .. 6
-+ * Standard day number = 1 (Mon) .. 7 (Sun)
-+ */
-+inline int localeDayInWeek_to_weekDay(int index)  { return (index + localeFirstDayOfWeek() - 1) % 7 + 1; }
-+
-+uint defaultWorkDays();
-+
-+} // namespace KAlarm
-+
-+#endif // LOCALE_H
-Index: kalarm/lib/kalocale.cpp
++			if (!win)
+ 			{
+-				// Either there isn't already a message for this event,
+-				// or there is a repeat-at-login message with no Defer
+-				// button, which needs to be replaced with a new message,
+-				// or the caption needs to be changed from "Reminder" to "Message".
+-				if (win)
+-					win->setRecreating();    // prevent post-alarm actions
+-				delete win;
++				// There isn't already a message for this event
+ 				int flags = (reschedule ? 0 : MessageWin::NO_RESCHEDULE) | (allowDefer ? 0 : MessageWin::NO_DEFER);
+ 				(new MessageWin(&event, alarm, flags))->show();
+ 			}
++			else if (replaceReminder)
++			{
++				// The caption needs to be changed from "Reminder" to "Message"
++				win->cancelReminder(event, alarm);
++			}
++			else if (!win->hasDefer() && !alarm.repeatAtLogin())
++			{
++				// It's a repeat-at-login message with no Defer button,
++				// which has now reached its final trigger time and needs
++				// to be replaced with a new message.
++				win->showDefer();
++				win->showDateTime(event, alarm);
++			}
+ 			else
+ 			{
++				// Use the existing message window
++			}
++			if (win)
++			{
+ 				// Raise the existing message window and replay any sound
+ 				win->repeat(alarm);    // N.B. this reschedules the alarm
+ 			}
+Index: kalarm/lib/desktop.cpp
 ===================================================================
---- kalarm/lib/kalocale.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 0)
-+++ kalarm/lib/kalocale.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -0,0 +1,83 @@
-+/*
-+ *  kalocale.cpp  -  miscellaneous locale functions
-+ *  Program:  kalarm
-+ *  Copyright © 2003-2009 by David Jarvie <djarvie@kde.org>
-+ *
-+ *  This program is free software; you can redistribute it and/or modify
-+ *  it under the terms of the GNU General Public License as published by
-+ *  the Free Software Foundation; either version 2 of the License, or
-+ *  (at your option) any later version.
-+ *
-+ *  This program is distributed in the hope that it will be useful,
-+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-+ *  GNU General Public License for more details.
-+ *
-+ *  You should have received a copy of the GNU General Public License along
-+ *  with this program; if not, write to the Free Software Foundation, Inc.,
-+ *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-+ */
+--- kalarm/lib/desktop.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/lib/desktop.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -1,7 +1,7 @@
+ /*
+  *  desktop.cpp  -  desktop functions
+  *  Program:  kalarm
+- *  Copyright © 2008 by David Jarvie <djarvie@kde.org>
++ *  Copyright © 2008,2009 by David Jarvie <djarvie@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+  *  it under the terms of the GNU General Public License as published by
+@@ -21,23 +21,23 @@
+ #include "desktop.h"
+ #ifdef Q_WS_X11
+ #include <kwindowsystem.h>
+-#else
++#endif
+ #include <QApplication>
+ #include <QDesktopWidget>
+-#endif
+ 
+ namespace KAlarm {
+ 
+ /******************************************************************************
+-* Return the size of the usable area of the desktop.
++* Return the size of the usable area of the desktop, optionally for a specific
++* screen in a multi-head setup.
+ */
+-QRect desktopWorkArea()
++QRect desktopWorkArea(int screen)
+ {
+ #ifdef Q_WS_X11
+-	return KWindowSystem::workArea();
+-#else
+-	return qApp->desktop()->availableGeometry();
++	if (screen < 0)
++		return KWindowSystem::workArea();
+ #endif
++	return qApp->desktop()->availableGeometry(screen);
+ }
+ 
+ } // namespace KAlarm
+Index: kalarm/lib/pushbutton.cpp
+===================================================================
+--- kalarm/lib/pushbutton.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/lib/pushbutton.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -1,7 +1,7 @@
+ /*
+  *  pushbutton.cpp  -  push button with read-only option
+  *  Program:  kalarm
+- *  Copyright (c) 2002, 2005 by David Jarvie <software@astrojar.org.uk>
++ *  Copyright © 2002,2005,2009 by David Jarvie <djarvie@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+  *  it under the terms of the GNU General Public License as published by
+@@ -25,25 +25,36 @@
+ 
+ 
+ PushButton::PushButton(QWidget* parent)
+-	: QPushButton(parent),
++	: KPushButton(parent),
+ 	  mFocusPolicy(focusPolicy()),
+-	  mReadOnly(false)
++	  mReadOnly(false),
++	  mNoHighlight(false)
+ { }
+ 
++PushButton::PushButton(const KGuiItem& text, QWidget* parent)
++	: KPushButton(text, parent),
++	  mFocusPolicy(focusPolicy()),
++	  mReadOnly(false),
++	  mNoHighlight(false)
++{ }
 +
-+#include "kalarm.h"   //krazy:exclude=includes (kalarm.h must be first)
-+#include "kalocale.h"
+ PushButton::PushButton(const QString& text, QWidget* parent)
+-	: QPushButton(text, parent),
++	: KPushButton(text, parent),
+ 	  mFocusPolicy(focusPolicy()),
+-	  mReadOnly(false)
++	  mReadOnly(false),
++	  mNoHighlight(false)
+ { }
+ 
+-PushButton::PushButton(const QIcon& icon, const QString& text, QWidget* parent)
+-	: QPushButton(icon, text, parent),
++PushButton::PushButton(const KIcon& icon, const QString& text, QWidget* parent)
++	: KPushButton(icon, text, parent),
+ 	  mFocusPolicy(focusPolicy()),
+-	  mReadOnly(false)
++	  mReadOnly(false),
++	  mNoHighlight(false)
+ { }
+ 
+-void PushButton::setReadOnly(bool ro)
++void PushButton::setReadOnly(bool ro, bool noHighlight)
+ {
++	mNoHighlight = noHighlight;
+ 	if ((int)ro != (int)mReadOnly)
+ 	{
+ 		mReadOnly = ro;
+@@ -61,7 +72,7 @@
+ 		if (e->button() == Qt::LeftButton)
+ 			return;
+ 	}
+-	QPushButton::mousePressEvent(e);
++	KPushButton::mousePressEvent(e);
+ }
+ 
+ void PushButton::mouseReleaseEvent(QMouseEvent* e)
+@@ -72,13 +83,13 @@
+ 		if (e->button() == Qt::LeftButton)
+ 			return;
+ 	}
+-	QPushButton::mouseReleaseEvent(e);
++	KPushButton::mouseReleaseEvent(e);
+ }
+ 
+ void PushButton::mouseMoveEvent(QMouseEvent* e)
+ {
+ 	if (!mReadOnly)
+-		QPushButton::mouseMoveEvent(e);
++		KPushButton::mouseMoveEvent(e);
+ }
+ 
+ void PushButton::keyPressEvent(QKeyEvent* e)
+@@ -95,11 +106,22 @@
+ 			default:
+ 				return;
+ 		}
+-	QPushButton::keyPressEvent(e);
++	KPushButton::keyPressEvent(e);
+ }
+ 
+ void PushButton::keyReleaseEvent(QKeyEvent* e)
+ {
+ 	if (!mReadOnly)
+-		QPushButton::keyReleaseEvent(e);
++		KPushButton::keyReleaseEvent(e);
+ }
 +
-+#include <kglobal.h>
-+#include <klocale.h>
-+#include <kdebug.h>
-+
-+
-+namespace KAlarm
++bool PushButton::event(QEvent* e)
 +{
-+
-+/******************************************************************************
-+*  Return the first day of the week for the user's locale.
-+*  Reply = 1 (Mon) .. 7 (Sun).
-+*/
-+int localeFirstDayOfWeek()
-+{
-+	static int firstDay = 0;
-+	if (!firstDay)
-+		firstDay = KGlobal::locale()->weekStartDay();
-+	return firstDay;
-+}
-+
-+/******************************************************************************
-+* Return the week day name (Monday = 1).
-+*/
-+QString weekDayName(int day, const KLocale* locale)
-+{
-+	switch (day)
++	if (mReadOnly  &&  mNoHighlight)
 +	{
-+		case 1: return ki18nc("@option Name of the weekday", "Monday").toString(locale);
-+		case 2: return ki18nc("@option Name of the weekday", "Tuesday").toString(locale);
-+		case 3: return ki18nc("@option Name of the weekday", "Wednesday").toString(locale);
-+		case 4: return ki18nc("@option Name of the weekday", "Thursday").toString(locale);
-+		case 5: return ki18nc("@option Name of the weekday", "Friday").toString(locale);
-+		case 6: return ki18nc("@option Name of the weekday", "Saturday").toString(locale);
-+		case 7: return ki18nc("@option Name of the weekday", "Sunday").toString(locale);
++		// Don't highlight the button on mouse hover
++		if (e->type() == QEvent::HoverEnter)
++			return true;
 +	}
-+	return QString();
++	return KPushButton::event(e);
++}
+Index: kalarm/lib/synchtimer.cpp
+===================================================================
+--- kalarm/lib/synchtimer.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/lib/synchtimer.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -1,7 +1,7 @@
+ /*
+  *  synchtimer.cpp  -  timers which synchronize to time boundaries
+  *  Program:  kalarm
+- *  Copyright © 2004,2005,2007,2008 by David Jarvie <djarvie@kde.org>
++ *  Copyright © 2004,2005,2007-2009 by David Jarvie <djarvie@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+  *  it under the terms of the GNU General Public License as published by
+@@ -68,7 +68,9 @@
+ 		mTimer->disconnect(receiver, member);
+ 		if (member)
+ 		{
+-			mConnections.removeAt(mConnections.indexOf(Connection(receiver, member)));
++			int i = mConnections.indexOf(Connection(receiver, member));
++			if (i >= 0)
++				mConnections.removeAt(i);
+ 		}
+ 		else
+ 		{
+Index: kalarm/lib/desktop.h
+===================================================================
+--- kalarm/lib/desktop.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/lib/desktop.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -1,7 +1,7 @@
+ /*
+  *  desktop.h  -  desktop functions
+  *  Program:  kalarm
+- *  Copyright © 2008 by David Jarvie <djarvie@kde.org>
++ *  Copyright © 2008,2009 by David Jarvie <djarvie@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+  *  it under the terms of the GNU General Public License as published by
+@@ -25,7 +25,7 @@
+ 
+ namespace KAlarm {
+ 
+-QRect desktopWorkArea();
++QRect desktopWorkArea(int screen = -1);
+ 
+ } // namespace KAlarm
+ 
+Index: kalarm/lib/pushbutton.h
+===================================================================
+--- kalarm/lib/pushbutton.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/lib/pushbutton.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -1,7 +1,7 @@
+ /*
+  *  pushbutton.h  -  push button with read-only option
+  *  Program:  kalarm
+- *  Copyright © 2002,2003,2005,2006 by David Jarvie <software@astrojar.org.uk>
++ *  Copyright © 2002,2003,2005,2006,2009 by David Jarvie <djarvie@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+  *  it under the terms of the GNU General Public License as published by
+@@ -21,22 +21,22 @@
+ #ifndef PUSHBUTTON_H
+ #define PUSHBUTTON_H
+ 
+-#include <QPushButton>
++#include <kpushbutton.h>
+ class QMouseEvent;
+ class QKeyEvent;
+ 
+ 
+ /**
+- *  @short A QPushButton with read-only option.
++ *  @short A KPushButton with read-only option.
+  *
+- *  The PushButton class is a QPushButton with a read-only option.
++ *  The PushButton class is a KPushButton with a read-only option.
+  *
+  *  The widget may be set as read-only. This has the same effect as disabling it, except
+  *  that its appearance is unchanged.
+  *
+  *  @author David Jarvie <software@astrojar.org.uk>
+  */
+-class PushButton : public QPushButton
++class PushButton : public KPushButton
+ {
+ 		Q_OBJECT
+ 		Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
+@@ -49,17 +49,23 @@
+ 		 *  @param text The text to show on the button.
+ 		 *  @param parent The parent object of this widget.
+ 		 */
++		PushButton(const KGuiItem& text, QWidget* parent);
++		/** Constructor for a push button which displays a text.
++		 *  @param text The text to show on the button.
++		 *  @param parent The parent object of this widget.
++		 */
+ 		PushButton(const QString& text, QWidget* parent);
+ 		/** Constructor for a push button which displays an icon and a text.
+ 		 *  @param icon The icon to show on the button.
+ 		 *  @param text The text to show on the button.
+ 		 *  @param parent The parent object of this widget.
+ 		 */
+-		PushButton(const QIcon& icon, const QString& text, QWidget* parent);
++		PushButton(const KIcon& icon, const QString& text, QWidget* parent);
+ 		/** Sets whether the push button is read-only for the user.
+ 		 *  @param readOnly True to set the widget read-only, false to enable its action.
++		 *  @param noHighlight True to prevent the button being highlighted on mouse-over.
+ 		 */
+-		virtual void  setReadOnly(bool readOnly);
++		virtual void  setReadOnly(bool readOnly, bool noHighlight = false);
+ 		/** Returns true if the widget is read only. */
+ 		virtual bool  isReadOnly() const  { return mReadOnly; }
+ 	protected:
+@@ -68,9 +74,11 @@
+ 		virtual void mouseMoveEvent(QMouseEvent*);
+ 		virtual void keyPressEvent(QKeyEvent*);
+ 		virtual void keyReleaseEvent(QKeyEvent*);
++		virtual bool event(QEvent*);
+ 	private:
+-		Qt::FocusPolicy mFocusPolicy;   // default focus policy for the QPushButton
++		Qt::FocusPolicy mFocusPolicy;   // default focus policy for the PushButton
+ 		bool            mReadOnly;      // value cannot be changed
++		bool            mNoHighlight;   // don't highlight on mouse hover, if read-only
+ };
+ 
+ #endif // PUSHBUTTON_H
+Index: kalarm/editdlgtypes.cpp
+===================================================================
+--- kalarm/editdlgtypes.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/editdlgtypes.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -545,7 +545,7 @@
+ 	int   fadeSecs;
+ 	float volume = mSoundPicker->volume(fadeVolume, fadeSecs);
+ 	event.setAudioFile(mSoundPicker->file().prettyUrl(), volume, fadeVolume, fadeSecs);
+-	if (!trial)
++	if (!trial  &&  reminder()->isEnabled())
+ 		event.setReminder(reminder()->minutes(), reminder()->isOnceOnly());
+ 	if (mSpecialActionsButton  &&  mSpecialActionsButton->isEnabled())
+ 		event.setActions(mSpecialActionsButton->preAction(), mSpecialActionsButton->postAction(), mSpecialActionsButton->cancelOnError());
+Index: kalarm/soundpicker.cpp
+===================================================================
+--- kalarm/soundpicker.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/soundpicker.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -90,7 +90,7 @@
+ 
+ 	// Sound file picker button
+ 	mFilePicker = new PushButton(this);
+-	mFilePicker->setIcon(SmallIcon("audio-x-generic"));
++	mFilePicker->setIcon(KIcon(SmallIcon("audio-x-generic")));
+ 	int size = mFilePicker->sizeHint().height();
+ 	mFilePicker->setFixedSize(size, size);
+ 	connect(mFilePicker, SIGNAL(clicked()), SLOT(slotPickFile()));
+Index: kalarm/alarmevent.cpp
+===================================================================
+--- kalarm/alarmevent.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/alarmevent.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -687,6 +687,8 @@
+ 					next.setTime(t);
+ 				}
+ 			}
++			if (next < start)
++				next = start;   // ensure next recurrence time is valid
+ 		}
+ 	}
+ 	return next;
+@@ -920,6 +922,8 @@
+ 	mDeferral               = NO_DEFERRAL;    // do this before setting flags
+ 
+ 	KAAlarmEventBase::set(flags & ~READ_ONLY_FLAGS);
++	if (mRepeatAtLogin)                       // do this after setting flags
++		++mAlarmCount;
+ 	mStartDateTime.setDateOnly(flags & ANY_TIME);
+ 	set_deferral((flags & DEFERRAL) ? NORMAL_DEFERRAL : NO_DEFERRAL);
+ 	mCommandXterm           = flags & EXEC_IN_XTERM;
+@@ -1013,6 +1017,26 @@
+ 	calcTriggerTimes();
+ }
+ 
++/******************************************************************************
++* Set or clear repeat-at-login.
++*/
++void KAEvent::setRepeatAtLogin(bool rl)
++{
++	if (rl  &&  !mRepeatAtLogin)
++		++mAlarmCount;
++	else if (!rl  &&  mRepeatAtLogin)
++		--mAlarmCount;
++	mRepeatAtLogin = rl;
++	if (mRepeatAtLogin)
++	{
++		setReminder(0, false);
++		mLateCancel = 0;
++		mAutoClose = false;
++		mCopyToKOrganizer = false;
++	}
++	mUpdated = true;
++}
++
+ void KAEvent::setReminder(int minutes, bool onceOnly)
+ {
+ 	if (minutes != mReminderMinutes)
+@@ -4131,7 +4155,7 @@
+ 	return converted;
+ }
+ 
+-#ifndef NDEBUG
++#ifndef KDE_NO_DEBUG_OUTPUT
+ void KAEvent::dumpDebug() const
+ {
+ 	kDebug() << "KAEvent dump:";
+@@ -4222,7 +4246,7 @@
+ 
+ }
+ 
+-#ifndef NDEBUG
++#ifndef KDE_NO_DEBUG_OUTPUT
+ void KAAlarm::dumpDebug() const
+ {
+ 	kDebug() << "KAAlarm dump:";
+@@ -4334,7 +4358,7 @@
+ 	return mDefaultFont ? Preferences::messageFont() : mFont;
+ }
+ 
+-#ifndef NDEBUG
++#ifndef KDE_NO_DEBUG_OUTPUT
+ void KAAlarmEventBase::dumpDebug() const
+ {
+ 	kDebug() << "-- mEventID:" << mEventID;
+Index: kalarm/messagewin.cpp
+===================================================================
+--- kalarm/messagewin.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/messagewin.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -23,6 +23,7 @@
+ #include "messagewin.moc"
+ 
+ #include "alarmcalendar.h"
++#include "autoqpointer.h"
+ #include "deferdlg.h"
+ #include "desktop.h"
+ #include "editdlg.h"
+@@ -30,6 +31,7 @@
+ #include "kalarmapp.h"
+ #include "mainwindow.h"
+ #include "preferences.h"
++#include "pushbutton.h"
+ #include "shellprocess.h"
+ #include "synchtimer.h"
+ 
+@@ -58,12 +60,15 @@
+ #include <phonon/volumefadereffect.h>
+ #include <kdebug.h>
+ #include <ktoolinvocation.h>
++#ifdef Q_WS_X11
++#include <netwm.h>
++#include <QX11Info>
++#endif
+ 
+ #include <QScrollBar>
+ #include <QtDBus/QtDBus>
+ #include <QFile>
+ #include <QFileInfo>
+-#include <QPushButton>
+ #include <QCheckBox>
+ #include <QLabel>
+ #include <QPalette>
+@@ -84,6 +89,12 @@
+ 
+ using namespace KCal;
+ 
++#ifdef Q_WS_X11
++enum FullScreenType { NoFullScreen = 0, FullScreen = 1, FullScreenActive = 2 };
++static FullScreenType haveFullScreenWindow(int screen);
++static FullScreenType findFullScreenWindows(const QVector<QRect>& screenRects, QVector<FullScreenType>& screenTypes);
++#endif
++
+ #ifdef KMAIL_SUPPORTED
+ #include "kmailinterface.h"
+ static const char* KMAIL_DBUS_SERVICE   = "org.kde.kmail";
+@@ -183,12 +194,14 @@
+ 	  mInvalid(false),
+ 	  mEvent(*event),
+ 	  mResource(AlarmCalendar::resources()->resourceForEvent(mEventID)),
++	  mTimeLabel(0),
+ 	  mEditButton(0),
+ 	  mDeferButton(0),
+ 	  mSilenceButton(0),
+ 	  mKMailButton(0),
+ 	  mCommandText(0),
+ 	  mDontShowAgainCheck(0),
++	  mEditDlg(0),
+ 	  mDeferDlg(0),
+ 	  mFlags(event->flags()),
+ 	  mLateCancel(event->lateCancel()),
+@@ -270,12 +283,14 @@
+ 	  mInvalid(false),
+ 	  mEvent(*event),
+ 	  mResource(0),
++	  mTimeLabel(0),
+ 	  mEditButton(0),
+ 	  mDeferButton(0),
+ 	  mSilenceButton(0),
+ 	  mKMailButton(0),
+ 	  mCommandText(0),
+ 	  mDontShowAgainCheck(0),
++	  mEditDlg(0),
+ 	  mDeferDlg(0),
+ 	  mErrorWindow(true),
+ 	  mNoPostAction(true),
+@@ -301,12 +316,14 @@
+ */
+ MessageWin::MessageWin()
+ 	: MainWindowBase(0, WFLAGS),
++	  mTimeLabel(0),
+ 	  mEditButton(0),
+ 	  mDeferButton(0),
+ 	  mSilenceButton(0),
+ 	  mKMailButton(0),
+ 	  mCommandText(0),
+ 	  mDontShowAgainCheck(0),
++	  mEditDlg(0),
+ 	  mDeferDlg(0),
+ 	  mErrorWindow(false),
+ 	  mRecreating(false),
+@@ -360,50 +377,31 @@
+ 	QPalette labelPalette = palette();
+ 	labelPalette.setColor(backgroundRole(), labelPalette.color(QPalette::Window));
+ 
++	// Show the alarm date/time, together with an advance reminder text where appropriate
++	// Alarm date/time: display time zone if not local time zone.
++	mTimeLabel = new QLabel(topWidget);
++	mTimeLabel->setText(dateTimeToDisplay());
++	mTimeLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
++	mTimeLabel->setPalette(labelPalette);
++	mTimeLabel->setAutoFillBackground(true);
++	topLayout->addWidget(mTimeLabel, 0, Qt::AlignHCenter);
++	mTimeLabel->setWhatsThis(i18nc("@info:whatsthis", "The scheduled date/time for the message (as opposed to the actual time of display)."));
++
+ 	if (mDateTime.isValid())
+ 	{
+-		// Show the alarm date/time, together with an advance reminder text where appropriate
+-		// Alarm date/time: display time zone if not local time zone.
+-		QLabel* label = new QLabel(topWidget);
+-		QString tm;
+-		if (mDateTime.isDateOnly())
+-			tm = KGlobal::locale()->formatDate(mDateTime.date(), KLocale::ShortDate);
+-		else
+-		{
+-			bool showZone = false;
+-			if (mDateTime.timeType() == KDateTime::UTC
+-			||  (mDateTime.timeType() == KDateTime::TimeZone && !mDateTime.isLocalZone()))
+-			{
+-				// Display time zone abbreviation if it's different from the local
+-				// zone. Note that the iCalendar time zone might represent the local
+-				// time zone in a slightly different way from the system time zone,
+-				// so the zone comparison above might not produce the desired result.
+-				QString tz = mDateTime.kDateTime().toString(QString::fromLatin1("%Z"));
+-				KDateTime local = mDateTime.kDateTime();
+-				local.setTimeSpec(KDateTime::Spec::LocalZone());
+-				showZone = (local.toString(QString::fromLatin1("%Z")) != tz);
+-			}
+-			tm = KGlobal::locale()->formatDateTime(mDateTime.kDateTime(), KLocale::ShortDate, KLocale::DateTimeFormatOptions(showZone ? KLocale::TimeZone : 0));
+-		}
+-		label->setText(tm);
+-		label->setFrameStyle(QFrame::Box | QFrame::Raised);
+-		label->setPalette(labelPalette);
+-		label->setAutoFillBackground(true);
+-		topLayout->addWidget(label, 0, Qt::AlignHCenter);
+-		label->setWhatsThis(i18nc("@info:whatsthis", "The scheduled date/time for the message (as opposed to the actual time of display)."));
+-
+ 		// Reminder
+ 		if (reminder)
+ 		{
+ 			QString s = i18nc("@info", "Reminder");
+ 			QRegExp re("^(<[^>]+>)*");
+ 			re.indexIn(s);
+-			s.insert(re.matchedLength(), label->text() + "<br/>");
+-			label->setText(s);
+-			label->setAlignment(Qt::AlignHCenter);
++			s.insert(re.matchedLength(), mTimeLabel->text() + "<br/>");
++			mTimeLabel->setText(s);
++			mTimeLabel->setAlignment(Qt::AlignHCenter);
+ 		}
+-		label->setFixedSize(label->sizeHint());
+ 	}
++	else
++		mTimeLabel->hide();
+ 
+ 	if (!mErrorWindow)
+ 	{
+@@ -508,7 +506,7 @@
+ 				topLayout->addSpacing(vspace);
+ 				topLayout->addStretch();
+ 				// Don't include any horizontal margins if message is 2/3 screen width
+-				if (text->sizeHint().width() >= mDesktopArea.width()*2/3)
++				if (text->sizeHint().width() >= KAlarm::desktopWorkArea(mScreenNumber).width()*2/3)
+ 					topLayout->addWidget(text, 1, Qt::AlignHCenter);
+ 				else
+ 				{
+@@ -642,7 +640,7 @@
+ 	int gridIndex = 1;
+ 
+ 	// Close button
+-	mOkButton = new KPushButton(KStandardGuiItem::close(), topWidget);
++	mOkButton = new PushButton(KStandardGuiItem::close(), topWidget);
+ 	// Prevent accidental acknowledgement of the message if the user is typing when the window appears
+ 	mOkButton->clearFocus();
+ 	mOkButton->setFocusPolicy(Qt::ClickFocus);    // don't allow keyboard selection
+@@ -654,7 +652,7 @@
+ 	if (mShowEdit)
+ 	{
+ 		// Edit button
+-		mEditButton = new QPushButton(i18nc("@action:button", "&Edit..."), topWidget);
++		mEditButton = new PushButton(i18nc("@action:button", "&Edit..."), topWidget);
+ 		mEditButton->setFocusPolicy(Qt::ClickFocus);    // don't allow keyboard selection
+ 		mEditButton->setFixedSize(mEditButton->sizeHint());
+ 		connect(mEditButton, SIGNAL(clicked()), SLOT(slotEdit()));
+@@ -662,26 +660,25 @@
+ 		mEditButton->setWhatsThis(i18nc("@info:whatsthis", "Edit the alarm."));
+ 	}
+ 
+-	if (!mNoDefer)
+-	{
+-		// Defer button
+-		mDeferButton = new QPushButton(i18nc("@action:button", "&Defer..."), topWidget);
+-		mDeferButton->setFocusPolicy(Qt::ClickFocus);    // don't allow keyboard selection
+-		mDeferButton->setFixedSize(mDeferButton->sizeHint());
+-		connect(mDeferButton, SIGNAL(clicked()), SLOT(slotDefer()));
+-		grid->addWidget(mDeferButton, 0, gridIndex++, Qt::AlignHCenter);
+-		mDeferButton->setWhatsThis(i18nc("@info:whatsthis", "<para>Defer the alarm until later.</para>"
+-		                                "<para>You will be prompted to specify when the alarm should be redisplayed.</para>"));
++	// Defer button
++	mDeferButton = new PushButton(i18nc("@action:button", "&Defer..."), topWidget);
++	mDeferButton->setFocusPolicy(Qt::ClickFocus);    // don't allow keyboard selection
++	mDeferButton->setFixedSize(mDeferButton->sizeHint());
++	connect(mDeferButton, SIGNAL(clicked()), SLOT(slotDefer()));
++	grid->addWidget(mDeferButton, 0, gridIndex++, Qt::AlignHCenter);
++	mDeferButton->setWhatsThis(i18nc("@info:whatsthis", "<para>Defer the alarm until later.</para>"
++	                                "<para>You will be prompted to specify when the alarm should be redisplayed.</para>"));
+ 
+-		setDeferralLimit(mEvent);    // ensure that button is disabled when alarm can't be deferred any more
+-	}
++	setDeferralLimit(mEvent);    // ensure that button is disabled when alarm can't be deferred any more
++	if (mNoDefer)
++		mDeferButton->hide();
+ 
+ 	if (!mAudioFile.isEmpty()  &&  (mVolume || mFadeVolume > 0))
+ 	{
+ 		// Silence button to stop sound repetition
+ 		QPixmap pixmap = MainBarIcon("media-playback-stop");
+-		mSilenceButton = new QPushButton(topWidget);
+-		mSilenceButton->setIcon(pixmap);
++		mSilenceButton = new PushButton(topWidget);
++		mSilenceButton->setIcon(KIcon(pixmap));
+ 		grid->addWidget(mSilenceButton, 0, gridIndex++, Qt::AlignHCenter);
+ 		mSilenceButton->setToolTip(i18nc("@info:tooltip", "Stop sound"));
+ 		mSilenceButton->setWhatsThis(i18nc("@info:whatsthis", "Stop playing the sound"));
+@@ -694,8 +691,8 @@
+ 	{
+ 		// KMail button
+ 		QPixmap pixmap = iconLoader.loadIcon(QLatin1String("internet-mail"), KIconLoader::MainToolbar);
+-		mKMailButton = new QPushButton(topWidget);
+-		mKMailButton->setIcon(pixmap);
++		mKMailButton = new PushButton(topWidget);
++		mKMailButton->setIcon(KIcon(pixmap));
+ 		connect(mKMailButton, SIGNAL(clicked()), SLOT(slotShowKMailMessage()));
+ 		grid->addWidget(mKMailButton, 0, gridIndex++, Qt::AlignHCenter);
+ 		mKMailButton->setToolTip(i18nc("@info:tooltip Locate this email in KMail", "Locate in <application>KMail</application>"));
+@@ -704,8 +701,8 @@
+ 
+ 	// KAlarm button
+ 	QPixmap pixmap = iconLoader.loadIcon(KGlobal::mainComponent().aboutData()->appName(), KIconLoader::MainToolbar);
+-	mKAlarmButton = new QPushButton(topWidget);
+-	mKAlarmButton->setIcon(pixmap);
++	mKAlarmButton = new PushButton(topWidget);
++	mKAlarmButton->setIcon(KIcon(pixmap));
+ 	connect(mKAlarmButton, SIGNAL(clicked()), SLOT(displayMainWindow()));
+ 	grid->addWidget(mKAlarmButton, 0, gridIndex++, Qt::AlignHCenter);
+ 	mKAlarmButton->setToolTip(i18nc("@info:tooltip", "Activate <application>KAlarm</application>"));
+@@ -725,7 +722,7 @@
+ 	// Disable all buttons initially, to prevent accidental clicking on if they happen to be
+ 	// under the mouse just as the window appears.
+ 	mOkButton->setEnabled(false);
+-	if (mDeferButton)
++	if (mDeferButton->isVisible())
+ 		mDeferButton->setEnabled(false);
+ 	if (mEditButton)
+ 		mEditButton->setEnabled(false);
+@@ -742,7 +739,88 @@
+ 	KWindowSystem::setOnAllDesktops(winid, true);
+ }
+ 
++bool MessageWin::hasDefer() const
++{
++	return mDeferButton->isVisible();
++}
++
+ /******************************************************************************
++* Show the Defer button when it was previously hidden.
++*/
++void MessageWin::showDefer()
++{
++	mNoDefer = false;
++	mDeferButton->show();
++	resize(sizeHint());
 +}
 +
 +/******************************************************************************
-+* Return the default work days in the week, as a bit mask.
-+* They are determined by the start and end work days in system settings.
++* Convert a reminder window into a normal alarm window.
 +*/
-+uint defaultWorkDays()
++void MessageWin::cancelReminder(const KAEvent& event, const KAAlarm& alarm)
 +{
-+	KLocale* locale = KGlobal::locale();
-+	int end = locale->workingWeekEndDay() - 1;
-+	uint days = 0;
-+	for (int day = locale->workingWeekStartDay() - 1;  ; )
-+	{
-+		days |= 1 << day;
-+		if (day == end)
-+			break;
-+		++day;
-+		if (day >= 7)
-+			day = 0;
-+	}
-+	return days;
++	mDateTime = alarm.dateTime(true);
++	mNoPostAction = false;
++	mAlarmType = alarm.type();
++	if (event.autoClose())
++		mCloseTime = alarm.dateTime().effectiveDateTime().addSecs(event.lateCancel() * 60);
++	setCaption(i18nc("@title:window", "Message"));
++	mTimeLabel->setText(dateTimeToDisplay());
++	mRemainingText->hide();
++	MidnightTimer::disconnect(this, SLOT(setRemainingTextDay()));
++	MinuteTimer::disconnect(this, SLOT(setRemainingTextMinute()));
++	setMinimumHeight(0);
++	centralWidget()->layout()->activate();
++	setMinimumHeight(sizeHint().height());
++	resize(sizeHint());
 +}
 +
-+} // namespace KAlarm
-Index: kalarm/functions.cpp
-===================================================================
---- kalarm/functions.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kalarm/functions.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -1562,36 +1562,6 @@
++/******************************************************************************
++* Show the alarm's trigger time.
++* This is assumed to have previously been hidden.
++*/
++void MessageWin::showDateTime(const KAEvent& event, const KAAlarm& alarm)
++{
++	mDateTime = (alarm.type() & KAAlarm::REMINDER_ALARM) ? event.mainDateTime(true) : alarm.dateTime(true);
++	if (mDateTime.isValid())
++	{
++		mTimeLabel->setText(dateTimeToDisplay());
++		mTimeLabel->show();
++	}
++}
++
++/******************************************************************************
++* Get the trigger time to display.
++*/
++QString MessageWin::dateTimeToDisplay()
++{
++	QString tm;
++	if (mDateTime.isValid())
++	{
++		if (mDateTime.isDateOnly())
++			tm = KGlobal::locale()->formatDate(mDateTime.date(), KLocale::ShortDate);
++		else
++		{
++			bool showZone = false;
++			if (mDateTime.timeType() == KDateTime::UTC
++			||  (mDateTime.timeType() == KDateTime::TimeZone && !mDateTime.isLocalZone()))
++			{
++				// Display time zone abbreviation if it's different from the local
++				// zone. Note that the iCalendar time zone might represent the local
++				// time zone in a slightly different way from the system time zone,
++				// so the zone comparison above might not produce the desired result.
++				QString tz = mDateTime.kDateTime().toString(QString::fromLatin1("%Z"));
++				KDateTime local = mDateTime.kDateTime();
++				local.setTimeSpec(KDateTime::Spec::LocalZone());
++				showZone = (local.toString(QString::fromLatin1("%Z")) != tz);
++			}
++			tm = KGlobal::locale()->formatDateTime(mDateTime.kDateTime(), KLocale::ShortDate, KLocale::DateTimeFormatOptions(showZone ? KLocale::TimeZone : 0));
++		}
++	}
++	return tm;
++}
++
++/******************************************************************************
+ * Set the remaining time text in a reminder window.
+ * Called at the start of every day (at the user-defined start-of-day time).
+ */
+@@ -1285,8 +1363,14 @@
+ AudioThread::~AudioThread()
+ {
+ 	kDebug();
+-	quit();   // stop playing and tidy up
+-	wait();   // wait for run() to exit
++	quit();       // stop playing and tidy up
++	wait(3000);   // wait for run() to exit (timeout 3 seconds)
++	if (!isFinished())
++	{
++		// Something has gone wrong - forcibly kill the thread
++		terminate();
++		wait();
++	}
  }
  
  /******************************************************************************
--*  Return the first day of the week for the user's locale.
--*  Reply = 1 (Mon) .. 7 (Sun).
--*/
--int localeFirstDayOfWeek()
--{
--	static int firstDay = 0;
--	if (!firstDay)
--		firstDay = KGlobal::locale()->weekStartDay();
--	return firstDay;
--}
--
--/******************************************************************************
--* Return the week day name (Monday = 1).
--*/
--QString weekDayName(int day, const KLocale* locale)
--{
--	switch (day)
--	{
--		case 1: return ki18nc("@option Name of the weekday", "Monday").toString(locale);
--		case 2: return ki18nc("@option Name of the weekday", "Tuesday").toString(locale);
--		case 3: return ki18nc("@option Name of the weekday", "Wednesday").toString(locale);
--		case 4: return ki18nc("@option Name of the weekday", "Thursday").toString(locale);
--		case 5: return ki18nc("@option Name of the weekday", "Friday").toString(locale);
--		case 6: return ki18nc("@option Name of the weekday", "Saturday").toString(locale);
--		case 7: return ki18nc("@option Name of the weekday", "Sunday").toString(locale);
--	}
--	return QString();
--}
--
--/******************************************************************************
- * Convert a date/time specification string into a local date/time or date value.
- * Parameters:
- *   timeString  = in the form [[[yyyy-]mm-]dd-]hh:mm [TZ] or yyyy-mm-dd [TZ].
-Index: kalarm/kalarmconfig.kcfg
-===================================================================
---- kalarm/kalarmconfig.kcfg	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kalarm/kalarmconfig.kcfg	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -10,6 +10,7 @@
-   <include>qnamespace.h</include>
-   <include>kglobalsettings.h</include>
-   <include>"timeperiod.h"</include>
-+  <include>"kalocale.h"</include>
+@@ -1495,7 +1579,7 @@
+ 	}
  
-   <kcfgfile name="kalarmrc"/>
+ 	// Limit the size to fit inside the working area of the desktop
+-	QSize desktop  = KAlarm::desktopWorkArea().size();
++	QSize desktop  = KAlarm::desktopWorkArea(mScreenNumber).size();
+ 	QSize frameThickness = frameGeometry().size() - geometry().size();  // title bar & window frame
+ 	return desired.boundedTo(desktop - frameThickness);
+ }
+@@ -1529,7 +1613,7 @@
+ 			KAlarm::readConfigWindowSize("FileMessage", s);
+ 		resize(s);
  
-@@ -193,7 +194,7 @@
-     <entry name="Base_WorkDays" key="WorkDays" type="UInt">
-       <label context="@label">Working days</label>
-       <whatsthis context="@info:whatsthis">OR'ed bits indicating which days of the week are work days, 1 = Monday ... 64 = Sunday.</whatsthis>
--      <default>31</default>
-+      <default code="true">KAlarm::defaultWorkDays()</default>
-       <emit signal="base_WorkTimeChanged"/>
-     </entry>
-     <entry name="DisabledColour" type="Color">
-Index: kalarm/prefdlg.cpp
-===================================================================
---- kalarm/prefdlg.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kalarm/prefdlg.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -32,6 +32,7 @@
- #include "identities.h"
- #include "itembox.h"
- #include "kalarmapp.h"
-+#include "kalocale.h"
- #include "kamail.h"
- #include "label.h"
- #include "latecancel.h"
-Index: kalarm/CMakeLists.txt
-===================================================================
---- kalarm/CMakeLists.txt	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kalarm/CMakeLists.txt	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -30,6 +30,7 @@
- 	lib/identities.cpp
- 	lib/itembox.cpp
- 	lib/label.cpp 
-+	lib/kalocale.cpp
- 	lib/messagebox.cpp 
- 	lib/packedlayout.cpp 
- 	lib/pushbutton.cpp 
-Index: kalarm/recurrenceedit.cpp
-===================================================================
---- kalarm/recurrenceedit.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kalarm/recurrenceedit.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -50,6 +50,7 @@
- #include "dateedit.h"
- #include "functions.h"
- #include "kalarmapp.h"
-+#include "kalocale.h"
- #include "karecurrence.h"
- #include "preferences.h"
- #include "radiobutton.h"
-Index: kaddressbook/xxport/gmx_xxport.cpp
-===================================================================
---- kaddressbook/xxport/gmx_xxport.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kaddressbook/xxport/gmx_xxport.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -1,10 +1,13 @@
- /*
-     This file is part of KAddressbook.
-     Copyright (c) 2003 - 2004 Helge Deller <deller@kde.org>
-+    Copyright (c) 2009 Laurent Montel <montel@kde.org>
-+    Copyright (c) 2009 Urs Joss <tschenturs@gmx.ch>
+-		QRect desk = KAlarm::desktopWorkArea();
++		QRect desk = KAlarm::desktopWorkArea(mScreenNumber);
+ 		QRect frame = frameGeometry();
  
-     This program is free software; you can redistribute it and/or modify
--    it under the terms of the GNU General Public License version 2 as
--    published by the Free Software Foundation.
-+    it under the terms of the GNU General Public License as published by
-+    the Free Software Foundation; either version 2 of the License, or
-+    (at your option) any later version.
+ 		mButtonDelay = Preferences::messageButtonDelay() * 1000;
+@@ -1602,7 +1686,7 @@
+ void MessageWin::moveEvent(QMoveEvent* e)
+ {
+ 	MainWindowBase::moveEvent(e);
+-	theApp()->setSpreadWindowsState(isSpread(KAlarm::desktopWorkArea().topLeft()));
++	theApp()->setSpreadWindowsState(isSpread(KAlarm::desktopWorkArea(mScreenNumber).topLeft()));
+ 	if (mPositioning)
+ 	{
+ 		// The window has just been initially positioned
+@@ -1624,7 +1708,7 @@
+ 		if (width() > s.width()  ||  height() > s.height())
+ 			resize(s);
+ 	}
+-	theApp()->setSpreadWindowsState(isSpread(KAlarm::desktopWorkArea().topLeft()));
++	theApp()->setSpreadWindowsState(isSpread(KAlarm::desktopWorkArea(mScreenNumber).topLeft()));
+ }
  
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-@@ -18,21 +21,67 @@
-     As a special exception, permission is given to link this program
-     with any edition of Qt, and distribute the resulting executable,
-     without including the source code for Qt in the source distribution.
-+*/
+ /******************************************************************************
+@@ -1651,7 +1735,7 @@
+ {
+ 	mOkButton->setEnabled(true);
+ 	mKAlarmButton->setEnabled(true);
+-	if (mDeferButton  &&  !mDisableDeferral)
++	if (mDeferButton->isVisible()  &&  !mDisableDeferral)
+ 		mDeferButton->setEnabled(true);
+ 	if (mEditButton)
+ 		mEditButton->setEnabled(true);
+@@ -1749,52 +1833,113 @@
+ #endif
  
-+/*
-+    Description:
- 
--    Description:
-     This import/export filter reads and writes addressbook entries in the
-     gmx format which is natively used by the german freemail provider GMX.
-     The big advantage of this format is, that it stores it's information
--    very consistent and makes parsing pretty simple. Furthermore, most
-+    very consistently and makes parsing pretty simple. Furthermore, most
-     information needed by KABC is available when compared to other formats.
-     For further information please visit http://www.gmx.com
-+
-+    A couple of notes:
-+
-+    a) Categories
-+
-+    GMX allows to define categories in the UI and assign one or more categories
-+    to each addressee. The gmxa file contains a list of defined categories in
-+    the last part of the file, in the section AB_CATEGORIES. The Category_id in
-+    this list is a 1-based index. The multi-category assignement of each
-+    contact consists of a bitfield which applies one bit per category. E.g.
-+    if one contact belongs to category 1 and 3, the bit-field for the category
-+    assignment for this addressee is 0101 or decimal 5.
-+
-+    The export of categories into hte gmxa file works flawlessly and also
-+    transfers nicely into the addressee categories. During the import of a
-+    gmxa file into GMX, the procedure will correctly manage the category
-+    bitfield for each contact. However GMX does *not* process the category
-+    list in the end of the file. In other words: If your categories have
-+    changed (either in kadderssbook or in GMX) since your
-+    previous import, the addressee records may point to the wrong - or even
-+    non-existing - categories. After an import it is suggested that you
-+    manually verify the category list is still valid. If not, you need to
-+    manually delete any categories which alphabetically list beyond your new
-+    or deleted category and recreate the remaining categories.
-+
-+    Only up to 31 different categories over all contacts are exported. Any
-+    more categories are ignored.
-+
-+    b) Address types
-+
-+    Home address and Work address are relatively straight forwardly handled.
-+    The third address type "Other" is factored out of a bunch of different
-+    address elements, which have been chosen relatively at random. There is
-+    some interpretation which is not completely reversible.
-+
-+    If you thus export a contact from kaddressbook to GMX
-+    and reimport it into kaddressbook, you will not exactly
-+    get the same contact as the original one.
-+
-+    Also other items affect this non-reversability: GMX should receive a nick
-+    name in the gmxa file. If there is none defined in kaddressbook,
-+    the export will use the formatted name instead. If you reimport
-+    such a record, you'll end up with the formatted name in the nickname field.
+ /******************************************************************************
+-*  Called when the Edit... button is clicked.
+-*  Displays the alarm edit dialog.
++* Called when the Edit... button is clicked.
++* Displays the alarm edit dialog.
++*
++* NOTE: The alarm edit dialog is made a child of the main window, not this
++*       window, so that if this window closes before the dialog (e.g. on
++*       auto-close), KAlarm doesn't crash. The dialog is set non-modal so that
++*       the main window is unaffected, but modal mode is simulated so that
++*       this window is inactive while the dialog is open.
  */
- 
- #include "gmx_xxport.h"
- 
- #include <QtCore/QFile>
- #include <QtCore/QMap>
-+#include <QtCore/QList>
- #include <QtCore/QTextStream>
- 
- #include <kcodecs.h>
-@@ -46,8 +95,13 @@
- 
- K_EXPORT_KADDRESSBOOK_XXFILTER_CATALOG( kaddrbk_gmx_xxport, GMXXXPort, "kaddrbk_gmx_xxport" )
- 
--#define GMX_FILESELECTION_STRING "*.gmxa|" + i18n( "GMX address book file (*.gmxa)" )
-+#define GMX_FILESELECTION_STRING "*.gmxa|" + \
-+  i18n( "GMX address book file (*.gmxa)" )
- 
-+const int typeHome  = 0;
-+const int typeWork  = 1;
-+const int typeOther = 2;
+ void MessageWin::slotEdit()
+ {
+-	EditAlarmDlg* editDlg = EditAlarmDlg::create(false, &mEvent, false, this, EditAlarmDlg::RES_IGNORE);
+-	if (editDlg->exec() == QDialog::Accepted)
++	AutoQPointer<EditAlarmDlg> editDlg = EditAlarmDlg::create(false, &mEvent, false, MainWindow::mainMainWindow(), EditAlarmDlg::RES_IGNORE);
++	KWindowSystem::setMainWindow(editDlg, winId());
++	KWindowSystem::setOnAllDesktops(editDlg->winId(), false);
++	mEditDlg = editDlg;
++	setButtonsReadOnly(true);
++	connect(editDlg, SIGNAL(accepted()), SLOT(editCloseOk()));
++	connect(editDlg, SIGNAL(rejected()), SLOT(editCloseCancel()));
++	connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)), SLOT(activeWindowChanged(WId)));
 +
- GMXXXPort::GMXXXPort( KABC::AddressBook *ab, QWidget *parent, const char *name )
-   : KAB::XXPort( ab, parent, name )
- {
-@@ -57,32 +111,32 @@
++	// Save values in case this window is closed by the time the dialog exits
++	KAEvent event = mEvent;
++	AlarmResource* resource = mResource;
++
++	editDlg->show();
++	QEventLoop eventloop;
++	eventloop.exec(QEventLoop::DialogExec);
++	if (editDlg  &&  editDlg->result() == QDialog::Accepted)
+ 	{
+-		KAEvent event;
+-		AlarmResource* resource;
+-		editDlg->getEvent(event, resource);
+-		resource = mResource;
++		KAEvent newEvent;
++		AlarmResource* res;
++		editDlg->getEvent(newEvent, res);
  
- static bool checkDateTime( const QString &dateStr, QDateTime &dt )
- {
--  if (dateStr.isEmpty())
-+  if ( dateStr.isEmpty() )
-      return false;
--  dt = QDateTime::fromString(dateStr, Qt::ISODate);
--  if (dt.isValid() && dt.date().year()>1901)
-+  dt = QDateTime::fromString( dateStr, Qt::ISODate );
-+  if ( dt.isValid() && dt.date().year()>1901 )
-      return true;
--  dt.setDate(QDate());
-+  dt.setDate( QDate() );
-   return false;
- }
+ 		// Update the displayed lists and the calendar file
+ 		KAlarm::UpdateStatus status;
+-		if (AlarmCalendar::resources()->event(mEventID))
++		if (AlarmCalendar::resources()->event(event.id()))
+ 		{
+ 			// The old alarm hasn't expired yet, so replace it
+-			Undo::Event undo(mEvent, resource);
+-			status = KAlarm::modifyEvent(mEvent, event, editDlg);
+-			Undo::saveEdit(undo, event);
++			Undo::Event undo(event, resource);
++			status = KAlarm::modifyEvent(event, newEvent, editDlg);
++			Undo::saveEdit(undo, newEvent);
+ 		}
+ 		else
+ 		{
+ 			// The old event has expired, so simply create a new one
+-			status = KAlarm::addEvent(event, resource, editDlg);
+-			Undo::saveAdd(event, resource);
++			status = KAlarm::addEvent(newEvent, resource, editDlg);
++			Undo::saveAdd(newEvent, resource);
+ 		}
  
- /* import */
- 
--KABC::Addressee::List GMXXXPort::importContacts( const QString& ) const
-+KABC::Addressee::List GMXXXPort::importContacts( const QString &data ) const
- {
--  KABC::Addressee::List addrList;
-+  KABC::Addressee::List addresseeList;
- 
-   QString fileName = KFileDialog::getOpenFileName( QDir::homePath(),
--                      GMX_FILESELECTION_STRING, 0 );
-+                       GMX_FILESELECTION_STRING, 0 );
-   if ( fileName.isEmpty() )
--    return addrList;
-+    return addresseeList;
- 
-   QFile file( fileName );
-   if ( !file.open( QIODevice::ReadOnly ) ) {
-     QString msg = i18n( "<qt>Unable to open <b>%1</b> for reading.</qt>",
-                         fileName );
-     KMessageBox::error( parentWidget(), msg );
--    return addrList;
-+    return addresseeList;
-   }
- 
-   QDateTime dt;
-@@ -91,132 +145,204 @@
-   QString line, line2;
-   line  = gmxStream.readLine();
-   line2 = gmxStream.readLine();
--  if (!line.startsWith(QLatin1String("AB_ADDRESSES:")) || !line2.startsWith(QLatin1String("Address_id"))) {
--	KMessageBox::error( parentWidget(), i18n("%1 is not a GMX address book file.", fileName) );
--	return addrList;
-+  if ( !line.startsWith( QLatin1String( "AB_ADDRESSES:" ) ) ||
-+      !line2.startsWith( QLatin1String( "Address_id"    ) ) ) {
-+    KMessageBox::error( parentWidget(),
-+      i18n( "%1 is not a GMX address book file.", fileName ) );
-+    return addresseeList;
-   }
- 
--  QStringList strList;
--  typedef QMap<QString, KABC::Addressee *> AddressMap;
--  AddressMap addrMap;
-+  QStringList itemList;
-+  QMap<QString, QString>  categoriesOfAddressee;
-+  typedef QMap<QString, KABC::Addressee *> AddresseeMap;
-+  AddresseeMap addresseeMap;
- 
--  // "Address_id,Nickname,Firstname,Lastname,Title,Birthday,Comments,Change_date,Status,Address_link_id,Categories"
-+  // "Address_id,Nickname,Firstname,Lastname,Title,Birthday,Comments,
-+  // Change_date,Status,Address_link_id,Categories"
-   line = gmxStream.readLine();
--  while (!line.startsWith(QLatin1String("####")) && !gmxStream.atEnd()) {
--    while (1) {
--       strList = line.split('#', QString::KeepEmptyParts );
--       if (strList.count() >= 11)
-+  while ( ( line!=QLatin1String( "####" ) ) && !gmxStream.atEnd() ) {
-+    // an addressee entry may spread over several lines in the file
-+    while ( 1 ) {
-+       itemList = line.split( '#', QString::KeepEmptyParts );
-+       if ( itemList.count() >= 11 )
-            break;
--       line.append('\n');
--       line.append(gmxStream.readLine());
-+       line.append( '\n' );
-+       line.append( gmxStream.readLine() );
-     };
- 
--    KABC::Addressee *addr = new KABC::Addressee;
--    addr->setNickName(strList[1]);
--    addr->setGivenName(strList[2]);
--    addr->setFamilyName(strList[3]);
--    addr->setTitle(strList[4]);
--    if (checkDateTime(strList[5],dt)) addr->setBirthday(dt);
--    addr->setNote(strList[6]);
--    if (checkDateTime(strList[7],dt)) addr->setRevision(dt);
--    // addr->setStatus(strList[8]); Status
--    // addr->xxx(strList[9]); Address_link_id
--    // addr->setCategory(strList[10]); Categories
--    addrMap[strList[0]] = addr;
-+    // populate the addressee
-+    KABC::Addressee *addressee = new KABC::Addressee;
-+    addressee->setNickName( itemList[1] );
-+    addressee->setGivenName( itemList[2] );
-+    addressee->setFamilyName( itemList[3] );
-+    addressee->setFormattedName( itemList[3] + ", " + itemList[2] );
-+    addressee->setPrefix( itemList[4] );
-+    if ( checkDateTime( itemList[5],dt ) ) addressee->setBirthday( dt );
-+    addressee->setNote( itemList[6] );
-+    if ( checkDateTime( itemList[7],dt ) ) addressee->setRevision( dt );
-+    // addressee->setStatus( itemList[8] ); Status
-+    // addressee->xxx( itemList[9] ); Address_link_id
-+    categoriesOfAddressee[ itemList[0] ] = itemList[10];
-+    addresseeMap[ itemList[0] ] = addressee;
- 
-     line = gmxStream.readLine();
-   }
- 
-   // now read the address records
-   line  = gmxStream.readLine();
--  if (!line.startsWith(QLatin1String("AB_ADDRESS_RECORDS:"))) {
--	kWarning() <<"Could not find address records!";
--	return addrList;
-+  if ( !line.startsWith( QLatin1String( "AB_ADDRESS_RECORDS:" ) ) ) {
-+    kWarning() << "Could not find address records!";
-+    return addresseeList;
-   }
--  // Address_id,Record_id,Street,Country,Zipcode,City,Phone,Fax,Mobile,Mobile_type,Email,
--  // Homepage,Position,Comments,Record_type_id,Record_type,Company,Department,Change_date,Preferred,Status
-+  // Address_id,Record_id,Street,Country,Zipcode,City,Phone,Fax,Mobile,
-+  // Mobile_type,Email,Homepage,Position,Comments,Record_type_id,Record_type,
-+  // Company,Department,Change_date,Preferred,Status
-   line = gmxStream.readLine();
-   line = gmxStream.readLine();
- 
--  while (!line.startsWith(QLatin1String("####")) && !gmxStream.atEnd()) {
--    while (1) {
--       strList = line.split('#', QString::KeepEmptyParts );
--       if (strList.count() >= 21)
-+  while ( !line.startsWith( QLatin1String( "####" ) ) && !gmxStream.atEnd() ) {
-+    // an address entry may spread over several lines in the file
-+    while ( 1 ) {
-+       itemList = line.split( '#', QString::KeepEmptyParts );
-+       if ( itemList.count() >= 21 )
-            break;
--       line.append('\n');
--       line.append(gmxStream.readLine());
-+       line.append( '\n' );
-+       line.append( gmxStream.readLine() );
-     };
- 
--    KABC::Addressee *addr = addrMap[strList[0]];
--    if (addr) {
--	for ( QStringList::Iterator it = strList.begin(); it != strList.end(); ++it )
--		*it = (*it).simplified();
--	// strList[1] = Record_id (numbered item, ignore here)
--	int id = strList[14].toInt(); // Record_type_id (0=work,1=home,2=other)
--  KABC::Address::Type type = (id==0) ? KABC::Address::Work : KABC::Address::Home;
--	if (!strList[19].isEmpty() && strList[19].toInt()!=0)
--		type |= KABC::Address::Pref; // Preferred address (seems to be bitfield for telephone Prefs)
--        KABC::Address adr = addr->address(type);
--	adr.setStreet(strList[2]);
--	adr.setCountry(strList[3]);
--	adr.setPostalCode(strList[4]);
--	adr.setLocality(strList[5]);
--	addr->insertPhoneNumber( KABC::PhoneNumber(strList[6], KABC::PhoneNumber::Home) );
--	addr->insertPhoneNumber( KABC::PhoneNumber(strList[7], KABC::PhoneNumber::Fax) );
--  KABC::PhoneNumber::Type celltype = KABC::PhoneNumber::Cell;
--	// strList[9]=Mobile_type // always 0 or -1(default phone).
--	if (strList[9].toInt()) celltype |= KABC::PhoneNumber::Pref;
--	addr->insertPhoneNumber( KABC::PhoneNumber(strList[8], celltype) );
--	addr->insertEmail(strList[10]);
--	if (!strList[11].isEmpty()) addr->setUrl(strList[11]);
--	if (!strList[12].isEmpty()) addr->setRole(strList[12]);
--	// strList[13]=Comments
--	// strList[14]=Record_type_id (0,1,2) - see above
--	// strList[15]=Record_type (name of this additional record entry)
--	if (!strList[16].isEmpty()) addr->setOrganization(strList[16]); // Company
--	if (!strList[17].isEmpty()) addr->insertCustom(
--			"KADDRESSBOOK", "X-Department", strList[17]); // Department
--        if (checkDateTime(strList[18],dt)) addr->setRevision(dt); // Change_date
--	// strList[19]=Preferred (see above)
--	// strList[20]=Status (should always be "1")
--	addr->insertAddress(adr);
-+    KABC::Addressee *addressee = addresseeMap[ itemList[0] ];
-+    if ( addressee ) {
-+      // itemList[1] = Record_id (numbered item, ignore here)
-+      int recordTypeId = itemList[14].toInt();
-+      KABC::Address::Type addressType;
-+      KABC::PhoneNumber::Type phoneType;
-+      switch ( recordTypeId ) {
-+        case typeHome:
-+          addressType = KABC::Address::Home;
-+          phoneType = KABC::PhoneNumber::Home;
-+          break;
-+        case typeWork:
-+          addressType = KABC::Address::Work;
-+          phoneType = KABC::PhoneNumber::Work;
-+          break;
-+        case typeOther:
-+        default:
-+          addressType = KABC::Address::Intl;
-+          phoneType = KABC::PhoneNumber::Voice;
-+          break;
-+      }
-+      KABC::Address address = addressee->address( addressType );
-+      address.setStreet(     itemList[2] );
-+      address.setCountry(    itemList[3] );
-+      address.setPostalCode( itemList[4] );
-+      address.setLocality(   itemList[5] );
-+      if ( !itemList[6].isEmpty() ) {
-+        addressee->insertPhoneNumber(
-+          KABC::PhoneNumber( itemList[6], phoneType ) );
-+      }
-+      if ( !itemList[7].isEmpty() )
-+        addressee->insertPhoneNumber(
-+          KABC::PhoneNumber( itemList[7], KABC::PhoneNumber::Fax ) );
-+      KABC::PhoneNumber::Type cellType = KABC::PhoneNumber::Cell;
-+      // itemList[9]=Mobile_type // always 0 or -1(default phone).
-+      // if ( itemList[19].toInt() & 4 ) cellType |= KABC::PhoneNumber::Pref;
-+      // don't do the above to avoid duplicate mobile numbers
-+      if ( !itemList[8].isEmpty() )
-+        addressee->insertPhoneNumber(
-+          KABC::PhoneNumber( itemList[8], cellType ) );
-+      bool preferred = false;
-+      if ( itemList[19].toInt() & 1 )
-+        preferred = true;
-+      addressee->insertEmail( itemList[10], preferred );
-+      if ( !itemList[11].isEmpty() )
-+        addressee->setUrl( itemList[11] );
-+      if ( !itemList[12].isEmpty() )
-+        addressee->setRole( itemList[12] );
-+      // itemList[13]=Comments
-+      // itemList[14]=Record_type_id (0,1,2) - see above
-+      // itemList[15]=Record_type (name of this additional record entry)
-+      if ( !itemList[16].isEmpty() )
-+        addressee->setOrganization( itemList[16] ); // Company
-+      if ( !itemList[17].isEmpty() ) addressee->insertCustom(
-+        "KADDRESSBOOK", "X-Department", itemList[17] ); // Department
-+      if ( checkDateTime( itemList[18],dt ) )
-+        addressee->setRevision( dt ); // Change_date
-+      // itemList[19]=Preferred (see above)
-+      // itemList[20]=Status (should always be "1")
-+      addressee->insertAddress( address );
-     } else {
--	kWarning() <<"unresolved line:" << line;
-+      kWarning() << "unresolved line:" << line;
-     }
+ 		if (status != KAlarm::UPDATE_OK  &&  status <= KAlarm::UPDATE_KORG_ERR)
+ 			KAlarm::displayKOrgUpdateError(editDlg, KAlarm::ERR_MODIFY, status, 1);
+-		KAlarm::outputAlarmWarnings(editDlg, &event);
 -
-     line = gmxStream.readLine();
-   }
- 
--  // now add the addresses to to addrList
--  for ( AddressMap::Iterator it = addrMap.begin(); it != addrMap.end(); ++it ) {
--     KABC::Addressee *addr = it.value();
--     addrList.append(*addr);
--     delete addr;
-+  // extract the categories from the list of addressees of the file to import
-+  QStringList usedCategoryList;
-+  line = gmxStream.readLine();
-+  line2 = gmxStream.readLine();
-+  if ( !line.startsWith( QLatin1String( "AB_CATEGORIES:" ) ) ||
-+    !line2.startsWith( QLatin1String( "Category_id" ) ) ) {
-+    kWarning() << "Could not find category records!";
-+  } else {
-+    while ( !line.startsWith( QLatin1String( "####" ) ) &&
-+            !gmxStream.atEnd() ) {
-+      // a category should not spread over multiple lines, but just in case
-+      while ( 1 ) {
-+        itemList = line.split( '#', QString::KeepEmptyParts );
-+        if ( itemList.count() >= 3 )
-+          break;
-+        line.append( '\n' );
-+        line.append( gmxStream.readLine() );
-+      };
-+      usedCategoryList.append( itemList[1] );
-+      line = gmxStream.readLine();
-+    };
-   }
- 
-+  // now add the addresses to addresseeList
-+  for ( AddresseeMap::Iterator addresseeIt = addresseeMap.begin();
-+    addresseeIt != addresseeMap.end(); ++addresseeIt ) {
-+    KABC::Addressee *addressee = addresseeIt.value();
-+    // Add categories
-+    // catgories is a bitfield with max 31 defined categories
-+    int categories = categoriesOfAddressee[ addresseeIt.key() ].toInt();
-+    for ( int i=32; i >= 0; --i ) {
-+      // convert category index to bitfield value for comparison
-+      int catBit =  1<<i;
-+      if ( catBit > categories ) continue; // current index unassigned
-+      if ( catBit & categories  && usedCategoryList.count() > i )
-+        addressee->insertCategory( usedCategoryList[i] );
-+    }
-+    addresseeList.append( *addressee );
-+    delete addressee;
-+  }
-+
-   file.close();
--  return addrList;
-+  return addresseeList;
+-		// Close the alarm window
+-		mNoCloseConfirm = true;   // allow window to close without confirmation prompt
+-		close();
++		KAlarm::outputAlarmWarnings(editDlg, &newEvent);
+ 	}
+-	delete editDlg;
  }
  
- 
- /* export */
- 
--bool GMXXXPort::exportContacts( const KABC::AddresseeList &list, const QString& )
-+bool GMXXXPort::exportContacts( const KABC::AddresseeList &list, const QString &data )
- {
--  KUrl url = KFileDialog::getSaveUrl( KUrl( QDir::homePath() + "/addressbook.gmx" ),
--			GMX_FILESELECTION_STRING );
-+  KUrl url = KFileDialog::getSaveUrl(
-+    KUrl( QDir::homePath() + "/addressbook.gmx" ), GMX_FILESELECTION_STRING );
-   if ( url.isEmpty() )
-       return true;
- 
--  if( QFileInfo( url.isLocalFile() ? url.toLocalFile() : url.path() ).exists() ) {
--      if(KMessageBox::questionYesNo( parentWidget(), i18n("Do you want to overwrite file \"%1\"", url.isLocalFile() ? url.toLocalFile() : url.path()) ) == KMessageBox::No)
--        return false;
-+  if( QFileInfo( url.isLocalFile() ?
-+    url.toLocalFile() : url.path() ).exists() ) {
-+    if( KMessageBox::questionYesNo( parentWidget(),
-+      i18n( "Do you want to overwrite file \"%1\"",
-+      url.isLocalFile() ? url.toLocalFile() : url.path() ) )==KMessageBox::No )
-+      return false;
-   }
- 
-   if ( !url.isLocalFile() ) {
-     KTemporaryFile tmpFile;
-     if ( !tmpFile.open() ) {
--      QString txt = i18n("<qt>Unable to open file <b>%1</b></qt>", url.url());
-+      QString txt = i18n( "<qt>Unable to open file <b>%1</b></qt>", url.url() );
-       KMessageBox::error( parentWidget(), txt );
-       return false;
-     }
-@@ -226,12 +352,12 @@
- 
-     return KIO::NetAccess::upload( tmpFile.fileName(), url, parentWidget() );
-   } else {
--    QString filename = url.toLocalFile();
--    QFile file( filename );
-+    QString fileName = url.toLocalFile();
-+    QFile file( fileName );
- 
-     if ( !file.open( QIODevice::WriteOnly ) ) {
-       QString txt = i18n( "<qt>Unable to open file <b>%1</b>.</qt>",
--                          filename );
-+                          fileName );
-       KMessageBox::error( parentWidget(), txt );
-       return false;
-     }
-@@ -245,46 +371,89 @@
- 
- static const QString dateString( const QDateTime &dt )
- {
--  if (!dt.isValid())
--	return QString::fromLatin1("1000-01-01 00:00:00");
--  QString d(dt.toString(Qt::ISODate));
-+  if ( !dt.isValid() )
-+    return QString::fromLatin1( "1000-01-01 00:00:00" );
-+  QString d( dt.toString( Qt::ISODate ) );
-   d[10] = ' '; // remove the "T" in the middle of the string
-   return d;
- }
- 
-+static const QStringList assignedCategoriesSorted(
-+  const KABC::AddresseeList &list )
+ /******************************************************************************
++* Called when OK is clicked in the alarm edit dialog invoked by the Edit button.
++* Closes the window.
++*/
++void MessageWin::editCloseOk()
 +{
-+  // Walk through the addressees and return a unique list of up to 31
-+  // categories, alphabetically sorted
-+  QStringList categoryList;
-+  const KABC::Addressee *addressee;
-+  for ( KABC::AddresseeList::ConstIterator addresseeIt = list.begin();
-+    addresseeIt != list.end() && categoryList.count() < 32; ++addresseeIt ) {
-+    addressee = &( *addresseeIt );
-+    if ( addressee->isEmpty() ) continue;
-+    const QStringList categories = addressee->categories();
-+    for ( int i=0; i < categories.count() && categoryList.count() < 32; ++i ) {
-+      if ( !categoryList.contains( categories[i]) )
-+        categoryList.append( categories[i] );
-+    }
-+  }
-+  categoryList.sort();
-+  return categoryList;
++	mEditDlg = 0;
++	mNoCloseConfirm = true;   // allow window to close without confirmation prompt
++	close();
 +}
 +
- void GMXXXPort::doExport( QFile *fp, const KABC::AddresseeList &list )
++/******************************************************************************
++* Called when Cancel is clicked in the alarm edit dialog invoked by the Edit button.
++*/
++void MessageWin::editCloseCancel()
++{
++	mEditDlg = 0;
++	setButtonsReadOnly(false);
++}
++
++/******************************************************************************
++* Called when the active window has changed. If this window has become the
++* active window and there is an alarm edit dialog, simulate a modal dialog by
++* making the alarm edit dialog the active window instead.
++*/
++void MessageWin::activeWindowChanged(WId win)
++{
++	if (mEditDlg  &&  win == winId())
++		KWindowSystem::activateWindow(mEditDlg->winId());
++}
++
++/******************************************************************************
++* Set or clear the read-only state of the dialog buttons.
++*/
++void MessageWin::setButtonsReadOnly(bool ro)
++{
++	mOkButton->setReadOnly(ro, true);
++	mDeferButton->setReadOnly(ro, true);
++	mEditButton->setReadOnly(ro, true);
++	if (mSilenceButton)
++		mSilenceButton->setReadOnly(ro, true);
++	if (mKMailButton)
++		mKMailButton->setReadOnly(ro, true);
++	mKAlarmButton->setReadOnly(ro, true);
++}
++
++/******************************************************************************
+ * Set up to disable the defer button when the deferral limit is reached.
+ */
+ void MessageWin::setDeferralLimit(const KAEvent& event)
  {
--  if (!fp || !list.count())
-+  if ( !fp || !list.count() )
-     return;
- 
-   QTextStream t( fp );
-   t.setCodec( "ISO 8859-1" );
- 
--  KABC::AddresseeList::ConstIterator it;
--  typedef QMap<int, const KABC::Addressee *> AddressMap;
--  AddressMap addrMap;
--  const KABC::Addressee *addr;
-+  typedef QMap<int, const KABC::Addressee *> AddresseeMap;
-+  AddresseeMap addresseeMap;
-+  const KABC::Addressee *addressee;
- 
-   t << "AB_ADDRESSES:\n";
-   t << "Address_id,Nickname,Firstname,Lastname,Title,Birthday,Comments,"
-        "Change_date,Status,Address_link_id,Categories\n";
- 
--  int no = 0;
--  const QChar DELIM('#');
--  for ( it = list.begin(); it != list.end(); ++it ) {
--     addr = &(*it);
--     if (addr->isEmpty())
--        continue;
--     addrMap[++no] = addr;
--     t << no << DELIM			// Address_id
--	<< addr->nickName() << DELIM	// Nickname
--	<< addr->givenName() << DELIM	// Firstname
--	<< addr->familyName() << DELIM	// Lastname
--	<< addr->title() << DELIM	// Title
--	<< dateString(addr->birthday()) << DELIM   // Birthday
--	<< addr->note() /*.replace('\n',"\r\n")*/ << DELIM // Comments
--	<< dateString(addr->revision()) << DELIM   // Change_date
--	<< "1##0\n";			// Status, Address_link_id, Categories
-+  QList<QString> categoryMap;
-+  categoryMap.append( assignedCategoriesSorted( list ) );
+-	if (mDeferButton)
++	if (mDeferButton->isVisible())
+ 	{
+ 		mDeferLimit = event.deferralLimit().effectiveDateTime();
+ 		MidnightTimer::connect(this, SLOT(checkDeferralLimit()));   // check every day
+@@ -1814,7 +1959,7 @@
+ */
+ void MessageWin::checkDeferralLimit()
+ {
+-	if (!mDeferButton  ||  !mDeferLimit.isValid())
++	if (!mDeferButton->isVisible()  ||  !mDeferLimit.isValid())
+ 		return;
+ 	int n = KDateTime::currentLocalDate().daysTo(mDeferLimit.date());
+ 	if (n > 0)
+@@ -1958,45 +2103,181 @@
+ */
+ bool MessageWin::getWorkAreaAndModal()
+ {
+-	mDesktopArea = KAlarm::desktopWorkArea();
++	mScreenNumber = -1;
+ 	bool modal = Preferences::modalMessages();
+-	if (modal)
++#ifdef Q_WS_X11
++	QDesktopWidget* desktop = qApp->desktop();
++	int numScreens = desktop->numScreens();
++	if (numScreens > 1)
+ 	{
+-		WId activeId = KWindowSystem::activeWindow();
+-		KWindowInfo wi = KWindowSystem::windowInfo(activeId, NET::WMState);
+-		if (wi.valid()  &&  wi.hasState(NET::FullScreen))
++		// There are multiple screens.
++		// Check for any full screen windows, even if they are not the active
++		// window, and try not to show the alarm message on their screens.
++		mScreenNumber = desktop->screenNumber(MainWindow::mainMainWindow());  // default = KAlarm's screen
++kDebug()<<"KAlarm's screen="<<mScreenNumber;
++		if (desktop->isVirtualDesktop())
+ 		{
+-			// There is a full screen window.
+-			// Check whether it only covers one screen in a multi-screen setup.
+-			modal = false;
+-			QDesktopWidget* desktop = qApp->desktop();
+-			int numScreens = desktop->numScreens();
+-			if (numScreens > 1)
++			// The screens form a single virtual desktop.
++			// Xinerama, for example, uses this scheme.
++			QVector<FullScreenType> screenTypes(numScreens);
++			QVector<QRect> screenRects(numScreens);
++			for (int s = 0;  s < numScreens;  ++s)
++				screenRects[s] = desktop->screenGeometry(s);
++			FullScreenType full = findFullScreenWindows(screenRects, screenTypes);
++			if (full == NoFullScreen  ||  screenTypes[mScreenNumber] == NoFullScreen)
++{kDebug()<<"... Use default screen="<<mScreenNumber;
++				return modal;
++}
++			for (int s = 0;  s < numScreens;  ++s)
+ 			{
+-				// There are multiple screens
+-				QRect winRect = wi.frameGeometry();
+-				int screen = desktop->screenNumber(MainWindow::mainMainWindow());  // KAlarm's screen
+-				if (!winRect.intersects(desktop->screenGeometry(screen)))
+-					modal = true;   // full screen window isn't on KAlarm's screen
+-				else
++				if (screenTypes[s] == NoFullScreen)
+ 				{
+-					for (int s = 0;  s < numScreens;  ++s)
++					// There is no full screen window on this screen
++					mScreenNumber = s;
++kDebug()<<"... Screen without full screen="<<mScreenNumber;
++					return modal;
++				}
++			}
++			// All screens contain a full screen window: use one without
++			// an active full screen window.
++			for (int s = 0;  s < numScreens;  ++s)
++			{
++				if (screenTypes[s] == FullScreen)
++				{
++					mScreenNumber = s;
++kDebug()<<"... All full screen="<<mScreenNumber;
++					return modal;
++				}
++			}
++		}
++		else
++		{
++			// The screens are completely separate from each other.
++			int inactiveScreen = -1;
++//for (int x = 0;  x < numScreens;  ++x){ kDebug()<<"Screen:"<<x<<": haveFullScreen ->"<<haveFullScreenWindow(x); }
++			FullScreenType full = haveFullScreenWindow(mScreenNumber);
++			if (full == NoFullScreen)
++				return modal;   // KAlarm's screen doesn't contain a full screen window
++			if (full == FullScreen)
++				inactiveScreen = mScreenNumber;
++			for (int s = 0;  s < numScreens;  ++s)
++			{
++				if (s != mScreenNumber)
++				{
++					full = haveFullScreenWindow(s);
++					if (full == NoFullScreen)
+ 					{
+-						if (s != screen
+-						&&  !winRect.intersects(desktop->screenGeometry(s)))
+-						{
+-							// The full screen window isn't on this screen
+-							screen = s;
+-							modal = true;
+-							break;
+-						}
++						// There is no full screen window on this screen
++						mScreenNumber = s;
++						return modal;
+ 					}
+-					if (!modal)
+-						return modal;
++					if (full == FullScreen  &&  inactiveScreen < 0)
++						inactiveScreen = s;
+ 				}
+-				mDesktopArea = desktop->availableGeometry(screen);
+ 			}
++			if (inactiveScreen >= 0)
++			{
++				// All screens contain a full screen window: use one without
++				// an active full screen window.
++				mScreenNumber = inactiveScreen;
++				return modal;
++			}
+ 		}
++kDebug()<<"... Returning false????";
++		return false;  // can't logically get here, since there can only be one active window...
+ 	}
++#endif
++	if (modal)
++	{
++		WId activeId = KWindowSystem::activeWindow();
++		KWindowInfo wi = KWindowSystem::windowInfo(activeId, NET::WMState);
++		if (wi.valid()  &&  wi.hasState(NET::FullScreen))
++			return false;    // the active window is full screen.
++	}
+ 	return modal;
+ }
 +
-+  int addresseeId = 0;
-+  const QChar DELIM( '#' );
-+  for ( KABC::AddresseeList::ConstIterator it = list.begin();
-+    it != list.end(); ++it ) {
-+    addressee = &(*it);
-+    if ( addressee->isEmpty() )
-+       continue;
-+    addresseeMap[ ++addresseeId ] = addressee;
-+
-+    // Assign categories as bitfield
-+    const QStringList categories = addressee->categories();
-+    long int category = 0;
-+    if ( categories.count() > 0 ) {
-+      for ( int i=0; i < categories.count(); i++ ) {
-+        if ( categoryMap.contains( categories[i] ) )
-+          category |= 1 << categoryMap.indexOf( categories[i], 0 ) ;
-+      }
++#ifdef Q_WS_X11
++/******************************************************************************
++* In a multi-screen setup (not a single virtual desktop), find whether the
++* specified screen has a full screen window on it.
++*/
++FullScreenType haveFullScreenWindow(int screen)
++{
++    FullScreenType type = NoFullScreen;
++    Display* display = QX11Info::display();
++    NETRootInfo rootInfo(display, NET::ClientList | NET::ActiveWindow, screen);
++    Window rootWindow     = rootInfo.rootWindow();
++    Window activeWindow   = rootInfo.activeWindow();
++    const Window* windows = rootInfo.clientList();
++    int windowCount       = rootInfo.clientListCount();
++kDebug()<<"Screen"<<screen<<": Window count="<<windowCount<<", active="<<activeWindow<<", geom="<<qApp->desktop()->screenGeometry(screen);
++NETRect geom;
++NETRect frame;
++    for (int w = 0;  w < windowCount;  ++w)
++    {
++        NETWinInfo winInfo(display, windows[w], rootWindow, NET::WMState|NET::WMGeometry);
++winInfo.kdeGeometry(frame, geom);
++QRect fr(frame.pos.x, frame.pos.y, frame.size.width, frame.size.height);
++QRect gm(geom.pos.x, geom.pos.y, geom.size.width, geom.size.height);
++        if (winInfo.state() & NET::FullScreen)
++        {
++kDebug()<<"Found FULL SCREEN: "<<windows[w]<<", geom="<<gm<<", frame="<<fr;
++            type = FullScreen;
++            if (windows[w] == activeWindow)
++                return FullScreenActive;
++        }
++//else { kDebug()<<"Found normal: "<<windows[w]<<", geom="<<gm<<", frame="<<fr; }
 +    }
++    return type;
++}
 +
-+    // GMX sorts by nickname by default - don't leave empty
-+    QString nickName = addressee->nickName();
-+    if ( nickName.isEmpty() )
-+      nickName = addressee->formattedName();
-+
-+    t << addresseeId << DELIM             // Address_id
-+      << nickName << DELIM                // Nickname
-+      << addressee->givenName() << DELIM  // Firstname
-+      << addressee->familyName() << DELIM // Lastname
-+      << addressee->prefix() << DELIM     // Title - Note: ->title()
-+                                          // refers to the professional title
-+      << dateString( addressee->birthday() ) << DELIM   // Birthday
-+      << addressee->note() /*.replace('\n',"\r\n")*/ << DELIM // Comments
-+      << dateString( addressee->revision() ) << DELIM   // Change_date
-+      << "1" << DELIM                     // Status
-+      << DELIM                            // Address_link_id
-+      << category << endl;                // Categories
-   }
++/******************************************************************************
++* In a multi-screen setup (single virtual desktop, e.g. Xinerama), find which
++* screens have full screen windows on them.
++*/
++FullScreenType findFullScreenWindows(const QVector<QRect>& screenRects, QVector<FullScreenType>& screenTypes)
++{
++    FullScreenType result = NoFullScreen;
++    screenTypes.fill(NoFullScreen);
++    Display* display = QX11Info::display();
++    NETRootInfo rootInfo(display, NET::ClientList | NET::ActiveWindow, 0);
++    Window rootWindow     = rootInfo.rootWindow();
++    Window activeWindow   = rootInfo.activeWindow();
++    const Window* windows = rootInfo.clientList();
++    int windowCount       = rootInfo.clientListCount();
++kDebug()<<"Virtual desktops: Window count="<<windowCount<<", active="<<activeWindow<<", geom="<<qApp->desktop()->screenGeometry(0);
++    NETRect netgeom;
++    NETRect netframe;
++    for (int w = 0;  w < windowCount;  ++w)
++    {
++        NETWinInfo winInfo(display, windows[w], rootWindow, NET::WMState | NET::WMGeometry);
++        if (winInfo.state() & NET::FullScreen)
++        {
++	    // Found a full screen window - find which screen it's on
++            bool active = (windows[w] == activeWindow);
++            winInfo.kdeGeometry(netframe, netgeom);
++            QRect winRect(netgeom.pos.x, netgeom.pos.y, netgeom.size.width, netgeom.size.height);
++kDebug()<<"Found FULL SCREEN: "<<windows[w]<<", geom="<<winRect;
++	    for (int s = 0, count = screenRects.count();  s < count;  ++s)
++	    {
++		if (screenRects[s].contains(winRect))
++		{
++kDebug()<<"FULL SCREEN on screen"<<s<<", active="<<active;
++		    if (active)
++		        screenTypes[s] = result = FullScreenActive;
++		    else
++		    {
++			if (screenTypes[s] == NoFullScreen)
++		            screenTypes[s] = FullScreen;
++			if (result == NoFullScreen)
++			    result = FullScreen;
++		    }
++		    break;
++		}
++	    }
++        }
++    }
++    return result;
++}
++#endif
+Index: kalarm/editdlg.cpp
+===================================================================
+--- kalarm/editdlg.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/editdlg.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -752,7 +752,8 @@
+ 			dt = KDateTime(QDate(2000,1,1), mTemplateTime->time());
+ 	}
  
-   t << "####\n";
-@@ -293,57 +462,139 @@
-        "Mobile_type,Email,Homepage,Position,Comments,Record_type_id,Record_type,"
-        "Company,Department,Change_date,Preferred,Status\n";
+-	type_setEvent(event, dt, text, (trial ? 0 : mLateCancel->minutes()), trial);
++	int lateCancel = (trial || !mLateCancel->isEnabled()) ? 0 : mLateCancel->minutes();
++	type_setEvent(event, dt, text, lateCancel, trial);
  
--  no = 1;
--  while ( (addr = addrMap[no]) != NULL ) {
--    for (int record_id=0; record_id<3; ++record_id) {
-+  addresseeId = 1;
-+  while ( ( addressee = addresseeMap[ addresseeId ] ) != NULL ) {
- 
--	KABC::Address address;
--  	KABC::PhoneNumber phone, fax, cell;
-+    const KABC::PhoneNumber::List cellPhones =
-+      addressee->phoneNumbers( KABC::PhoneNumber::Cell );
- 
--	/* record ID == 1: Work address */
--        if (record_id == 1) {
--		address = addr->address(KABC::Address::Work);
--		phone = addr->phoneNumber(KABC::PhoneNumber::Work);
--		fax   = addr->phoneNumber(KABC::PhoneNumber::Fax);
--		cell  = addr->phoneNumber(KABC::PhoneNumber::Work | KABC::PhoneNumber::Cell);
--	} else {
--		address = addr->address(KABC::Address::Home);
--		phone = addr->phoneNumber(KABC::PhoneNumber::Home);
--		cell  = addr->phoneNumber(KABC::PhoneNumber::Cell);
--	}
-+    const QStringList emails = addressee->emails();
- 
--	const QStringList emails = addr->emails();
--	QString email;
--	if (emails.count()>record_id) email = emails[record_id];
-+    for ( int recId=0; recId<3; ++recId ) {
-+      KABC::Address address;
-+      KABC::PhoneNumber phone, fax, cell;
- 
--	t << no << DELIM			// Address_id
--	  << record_id << DELIM			// Record_id
--	  << address.street() << DELIM		// Street
--	  << address.country() << DELIM 	// Country
--	  << address.postalCode() << DELIM	// Zipcode
--	  << address.locality() << DELIM	// City
--	  << phone.number() << DELIM		// Phone
--	  << fax.number() << DELIM		// Fax
--	  << cell.number() << DELIM		// Mobile
--	  << ((cell.type()&KABC::PhoneNumber::Pref)?-1:0) << DELIM // Mobile_type
--	  << email << DELIM			// Email
--	  << ((record_id==1)?addr->url().url():QString()) << DELIM // Homepage
--	  << ((record_id==1)?addr->role():QString()) << DELIM	// Position
--	  << DELIM				// Comments
--	  << record_id << DELIM			// Record_type_id (0,1,2) - see above
--	  << DELIM				// Record_type (name of this additional record entry)
--	  << ((record_id==1)?addr->organization():QString()) << DELIM // Company
--	  << ((record_id==1)?addr->custom("KADDRESSBOOK", "X-Department"):QString()) << DELIM // Department
--	  << dateString(addr->revision()) << DELIM	// Change_date
--	  << 5 << DELIM				// Preferred
--	  << 1 << endl;				// Status (should always be "1")
-+      // address preference flag:
-+      // & 1: preferred email address
-+      // & 4: preferred cell phone
-+      int prefFlag=0;
-+
-+      switch ( recId ) {
-+      // Assign address, phone and cellphone, fax if applicable
-+        case typeHome:
-+          address = addressee->address( KABC::Address::Home );
-+          phone   = addressee->phoneNumber( KABC::PhoneNumber::Home );
-+          if ( cellPhones.count() > 0 ) {
-+            cell  = cellPhones.at( 0 );
-+            if ( !cell.isEmpty() )
-+              prefFlag |= 4;
-+          }
-+          break;
-+        case typeWork:
-+          address = addressee->address( KABC::Address::Work );
-+          phone   = addressee->phoneNumber( KABC::PhoneNumber::Work );
-+          if ( cellPhones.count() >= 2 )
-+            cell  = cellPhones.at( 1 );
-+          fax     = addressee->phoneNumber( KABC::PhoneNumber::Fax );
-+          break;
-+        case typeOther:
-+        default:
-+          if ( addressee->addresses( KABC::Address::Home ).count() > 1 )
-+            address = addressee->addresses( KABC::Address::Home ).at( 1 );
-+          if ( ( address.isEmpty() ) &&
-+               ( addressee->addresses( KABC::Address::Work ).count() > 1 ) )
-+            address = addressee->addresses( KABC::Address::Work ).at( 1 );
-+          if ( address.isEmpty() )
-+            address = addressee->address( KABC::Address::Dom );
-+          if ( address.isEmpty() )
-+            address = addressee->address( KABC::Address::Intl );
-+          if ( address.isEmpty() )
-+            address = addressee->address( KABC::Address::Postal );
-+          if ( address.isEmpty() )
-+            address = addressee->address( KABC::Address::Parcel );
-+
-+          if ( addressee->phoneNumbers( KABC::PhoneNumber::Home ).count() > 1 )
-+            phone = addressee->phoneNumbers( KABC::PhoneNumber::Home ).at( 1 );
-+          if ( ( phone.isEmpty() ) && ( addressee->phoneNumbers(
-+            KABC::PhoneNumber::Work ).count() > 1 ) )
-+            phone = addressee->phoneNumbers( KABC::PhoneNumber::Work ).at( 1 );
-+          if ( phone.isEmpty() )
-+            phone = addressee->phoneNumber( KABC::PhoneNumber::Voice );
-+          if ( phone.isEmpty() )
-+            phone = addressee->phoneNumber( KABC::PhoneNumber::Msg );
-+          if ( phone.isEmpty() )
-+            phone = addressee->phoneNumber( KABC::PhoneNumber::Isdn );
-+          if ( phone.isEmpty() )
-+            phone = addressee->phoneNumber( KABC::PhoneNumber::Car );
-+          if ( phone.isEmpty() )
-+            phone = addressee->phoneNumber( KABC::PhoneNumber::Pager );
-+
-+          switch ( cellPhones.count() ) {
-+            case 0: break;
-+            case 1:
-+            case 2:
-+              if ( !address.isEmpty() )
-+                cell = cellPhones.at( 0 );
-+              break;
-+            default:
-+              cell = cellPhones.at( 2 );
-+              break;
-+          }
-+          break;
-+      }
-+
-+      QString email="";
-+      if ( emails.count()>recId ) {
-+        email = emails[ recId ];
-+        if ( email == addressee->preferredEmail() ) prefFlag |= 1;
-+      }
-+
-+      if ( !address.isEmpty() || !phone.isEmpty() ||
-+           !cell.isEmpty()    || !email.isEmpty() ) {
-+        t << addresseeId << DELIM             // Address_id
-+          << recId << DELIM                   // Record_id
-+          << address.street() << DELIM        // Street
-+          << address.country() << DELIM       // Country
-+          << address.postalCode() << DELIM    // Zipcode
-+          << address.locality() << DELIM      // City
-+          << phone.number() << DELIM          // Phone
-+          << fax.number() << DELIM            // Fax
-+          << cell.number() << DELIM           // Mobile
-+          << ((recId==typeWork)?0:1) << DELIM // Mobile_type
-+          << email << DELIM                   // Email
-+          << ((recId==typeWork)?addressee->url().url():QString()) << DELIM
-+                                              // Homepage
-+          << ((recId==typeWork)?addressee->role():QString()) << DELIM
-+                                              // Position
-+          << ((recId==typeHome)?addressee->custom(
-+             "KADDRESSBOOK", "X-SpousesName" ):QString() ) << DELIM // Comments
-+          << recId << DELIM                   // Record_type_id (0,1,2)
-+          << DELIM                            // Record_type
-+          << ((recId==typeWork)?addressee->organization():QString()) << DELIM
-+                                              // Company
-+          << ((recId==typeWork)?addressee->custom(
-+             "KADDRESSBOOK", "X-Department" ):QString() )<< DELIM // Department
-+          << dateString( addressee->revision() ) << DELIM // Change_date
-+          << prefFlag << DELIM                // Preferred:
-+                                              // ( & 1: preferred email,
-+                                              //   & 4: preferred cell phone )
-+          << 1 << endl;                       // Status (should always be "1")
-+      }
-     }
- 
--    ++no;
-+    ++addresseeId;
-   };
- 
--  t << "####";
-+  t << "####" << endl;
-+  t << "AB_CATEGORIES:" << endl;
-+  t << "Category_id,Name,Icon_id" << endl;
-+
-+  //  Write Category List (beware: Category_ID 0 is reserved for none
-+  //  Interestingly: The index here is an int sequence and does not
-+  //  correspond to the bit reference used above.
-+  for ( int i = 0; i < categoryMap.size(); i++ ) {
-+    t << ( i + 1 ) << DELIM << categoryMap.at( i ) << DELIM << 0 << endl;
-+  }
-+  t << "####" << endl;
+ 	if (!trial)
+ 	{
+@@ -803,8 +804,8 @@
+ */
+ int EditAlarmDlg::getAlarmFlags() const
+ {
+-	return (mShowInKorganizer && mShowInKorganizer->isChecked()                  ? KAEvent::COPY_KORGANIZER : 0)
+-	     | (mRecurrenceEdit->repeatType() == RecurrenceEdit::AT_LOGIN            ? KAEvent::REPEAT_AT_LOGIN : 0)
++	return (mShowInKorganizer && mShowInKorganizer->isEnabled() && mShowInKorganizer->isChecked() ? KAEvent::COPY_KORGANIZER : 0)
++	     | (mRecurrenceEdit->repeatType() == RecurrenceEdit::AT_LOGIN                 ? KAEvent::REPEAT_AT_LOGIN : 0)
+ 	     | ((mTemplate ? mTemplateAnyTime->isChecked() : mAlarmDateTime.isDateOnly()) ? KAEvent::ANY_TIME : 0);
  }
  
--#include "gmx_xxport.moc"
--
-Index: kjots/kjots_config_misc.desktop
-===================================================================
---- kjots/kjots_config_misc.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kjots/kjots_config_misc.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -81,7 +81,7 @@
- Comment[es]=Configuraciones varias de KJots
- Comment[et]=KJotsi muud seadistused
- Comment[fr]=Configuration (divers) de KJots
--Comment[gl]=Configurar opcións varias do KJots
-+Comment[gl]=Configuración de opcións varias do KJots
- Comment[it]=Impostazioni varie per KJots
- Comment[km]=ការ​ដំឡើង​ផ្សេងៗ​សម្រាប់ KJots
- Comment[lv]=Dažādi KJots iestatījumi
-Index: libkdepim/addresseelineedit.cpp
-===================================================================
---- libkdepim/addresseelineedit.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ libkdepim/addresseelineedit.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -800,7 +800,7 @@
+@@ -835,6 +836,15 @@
+ }
  
- void AddresseeLineEdit::slotLDAPSearchData( const KPIM::LdapResultList &adrs )
- {
--  if ( s_LDAPLineEdit != this ) {
-+  if ( adrs.isEmpty() || s_LDAPLineEdit != this ) {
-     return;
-   }
- 
-@@ -817,7 +817,8 @@
-     setText( m_previousAddresses + m_searchString );
-     // only complete again if the user didn't change the selection while
-     // we were waiting; otherwise the completion box will be closed
--    if ( m_searchString.trimmed() != completionBox()->currentItem()->text().trimmed() ) {
-+    QListWidgetItem *current = completionBox()->currentItem();
-+    if ( !current || m_searchString.trimmed() != current->text().trimmed() ) {
-       doCompletion( m_lastSearchMode );
-     }
-   }
-Index: libkdepim/foldertreewidget.cpp
+ /******************************************************************************
++* Called when the dialog is closed.
++*/
++void EditAlarmDlg::closeEvent(QCloseEvent* ce)
++{
++	emit rejected();
++	KDialog::closeEvent(ce);
++}
++
++/******************************************************************************
+ * Update the tab sizes (again) and if the resized dialog height is greater
+ * than the minimum, resize it again. This is necessary because (a) resizing
+ * tabs doesn't always work properly the first time, and (b) resizing to the
+Index: kalarm/fontcolourbutton.h
 ===================================================================
---- libkdepim/foldertreewidget.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ libkdepim/foldertreewidget.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -34,6 +34,7 @@
- #include <QStyle>
- #include <QPainter>
- #include <QFontMetrics>
-+#include <QApplication>
+--- kalarm/fontcolourbutton.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/fontcolourbutton.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -42,7 +42,8 @@
+ 		QFont         font() const           { return mFont; }
+ 		QColor        bgColour() const       { return mBgColour; }
+ 		QColor        fgColour() const       { return mFgColour; }
+-		virtual void  setReadOnly(bool ro)   { mReadOnly = ro; }
++		virtual void  setReadOnly(bool ro, bool noHighlight = false)
++		                         { mReadOnly = ro; PushButton::setReadOnly(ro, noHighlight); }
+ 		virtual bool  isReadOnly() const     { return mReadOnly; }
  
- #define FOLDERTREEWIDGETITEM_TYPE ( QTreeWidgetItem::UserType + 0xcafe )
- 
-@@ -88,8 +89,6 @@
-     if ( !item )
-       return; // ugh :/
- 
--    // FIXME: opt->direction == Qt::RightToLeft ?
--
-     // draw the labelText().
-     QRect textRect = style->subElementRect( QStyle::SE_ItemViewItemText, &opt, mFolderTreeWidget );
-     textRect.setWidth( textRect.width() - ITEM_LABEL_RIGHT_MARGIN );
-@@ -164,7 +163,10 @@
- 
-         painter->drawText( textRect, Qt::AlignLeft | Qt::TextSingleLine | Qt::AlignVCenter, label );
- 
--        textRect.setLeft( textRect.left() + labelWidth + ITEM_LABEL_TO_UNREADCOUNT_SPACING );
-+        if ( QApplication::isLeftToRight() )
-+          textRect.setLeft( textRect.left() + labelWidth + ITEM_LABEL_TO_UNREADCOUNT_SPACING );
-+        else
-+          textRect.setRight( textRect.right() - labelWidth - ITEM_LABEL_TO_UNREADCOUNT_SPACING );
- 
-         if ( !( opt.state & QStyle::State_Selected ) ) {
-           painter->setPen( QPen( mFolderTreeWidget->unreadCountColor(), 0 ) );
-Index: kpilot/conduits/timeconduit/time_conduit.desktop
+ 	signals:
+Index: kalarm/alarmevent.h
 ===================================================================
---- kpilot/conduits/timeconduit/time_conduit.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kpilot/conduits/timeconduit/time_conduit.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -18,7 +18,7 @@
- Comment[fr]=Ce canal règle l'heure de votre ordinateur de poche sur celle du PC.
- Comment[fy]=Comment=Dit conduit set de tiid fan jo handheld oan d ehÃ¢n fan de pc-klok.
- Comment[ga]=Sioncrónaíonn an seoladán seo an t-am ar do ríomhaire boise leis an gclog ar do ríomhaire deisce.
--Comment[gl]=Este conduto muda a hora do aparello portátil dende o reloxo do PC.
-+Comment[gl]=Este conduto muda a hora do aparello portátil desde o reloxo do PC.
- Comment[hu]=Ez a csatoló beállítja a kéziszámítógép óráját a számítógépé alapján
- Comment[is]=Þessi rás stillir klukku lófatölvunnar eftir klukku PC tölvunnar.
- Comment[it]=Questo condotto imposta l'ora sul tuo palmare prendendola dall'orologio del PC.
-Index: kpilot/conduits/popmail/popmail-conduit.desktop
+--- kalarm/alarmevent.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/alarmevent.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -90,7 +90,7 @@
+ 		bool               displaying() const          { return mDisplaying; }
+ 		bool               beep() const                { return mBeep; }
+ 		int                flags() const;
+-#ifdef NDEBUG
++#ifdef KDE_NO_DEBUG_OUTPUT
+ 		void               dumpDebug() const  { }
+ #else
+ 		void               dumpDebug() const;
+@@ -217,7 +217,7 @@
+ 		void               setTime(const DateTime& dt)  { mNextMainDateTime = dt; }
+ 		void               setTime(const KDateTime& dt) { mNextMainDateTime = dt; }
+ 		int                flags() const;
+-#ifdef NDEBUG
++#ifdef KDE_NO_DEBUG_OUTPUT
+ 		void               dumpDebug() const  { }
+ 		static const char* debugType(Type)   { return ""; }
+ #else
+@@ -342,7 +342,7 @@
+ 		void               setSaveDateTime(const KDateTime& dt)              { mSaveDateTime = dt;  mUpdated = true; }
+ 		void               setLateCancel(int lc)                             { mLateCancel = lc;  mUpdated = true; }
+ 		void               setAutoClose(bool ac)                             { mAutoClose = ac;  mUpdated = true; }
+-		void               setRepeatAtLogin(bool rl)                         { mRepeatAtLogin = rl;  mUpdated = true; }
++		void               setRepeatAtLogin(bool rl);
+ 		void               setExcludeHolidays(bool ex)                       { mExcludeHolidays = ex;  mUpdated = true; }
+ 		void               setWorkTimeOnly(bool wto)                         { mWorkTimeOnly = wto; }
+ 		void               setKMailSerialNumber(unsigned long n)             { mKMailSerialNumber = n; }
+@@ -458,7 +458,7 @@
+ 		bool               setRecurAnnualByPos(int freq, const QList<MonthPos>& pos, const QList<int>& months, int count, const QDate& end);
+ //		static QValueList<MonthPos> convRecurPos(const QValueList<KCal::RecurrenceRule::WDayPos>&);
+ 		void               adjustRecurrenceStartOfDay();
+-#ifdef NDEBUG
++#ifdef KDE_NO_DEBUG_OUTPUT
+ 		void               dumpDebug() const  { }
+ #else
+ 		void               dumpDebug() const;
+Index: kalarm/messagewin.h
 ===================================================================
---- kpilot/conduits/popmail/popmail-conduit.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kpilot/conduits/popmail/popmail-conduit.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -37,7 +37,7 @@
- Comment[pa]=ਆਪਣੇ ਹੈਂਡਹਿਲਡ ਤੋਂ ਕੇਮੇਲ ਰਾਹੀਂ ਮੇਲ ਭੇਜੋ।
- Comment[pl]=Wysyła pocztę z palmtopa za pomocą KMail.
- Comment[pt]=Enviar um e-mail a partir do seu dispositivo móvel através do KMail.
--Comment[pt_BR]=Envia mensagem do seu handheld através do Kmail.
-+Comment[pt_BR]=Envia mensagem do seu handheld através do KMail.
- Comment[ru]=Отправка почты с КПК через KMail.
- Comment[sk]=Pošle poštu z prenosného zariadenia cez KMail.
- Comment[sl]=Pošljite pošto z vašega ročnega računalnika preko KMaila.
-Index: kpilot/conduits/todo/kpilot-conduit-todo.desktop
+--- kalarm/messagewin.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/messagewin.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -27,6 +27,7 @@
+ #include <QMap>
+ #include <QPointer>
+ 
++#include "autoqpointer.h"
+ #include "mainwindowbase.h"
+ #include "alarmevent.h"
+ 
+@@ -34,12 +35,12 @@
+ class QMoveEvent;
+ class QResizeEvent;
+ class QCloseEvent;
+-class QPushButton;
+-class KPushButton;
++class PushButton;
+ class MessageText;
+ class QCheckBox;
+ class QLabel;
+ class DeferAlarmDlg;
++class EditAlarmDlg;
+ class ShellProcess;
+ class AudioThread;
+ 
+@@ -63,7 +64,10 @@
+ 		void                setRecreating()        { mRecreating = true; }
+ 		const DateTime&     dateTime()             { return mDateTime; }
+ 		KAAlarm::Type       alarmType() const      { return mAlarmType; }
+-		bool                hasDefer() const       { return mDeferButton; }
++		bool                hasDefer() const;
++		void                showDefer();
++		void                cancelReminder(const KAEvent&, const KAAlarm&);
++		void                showDateTime(const KAEvent&, const KAAlarm&);
+ 		bool                isValid() const        { return !mInvalid; }
+ 		virtual void        show();
+ 		virtual QSize       sizeHint() const;
+@@ -86,6 +90,9 @@
+ 		void                slotOk();
+ 		void                slotEdit();
+ 		void                slotDefer();
++		void                editCloseOk();
++		void                editCloseCancel();
++		void                activeWindowChanged(WId);
+ 		void                checkDeferralLimit();
+ 		void                displayMainWindow();
+ #ifdef KMAIL_SUPPORTED
+@@ -106,7 +113,9 @@
+ 		MessageWin(const KAEvent*, const DateTime& alarmDateTime, const QStringList& errmsgs,
+ 		           const QString& dontShowAgain);
+ 		void                initView();
++		QString             dateTimeToDisplay();
+ 		void                displayComplete();
++		void                setButtonsReadOnly(bool);
+ 		bool                getWorkAreaAndModal();
+ 		void                playAudio();
+ 		void                setDeferralLimit(const KAEvent&);
+@@ -149,21 +158,23 @@
+ 		// Miscellaneous
+ 		KAEvent             mEvent;           // the whole event, for updating the calendar file
+ 		AlarmResource*      mResource;        // resource which the event comes/came from
++		QLabel*             mTimeLabel;       // trigger time label
+ 		QLabel*             mRemainingText;   // the remaining time (for a reminder window)
+-		KPushButton*        mOkButton;
+-		QPushButton*        mEditButton;
+-		QPushButton*        mDeferButton;
+-		QPushButton*        mSilenceButton;
+-		QPushButton*        mKAlarmButton;
+-		QPushButton*        mKMailButton;
++		PushButton*         mOkButton;
++		PushButton*         mEditButton;
++		PushButton*         mDeferButton;
++		PushButton*         mSilenceButton;
++		PushButton*         mKAlarmButton;
++		PushButton*         mKMailButton;
+ 		MessageText*        mCommandText;     // shows output from command
+ 		QCheckBox*          mDontShowAgainCheck;
++		EditAlarmDlg*       mEditDlg;         // alarm edit dialog invoked by Edit button
+ 		DeferAlarmDlg*      mDeferDlg;
+ 		QDateTime           mDeferLimit;      // last time to which the message can currently be deferred
+-		QRect               mDesktopArea;     // usable area of desktop (excluding panel etc.)
+ 		int                 mFlags;           // event flags
+ 		int                 mLateCancel;
+ 		int                 mButtonDelay;     // delay (ms) after window is shown before buttons are enabled
++		int                 mScreenNumber;    // screen to display on, or -1 for default
+ 		bool                mErrorWindow;     // the window is simply an error message
+ 		bool                mNoPostAction;    // don't execute any post-alarm action
+ 		bool                mRecreating;      // window is about to be deleted and immediately recreated
+Index: kalarm/sounddlg.cpp
 ===================================================================
---- kpilot/conduits/todo/kpilot-conduit-todo.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kpilot/conduits/todo/kpilot-conduit-todo.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -9,7 +9,7 @@
- Comment[es]=Este conducto sincroniza la base de tareas pendientes de la agenda electrónica con una colección de tareas pendientes de Akonadi.
- Comment[et]=See kanal sünkroniseerib pihuarvuti ülesannete andmebaasi ja Akonadi ülesannete kogu.
- Comment[fr]=Ce canal synchronise la liste de tâches du périphérique avec une collection de liste de tâches Akonadi.
--Comment[gl]=Este conduto sincroniza o base de datos do chaveiro do aparello portátil coa colección da Tarefas do Akonadi.
-+Comment[gl]=Este conduto sincroniza o base de datos do chaveiro do aparello portátil coa colección de Tarefas do Akonadi.
- Comment[hu]=Ezzel a csatolóval egy kéziszámítógép feladatai és egy Akonadi-feladatgyűjtemény között lehet szinkronizálást végezni.
- Comment[it]=Questo condotto sincronizza l'elenco delle cose da fare del palmare con una collezione di cose da fare di Akonadi.
- Comment[ja]=このコンジットはハンドヘルドの To-Do データベースを Akonadi の To-Do コレクションと同期させます。
-Index: kpilot/conduits/contacts/kpilot-conduit-contacts.desktop
+--- kalarm/sounddlg.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kalarm/sounddlg.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -87,7 +87,7 @@
+ 
+ 	// File browse button
+ 	mFileBrowseButton = new PushButton(box);
+-	mFileBrowseButton->setIcon(SmallIcon("document-open"));
++	mFileBrowseButton->setIcon(KIcon(SmallIcon("document-open")));
+ 	connect(mFileBrowseButton, SIGNAL(clicked()), SLOT(slotPickFile()));
+ 	mFileBrowseButton->setToolTip(i18nc("@info:tooltip", "Choose a file"));
+ 	mFileBrowseButton->setWhatsThis(i18nc("@info:whatsthis", "Select a sound file to play."));
+Index: kdepim-version.h
 ===================================================================
---- kpilot/conduits/contacts/kpilot-conduit-contacts.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kpilot/conduits/contacts/kpilot-conduit-contacts.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -10,7 +10,7 @@
- Comment[et]=See kanal sünkroniseerib pihuarvuti aadressiraamatu andmebaasi Akonadi koguga.
- Comment[fr]=Ce canal synchronise le carnet d'adresse du périphérique avec une collection Akonadi.
- Comment[ga]=Sioncrónaíonn an seoladán seo bunachar sonraí an leabhair seoltaí ar do ríomhaire boise le Bailiúchán Akonadi.
--Comment[gl]=Este conduto sincroniza o caderno de enderezos do aparello móbil coa colección de calendarios do Akonadi
-+Comment[gl]=Este conduto sincroniza o caderno de enderezos do aparello portátil coa colección de calendarios do Akonadi
- Comment[it]=Questo condotto sincronizza la rubrica del palmare con una collezione di Akonadi.
- Comment[ja]=このコンジットはハンドヘルドのアドレス帳データベースを Akonadi のコレクションと同期させます。
- Comment[km]=conduit syncs នេះ​ជា​មូលដ្ឋាន​​សៀវភៅ​អាសយដ្ឋាន​ឧបករណ៍​​​យួរដៃ​ដែល​មាន​បណ្ដុំ Akonadi ។
-Index: kontact/plugins/planner/planner.cpp
+--- kdepim-version.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ kdepim-version.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -58,6 +58,6 @@
+     3.2 alpha1
+ */
+ 
+-#define KDEPIM_VERSION "4.3.3"
++#define KDEPIM_VERSION "4.3.4"
+ 
+ #endif
+Index: libkdepim/ldapsearchdialog.cpp
 ===================================================================
---- kontact/plugins/planner/planner.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kontact/plugins/planner/planner.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -361,7 +361,7 @@
-       urlLabel2->setUrl( todo->uid() );
-       urlLabel2->installEventFilter( this );
-       urlLabel2->setAlignment( Qt::AlignLeft | Qt::AlignTop );
--      urlLabel->setWordWrap( true );
-+      urlLabel2->setWordWrap( true );
-       if ( stateText == i18nc( "to-do is overdue", "overdue" ) ) {
-         urlLabel2->setText( "<font color = red >" + string + "</font>" );
+--- libkdepim/ldapsearchdialog.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ libkdepim/ldapsearchdialog.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -111,8 +111,8 @@
+     {
+       const KLDAP::LdapAttrValue &mailAttrs = attrs[ "mail" ];
+       if ( mailAttrs.isEmpty() ) {
+-        setCheckState( 0, Qt::Unchecked );
+         setFlags( flags() & ~Qt::ItemIsSelectable );
++        setFlags( flags() & ~Qt::ItemIsEnabled );
        }
-Index: kontact/plugins/knode/knodeplugin.desktop
-===================================================================
---- kontact/plugins/knode/knodeplugin.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kontact/plugins/knode/knodeplugin.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -56,7 +56,7 @@
- Comment[pa]=ਕੇਸੰਪਰਕ ਕੇਨੋਡ ਪਲੱਗਇਨ
- Comment[pl]=Wtyczka Kontact do współpracy z KNode
- Comment[pt]='Plugin' do KNode para o Kontact
--Comment[pt_BR]=Plug-in do Knode para o Kontact
-+Comment[pt_BR]=Plug-in do KNode para o Kontact
- Comment[ro]=Modul KNode pentru Kontact
- Comment[ru]=Новости
- Comment[se]=Kontact, KNode-lassemoduvla
-Index: kontact/plugins/kjots/kjots_plugin.desktop
-===================================================================
---- kontact/plugins/kjots/kjots_plugin.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kontact/plugins/kjots/kjots_plugin.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -42,7 +42,7 @@
- Comment[pa]=ਕੇ-ਸੰਪਰਕ ਕੇਜੂਟ ਪਲੱਗਇਨ
- Comment[pl]=Wtyczka Kontact do współpracy z Notatkami
- Comment[pt]='Plugin' do KJots para o Kontact
--Comment[pt_BR]=Plug-in do Kjots para o Kontact
-+Comment[pt_BR]=Plug-in do KJots para o Kontact
- Comment[ru]=Блокнот
- Comment[sl]=Vstavek KJots za Kontact
- Comment[sv]=Kontact insticksdelprogram för Kjots
-Index: kontactinterfaces/kontactplugin.desktop
-===================================================================
---- kontactinterfaces/kontactplugin.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ kontactinterfaces/kontactplugin.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -20,7 +20,7 @@
- Name[fi]=Kontact-liitännäinen
- Name[fr]=Module Kontact
- Name[ga]=Breiseán Kontact
--Name[gl]=Engadido do Kontact
-+Name[gl]=Engadido para Kontact
- Name[he]=תוסף Kontact
- Name[hu]=Kontact-bővítőmodul
- Name[is]=Kontact íforrit
-Index: korganizer/datenavigator.cpp
-===================================================================
---- korganizer/datenavigator.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ korganizer/datenavigator.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -158,6 +158,8 @@
+     }
  
-   if ( dateCount == 7 ) {
-     selectWeek( d );
-+  } else if ( dateCount == 5 ) {
-+    selectWorkWeek( d );
+@@ -477,14 +477,15 @@
+         QString email = asUtf8( mailAttrs.first() ).trimmed();
+         if ( !email.isEmpty() ) {
+           const KLDAP::LdapAttrValue &nameAttrs = cli->mAttrs[ "cn" ];
++          QString name;
+           if ( nameAttrs.size() > 1 ) {
+-            QString name = asUtf8( nameAttrs.first() ).trimmed();
+-            if ( name.isEmpty() ) {
+-              result << email;
+-            } else {
+-              result << name + " <" + email + '>';
+-            }
++            name = asUtf8( nameAttrs.first() ).trimmed();
+           }
++          if ( name.isEmpty() ) {
++            result << email;
++          } else {
++            result << name + " <" + email + '>';
++          }
+         }
+       }
+     }
+Index: akonadi/agents/CMakeLists.txt
+===================================================================
+Index: akonadi/resources/imap/imapaccount.cpp
+===================================================================
+Index: korganizer/printing/calprinter.cpp
+===================================================================
+--- korganizer/printing/calprinter.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ korganizer/printing/calprinter.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -31,6 +31,7 @@
+ #include <KPrintPreview>
+ #include <KStandardGuiItem>
+ #include <KVBox>
++#include <kdeprintdialog.h> //krazy:exclude=camelcase not available
+ 
+ #include <QButtonGroup>
+ #include <QGridLayout>
+@@ -152,7 +153,7 @@
+     printPreview->exec();
+     delete printPreview;
    } else {
-     selectDates( d, dateCount );
-   }
+-    QPointer<QPrintDialog> printDialog = new QPrintDialog( &printer, mParent );
++    QPointer<QPrintDialog> printDialog = KdePrint::createPrintDialog( &printer, mParent );
+     if ( printDialog->exec() == QDialog::Accepted ) {
+       selectedStyle->doPrint( &printer );
+     }
 Index: korganizer/koeditorgeneraltodo.cpp
 ===================================================================
---- korganizer/koeditorgeneraltodo.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ korganizer/koeditorgeneraltodo.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -287,11 +287,12 @@
- 
-   KOEditorGeneral::readIncidence( todo );
- 
--  QDateTime dueDT;
--
-   if ( todo->hasDueDate() ) {
-     enableAlarm( true );
--    dueDT = todo->dtDue().dateTime();
-+    KDateTime dueDT = todo->dtDue();
-+    if ( dueDT.isUtc() ) {
-+      dueDT = dueDT.toLocalZone();
+--- korganizer/koeditorgeneraltodo.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ korganizer/koeditorgeneraltodo.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -399,8 +399,12 @@
+   if ( todo->recurs() && !mStartDateModified ) {
+     todo->setDtDue( tmpDueDT );
+   } else {
+-    todo->setDtDue( tmpDueDT, true );
+-    todo->setDtStart( tmpStartDT );
++    if ( mDueCheck->isChecked() ) {
++      todo->setDtDue( tmpDueDT, true );
 +    }
-     mDueDateEdit->setDate( dueDT.date() );
-     mDueTimeEdit->setTime( dueDT.time() );
-     mDueCheck->setChecked( true );
-@@ -308,9 +309,12 @@
++    if ( mStartCheck->isChecked() ) {
++      todo->setDtStart( tmpStartDT );
++    }
+     todo->setDtRecurrence( tmpDueDT );
    }
- 
-   if ( todo->hasStartDate() ) {
--    QDateTime start = todo->dtStart().dateTime();
--    mStartDateEdit->setDate( start.date() );
--    mStartTimeEdit->setTime( start.time() );
-+    KDateTime startDT = todo->dtStart();
-+    if ( startDT.isUtc() ) {
-+      startDT = startDT.toLocalZone();
-+    }
-+    mStartDateEdit->setDate( startDT.date() );
-+    mStartTimeEdit->setTime( startDT.time() );
-     mStartCheck->setChecked( true );
-     mStartSpec = todo->dtStart().timeSpec();
-     mTimeZoneComboStart->selectTimeSpec( todo->dtStart().timeSpec() );
-@@ -446,11 +450,11 @@
-   if( mDueCheck->isChecked() || mStartCheck->isChecked() ) {
-     mTimeButton->setEnabled( true );
-   } else {
--    mTimeButton->setEnabled(false);
--    mTimeButton->setChecked(false);
-+    mTimeButton->setEnabled( false );
-+    mTimeButton->setChecked( false );
-   }
- 
--  if (enable) {
-+  if ( enable ) {
-     mStartTimeEdit->setEnabled( mTimeButton->isChecked() );
-     mTimeZoneComboStart->setEnabled( mTimeButton->isChecked() );
-   } else {
-Index: korganizer/koeditorgeneralevent.cpp
+   todo->setPriority( mPriorityCombo->currentIndex() );
+Index: korganizer/korgac/alarmdialog.h
 ===================================================================
---- korganizer/koeditorgeneralevent.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ korganizer/koeditorgeneralevent.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -430,8 +430,16 @@
-   setTimeEditorsEnabled( !event->allDay() );
+--- korganizer/korgac/alarmdialog.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ korganizer/korgac/alarmdialog.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -46,6 +46,7 @@
  
-   if ( !isTemplate ) {
--    // the rest is for the events only
--    setDateTimes( event->dtStart(), event->dtEnd() );
-+    // Convert UTC to local timezone, if needed (i.e. for kolab #204059)
-+    KDateTime startDT = event->dtStart();
-+    KDateTime endDT = event->dtEnd();
-+    if ( startDT.isUtc() ) {
-+      startDT = startDT.toLocalZone();
-+    }
-+    if ( endDT.isUtc() ) {
-+      endDT = endDT.toLocalZone();
-+    }
-+    setDateTimes( startDT, endDT );
-   } else {
-     // set the start/end time from the template, only as a last resort #190545
-     if ( !event->dtStart().isValid() || !event->dtEnd().isValid() ) {
-Index: korganizer/koeditorgeneraljournal.cpp
-===================================================================
---- korganizer/koeditorgeneraljournal.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ korganizer/koeditorgeneraljournal.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -148,9 +148,13 @@
+ class AlarmDialog : public KDialog
  {
-   setSummary( journal->summary() );
-   if ( !tmpl ) {
--    setDate( journal->dtStart().date() );
-+    KDateTime startDT = journal->dtStart();
-+    if ( startDT.isUtc() ) {
-+      startDT = startDT.toLocalZone();
-+    }
-+    setDate( startDT.date() );
-     if ( !journal->allDay() ) {
--      setTime( journal->dtStart().time() );
-+      setTime( startDT.time() );
-     } else {
-       setTime( QTime( -1, -1, -1 ) );
++
+   Q_OBJECT
+   public:
+     AlarmDialog( QWidget *parent = 0 );
+@@ -80,6 +81,7 @@
+   private:
+     bool startKOrganizer();
+     void setTimer();
++    void dismiss( QList<ReminderListItem *> selections );
+     int activeCount();
+     QList<ReminderListItem *> selectedItems() const;
+     void updateButtons();
+Index: korganizer/korgac/alarmdialog.cpp
+===================================================================
+--- korganizer/korgac/alarmdialog.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ korganizer/korgac/alarmdialog.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -249,17 +249,7 @@
+ 
+ void AlarmDialog::slotOk() // Dismiss selected
+ {
+-  ReminderList selection = selectedItems();
+-  for ( ReminderList::Iterator it = selection.begin(); it != selection.end(); ++it ) {
+-    kDebug() << "removing " << ( *it )->mIncidence->summary();
+-    if ( mIncidenceTree->itemBelow( *it ) ) {
+-      mIncidenceTree->setCurrentItem( mIncidenceTree->itemBelow( *it ) );
+-    } else if ( mIncidenceTree->itemAbove( *it ) ) {
+-      mIncidenceTree->setCurrentItem( mIncidenceTree->itemAbove( *it ) );
+-    }
+-    mIncidenceTree->removeItemWidget( *it, 0 );
+-    delete *it;
+-  }
++  dismiss( selectedItems() );
+ 
+   if ( activeCount() == 0 ) {
+     accept();
+@@ -360,18 +350,36 @@
+ 
+ void AlarmDialog::dismissAll()
+ {
++  ReminderList selections;
++
+   QTreeWidgetItemIterator it( mIncidenceTree );
+   while ( *it ) {
+     if ( !(*it)->isDisabled() ) { //do not disable suspended reminders
+-      delete *it;
++      selections.append( static_cast<ReminderListItem *>( *it ) );
      }
-Index: korganizer/plugins/printing/whatsnext/whatsnextprint.desktop
-===================================================================
---- korganizer/plugins/printing/whatsnext/whatsnextprint.desktop	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ korganizer/plugins/printing/whatsnext/whatsnextprint.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -17,7 +17,7 @@
- Name[fr]=Impression des évènements à venir
- Name[fy]=Printstyl foar Wat komt der no
- Name[ga]=Priontáil Rudaí Le Teacht
--Name[gl]=Estilo de Impresión do Quen Ven Agora
-+Name[gl]=Estilo de Impresión do Que Ven Agora
- Name[hu]=A közeljövő eseményeinek kinyomtatása
- Name[is]=Hvað er næst prentstíll
- Name[it]=Stile di stampa "cosa viene dopo"
-Index: korganizer/views/todoview/kotodomodel.cpp
-===================================================================
---- korganizer/views/todoview/kotodomodel.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ korganizer/views/todoview/kotodomodel.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -630,11 +630,11 @@
+     ++it;
    }
++  dismiss( selections );
++
+   setTimer();
+   accept();
+   emit reminderCount( activeCount() );
+ }
  
-   TodoTreeNode *node = static_cast<TodoTreeNode *>( child.internalPointer() );
--  // every model index given out by us has a valid internal pointer, so
--  // that's save:
--  TodoTreeNode *parent = node->mParent;
--
--  return getModelIndex( parent );
-+  if ( node->isValid() ) {
-+    return getModelIndex( node->mParent );
-+  } else {
-+    return QModelIndex();
++void AlarmDialog::dismiss( ReminderList selections )
++{
++  for ( ReminderList::Iterator it = selections.begin(); it != selections.end(); ++it ) {
++    kDebug() << "removing " << ( *it )->mIncidence->summary();
++    if ( mIncidenceTree->itemBelow( *it ) ) {
++      mIncidenceTree->setCurrentItem( mIncidenceTree->itemBelow( *it ) );
++    } else if ( mIncidenceTree->itemAbove( *it ) ) {
++      mIncidenceTree->setCurrentItem( mIncidenceTree->itemAbove( *it ) );
++    }
++    mIncidenceTree->removeItemWidget( *it, 0 );
++    delete *it;
 +  }
- }
- 
- int KOTodoModel::columnCount( const QModelIndex &/*parent*/ ) const
-Index: korganizer/freebusymanager.cpp
-===================================================================
---- korganizer/freebusymanager.cpp	(.../tags/KDE/4.3.1/kdepim)	(wersja 1023019)
-+++ korganizer/freebusymanager.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1023019)
-@@ -38,6 +38,8 @@
- #include "freebusymanager.h"
- #include "koprefs.h"
- #include "mailscheduler.h"
-+#include "actionmanager.h"
-+#include "korganizer.h"
- 
- #include <kabc/stdaddressbook.h>
- #include <kabc/addressee.h>
-@@ -50,6 +52,7 @@
- #include <kcal/icalformat.h>
- 
- #include <kio/job.h>
-+#include <kio/jobuidelegate.h>
- #include <kio/netaccess.h>
- #include <kdebug.h>
- #include <kmessagebox.h>
-@@ -74,6 +77,11 @@
-   : QObject( manager ), mManager( manager ), mEmail( email )
++}
++
+ void AlarmDialog::suspendAll()
  {
-   KIO::Job *job = KIO::get( url, KIO::NoReload, KIO::HideProgressInfo );
-+
-+  //pass the mainwindow to the job so any prompts are active
-+  KOrg::MainWindow *korg = ActionManager::findInstance( KUrl() );
-+  job->ui()->setWindow( korg->topLevelWidget() );
-+
-   connect( job, SIGNAL(result(KJob *)), SLOT(slotResult(KJob *)) );
-   connect( job, SIGNAL(data(KIO::Job *,const QByteArray &)),
-            SLOT(slotData(KIO::Job *,const QByteArray &)) );
-@@ -317,6 +325,11 @@
-     kDebug() << targetURL;
+   mIncidenceTree->clearSelection();
+Index: korganizer/navigatorbar.cpp
+===================================================================
+--- korganizer/navigatorbar.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
++++ korganizer/navigatorbar.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
+@@ -86,14 +86,14 @@
  
-     KIO::Job *job = KIO::file_copy( src, targetURL, -1, KIO::Overwrite | KIO::HideProgressInfo );
-+
-+    //pass the mainwindow to the job so any prompts are active
-+    KOrg::MainWindow *korg = ActionManager::findInstance( KUrl() );
-+    job->ui()->setWindow( korg->topLevelWidget() );
-+
-     connect( job, SIGNAL(result(KJob *)), SLOT(slotUploadFreeBusyResult(KJob *)) );
-   }
- }
+   // set up control frame layout
+   QHBoxLayout *ctrlLayout = new QHBoxLayout( this );
+-  ctrlLayout->addSpacerItem( frontSpacer );
+   ctrlLayout->addWidget( mPrevYear );
+   ctrlLayout->addWidget( mPrevMonth );
++  ctrlLayout->addSpacerItem( frontSpacer );
+   ctrlLayout->addWidget( mMonth );
+   ctrlLayout->addWidget( mYear );
++  ctrlLayout->addSpacerItem( endSpacer );
+   ctrlLayout->addWidget( mNextMonth );
+   ctrlLayout->addWidget( mNextYear );
+-  ctrlLayout->addSpacerItem( endSpacer );
+ 
+   connect( mPrevYear, SIGNAL(clicked()), SIGNAL(goPrevYear()) );
+   connect( mPrevMonth, SIGNAL(clicked()), SIGNAL(goPrevMonth()) );
 
 Zmiany atrybutów dla: .
 ___________________________________________________________________
