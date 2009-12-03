@@ -1,8 +1,8 @@
 #
-%define		_state      unstable
-%define		qtver       4.6.0
-%define     orgname     kdepim
-%define     snap        svn1040395
+%define		_state	unstable
+%define		qtver	4.6.0
+%define		orgname	kdepim
+%define		snap	svn1040395
 
 
 Summary:	Personal Information Management (PIM) for KDE
@@ -18,7 +18,10 @@ Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}%{snap}.tar.bz2
 # Source0-md5:	c399b0ed637031e7105670f6cd4fe581
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
+BuildRequires:	Qt3Support-devel
 Patch100:	%{name}-branch.diff
+BuildRequires:	QtSvg-devel
+BuildRequires:	QtTest-devel
 Patch0:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
 BuildRequires:	QtDesigner-devel
@@ -45,6 +48,7 @@ BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
 BuildRequires:	pilot-link-devel >= 0.12.1
 BuildRequires:	qca-devel >= 2.0.0
+BuildRequires:	qt4-build
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	soprano-devel >= 2.3.0
 BuildRequires:	strigi-devel >= 0.6.5
@@ -740,8 +744,8 @@ cd build
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C build/ install \
-        DESTDIR=$RPM_BUILD_ROOT \
-        kde_htmldir=%{_kdedocdir}
+	DESTDIR=$RPM_BUILD_ROOT \
+	kde_htmldir=%{_kdedocdir}
 
 %find_lang akregator --with-kde
 #%find_lang kaddressbook --with-kde
