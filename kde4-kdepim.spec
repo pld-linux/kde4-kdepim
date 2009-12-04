@@ -16,7 +16,7 @@ Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	c86fcb4f0378069fea24bce05b6e2853
+# Source0-md5:	938c4686506d3dd4729774b20a7234e4
 Patch100:	%{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
