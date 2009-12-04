@@ -18,13 +18,13 @@ Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}%{snap}.tar.bz2
 # Source0-md5:	c399b0ed637031e7105670f6cd4fe581
 #Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-BuildRequires:	Qt3Support-devel
 Patch100:	%{name}-branch.diff
-BuildRequires:	QtSvg-devel
-BuildRequires:	QtTest-devel
 Patch0:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
+BuildRequires:	Qt3Support-devel
 BuildRequires:	QtDesigner-devel
+BuildRequires:	QtSvg-devel
+BuildRequires:	QtTest-devel
 BuildRequires:	akonadi-devel >= 1.1.2
 BuildRequires:	automoc4 >= 0.9.88
 BuildRequires:	bison
