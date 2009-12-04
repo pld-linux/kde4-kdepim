@@ -11,13 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.3.73
+Version:	4.3.80
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}%{snap}.tar.bz2
-# Source0-md5:	c399b0ed637031e7105670f6cd4fe581
-#Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
+Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
+# Source0-md5:	c86fcb4f0378069fea24bce05b6e2853
 Patch100:	%{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
@@ -720,7 +719,7 @@ libkdenetwork, libkdepim, libkmailprivate, libknodecommon, libkpilot,
 libksieve, libmimelib.
 
 %prep
-%setup -q -n %{orgname}-%{version}%{snap}
+%setup -q -n %{orgname}-%{version}
 #%patch100 -p0
 #%patch0 -p0
 
