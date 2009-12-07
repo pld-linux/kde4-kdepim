@@ -1,1852 +1,321 @@
-Index: kmail/stringutil.h
+Index: akregator/src/aboutdata.h
 ===================================================================
---- kmail/stringutil.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kmail/stringutil.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -20,6 +20,7 @@
- #define KMAIL_STRINGUTIL_H
+--- akregator/src/aboutdata.h	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ akregator/src/aboutdata.h	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -28,7 +28,7 @@
+ #include "akregator_export.h"
+ #include <kaboutdata.h>
  
- #include <QString>
-+#include <QMap>
+-#define AKREGATOR_VERSION "1.5.3"
++#define AKREGATOR_VERSION "1.5.4"
  
- class KUrl;
- namespace KMime
-@@ -157,10 +158,9 @@
-   QString smartQuote( const QString &msg, int maxLineLength );
- 
-   /**
--   * Parses a mailto: url and extracts the information about to, cc, subject and body out into
--   * the QStrings given as argument.
-+   * Parses a mailto: url and extracts the information in the QMap (field name as key).
-    */
--  void parseMailtoUrl( const KUrl &url, QString &to, QString &cc, QString &subject, QString &body );
-+  QMap<QString, QString> parseMailtoUrl( const KUrl &url );
- }
- 
- }
-Index: kmail/stringutil.cpp
-===================================================================
---- kmail/stringutil.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kmail/stringutil.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -997,15 +997,14 @@
- }
- 
- #ifndef KMAIL_UNITTESTS
--void parseMailtoUrl ( const KUrl& url, QString& to, QString& cc, QString& subject, QString& body )
-+QMap<QString, QString> parseMailtoUrl ( const KUrl& url )
- {
-   kDebug() << url.pathOrUrl();
--  to = decodeMailtoUrl( url.path() );
-   QMap<QString, QString> values = url.queryItems( KUrl::CaseInsensitiveKeys );
--  to += ", " + values.value( "to" );
--  body = values.value( "body" );
--  subject = values.value( "subject" );
--  cc = values.value( "cc" );
-+  QString to = decodeMailtoUrl( url.path() );
-+  to = to.isEmpty() ?  values.value( "to" ) : to + QString( ", " ) + values.value( "to" );
-+  values.insert( "to", to );
-+  return values;
- }
- #endif
- 
-Index: kmail/kmcommands.cpp
-===================================================================
---- kmail/kmcommands.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kmail/kmcommands.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -2294,16 +2294,15 @@
-     msg->initHeader(mIdentity);
-     msg->setCharset("utf-8");
- 
--    QString to, body, subject, cc;
--    KMail::StringUtil::parseMailtoUrl( mUrl, to, cc, subject, body );
-+    QMap<QString, QString> fields =  KMail::StringUtil::parseMailtoUrl( mUrl );
- 
--    msg->setTo( to );
--    if ( !subject.isEmpty() )
--      msg->setSubject( subject );
--    if ( !body.isEmpty() )
--      msg->setBodyFromUnicode( body );
--    if ( !cc.isEmpty() )
--      msg->setCc( cc );
-+    msg->setTo( fields.value( "to" ) );
-+    if ( !fields.value( "subject" ).isEmpty() )
-+      msg->setSubject( fields.value( "subject" ) );
-+    if ( !fields.value( "body" ).isEmpty() )
-+      msg->setBodyFromUnicode( fields.value( "body" ) );
-+    if ( !fields.value( "cc" ).isEmpty() )
-+      msg->setCc( fields.value( "cc" ) );
- 
-     KMail::Composer * win = KMail::makeComposer( msg, mIdentity );
-     win->setCharset("", true);
-Index: kmail/kmkernel.cpp
-===================================================================
---- kmail/kmkernel.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kmail/kmkernel.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -307,16 +307,17 @@
-     for(int i= 0; i < args->count(); i++)
-     {
-       if ( args->arg(i).startsWith( QLatin1String( "mailto:" ), Qt::CaseInsensitive ) ) {
--        QString mailtoTo, mailtoBody, mailtoSubject, mailtoCC;
--        KMail::StringUtil::parseMailtoUrl( args->url( i ), mailtoTo, mailtoCC, mailtoSubject, mailtoBody );
--        if ( !mailtoTo.isEmpty() )
--          to += mailtoTo + ", ";
--        if ( !mailtoCC.isEmpty() )
--          cc += mailtoCC + ", ";
--        if ( !mailtoSubject.isEmpty() )
--          subj = mailtoSubject;
--        if ( !mailtoBody.isEmpty() )
--          body = mailtoBody;
-+        QMap<QString, QString> values = KMail::StringUtil::parseMailtoUrl( args->url( i ) );
-+        if ( !values.value( "to" ).isEmpty() )
-+          to += values.value( "to" ) + ", ";
-+        if ( !values.value( "cc" ).isEmpty() )
-+          cc += values.value( "cc" ) + ", ";
-+        if ( !values.value( "subject" ).isEmpty() )
-+          subj = values.value( "subject" );
-+        if ( !values.value( "body" ).isEmpty() )
-+          body = values.value( "body" );
-+        if ( !values.value( "in-reply-to" ).isEmpty() )
-+          customHeaders << "In-Reply-To:" + values.value( "in-reply-to" );
-       }
-       else {
-         QString tmpArg = args->arg(i);
-Index: kmail/mailsourceviewer.cpp
-===================================================================
---- kmail/mailsourceviewer.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kmail/mailsourceviewer.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -78,6 +78,7 @@
-   setAttribute( Qt::WA_DeleteOnClose );
-   setLineWrapMode( QTextEdit::NoWrap );
-   setTextInteractionFlags( Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard );
-+  setLayoutDirection( Qt::LeftToRight );
- 
-   // combining the shortcuts in one qkeysequence() did not work...
-   QShortcut* shortcut = new QShortcut( this );
-Index: kmail/kmacctimap.cpp
-===================================================================
---- kmail/kmacctimap.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kmail/kmacctimap.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -179,11 +179,17 @@
-       (*it).progressItem->setComplete();
-     }
-   }
--  if (mSlave && mapJobData.begin() != mapJobData.end())
--  {
--    mSlave->kill();
-+
-+  if ( slave() ) {
-+    if ( disconnectSlave ) {
-+      KIO::Scheduler::disconnectSlave( slave() );
-+    }
-+    if ( mapJobData.begin() != mapJobData.end() ) {
-+      mSlave->kill();
-+    }
-     mSlave = 0;
-   }
-+
-   // remove the jobs
-   mapJobData.clear();
-   KMAccount::deleteFolderJobs();
-@@ -198,10 +204,6 @@
-     checkDone( false, CheckOK ); // returned 0 new messages
-     mCountRemainChecks = 0;
-   }
--  if ( disconnectSlave && slave() ) {
--    KIO::Scheduler::disconnectSlave( slave() );
--    mSlave = 0;
--  }
- }
- 
- //-----------------------------------------------------------------------------
-Index: kmail/objecttreeparser.cpp
-===================================================================
---- kmail/objecttreeparser.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kmail/objecttreeparser.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -1179,7 +1179,7 @@
-       // here.
-       // Do this only when prefering HTML mail, though, since otherwise the attachments are hidden
-       // when displaying plain text.
--      if ( !dataHtml && mReader->htmlMail() ) {
-+      if ( !dataHtml && mReader && mReader->htmlMail() ) {
-         dataHtml = child->findType( DwMime::kTypeMultipart, DwMime::kSubtypeMixed, false, true );
-       }
-     }
-Index: kmail/kmversion.h
-===================================================================
---- kmail/kmversion.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kmail/kmversion.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -3,6 +3,6 @@
- #ifndef kmversion_h
- #define kmversion_h
- 
--#define KMAIL_VERSION "1.12.3"
-+#define KMAIL_VERSION "1.12.4"
- 
- #endif /*kmversion_h*/
-Index: kalarm/kalarm.h
-===================================================================
---- kalarm/kalarm.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/kalarm.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -23,7 +23,7 @@
- 
- #undef QT3_SUPPORT
- 
--#define KALARM_VERSION "2.2.9"
-+#define KALARM_VERSION "2.2.10"
- #define KALARM_NAME "KAlarm"
- #define KALARM_DBUS_SERVICE  "org.kde.kalarm"  // D-Bus service name of KAlarm application
- 
-Index: kalarm/editdlg.h
-===================================================================
---- kalarm/editdlg.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/editdlg.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -90,6 +90,7 @@
- 		void            init(const KAEvent* event, bool newAlarm);
- 		virtual void    resizeEvent(QResizeEvent*);
- 		virtual void    showEvent(QShowEvent*);
-+		virtual void    closeEvent(QCloseEvent*);
- 		virtual QString type_caption(bool newAlarm) const = 0;
- 		virtual void    type_init(QWidget* parent, QVBoxLayout* frameLayout) = 0;
- 		virtual void    type_initValues(const KAEvent*) = 0;
-Index: kalarm/Changelog
-===================================================================
---- kalarm/Changelog	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/Changelog	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -1,5 +1,15 @@
- KAlarm Change Log
- 
-+=== Version 2.2.10 --- 23 November 2009 ===
-+- If dual screens, show alarm in other screen if any full screen window exists.
-+- Fix crash if editing alarm from alarm window Edit button, and window changes
-+  from reminder to normal, or window changes from at-login to final at-login
-+  trigger time, or window auto-closes.
-+- Prevent infinite loop if NEXTRECUR time in alarm is before alarm start time.
-+- Fix error saving the alarm after editing a repeat-at-login alarm.
-+- Don't set reminder/late-cancel/show-in-KOrganizer when saving repeat-at-login
-+  alarms.
-+
- === Version 2.2.9 (KDE 4.3.3) --- 29 October 2009 ===
- - Fix recurring date-only alarm triggering repeatedly and eating up CPU, if the
-   start-of-day time is after midnight and the alarm is due, but current UTC time
-@@ -11,7 +21,6 @@
- - Interpret '~' properly in entered file names.
- - Prevent sound file configuration dialogue closing after showing error message.
- - Fix crash if calendar formats are updated at login, during session restoration.
--- If dual screens, show alarm in other screen if active window is full screen.
- 
- === Version 2.2.8 (KDE 4.3.2) --- 28 September 2009 ===
- - Use KDE system settings to determine default working days in the week.
-Index: kalarm/kalarmapp.cpp
-===================================================================
---- kalarm/kalarmapp.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/kalarmapp.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -212,7 +212,7 @@
- 	{
- 		--mActiveCount;
- 		quitIf(1, true);    // error opening the main calendar - quit
--		return true;
-+		return false;
- 	}
- 	MainWindow* trayParent = 0;
- 	for (int i = 1;  KMainWindow::canBeRestored(i);  ++i)
-@@ -254,7 +254,8 @@
- 	}
- 
- 	--mActiveCount;
--	quitIf(0);           // quit if no windows are open
-+	if (quitIf(0))           // quit if no windows are open
-+		return false;    // quitIf() can sometimes return, despite calling exit()
- 
- 	startProcessQueue();      // start processing the execution queue
- 	return true;
-@@ -1357,6 +1358,9 @@
- 				// It's not a reminder or a deferred alarm, and there is no message window
- 				// (other than a reminder window) currently displayed for this alarm,
- 				// and we need to execute a command before displaying the new window.
-+				//
-+				// NOTE: The pre-action is not executed for a recurring alarm if an
-+				// alarm message window for a previous occurrence is still visible.
- 				if (!ShellProcess::authorised())
- 					setEventCommandError(event, KAEvent::CMD_ERROR_PRE);
- 				else
-@@ -1392,22 +1396,32 @@
- 					// Display the message even though it failed
- 				}
- 			}
--			if (!win
--			     ||  (!win->hasDefer() && !alarm.repeatAtLogin())
--			     ||  replaceReminder)
-+
-+			if (!win)
- 			{
--				// Either there isn't already a message for this event,
--				// or there is a repeat-at-login message with no Defer
--				// button, which needs to be replaced with a new message,
--				// or the caption needs to be changed from "Reminder" to "Message".
--				if (win)
--					win->setRecreating();    // prevent post-alarm actions
--				delete win;
-+				// There isn't already a message for this event
- 				int flags = (reschedule ? 0 : MessageWin::NO_RESCHEDULE) | (allowDefer ? 0 : MessageWin::NO_DEFER);
- 				(new MessageWin(&event, alarm, flags))->show();
- 			}
-+			else if (replaceReminder)
-+			{
-+				// The caption needs to be changed from "Reminder" to "Message"
-+				win->cancelReminder(event, alarm);
-+			}
-+			else if (!win->hasDefer() && !alarm.repeatAtLogin())
-+			{
-+				// It's a repeat-at-login message with no Defer button,
-+				// which has now reached its final trigger time and needs
-+				// to be replaced with a new message.
-+				win->showDefer();
-+				win->showDateTime(event, alarm);
-+			}
- 			else
- 			{
-+				// Use the existing message window
-+			}
-+			if (win)
-+			{
- 				// Raise the existing message window and replay any sound
- 				win->repeat(alarm);    // N.B. this reschedules the alarm
- 			}
-Index: kalarm/lib/desktop.cpp
-===================================================================
---- kalarm/lib/desktop.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/lib/desktop.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -1,7 +1,7 @@
- /*
-  *  desktop.cpp  -  desktop functions
-  *  Program:  kalarm
-- *  Copyright © 2008 by David Jarvie <djarvie@kde.org>
-+ *  Copyright © 2008,2009 by David Jarvie <djarvie@kde.org>
-  *
-  *  This program is free software; you can redistribute it and/or modify
-  *  it under the terms of the GNU General Public License as published by
-@@ -21,23 +21,23 @@
- #include "desktop.h"
- #ifdef Q_WS_X11
- #include <kwindowsystem.h>
--#else
-+#endif
- #include <QApplication>
- #include <QDesktopWidget>
--#endif
- 
- namespace KAlarm {
- 
- /******************************************************************************
--* Return the size of the usable area of the desktop.
-+* Return the size of the usable area of the desktop, optionally for a specific
-+* screen in a multi-head setup.
- */
--QRect desktopWorkArea()
-+QRect desktopWorkArea(int screen)
- {
- #ifdef Q_WS_X11
--	return KWindowSystem::workArea();
--#else
--	return qApp->desktop()->availableGeometry();
-+	if (screen < 0)
-+		return KWindowSystem::workArea();
- #endif
-+	return qApp->desktop()->availableGeometry(screen);
- }
- 
- } // namespace KAlarm
-Index: kalarm/lib/pushbutton.cpp
-===================================================================
---- kalarm/lib/pushbutton.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/lib/pushbutton.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -1,7 +1,7 @@
- /*
-  *  pushbutton.cpp  -  push button with read-only option
-  *  Program:  kalarm
-- *  Copyright (c) 2002, 2005 by David Jarvie <software@astrojar.org.uk>
-+ *  Copyright © 2002,2005,2009 by David Jarvie <djarvie@kde.org>
-  *
-  *  This program is free software; you can redistribute it and/or modify
-  *  it under the terms of the GNU General Public License as published by
-@@ -25,25 +25,36 @@
- 
- 
- PushButton::PushButton(QWidget* parent)
--	: QPushButton(parent),
-+	: KPushButton(parent),
- 	  mFocusPolicy(focusPolicy()),
--	  mReadOnly(false)
-+	  mReadOnly(false),
-+	  mNoHighlight(false)
- { }
- 
-+PushButton::PushButton(const KGuiItem& text, QWidget* parent)
-+	: KPushButton(text, parent),
-+	  mFocusPolicy(focusPolicy()),
-+	  mReadOnly(false),
-+	  mNoHighlight(false)
-+{ }
-+
- PushButton::PushButton(const QString& text, QWidget* parent)
--	: QPushButton(text, parent),
-+	: KPushButton(text, parent),
- 	  mFocusPolicy(focusPolicy()),
--	  mReadOnly(false)
-+	  mReadOnly(false),
-+	  mNoHighlight(false)
- { }
- 
--PushButton::PushButton(const QIcon& icon, const QString& text, QWidget* parent)
--	: QPushButton(icon, text, parent),
-+PushButton::PushButton(const KIcon& icon, const QString& text, QWidget* parent)
-+	: KPushButton(icon, text, parent),
- 	  mFocusPolicy(focusPolicy()),
--	  mReadOnly(false)
-+	  mReadOnly(false),
-+	  mNoHighlight(false)
- { }
- 
--void PushButton::setReadOnly(bool ro)
-+void PushButton::setReadOnly(bool ro, bool noHighlight)
- {
-+	mNoHighlight = noHighlight;
- 	if ((int)ro != (int)mReadOnly)
- 	{
- 		mReadOnly = ro;
-@@ -61,7 +72,7 @@
- 		if (e->button() == Qt::LeftButton)
- 			return;
- 	}
--	QPushButton::mousePressEvent(e);
-+	KPushButton::mousePressEvent(e);
- }
- 
- void PushButton::mouseReleaseEvent(QMouseEvent* e)
-@@ -72,13 +83,13 @@
- 		if (e->button() == Qt::LeftButton)
- 			return;
- 	}
--	QPushButton::mouseReleaseEvent(e);
-+	KPushButton::mouseReleaseEvent(e);
- }
- 
- void PushButton::mouseMoveEvent(QMouseEvent* e)
- {
- 	if (!mReadOnly)
--		QPushButton::mouseMoveEvent(e);
-+		KPushButton::mouseMoveEvent(e);
- }
- 
- void PushButton::keyPressEvent(QKeyEvent* e)
-@@ -95,11 +106,22 @@
- 			default:
- 				return;
- 		}
--	QPushButton::keyPressEvent(e);
-+	KPushButton::keyPressEvent(e);
- }
- 
- void PushButton::keyReleaseEvent(QKeyEvent* e)
- {
- 	if (!mReadOnly)
--		QPushButton::keyReleaseEvent(e);
-+		KPushButton::keyReleaseEvent(e);
- }
-+
-+bool PushButton::event(QEvent* e)
-+{
-+	if (mReadOnly  &&  mNoHighlight)
-+	{
-+		// Don't highlight the button on mouse hover
-+		if (e->type() == QEvent::HoverEnter)
-+			return true;
-+	}
-+	return KPushButton::event(e);
-+}
-Index: kalarm/lib/synchtimer.cpp
-===================================================================
---- kalarm/lib/synchtimer.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/lib/synchtimer.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -1,7 +1,7 @@
- /*
-  *  synchtimer.cpp  -  timers which synchronize to time boundaries
-  *  Program:  kalarm
-- *  Copyright © 2004,2005,2007,2008 by David Jarvie <djarvie@kde.org>
-+ *  Copyright © 2004,2005,2007-2009 by David Jarvie <djarvie@kde.org>
-  *
-  *  This program is free software; you can redistribute it and/or modify
-  *  it under the terms of the GNU General Public License as published by
-@@ -68,7 +68,9 @@
- 		mTimer->disconnect(receiver, member);
- 		if (member)
- 		{
--			mConnections.removeAt(mConnections.indexOf(Connection(receiver, member)));
-+			int i = mConnections.indexOf(Connection(receiver, member));
-+			if (i >= 0)
-+				mConnections.removeAt(i);
- 		}
- 		else
- 		{
-Index: kalarm/lib/desktop.h
-===================================================================
---- kalarm/lib/desktop.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/lib/desktop.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -1,7 +1,7 @@
- /*
-  *  desktop.h  -  desktop functions
-  *  Program:  kalarm
-- *  Copyright © 2008 by David Jarvie <djarvie@kde.org>
-+ *  Copyright © 2008,2009 by David Jarvie <djarvie@kde.org>
-  *
-  *  This program is free software; you can redistribute it and/or modify
-  *  it under the terms of the GNU General Public License as published by
-@@ -25,7 +25,7 @@
- 
- namespace KAlarm {
- 
--QRect desktopWorkArea();
-+QRect desktopWorkArea(int screen = -1);
- 
- } // namespace KAlarm
- 
-Index: kalarm/lib/pushbutton.h
-===================================================================
---- kalarm/lib/pushbutton.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/lib/pushbutton.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -1,7 +1,7 @@
- /*
-  *  pushbutton.h  -  push button with read-only option
-  *  Program:  kalarm
-- *  Copyright © 2002,2003,2005,2006 by David Jarvie <software@astrojar.org.uk>
-+ *  Copyright © 2002,2003,2005,2006,2009 by David Jarvie <djarvie@kde.org>
-  *
-  *  This program is free software; you can redistribute it and/or modify
-  *  it under the terms of the GNU General Public License as published by
-@@ -21,22 +21,22 @@
- #ifndef PUSHBUTTON_H
- #define PUSHBUTTON_H
- 
--#include <QPushButton>
-+#include <kpushbutton.h>
- class QMouseEvent;
- class QKeyEvent;
- 
- 
+ namespace Akregator {
  /**
-- *  @short A QPushButton with read-only option.
-+ *  @short A KPushButton with read-only option.
-  *
-- *  The PushButton class is a QPushButton with a read-only option.
-+ *  The PushButton class is a KPushButton with a read-only option.
-  *
-  *  The widget may be set as read-only. This has the same effect as disabling it, except
-  *  that its appearance is unchanged.
-  *
-  *  @author David Jarvie <software@astrojar.org.uk>
-  */
--class PushButton : public QPushButton
-+class PushButton : public KPushButton
+Index: kresources/slox/sloxbase.h
+===================================================================
+--- kresources/slox/sloxbase.h	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ kresources/slox/sloxbase.h	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -34,6 +34,7 @@
+       ClientId,
+       FolderId,
+       LastSync,
++      LastModified,
+       ObjectType,
+       ObjectStatus,
+       CreatedBy,
+Index: kresources/slox/kcalresourceslox.cpp
+===================================================================
+--- kresources/slox/kcalresourceslox.cpp	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ kresources/slox/kcalresourceslox.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -334,6 +334,11 @@
+   WebdavHandler::addSloxElement( this, doc, prop, fieldName( ClientId ),
+                                  mUploadedIncidence->uid() );
+ 
++  if ( type() == "ox" ) {
++    const QString lastModified = mUploadedIncidence->customProperty( "SLOX", "LastModified" );
++    WebdavHandler::addSloxElement( this, doc, prop, fieldName( LastModified ), lastModified );
++  }
++
+   if ( mUploadIsDelete ) {
+     if ( mUploadedIncidence->type() == "Event" ) {
+       url.setPath( "/servlet/webdav.calendar/" + sloxId );
+@@ -347,6 +352,10 @@
+ 
+     if ( type() == "ox" ) {
+       WebdavHandler::addSloxElement( this, doc, prop, "method", "DELETE" );
++      if ( mUploadedIncidence->type() == "Event" )
++        WebdavHandler::addSloxElement( this, doc, prop, fieldName( FolderId ), mPrefs->calendarFolderId() );
++      else if ( mUploadedIncidence->type() == "Todo" )
++        WebdavHandler::addSloxElement( this, doc, prop, fieldName( FolderId ), mPrefs->taskFolderId() );
+     } else {
+       QDomElement remove = WebdavHandler::addElement( doc, pu, "D:remove" );
+       QDomElement prop = WebdavHandler::addElement( doc, remove, "D:prop" );
+@@ -694,6 +703,8 @@
+     parseReadRightsAttribute( e, incidence );
+   } else if ( tag == fieldName( Categories ) ) {
+     incidence->setCategories( text.split( QRegExp(",\\s*") ) );
++  } else if ( tag == fieldName( LastModified ) && type() == "ox" ) {
++    incidence->setCustomProperty( "SLOX", "LastModified", text );
+   }
+ }
+ 
+@@ -1162,6 +1173,16 @@
+           i->setUid( uid );
+           i->setCustomProperty( "SLOX", "ID", sloxId );
+ 
++          if ( type() == "ox" ) {
++            // Update the last_modified property
++            const QDomNode lastModifiedNode = prop.namedItem( fieldName( LastModified ) );
++            if ( !lastModifiedNode.isNull() ) {
++              const QDomElement lastModifiedElement = lastModifiedNode.toElement();
++              const QString lastModified = lastModifiedElement.text();
++              i->setCustomProperty( "SLOX", "LastModified", lastModified );
++            }
++          }
++
+           disableChangeNotification();
+           calendar()->deleteIncidence( mUploadedIncidence );
+           calendar()->addIncidence( i );
+Index: kresources/slox/sloxbase.cpp
+===================================================================
+--- kresources/slox/sloxbase.cpp	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ kresources/slox/sloxbase.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -29,6 +29,7 @@
+   {"clientid", "client_id"},
+   {"folderid", "folder_id"},
+   {"lastsync", "lastsync"},
++  {"n/a", "last_modified"},
+   {"objecttype", "objectmode"},
+   {"sloxstatus", "object_status"},
+   {"createfrom", "created_by"},
+Index: kalarm/lib/lineedit.cpp
+===================================================================
+--- kalarm/lib/lineedit.cpp	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ kalarm/lib/lineedit.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -88,8 +88,8 @@
+ QString LineEdit::text() const
  {
- 		Q_OBJECT
- 		Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
-@@ -49,17 +49,23 @@
- 		 *  @param text The text to show on the button.
- 		 *  @param parent The parent object of this widget.
- 		 */
-+		PushButton(const KGuiItem& text, QWidget* parent);
-+		/** Constructor for a push button which displays a text.
-+		 *  @param text The text to show on the button.
-+		 *  @param parent The parent object of this widget.
-+		 */
- 		PushButton(const QString& text, QWidget* parent);
- 		/** Constructor for a push button which displays an icon and a text.
- 		 *  @param icon The icon to show on the button.
- 		 *  @param text The text to show on the button.
- 		 *  @param parent The parent object of this widget.
- 		 */
--		PushButton(const QIcon& icon, const QString& text, QWidget* parent);
-+		PushButton(const KIcon& icon, const QString& text, QWidget* parent);
- 		/** Sets whether the push button is read-only for the user.
- 		 *  @param readOnly True to set the widget read-only, false to enable its action.
-+		 *  @param noHighlight True to prevent the button being highlighted on mouse-over.
- 		 */
--		virtual void  setReadOnly(bool readOnly);
-+		virtual void  setReadOnly(bool readOnly, bool noHighlight = false);
- 		/** Returns true if the widget is read only. */
- 		virtual bool  isReadOnly() const  { return mReadOnly; }
- 	protected:
-@@ -68,9 +74,11 @@
- 		virtual void mouseMoveEvent(QMouseEvent*);
- 		virtual void keyPressEvent(QKeyEvent*);
- 		virtual void keyReleaseEvent(QKeyEvent*);
-+		virtual bool event(QEvent*);
- 	private:
--		Qt::FocusPolicy mFocusPolicy;   // default focus policy for the QPushButton
-+		Qt::FocusPolicy mFocusPolicy;   // default focus policy for the PushButton
- 		bool            mReadOnly;      // value cannot be changed
-+		bool            mNoHighlight;   // don't highlight on mouse hover, if read-only
+ 	if (mType == Url)
+-		return KShell::tildeExpand(QLineEdit::text());
+-	return QLineEdit::text();
++		return KShell::tildeExpand(KLineEdit::text());
++	return KLineEdit::text();
+ }
+ 
+ void LineEdit::setText(const QString& text)
+Index: kaddressbook/xxport/gmx_xxport.desktop
+===================================================================
+--- kaddressbook/xxport/gmx_xxport.desktop	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ kaddressbook/xxport/gmx_xxport.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -68,6 +68,7 @@
+ Comment[pl]=Wtyczka do importu i eksportu wizytówek w formacie książki adresowej GMX
+ Comment[pt]=Um 'plugin' para importar e exportar os contactos no formato GMX
+ Comment[pt_BR]=Plug-in para importar e exportar contatos no formato de livro de endereços do GMX
++Comment[ru]=Импорт и экспорт контактов в формате GMX
+ Comment[sv]=Insticksprogram för import och export av kontakter med GMX-adressboksformat
+ Comment[tr]=GMX'in adres defteri biçimini içeriye ya da dışarıya aktarma eklentisi
+ Comment[uk]=Втулок для імпорту та експорту контактів у форматі адресних книг GMX
+Index: kaddressbook/xxport/vcard_xxport.desktop
+===================================================================
+--- kaddressbook/xxport/vcard_xxport.desktop	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ kaddressbook/xxport/vcard_xxport.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -93,7 +93,7 @@
+ Comment[pl]=Wtyczka do importu i eksportu wizytówek w formacie vCard
+ Comment[pt]=Um 'plugin' para importar e exportar os contactos no formato vCard
+ Comment[pt_BR]=Plug-in para importar e exportar contatos no formato vCard
+-Comment[ru]=Импорта и экспорт контактов в формате vCard
++Comment[ru]=Импорт и экспорт контактов в формате vCard
+ Comment[sk]=Plugin pre import a export kontaktov v vCard formáte
+ Comment[sl]=Vstavek za uvoz in izvoz stikov v obliki vCard
+ Comment[sv]=Insticksprogram för import och export av kontakter med vCard-format
+Index: kaddressbook/xxport/pab_xxport.desktop
+===================================================================
+--- kaddressbook/xxport/pab_xxport.desktop	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ kaddressbook/xxport/pab_xxport.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -24,6 +24,7 @@
+ Name[pl]=Wtyczka KAB do importu Osobistej książki adresowej MS Exchange - XXPort Plugin
+ Name[pt]='Plugin' XXPort do Livro de Endereços Pessoal do MS Exchange para o KAB
+ Name[pt_BR]=Plug-in do KAB para importação/exportação de livros de endereços pessoais do MS Exchange
++Name[ru]=Импорт контактов из персональной адресной книги MS Exchange
+ Name[sv]=Adressbokens överföringsinsticksprogram för MS Exchange personlig adressbok
+ Name[tr]=KAB MS Exchange Kişisel Adres Defteri XXPort Eklentisi
+ Name[uk]=Втулок KAB для обміну з персональною адресною книгою MS Exchange
+Index: kaddressbook/xxport/gnokii_xxport.desktop
+===================================================================
+--- kaddressbook/xxport/gnokii_xxport.desktop	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ kaddressbook/xxport/gnokii_xxport.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -78,6 +78,7 @@
+ Comment[pl]=Wtyczka do importowania i eksportowania wpisów z książki adresowej telefonu komórkowego
+ Comment[pt]=Um 'plugin' para importar e exportar contactos da agenda do telemóvel
+ Comment[pt_BR]=Plug-in para importar e exportar entradas do livro de endereços do celular
++Comment[ru]=Импорт и экспорт контактов адресной книги
+ Comment[sv]=Insticksprogram för import och export av adressboksposter till mobiltelefon
+ Comment[tr]=Adres defteri girdilerini cep telefonuna aktarma ve cep telefonundan alma eklentisi
+ Comment[uk]=Втулок для імпорту та експорту записів у адресній книзі мобільних телефонів
+Index: libkdepim/categoryeditdialog.cpp
+===================================================================
+--- libkdepim/categoryeditdialog.cpp	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ libkdepim/categoryeditdialog.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -69,6 +69,8 @@
+ 
+   fillList();
+ 
++  mWidgets->mCategories->setFocus();
++
+   connect( mWidgets->mCategories, SIGNAL(currentItemChanged(QTreeWidgetItem *,QTreeWidgetItem *)),
+            SLOT(editItem(QTreeWidgetItem *)) );
+   connect( mWidgets->mCategories, SIGNAL(itemSelectionChanged()),
+Index: libkdepim/categoryselectdialog.cpp
+===================================================================
+--- libkdepim/categoryselectdialog.cpp	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ libkdepim/categoryselectdialog.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -188,7 +188,7 @@
+   lay->addWidget( mWidgets );
+ 
+   mWidgets->setCategories();
+-  mWidgets->setFocus();
++  mWidgets->listView()->setFocus();
+ 
+   connect( mWidgets, SIGNAL(editCategories()), SIGNAL(editCategories()) );
+ 
+@@ -243,10 +243,4 @@
+   mWidgets->setSelected( selList );
+ }
+ 
+-void CategorySelectDialog::enterEvent( QEvent *event )
+-{
+-  Q_UNUSED( event );
+-  mWidgets->listView()->setFocus();
+-}
+-
+ #include "categoryselectdialog.moc"
+Index: libkdepim/categoryselectdialog.h
+===================================================================
+--- libkdepim/categoryselectdialog.h	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ libkdepim/categoryselectdialog.h	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -88,9 +88,6 @@
+     void categoriesSelected( const QStringList & );
+     void editCategories();
+ 
+-  protected:
+-    /*reimp*/void enterEvent( QEvent * );
+-
+   private:
+     CategorySelectWidget *mWidgets;
+ 
+Index: akonadi/resources/kolabproxy/kolabproxyresource.desktop
+===================================================================
+Index: akonadi/resources/kabc/kabcresource.desktop
+===================================================================
+Index: korganizer/views/monthview/monthscene.cpp
+===================================================================
+--- korganizer/views/monthview/monthscene.cpp	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ korganizer/views/monthview/monthscene.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -61,6 +61,8 @@
+   mReadonlyPixmap  = KOGlobals::self()->smallIcon( "object-locked" );
+   mReplyPixmap     = KOGlobals::self()->smallIcon( "mail-reply-sender" );
+   mHolidayPixmap   = KOGlobals::self()->smallIcon( "favorites" );
++
++  setSceneRect( 0, 0, parent->width(), parent->height() );
+ }
+ 
+ MonthScene::~MonthScene()
+Index: korganizer/views/todoview/kotodoviewquickaddline.cpp
+===================================================================
+--- korganizer/views/todoview/kotodoviewquickaddline.cpp	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ korganizer/views/todoview/kotodoviewquickaddline.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -25,6 +25,7 @@
+ 
+ #include "kotodoviewquickaddline.h"
+ 
++#include <KLocale>
+ #include <QWidget>
+ #include <QKeyEvent>
+ 
+@@ -33,6 +34,9 @@
+ {
+   connect( this, SIGNAL(returnPressed()),
+            this, SLOT(returnPressed()) );
++
++  mClickMessage = i18n( "Click to add a new to-do" );
++  setToolTip( mClickMessage );
+ }
+ 
+ void KOTodoViewQuickAddLine::keyPressEvent( QKeyEvent *event )
+@@ -49,4 +53,14 @@
+   emit returnPressed( mModifiers );
+ }
+ 
++void KOTodoViewQuickAddLine::resizeEvent ( QResizeEvent * event )
++{
++  KLineEdit::resizeEvent( event );
++
++  setClickMessage( fontMetrics().elidedText(
++                     mClickMessage,
++                     Qt::ElideRight,
++                     width() - clearButtonUsedSize().width() ) );
++}
++
+ #include "kotodoviewquickaddline.moc"
+Index: korganizer/views/todoview/kotodoviewquickaddline.h
+===================================================================
+--- korganizer/views/todoview/kotodoviewquickaddline.h	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ korganizer/views/todoview/kotodoviewquickaddline.h	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -42,6 +42,7 @@
+ 
+   protected:
+     void keyPressEvent( QKeyEvent *event );
++    void resizeEvent ( QResizeEvent * event );
+ 
+   Q_SIGNALS:
+     void returnPressed( Qt::KeyboardModifiers modifiers );
+@@ -51,6 +52,7 @@
+ 
+   private:
+     Qt::KeyboardModifiers mModifiers;
++    QString mClickMessage;
  };
  
- #endif // PUSHBUTTON_H
-Index: kalarm/editdlgtypes.cpp
-===================================================================
---- kalarm/editdlgtypes.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/editdlgtypes.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -545,7 +545,7 @@
- 	int   fadeSecs;
- 	float volume = mSoundPicker->volume(fadeVolume, fadeSecs);
- 	event.setAudioFile(mSoundPicker->file().prettyUrl(), volume, fadeVolume, fadeSecs);
--	if (!trial)
-+	if (!trial  &&  reminder()->isEnabled())
- 		event.setReminder(reminder()->minutes(), reminder()->isOnceOnly());
- 	if (mSpecialActionsButton  &&  mSpecialActionsButton->isEnabled())
- 		event.setActions(mSpecialActionsButton->preAction(), mSpecialActionsButton->postAction(), mSpecialActionsButton->cancelOnError());
-Index: kalarm/soundpicker.cpp
-===================================================================
---- kalarm/soundpicker.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/soundpicker.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -90,7 +90,7 @@
- 
- 	// Sound file picker button
- 	mFilePicker = new PushButton(this);
--	mFilePicker->setIcon(SmallIcon("audio-x-generic"));
-+	mFilePicker->setIcon(KIcon(SmallIcon("audio-x-generic")));
- 	int size = mFilePicker->sizeHint().height();
- 	mFilePicker->setFixedSize(size, size);
- 	connect(mFilePicker, SIGNAL(clicked()), SLOT(slotPickFile()));
-Index: kalarm/alarmevent.cpp
-===================================================================
---- kalarm/alarmevent.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/alarmevent.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -687,6 +687,8 @@
- 					next.setTime(t);
- 				}
- 			}
-+			if (next < start)
-+				next = start;   // ensure next recurrence time is valid
- 		}
- 	}
- 	return next;
-@@ -920,6 +922,8 @@
- 	mDeferral               = NO_DEFERRAL;    // do this before setting flags
- 
- 	KAAlarmEventBase::set(flags & ~READ_ONLY_FLAGS);
-+	if (mRepeatAtLogin)                       // do this after setting flags
-+		++mAlarmCount;
- 	mStartDateTime.setDateOnly(flags & ANY_TIME);
- 	set_deferral((flags & DEFERRAL) ? NORMAL_DEFERRAL : NO_DEFERRAL);
- 	mCommandXterm           = flags & EXEC_IN_XTERM;
-@@ -1013,6 +1017,26 @@
- 	calcTriggerTimes();
- }
- 
-+/******************************************************************************
-+* Set or clear repeat-at-login.
-+*/
-+void KAEvent::setRepeatAtLogin(bool rl)
-+{
-+	if (rl  &&  !mRepeatAtLogin)
-+		++mAlarmCount;
-+	else if (!rl  &&  mRepeatAtLogin)
-+		--mAlarmCount;
-+	mRepeatAtLogin = rl;
-+	if (mRepeatAtLogin)
-+	{
-+		setReminder(0, false);
-+		mLateCancel = 0;
-+		mAutoClose = false;
-+		mCopyToKOrganizer = false;
-+	}
-+	mUpdated = true;
-+}
-+
- void KAEvent::setReminder(int minutes, bool onceOnly)
- {
- 	if (minutes != mReminderMinutes)
-@@ -4131,7 +4155,7 @@
- 	return converted;
- }
- 
--#ifndef NDEBUG
-+#ifndef KDE_NO_DEBUG_OUTPUT
- void KAEvent::dumpDebug() const
- {
- 	kDebug() << "KAEvent dump:";
-@@ -4222,7 +4246,7 @@
- 
- }
- 
--#ifndef NDEBUG
-+#ifndef KDE_NO_DEBUG_OUTPUT
- void KAAlarm::dumpDebug() const
- {
- 	kDebug() << "KAAlarm dump:";
-@@ -4334,7 +4358,7 @@
- 	return mDefaultFont ? Preferences::messageFont() : mFont;
- }
- 
--#ifndef NDEBUG
-+#ifndef KDE_NO_DEBUG_OUTPUT
- void KAAlarmEventBase::dumpDebug() const
- {
- 	kDebug() << "-- mEventID:" << mEventID;
-Index: kalarm/messagewin.cpp
-===================================================================
---- kalarm/messagewin.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/messagewin.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -23,6 +23,7 @@
- #include "messagewin.moc"
- 
- #include "alarmcalendar.h"
-+#include "autoqpointer.h"
- #include "deferdlg.h"
- #include "desktop.h"
- #include "editdlg.h"
-@@ -30,6 +31,7 @@
- #include "kalarmapp.h"
- #include "mainwindow.h"
- #include "preferences.h"
-+#include "pushbutton.h"
- #include "shellprocess.h"
- #include "synchtimer.h"
- 
-@@ -58,12 +60,15 @@
- #include <phonon/volumefadereffect.h>
- #include <kdebug.h>
- #include <ktoolinvocation.h>
-+#ifdef Q_WS_X11
-+#include <netwm.h>
-+#include <QX11Info>
-+#endif
- 
- #include <QScrollBar>
- #include <QtDBus/QtDBus>
- #include <QFile>
- #include <QFileInfo>
--#include <QPushButton>
- #include <QCheckBox>
- #include <QLabel>
- #include <QPalette>
-@@ -84,6 +89,12 @@
- 
- using namespace KCal;
- 
-+#ifdef Q_WS_X11
-+enum FullScreenType { NoFullScreen = 0, FullScreen = 1, FullScreenActive = 2 };
-+static FullScreenType haveFullScreenWindow(int screen);
-+static FullScreenType findFullScreenWindows(const QVector<QRect>& screenRects, QVector<FullScreenType>& screenTypes);
-+#endif
-+
- #ifdef KMAIL_SUPPORTED
- #include "kmailinterface.h"
- static const char* KMAIL_DBUS_SERVICE   = "org.kde.kmail";
-@@ -183,12 +194,14 @@
- 	  mInvalid(false),
- 	  mEvent(*event),
- 	  mResource(AlarmCalendar::resources()->resourceForEvent(mEventID)),
-+	  mTimeLabel(0),
- 	  mEditButton(0),
- 	  mDeferButton(0),
- 	  mSilenceButton(0),
- 	  mKMailButton(0),
- 	  mCommandText(0),
- 	  mDontShowAgainCheck(0),
-+	  mEditDlg(0),
- 	  mDeferDlg(0),
- 	  mFlags(event->flags()),
- 	  mLateCancel(event->lateCancel()),
-@@ -270,12 +283,14 @@
- 	  mInvalid(false),
- 	  mEvent(*event),
- 	  mResource(0),
-+	  mTimeLabel(0),
- 	  mEditButton(0),
- 	  mDeferButton(0),
- 	  mSilenceButton(0),
- 	  mKMailButton(0),
- 	  mCommandText(0),
- 	  mDontShowAgainCheck(0),
-+	  mEditDlg(0),
- 	  mDeferDlg(0),
- 	  mErrorWindow(true),
- 	  mNoPostAction(true),
-@@ -301,12 +316,14 @@
- */
- MessageWin::MessageWin()
- 	: MainWindowBase(0, WFLAGS),
-+	  mTimeLabel(0),
- 	  mEditButton(0),
- 	  mDeferButton(0),
- 	  mSilenceButton(0),
- 	  mKMailButton(0),
- 	  mCommandText(0),
- 	  mDontShowAgainCheck(0),
-+	  mEditDlg(0),
- 	  mDeferDlg(0),
- 	  mErrorWindow(false),
- 	  mRecreating(false),
-@@ -360,50 +377,31 @@
- 	QPalette labelPalette = palette();
- 	labelPalette.setColor(backgroundRole(), labelPalette.color(QPalette::Window));
- 
-+	// Show the alarm date/time, together with an advance reminder text where appropriate
-+	// Alarm date/time: display time zone if not local time zone.
-+	mTimeLabel = new QLabel(topWidget);
-+	mTimeLabel->setText(dateTimeToDisplay());
-+	mTimeLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
-+	mTimeLabel->setPalette(labelPalette);
-+	mTimeLabel->setAutoFillBackground(true);
-+	topLayout->addWidget(mTimeLabel, 0, Qt::AlignHCenter);
-+	mTimeLabel->setWhatsThis(i18nc("@info:whatsthis", "The scheduled date/time for the message (as opposed to the actual time of display)."));
-+
- 	if (mDateTime.isValid())
- 	{
--		// Show the alarm date/time, together with an advance reminder text where appropriate
--		// Alarm date/time: display time zone if not local time zone.
--		QLabel* label = new QLabel(topWidget);
--		QString tm;
--		if (mDateTime.isDateOnly())
--			tm = KGlobal::locale()->formatDate(mDateTime.date(), KLocale::ShortDate);
--		else
--		{
--			bool showZone = false;
--			if (mDateTime.timeType() == KDateTime::UTC
--			||  (mDateTime.timeType() == KDateTime::TimeZone && !mDateTime.isLocalZone()))
--			{
--				// Display time zone abbreviation if it's different from the local
--				// zone. Note that the iCalendar time zone might represent the local
--				// time zone in a slightly different way from the system time zone,
--				// so the zone comparison above might not produce the desired result.
--				QString tz = mDateTime.kDateTime().toString(QString::fromLatin1("%Z"));
--				KDateTime local = mDateTime.kDateTime();
--				local.setTimeSpec(KDateTime::Spec::LocalZone());
--				showZone = (local.toString(QString::fromLatin1("%Z")) != tz);
--			}
--			tm = KGlobal::locale()->formatDateTime(mDateTime.kDateTime(), KLocale::ShortDate, KLocale::DateTimeFormatOptions(showZone ? KLocale::TimeZone : 0));
--		}
--		label->setText(tm);
--		label->setFrameStyle(QFrame::Box | QFrame::Raised);
--		label->setPalette(labelPalette);
--		label->setAutoFillBackground(true);
--		topLayout->addWidget(label, 0, Qt::AlignHCenter);
--		label->setWhatsThis(i18nc("@info:whatsthis", "The scheduled date/time for the message (as opposed to the actual time of display)."));
--
- 		// Reminder
- 		if (reminder)
- 		{
- 			QString s = i18nc("@info", "Reminder");
- 			QRegExp re("^(<[^>]+>)*");
- 			re.indexIn(s);
--			s.insert(re.matchedLength(), label->text() + "<br/>");
--			label->setText(s);
--			label->setAlignment(Qt::AlignHCenter);
-+			s.insert(re.matchedLength(), mTimeLabel->text() + "<br/>");
-+			mTimeLabel->setText(s);
-+			mTimeLabel->setAlignment(Qt::AlignHCenter);
- 		}
--		label->setFixedSize(label->sizeHint());
- 	}
-+	else
-+		mTimeLabel->hide();
- 
- 	if (!mErrorWindow)
- 	{
-@@ -508,7 +506,7 @@
- 				topLayout->addSpacing(vspace);
- 				topLayout->addStretch();
- 				// Don't include any horizontal margins if message is 2/3 screen width
--				if (text->sizeHint().width() >= mDesktopArea.width()*2/3)
-+				if (text->sizeHint().width() >= KAlarm::desktopWorkArea(mScreenNumber).width()*2/3)
- 					topLayout->addWidget(text, 1, Qt::AlignHCenter);
- 				else
- 				{
-@@ -642,7 +640,7 @@
- 	int gridIndex = 1;
- 
- 	// Close button
--	mOkButton = new KPushButton(KStandardGuiItem::close(), topWidget);
-+	mOkButton = new PushButton(KStandardGuiItem::close(), topWidget);
- 	// Prevent accidental acknowledgement of the message if the user is typing when the window appears
- 	mOkButton->clearFocus();
- 	mOkButton->setFocusPolicy(Qt::ClickFocus);    // don't allow keyboard selection
-@@ -654,7 +652,7 @@
- 	if (mShowEdit)
- 	{
- 		// Edit button
--		mEditButton = new QPushButton(i18nc("@action:button", "&Edit..."), topWidget);
-+		mEditButton = new PushButton(i18nc("@action:button", "&Edit..."), topWidget);
- 		mEditButton->setFocusPolicy(Qt::ClickFocus);    // don't allow keyboard selection
- 		mEditButton->setFixedSize(mEditButton->sizeHint());
- 		connect(mEditButton, SIGNAL(clicked()), SLOT(slotEdit()));
-@@ -662,26 +660,25 @@
- 		mEditButton->setWhatsThis(i18nc("@info:whatsthis", "Edit the alarm."));
- 	}
- 
--	if (!mNoDefer)
--	{
--		// Defer button
--		mDeferButton = new QPushButton(i18nc("@action:button", "&Defer..."), topWidget);
--		mDeferButton->setFocusPolicy(Qt::ClickFocus);    // don't allow keyboard selection
--		mDeferButton->setFixedSize(mDeferButton->sizeHint());
--		connect(mDeferButton, SIGNAL(clicked()), SLOT(slotDefer()));
--		grid->addWidget(mDeferButton, 0, gridIndex++, Qt::AlignHCenter);
--		mDeferButton->setWhatsThis(i18nc("@info:whatsthis", "<para>Defer the alarm until later.</para>"
--		                                "<para>You will be prompted to specify when the alarm should be redisplayed.</para>"));
-+	// Defer button
-+	mDeferButton = new PushButton(i18nc("@action:button", "&Defer..."), topWidget);
-+	mDeferButton->setFocusPolicy(Qt::ClickFocus);    // don't allow keyboard selection
-+	mDeferButton->setFixedSize(mDeferButton->sizeHint());
-+	connect(mDeferButton, SIGNAL(clicked()), SLOT(slotDefer()));
-+	grid->addWidget(mDeferButton, 0, gridIndex++, Qt::AlignHCenter);
-+	mDeferButton->setWhatsThis(i18nc("@info:whatsthis", "<para>Defer the alarm until later.</para>"
-+	                                "<para>You will be prompted to specify when the alarm should be redisplayed.</para>"));
- 
--		setDeferralLimit(mEvent);    // ensure that button is disabled when alarm can't be deferred any more
--	}
-+	setDeferralLimit(mEvent);    // ensure that button is disabled when alarm can't be deferred any more
-+	if (mNoDefer)
-+		mDeferButton->hide();
- 
- 	if (!mAudioFile.isEmpty()  &&  (mVolume || mFadeVolume > 0))
- 	{
- 		// Silence button to stop sound repetition
- 		QPixmap pixmap = MainBarIcon("media-playback-stop");
--		mSilenceButton = new QPushButton(topWidget);
--		mSilenceButton->setIcon(pixmap);
-+		mSilenceButton = new PushButton(topWidget);
-+		mSilenceButton->setIcon(KIcon(pixmap));
- 		grid->addWidget(mSilenceButton, 0, gridIndex++, Qt::AlignHCenter);
- 		mSilenceButton->setToolTip(i18nc("@info:tooltip", "Stop sound"));
- 		mSilenceButton->setWhatsThis(i18nc("@info:whatsthis", "Stop playing the sound"));
-@@ -694,8 +691,8 @@
- 	{
- 		// KMail button
- 		QPixmap pixmap = iconLoader.loadIcon(QLatin1String("internet-mail"), KIconLoader::MainToolbar);
--		mKMailButton = new QPushButton(topWidget);
--		mKMailButton->setIcon(pixmap);
-+		mKMailButton = new PushButton(topWidget);
-+		mKMailButton->setIcon(KIcon(pixmap));
- 		connect(mKMailButton, SIGNAL(clicked()), SLOT(slotShowKMailMessage()));
- 		grid->addWidget(mKMailButton, 0, gridIndex++, Qt::AlignHCenter);
- 		mKMailButton->setToolTip(i18nc("@info:tooltip Locate this email in KMail", "Locate in <application>KMail</application>"));
-@@ -704,8 +701,8 @@
- 
- 	// KAlarm button
- 	QPixmap pixmap = iconLoader.loadIcon(KGlobal::mainComponent().aboutData()->appName(), KIconLoader::MainToolbar);
--	mKAlarmButton = new QPushButton(topWidget);
--	mKAlarmButton->setIcon(pixmap);
-+	mKAlarmButton = new PushButton(topWidget);
-+	mKAlarmButton->setIcon(KIcon(pixmap));
- 	connect(mKAlarmButton, SIGNAL(clicked()), SLOT(displayMainWindow()));
- 	grid->addWidget(mKAlarmButton, 0, gridIndex++, Qt::AlignHCenter);
- 	mKAlarmButton->setToolTip(i18nc("@info:tooltip", "Activate <application>KAlarm</application>"));
-@@ -725,7 +722,7 @@
- 	// Disable all buttons initially, to prevent accidental clicking on if they happen to be
- 	// under the mouse just as the window appears.
- 	mOkButton->setEnabled(false);
--	if (mDeferButton)
-+	if (mDeferButton->isVisible())
- 		mDeferButton->setEnabled(false);
- 	if (mEditButton)
- 		mEditButton->setEnabled(false);
-@@ -742,7 +739,88 @@
- 	KWindowSystem::setOnAllDesktops(winid, true);
- }
- 
-+bool MessageWin::hasDefer() const
-+{
-+	return mDeferButton->isVisible();
-+}
-+
- /******************************************************************************
-+* Show the Defer button when it was previously hidden.
-+*/
-+void MessageWin::showDefer()
-+{
-+	mNoDefer = false;
-+	mDeferButton->show();
-+	resize(sizeHint());
-+}
-+
-+/******************************************************************************
-+* Convert a reminder window into a normal alarm window.
-+*/
-+void MessageWin::cancelReminder(const KAEvent& event, const KAAlarm& alarm)
-+{
-+	mDateTime = alarm.dateTime(true);
-+	mNoPostAction = false;
-+	mAlarmType = alarm.type();
-+	if (event.autoClose())
-+		mCloseTime = alarm.dateTime().effectiveDateTime().addSecs(event.lateCancel() * 60);
-+	setCaption(i18nc("@title:window", "Message"));
-+	mTimeLabel->setText(dateTimeToDisplay());
-+	mRemainingText->hide();
-+	MidnightTimer::disconnect(this, SLOT(setRemainingTextDay()));
-+	MinuteTimer::disconnect(this, SLOT(setRemainingTextMinute()));
-+	setMinimumHeight(0);
-+	centralWidget()->layout()->activate();
-+	setMinimumHeight(sizeHint().height());
-+	resize(sizeHint());
-+}
-+
-+/******************************************************************************
-+* Show the alarm's trigger time.
-+* This is assumed to have previously been hidden.
-+*/
-+void MessageWin::showDateTime(const KAEvent& event, const KAAlarm& alarm)
-+{
-+	mDateTime = (alarm.type() & KAAlarm::REMINDER_ALARM) ? event.mainDateTime(true) : alarm.dateTime(true);
-+	if (mDateTime.isValid())
-+	{
-+		mTimeLabel->setText(dateTimeToDisplay());
-+		mTimeLabel->show();
-+	}
-+}
-+
-+/******************************************************************************
-+* Get the trigger time to display.
-+*/
-+QString MessageWin::dateTimeToDisplay()
-+{
-+	QString tm;
-+	if (mDateTime.isValid())
-+	{
-+		if (mDateTime.isDateOnly())
-+			tm = KGlobal::locale()->formatDate(mDateTime.date(), KLocale::ShortDate);
-+		else
-+		{
-+			bool showZone = false;
-+			if (mDateTime.timeType() == KDateTime::UTC
-+			||  (mDateTime.timeType() == KDateTime::TimeZone && !mDateTime.isLocalZone()))
-+			{
-+				// Display time zone abbreviation if it's different from the local
-+				// zone. Note that the iCalendar time zone might represent the local
-+				// time zone in a slightly different way from the system time zone,
-+				// so the zone comparison above might not produce the desired result.
-+				QString tz = mDateTime.kDateTime().toString(QString::fromLatin1("%Z"));
-+				KDateTime local = mDateTime.kDateTime();
-+				local.setTimeSpec(KDateTime::Spec::LocalZone());
-+				showZone = (local.toString(QString::fromLatin1("%Z")) != tz);
-+			}
-+			tm = KGlobal::locale()->formatDateTime(mDateTime.kDateTime(), KLocale::ShortDate, KLocale::DateTimeFormatOptions(showZone ? KLocale::TimeZone : 0));
-+		}
-+	}
-+	return tm;
-+}
-+
-+/******************************************************************************
- * Set the remaining time text in a reminder window.
- * Called at the start of every day (at the user-defined start-of-day time).
- */
-@@ -1285,8 +1363,14 @@
- AudioThread::~AudioThread()
- {
- 	kDebug();
--	quit();   // stop playing and tidy up
--	wait();   // wait for run() to exit
-+	quit();       // stop playing and tidy up
-+	wait(3000);   // wait for run() to exit (timeout 3 seconds)
-+	if (!isFinished())
-+	{
-+		// Something has gone wrong - forcibly kill the thread
-+		terminate();
-+		wait();
-+	}
- }
- 
- /******************************************************************************
-@@ -1495,7 +1579,7 @@
- 	}
- 
- 	// Limit the size to fit inside the working area of the desktop
--	QSize desktop  = KAlarm::desktopWorkArea().size();
-+	QSize desktop  = KAlarm::desktopWorkArea(mScreenNumber).size();
- 	QSize frameThickness = frameGeometry().size() - geometry().size();  // title bar & window frame
- 	return desired.boundedTo(desktop - frameThickness);
- }
-@@ -1529,7 +1613,7 @@
- 			KAlarm::readConfigWindowSize("FileMessage", s);
- 		resize(s);
- 
--		QRect desk = KAlarm::desktopWorkArea();
-+		QRect desk = KAlarm::desktopWorkArea(mScreenNumber);
- 		QRect frame = frameGeometry();
- 
- 		mButtonDelay = Preferences::messageButtonDelay() * 1000;
-@@ -1602,7 +1686,7 @@
- void MessageWin::moveEvent(QMoveEvent* e)
- {
- 	MainWindowBase::moveEvent(e);
--	theApp()->setSpreadWindowsState(isSpread(KAlarm::desktopWorkArea().topLeft()));
-+	theApp()->setSpreadWindowsState(isSpread(KAlarm::desktopWorkArea(mScreenNumber).topLeft()));
- 	if (mPositioning)
- 	{
- 		// The window has just been initially positioned
-@@ -1624,7 +1708,7 @@
- 		if (width() > s.width()  ||  height() > s.height())
- 			resize(s);
- 	}
--	theApp()->setSpreadWindowsState(isSpread(KAlarm::desktopWorkArea().topLeft()));
-+	theApp()->setSpreadWindowsState(isSpread(KAlarm::desktopWorkArea(mScreenNumber).topLeft()));
- }
- 
- /******************************************************************************
-@@ -1651,7 +1735,7 @@
- {
- 	mOkButton->setEnabled(true);
- 	mKAlarmButton->setEnabled(true);
--	if (mDeferButton  &&  !mDisableDeferral)
-+	if (mDeferButton->isVisible()  &&  !mDisableDeferral)
- 		mDeferButton->setEnabled(true);
- 	if (mEditButton)
- 		mEditButton->setEnabled(true);
-@@ -1749,52 +1833,113 @@
  #endif
+Index: korganizer/views/todoview/kotodoview.cpp
+===================================================================
+--- korganizer/views/todoview/kotodoview.cpp	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ korganizer/views/todoview/kotodoview.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -112,8 +112,6 @@
  
- /******************************************************************************
--*  Called when the Edit... button is clicked.
--*  Displays the alarm edit dialog.
-+* Called when the Edit... button is clicked.
-+* Displays the alarm edit dialog.
-+*
-+* NOTE: The alarm edit dialog is made a child of the main window, not this
-+*       window, so that if this window closes before the dialog (e.g. on
-+*       auto-close), KAlarm doesn't crash. The dialog is set non-modal so that
-+*       the main window is unaffected, but modal mode is simulated so that
-+*       this window is inactive while the dialog is open.
- */
- void MessageWin::slotEdit()
- {
--	EditAlarmDlg* editDlg = EditAlarmDlg::create(false, &mEvent, false, this, EditAlarmDlg::RES_IGNORE);
--	if (editDlg->exec() == QDialog::Accepted)
-+	AutoQPointer<EditAlarmDlg> editDlg = EditAlarmDlg::create(false, &mEvent, false, MainWindow::mainMainWindow(), EditAlarmDlg::RES_IGNORE);
-+	KWindowSystem::setMainWindow(editDlg, winId());
-+	KWindowSystem::setOnAllDesktops(editDlg->winId(), false);
-+	mEditDlg = editDlg;
-+	setButtonsReadOnly(true);
-+	connect(editDlg, SIGNAL(accepted()), SLOT(editCloseOk()));
-+	connect(editDlg, SIGNAL(rejected()), SLOT(editCloseCancel()));
-+	connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)), SLOT(activeWindowChanged(WId)));
-+
-+	// Save values in case this window is closed by the time the dialog exits
-+	KAEvent event = mEvent;
-+	AlarmResource* resource = mResource;
-+
-+	editDlg->show();
-+	QEventLoop eventloop;
-+	eventloop.exec(QEventLoop::DialogExec);
-+	if (editDlg  &&  editDlg->result() == QDialog::Accepted)
- 	{
--		KAEvent event;
--		AlarmResource* resource;
--		editDlg->getEvent(event, resource);
--		resource = mResource;
-+		KAEvent newEvent;
-+		AlarmResource* res;
-+		editDlg->getEvent(newEvent, res);
+   mQuickAdd = new KOTodoViewQuickAddLine( this );
+   mQuickAdd->setClearButtonShown( true );
+-  QString clickText = i18n( "Click to add a new to-do" );
+-  mQuickAdd->setToolTip( clickText );
+   mQuickAdd->setVisible( KOPrefs::instance()->enableQuickTodo() );
+   connect( mQuickAdd, SIGNAL(returnPressed(Qt::KeyboardModifiers)),
+            this, SLOT(addQuickTodo(Qt::KeyboardModifiers)) );
+@@ -140,12 +138,6 @@
  
- 		// Update the displayed lists and the calendar file
- 		KAlarm::UpdateStatus status;
--		if (AlarmCalendar::resources()->event(mEventID))
-+		if (AlarmCalendar::resources()->event(event.id()))
- 		{
- 			// The old alarm hasn't expired yet, so replace it
--			Undo::Event undo(mEvent, resource);
--			status = KAlarm::modifyEvent(mEvent, event, editDlg);
--			Undo::saveEdit(undo, event);
-+			Undo::Event undo(event, resource);
-+			status = KAlarm::modifyEvent(event, newEvent, editDlg);
-+			Undo::saveEdit(undo, newEvent);
- 		}
- 		else
- 		{
- 			// The old event has expired, so simply create a new one
--			status = KAlarm::addEvent(event, resource, editDlg);
--			Undo::saveAdd(event, resource);
-+			status = KAlarm::addEvent(newEvent, resource, editDlg);
-+			Undo::saveAdd(newEvent, resource);
- 		}
+   setLayout( layout );
  
- 		if (status != KAlarm::UPDATE_OK  &&  status <= KAlarm::UPDATE_KORG_ERR)
- 			KAlarm::displayKOrgUpdateError(editDlg, KAlarm::ERR_MODIFY, status, 1);
--		KAlarm::outputAlarmWarnings(editDlg, &event);
+-  // Do elided text after the layout is set so the width is properly computed
+-  mQuickAdd->setClickMessage(
+-    fontMetrics().elidedText(
+-      clickText, Qt::ElideRight,
+-      mQuickAdd->width() + mQuickAdd->clearButtonUsedSize().width() ) );
 -
--		// Close the alarm window
--		mNoCloseConfirm = true;   // allow window to close without confirmation prompt
--		close();
-+		KAlarm::outputAlarmWarnings(editDlg, &newEvent);
- 	}
--	delete editDlg;
- }
+   // ---------------- POPUP-MENUS -----------------------
+   mItemPopupMenu = new QMenu( this );
  
- /******************************************************************************
-+* Called when OK is clicked in the alarm edit dialog invoked by the Edit button.
-+* Closes the window.
-+*/
-+void MessageWin::editCloseOk()
-+{
-+	mEditDlg = 0;
-+	mNoCloseConfirm = true;   // allow window to close without confirmation prompt
-+	close();
-+}
-+
-+/******************************************************************************
-+* Called when Cancel is clicked in the alarm edit dialog invoked by the Edit button.
-+*/
-+void MessageWin::editCloseCancel()
-+{
-+	mEditDlg = 0;
-+	setButtonsReadOnly(false);
-+}
-+
-+/******************************************************************************
-+* Called when the active window has changed. If this window has become the
-+* active window and there is an alarm edit dialog, simulate a modal dialog by
-+* making the alarm edit dialog the active window instead.
-+*/
-+void MessageWin::activeWindowChanged(WId win)
-+{
-+	if (mEditDlg  &&  win == winId())
-+		KWindowSystem::activateWindow(mEditDlg->winId());
-+}
-+
-+/******************************************************************************
-+* Set or clear the read-only state of the dialog buttons.
-+*/
-+void MessageWin::setButtonsReadOnly(bool ro)
-+{
-+	mOkButton->setReadOnly(ro, true);
-+	mDeferButton->setReadOnly(ro, true);
-+	mEditButton->setReadOnly(ro, true);
-+	if (mSilenceButton)
-+		mSilenceButton->setReadOnly(ro, true);
-+	if (mKMailButton)
-+		mKMailButton->setReadOnly(ro, true);
-+	mKAlarmButton->setReadOnly(ro, true);
-+}
-+
-+/******************************************************************************
- * Set up to disable the defer button when the deferral limit is reached.
- */
- void MessageWin::setDeferralLimit(const KAEvent& event)
- {
--	if (mDeferButton)
-+	if (mDeferButton->isVisible())
- 	{
- 		mDeferLimit = event.deferralLimit().effectiveDateTime();
- 		MidnightTimer::connect(this, SLOT(checkDeferralLimit()));   // check every day
-@@ -1814,7 +1959,7 @@
- */
- void MessageWin::checkDeferralLimit()
- {
--	if (!mDeferButton  ||  !mDeferLimit.isValid())
-+	if (!mDeferButton->isVisible()  ||  !mDeferLimit.isValid())
- 		return;
- 	int n = KDateTime::currentLocalDate().daysTo(mDeferLimit.date());
- 	if (n > 0)
-@@ -1958,45 +2103,181 @@
- */
- bool MessageWin::getWorkAreaAndModal()
- {
--	mDesktopArea = KAlarm::desktopWorkArea();
-+	mScreenNumber = -1;
- 	bool modal = Preferences::modalMessages();
--	if (modal)
-+#ifdef Q_WS_X11
-+	QDesktopWidget* desktop = qApp->desktop();
-+	int numScreens = desktop->numScreens();
-+	if (numScreens > 1)
- 	{
--		WId activeId = KWindowSystem::activeWindow();
--		KWindowInfo wi = KWindowSystem::windowInfo(activeId, NET::WMState);
--		if (wi.valid()  &&  wi.hasState(NET::FullScreen))
-+		// There are multiple screens.
-+		// Check for any full screen windows, even if they are not the active
-+		// window, and try not to show the alarm message on their screens.
-+		mScreenNumber = desktop->screenNumber(MainWindow::mainMainWindow());  // default = KAlarm's screen
-+kDebug()<<"KAlarm's screen="<<mScreenNumber;
-+		if (desktop->isVirtualDesktop())
- 		{
--			// There is a full screen window.
--			// Check whether it only covers one screen in a multi-screen setup.
--			modal = false;
--			QDesktopWidget* desktop = qApp->desktop();
--			int numScreens = desktop->numScreens();
--			if (numScreens > 1)
-+			// The screens form a single virtual desktop.
-+			// Xinerama, for example, uses this scheme.
-+			QVector<FullScreenType> screenTypes(numScreens);
-+			QVector<QRect> screenRects(numScreens);
-+			for (int s = 0;  s < numScreens;  ++s)
-+				screenRects[s] = desktop->screenGeometry(s);
-+			FullScreenType full = findFullScreenWindows(screenRects, screenTypes);
-+			if (full == NoFullScreen  ||  screenTypes[mScreenNumber] == NoFullScreen)
-+{kDebug()<<"... Use default screen="<<mScreenNumber;
-+				return modal;
-+}
-+			for (int s = 0;  s < numScreens;  ++s)
- 			{
--				// There are multiple screens
--				QRect winRect = wi.frameGeometry();
--				int screen = desktop->screenNumber(MainWindow::mainMainWindow());  // KAlarm's screen
--				if (!winRect.intersects(desktop->screenGeometry(screen)))
--					modal = true;   // full screen window isn't on KAlarm's screen
--				else
-+				if (screenTypes[s] == NoFullScreen)
- 				{
--					for (int s = 0;  s < numScreens;  ++s)
-+					// There is no full screen window on this screen
-+					mScreenNumber = s;
-+kDebug()<<"... Screen without full screen="<<mScreenNumber;
-+					return modal;
-+				}
-+			}
-+			// All screens contain a full screen window: use one without
-+			// an active full screen window.
-+			for (int s = 0;  s < numScreens;  ++s)
-+			{
-+				if (screenTypes[s] == FullScreen)
-+				{
-+					mScreenNumber = s;
-+kDebug()<<"... All full screen="<<mScreenNumber;
-+					return modal;
-+				}
-+			}
-+		}
-+		else
-+		{
-+			// The screens are completely separate from each other.
-+			int inactiveScreen = -1;
-+//for (int x = 0;  x < numScreens;  ++x){ kDebug()<<"Screen:"<<x<<": haveFullScreen ->"<<haveFullScreenWindow(x); }
-+			FullScreenType full = haveFullScreenWindow(mScreenNumber);
-+			if (full == NoFullScreen)
-+				return modal;   // KAlarm's screen doesn't contain a full screen window
-+			if (full == FullScreen)
-+				inactiveScreen = mScreenNumber;
-+			for (int s = 0;  s < numScreens;  ++s)
-+			{
-+				if (s != mScreenNumber)
-+				{
-+					full = haveFullScreenWindow(s);
-+					if (full == NoFullScreen)
- 					{
--						if (s != screen
--						&&  !winRect.intersects(desktop->screenGeometry(s)))
--						{
--							// The full screen window isn't on this screen
--							screen = s;
--							modal = true;
--							break;
--						}
-+						// There is no full screen window on this screen
-+						mScreenNumber = s;
-+						return modal;
- 					}
--					if (!modal)
--						return modal;
-+					if (full == FullScreen  &&  inactiveScreen < 0)
-+						inactiveScreen = s;
- 				}
--				mDesktopArea = desktop->availableGeometry(screen);
- 			}
-+			if (inactiveScreen >= 0)
-+			{
-+				// All screens contain a full screen window: use one without
-+				// an active full screen window.
-+				mScreenNumber = inactiveScreen;
-+				return modal;
-+			}
- 		}
-+kDebug()<<"... Returning false????";
-+		return false;  // can't logically get here, since there can only be one active window...
- 	}
-+#endif
-+	if (modal)
-+	{
-+		WId activeId = KWindowSystem::activeWindow();
-+		KWindowInfo wi = KWindowSystem::windowInfo(activeId, NET::WMState);
-+		if (wi.valid()  &&  wi.hasState(NET::FullScreen))
-+			return false;    // the active window is full screen.
-+	}
- 	return modal;
- }
-+
-+#ifdef Q_WS_X11
-+/******************************************************************************
-+* In a multi-screen setup (not a single virtual desktop), find whether the
-+* specified screen has a full screen window on it.
-+*/
-+FullScreenType haveFullScreenWindow(int screen)
-+{
-+    FullScreenType type = NoFullScreen;
-+    Display* display = QX11Info::display();
-+    NETRootInfo rootInfo(display, NET::ClientList | NET::ActiveWindow, screen);
-+    Window rootWindow     = rootInfo.rootWindow();
-+    Window activeWindow   = rootInfo.activeWindow();
-+    const Window* windows = rootInfo.clientList();
-+    int windowCount       = rootInfo.clientListCount();
-+kDebug()<<"Screen"<<screen<<": Window count="<<windowCount<<", active="<<activeWindow<<", geom="<<qApp->desktop()->screenGeometry(screen);
-+NETRect geom;
-+NETRect frame;
-+    for (int w = 0;  w < windowCount;  ++w)
-+    {
-+        NETWinInfo winInfo(display, windows[w], rootWindow, NET::WMState|NET::WMGeometry);
-+winInfo.kdeGeometry(frame, geom);
-+QRect fr(frame.pos.x, frame.pos.y, frame.size.width, frame.size.height);
-+QRect gm(geom.pos.x, geom.pos.y, geom.size.width, geom.size.height);
-+        if (winInfo.state() & NET::FullScreen)
-+        {
-+kDebug()<<"Found FULL SCREEN: "<<windows[w]<<", geom="<<gm<<", frame="<<fr;
-+            type = FullScreen;
-+            if (windows[w] == activeWindow)
-+                return FullScreenActive;
-+        }
-+//else { kDebug()<<"Found normal: "<<windows[w]<<", geom="<<gm<<", frame="<<fr; }
-+    }
-+    return type;
-+}
-+
-+/******************************************************************************
-+* In a multi-screen setup (single virtual desktop, e.g. Xinerama), find which
-+* screens have full screen windows on them.
-+*/
-+FullScreenType findFullScreenWindows(const QVector<QRect>& screenRects, QVector<FullScreenType>& screenTypes)
-+{
-+    FullScreenType result = NoFullScreen;
-+    screenTypes.fill(NoFullScreen);
-+    Display* display = QX11Info::display();
-+    NETRootInfo rootInfo(display, NET::ClientList | NET::ActiveWindow, 0);
-+    Window rootWindow     = rootInfo.rootWindow();
-+    Window activeWindow   = rootInfo.activeWindow();
-+    const Window* windows = rootInfo.clientList();
-+    int windowCount       = rootInfo.clientListCount();
-+kDebug()<<"Virtual desktops: Window count="<<windowCount<<", active="<<activeWindow<<", geom="<<qApp->desktop()->screenGeometry(0);
-+    NETRect netgeom;
-+    NETRect netframe;
-+    for (int w = 0;  w < windowCount;  ++w)
-+    {
-+        NETWinInfo winInfo(display, windows[w], rootWindow, NET::WMState | NET::WMGeometry);
-+        if (winInfo.state() & NET::FullScreen)
-+        {
-+	    // Found a full screen window - find which screen it's on
-+            bool active = (windows[w] == activeWindow);
-+            winInfo.kdeGeometry(netframe, netgeom);
-+            QRect winRect(netgeom.pos.x, netgeom.pos.y, netgeom.size.width, netgeom.size.height);
-+kDebug()<<"Found FULL SCREEN: "<<windows[w]<<", geom="<<winRect;
-+	    for (int s = 0, count = screenRects.count();  s < count;  ++s)
-+	    {
-+		if (screenRects[s].contains(winRect))
-+		{
-+kDebug()<<"FULL SCREEN on screen"<<s<<", active="<<active;
-+		    if (active)
-+		        screenTypes[s] = result = FullScreenActive;
-+		    else
-+		    {
-+			if (screenTypes[s] == NoFullScreen)
-+		            screenTypes[s] = FullScreen;
-+			if (result == NoFullScreen)
-+			    result = FullScreen;
-+		    }
-+		    break;
-+		}
-+	    }
-+        }
-+    }
-+    return result;
-+}
-+#endif
-Index: kalarm/editdlg.cpp
+Index: korganizer/kcmconfigs/korganizer_configcolorsandfonts.desktop
 ===================================================================
---- kalarm/editdlg.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/editdlg.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -752,7 +752,8 @@
- 			dt = KDateTime(QDate(2000,1,1), mTemplateTime->time());
- 	}
- 
--	type_setEvent(event, dt, text, (trial ? 0 : mLateCancel->minutes()), trial);
-+	int lateCancel = (trial || !mLateCancel->isEnabled()) ? 0 : mLateCancel->minutes();
-+	type_setEvent(event, dt, text, lateCancel, trial);
- 
- 	if (!trial)
- 	{
-@@ -803,8 +804,8 @@
- */
- int EditAlarmDlg::getAlarmFlags() const
- {
--	return (mShowInKorganizer && mShowInKorganizer->isChecked()                  ? KAEvent::COPY_KORGANIZER : 0)
--	     | (mRecurrenceEdit->repeatType() == RecurrenceEdit::AT_LOGIN            ? KAEvent::REPEAT_AT_LOGIN : 0)
-+	return (mShowInKorganizer && mShowInKorganizer->isEnabled() && mShowInKorganizer->isChecked() ? KAEvent::COPY_KORGANIZER : 0)
-+	     | (mRecurrenceEdit->repeatType() == RecurrenceEdit::AT_LOGIN                 ? KAEvent::REPEAT_AT_LOGIN : 0)
- 	     | ((mTemplate ? mTemplateAnyTime->isChecked() : mAlarmDateTime.isDateOnly()) ? KAEvent::ANY_TIME : 0);
- }
- 
-@@ -835,6 +836,15 @@
- }
- 
- /******************************************************************************
-+* Called when the dialog is closed.
-+*/
-+void EditAlarmDlg::closeEvent(QCloseEvent* ce)
-+{
-+	emit rejected();
-+	KDialog::closeEvent(ce);
-+}
-+
-+/******************************************************************************
- * Update the tab sizes (again) and if the resized dialog height is greater
- * than the minimum, resize it again. This is necessary because (a) resizing
- * tabs doesn't always work properly the first time, and (b) resizing to the
-Index: kalarm/fontcolourbutton.h
-===================================================================
---- kalarm/fontcolourbutton.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/fontcolourbutton.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -42,7 +42,8 @@
- 		QFont         font() const           { return mFont; }
- 		QColor        bgColour() const       { return mBgColour; }
- 		QColor        fgColour() const       { return mFgColour; }
--		virtual void  setReadOnly(bool ro)   { mReadOnly = ro; }
-+		virtual void  setReadOnly(bool ro, bool noHighlight = false)
-+		                         { mReadOnly = ro; PushButton::setReadOnly(ro, noHighlight); }
- 		virtual bool  isReadOnly() const     { return mReadOnly; }
- 
- 	signals:
-Index: kalarm/alarmevent.h
-===================================================================
---- kalarm/alarmevent.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/alarmevent.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -90,7 +90,7 @@
- 		bool               displaying() const          { return mDisplaying; }
- 		bool               beep() const                { return mBeep; }
- 		int                flags() const;
--#ifdef NDEBUG
-+#ifdef KDE_NO_DEBUG_OUTPUT
- 		void               dumpDebug() const  { }
- #else
- 		void               dumpDebug() const;
-@@ -217,7 +217,7 @@
- 		void               setTime(const DateTime& dt)  { mNextMainDateTime = dt; }
- 		void               setTime(const KDateTime& dt) { mNextMainDateTime = dt; }
- 		int                flags() const;
--#ifdef NDEBUG
-+#ifdef KDE_NO_DEBUG_OUTPUT
- 		void               dumpDebug() const  { }
- 		static const char* debugType(Type)   { return ""; }
- #else
-@@ -342,7 +342,7 @@
- 		void               setSaveDateTime(const KDateTime& dt)              { mSaveDateTime = dt;  mUpdated = true; }
- 		void               setLateCancel(int lc)                             { mLateCancel = lc;  mUpdated = true; }
- 		void               setAutoClose(bool ac)                             { mAutoClose = ac;  mUpdated = true; }
--		void               setRepeatAtLogin(bool rl)                         { mRepeatAtLogin = rl;  mUpdated = true; }
-+		void               setRepeatAtLogin(bool rl);
- 		void               setExcludeHolidays(bool ex)                       { mExcludeHolidays = ex;  mUpdated = true; }
- 		void               setWorkTimeOnly(bool wto)                         { mWorkTimeOnly = wto; }
- 		void               setKMailSerialNumber(unsigned long n)             { mKMailSerialNumber = n; }
-@@ -458,7 +458,7 @@
- 		bool               setRecurAnnualByPos(int freq, const QList<MonthPos>& pos, const QList<int>& months, int count, const QDate& end);
- //		static QValueList<MonthPos> convRecurPos(const QValueList<KCal::RecurrenceRule::WDayPos>&);
- 		void               adjustRecurrenceStartOfDay();
--#ifdef NDEBUG
-+#ifdef KDE_NO_DEBUG_OUTPUT
- 		void               dumpDebug() const  { }
- #else
- 		void               dumpDebug() const;
-Index: kalarm/messagewin.h
-===================================================================
---- kalarm/messagewin.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/messagewin.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -27,6 +27,7 @@
- #include <QMap>
- #include <QPointer>
- 
-+#include "autoqpointer.h"
- #include "mainwindowbase.h"
- #include "alarmevent.h"
- 
-@@ -34,12 +35,12 @@
- class QMoveEvent;
- class QResizeEvent;
- class QCloseEvent;
--class QPushButton;
--class KPushButton;
-+class PushButton;
- class MessageText;
- class QCheckBox;
- class QLabel;
- class DeferAlarmDlg;
-+class EditAlarmDlg;
- class ShellProcess;
- class AudioThread;
- 
-@@ -63,7 +64,10 @@
- 		void                setRecreating()        { mRecreating = true; }
- 		const DateTime&     dateTime()             { return mDateTime; }
- 		KAAlarm::Type       alarmType() const      { return mAlarmType; }
--		bool                hasDefer() const       { return mDeferButton; }
-+		bool                hasDefer() const;
-+		void                showDefer();
-+		void                cancelReminder(const KAEvent&, const KAAlarm&);
-+		void                showDateTime(const KAEvent&, const KAAlarm&);
- 		bool                isValid() const        { return !mInvalid; }
- 		virtual void        show();
- 		virtual QSize       sizeHint() const;
-@@ -86,6 +90,9 @@
- 		void                slotOk();
- 		void                slotEdit();
- 		void                slotDefer();
-+		void                editCloseOk();
-+		void                editCloseCancel();
-+		void                activeWindowChanged(WId);
- 		void                checkDeferralLimit();
- 		void                displayMainWindow();
- #ifdef KMAIL_SUPPORTED
-@@ -106,7 +113,9 @@
- 		MessageWin(const KAEvent*, const DateTime& alarmDateTime, const QStringList& errmsgs,
- 		           const QString& dontShowAgain);
- 		void                initView();
-+		QString             dateTimeToDisplay();
- 		void                displayComplete();
-+		void                setButtonsReadOnly(bool);
- 		bool                getWorkAreaAndModal();
- 		void                playAudio();
- 		void                setDeferralLimit(const KAEvent&);
-@@ -149,21 +158,23 @@
- 		// Miscellaneous
- 		KAEvent             mEvent;           // the whole event, for updating the calendar file
- 		AlarmResource*      mResource;        // resource which the event comes/came from
-+		QLabel*             mTimeLabel;       // trigger time label
- 		QLabel*             mRemainingText;   // the remaining time (for a reminder window)
--		KPushButton*        mOkButton;
--		QPushButton*        mEditButton;
--		QPushButton*        mDeferButton;
--		QPushButton*        mSilenceButton;
--		QPushButton*        mKAlarmButton;
--		QPushButton*        mKMailButton;
-+		PushButton*         mOkButton;
-+		PushButton*         mEditButton;
-+		PushButton*         mDeferButton;
-+		PushButton*         mSilenceButton;
-+		PushButton*         mKAlarmButton;
-+		PushButton*         mKMailButton;
- 		MessageText*        mCommandText;     // shows output from command
- 		QCheckBox*          mDontShowAgainCheck;
-+		EditAlarmDlg*       mEditDlg;         // alarm edit dialog invoked by Edit button
- 		DeferAlarmDlg*      mDeferDlg;
- 		QDateTime           mDeferLimit;      // last time to which the message can currently be deferred
--		QRect               mDesktopArea;     // usable area of desktop (excluding panel etc.)
- 		int                 mFlags;           // event flags
- 		int                 mLateCancel;
- 		int                 mButtonDelay;     // delay (ms) after window is shown before buttons are enabled
-+		int                 mScreenNumber;    // screen to display on, or -1 for default
- 		bool                mErrorWindow;     // the window is simply an error message
- 		bool                mNoPostAction;    // don't execute any post-alarm action
- 		bool                mRecreating;      // window is about to be deleted and immediately recreated
-Index: kalarm/sounddlg.cpp
-===================================================================
---- kalarm/sounddlg.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kalarm/sounddlg.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -87,7 +87,7 @@
- 
- 	// File browse button
- 	mFileBrowseButton = new PushButton(box);
--	mFileBrowseButton->setIcon(SmallIcon("document-open"));
-+	mFileBrowseButton->setIcon(KIcon(SmallIcon("document-open")));
- 	connect(mFileBrowseButton, SIGNAL(clicked()), SLOT(slotPickFile()));
- 	mFileBrowseButton->setToolTip(i18nc("@info:tooltip", "Choose a file"));
- 	mFileBrowseButton->setWhatsThis(i18nc("@info:whatsthis", "Select a sound file to play."));
-Index: kdepim-version.h
-===================================================================
---- kdepim-version.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ kdepim-version.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -58,6 +58,6 @@
-     3.2 alpha1
- */
- 
--#define KDEPIM_VERSION "4.3.3"
-+#define KDEPIM_VERSION "4.3.4"
- 
- #endif
-Index: libkdepim/ldapsearchdialog.cpp
-===================================================================
---- libkdepim/ldapsearchdialog.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ libkdepim/ldapsearchdialog.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -111,8 +111,8 @@
-     {
-       const KLDAP::LdapAttrValue &mailAttrs = attrs[ "mail" ];
-       if ( mailAttrs.isEmpty() ) {
--        setCheckState( 0, Qt::Unchecked );
-         setFlags( flags() & ~Qt::ItemIsSelectable );
-+        setFlags( flags() & ~Qt::ItemIsEnabled );
-       }
-     }
- 
-@@ -477,14 +477,15 @@
-         QString email = asUtf8( mailAttrs.first() ).trimmed();
-         if ( !email.isEmpty() ) {
-           const KLDAP::LdapAttrValue &nameAttrs = cli->mAttrs[ "cn" ];
-+          QString name;
-           if ( nameAttrs.size() > 1 ) {
--            QString name = asUtf8( nameAttrs.first() ).trimmed();
--            if ( name.isEmpty() ) {
--              result << email;
--            } else {
--              result << name + " <" + email + '>';
--            }
-+            name = asUtf8( nameAttrs.first() ).trimmed();
-           }
-+          if ( name.isEmpty() ) {
-+            result << email;
-+          } else {
-+            result << name + " <" + email + '>';
-+          }
-         }
-       }
-     }
-Index: akonadi/agents/CMakeLists.txt
-===================================================================
-Index: akonadi/resources/imap/imapaccount.cpp
-===================================================================
-Index: korganizer/printing/calprinter.cpp
-===================================================================
---- korganizer/printing/calprinter.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ korganizer/printing/calprinter.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -31,6 +31,7 @@
- #include <KPrintPreview>
- #include <KStandardGuiItem>
- #include <KVBox>
-+#include <kdeprintdialog.h> //krazy:exclude=camelcase not available
- 
- #include <QButtonGroup>
- #include <QGridLayout>
-@@ -152,7 +153,7 @@
-     printPreview->exec();
-     delete printPreview;
-   } else {
--    QPointer<QPrintDialog> printDialog = new QPrintDialog( &printer, mParent );
-+    QPointer<QPrintDialog> printDialog = KdePrint::createPrintDialog( &printer, mParent );
-     if ( printDialog->exec() == QDialog::Accepted ) {
-       selectedStyle->doPrint( &printer );
-     }
-Index: korganizer/koeditorgeneraltodo.cpp
-===================================================================
---- korganizer/koeditorgeneraltodo.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ korganizer/koeditorgeneraltodo.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -399,8 +399,12 @@
-   if ( todo->recurs() && !mStartDateModified ) {
-     todo->setDtDue( tmpDueDT );
-   } else {
--    todo->setDtDue( tmpDueDT, true );
--    todo->setDtStart( tmpStartDT );
-+    if ( mDueCheck->isChecked() ) {
-+      todo->setDtDue( tmpDueDT, true );
-+    }
-+    if ( mStartCheck->isChecked() ) {
-+      todo->setDtStart( tmpStartDT );
-+    }
-     todo->setDtRecurrence( tmpDueDT );
-   }
-   todo->setPriority( mPriorityCombo->currentIndex() );
-Index: korganizer/korgac/alarmdialog.h
-===================================================================
---- korganizer/korgac/alarmdialog.h	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ korganizer/korgac/alarmdialog.h	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -46,6 +46,7 @@
- 
- class AlarmDialog : public KDialog
- {
-+
-   Q_OBJECT
-   public:
-     AlarmDialog( QWidget *parent = 0 );
-@@ -80,6 +81,7 @@
-   private:
-     bool startKOrganizer();
-     void setTimer();
-+    void dismiss( QList<ReminderListItem *> selections );
-     int activeCount();
-     QList<ReminderListItem *> selectedItems() const;
-     void updateButtons();
-Index: korganizer/korgac/alarmdialog.cpp
-===================================================================
---- korganizer/korgac/alarmdialog.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ korganizer/korgac/alarmdialog.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -249,17 +249,7 @@
- 
- void AlarmDialog::slotOk() // Dismiss selected
- {
--  ReminderList selection = selectedItems();
--  for ( ReminderList::Iterator it = selection.begin(); it != selection.end(); ++it ) {
--    kDebug() << "removing " << ( *it )->mIncidence->summary();
--    if ( mIncidenceTree->itemBelow( *it ) ) {
--      mIncidenceTree->setCurrentItem( mIncidenceTree->itemBelow( *it ) );
--    } else if ( mIncidenceTree->itemAbove( *it ) ) {
--      mIncidenceTree->setCurrentItem( mIncidenceTree->itemAbove( *it ) );
--    }
--    mIncidenceTree->removeItemWidget( *it, 0 );
--    delete *it;
--  }
-+  dismiss( selectedItems() );
- 
-   if ( activeCount() == 0 ) {
-     accept();
-@@ -360,18 +350,36 @@
- 
- void AlarmDialog::dismissAll()
- {
-+  ReminderList selections;
-+
-   QTreeWidgetItemIterator it( mIncidenceTree );
-   while ( *it ) {
-     if ( !(*it)->isDisabled() ) { //do not disable suspended reminders
--      delete *it;
-+      selections.append( static_cast<ReminderListItem *>( *it ) );
-     }
-     ++it;
-   }
-+  dismiss( selections );
-+
-   setTimer();
-   accept();
-   emit reminderCount( activeCount() );
- }
- 
-+void AlarmDialog::dismiss( ReminderList selections )
-+{
-+  for ( ReminderList::Iterator it = selections.begin(); it != selections.end(); ++it ) {
-+    kDebug() << "removing " << ( *it )->mIncidence->summary();
-+    if ( mIncidenceTree->itemBelow( *it ) ) {
-+      mIncidenceTree->setCurrentItem( mIncidenceTree->itemBelow( *it ) );
-+    } else if ( mIncidenceTree->itemAbove( *it ) ) {
-+      mIncidenceTree->setCurrentItem( mIncidenceTree->itemAbove( *it ) );
-+    }
-+    mIncidenceTree->removeItemWidget( *it, 0 );
-+    delete *it;
-+  }
-+}
-+
- void AlarmDialog::suspendAll()
- {
-   mIncidenceTree->clearSelection();
-Index: korganizer/navigatorbar.cpp
-===================================================================
---- korganizer/navigatorbar.cpp	(.../tags/KDE/4.3.3/kdepim)	(wersja 1053999)
-+++ korganizer/navigatorbar.cpp	(.../branches/KDE/4.3/kdepim)	(wersja 1053999)
-@@ -86,14 +86,14 @@
- 
-   // set up control frame layout
-   QHBoxLayout *ctrlLayout = new QHBoxLayout( this );
--  ctrlLayout->addSpacerItem( frontSpacer );
-   ctrlLayout->addWidget( mPrevYear );
-   ctrlLayout->addWidget( mPrevMonth );
-+  ctrlLayout->addSpacerItem( frontSpacer );
-   ctrlLayout->addWidget( mMonth );
-   ctrlLayout->addWidget( mYear );
-+  ctrlLayout->addSpacerItem( endSpacer );
-   ctrlLayout->addWidget( mNextMonth );
-   ctrlLayout->addWidget( mNextYear );
--  ctrlLayout->addSpacerItem( endSpacer );
- 
-   connect( mPrevYear, SIGNAL(clicked()), SIGNAL(goPrevYear()) );
-   connect( mPrevMonth, SIGNAL(clicked()), SIGNAL(goPrevMonth()) );
+--- korganizer/kcmconfigs/korganizer_configcolorsandfonts.desktop	(.../tags/KDE/4.3.4/kdepim)	(wersja 1059841)
++++ korganizer/kcmconfigs/korganizer_configcolorsandfonts.desktop	(.../branches/KDE/4.3/kdepim)	(wersja 1059841)
+@@ -42,7 +42,7 @@
+ Name[pt]=Cores e Tipos de Letra
+ Name[pt_BR]=Fontes e cores
+ Name[ro]=Culori și fonturi
+-Name[ru]=Цветы и шрифты
++Name[ru]=Цвета и шрифты
+ Name[sl]=Barve in pisave
+ Name[sv]=Färger och teckensnitt
+ Name[th]=สีและแบบอักษร
 
 Zmiany atrybutów dla: .
 ___________________________________________________________________
