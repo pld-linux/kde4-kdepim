@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.3.85
+Version:	4.3.90
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	6fa073c3db2937f397dcfc1cdbf7c5b8
+# Source0-md5:	8585fdcd197fa4307d74e845bf0d40e2
 Patch100:	%{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
@@ -796,8 +796,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/akonadi/contact/editorpageplugins
 %{_datadir}/apps/akonadi/contact/editorpageplugins/cryptopageplugin.so
 %attr(755,root,root) %{_bindir}/akonadiconsole
-%attr(755,root,root) %ghost %{_libdir}/libakonadi-kcal.so.?
-%attr(755,root,root) %{_libdir}/libakonadi-kcal.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libakonadi-kcal_next.so.?
+%attr(755,root,root) %{_libdir}/libakonadi-kcal_next.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libakonadi_next.so.?
 %attr(755,root,root) %{_libdir}/libakonadi_next.so.*.*.*
 %{_datadir}/applications/kde4/akonadiconsole.desktop
@@ -866,6 +866,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/blogilo
 %{_datadir}/config.kcfg/blogilo.kcfg
 %{_iconsdir}/hicolor/*x*/apps/blogilo.png
+%{_iconsdir}/hicolor/*x*/actions/format*.png
+%{_iconsdir}/hicolor/*x*/actions/*-mark.png
+%{_iconsdir}/hicolor/*x*/actions/*-link.png
+%{_iconsdir}/hicolor/*x*/actions/*-media.png
 %{_kdedocdir}/en/blogilo
 
 %files kontact -f kontact.lang
@@ -1206,7 +1210,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkabc_slox.so
 %attr(755,root,root) %{_libdir}/libkabcgroupwise.so
 %attr(755,root,root) %{_libdir}/libkabckolab.so
-%attr(755,root,root) %{_libdir}/libakonadi-kcal.so
+%attr(755,root,root) %{_libdir}/libakonadi-kcal_next.so
 %attr(755,root,root) %{_libdir}/libakonadi_next.so
 %attr(755,root,root) %{_libdir}/libkcalgroupwise.so
 %attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
