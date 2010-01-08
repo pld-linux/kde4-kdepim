@@ -801,7 +801,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libakonadi_next.so.?
 %attr(755,root,root) %{_libdir}/libakonadi_next.so.*.*.*
 %{_datadir}/applications/kde4/akonadiconsole.desktop
-%{_datadir}/apps/akonadiconsole/akonadiconsoleui.rc
+%{_datadir}/apps/akonadiconsole
 #
 %attr(755,root,root) %{_bindir}/kgpgconf
 %attr(755,root,root) %{_bindir}/kwatchgnupg
