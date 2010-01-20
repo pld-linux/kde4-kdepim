@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.3.90
-Release:	2
+Version:	4.3.95
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	8585fdcd197fa4307d74e845bf0d40e2
+# Source0-md5:	66a094f6f292d82e5bc0722f1b9140e1
 Patch100:	%{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
@@ -1200,9 +1200,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/kleo
-%{_includedir}/kpgp
-%{_includedir}/libkleopatraclient
+#%{_includedir}/kleo
+#%{_includedir}/kpgp
+#%{_includedir}/libkleopatraclient
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
 %attr(755,root,root) %{_libdir}/libkalarm_resources.so
 %attr(755,root,root) %{_libdir}/libkalarm_calendar.so
