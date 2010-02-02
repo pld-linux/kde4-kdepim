@@ -510,6 +510,8 @@ Summary:	IMAP4 protocol service
 Summary(pl.UTF-8):	Obsługa protokołu IMAP4
 Group:		X11/Libraries
 Obsoletes:	kde4-kio-imap4
+# for PLAIN authentication
+Suggests:	cyrus-sasl-plain
 
 %description kio-imap4
 IMAP4 protocol service.
