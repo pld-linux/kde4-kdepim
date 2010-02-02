@@ -2,7 +2,6 @@
 %define		_state	unstable
 %define		qtver	4.6.0
 %define		orgname	kdepim
-%define		snap	svn1040395
 
 
 Summary:	Personal Information Management (PIM) for KDE
