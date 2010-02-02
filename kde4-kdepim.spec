@@ -791,6 +791,10 @@ rm -rf $RPM_BUILD_ROOT
 %postun	libs	-p /sbin/ldconfig
 %post	kalarm	-p /sbin/ldconfig
 %postun	kalarm	-p /sbin/ldconfig
+%post	kleopatra	-p /sbin/ldconfig
+%postun	kleopatra	-p /sbin/ldconfig
+%post	korganizer	-p /sbin/ldconfig
+%postun	korganizer	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
