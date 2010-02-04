@@ -1,5 +1,5 @@
 #
-%define		_state	unstable
+%define		_state	stable
 %define		qtver	4.6.1
 %define		orgname	kdepim
 
@@ -10,12 +10,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.3.98
+Version:	4.4.0
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	24d655b6d21d53d120536762186eb23c
+# Source0-md5:	a354448eebd4fd4b50739c4f20b90e20
 Patch100:	%{name}-branch.diff
 Patch0:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
