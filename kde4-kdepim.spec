@@ -56,6 +56,7 @@ BuildConflicts:	indexlib
 BuildConflicts:	kdepim-kontact-libs
 BuildConflicts:	kdepim-libkmailprivate
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	akonadi >= 1.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
