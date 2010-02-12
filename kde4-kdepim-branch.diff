@@ -1,0 +1,1816 @@
+Index: akregator/src/selectioncontroller.cpp
+===================================================================
+--- akregator/src/selectioncontroller.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ akregator/src/selectioncontroller.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -143,11 +143,15 @@
+ 
+ Akregator::Article Akregator::SelectionController::currentArticle() const
+ {
++    if ( !m_articleLister || !m_articleLister->articleSelectionModel() )
++        return Article();
+     return ::articleForIndex( m_articleLister->articleSelectionModel()->currentIndex(), m_feedList.get() );
+ }
+ 
+ QList<Akregator::Article> Akregator::SelectionController::selectedArticles() const
+ {
++    if ( !m_articleLister || !m_articleLister->articleSelectionModel() )
++        return QList<Akregator::Article>();
+     return ::articlesForIndexes( m_articleLister->articleSelectionModel()->selectedRows(), m_feedList.get() );
+ }
+ 
+Index: akregator/src/articleformatter.cpp
+===================================================================
+--- akregator/src/articleformatter.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ akregator/src/articleformatter.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -101,9 +101,9 @@
+         virtual bool visitFeed(Feed* node)
+         {
+             text = QString("<div class=\"headerbox\" dir=\"%1\">\n").arg(QApplication::isRightToLeft() ? "rtl" : "ltr");
+-
+-            text += QString("<div class=\"headertitle\" dir=\"%1\">").arg(Utils::directionOf(Utils::stripTags(node->title())));
+-            text += node->title();
++            const QString strippedTitle = Utils::stripTags(node->title());
++            text += QString("<div class=\"headertitle\" dir=\"%1\">").arg(Utils::directionOf(strippedTitle));
++            text += strippedTitle;
+             if(node->unread() == 0)
+                 text += i18n(" (no unread articles)");
+             else
+@@ -173,12 +173,13 @@
+     text = QString("<div class=\"headerbox\" dir=\"%1\">\n").arg(QApplication::isRightToLeft() ? "rtl" : "ltr");
+     const QString enc = formatEnclosure( *article.enclosure() );
+ 
+-    if (!article.title().isEmpty())
++    const QString strippedTitle = Utils::stripTags( article.title() );
++    if (!strippedTitle.isEmpty())
+     {
+-        text += QString("<div class=\"headertitle\" dir=\"%1\">\n").arg(Utils::directionOf(Utils::stripTags(article.title())));
++        text += QString("<div class=\"headertitle\" dir=\"%1\">\n").arg(Utils::directionOf(strippedTitle));
+         if (article.link().isValid())
+             text += "<a href=\""+article.link().url()+"\">";
+-        text += article.title().replace('<', "&lt;").replace('>', "&gt;"); // TODO: better leave things escaped in the parser
++        text += strippedTitle;
+         if (article.link().isValid())
+             text += "</a>";
+         text += "</div>\n";
+@@ -367,12 +368,14 @@
+     const QString enc = formatEnclosure( *article.enclosure() );
+     text = QString("<div class=\"headerbox\" dir=\"%1\">\n").arg(QApplication::isRightToLeft() ? "rtl" : "ltr");
+ 
+-    if (!article.title().isEmpty())
++    const QString strippedTitle = Utils::stripTags( article.title() );
++
++    if (!strippedTitle.isEmpty())
+     {
+-        text += QString("<div class=\"headertitle\" dir=\"%1\">\n").arg(Utils::directionOf(Utils::stripTags(article.title())));
++        text += QString("<div class=\"headertitle\" dir=\"%1\">\n").arg(Utils::directionOf(strippedTitle));
+         if (article.link().isValid())
+             text += "<a href=\""+article.link().url()+"\">";
+-        text += article.title().replace('<', "&lt;").replace('>', "&gt;"); // TODO: better leave things escaped in the parser
++        text += strippedTitle;
+         if (article.link().isValid())
+             text += "</a>";
+         text += "</div>\n";
+Index: akregator/src/articlemodel.cpp
+===================================================================
+--- akregator/src/articlemodel.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ akregator/src/articlemodel.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -58,12 +58,22 @@
+ 
+ };
+ 
++//like Syndication::htmlToPlainText, but without linebreaks
++
++static QString stripHtml( const QString& html ) {
++    QString str(html);
++    //TODO: preserve some formatting, such as line breaks
++    str.remove(QRegExp("<[^>]*>")); // remove tags
++    str = Syndication::resolveEntities(str);
++    return str.simplified();
++}
++
+ ArticleModel::Private::Private( const QList<Article>& articles_, ArticleModel* qq )
+  : q( qq ), articles( articles_ )
+ {
+     titleCache.resize( articles.count() );
+     for ( int i = 0; i < articles.count(); ++i )
+-        titleCache[i] = Syndication::htmlToPlainText( articles[i].title() );
++        titleCache[i] = stripHtml( articles[i].title() );
+ }
+ 
+ Akregator::ArticleModel::ArticleModel(const QList<Article>& articles, QObject* parent) : QAbstractTableModel( parent ), d( new Private( articles, this ) )
+Index: runtime/resources/pop3/accountdialog.cpp
+===================================================================
+Index: runtime/resources/maildir/maildirresource.cpp
+===================================================================
+Index: runtime/resources/kabc/kresourceassistant.cpp
+===================================================================
+Index: kresources/remote/resourceremoteconfig.cpp
+===================================================================
+--- kresources/remote/resourceremoteconfig.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ kresources/remote/resourceremoteconfig.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -93,7 +93,7 @@
+ 
+     if ( mUploadUrl->url().isEmpty() && !resource->readOnly() ) {
+       KMessageBox::information( this, i18n( "You have specified no upload URL, "
+-			    "the calendar will be read-only." ), "RemoteResourseNoUploadURL" );
++			    "the calendar will be read-only." ),QString(), "RemoteResourseNoUploadURL");
+       resource->setReadOnly( true );
+     }
+   } else {
+Index: blogilo/src/composer/stylegetter.cpp
+===================================================================
+--- blogilo/src/composer/stylegetter.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ blogilo/src/composer/stylegetter.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -82,7 +82,6 @@
+     b = new Backend( blogid );
+     connect( b, SIGNAL( sigPostPublished( int, BilboPost* ) ), this,
+              SLOT( sltTempPostPublished( int, BilboPost* ) ) );
+-//     connect( b, SIGNAL( sigPostFetched( BilboPost * ) ), this, SLOT( sltTempPostFetched( BilboPost * ) ) );
+     connect( b, SIGNAL( sigError( const QString& ) ), this, SLOT( sltError( const QString& ) ) );
+ 
+     Q_EMIT sigGetStyleProgress( 10 );
+@@ -160,9 +159,9 @@
+ 
+     mTempPost = post;
+     KIO::StoredTransferJob *job = KIO::storedGet( postUrl, KIO::NoReload, KIO::HideProgressInfo );
+-
+     connect( job, SIGNAL( result( KJob* ) ),
+             this, SLOT( sltHtmlCopied( KJob* ) ) );
++
+ }
+ 
+ void StyleGetter::sltHtmlCopied( KJob *job )
+@@ -212,9 +211,9 @@
+ 
+ 
+     //Remove temp post from the server.
+-    b->removePost( *mTempPost );
+     connect( b, SIGNAL( sigPostRemoved( int, const BilboPost &) ), this,
+              SLOT( sltTempPostRemoved( int, const BilboPost & ) ) );
++    b->removePost( *mTempPost );
+ }
+ 
+ void StyleGetter::sltTempPostRemoved( int blog_id, const BilboPost &post)
+Index: blogilo/src/backend.cpp
+===================================================================
+--- blogilo/src/backend.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ blogilo/src/backend.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -422,7 +422,9 @@
+         kDebug() << "Emitting sigPostPublished ...";
+         Q_EMIT sigPostPublished( mBBlog->id(), pp );
+     }
+-    delete post;
++    // TODO crashes stylegetter on GData. Somehow the post gets deleted before
++    // slotFetchedPost as it seems. Don't get all the pointer copies done here.
++    //delete post;
+ }
+ 
+ KBlog::BlogPost * Backend::preparePost( BilboPost &post )
+Index: doc/kwatchgnupg/index.docbook
+===================================================================
+--- doc/kwatchgnupg/index.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kwatchgnupg/index.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -47,7 +47,7 @@
+ 
+ <legalnotice>&GPLNotice;</legalnotice>
+ 
+-<date>2004-05-09</date>
++<date>2010-01-12</date>
+ <releaseinfo>1.0</releaseinfo>
+ 
+ <abstract>
+@@ -78,7 +78,7 @@
+ &watchgnupg;.</para>
+ 
+ <para>&kwatchgnupg; can be started from the
+-<menuchoice><guimenu>Tools</guimenu></menuchoice> menu of both
++<menuchoice><guimenu>Tools</guimenu><guimenuitem>GnuPG Log Viewer</guimenuitem></menuchoice> menu of both
+ &kleopatra; and &kmail;, as well as from the command
+ line. The &kwatchgnupg; executable is named
+ <userinput>kwatchgnupg</userinput>.
+Index: doc/ktimetracker/systray.png
+===================================================================
+Nie można wyświetlić: plik binarny.
+svn:mime-type = image/png
+Index: doc/ktimetracker/index.docbook
+===================================================================
+--- doc/ktimetracker/index.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/ktimetracker/index.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -141,7 +141,7 @@
+ </shortcut>
+ <guimenu>Task</guimenu>
+ <guimenuitem>New Task...</guimenuitem>
+-</menuchoice>
++</menuchoice>. 
+ 
+ To create a subtask, pick the parent task and select
+ 
+@@ -151,7 +151,7 @@
+ </shortcut>
+ <guimenu>Task</guimenu>
+ <guimenuitem>New Subtask...</guimenuitem>
+-</menuchoice>
++</menuchoice>.
+ </para>
+ 
+ <para>When &ktimetracker; exits, the task list is saved to a file on your disk. 
+@@ -192,13 +192,14 @@
+ <listitem><para>The time spent on the task since the session
+ began.</para></listitem> </varlistentry> 
+ 
+-<varlistentry> <term><guilabel>Total Session Time</guilabel></term>
+-<listitem><para>The time spent on the task and all its subtasks since the
+-session began.</para></listitem> </varlistentry> 
+ <varlistentry> <term><guilabel>Time</guilabel></term> <listitem><para>The time
+ spent on the task since all times were reset.</para></listitem>
+ </varlistentry> 
+ 
++<varlistentry> <term><guilabel>Total Session Time</guilabel></term>
++<listitem><para>The time spent on the task and all its subtasks since the
++session began.</para></listitem> </varlistentry> 
++
+ <varlistentry> <term><guilabel>Total Time</guilabel></term>
+ <listitem><para>The time spent on the task and all its subtasks since all
+ times were reset.</para></listitem> </varlistentry> 
+@@ -309,10 +310,10 @@
+ 
+ <para>As a typical usecase, you might want to plan a project with the project 
+ management tool Imendio Planner 
+-(from <ulink url="http://planner.imendio.org">planner.imendio.org</ulink>) 
+-and import its tasks to &ktimetracker; with <guimenu>File</guimenu>
+-<guisubmenu>Import</guisubmenu><guimenuitem>Import Tasks From Planner...</guimenuitem>, 
+-to have them in the industry standard <ulink
++(from <ulink url="http://live.gnome.org/Planner">live.gnome.org/Planner</ulink>) 
++and import its tasks to &ktimetracker; with <menuchoice><guimenu>File</guimenu>
++<guisubmenu>Import</guisubmenu><guimenuitem>Import Tasks From Planner...</guimenuitem>
++</menuchoice>, to have them in the industry standard <ulink
+ url="http://developer.kde.org/documentation/standards/index.html">iCalendar</ulink> 
+ format. Having done so, you are able to schedule the tasks in &korganizer;, and account your time 
+ to them in &ktimetracker;. That's one way to help ensure your project stays on time
+@@ -479,8 +480,8 @@
+ 
+ </sect1>
+ 
+-<sect1 id="tool-bar">
+-<title>The Toolbar</title>
++<sect1 id="tool-bar-status-bar">
++<title>The Toolbar and Statusbar</title>
+ <para>The toolbar contains icons for the following commands:</para>
+ 
+ <note><para>(All behave identically to the menu command.)</para></note>
+@@ -494,14 +495,9 @@
+ <listitem><para><guiicon>Edit</guiicon></para></listitem>
+ </itemizedlist>
+ 
++<para>The statusbar reports the name of the file where the data was saved.</para>
+ </sect1>
+ 
+-<sect1 id="status-bar">
+-<title>The Statusbar</title>
+-
+-<para>Reports the name of the file where the data was saved.</para>
+-</sect1>
+-
+ </chapter>
+ 
+ <chapter id="credits">
+Index: doc/kmail/using-kmail.docbook
+===================================================================
+--- doc/kmail/using-kmail.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/using-kmail.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -210,8 +210,7 @@
+ message, click the <guiicon>Send Now</guiicon> icon (the envelope) to send
+ the message now, or click the <guiicon>Send Later</guiicon> icon to put
+ the message in the outbox. If your message is not finished yet, select
+-<menuchoice><guimenu>Message</guimenu><guimenuitem>Save in Drafts
+-Folder</guimenuitem></menuchoice>.
++<menuchoice><guimenu>Message</guimenu><guimenuitem>Save as Draft</guimenuitem></menuchoice>.
+ </para></sect2>
+ 
+ <sect2 id="encrypt-sign">
+@@ -1773,9 +1772,9 @@
+ <para>Multiple accounts are used to check for messages from more than one email address
+ and/or mail server. Select <menuchoice><guimenu>Settings</guimenu>
+ <guimenuitem>Configure &kmail;...</guimenuitem></menuchoice> and click on the
+-<guilabel>Network</guilabel> page to add or change your account settings. See the
++<guilabel>Accounts</guilabel> page to add or change your account settings. See the
+ <link linkend="getting-started">Getting started</link> section for more
+-information on the settings in the <guilabel>Network</guilabel> page.</para>
++information on the settings in the <guilabel>Accounts</guilabel> page.</para>
+ 
+ <para>To check for messages from a particular account, use the
+ <menuchoice><guimenu>File</guimenu><guimenuitem>Check Mail
+Index: doc/kmail/configure.docbook
+===================================================================
+--- doc/kmail/configure.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/configure.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -115,7 +115,7 @@
+ identity.</para>
+ 
+ <para>To add a new identity to the identity list, click on the
+-<guibutton>New...</guibutton> button.
++<guibutton>Add...</guibutton> button.
+ The <link linkend="configure-identity-newidentitydialog">New identity</link> dialog
+ will then appear.</para>
+ 
+@@ -143,11 +143,9 @@
+ <varlistentry>
+ <term><guilabel>Use Control Center settings</guilabel></term>
+ <listitem>
+-<para>Uses the settings of the <application>Control
+-Center</application>'s default email profile (you can edit that one
+-under <menuchoice><guimenu>Internet &amp; Network</guimenu>
+-<guimenuitem>Email</guimenuitem></menuchoice> in the
+-<application>Control Center</application>).</para>
++<para>Uses the values from <menuchoice><guimenu>Personal</guimenu><guimenuitem>About Me</guimenuitem>
++<guimenuitem>Password &amp; User Account</guimenuitem></menuchoice> in the
++&systemsettings;.</para>
+ </listitem>
+ </varlistentry>
+ 
+@@ -533,12 +531,12 @@
+ or similar programs
+ you can specify a name and the location of the
+ <command>sendmail</command> program.  For <acronym>SMTP</acronym> you
+-can specify <guilabel>Name</guilabel>, <guilabel>Host</guilabel>, and
++can specify <guilabel>Name</guilabel>, <guilabel>Outgoing mail server</guilabel>, and
+ <guilabel>Port</guilabel> of the server.  <guilabel>Server requires
+ authentication</guilabel> will enable the <guilabel>Login</guilabel>
+ and <guilabel>Password</guilabel> fields and the
+ <guilabel>Authentication method</guilabel> buttons on the
+-<guilabel>Security</guilabel> tab. If you are not sure about the
++<guilabel>Advanced</guilabel> tab. If you are not sure about the
+ security settings you can make &kmail; test for the best settings by
+ using <guibutton>Check What the Server Supports</guibutton>.</para>
+ 
+@@ -647,13 +645,21 @@
+ <guilabel>Recycle colors on deep quoting</guilabel> means that even text that is
+ quoted more than three times will appear in color. Note that the
+ <guilabel>Quoted text</guilabel> colors only work in the message reader, not in
+-the composer.<!-- TODO --></para>
++the composer. If you want folders which are close to their quota
++(space allotment, usually used on IMAP servers) to be displayed in a different color,
++you can specify a percentage value as a threshold for this. The color to be used
++can be configured along with the other custom colors.<!-- TODO --></para>
+ 
+ </sect2>
+ 
+ <sect2 id="configure-appearance-layout">
+ <title>Layout</title>
+ 
++<para>If the <guilabel>Close message window after replying or forwarding</guilabel> option is
++activated, KMail will close the message window after replying to or forwarding the message that
++is displayed in the window. This only applies to the separate message window, not to the embedded
++message preview pane.</para>
++
+ <para><guilabel>Show HTML status bar</guilabel> activates a bar at the left side of the reader
+ pane that tells you if a message is &html; or not. This is important because
+ &html; messages might imitate the look of a signed and encrypted message, so
+@@ -1124,7 +1130,7 @@
+ 		  <para>
+ 		    Attaches the complete message to the disposition
+ 		    notification. Usually, this is overkill. It does
+-		    not add any valueable information that cannot be
++		    not add any valuable information that cannot be
+ 		    deduced from the message headers alone, but people
+ 		    sometimes insist on this, since it is much easier
+ 		    for humans to correlate the content of the message
+@@ -1298,7 +1304,7 @@
+ 	  </term>
+ 	  <listitem>
+ 	    <para>
+-	      If checked, everytime you encrypt a message, a dialog
++	      If checked, every time you encrypt a message, a dialog
+ 	      will appear that presents you with the encryption keys
+ 	      that will be used for each recipient. You can then
+ 	      review the choice of keys, change them, and approve or
+@@ -1408,7 +1414,7 @@
+ 	  <listitem>
+ 	    <para>
+ 	      If checked, &kmail; will emit a warning if an &smime;
+-	      certifciate or &openpgp; key will be used for a recipient
++	      certificate or &openpgp; key will be used for a recipient
+ 	      whose email address is not listed in the email addresses
+ 	      stored in the certificate.
+ 	    </para>
+@@ -1720,7 +1726,7 @@
+ 	backends. Below each backend entry, you can see what protocols
+ 	(&openpgp; and/or &smime;) the backend supports. If a protocol
+ 	is not listed, the backend does not support it. If it is
+-	listed, but greyed out, the backend supports the protocol, but
++	listed, but grayed out, the backend supports the protocol, but
+ 	some required programs were not found, or other errors
+ 	occurred during initialization. If you press
+ 	<guibutton>Rescan</guibutton>, a dialog box will appear that
+@@ -1815,13 +1821,30 @@
+ </varlistentry>
+ 
+ <varlistentry>
+-<term><guilabel>Jump to first unread message when entering a folder</guilabel></term>
++
++<term><guilabel>When entering a folder</guilabel></term>
+ <listitem>
+-<para>If this option is enabled &kmail; will go to the first unread message
+-when you enter a folder; if it is not enabled, &kmail; will go to first
+-new message or, if there is no new message, to the message
+-that was selected when you last left the folder.</para>
++<para>This option controls what happens if you open a folder.
++<itemizedlist>
++<listitem>
++<para>If <guilabel>Jump to First New Message</guilabel> is selected then &kmail; will select the
++first message it finds that is marked as new.
++</para>
+ </listitem>
++<listitem>
++<para>If <guilabel>Jump to First Unread or New Message</guilabel> is selected then &kmail; will
++select the first message it finds that is marked either as new or as unread.
++</para>
++</listitem>
++<listitem>
++<para>If <guilabel>Jump to Last Selected Message</guilabel> is selected then &kmail; will select
++the message that was selected when the folder was open the last time.
++</para>
++</listitem>
++</itemizedlist>
++
++</para>
++</listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+@@ -1918,6 +1941,14 @@
+ <para>You should not need to see the folders that hold the  <guilabel>IMAP</guilabel> resources. However if you want to see them, you can set that by enabling this option.</para>
+ </listitem>
+ </varlistentry>
++</variablelist>
++</sect2>
++
++<sect2 id="configure-misc-invitation">
++<title>Invitations</title>
++
++<variablelist>
++
+ <varlistentry>
+ <term><guilabel>Mangle From:/To: headers in replies to invitations</guilabel></term>
+ <listitem>
+@@ -1942,9 +1973,26 @@
+ <varlistentry>
+ <term><guilabel>Outlook compatible invitation reply comments</guilabel></term>
+ <listitem>
+-<para>When the user provides comments when responding to invitations, send the comment in way that Microsoft Outlook(tm) understands. If this option is not enabled, the reponse comments will not be seen in Outlook.</para>
++<para>When the user provides comments when responding to invitations, send the comment in way that Microsoft Outlook(tm) understands. If this option is not enabled, the response comments will not be seen in Outlook.</para>
+ </listitem>
+ </varlistentry>
++<varlistentry>
++<term><guilabel>Automatic invitation sending</guilabel></term>
++<listitem>
++<para>When this is checked, you will not see the mail composer window. Instead, 
++all invitation mails are sent automatically. If you want to see the mail 
++before sending it, you can uncheck this option. However, be aware that the 
++text in the composer window is in iCalendar syntax, and you should not try 
++modifying it by hand.</para>
++</listitem>
++</varlistentry>
++<varlistentry>
++<term><guilabel>Delete invitation emails after the reply to them has been sent</guilabel></term>
++<listitem>
++<para>When this is checked, received invitation emails that have been replied to 
++will be moved to the Trash folder, once the reply has been successfully sent.</para>
++</listitem>
++</varlistentry>
+ </variablelist>
+ </sect2>
+ 
+@@ -1991,7 +2039,7 @@
+ to the [MDN] section of the kmail configuration file. If there is no such section, simply add "[MDN]" on
+ a line by itself just above the option.
+ 
+-Note that the default setting of "false" strictly speaking violates internet standards, but is
++Note that the default setting of "false" strictly speaking violates Internet standards, but is
+ set that way for practical reasons, to avoid servers rejecting MDNs that KMail
+ generates because they think they are SPAM.
+ </para>
+@@ -2142,6 +2190,16 @@
+ </varlistentry>
+ 
+ <varlistentry>
++<term><guilabel>AutoLostFoundMove</guilabel></term>
++<listitem><para>Activate this option to automate the handling of not yet uploaded messages in disconnected IMAP
++folders that can not be uploaded. This can happen if the folder was removed from the server or your access
++rights have been restricted. Such messages will automatically moved to a newly created lost+found folder if
++this option is enabled, you will be ask how to proceed every time otherwise.
++</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
+ <term><guilabel>ShowUserAgent</guilabel></term>
+ <listitem>
+ <para>
+Index: doc/kmail/getting-started.docbook
+===================================================================
+--- doc/kmail/getting-started.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/getting-started.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -49,14 +49,14 @@
+ messages.</para>
+ 
+ <para>The Configure window consists of six sections:
+-<guilabel>Identities</guilabel>, <guilabel>Network</guilabel>,
++<guilabel>Identities</guilabel>, <guilabel>Accounts</guilabel>,
+ <guilabel>Appearance</guilabel>, <guilabel>Composer</guilabel>,
+ <guilabel>Security</guilabel>, and
+ <guilabel>Misc</guilabel>.</para>
+ 
+ <para>To begin sending and receiving messages you will only have to
+ change some settings in the <guilabel>Identities</guilabel> and
+-<guilabel>Network</guilabel> pages.</para>
++<guilabel>Accounts</guilabel> pages.</para>
+ 
+   <sect1 id="setting-your-identity">
+     <title>
+@@ -94,7 +94,7 @@
+ <sect1 id="setting-up-your-account">
+ <title>Setting up your Account</title>
+ 
+-<para>The <guilabel>Network</guilabel> page contains the settings that
++<para>The <guilabel>Accounts</guilabel> page contains the settings that
+ tell &kmail; how to send and receive your email messages. Many of these settings
+ can vary greatly depending on the setup of your system and on the kind
+ of network that your mail server is located in. If you do not know what
+@@ -116,8 +116,8 @@
+ working &Sendmail; configuration, choose
+ <guilabel>SMTP</guilabel> and fill in the <guilabel>Name</guilabel>
+ field with a descriptive name
+-(&eg; <userinput>My Mail Account</userinput>)
+-and the <guilabel>Host</guilabel>
++(&eg; <userinput>My Mail Account</userinput>). Click the <guibutton>Create and Configure</guibutton>
++and fill the <guilabel>Outgoing mail server</guilabel>
+ field with the name and domain of your mail server
+ (&eg; <userinput>smtp.provider.com</userinput>). You will probably
+ not need to change the <guilabel>Port</guilabel> setting (the default is
+@@ -159,10 +159,10 @@
+ about file locking</link>.</para>
+ 
+ <para>You will then be presented with
+-the <guilabel>Add account</guilabel> window. First, fill in the
+-<guilabel>Name</guilabel> field to name your account. You can choose any name
++the <guilabel>Add Account</guilabel> window. First, fill in the
++<guilabel>Account name</guilabel> field to name your account. You can choose any name
+ you like.  <guilabel>Login</guilabel>, <guilabel>Password</guilabel>, and
+-<guilabel>Host</guilabel> should be filled in with the appropriate information
++<guilabel>Incoming mail server</guilabel> should be filled in with the appropriate information
+ from your <acronym>ISP</acronym> or system administrator. You should not
+ need to change the <guilabel>Port</guilabel> setting (the default for POP3 is
+ <userinput>110</userinput>, the default for <acronym>IMAP</acronym> is
+@@ -234,12 +234,12 @@
+ <link linkend="filters">filter</link>, which has nothing to do with this
+ option.</para>
+ 
+-<para>With <guilabel>Precommand</guilabel> you can specify any program that &kmail;
++<para>With <guilabel>Pre-command</guilabel> you can specify any program that &kmail;
+ will execute just before fetching mail. Please specify the full path
+ (do not use <quote>~</quote>) and note that &kmail; will not continue
+ until the program returns.</para>
+ 
+-<para>On the <guilabel>Extras</guilabel> tab you can select <guilabel>Use
++<para>On the <guilabel>POP Settings</guilabel> tab you can select <guilabel>Use
+ pipelining for faster mail download</guilabel> if this is supported by your
+ server. You should carefully test this to make sure it works safely.</para>
+ </sect3>
+@@ -248,9 +248,9 @@
+ <title>Options for both <acronym>IMAP</acronym> and POP3</title>
+ 
+ <!-- TODO: move all this, this isn't important for beginners?! -->
+-<para>If you select <guilabel>Store POP password in configuration
+-file</guilabel> or <guilabel>Store IMAP password in configuration
+-file</guilabel> &kmail; will remember your password so you will not have to
++<para>If you select <guilabel>Store POP password</guilabel> or 
++<guilabel>Store IMAP Password</guilabel> &kmail; will remember 
++your password so you will not have to
+ type it every time you start &kmail; and fetch new mail.</para>
+ 
+ <warning><para>Be warned that &kmail; cannot really encrypt your password, so
+@@ -282,7 +282,7 @@
+ authentication methods. Additionally, for <acronym>IMAP</acronym>
+ <guilabel>Anonymous</guilabel> is supported, but <guilabel>APOP</guilabel>
+ is not. Use the <guibutton>Check what the server supports</guibutton> button
+-on the <guilabel>Extras</guilabel> or <guilabel>Security</guilabel> tab
++on the <guilabel>Security</guilabel> tab
+ to automatically select the most secure settings supported by your server.</para>
+ 
+ <para>You are now ready to send and receive mail. For
+@@ -310,7 +310,7 @@
+ <link linkend="the-composer-window">composer window</link> will appear. Fill in the
+ <guilabel>To:</guilabel> field with your email address and type
+ something in the <guilabel>Subject</guilabel> field. Send the message by
+-selecting <menuchoice><guimenu>Message</guimenu> <guimenuitem>Send</guimenuitem>
++selecting <menuchoice><guimenu>Message</guimenu> <guimenuitem>Send Mail</guimenuitem>
+ </menuchoice>.</para>
+ 
+ <para>To check your email, select
+Index: doc/kmail/faq.docbook
+===================================================================
+--- doc/kmail/faq.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/faq.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -492,7 +492,7 @@
+ <answer><para>See the <link linkend="popfilters">Download filters</link> chapter.
+ If you want to leave all messages on the server: open up the
+ <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &kmail;...</guimenuitem>
+-</menuchoice> window. Click on the <guilabel>Network</guilabel> page. Select your
++</menuchoice> window. Click on the <guilabel>Accounts</guilabel> page. Select your
+ account from the account list and click the <guibutton>Modify...</guibutton>
+ button. This dialog contains the <guilabel>Leave fetched messages on the server</guilabel>
+ setting which you must enable.</para></answer>
+Index: doc/kmail/menus.docbook
+===================================================================
+--- doc/kmail/menus.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/menus.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -83,6 +83,22 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
++<guimenu>Tools</guimenu>
++<guimenuitem>Import Messages...</guimenuitem>
++</menuchoice>
++</term>
++<listitem>
++<para>
++Starts up <application>kmailcvt</application> (which is
++part of kdepim). This application lets you import
++messages from several email clients &kmail;.
++</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term>
++<menuchoice>
+ <shortcut><keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo></shortcut>
+ <guimenu>File</guimenu>
+ <guimenuitem>Print...</guimenuitem>
+@@ -92,7 +108,7 @@
+ <para>Display a dialog that lets you prints the currently displayed message.</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- NOT IN 4.4.0
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -104,7 +120,7 @@
+ on disk according to how you have moved and deleted them in &kmail;.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -233,22 +249,8 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycap>T</keycap></shortcut>
++<shortcut><keycap>Del</keycap></shortcut>
+ <guimenu>Edit</guimenu>
+-<guimenuitem>Edit Message</guimenuitem>
+-</menuchoice>
+-</term>
+-<listitem>
+-<para>Edits the selected message if it is editable. Only messages in the
+-<guilabel>outbox</guilabel> and <guilabel>drafts</guilabel> folder can be edited.</para>
+-</listitem>
+-</varlistentry>
+-
+-<varlistentry>
+-<term>
+-<menuchoice>
+-<shortcut><keycap>Delete</keycap></shortcut>
+-<guimenu>Edit</guimenu>
+ <guimenuitem>Move to Trash</guimenuitem>
+ </menuchoice>
+ </term>
+@@ -257,7 +259,7 @@
+ messages are already in the trash folder, they will really be deleted.</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -271,7 +273,7 @@
+ once they are deleted with this command.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -301,9 +303,9 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>A</keycap></keycombo></shortcut>
++<shortcut><keycombo action="simul">&Ctrl;<keycap>T</keycap></keycombo></shortcut>
+ <guimenu>Edit</guimenu>
+-<guimenuitem>Select Message Text</guimenuitem>
++<guimenuitem>Select All Text</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+@@ -356,7 +358,7 @@
+ </para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -384,7 +386,7 @@
+ of messages per folder.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -559,7 +561,7 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycombo action="simul">&Ctrl;<keycap>+</keycap></keycombo></shortcut>
++<shortcut><keycombo action="simul">&Alt;<keycap>+</keycap></keycombo></shortcut>
+ <guimenu>Go</guimenu>
+ <guimenuitem>Next Unread Folder</guimenuitem>
+ </menuchoice>
+@@ -572,7 +574,7 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycombo action="simul">&Ctrl;<keycap>-</keycap></keycombo></shortcut>
++<shortcut><keycombo action="simul">&Alt;<keycap>-</keycap></keycombo></shortcut>
+ <guimenu>Go</guimenu>
+ <guimenuitem>Previous Unread Folder</guimenuitem>
+ </menuchoice>
+@@ -634,14 +636,14 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
++<shortcut><keycap>F5</keycap></shortcut>
+ <guimenu>Folder</guimenu>
+-<guimenuitem>Compact</guimenuitem>
++<guimenuitem>Check Mail in This Folder</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>Compacts the folder file to reduce its disk space usage. Usually
+-&kmail; compacts all folders automatically, but under certain circumstances
+-you might want to compact a folder manually.</para>
++<para>Checks whether new mail arrived in the currently selected folder.
++This is only available for &imap; folders.</para>
+ </listitem>
+ </varlistentry>
+ 
+@@ -649,59 +651,60 @@
+ <term>
+ <menuchoice>
+ <guimenu>Folder</guimenu>
+-<guimenuitem>Expire</guimenuitem>
++<guimenuitem>Move All Messages to Trash</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>Deletes old messages from the current folder or moves them to another
+-folder, according to the rules in the folder's <guilabel>Properties</guilabel> dialog (the default is not to delete or move old messages). Usually &kmail;
+-does this automatically, but under certain circumstances you might want to
+-expire a folder manually...</para>
++<para>Moves all of the messages in the selected folder into the trash folder.
++This is only available if the currently selected folder is not a trash
++folder.</para>
+ </listitem>
+ </varlistentry>
+ 
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycombo action="simul">&Ctrl;<keycap>*</keycap></keycombo></shortcut>
+ <guimenu>Folder</guimenu>
+-<guimenuitem>Remove Duplicate Messages</guimenuitem>
++<guimenuitem>Compact</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>Searches the folder for duplicate messages and deletes the
+-duplicates.</para>
++<para>Compacts the folder file to reduce its disk space usage. Usually
++&kmail; compacts all folders automatically, but under certain circumstances
++you might want to compact a folder manually.</para>
+ </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycap>F5</keycap></shortcut>
+ <guimenu>Folder</guimenu>
+-<guimenuitem>Check Mail in This Folder</guimenuitem>
++<guimenuitem>Expire</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>Checks whether new mail arrived in the currently selected folder.
+-This is only available for &imap; folders.</para>
++<para>Deletes old messages from the current folder or moves them to another
++folder, according to the rules in the folder's <guilabel>Properties</guilabel> dialog (the default is not to delete or move old messages). Usually &kmail;
++does this automatically, but under certain circumstances you might want to
++expire a folder manually...</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
++<shortcut><keycombo action="simul">&Ctrl;<keycap>*</keycap></keycombo></shortcut>
+ <guimenu>Folder</guimenu>
+-<guimenuitem>Move All Messages to Trash</guimenuitem>
++<guimenuitem>Remove Duplicate Messages</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>Moves all of the messages in the selected folder into the trash folder.
+-This is only available if the currently selected folder is not a trash
+-folder.</para>
++<para>Searches the folder for duplicate messages and deletes the
++duplicates.</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -714,7 +717,7 @@
+ currently selected folder is a trash folder.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -742,7 +745,7 @@
+ activate this for folders which only contain trusted messages.</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -773,7 +776,7 @@
+ </para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -873,6 +876,7 @@
+ <menuchoice>
+ <shortcut><keycombo action="simul">&Shift;<keycap>A</keycap></keycombo></shortcut>
+ <guimenu>Message</guimenu>
++<guisubmenu>Reply Special</guisubmenu>
+ <guimenuitem>Reply to Author...</guimenuitem>
+ </menuchoice>
+ </term>
+@@ -890,6 +894,7 @@
+ <menuchoice>
+ <shortcut><keycap>L</keycap></shortcut>
+ <guimenu>Message</guimenu>
++<guisubmenu>Reply Special</guisubmenu>
+ <guimenuitem>Reply to Mailing-List...</guimenuitem>
+ </menuchoice>
+ </term>
+@@ -910,6 +915,7 @@
+ <menuchoice>
+ <shortcut><keycombo action="simul">&Shift;<keycap>R</keycap></keycombo></shortcut>
+ <guimenu>Message</guimenu>
++<guisubmenu>Reply Special</guisubmenu>
+ <guimenuitem>Reply Without Quote...</guimenuitem>
+ </menuchoice>
+ </term>
+@@ -956,7 +962,21 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
++<shortcut><keycap>T</keycap></shortcut>
+ <guimenu>Message</guimenu>
++<guimenuitem>Edit Message</guimenuitem>
++</menuchoice>
++</term>
++<listitem>
++<para>Edits the selected message if it is editable. Only messages in the
++<guilabel>outbox</guilabel> and <guilabel>drafts</guilabel> folder can be edited.</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term>
++<menuchoice>
++<guimenu>Message</guimenu>
+ <guisubmenu>Copy To</guisubmenu>
+ </menuchoice>
+ </term>
+@@ -1071,7 +1091,7 @@
+ <guimenuitem>Mark Message</guimenuitem></menuchoice>.</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1097,7 +1117,7 @@
+ to this thread will automatically be marked as read.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1214,21 +1234,6 @@
+       </listitem>
+     </varlistentry>
+ 
+-    <varlistentry id="reader-tools-import-messages">
+-      <term>
+-        <menuchoice>
+-          <guimenu>Tools</guimenu>
+-          <guimenuitem>Import Messages...</guimenuitem>
+-        </menuchoice>
+-      </term>
+-      <listitem>
+-        <para>
+-          Starts up <application>kmailcvt</application> (which is
+-          part of kdepim). This application lets you import
+-          messages from several email clients &kmail;.
+-        </para>
+-      </listitem>
+-    </varlistentry>
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1273,7 +1278,6 @@
+ </listitem>
+ </varlistentry>
+ 
+-<!--
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1286,7 +1290,6 @@
+ you to set up scanning messages for viruses.</para>
+ </listitem>
+ </varlistentry>
+--->
+ 
+ </variablelist>
+ 
+@@ -1310,7 +1313,7 @@
+ to compose a new message &etc;).</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1323,7 +1326,7 @@
+ for messages matching a search text is visible.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1482,7 +1485,7 @@
+ <menuchoice>
+ <shortcut><keycombo action="simul">&Ctrl;<keycap>Return</keycap></keycombo></shortcut>
+ <guimenu>Message</guimenu>
+-<guimenuitem>Send Now</guimenuitem>
++<guimenuitem>Send Mail</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+@@ -1645,6 +1648,18 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
++<guimenu>Edit</guimenu>
++<guimenuitem>Paste as Quotation</guimenuitem>
++</menuchoice>
++</term>
++<listitem>
++<para>Pastes the text from the clipboard marked as quotation.</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term>
++<menuchoice>
+ <shortcut><keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo></shortcut>
+ <guimenu>Edit</guimenu>
+ <guimenuitem>Select All</guimenuitem>
+@@ -1671,7 +1686,7 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycombo action="simul">&Ctrl;<keycap>F</keycap></keycombo></shortcut>
++<shortcut><keycap>F3</keycap></shortcut>
+ <guimenu>Edit</guimenu>
+ <guimenuitem>Find Next</guimenuitem>
+ </menuchoice>
+@@ -1711,18 +1726,6 @@
+ <term>
+ <menuchoice>
+ <guimenu>Edit</guimenu>
+-<guimenuitem>Paste as Quotation</guimenuitem>
+-</menuchoice>
+-</term>
+-<listitem>
+-<para>Pastes the text from the clipboard marked as quotation.</para>
+-</listitem>
+-</varlistentry>
+-
+-<varlistentry>
+-<term>
+-<menuchoice>
+-<guimenu>Edit</guimenu>
+ <guimenuitem>Add Quote Characters</guimenuitem>
+ </menuchoice>
+ </term>
+@@ -2100,24 +2103,12 @@
+ <term>
+ <menuchoice>
+ <guimenu>Settings</guimenu>
+-<guimenuitem>Show Main Toolbar</guimenuitem>
++<guimenuitem>Toolbars Shown</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>If enabled, the Main Toolbar is visible, &ie; the one with the icon
+-to send the message &etc;.</para>
+-</listitem>
+-</varlistentry>
+-
+-<varlistentry>
+-<term>
+-<menuchoice>
+-<guimenu>Settings</guimenu>
+-<guimenuitem>Show HTML Toolbar</guimenuitem>
+-</menuchoice>
+-</term>
+-<listitem>
+-<para>If enabled, the &html; Toolbar is visible, &ie; the one which with the
++<para>Enables and disables the Main Toolbar, &ie; the one with the icon
++to send the message &etc; and the &html; Toolbar, &ie; the one which with the
+ tools to change certain properties of the composed text.</para>
+ </listitem>
+ </varlistentry>
+Index: doc/kmail/importing.docbook
+===================================================================
+--- doc/kmail/importing.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/importing.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -25,8 +25,8 @@
+ <title>Using other Mailbox Files with &kmail;</title>
+ 
+ <para>&kmail; offers an import tool for the messages and address books of some
+-other email clients. You can access it using <menuchoice><guimenu>Tools</guimenu>
+-<guimenuitem>Import...</guimenuitem></menuchoice>. Please make sure that you 
++other email clients. You can access it using <menuchoice><guimenu>File</guimenu>
++<guimenuitem>Import Messages</guimenuitem></menuchoice>. Please make sure that you 
+ compact your folders in the other email client, no matter if you are going to use
+ the import utility or if you are going to copy files manually.
+ You only need to read this chapter if this tool does not work for you.</para>
+@@ -46,7 +46,7 @@
+ &kmail;. The mailboxes should now show up correctly in &kmail;.</para>
+ 
+ <para>Please have a look at the
+-<ulink url="http://kontact.kde.org/kmail/tools.html">Tools section of &kmail;'s
++<ulink url="http://userbase.kde.org/KMail/Tools">Tools section of &kmail;'s
+ homepage</ulink> first, to see if there is a tool that imports your mailbox
+ and maybe even address book.</para>
+ 
+@@ -241,7 +241,7 @@
+ <term>Maildir / Outlook Express / xfmail</term>
+ <listitem>
+ <para>Tools to convert these formats are available at the
+-<ulink url="http://kontact.kde.org/kmail/tools.html">Tools section of &kmail;'s
++<ulink url="http://userbase.kde.org/KMail/Tools">Tools section of &kmail;'s
+ homepage</ulink>.</para>
+ </listitem>
+ </varlistentry>
+@@ -251,7 +251,7 @@
+ Mail</application>, &etc;...</term>
+ <listitem>
+ <para>First you should have a look at <ulink
+-url="http://kontact.kde.org/kmail/tools.html">Tools section of &kmail;'s homepage</ulink> if 
++url="http://userbase.kde.org/KMail/Tools">Tools section of &kmail;'s homepage</ulink> if 
+ there are tools to convert your messages.</para>
+ <para>Mail programs not listed here or on the homepage probably do not work with &kmail; as they use
+ proprietary mail formats that &kmail; cannot understand. However, there is no
+Index: doc/kmail/intro.docbook
+===================================================================
+--- doc/kmail/intro.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/intro.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -45,7 +45,7 @@
+ </itemizedlist>
+ 
+ <para>&kmail;'s homepage can be found at <ulink
+-url="http://kontact.kde.org/kmail/">http://kontact.kde.org/kmail/</ulink>. There you will
++url="http://userbase.kde.org/KMail">http://userbase.kde.org/KMail</ulink>. There you will
+ find useful links, &eg; to the user and developer mailing lists.
+ Please report bugs in &kmail; using
+ <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
+Index: kalarm/editdlgtypes.cpp
+===================================================================
+--- kalarm/editdlgtypes.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ kalarm/editdlgtypes.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -1,7 +1,7 @@
+ /*
+  *  editdlgtypes.cpp  -  dialogs to create or edit alarm or alarm template types
+  *  Program:  kalarm
+- *  Copyright © 2001-2009 by David Jarvie <djarvie@kde.org>
++ *  Copyright © 2001-2010 by David Jarvie <djarvie@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+  *  it under the terms of the GNU General Public License as published by
+@@ -846,6 +846,7 @@
+ */
+ void EditCommandAlarmDlg::setAction(KAEventData::Action action, const AlarmText& alarmText)
+ {
++	Q_UNUSED(action);
+ 	Q_ASSERT(action == KAEventData::COMMAND);
+ 	mCmdEdit->setText(alarmText);
+ }
+@@ -1177,6 +1178,7 @@
+ */
+ void EditEmailAlarmDlg::setAction(KAEventData::Action action, const AlarmText& alarmText)
+ {
++	Q_UNUSED(action);
+ 	Q_ASSERT(action == KAEventData::EMAIL);
+ 	if (alarmText.isEmail())
+ 	{
+@@ -1505,6 +1507,7 @@
+ */
+ void EditAudioAlarmDlg::setAction(KAEventData::Action action, const AlarmText& alarmText)
+ {
++	Q_UNUSED(action);
+ 	Q_ASSERT(action == KAEventData::AUDIO);
+ 	mSoundConfig->set(alarmText.displayText(), Preferences::defaultSoundVolume());
+ }
+Index: ktimetracker/ktimetracker_config_storage.desktop
+===================================================================
+--- ktimetracker/ktimetracker_config_storage.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ ktimetracker/ktimetracker_config_storage.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -61,7 +61,7 @@
+ Comment[et]=Salvesti seadistamine
+ Comment[fr]=Configuration du stockage
+ Comment[ga]=Cumraigh Stóras
+-Comment[gl]=Configurar o almacenamento
++Comment[gl]=Configure o almacenamento
+ Comment[hu]=A tároló beállításai
+ Comment[it]=Configura la memorizzazione
+ Comment[ja]=保存の設定
+Index: ktimetracker/ktimetracker_config_display.desktop
+===================================================================
+--- ktimetracker/ktimetracker_config_display.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ ktimetracker/ktimetracker_config_display.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -90,7 +90,7 @@
+ Comment[et]=Välimuse seadistamine
+ Comment[fr]=Configuration de l'apparence
+ Comment[ga]=Cumraigh Cuma
+-Comment[gl]=Configurar a aparencia
++Comment[gl]=Configure a aparencia
+ Comment[hu]=A megjelenés beállítása
+ Comment[it]=Configura l'aspetto
+ Comment[ja]=外観の設定
+Index: ktimetracker/ktimetracker_config_behavior.desktop
+===================================================================
+--- ktimetracker/ktimetracker_config_behavior.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ ktimetracker/ktimetracker_config_behavior.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -62,7 +62,7 @@
+ Comment[et]=Käitumise seadistamine
+ Comment[fr]=Configuration du comportement
+ Comment[ga]=Cumraigh Oibriú
+-Comment[gl]=Configurar o comportamento
++Comment[gl]=Configure o comportamento
+ Comment[hu]=A működési mód beállítása
+ Comment[it]=Configura il comportamento
+ Comment[ja]=挙動の設定
+Index: libkdepim/categoryeditdialog_base.ui
+===================================================================
+--- libkdepim/categoryeditdialog_base.ui	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ libkdepim/categoryeditdialog_base.ui	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -21,6 +21,9 @@
+    </property>
+    <item row="1" column="0" colspan="2" >
+     <widget class="KLineEdit" name="mEdit" >
++     <property name="ClearButtonShown" >
++      <bool>true</bool>
++     </property>
+      <property name="toolTip" >
+       <string>New category entry</string>
+      </property>
+Index: kontact/src/kontactconfig.desktop
+===================================================================
+--- kontact/src/kontactconfig.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ kontact/src/kontactconfig.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -80,6 +80,7 @@
+ Comment[es]=Componente predeterminado de KDE Kontact
+ Comment[et]=KDE Kontacti vaikekomponent
+ Comment[fr]=Composant Kontact KDE par défaut
++Comment[gl]=Compoñente por omisión de Kontact de KDE
+ Comment[it]=Componente predefinito di KDE Kontact
+ Comment[km]=សមាសធាតុ​ Kontact របស់ KDE លំនាំដើម
+ Comment[lv]=Noklusētā KDE kontaktu komponente
+Index: kontact/src/main.cpp
+===================================================================
+--- kontact/src/main.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ kontact/src/main.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -138,7 +138,6 @@
+         mMainWindow->setInitialActivePluginModule( moduleName );
+       }
+       mMainWindow->show();
+-      Akonadi::Control::start( mMainWindow );
+       KontactInterface::UniqueAppHandler::setMainWidget( mMainWindow );
+       // --iconify is needed in kontact, although kstart can do that too,
+       // because kstart returns immediately so it's too early to talk D-Bus to the app.
+@@ -200,6 +199,10 @@
+ 
+   KontactApp app;
+ 
++  // KDE 4.4: do akonadi startup before creating any window, since creating
++  // the window loads kmail. In 4.5 we'll do this startup async instead.
++  Akonadi::Control::start( 0 );
++
+   // Qt doesn't treat the system tray as a window, and therefore Qt would quit
+   // the event loop when an error message is clicked away while Kontact is in the
+   // tray.
+Index: akonadi/kcal/Messages.sh
+===================================================================
+Index: korganizer/koeventviewerdialog.cpp
+===================================================================
+--- korganizer/koeventviewerdialog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/koeventviewerdialog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -33,7 +33,7 @@
+   setCaption( i18n( "Event Viewer" ) );
+   setButtons( Close | User1 | User2 );
+   setModal( false );
+-  setButtonGuiItem( User1, KGuiItem( i18n( "Edit..." ) ) );
++  setButtonGuiItem( User1, KGuiItem( i18n( "Edit..." ), KIcon( "document-edit" ) ) );
+   setButtonGuiItem( User2, KGuiItem( i18n( "Show in Context" ) ) );
+   mEventViewer = new KOEventViewer( calendar, this );
+   setMainWidget( mEventViewer );
+Index: korganizer/actionmanager.h
+===================================================================
+--- korganizer/actionmanager.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/actionmanager.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -404,6 +404,13 @@
+     KAction *mPublishEvent;
+     KAction *mForwardEvent;
+ 
++    KAction *mSendInvitation;
++    KAction *mSendCancel;
++    KAction *mSendStatusUpdate;
++
++    KAction *mRequestChange;
++    KAction *mRequestUpdate;
++
+     KAction *mUndoAction;
+     KAction *mRedoAction;
+     KMenuBar *mMenuBar;
+Index: korganizer/publishdialog.cpp
+===================================================================
+--- korganizer/publishdialog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/publishdialog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -92,7 +92,7 @@
+   Person person( attendee->name(), attendee->email() );
+   item->setText( person.fullName() );
+   mUI.mListWidget->addItem( item );
+-  mUI.mRemove->setEnabled( true );
++  mUI.mRemove->setEnabled( !mUI.mListWidget->selectedItems().isEmpty() );
+ }
+ 
+ QString PublishDialog::addresses()
+@@ -128,12 +128,13 @@
+ 
+ void PublishDialog::removeItem()
+ {
++  if ( mUI.mListWidget->selectedItems().isEmpty() ) {
++    return;
++  }
+   QListWidgetItem *item;
+   item = mUI.mListWidget->selectedItems().first();
+-  if ( !item ) {
+-    return;
+-  }
+ 
++
+   int row = mUI.mListWidget->row( item );
+   mUI.mListWidget->takeItem( row );
+ 
+Index: korganizer/kodaymatrix.h
+===================================================================
+--- korganizer/kodaymatrix.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/kodaymatrix.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -178,7 +178,7 @@
+     void setHighlightMode( bool highlightEvents,
+                            bool highlightTodos,
+                            bool highlightJournals );
+-
++    void setUpdateNeeded();
+   public slots:
+     /**
+      * Recalculates all the flags of the days in the matrix like holidays or
+Index: korganizer/actionmanager.cpp
+===================================================================
+--- korganizer/actionmanager.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/actionmanager.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -568,40 +568,40 @@
+   connect( mPublishEvent, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_publish()) );
+   mPublishEvent->setEnabled( false );
+ 
+-  action = new KAction( KIcon( "mail-send" ), i18n( "Send &Invitation to Attendees" ), this );
+-  mACollection->addAction( "schedule_request", action );
+-  connect( action, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_request()) );
+-  action->setEnabled( false );
++  mSendInvitation = new KAction( KIcon( "mail-send" ), i18n( "Send &Invitation to Attendees" ), this );
++  mACollection->addAction( "schedule_request", mSendInvitation );
++  connect( mSendInvitation, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_request()) );
++  mSendInvitation->setEnabled( false );
+   connect( mCalendarView, SIGNAL(organizerEventsSelected(bool)),
+-           action, SLOT(setEnabled(bool)) );
++           mSendInvitation, SLOT(setEnabled(bool)) );
+ 
+-  action = new KAction( i18n( "Re&quest Update" ), this );
+-  mACollection->addAction( "schedule_refresh", action );
+-  connect( action, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_refresh()) );
+-  action->setEnabled( false );
++  mRequestUpdate = new KAction( i18n( "Re&quest Update" ), this );
++  mACollection->addAction( "schedule_refresh", mRequestUpdate );
++  connect( mRequestUpdate, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_refresh()) );
++  mRequestUpdate->setEnabled( false );
+   connect( mCalendarView, SIGNAL(groupEventsSelected(bool)),
+-           action, SLOT(setEnabled(bool)) );
++           mRequestUpdate, SLOT(setEnabled(bool)) );
+ 
+-  action = new KAction( i18n( "Send &Cancellation to Attendees" ), this );
+-  mACollection->addAction( "schedule_cancel", action );
+-  connect( action, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_cancel()) );
+-  action->setEnabled( false );
++  mSendCancel = new KAction( i18n( "Send &Cancellation to Attendees" ), this );
++  mACollection->addAction( "schedule_cancel", mSendCancel );
++  connect( mSendCancel, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_cancel()) );
++  mSendCancel->setEnabled( false );
+   connect( mCalendarView, SIGNAL(organizerEventsSelected(bool)),
+-           action, SLOT(setEnabled(bool)) );
++           mSendCancel, SLOT(setEnabled(bool)) );
+ 
+-  action = new KAction( KIcon( "mail-reply-sender" ), i18n( "Send Status &Update" ), this );
+-  mACollection->addAction( "schedule_reply", action );
+-  connect( action, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_reply()) );
+-  action->setEnabled( false );
++  mSendStatusUpdate = new KAction( KIcon( "mail-reply-sender" ), i18n( "Send Status &Update" ), this );
++  mACollection->addAction( "schedule_reply", mSendStatusUpdate );
++  connect( mSendStatusUpdate, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_reply()) );
++  mSendStatusUpdate->setEnabled( false );
+   connect( mCalendarView, SIGNAL(groupEventsSelected(bool)),
+-           action, SLOT(setEnabled(bool)) );
++           mSendStatusUpdate, SLOT(setEnabled(bool)) );
+ 
+-  action = new KAction( i18nc( "counter proposal", "Request Chan&ge" ), this );
+-  mACollection->addAction( "schedule_counter", action );
+-  connect( action, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_counter()) );
+-  action->setEnabled( false );
++  mRequestChange = new KAction( i18nc( "counter proposal", "Request Chan&ge" ), this );
++  mACollection->addAction( "schedule_counter", mRequestChange );
++  connect( mRequestChange, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_counter()) );
++  mRequestChange->setEnabled( false );
+   connect( mCalendarView, SIGNAL(groupEventsSelected(bool)),
+-           action, SLOT(setEnabled(bool)) );
++           mRequestChange, SLOT(setEnabled(bool)) );
+ 
+   action = new KAction( i18n( "&Mail Free Busy Information..." ), this );
+   mACollection->addAction( "mail_freebusy", action );
+@@ -1698,6 +1698,11 @@
+   mDeleteAction->setEnabled( enabled );
+   mPublishEvent->setEnabled( enabled );
+   mForwardEvent->setEnabled( enabled );
++  mSendInvitation->setEnabled( enabled );
++  mSendCancel->setEnabled( enabled );
++  mSendStatusUpdate->setEnabled( enabled );
++  mRequestChange->setEnabled( enabled );
++  mRequestUpdate->setEnabled( enabled );
+ }
+ 
+ void ActionManager::keyBindings()
+Index: korganizer/calendarview.h
+===================================================================
+--- korganizer/calendarview.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/calendarview.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -651,6 +651,9 @@
+     // uncompleted subitems), notAllPurged is set to true.
+     bool purgeCompletedSubTodos( Todo *todo, bool &notAllPurged );
+ 
++    // Frees filters
++    void deleteFilters();
++
+     KOrg::History *mHistory;
+ 
+     CalPrinter *mCalPrinter;
+Index: korganizer/datenavigatorcontainer.h
+===================================================================
+--- korganizer/datenavigatorcontainer.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/datenavigatorcontainer.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -51,7 +51,7 @@
+     void setHighlightMode( bool highlightEvents,
+                            bool highlightTodos,
+                            bool highlightJournals ) const;
+-
++    void setUpdateNeeded();
+   public slots:
+     void selectDates( const KCal::DateList & );
+     void selectNextMonth();
+Index: korganizer/datenavigatorcontainer.cpp
+===================================================================
+--- korganizer/datenavigatorcontainer.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/datenavigatorcontainer.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -127,12 +127,22 @@
+   }
+ }
+ 
++void DateNavigatorContainer::setUpdateNeeded()
++{
++  mNavigatorView->setUpdateNeeded();
++  foreach ( KDateNavigator *n, mExtraViews ) {
++    if ( n ) {
++      n->setUpdateNeeded();
++    }
++  }
++}
++
+ void DateNavigatorContainer::updateView()
+ {
+   mNavigatorView->updateView();
+   foreach ( KDateNavigator *n, mExtraViews ) {
+     if ( n ) {
+-      n->updateView();
++      n->setUpdateNeeded();
+     }
+   }
+ }
+Index: korganizer/kodaymatrix.cpp
+===================================================================
+--- korganizer/kodaymatrix.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/kodaymatrix.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -209,12 +209,16 @@
+   updateView( mStartDate );
+ }
+ 
++void KODayMatrix::setUpdateNeeded()
++{
++  mPendingChanges = true;
++}
++
+ void KODayMatrix::updateView( const QDate &actdate )
+ {
+   if ( !actdate.isValid() ) {
+     return;
+   }
+-
+   //flag to indicate if the starting day of the matrix has changed by this call
+   bool daychanged = false;
+ 
+Index: korganizer/views/todoview/kotodoview.h
+===================================================================
+--- korganizer/views/todoview/kotodoview.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotodoview.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -28,6 +28,7 @@
+ #define KOTODOVIEW_H
+ 
+ #include "korganizer/baseview.h"
++#include "kotodoviewsortfilterproxymodel.h"
+ 
+ namespace KCal {
+   class Incidence;
+@@ -125,7 +126,7 @@
+ 
+     KOTodoViewView *mView;
+     KOTodoModel *mModel;
+-    QSortFilterProxyModel *mProxyModel;
++    KOTodoViewSortFilterProxyModel *mProxyModel;
+     KOTodoCategoriesDelegate *mCategoriesDelegate;
+ 
+     KOTodoViewQuickSearch *mQuickSearch;
+Index: korganizer/views/todoview/kotodomodel.cpp
+===================================================================
+--- korganizer/views/todoview/kotodomodel.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotodomodel.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -173,7 +173,7 @@
+ };
+ 
+ KOTodoModel::KOTodoModel( Calendar *cal, QObject *parent )
+-  : QAbstractItemModel( parent ), mColumnCount( DescriptionColumn + 1 )
++  : QAbstractItemModel( parent ), mColumnCount( DescriptionColumn + 1 ), mChanger( 0 )
+ {
+   mRootNode = new TodoTreeNode( 0, 0, this );
+   mFlatView = false;
+@@ -305,7 +305,8 @@
+ }
+ 
+ QModelIndex KOTodoModel::addTodo( const QString &summary,
+-                                  const QModelIndex &parent )
++                                  const QModelIndex &parent,
++                                  const QStringList &categories )
+ {
+   if ( !mChanger ) {
+     return QModelIndex();
+@@ -316,6 +317,9 @@
+     todo->setSummary( summary.trimmed() );
+     todo->setOrganizer( Person( KOPrefs::instance()->fullName(),
+                                 KOPrefs::instance()->email() ) );
++
++    todo->setCategories( categories );
++
+     if ( parent.isValid() ) {
+       TodoTreeNode *node = static_cast<TodoTreeNode *>( parent.internalPointer() );
+       if ( node->isValid() ) {
+Index: korganizer/views/todoview/kotodoviewsortfilterproxymodel.h
+===================================================================
+--- korganizer/views/todoview/kotodoviewsortfilterproxymodel.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotodoviewsortfilterproxymodel.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -39,6 +39,7 @@
+     KOTodoViewSortFilterProxyModel( QObject *parent = 0 );
+ 
+     void sort( int column, Qt::SortOrder order = Qt::AscendingOrder );
++    const QStringList& categories() const { return mCategories; }
+ 
+   protected:
+     bool filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const;
+Index: korganizer/views/todoview/kotodomodel.h
+===================================================================
+--- korganizer/views/todoview/kotodomodel.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotodomodel.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -26,6 +26,7 @@
+ #define KOTODOMODEL_H
+ 
+ #include <QAbstractItemModel>
++#include <QStringList>
+ #include <QString>
+ #include <QHash>
+ 
+@@ -84,7 +85,8 @@
+ 
+     /** Creates a new todo with the given text as summary under the given parent */
+     QModelIndex addTodo( const QString &summary,
+-                         const QModelIndex &parent = QModelIndex() );
++                         const QModelIndex &parent = QModelIndex(),
++                         const QStringList &categories = QStringList() );
+     /** Copy the todo with the given index to the given date */
+     void copyTodo( const QModelIndex &index, const QDate &date );
+ 
+Index: korganizer/views/todoview/kotodoview.cpp
+===================================================================
+--- korganizer/views/todoview/kotodoview.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotodoview.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -36,7 +36,6 @@
+ #include "kotodomodel.h"
+ #include "kotodoviewquickaddline.h"
+ #include "kotodoviewquicksearch.h"
+-#include "kotodoviewsortfilterproxymodel.h"
+ #include "kotodoviewview.h"
+ 
+ #include <libkdepim/kdatepickerpopup.h>
+@@ -414,7 +413,7 @@
+ void KOTodoView::addQuickTodo( Qt::KeyboardModifiers modifiers )
+ {
+   if ( modifiers == Qt::NoModifier ) {
+-    QModelIndex index = mModel->addTodo( mQuickAdd->text() );
++    QModelIndex index = mModel->addTodo( mQuickAdd->text(), QModelIndex(), mProxyModel->categories() );
+ 
+     QModelIndexList selection = mView->selectionModel()->selectedRows();
+     if ( selection.size() <= 1 ) {
+@@ -429,7 +428,7 @@
+     if ( selection.size() != 1 ) {
+       return;
+     }
+-    mModel->addTodo( mQuickAdd->text(), mProxyModel->mapToSource( selection[0] ) );
++    mModel->addTodo( mQuickAdd->text(), mProxyModel->mapToSource( selection[0] ), mProxyModel->categories() );
+   } else {
+     return;
+   }
+Index: korganizer/views/todoview/kotododelegates.cpp
+===================================================================
+--- korganizer/views/todoview/kotododelegates.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotododelegates.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -90,21 +90,23 @@
+ #warning QTreeView should now set State_Editing correctly, remove the workaround
+ #endif
+ #endif
+-  bool isEditing = false;
+-  KOTodoViewView *view = qobject_cast<KOTodoViewView*>( parent() );
+-  if ( view ) {
+-    isEditing = view->isEditing( index );
+-  }
++  if ( index.data( Qt::EditRole ).toInt() > 0 ) {
++    bool isEditing = false;
++    KOTodoViewView *view = qobject_cast<KOTodoViewView*>( parent() );
++    if ( view ) {
++      isEditing = view->isEditing( index );
++    }
+ 
+-  // TODO QTreeView does not set State_Editing. Qt task id 205051
+-  // should be fixed with Qt 4.5, but wasn't. According to the
+-  // task tracker the fix arrives in "Some future release".
+-  if ( !( opt.state & QStyle::State_Editing ) && !isEditing ) {
+-    QStyleOptionProgressBar pbOption;
+-    pbOption.QStyleOption::operator=( option );
+-    initStyleOptionProgressBar( &pbOption, index );
++    // TODO QTreeView does not set State_Editing. Qt task id 205051
++    // should be fixed with Qt 4.5, but wasn't. According to the
++    // task tracker the fix arrives in "Some future release".
++    if ( !( opt.state & QStyle::State_Editing ) && !isEditing ) {
++      QStyleOptionProgressBar pbOption;
++      pbOption.QStyleOption::operator=( option );
++      initStyleOptionProgressBar( &pbOption, index );
+ 
+-    style->drawControl( QStyle::CE_ProgressBar, &pbOption, painter );
++      style->drawControl( QStyle::CE_ProgressBar, &pbOption, painter );
++    }
+   }
+ }
+ 
+Index: korganizer/calendarview.cpp
+===================================================================
+--- korganizer/calendarview.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/calendarview.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -241,7 +241,7 @@
+ CalendarView::~CalendarView()
+ {
+   mCalendar->unregisterObserver( this );
+-  qDeleteAll( mFilters );
++  deleteFilters();
+   qDeleteAll( mExtensions );
+ 
+   delete mDialogManager;
+@@ -505,7 +505,7 @@
+ 
+ void CalendarView::readFilterSettings( KConfig *config )
+ {
+-  qDeleteAll( mFilters );
++  deleteFilters();
+   mFilters.clear();
+ 
+   KConfigGroup generalConfig( config, "General" );
+@@ -636,19 +636,8 @@
+ 
+   emit configChanged();
+ 
+-  // force reload and handle agenda view type switch
+-  const bool showMerged =
+-    KOPrefs::instance()->agendaViewCalendarDisplay() == KOPrefs::CalendarsMerged;
+-  const bool showSideBySide =
+-    KOPrefs::instance()->agendaViewCalendarDisplay() == KOPrefs::CalendarsSideBySide;
+-  KOrg::BaseView *view = mViewManager->currentView();
+-  mViewManager->showAgendaView();
+-  if ( view == mViewManager->agendaView() && showSideBySide ) {
+-    view = mViewManager->multiAgendaView();
+-  } else if ( view == mViewManager->multiAgendaView() && showMerged ) {
+-    view = mViewManager->agendaView();
+-  }
+-  mViewManager->showView( view );
++  //switch beetween merged, side by side and tabbed agenda if needed
++  mViewManager->updateMultiCalendarDisplay();
+ 
+   // To make the "fill window" configurations work
+   mViewManager->raiseCurrentView();
+@@ -1949,6 +1938,7 @@
+   }
+ 
+   if ( !incidence ) {
++   mSelectedIncidence = incidence;
+    return;
+   }
+   if ( incidence == mSelectedIncidence ) {
+@@ -2742,6 +2732,7 @@
+ void CalendarView::resourcesChanged()
+ {
+   mViewManager->setUpdateNeeded();
++  mDateNavigatorContainer->setUpdateNeeded();
+   updateView();
+ }
+ 
+@@ -2753,7 +2744,8 @@
+   return KOrg::CalendarViewBase::eventFilter( watched, event );
+ }
+ 
+-void CalendarView::updateHighlightModes() {
++void CalendarView::updateHighlightModes()
++{
+ 
+   KOrg::BaseView *view = mViewManager->currentView();
+   if ( view ) {
+@@ -2767,4 +2759,15 @@
+                                                hiJournals );
+   }
+ }
++
++void CalendarView::deleteFilters()
++{
++  if ( mCalendar ) {
++    // KCal::Calendar takes ownership of it's filter, and will free it.
++    mFilters.removeAll( mCalendar->filter() );
++  }
++
++  qDeleteAll( mFilters );
++}
++
+ #include "calendarview.moc"
+Index: korganizer/koviewmanager.h
+===================================================================
+--- korganizer/koviewmanager.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/koviewmanager.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -100,6 +100,8 @@
+     KOTodoView *todoView() const { return mTodoView; }
+     KOrg::MonthView *monthView() const { return mMonthView; }
+ 
++    void updateMultiCalendarDisplay();
++
+   signals:
+     void configChanged();
+ 
+Index: korganizer/kdatenavigator.h
+===================================================================
+--- korganizer/kdatenavigator.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/kdatenavigator.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -74,7 +74,7 @@
+     void setHighlightMode( bool highlightEvents,
+                            bool highlightTodos,
+                            bool highlightJournals ) const;
+-
++    void setUpdateNeeded();
+   public slots:
+     void selectDates( const KCal::DateList & );
+     void selectPreviousMonth();
+Index: korganizer/koviewmanager.cpp
+===================================================================
+--- korganizer/koviewmanager.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/koviewmanager.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -590,3 +590,14 @@
+     mAgendaSideBySideView->setUpdateNeeded();
+   }
+ }
++
++void KOViewManager::updateMultiCalendarDisplay()
++{
++  if ( mCurrentView == mAgendaView            ||
++       mCurrentView == mAgendaSideBySideView  ||
++       ( mAgendaViewTabs && mCurrentView == mAgendaViewTabs->currentWidget() ) ) {
++    showAgendaView();
++  } else {
++    updateView();
++  }
++}
+Index: korganizer/kdatenavigator.cpp
+===================================================================
+--- korganizer/kdatenavigator.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/kdatenavigator.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -221,6 +221,11 @@
+   mDayMatrix->repaint();
+ }
+ 
++void KDateNavigator::setUpdateNeeded()
++{
++  mDayMatrix->setUpdateNeeded();
++}
++
+ void KDateNavigator::updateView()
+ {
+   updateDayMatrix();
+
+Zmiany atrybutów dla: .
+___________________________________________________________________
+Dodane: svn:externals
+   + 
+
+
