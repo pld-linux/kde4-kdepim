@@ -1,7 +1,7 @@
 Index: akregator/src/selectioncontroller.cpp
 ===================================================================
---- akregator/src/selectioncontroller.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ akregator/src/selectioncontroller.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- akregator/src/selectioncontroller.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ akregator/src/selectioncontroller.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -143,11 +143,15 @@
  
  Akregator::Article Akregator::SelectionController::currentArticle() const
@@ -20,8 +20,8 @@ Index: akregator/src/selectioncontroller.cpp
  
 Index: akregator/src/articleformatter.cpp
 ===================================================================
---- akregator/src/articleformatter.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ akregator/src/articleformatter.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- akregator/src/articleformatter.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ akregator/src/articleformatter.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -101,9 +101,9 @@
          virtual bool visitFeed(Feed* node)
          {
@@ -72,8 +72,8 @@ Index: akregator/src/articleformatter.cpp
          text += "</div>\n";
 Index: akregator/src/articlemodel.cpp
 ===================================================================
---- akregator/src/articlemodel.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ akregator/src/articlemodel.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- akregator/src/articlemodel.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ akregator/src/articlemodel.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -58,12 +58,22 @@
  
  };
@@ -106,8 +106,8 @@ Index: runtime/resources/kabc/kresourceassistant.cpp
 ===================================================================
 Index: kresources/remote/resourceremoteconfig.cpp
 ===================================================================
---- kresources/remote/resourceremoteconfig.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ kresources/remote/resourceremoteconfig.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- kresources/remote/resourceremoteconfig.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ kresources/remote/resourceremoteconfig.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -93,7 +93,7 @@
  
      if ( mUploadUrl->url().isEmpty() && !resource->readOnly() ) {
@@ -117,10 +117,59 @@ Index: kresources/remote/resourceremoteconfig.cpp
        resource->setReadOnly( true );
      }
    } else {
+Index: blogilo/src/composer/stylegetter.cpp
+===================================================================
+--- blogilo/src/composer/stylegetter.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ blogilo/src/composer/stylegetter.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -82,7 +82,6 @@
+     b = new Backend( blogid );
+     connect( b, SIGNAL( sigPostPublished( int, BilboPost* ) ), this,
+              SLOT( sltTempPostPublished( int, BilboPost* ) ) );
+-//     connect( b, SIGNAL( sigPostFetched( BilboPost * ) ), this, SLOT( sltTempPostFetched( BilboPost * ) ) );
+     connect( b, SIGNAL( sigError( const QString& ) ), this, SLOT( sltError( const QString& ) ) );
+ 
+     Q_EMIT sigGetStyleProgress( 10 );
+@@ -160,9 +159,9 @@
+ 
+     mTempPost = post;
+     KIO::StoredTransferJob *job = KIO::storedGet( postUrl, KIO::NoReload, KIO::HideProgressInfo );
+-
+     connect( job, SIGNAL( result( KJob* ) ),
+             this, SLOT( sltHtmlCopied( KJob* ) ) );
++
+ }
+ 
+ void StyleGetter::sltHtmlCopied( KJob *job )
+@@ -212,9 +211,9 @@
+ 
+ 
+     //Remove temp post from the server.
+-    b->removePost( *mTempPost );
+     connect( b, SIGNAL( sigPostRemoved( int, const BilboPost &) ), this,
+              SLOT( sltTempPostRemoved( int, const BilboPost & ) ) );
++    b->removePost( *mTempPost );
+ }
+ 
+ void StyleGetter::sltTempPostRemoved( int blog_id, const BilboPost &post)
+Index: blogilo/src/backend.cpp
+===================================================================
+--- blogilo/src/backend.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ blogilo/src/backend.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -422,7 +422,9 @@
+         kDebug() << "Emitting sigPostPublished ...";
+         Q_EMIT sigPostPublished( mBBlog->id(), pp );
+     }
+-    delete post;
++    // TODO crashes stylegetter on GData. Somehow the post gets deleted before
++    // slotFetchedPost as it seems. Don't get all the pointer copies done here.
++    //delete post;
+ }
+ 
+ KBlog::BlogPost * Backend::preparePost( BilboPost &post )
 Index: doc/kwatchgnupg/index.docbook
 ===================================================================
---- doc/kwatchgnupg/index.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ doc/kwatchgnupg/index.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- doc/kwatchgnupg/index.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kwatchgnupg/index.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -47,7 +47,7 @@
  
  <legalnotice>&GPLNotice;</legalnotice>
@@ -139,10 +188,14 @@ Index: doc/kwatchgnupg/index.docbook
  &kleopatra; and &kmail;, as well as from the command
  line. The &kwatchgnupg; executable is named
  <userinput>kwatchgnupg</userinput>.
+Index: doc/ktimetracker/systray.png
+===================================================================
+Nie można wyświetlić: plik binarny.
+svn:mime-type = image/png
 Index: doc/ktimetracker/index.docbook
 ===================================================================
---- doc/ktimetracker/index.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ doc/ktimetracker/index.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- doc/ktimetracker/index.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/ktimetracker/index.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -141,7 +141,7 @@
  </shortcut>
  <guimenu>Task</guimenu>
@@ -223,8 +276,8 @@ Index: doc/ktimetracker/index.docbook
  <chapter id="credits">
 Index: doc/kmail/using-kmail.docbook
 ===================================================================
---- doc/kmail/using-kmail.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ doc/kmail/using-kmail.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- doc/kmail/using-kmail.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/using-kmail.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -210,8 +210,7 @@
  message, click the <guiicon>Send Now</guiicon> icon (the envelope) to send
  the message now, or click the <guiicon>Send Later</guiicon> icon to put
@@ -249,8 +302,8 @@ Index: doc/kmail/using-kmail.docbook
  <menuchoice><guimenu>File</guimenu><guimenuitem>Check Mail
 Index: doc/kmail/configure.docbook
 ===================================================================
---- doc/kmail/configure.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ doc/kmail/configure.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- doc/kmail/configure.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/configure.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -115,7 +115,7 @@
  identity.</para>
  
@@ -456,8 +509,8 @@ Index: doc/kmail/configure.docbook
  <para>
 Index: doc/kmail/getting-started.docbook
 ===================================================================
---- doc/kmail/getting-started.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ doc/kmail/getting-started.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- doc/kmail/getting-started.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/getting-started.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -49,14 +49,14 @@
  messages.</para>
  
@@ -557,8 +610,8 @@ Index: doc/kmail/getting-started.docbook
  <para>To check your email, select
 Index: doc/kmail/faq.docbook
 ===================================================================
---- doc/kmail/faq.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ doc/kmail/faq.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- doc/kmail/faq.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/faq.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -492,7 +492,7 @@
  <answer><para>See the <link linkend="popfilters">Download filters</link> chapter.
  If you want to leave all messages on the server: open up the
@@ -570,8 +623,8 @@ Index: doc/kmail/faq.docbook
  setting which you must enable.</para></answer>
 Index: doc/kmail/menus.docbook
 ===================================================================
---- doc/kmail/menus.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ doc/kmail/menus.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- doc/kmail/menus.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/menus.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -83,6 +83,22 @@
  <varlistentry>
  <term>
@@ -1035,8 +1088,8 @@ Index: doc/kmail/menus.docbook
  </varlistentry>
 Index: doc/kmail/importing.docbook
 ===================================================================
---- doc/kmail/importing.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ doc/kmail/importing.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- doc/kmail/importing.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/importing.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -25,8 +25,8 @@
  <title>Using other Mailbox Files with &kmail;</title>
  
@@ -1077,8 +1130,8 @@ Index: doc/kmail/importing.docbook
  proprietary mail formats that &kmail; cannot understand. However, there is no
 Index: doc/kmail/intro.docbook
 ===================================================================
---- doc/kmail/intro.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ doc/kmail/intro.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- doc/kmail/intro.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ doc/kmail/intro.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -45,7 +45,7 @@
  </itemizedlist>
  
@@ -1090,8 +1143,8 @@ Index: doc/kmail/intro.docbook
  <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
 Index: kalarm/editdlgtypes.cpp
 ===================================================================
---- kalarm/editdlgtypes.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ kalarm/editdlgtypes.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- kalarm/editdlgtypes.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ kalarm/editdlgtypes.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -1,7 +1,7 @@
  /*
   *  editdlgtypes.cpp  -  dialogs to create or edit alarm or alarm template types
@@ -1127,8 +1180,8 @@ Index: kalarm/editdlgtypes.cpp
  }
 Index: ktimetracker/ktimetracker_config_storage.desktop
 ===================================================================
---- ktimetracker/ktimetracker_config_storage.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ ktimetracker/ktimetracker_config_storage.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- ktimetracker/ktimetracker_config_storage.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ ktimetracker/ktimetracker_config_storage.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -61,7 +61,7 @@
  Comment[et]=Salvesti seadistamine
  Comment[fr]=Configuration du stockage
@@ -1140,8 +1193,8 @@ Index: ktimetracker/ktimetracker_config_storage.desktop
  Comment[ja]=保存の設定
 Index: ktimetracker/ktimetracker_config_display.desktop
 ===================================================================
---- ktimetracker/ktimetracker_config_display.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ ktimetracker/ktimetracker_config_display.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- ktimetracker/ktimetracker_config_display.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ ktimetracker/ktimetracker_config_display.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -90,7 +90,7 @@
  Comment[et]=Välimuse seadistamine
  Comment[fr]=Configuration de l'apparence
@@ -1153,8 +1206,8 @@ Index: ktimetracker/ktimetracker_config_display.desktop
  Comment[ja]=外観の設定
 Index: ktimetracker/ktimetracker_config_behavior.desktop
 ===================================================================
---- ktimetracker/ktimetracker_config_behavior.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ ktimetracker/ktimetracker_config_behavior.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- ktimetracker/ktimetracker_config_behavior.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ ktimetracker/ktimetracker_config_behavior.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -62,7 +62,7 @@
  Comment[et]=Käitumise seadistamine
  Comment[fr]=Configuration du comportement
@@ -1166,8 +1219,8 @@ Index: ktimetracker/ktimetracker_config_behavior.desktop
  Comment[ja]=挙動の設定
 Index: libkdepim/categoryeditdialog_base.ui
 ===================================================================
---- libkdepim/categoryeditdialog_base.ui	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ libkdepim/categoryeditdialog_base.ui	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- libkdepim/categoryeditdialog_base.ui	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ libkdepim/categoryeditdialog_base.ui	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -21,6 +21,9 @@
     </property>
     <item row="1" column="0" colspan="2" >
@@ -1180,8 +1233,8 @@ Index: libkdepim/categoryeditdialog_base.ui
       </property>
 Index: kontact/src/kontactconfig.desktop
 ===================================================================
---- kontact/src/kontactconfig.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ kontact/src/kontactconfig.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- kontact/src/kontactconfig.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ kontact/src/kontactconfig.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -80,6 +80,7 @@
  Comment[es]=Componente predeterminado de KDE Kontact
  Comment[et]=KDE Kontacti vaikekomponent
@@ -1192,8 +1245,8 @@ Index: kontact/src/kontactconfig.desktop
  Comment[lv]=Noklusētā KDE kontaktu komponente
 Index: kontact/src/main.cpp
 ===================================================================
---- kontact/src/main.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ kontact/src/main.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- kontact/src/main.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ kontact/src/main.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -138,7 +138,6 @@
          mMainWindow->setInitialActivePluginModule( moduleName );
        }
@@ -1217,8 +1270,8 @@ Index: akonadi/kcal/Messages.sh
 ===================================================================
 Index: korganizer/koeventviewerdialog.cpp
 ===================================================================
---- korganizer/koeventviewerdialog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/koeventviewerdialog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- korganizer/koeventviewerdialog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/koeventviewerdialog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -33,7 +33,7 @@
    setCaption( i18n( "Event Viewer" ) );
    setButtons( Close | User1 | User2 );
@@ -1230,8 +1283,8 @@ Index: korganizer/koeventviewerdialog.cpp
    setMainWidget( mEventViewer );
 Index: korganizer/actionmanager.h
 ===================================================================
---- korganizer/actionmanager.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/actionmanager.h	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- korganizer/actionmanager.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/actionmanager.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -404,6 +404,13 @@
      KAction *mPublishEvent;
      KAction *mForwardEvent;
@@ -1248,8 +1301,8 @@ Index: korganizer/actionmanager.h
      KMenuBar *mMenuBar;
 Index: korganizer/publishdialog.cpp
 ===================================================================
---- korganizer/publishdialog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/publishdialog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- korganizer/publishdialog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/publishdialog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -92,7 +92,7 @@
    Person person( attendee->name(), attendee->email() );
    item->setText( person.fullName() );
@@ -1278,8 +1331,8 @@ Index: korganizer/publishdialog.cpp
  
 Index: korganizer/kodaymatrix.h
 ===================================================================
---- korganizer/kodaymatrix.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/kodaymatrix.h	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- korganizer/kodaymatrix.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/kodaymatrix.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -178,7 +178,7 @@
      void setHighlightMode( bool highlightEvents,
                             bool highlightTodos,
@@ -1291,8 +1344,8 @@ Index: korganizer/kodaymatrix.h
       * Recalculates all the flags of the days in the matrix like holidays or
 Index: korganizer/actionmanager.cpp
 ===================================================================
---- korganizer/actionmanager.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/actionmanager.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- korganizer/actionmanager.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/actionmanager.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -568,40 +568,40 @@
    connect( mPublishEvent, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_publish()) );
    mPublishEvent->setEnabled( false );
@@ -1371,10 +1424,24 @@ Index: korganizer/actionmanager.cpp
  }
  
  void ActionManager::keyBindings()
+Index: korganizer/calendarview.h
+===================================================================
+--- korganizer/calendarview.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/calendarview.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -651,6 +651,9 @@
+     // uncompleted subitems), notAllPurged is set to true.
+     bool purgeCompletedSubTodos( Todo *todo, bool &notAllPurged );
+ 
++    // Frees filters
++    void deleteFilters();
++
+     KOrg::History *mHistory;
+ 
+     CalPrinter *mCalPrinter;
 Index: korganizer/datenavigatorcontainer.h
 ===================================================================
---- korganizer/datenavigatorcontainer.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/datenavigatorcontainer.h	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- korganizer/datenavigatorcontainer.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/datenavigatorcontainer.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -51,7 +51,7 @@
      void setHighlightMode( bool highlightEvents,
                             bool highlightTodos,
@@ -1386,8 +1453,8 @@ Index: korganizer/datenavigatorcontainer.h
      void selectNextMonth();
 Index: korganizer/datenavigatorcontainer.cpp
 ===================================================================
---- korganizer/datenavigatorcontainer.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/datenavigatorcontainer.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- korganizer/datenavigatorcontainer.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/datenavigatorcontainer.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -127,12 +127,22 @@
    }
  }
@@ -1414,8 +1481,8 @@ Index: korganizer/datenavigatorcontainer.cpp
  }
 Index: korganizer/kodaymatrix.cpp
 ===================================================================
---- korganizer/kodaymatrix.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/kodaymatrix.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- korganizer/kodaymatrix.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/kodaymatrix.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -209,12 +209,16 @@
    updateView( mStartDate );
  }
@@ -1434,11 +1501,210 @@ Index: korganizer/kodaymatrix.cpp
    //flag to indicate if the starting day of the matrix has changed by this call
    bool daychanged = false;
  
+Index: korganizer/views/todoview/kotodoview.h
+===================================================================
+--- korganizer/views/todoview/kotodoview.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotodoview.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -28,6 +28,7 @@
+ #define KOTODOVIEW_H
+ 
+ #include "korganizer/baseview.h"
++#include "kotodoviewsortfilterproxymodel.h"
+ 
+ namespace KCal {
+   class Incidence;
+@@ -125,7 +126,7 @@
+ 
+     KOTodoViewView *mView;
+     KOTodoModel *mModel;
+-    QSortFilterProxyModel *mProxyModel;
++    KOTodoViewSortFilterProxyModel *mProxyModel;
+     KOTodoCategoriesDelegate *mCategoriesDelegate;
+ 
+     KOTodoViewQuickSearch *mQuickSearch;
+Index: korganizer/views/todoview/kotodomodel.cpp
+===================================================================
+--- korganizer/views/todoview/kotodomodel.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotodomodel.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -173,7 +173,7 @@
+ };
+ 
+ KOTodoModel::KOTodoModel( Calendar *cal, QObject *parent )
+-  : QAbstractItemModel( parent ), mColumnCount( DescriptionColumn + 1 )
++  : QAbstractItemModel( parent ), mColumnCount( DescriptionColumn + 1 ), mChanger( 0 )
+ {
+   mRootNode = new TodoTreeNode( 0, 0, this );
+   mFlatView = false;
+@@ -305,7 +305,8 @@
+ }
+ 
+ QModelIndex KOTodoModel::addTodo( const QString &summary,
+-                                  const QModelIndex &parent )
++                                  const QModelIndex &parent,
++                                  const QStringList &categories )
+ {
+   if ( !mChanger ) {
+     return QModelIndex();
+@@ -316,6 +317,9 @@
+     todo->setSummary( summary.trimmed() );
+     todo->setOrganizer( Person( KOPrefs::instance()->fullName(),
+                                 KOPrefs::instance()->email() ) );
++
++    todo->setCategories( categories );
++
+     if ( parent.isValid() ) {
+       TodoTreeNode *node = static_cast<TodoTreeNode *>( parent.internalPointer() );
+       if ( node->isValid() ) {
+Index: korganizer/views/todoview/kotodoviewsortfilterproxymodel.h
+===================================================================
+--- korganizer/views/todoview/kotodoviewsortfilterproxymodel.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotodoviewsortfilterproxymodel.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -39,6 +39,7 @@
+     KOTodoViewSortFilterProxyModel( QObject *parent = 0 );
+ 
+     void sort( int column, Qt::SortOrder order = Qt::AscendingOrder );
++    const QStringList& categories() const { return mCategories; }
+ 
+   protected:
+     bool filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const;
+Index: korganizer/views/todoview/kotodomodel.h
+===================================================================
+--- korganizer/views/todoview/kotodomodel.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotodomodel.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -26,6 +26,7 @@
+ #define KOTODOMODEL_H
+ 
+ #include <QAbstractItemModel>
++#include <QStringList>
+ #include <QString>
+ #include <QHash>
+ 
+@@ -84,7 +85,8 @@
+ 
+     /** Creates a new todo with the given text as summary under the given parent */
+     QModelIndex addTodo( const QString &summary,
+-                         const QModelIndex &parent = QModelIndex() );
++                         const QModelIndex &parent = QModelIndex(),
++                         const QStringList &categories = QStringList() );
+     /** Copy the todo with the given index to the given date */
+     void copyTodo( const QModelIndex &index, const QDate &date );
+ 
+Index: korganizer/views/todoview/kotodoview.cpp
+===================================================================
+--- korganizer/views/todoview/kotodoview.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotodoview.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -36,7 +36,6 @@
+ #include "kotodomodel.h"
+ #include "kotodoviewquickaddline.h"
+ #include "kotodoviewquicksearch.h"
+-#include "kotodoviewsortfilterproxymodel.h"
+ #include "kotodoviewview.h"
+ 
+ #include <libkdepim/kdatepickerpopup.h>
+@@ -414,7 +413,7 @@
+ void KOTodoView::addQuickTodo( Qt::KeyboardModifiers modifiers )
+ {
+   if ( modifiers == Qt::NoModifier ) {
+-    QModelIndex index = mModel->addTodo( mQuickAdd->text() );
++    QModelIndex index = mModel->addTodo( mQuickAdd->text(), QModelIndex(), mProxyModel->categories() );
+ 
+     QModelIndexList selection = mView->selectionModel()->selectedRows();
+     if ( selection.size() <= 1 ) {
+@@ -429,7 +428,7 @@
+     if ( selection.size() != 1 ) {
+       return;
+     }
+-    mModel->addTodo( mQuickAdd->text(), mProxyModel->mapToSource( selection[0] ) );
++    mModel->addTodo( mQuickAdd->text(), mProxyModel->mapToSource( selection[0] ), mProxyModel->categories() );
+   } else {
+     return;
+   }
+Index: korganizer/views/todoview/kotododelegates.cpp
+===================================================================
+--- korganizer/views/todoview/kotododelegates.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/views/todoview/kotododelegates.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -90,21 +90,23 @@
+ #warning QTreeView should now set State_Editing correctly, remove the workaround
+ #endif
+ #endif
+-  bool isEditing = false;
+-  KOTodoViewView *view = qobject_cast<KOTodoViewView*>( parent() );
+-  if ( view ) {
+-    isEditing = view->isEditing( index );
+-  }
++  if ( index.data( Qt::EditRole ).toInt() > 0 ) {
++    bool isEditing = false;
++    KOTodoViewView *view = qobject_cast<KOTodoViewView*>( parent() );
++    if ( view ) {
++      isEditing = view->isEditing( index );
++    }
+ 
+-  // TODO QTreeView does not set State_Editing. Qt task id 205051
+-  // should be fixed with Qt 4.5, but wasn't. According to the
+-  // task tracker the fix arrives in "Some future release".
+-  if ( !( opt.state & QStyle::State_Editing ) && !isEditing ) {
+-    QStyleOptionProgressBar pbOption;
+-    pbOption.QStyleOption::operator=( option );
+-    initStyleOptionProgressBar( &pbOption, index );
++    // TODO QTreeView does not set State_Editing. Qt task id 205051
++    // should be fixed with Qt 4.5, but wasn't. According to the
++    // task tracker the fix arrives in "Some future release".
++    if ( !( opt.state & QStyle::State_Editing ) && !isEditing ) {
++      QStyleOptionProgressBar pbOption;
++      pbOption.QStyleOption::operator=( option );
++      initStyleOptionProgressBar( &pbOption, index );
+ 
+-    style->drawControl( QStyle::CE_ProgressBar, &pbOption, painter );
++      style->drawControl( QStyle::CE_ProgressBar, &pbOption, painter );
++    }
+   }
+ }
+ 
 Index: korganizer/calendarview.cpp
 ===================================================================
---- korganizer/calendarview.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/calendarview.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
-@@ -1949,6 +1949,7 @@
+--- korganizer/calendarview.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/calendarview.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -241,7 +241,7 @@
+ CalendarView::~CalendarView()
+ {
+   mCalendar->unregisterObserver( this );
+-  qDeleteAll( mFilters );
++  deleteFilters();
+   qDeleteAll( mExtensions );
+ 
+   delete mDialogManager;
+@@ -505,7 +505,7 @@
+ 
+ void CalendarView::readFilterSettings( KConfig *config )
+ {
+-  qDeleteAll( mFilters );
++  deleteFilters();
+   mFilters.clear();
+ 
+   KConfigGroup generalConfig( config, "General" );
+@@ -636,19 +636,8 @@
+ 
+   emit configChanged();
+ 
+-  // force reload and handle agenda view type switch
+-  const bool showMerged =
+-    KOPrefs::instance()->agendaViewCalendarDisplay() == KOPrefs::CalendarsMerged;
+-  const bool showSideBySide =
+-    KOPrefs::instance()->agendaViewCalendarDisplay() == KOPrefs::CalendarsSideBySide;
+-  KOrg::BaseView *view = mViewManager->currentView();
+-  mViewManager->showAgendaView();
+-  if ( view == mViewManager->agendaView() && showSideBySide ) {
+-    view = mViewManager->multiAgendaView();
+-  } else if ( view == mViewManager->multiAgendaView() && showMerged ) {
+-    view = mViewManager->agendaView();
+-  }
+-  mViewManager->showView( view );
++  //switch beetween merged, side by side and tabbed agenda if needed
++  mViewManager->updateMultiCalendarDisplay();
+ 
+   // To make the "fill window" configurations work
+   mViewManager->raiseCurrentView();
+@@ -1949,6 +1938,7 @@
    }
  
    if ( !incidence ) {
@@ -1446,7 +1712,7 @@ Index: korganizer/calendarview.cpp
     return;
    }
    if ( incidence == mSelectedIncidence ) {
-@@ -2742,6 +2743,7 @@
+@@ -2742,6 +2732,7 @@
  void CalendarView::resourcesChanged()
  {
    mViewManager->setUpdateNeeded();
@@ -1454,10 +1720,49 @@ Index: korganizer/calendarview.cpp
    updateView();
  }
  
+@@ -2753,7 +2744,8 @@
+   return KOrg::CalendarViewBase::eventFilter( watched, event );
+ }
+ 
+-void CalendarView::updateHighlightModes() {
++void CalendarView::updateHighlightModes()
++{
+ 
+   KOrg::BaseView *view = mViewManager->currentView();
+   if ( view ) {
+@@ -2767,4 +2759,15 @@
+                                                hiJournals );
+   }
+ }
++
++void CalendarView::deleteFilters()
++{
++  if ( mCalendar ) {
++    // KCal::Calendar takes ownership of it's filter, and will free it.
++    mFilters.removeAll( mCalendar->filter() );
++  }
++
++  qDeleteAll( mFilters );
++}
++
+ #include "calendarview.moc"
+Index: korganizer/koviewmanager.h
+===================================================================
+--- korganizer/koviewmanager.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/koviewmanager.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -100,6 +100,8 @@
+     KOTodoView *todoView() const { return mTodoView; }
+     KOrg::MonthView *monthView() const { return mMonthView; }
+ 
++    void updateMultiCalendarDisplay();
++
+   signals:
+     void configChanged();
+ 
 Index: korganizer/kdatenavigator.h
 ===================================================================
---- korganizer/kdatenavigator.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/kdatenavigator.h	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- korganizer/kdatenavigator.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/kdatenavigator.h	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -74,7 +74,7 @@
      void setHighlightMode( bool highlightEvents,
                             bool highlightTodos,
@@ -1467,10 +1772,29 @@ Index: korganizer/kdatenavigator.h
    public slots:
      void selectDates( const KCal::DateList & );
      void selectPreviousMonth();
+Index: korganizer/koviewmanager.cpp
+===================================================================
+--- korganizer/koviewmanager.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/koviewmanager.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
+@@ -590,3 +590,14 @@
+     mAgendaSideBySideView->setUpdateNeeded();
+   }
+ }
++
++void KOViewManager::updateMultiCalendarDisplay()
++{
++  if ( mCurrentView == mAgendaView            ||
++       mCurrentView == mAgendaSideBySideView  ||
++       ( mAgendaViewTabs && mCurrentView == mAgendaViewTabs->currentWidget() ) ) {
++    showAgendaView();
++  } else {
++    updateView();
++  }
++}
 Index: korganizer/kdatenavigator.cpp
 ===================================================================
---- korganizer/kdatenavigator.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1088121)
-+++ korganizer/kdatenavigator.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1088121)
+--- korganizer/kdatenavigator.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1089014)
++++ korganizer/kdatenavigator.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1089014)
 @@ -221,6 +221,11 @@
    mDayMatrix->repaint();
  }
