@@ -1,0 +1,3540 @@
+Index: akregator/plugins/onlinesync/akregator_onlinesync_plugin.desktop
+===================================================================
+--- akregator/plugins/onlinesync/akregator_onlinesync_plugin.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/plugins/onlinesync/akregator_onlinesync_plugin.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -11,6 +11,7 @@
+ Name[en_GB]=Akregator Online Feed Reader Support
+ Name[es]=Soporte para el lector de fuentes en línea de Akregator
+ Name[et]=Akregatori uudistevoogude võrgulugejate toetus
++Name[fi]=Akregatorin Online-syötelukijatuki
+ Name[fr]=Prise en charge des lecteurs en ligne pour Akregator
+ Name[ga]=Tacaíocht Akregator do Léitheoirí Fothaí Ar Líne
+ Name[gl]=Funcionalidade de lector de fontes en liña do Akregator
+Index: akregator/plugins/onlinesync/akregator_config_onlinesync.desktop
+===================================================================
+--- akregator/plugins/onlinesync/akregator_config_onlinesync.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/plugins/onlinesync/akregator_config_onlinesync.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -22,6 +22,7 @@
+ Name[en_GB]=Online Readers
+ Name[es]=Lectores en línea
+ Name[et]=Võrgulugejad
++Name[fi]=Online-lukijat
+ Name[fr]=Lecteurs en ligne
+ Name[ga]=Léitheoirí Ar Líne
+ Name[gl]=Lector de novas en liña
+@@ -60,6 +61,7 @@
+ Comment[en_GB]=Configure Online Readers
+ Comment[es]=Configurar los lectores en línea
+ Comment[et]=Võrgulugejate seadistamine
++Comment[fi]=Online-lukijoiden asetukset
+ Comment[fr]=Configurer les lecteurs en ligne
+ Comment[ga]=Cumraigh Léitheoirí Ar Líne
+ Comment[gl]=Configurar os lectores en liña
+Index: akregator/src/selectioncontroller.cpp
+===================================================================
+--- akregator/src/selectioncontroller.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/src/selectioncontroller.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -143,11 +143,15 @@
+ 
+ Akregator::Article Akregator::SelectionController::currentArticle() const
+ {
++    if ( !m_articleLister || !m_articleLister->articleSelectionModel() )
++        return Article();
+     return ::articleForIndex( m_articleLister->articleSelectionModel()->currentIndex(), m_feedList.get() );
+ }
+ 
+ QList<Akregator::Article> Akregator::SelectionController::selectedArticles() const
+ {
++    if ( !m_articleLister || !m_articleLister->articleSelectionModel() )
++        return QList<Akregator::Article>();
+     return ::articlesForIndexes( m_articleLister->articleSelectionModel()->selectedRows(), m_feedList.get() );
+ }
+ 
+Index: akregator/src/akregator.notifyrc
+===================================================================
+--- akregator/src/akregator.notifyrc	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/src/akregator.notifyrc	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -155,7 +155,7 @@
+ Comment[uz]=Akregator dasturiga yangi yangiliklar tasmasi qoʻshildi
+ Comment[uz@cyrillic]=Akregator дастурига янги янгиликлар тасмаси қўшилди
+ Comment[x-test]=xxA new feed was remotely added to Akregatorxx
+-Comment[zh_CN]=远程添加新种子进了 Akregator
++Comment[zh_CN]=一个新种子已通过远程添加进 Akregator
+ Comment[zh_TW]=已從遠端新增 Feed 到 Akregator
+ Action=Popup
+ 
+@@ -228,7 +228,7 @@
+ Comment[es]=Se han obtenido nuevos artículos
+ Comment[et]=Tõmmati uued artiklid
+ Comment[eu]=Artikulu berriak eskuratu dira
+-Comment[fi]=Uutta postia saapunut
++Comment[fi]=Uusia artikkeleja noudettiin
+ Comment[fr]=Les nouveaux articles ont été relevés
+ Comment[fy]=Nije artikels binne ophelle
+ Comment[ga]=Fuarthas ailt nua
+Index: akregator/src/articleformatter.cpp
+===================================================================
+--- akregator/src/articleformatter.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/src/articleformatter.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -101,9 +101,9 @@
+         virtual bool visitFeed(Feed* node)
+         {
+             text = QString("<div class=\"headerbox\" dir=\"%1\">\n").arg(QApplication::isRightToLeft() ? "rtl" : "ltr");
+-
+-            text += QString("<div class=\"headertitle\" dir=\"%1\">").arg(Utils::directionOf(Utils::stripTags(node->title())));
+-            text += node->title();
++            const QString strippedTitle = Utils::stripTags(node->title());
++            text += QString("<div class=\"headertitle\" dir=\"%1\">").arg(Utils::directionOf(strippedTitle));
++            text += strippedTitle;
+             if(node->unread() == 0)
+                 text += i18n(" (no unread articles)");
+             else
+@@ -173,12 +173,13 @@
+     text = QString("<div class=\"headerbox\" dir=\"%1\">\n").arg(QApplication::isRightToLeft() ? "rtl" : "ltr");
+     const QString enc = formatEnclosure( *article.enclosure() );
+ 
+-    if (!article.title().isEmpty())
++    const QString strippedTitle = Utils::stripTags( article.title() );
++    if (!strippedTitle.isEmpty())
+     {
+-        text += QString("<div class=\"headertitle\" dir=\"%1\">\n").arg(Utils::directionOf(Utils::stripTags(article.title())));
++        text += QString("<div class=\"headertitle\" dir=\"%1\">\n").arg(Utils::directionOf(strippedTitle));
+         if (article.link().isValid())
+             text += "<a href=\""+article.link().url()+"\">";
+-        text += article.title().replace('<', "&lt;").replace('>', "&gt;"); // TODO: better leave things escaped in the parser
++        text += strippedTitle;
+         if (article.link().isValid())
+             text += "</a>";
+         text += "</div>\n";
+@@ -367,12 +368,14 @@
+     const QString enc = formatEnclosure( *article.enclosure() );
+     text = QString("<div class=\"headerbox\" dir=\"%1\">\n").arg(QApplication::isRightToLeft() ? "rtl" : "ltr");
+ 
+-    if (!article.title().isEmpty())
++    const QString strippedTitle = Utils::stripTags( article.title() );
++
++    if (!strippedTitle.isEmpty())
+     {
+-        text += QString("<div class=\"headertitle\" dir=\"%1\">\n").arg(Utils::directionOf(Utils::stripTags(article.title())));
++        text += QString("<div class=\"headertitle\" dir=\"%1\">\n").arg(Utils::directionOf(strippedTitle));
+         if (article.link().isValid())
+             text += "<a href=\""+article.link().url()+"\">";
+-        text += article.title().replace('<', "&lt;").replace('>', "&gt;"); // TODO: better leave things escaped in the parser
++        text += strippedTitle;
+         if (article.link().isValid())
+             text += "</a>";
+         text += "</div>\n";
+Index: akregator/src/articlemodel.cpp
+===================================================================
+--- akregator/src/articlemodel.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/src/articlemodel.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -58,12 +58,22 @@
+ 
+ };
+ 
++//like Syndication::htmlToPlainText, but without linebreaks
++
++static QString stripHtml( const QString& html ) {
++    QString str(html);
++    //TODO: preserve some formatting, such as line breaks
++    str.remove(QRegExp("<[^>]*>")); // remove tags
++    str = Syndication::resolveEntities(str);
++    return str.simplified();
++}
++
+ ArticleModel::Private::Private( const QList<Article>& articles_, ArticleModel* qq )
+  : q( qq ), articles( articles_ )
+ {
+     titleCache.resize( articles.count() );
+     for ( int i = 0; i < articles.count(); ++i )
+-        titleCache[i] = Syndication::htmlToPlainText( articles[i].title() );
++        titleCache[i] = stripHtml( articles[i].title() );
+ }
+ 
+ Akregator::ArticleModel::ArticleModel(const QList<Article>& articles, QObject* parent) : QAbstractTableModel( parent ), d( new Private( articles, this ) )
+Index: akregator/src/akregator.desktop
+===================================================================
+--- akregator/src/akregator.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/src/akregator.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -72,6 +72,7 @@
+ GenericName[en_GB]=Feed Reader
+ GenericName[es]=Lector de fuentes
+ GenericName[et]=Uudistevoogude lugemisvahend
++GenericName[fi]=Syötelukija
+ GenericName[fr]=Lecteur de flux
+ GenericName[ga]=Léitheoir Fothaí
+ GenericName[gl]=Lector de novas
+@@ -112,6 +113,7 @@
+ Comment[en_GB]=A Feed Reader for KDE
+ Comment[es]=Un lector de fuentes
+ Comment[et]=KDE uudistevoogude lugemisvahend
++Comment[fi]=KDE:n RSS-syötelukija
+ Comment[fr]=Un lecteur de flux pour KDE
+ Comment[ga]=Léitheoir Fothaí KDE
+ Comment[gl]=Un lector de novas para o KDE
+Index: akregator/configuration/akregator_config_browser.desktop
+===================================================================
+--- akregator/configuration/akregator_config_browser.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/configuration/akregator_config_browser.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -21,6 +21,7 @@
+ Name[en_GB]=Browser
+ Name[es]=Navegador
+ Name[et]=Sirvija
++Name[fi]=Selain
+ Name[fr]=Navigateur
+ Name[ga]=Brabhsálaí
+ Name[gl]=Navegador
+@@ -61,6 +62,7 @@
+ Comment[en_GB]=Configure Internal Browser Component
+ Comment[es]=Configurar el componente navegador interno
+ Comment[et]=Sisemise sirvimiskomponendi seadistamine
++Comment[fi]=Sisäisen selainosan asetukset
+ Comment[fr]=Configurer le navigateur web interne
+ Comment[gl]=Configurar o compoñente do navegador interno
+ Comment[hu]=A belső böngészőkomponens beállítása
+Index: akregator/configuration/akregator_config_appearance.desktop
+===================================================================
+--- akregator/configuration/akregator_config_appearance.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/configuration/akregator_config_appearance.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -85,6 +85,7 @@
+ Comment[en_GB]=Configure the Feed Reader Appearance
+ Comment[es]=Configurar la apariencia del lector de fuentes
+ Comment[et]=Uudistevoogude lugeja välimuse seadistamine
++Comment[fi]=Syötelukijan ulkoasuasetukset
+ Comment[fr]=Configurer l'apparence du lecteur de flux
+ Comment[gl]=Configurar a aparencia do lector de novas
+ Comment[hu]=Beállítások a hírolvasó megjelenéséhez
+Index: akregator/configuration/akregator_config_advanced.desktop
+===================================================================
+--- akregator/configuration/akregator_config_advanced.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/configuration/akregator_config_advanced.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -22,6 +22,7 @@
+ Name[eo]=Pliaj
+ Name[es]=Avanzado
+ Name[et]=Muu
++Name[fi]=Lisäasetukset
+ Name[fr]=Avancé
+ Name[ga]=Ardsocruithe
+ Name[gl]=Avanzado
+@@ -62,6 +63,7 @@
+ Comment[en_GB]=Advanced Feed Reader Settings
+ Comment[es]=Configuración avanzada del lector de fuentes
+ Comment[et]=Uudistevoogude lugeja muud seadistused
++Comment[fi]=Syötelukijan lisäasetukset
+ Comment[fr]=Configuration avancé du lecteur de flux
+ Comment[gl]=Configuración avanzada do lector de novas
+ Comment[hu]=Hírolvasó-beállítások
+Index: akregator/configuration/akregator_config_general.desktop
+===================================================================
+--- akregator/configuration/akregator_config_general.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/configuration/akregator_config_general.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -29,7 +29,7 @@
+ Name[et]=Üldine
+ Name[eu]=Orokorra
+ Name[fa]=عمومی
+-Name[fi]=Yleinen
++Name[fi]=Yleistä
+ Name[fr]=Général
+ Name[fy]=Algemien
+ Name[ga]=Ginearálta
+@@ -83,6 +83,7 @@
+ Comment[en_GB]=Configure Feeds
+ Comment[es]=Configurar fuentes
+ Comment[et]=Uudistevoogude seadistamine
++Comment[fi]=Syötteiden asetukset
+ Comment[fr]=Configurer les flux
+ Comment[ga]=Cumraigh Fothaí
+ Comment[gl]=Configurar as fontes de novas
+Index: akregator/configuration/akregator_config_archive.desktop
+===================================================================
+--- akregator/configuration/akregator_config_archive.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akregator/configuration/akregator_config_archive.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -21,6 +21,7 @@
+ Name[en_GB]=Archive
+ Name[es]=Archivo
+ Name[et]=Arhiveerimine
++Name[fi]=Arkisto
+ Name[fr]=Archive
+ Name[ga]=Cartlann
+ Name[gl]=Arquivo
+@@ -60,6 +61,7 @@
+ Comment[en_GB]=Configure Feed Archive
+ Comment[es]=Configurar el archivo de fuentes
+ Comment[et]=Uudistevoogude arhiveerimise seadistamine
++Comment[fi]=Syötearkiston asetukset
+ Comment[fr]=Configurer les archives des flux
+ Comment[ga]=Cumraigh Cartlann na bhFothaí
+ Comment[gl]=Configurar o arquivo de fontes de novas
+Index: libkleo/libkleopatrarc.desktop
+===================================================================
+--- libkleo/libkleopatrarc.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ libkleo/libkleopatrarc.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -19,6 +19,7 @@
+ Name[nb]=TAR (PGP®-kompatibel)
+ Name[nds]=TAR (PGP®-kompatibel)
+ Name[nl]=TAR (PGP®-compatible)
++Name[nn]=TAR (PGP®-kompatibel)
+ Name[pa]=TAR (PGP®-ਅਨੁਕੂਲ)
+ Name[pl]=TAR (kompatybilny z PGP®)
+ Name[pt]=TAR (compatível com o PGP®)
+@@ -53,6 +54,7 @@
+ Name[nb]=ZIP
+ Name[nds]=Zip
+ Name[nl]=ZIP
++Name[nn]=ZIP
+ Name[pa]=ZIP
+ Name[pl]=ZIP
+ Name[pt]=ZIP
+@@ -86,6 +88,7 @@
+ Name[nb]=TAR (med bzip2-komprimering)
+ Name[nds]=TAR (mit bzip2-Komprimeren)
+ Name[nl]=TAR (met bzip2 compressie)
++Name[nn]=TAR (med bzip2-komprimering)
+ Name[pl]=TAR (z kompresją  bzip2)
+ Name[pt]=TAR (com compressão bzip2)
+ Name[pt_BR]=TAR (com compressão em bzip2)
+Index: kleopatra/kleopatra_import.desktop
+===================================================================
+--- kleopatra/kleopatra_import.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kleopatra/kleopatra_import.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -78,6 +78,7 @@
+ Comment[en_GB]=Certificate Manager and Unified Crypto GUI
+ Comment[es]=Gestor de certificados e interfaz gráfica unificada de cifrado
+ Comment[et]=Sertifikaadihaldur ja ühendatud krüptimise graafiline kasutajaliides
++Comment[fi]=Varmenteiden hallinta ja yhtenäinen salauskäyttöliittymä
+ Comment[fr]=Interface de gestion des certificats et cryptographie unifiée
+ Comment[gl]=Xestor de certificados e interface gráfica unificada de criptografí­a
+ Comment[hu]=Tanúsítványkezelő és egységes kriptográfiai kezelőfelület
+Index: kleopatra/conf/kleopatra_config_smimevalidation.desktop
+===================================================================
+--- kleopatra/conf/kleopatra_config_smimevalidation.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kleopatra/conf/kleopatra_config_smimevalidation.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -23,6 +23,7 @@
+ Name[en_GB]=S/MIME Validation
+ Name[es]=Validación S/MIME
+ Name[et]=S/MIME valideerimine
++Name[fi]=S/MIME-tarkistus
+ Name[fr]=Validation S/MIME
+ Name[gl]=Validación S/MIME
+ Name[hu]=S/MIME-ellenőrzés
+@@ -60,6 +61,7 @@
+ Comment[en_GB]=Configuration of S/MIME certificate validation options
+ Comment[es]=Configuración de las opciones de los certificados de validación S/MIME
+ Comment[et]=S/MIME sertifikaatide valideerimise valikute seadistamine
++Comment[fi]=S/MIME-varmenteentarkistuksen asetukset
+ Comment[fr]=Configuration des options de validation des certificats S/MIME
+ Comment[gl]=Configuración das opcións de validación de certificados S/MIME
+ Comment[hu]=Az S/MIME-tanúsítványok ellenőrzési beállításai
+Index: kleopatra/conf/kleopatra_config_gnupgsystem.desktop
+===================================================================
+--- kleopatra/conf/kleopatra_config_gnupgsystem.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kleopatra/conf/kleopatra_config_gnupgsystem.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -23,6 +23,7 @@
+ Name[en_GB]=GnuPG System
+ Name[es]=Sistema GnuPG
+ Name[et]=GnuPG süsteem
++Name[fi]=GnuPG-järjestelmä
+ Name[fr]=Système GnuPG
+ Name[ga]=Córas GnuPG
+ Name[gl]=Sistema GnuPG
+@@ -59,6 +60,7 @@
+ Comment[en_GB]=Configuration of GnuPG System options
+ Comment[es]=Configuración de las opciones del sistema GnuPG
+ Comment[et]=GnuPG süsteemi valikute seadistamine
++Comment[fi]=GnuPG-järjestelmän asetukset
+ Comment[fr]=Configuration des options du système GnuPG
+ Comment[gl]=Configuración das opcións do Sistema GnuPG
+ Comment[hu]=A GnuPG beállításai
+Index: kleopatra/conf/kleopatra_config_dnorder.desktop
+===================================================================
+--- kleopatra/conf/kleopatra_config_dnorder.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kleopatra/conf/kleopatra_config_dnorder.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -28,7 +28,7 @@
+ Name[et]=DN-atribuutide järjekord
+ Name[eu]=DN-atributu ordena
+ Name[fa]=ترتیب خصیصۀ DN
+-Name[fi]=DN-attribuuttien järjestys
++Name[fi]=DN-määritteiden järjestys
+ Name[fr]=Ordre des attributs DN
+ Name[fy]=DN-Attribuutoarder
+ Name[ga]=Ord aitreabúidí DN
+@@ -82,7 +82,7 @@
+ Comment[et]=DN-atribuutide näitamise järjekorra seadistamine
+ Comment[eu]=Konfiguratu DN atributuak zein ordenetan erakutsiko diren
+ Comment[fa]=پیکربندی ترتیبی که خصیصه‌های DN طبق آن نمایش داده می‌شوند
+-Comment[fi]=Määrittele missä järjestyksessä DN-attribuutit näytetään
++Comment[fi]=Aseta DN-määritteiden esitysjärjestys
+ Comment[fr]=Configurer l'ordre dans lequel les attributs DN sont affichés
+ Comment[fy]=De folchoarder fan de DN-atributen ynstelle
+ Comment[ga]=Cumraigh an t-ord ina dtaispeánfar aitreabúidí DN
+Index: kleopatra/conf/kleopatra_config_dirserv.desktop
+===================================================================
+--- kleopatra/conf/kleopatra_config_dirserv.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kleopatra/conf/kleopatra_config_dirserv.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -79,6 +79,7 @@
+ Comment[en_GB]=Configuration of directory services
+ Comment[es]=Configuración de los servicios de directorio
+ Comment[et]=Kataloogiteenuste seadistused
++Comment[fi]=Hakemistopalvelujen asetukset
+ Comment[fr]=Configuration des annuaires
+ Comment[ga]=Cumraíocht seirbhísí eolaire
+ Comment[gl]=Configuración dos servizos de directorio
+Index: kleopatra/kleopatra_decryptverifyfolders.desktop
+===================================================================
+--- kleopatra/kleopatra_decryptverifyfolders.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kleopatra/kleopatra_decryptverifyfolders.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -13,6 +13,7 @@
+ Name[en_GB]=Kleopatra Decrypt/Verify All Files In Folder
+ Name[es]=Kleopatra Descifrar/verificar todos los archivos en la carpeta
+ Name[et]=Kleopatra kõigi kataloogi failide lahtikrüptimine/kontrollimine
++Name[fi]=Kleopatra: pura/varmista kaikki kansion tiedostot
+ Name[fr]=Kleopatra vérification et déchiffrement de tous les fichiers dans un dossier
+ Name[gl]=Descifrar/Verificar todos os ficheiros do cartafol co Kleopatra
+ Name[hu]=Kleopatra - Fájlok dekódolása és ellenőrzése egy mappában
+@@ -53,6 +54,7 @@
+ Name[en_GB]=Decrypt/Verify All Files In Folder
+ Name[es]=Descifrar/verificar todos los archivos en la carpeta
+ Name[et]=Kõigi kataloogi failide lahtikrüptimine/kontrollimine
++Name[fi]=Pura kaikkien kansion tiedostojen salaus tai tarkista tiedostot
+ Name[fr]=Vérifier et déchiffrer tous les fichiers dans un dossier
+ Name[gl]=Descifrar/Verificar todos os ficheiros do cartafol
+ Name[hu]=Dekódol és ellenőriz minden fájlt egy mappában
+Index: kleopatra/kleopatra.desktop
+===================================================================
+--- kleopatra/kleopatra.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kleopatra/kleopatra.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -74,6 +74,7 @@
+ GenericName[en_GB]=Certificate Manager and Unified Crypto GUI
+ GenericName[es]=Gestor de certificados e interfaz gráfica unificada de cifrado
+ GenericName[et]=Sertifikaadihaldur ja ühendatud krüptimise graafiline kasutajaliides
++GenericName[fi]=Varmenteiden hallinta ja yhtenäinen salauskäyttöliittymä
+ GenericName[fr]=Interface de gestion des certificats et cryptographie unifiée
+ GenericName[gl]=Xestor de certificados e interface gráfica unificada de criptografí­a
+ GenericName[it]=Gestore di certificati e interfaccia grafica unificata di crittografia
+Index: kleopatra/kleopatra_decryptverifyfiles.desktop
+===================================================================
+--- kleopatra/kleopatra_decryptverifyfiles.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kleopatra/kleopatra_decryptverifyfiles.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -14,6 +14,7 @@
+ Name[en_GB]=Kleopatra Decrypt/Verify Files
+ Name[es]=Kleopatra Descifrar/verificar archivos
+ Name[et]=Kleopatra failide lahtikrüptimine/kontrollimine
++Name[fi]=Kleopatra: pura/varmista tiedostot
+ Name[fr]=Kleopatra vérification et déchiffrement de fichiers
+ Name[gl]=Descifrar/Verificar ficheiros con Kleopatra
+ Name[hu]=Kleopatra - Fájlok dekódolása és ellenőrzése
+@@ -54,6 +55,7 @@
+ Name[en_GB]=Decrypt/Verify File
+ Name[es]=Descifrar/verificar archivo
+ Name[et]=Faili lahtikrüptimine/kontrollimine
++Name[fi]=Pura tiedoston salaus tai tarkista tiedosto
+ Name[fr]=Vérifier et déchiffrer le fichier
+ Name[gl]=Descifrar/Verificar ficheiros
+ Name[hu]=Fájlok dekódolása és ellenőrzése
+Index: kleopatra/kleopatra_signencryptfolders.desktop
+===================================================================
+--- kleopatra/kleopatra_signencryptfolders.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kleopatra/kleopatra_signencryptfolders.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -14,6 +14,7 @@
+ Name[en_GB]=Kleopatra Sign/Encrypt Folders
+ Name[es]=Kleopatra Firmar/cifrar carpetas
+ Name[et]=Kleopatra kataloogide allkirjastamine/krüptimine
++Name[fi]=Kleopatra: allekirjoita/salaa kansioita
+ Name[fr]=Kleopatra signature et chiffrement de dossiers
+ Name[gl]=Asinar/Cifrar cartafoles co Kleopatra
+ Name[hu]=Kleopatra - Mappák aláírása és titkosítása
+@@ -53,6 +54,7 @@
+ Name[en_GB]=Archive, Sign & Encrypt Folder
+ Name[es]=Archivar, firmar y cifrar carpeta
+ Name[et]=Kataloogi arhiveerimine, allkirjastamine ja krüptimine
++Name[fi]=Arkistoi, allekirjoita ja salaa kansio
+ Name[fr]=Archiver, signer et chiffrer le dossier
+ Name[gl]=Arquivar, asinar e cifrar o cartafol
+ Name[hu]=Mappa archiválása, aláírása és titkosítása
+@@ -95,6 +97,7 @@
+ Name[eo]=Arkivigi kaj ĉifri dosierujon
+ Name[es]=Archivar y cifrar carpeta
+ Name[et]=Kataloogi arhiveerimine ja krüptimine
++Name[fi]=Arkistoi ja salaa kansio
+ Name[fr]=Archiver et chiffrer le dossier
+ Name[ga]=Cuir Fillteán i gCartlann agus Criptigh É
+ Name[gl]=Arquivar e cifrar o cartafol
+Index: kleopatra/kleopatra_signencryptfiles.desktop
+===================================================================
+--- kleopatra/kleopatra_signencryptfiles.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kleopatra/kleopatra_signencryptfiles.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -15,6 +15,7 @@
+ Name[en_GB]=Kleopatra Sign/Encrypt Files
+ Name[es]=Firmar/cifrar archivos con Kleopatra
+ Name[et]=Kleopatra failide allkirjastamine/krüptimine
++Name[fi]=Kleopatra: allekirjoita/salaa tiedostoja
+ Name[fr]=Kleopatra signature et chiffrement de fichiers
+ Name[gl]=Asinar/Cifrar ficheiros co Kleopatra
+ Name[hu]=Kleopatra - Fájlok aláírása és titkosítása
+@@ -55,6 +56,7 @@
+ Name[en_GB]=Encrypt & Sign File
+ Name[es]=Cifrar y firmar archivo
+ Name[et]=Faili krüptimine ja allkirjastamine
++Name[fi]=Salaa ja allekirjoita tiedosto
+ Name[fr]=Chiffrer et signer le fichier
+ Name[gl]=Cifrar e asinar o ficheiro
+ Name[hu]=Fájl aláírása és titkosítása
+@@ -98,6 +100,7 @@
+ Name[eo]=Ĉifri dosieron
+ Name[es]=Cifrar archivo
+ Name[et]=Faili krüptimine
++Name[fi]=Salaa tiedosto
+ Name[fr]=Chiffrer le fichier
+ Name[ga]=Criptigh Comhad
+ Name[gl]=Cifrar o ficheiro
+@@ -141,6 +144,7 @@
+ Name[en_GB]=OpenPGP-Sign File
+ Name[es]=Firmar archivo con OpenPGP
+ Name[et]=Faili OpenPGP-allkirjastamine
++Name[fi]=OpenPGP-allekirjoita tiedosto
+ Name[fr]=Signer le fichier avec OpenPGP
+ Name[gl]=Asinar o ficheiro con OpenPGP
+ Name[hu]=OpenPGP-aláírásfájl
+@@ -182,6 +186,7 @@
+ Name[en_GB]=S/MIME-Sign File
+ Name[es]=Firmar archivo con S/MIME
+ Name[et]=Faili S/MIME-allkirjastamine
++Name[fi]=S/MIME-allekirjoita tiedosto
+ Name[fr]=Signer le fichier avec S/MIME
+ Name[gl]=Asinar o ficheiro con S/MIME
+ Name[hu]=S/MIME-aláírásfájl
+Index: runtime/tray/akonaditray.desktop
+===================================================================
+Index: runtime/plugins/akonadi_serializer_microblog.desktop
+===================================================================
+Index: runtime/plugins/akonadi_serializer_mail.desktop
+===================================================================
+Index: runtime/migration/kres/kresmigrator.h
+===================================================================
+Index: runtime/resources/nntp/nntpresource.desktop
+===================================================================
+Index: runtime/resources/pop3/pop3resource.desktop
+===================================================================
+Index: runtime/resources/pop3/accountdialog.cpp
+===================================================================
+Index: runtime/resources/knut/knutresource.desktop
+===================================================================
+Index: runtime/resources/maildir/maildirresource.cpp
+===================================================================
+Index: runtime/resources/imap/imapaccount.cpp
+===================================================================
+Index: runtime/resources/imap/imapresource.desktop
+===================================================================
+Index: runtime/resources/birthdays/birthdaysresource.desktop
+===================================================================
+Index: runtime/resources/vcarddir/vcarddirresource.desktop
+===================================================================
+Index: runtime/resources/vcard/vcardresource.desktop
+===================================================================
+Index: runtime/resources/kabc/kabcresource.desktop
+===================================================================
+Index: runtime/resources/kabc/kresourceassistant.cpp
+===================================================================
+Index: runtime/resources/mbox/mboxresource.desktop
+===================================================================
+Index: runtime/resources/openchange/ocresource.desktop
+===================================================================
+Index: runtime/resources/ical/icalresource.desktop
+===================================================================
+Index: runtime/resources/ical/notes/notesresource.desktop
+===================================================================
+Index: runtime/resources/nepomuktag/nepomuktagresource.desktop
+===================================================================
+Index: runtime/resources/kcal/kcalresource.desktop
+===================================================================
+Index: runtime/resources/microblog/microblog.desktop
+===================================================================
+Index: runtime/resources/contacts/contactsresource.desktop
+===================================================================
+Index: kresources/remote/resourceremoteconfig.cpp
+===================================================================
+--- kresources/remote/resourceremoteconfig.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kresources/remote/resourceremoteconfig.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -93,7 +93,7 @@
+ 
+     if ( mUploadUrl->url().isEmpty() && !resource->readOnly() ) {
+       KMessageBox::information( this, i18n( "You have specified no upload URL, "
+-			    "the calendar will be read-only." ), "RemoteResourseNoUploadURL" );
++			    "the calendar will be read-only." ),QString(), "RemoteResourseNoUploadURL");
+       resource->setReadOnly( true );
+     }
+   } else {
+Index: blogilo/blogilo.desktop
+===================================================================
+--- blogilo/blogilo.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ blogilo/blogilo.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -9,6 +9,7 @@
+ Name[eo]=Blogilo
+ Name[es]=Blogilo
+ Name[et]=Blogilo
++Name[fi]=Blogilo
+ Name[fr]=Blogilo
+ Name[gl]=Blogilo
+ Name[it]=Blogilo
+@@ -18,6 +19,7 @@
+ Name[nb]=Blogilo
+ Name[nds]=Blogilo
+ Name[nl]=Blogilo
++Name[nn]=Blogilo
+ Name[pl]=Blogilo
+ Name[pt]=Blogilo
+ Name[pt_BR]=Blogilo
+@@ -41,6 +43,7 @@
+ GenericName[en_GB]=A KDE Blogging Client
+ GenericName[es]=Un cliente de Blog par KDE
+ GenericName[et]=KDE ajaveebiklient
++GenericName[fi]=KDE:n blogausasiakas
+ GenericName[fr]=Un client de Blog pour KDE
+ GenericName[gl]=Un cliente para blogues de KDE
+ GenericName[it]=Un client KDE per scrivere blog
+@@ -50,6 +53,7 @@
+ GenericName[nb]=En KDE-klient for blogging
+ GenericName[nds]=En Nettdaagbook-Programm för KDE
+ GenericName[nl]=Een KDE Blogging-client
++GenericName[nn]=Bloggklient for KDE
+ GenericName[pl]=Klient blogów dla KDE
+ GenericName[pt]=Um Cliente de Blogs para o KDE
+ GenericName[pt_BR]=Um cliente de blog do KDE
+Index: blogilo/src/addeditblog.cpp
+===================================================================
+--- blogilo/src/addeditblog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ blogilo/src/addeditblog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -290,6 +290,7 @@
+     mFetchAPITimer = 0;
+     hideWaitWidget();
+     ui.txtId->setEnabled( true );
++    ui.txtId->setText( QString() );
+     KMessageBox::sorry( this, i18n( "The API guess function has failed, \
+ please check your Internet connection. Otherwise, you have to set the API type manually on the Advanced tab." ),
+                         i18n( "Auto Configuration Failed" ) );
+@@ -299,6 +300,7 @@
+ {
+     kDebug() << " ErrorType: " << type;
+     ui.txtId->setEnabled( true );
++    ui.txtId->setText( QString() );
+     hideWaitWidget();
+     KMessageBox::detailedError( this, i18n( "Fetching BlogID Failed.\nPlease check your Internet connection." ), errorMsg );
+ }
+@@ -347,11 +349,14 @@
+             apiUrl = qobject_cast<QLabel*>( blogsList->cellWidget(row, 3) )->text();
+         } else
+             return;
++    } else if (list.count() > 0) {
++        blogId = list.constBegin()->value("id");
++        blogName = list.constBegin()->value("title");
++        blogUrl = list.constBegin()->value("url");
++        apiUrl = list.constBegin()->value("apiUrl");
+     } else {
+-        blogId = list.begin()->value("id");
+-        blogName = list.begin()->value("title");
+-        blogUrl = list.begin()->value("url");
+-        apiUrl = list.begin()->value("apiUrl");
++//         KMessageBox::sorry(this, i18n("Sorry, No blog found with the specified account info."));
++        return;
+     }
+     ui.txtId->setText( blogId );
+     ui.txtTitle->setText( blogName );
+Index: blogilo/src/composer/stylegetter.cpp
+===================================================================
+--- blogilo/src/composer/stylegetter.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ blogilo/src/composer/stylegetter.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -82,7 +82,6 @@
+     b = new Backend( blogid );
+     connect( b, SIGNAL( sigPostPublished( int, BilboPost* ) ), this,
+              SLOT( sltTempPostPublished( int, BilboPost* ) ) );
+-//     connect( b, SIGNAL( sigPostFetched( BilboPost * ) ), this, SLOT( sltTempPostFetched( BilboPost * ) ) );
+     connect( b, SIGNAL( sigError( const QString& ) ), this, SLOT( sltError( const QString& ) ) );
+ 
+     Q_EMIT sigGetStyleProgress( 10 );
+@@ -160,9 +159,9 @@
+ 
+     mTempPost = post;
+     KIO::StoredTransferJob *job = KIO::storedGet( postUrl, KIO::NoReload, KIO::HideProgressInfo );
+-
+     connect( job, SIGNAL( result( KJob* ) ),
+             this, SLOT( sltHtmlCopied( KJob* ) ) );
++
+ }
+ 
+ void StyleGetter::sltHtmlCopied( KJob *job )
+@@ -212,9 +211,9 @@
+ 
+ 
+     //Remove temp post from the server.
+-    b->removePost( *mTempPost );
+     connect( b, SIGNAL( sigPostRemoved( int, const BilboPost &) ), this,
+              SLOT( sltTempPostRemoved( int, const BilboPost & ) ) );
++    b->removePost( *mTempPost );
+ }
+ 
+ void StyleGetter::sltTempPostRemoved( int blog_id, const BilboPost &post)
+Index: blogilo/src/backend.cpp
+===================================================================
+--- blogilo/src/backend.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ blogilo/src/backend.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -422,7 +422,9 @@
+         kDebug() << "Emitting sigPostPublished ...";
+         Q_EMIT sigPostPublished( mBBlog->id(), pp );
+     }
+-    delete post;
++    // TODO crashes stylegetter on GData. Somehow the post gets deleted before
++    // slotFetchedPost as it seems. Don't get all the pointer copies done here.
++    //delete post;
+ }
+ 
+ KBlog::BlogPost * Backend::preparePost( BilboPost &post )
+Index: akonadiconsole/akonadiconsole.desktop
+===================================================================
+--- akonadiconsole/akonadiconsole.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ akonadiconsole/akonadiconsole.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -10,6 +10,7 @@
+ Name[en_GB]=Akonadi Console
+ Name[es]=Consola de Akonadi
+ Name[et]=Akonadi konsool
++Name[fi]=Akonadi-konsoli
+ Name[fr]=Console Akonadi
+ Name[ga]=Consól Akonadi
+ Name[gl]=Consola de Akonadi
+@@ -51,6 +52,7 @@
+ Comment[en_GB]=Akonadi Management and Debugging Console
+ Comment[es]=Consola de gestión y depuración de Akonadi
+ Comment[et]=Akonadi haldamise ja silumise konsool
++Comment[fi]=Akonadin hallinta- ja vianjäljityskonsoli
+ Comment[fr]=Console de gestion et de déboguage pour Akonadi
+ Comment[ga]=Consól Bainisteoireachta agus Dífhabhtaithe Akonadi
+ Comment[gl]=Consola de xestión e depuración de Akonadi
+Index: kmail/dbusmail.desktop
+===================================================================
+--- kmail/dbusmail.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/dbusmail.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -12,6 +12,7 @@
+ Comment[en_GB]=Mail program with a D-Bus interface
+ Comment[es]=Programa de correo con una interfaz D-Bus
+ Comment[et]=E-posti rakendus D-Busi liidesega
++Comment[fi]=D-Bus-rajapintainen sähköpostiohjelma
+ Comment[fr]=Programme de messagerie avec une interface D-Bus
+ Comment[ga]=Clár ríomhphoist a bhfuil comhéadan D-Bus aige
+ Comment[gl]=Programa de correo electrónico cunha interface D-BUS
+Index: kmail/application_octetstream.desktop
+===================================================================
+--- kmail/application_octetstream.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/application_octetstream.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -10,6 +10,7 @@
+ Name[en_GB]=Application Octet Stream
+ Name[es]=Flujo de octetos de la aplicación
+ Name[et]=Application Octet Stream
++Name[fi]=Octet Stream -sovellus
+ Name[fr]=Application octetstream
+ Name[ga]=Application Octet Stream
+ Name[gl]=Aplicación Octet Stream
+Index: kmail/folderselectiontreewidget.cpp
+===================================================================
+--- kmail/folderselectiontreewidget.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/folderselectiontreewidget.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -283,9 +283,13 @@
+     allowOk = allowCreate = false;
+   else
+   {
+-    const KMFolder *fld = static_cast<FolderSelectionTreeWidgetItem *>( selectedItems().first() )->folder();
+-    if ( !fld )						// "Local Folders" root
++    const FolderSelectionTreeWidgetItem *itemFolderSelection = static_cast<FolderSelectionTreeWidgetItem *>( selectedItems().first() );
++    const KMFolder *fld = itemFolderSelection->folder();
++    if ( !fld ) {
++      // "Local Folders" root
+       allowOk = !mLastMustBeReadWrite;
++      allowCreate = (itemFolderSelection->protocol() != FolderViewItem::Search);
++    }
+     else						// any other folder
+     {
+       allowCreate = !fld->noChildren() && !fld->isReadOnly();
+Index: kmail/kmail.notifyrc
+===================================================================
+--- kmail/kmail.notifyrc	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/kmail.notifyrc	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -71,6 +71,7 @@
+ Name[en_GB]=Error While Checking Mail
+ Name[es]=Error al comprobar el correo
+ Name[et]=Viga kirjade kontrollimisel
++Name[fi]=Virhe tarkistettaessa postia
+ Name[fr]=Erreur lors de la vérification du courriel
+ Name[gl]=Produciuse un erro ao comprobar o correo
+ Name[it]=Errore durante il controllo della posta
+@@ -102,6 +103,7 @@
+ Comment[en_GB]=There was an error while checking for new mail
+ Comment[es]=Ha ocurrido un error mientras se comprobaba el correo nuevo
+ Comment[et]=Uute kirjade kontrollimisel tekkis viga
++Comment[fi]=Sattui virhe tarkistettaessa uutta postia
+ Comment[fr]=Il y a eu une erreur lors de la vérification du courriel
+ Comment[gl]=Aconteceu un erro cando se comprobaba o correo novo
+ Comment[it]=Si è verificato un errore durante il controllo dei nuovi messaggi di posta
+Index: kmail/recipientspicker.h
+===================================================================
+--- kmail/recipientspicker.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/recipientspicker.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -219,6 +219,7 @@
+     void insertAddressBook( AddressBook * );
+     void slotSearchLDAP();
+     void ldapSearchResult();
++    void slotSelectionChanged();
+   private:
+     KABC::StdAddressBook *mAddressBook;
+ 
+Index: kmail/searchwindow.cpp
+===================================================================
+--- kmail/searchwindow.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/searchwindow.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -182,7 +182,6 @@
+       } else {
+           mChkbxAllFolders->setChecked(true);
+       }
+-      mFolder = searchFolder;
+   }
+   else
+       mSearchPattern->append( KMSearchRule::createInstance( "Subject" ) );
+Index: kmail/recipientspicker.cpp
+===================================================================
+--- kmail/recipientspicker.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/recipientspicker.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -268,13 +268,13 @@
+ 
+ bool RecipientsCollection::hasEquivalentItem( RecipientItem *item ) const
+ {
+-  return mKeyMap.find( item->key() ) != mKeyMap.constEnd();
++  return mKeyMap.constFind( item->key() ) != mKeyMap.constEnd();
+ }
+ 
+ RecipientItem * RecipientsCollection::getEquivalentItem( RecipientItem *item) const
+ {
+   QMap<QString, RecipientItem *>::ConstIterator it;
+-  it = mKeyMap.find( item->key() );
++  it = mKeyMap.constFind( item->key() );
+   if ( it == mKeyMap.constEnd() )
+     return 0;
+   return (*it);
+@@ -363,6 +363,8 @@
+   topLayout->addWidget( mRecipientList );
+   topLayout->setStretchFactor( mRecipientList, 1 );
+ 
++  connect( mRecipientList, SIGNAL( itemSelectionChanged () ),
++           SLOT( slotSelectionChanged() ) );
+   connect( mRecipientList, SIGNAL( itemDoubleClicked(QTreeWidgetItem*,int) ),
+            SLOT( slotPicked() ) );
+   connect( mRecipientList, SIGNAL( returnPressed() ),
+@@ -425,6 +427,7 @@
+   setTabOrder( mCollectionCombo, mSearchLine );
+   setTabOrder( mSearchLine, mRecipientList );
+   setTabOrder( closeButton, mCollectionCombo );
++  slotSelectionChanged();
+ }
+ 
+ RecipientsPicker::~RecipientsPicker()
+@@ -437,6 +440,14 @@
+   }
+ }
+ 
++void RecipientsPicker::slotSelectionChanged()
++{
++  bool hasSelection = !mRecipientList->selectedItems ().isEmpty();
++  mToButton->setEnabled( hasSelection );
++  mBccButton->setEnabled( hasSelection );
++  mCcButton->setEnabled( hasSelection );
++}
++
+ void RecipientsPicker::initCollections()
+ {
+   mAllRecipients = new RecipientsCollection( i18nc("All collections containing recipients.", "All") );
+@@ -828,7 +839,7 @@
+     KABC::Addressee ad;
+     ad.setNameFromString( name );
+     ad.insertEmail( email );
+-    
++
+     RecipientItem *item = new RecipientItem;
+     item->setAddressee( ad, ad.preferredEmail() );
+     emit pickedRecipient( Recipient( item->recipient(), Recipient::Undefined ) );
+Index: kmail/kmreaderwin.cpp
+===================================================================
+--- kmail/kmreaderwin.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/kmreaderwin.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -646,6 +646,7 @@
+   KAction *action = new KAction(KIcon("edit-find"), i18n("&Find in Message..."), this);
+   ac->addAction("find_in_messages", action );
+   connect(action, SIGNAL(triggered(bool)), SLOT(slotFind()));
++  action->setShortcut(KStandardShortcut::find());
+ 
+   // open URL
+   mUrlOpenAction = new KAction( KIcon( "document-open" ), i18n( "Open URL" ), this );
+Index: kmail/dbusimap.desktop
+===================================================================
+--- kmail/dbusimap.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/dbusimap.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -12,6 +12,7 @@
+ Comment[en_GB]=Mail program with a D-Bus interface
+ Comment[es]=Programa de correo con una interfaz D-Bus
+ Comment[et]=E-posti rakendus D-Busi liidesega
++Comment[fi]=D-Bus-rajapintainen sähköpostiohjelma
+ Comment[fr]=Programme de messagerie avec une interface D-Bus
+ Comment[ga]=Clár ríomhphoist a bhfuil comhéadan D-Bus aige
+ Comment[gl]=Programa de correo electrónico cunha interface D-BUS
+Index: kmail/kmail_config_identity.desktop
+===================================================================
+--- kmail/kmail_config_identity.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/kmail_config_identity.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -31,7 +31,7 @@
+ Name[et]=Identiteedid
+ Name[eu]=Identitateak
+ Name[fa]=هویتها
+-Name[fi]=Henkilöllisyydet
++Name[fi]=Henkilöydet
+ Name[fr]=Identités
+ Name[fy]=Identiteiten
+ Name[ga]=Aitheantais
+@@ -93,7 +93,7 @@
+ Comment[et]=Identiteetide haldus
+ Comment[eu]=Identitateak kudeatu
+ Comment[fa]=مدیریت هویتها
+-Comment[fi]=Henkilöllisyysasetukset
++Comment[fi]=Henkilöysasetukset
+ Comment[fr]=Gestion des identités
+ Comment[fy]=Identiteiten beheare
+ Comment[ga]=Bainistiú na nAitheantas
+Index: kmail/kmfolderdialog.cpp
+===================================================================
+--- kmail/kmfolderdialog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/kmfolderdialog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -354,7 +354,7 @@
+   topLayout->setMargin( 0 );
+ 
+   // Musn't be able to edit details for a non-resource, system folder.
+-  if ( !mIsLocalSystemFolder || mIsResourceFolder ) {
++  if ( (!mIsLocalSystemFolder || mIsResourceFolder )&& !mDlg->folder()->isReadOnly()) {
+ 
+     QHBoxLayout *hl = new QHBoxLayout();
+     topLayout->addItem( hl );
+@@ -1016,7 +1016,7 @@
+   topLayout->setMargin( 0 );
+   topLayout->setSpacing( KDialog::spacingHint() );
+ 
+-  QHBoxLayout *topItems = new QHBoxLayout( this );
++  QHBoxLayout *topItems = new QHBoxLayout;
+   topLayout->addLayout( topItems );
+ 
+   mCustom = new QCheckBox( i18n("&Use custom message templates in this folder"), this );
+Index: kmail/kmail_view.desktop
+===================================================================
+--- kmail/kmail_view.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/kmail_view.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -10,6 +10,7 @@
+ Name[en_GB]=KMail view
+ Name[es]=Vista KMail
+ Name[et]=KMaili vaade
++Name[fi]=KMail-näkymä
+ Name[fr]=KMail view
+ Name[ga]=Amharc KMail
+ Name[gl]=Vista KMail 
+Index: kmail/configuredialog.cpp
+===================================================================
+--- kmail/configuredialog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/configuredialog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -2383,7 +2383,7 @@
+     mFontRequester->setEnabled( false );
+     mIconButton->setEnabled( false );
+     mKeySequenceWidget->setEnabled( false );
+-
++    mBackgroundColorCombo->setEnabled( false );
+     mEmitChanges = true;
+     return;
+   }
+Index: kmail/kmail_config_appearance.desktop
+===================================================================
+--- kmail/kmail_config_appearance.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kmail/kmail_config_appearance.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -93,7 +93,7 @@
+ Comment[et]=Välimuse seadistused
+ Comment[eu]=Pertsonalizatu itxura
+ Comment[fa]=سفارشی کردن ظاهر تصویری
+-Comment[fi]=Ulkonäköasetukset
++Comment[fi]=Mukauta ulkoasua
+ Comment[fr]=Personnalisation de l'apparence
+ Comment[fy]=It uterlik oanpasse
+ Comment[ga]=Saincheap an Chuma
+Index: knode/knode_config_appearance.desktop
+===================================================================
+--- knode/knode_config_appearance.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ knode/knode_config_appearance.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -92,7 +92,7 @@
+ Comment[et]=Välimuse seadistused
+ Comment[eu]=Pertsonalizatu itxura
+ Comment[fa]=سفارشی کردن ظاهر تصویری
+-Comment[fi]=Ulkonäköasetukset
++Comment[fi]=Mukauta ulkoasua
+ Comment[fr]=Personnalisation de l'apparence
+ Comment[fy]=It uterlik oanpasse
+ Comment[ga]=Saincheap an Chuma
+Index: doc/kwatchgnupg/index.docbook
+===================================================================
+--- doc/kwatchgnupg/index.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ doc/kwatchgnupg/index.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -47,7 +47,7 @@
+ 
+ <legalnotice>&GPLNotice;</legalnotice>
+ 
+-<date>2004-05-09</date>
++<date>2010-01-12</date>
+ <releaseinfo>1.0</releaseinfo>
+ 
+ <abstract>
+@@ -78,7 +78,7 @@
+ &watchgnupg;.</para>
+ 
+ <para>&kwatchgnupg; can be started from the
+-<menuchoice><guimenu>Tools</guimenu></menuchoice> menu of both
++<menuchoice><guimenu>Tools</guimenu><guimenuitem>GnuPG Log Viewer</guimenuitem></menuchoice> menu of both
+ &kleopatra; and &kmail;, as well as from the command
+ line. The &kwatchgnupg; executable is named
+ <userinput>kwatchgnupg</userinput>.
+Index: doc/ktimetracker/systray.png
+===================================================================
+Nie można wyświetlić: plik binarny.
+svn:mime-type = image/png
+Index: doc/ktimetracker/index.docbook
+===================================================================
+--- doc/ktimetracker/index.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ doc/ktimetracker/index.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -141,7 +141,7 @@
+ </shortcut>
+ <guimenu>Task</guimenu>
+ <guimenuitem>New Task...</guimenuitem>
+-</menuchoice>
++</menuchoice>. 
+ 
+ To create a subtask, pick the parent task and select
+ 
+@@ -151,7 +151,7 @@
+ </shortcut>
+ <guimenu>Task</guimenu>
+ <guimenuitem>New Subtask...</guimenuitem>
+-</menuchoice>
++</menuchoice>.
+ </para>
+ 
+ <para>When &ktimetracker; exits, the task list is saved to a file on your disk. 
+@@ -192,13 +192,14 @@
+ <listitem><para>The time spent on the task since the session
+ began.</para></listitem> </varlistentry> 
+ 
+-<varlistentry> <term><guilabel>Total Session Time</guilabel></term>
+-<listitem><para>The time spent on the task and all its subtasks since the
+-session began.</para></listitem> </varlistentry> 
+ <varlistentry> <term><guilabel>Time</guilabel></term> <listitem><para>The time
+ spent on the task since all times were reset.</para></listitem>
+ </varlistentry> 
+ 
++<varlistentry> <term><guilabel>Total Session Time</guilabel></term>
++<listitem><para>The time spent on the task and all its subtasks since the
++session began.</para></listitem> </varlistentry> 
++
+ <varlistentry> <term><guilabel>Total Time</guilabel></term>
+ <listitem><para>The time spent on the task and all its subtasks since all
+ times were reset.</para></listitem> </varlistentry> 
+@@ -309,10 +310,10 @@
+ 
+ <para>As a typical usecase, you might want to plan a project with the project 
+ management tool Imendio Planner 
+-(from <ulink url="http://planner.imendio.org">planner.imendio.org</ulink>) 
+-and import its tasks to &ktimetracker; with <guimenu>File</guimenu>
+-<guisubmenu>Import</guisubmenu><guimenuitem>Import Tasks From Planner...</guimenuitem>, 
+-to have them in the industry standard <ulink
++(from <ulink url="http://live.gnome.org/Planner">live.gnome.org/Planner</ulink>) 
++and import its tasks to &ktimetracker; with <menuchoice><guimenu>File</guimenu>
++<guisubmenu>Import</guisubmenu><guimenuitem>Import Tasks From Planner...</guimenuitem>
++</menuchoice>, to have them in the industry standard <ulink
+ url="http://developer.kde.org/documentation/standards/index.html">iCalendar</ulink> 
+ format. Having done so, you are able to schedule the tasks in &korganizer;, and account your time 
+ to them in &ktimetracker;. That's one way to help ensure your project stays on time
+@@ -479,8 +480,8 @@
+ 
+ </sect1>
+ 
+-<sect1 id="tool-bar">
+-<title>The Toolbar</title>
++<sect1 id="tool-bar-status-bar">
++<title>The Toolbar and Statusbar</title>
+ <para>The toolbar contains icons for the following commands:</para>
+ 
+ <note><para>(All behave identically to the menu command.)</para></note>
+@@ -494,14 +495,9 @@
+ <listitem><para><guiicon>Edit</guiicon></para></listitem>
+ </itemizedlist>
+ 
++<para>The statusbar reports the name of the file where the data was saved.</para>
+ </sect1>
+ 
+-<sect1 id="status-bar">
+-<title>The Statusbar</title>
+-
+-<para>Reports the name of the file where the data was saved.</para>
+-</sect1>
+-
+ </chapter>
+ 
+ <chapter id="credits">
+Index: doc/kontact-admin/kontact-admin.desktop
+===================================================================
+--- doc/kontact-admin/kontact-admin.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ doc/kontact-admin/kontact-admin.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -9,6 +9,7 @@
+ Name[en_GB]=Kontact Administration
+ Name[es]=Administración de Kontact
+ Name[et]=Kontacti haldur
++Name[fi]=Kontactin hallinta
+ Name[fr]=Administration de Kontact
+ Name[gl]=Administración do Akonadi 
+ Name[it]=Gestione di Kontact
+@@ -18,6 +19,7 @@
+ Name[nb]=Kontact-administrasjon
+ Name[nds]=Kontaktenpleeg
+ Name[nl]=Kontactbeheer
++Name[nn]=Kontakt-administrering
+ Name[pa]=ਕੇਸੰਪਰਕ ਪਰਸ਼ਾਸ਼ਨ
+ Name[pl]=Administracja Kontact
+ Name[pt]=Administração do Kontact
+Index: doc/kmail/using-kmail.docbook
+===================================================================
+--- doc/kmail/using-kmail.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ doc/kmail/using-kmail.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -210,8 +210,7 @@
+ message, click the <guiicon>Send Now</guiicon> icon (the envelope) to send
+ the message now, or click the <guiicon>Send Later</guiicon> icon to put
+ the message in the outbox. If your message is not finished yet, select
+-<menuchoice><guimenu>Message</guimenu><guimenuitem>Save in Drafts
+-Folder</guimenuitem></menuchoice>.
++<menuchoice><guimenu>Message</guimenu><guimenuitem>Save as Draft</guimenuitem></menuchoice>.
+ </para></sect2>
+ 
+ <sect2 id="encrypt-sign">
+@@ -1773,9 +1772,9 @@
+ <para>Multiple accounts are used to check for messages from more than one email address
+ and/or mail server. Select <menuchoice><guimenu>Settings</guimenu>
+ <guimenuitem>Configure &kmail;...</guimenuitem></menuchoice> and click on the
+-<guilabel>Network</guilabel> page to add or change your account settings. See the
++<guilabel>Accounts</guilabel> page to add or change your account settings. See the
+ <link linkend="getting-started">Getting started</link> section for more
+-information on the settings in the <guilabel>Network</guilabel> page.</para>
++information on the settings in the <guilabel>Accounts</guilabel> page.</para>
+ 
+ <para>To check for messages from a particular account, use the
+ <menuchoice><guimenu>File</guimenu><guimenuitem>Check Mail
+Index: doc/kmail/configure.docbook
+===================================================================
+--- doc/kmail/configure.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ doc/kmail/configure.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -115,7 +115,7 @@
+ identity.</para>
+ 
+ <para>To add a new identity to the identity list, click on the
+-<guibutton>New...</guibutton> button.
++<guibutton>Add...</guibutton> button.
+ The <link linkend="configure-identity-newidentitydialog">New identity</link> dialog
+ will then appear.</para>
+ 
+@@ -143,11 +143,9 @@
+ <varlistentry>
+ <term><guilabel>Use Control Center settings</guilabel></term>
+ <listitem>
+-<para>Uses the settings of the <application>Control
+-Center</application>'s default email profile (you can edit that one
+-under <menuchoice><guimenu>Internet &amp; Network</guimenu>
+-<guimenuitem>Email</guimenuitem></menuchoice> in the
+-<application>Control Center</application>).</para>
++<para>Uses the values from <menuchoice><guimenu>Personal</guimenu><guimenuitem>About Me</guimenuitem>
++<guimenuitem>Password &amp; User Account</guimenuitem></menuchoice> in the
++&systemsettings;.</para>
+ </listitem>
+ </varlistentry>
+ 
+@@ -533,12 +531,12 @@
+ or similar programs
+ you can specify a name and the location of the
+ <command>sendmail</command> program.  For <acronym>SMTP</acronym> you
+-can specify <guilabel>Name</guilabel>, <guilabel>Host</guilabel>, and
++can specify <guilabel>Name</guilabel>, <guilabel>Outgoing mail server</guilabel>, and
+ <guilabel>Port</guilabel> of the server.  <guilabel>Server requires
+ authentication</guilabel> will enable the <guilabel>Login</guilabel>
+ and <guilabel>Password</guilabel> fields and the
+ <guilabel>Authentication method</guilabel> buttons on the
+-<guilabel>Security</guilabel> tab. If you are not sure about the
++<guilabel>Advanced</guilabel> tab. If you are not sure about the
+ security settings you can make &kmail; test for the best settings by
+ using <guibutton>Check What the Server Supports</guibutton>.</para>
+ 
+@@ -647,13 +645,21 @@
+ <guilabel>Recycle colors on deep quoting</guilabel> means that even text that is
+ quoted more than three times will appear in color. Note that the
+ <guilabel>Quoted text</guilabel> colors only work in the message reader, not in
+-the composer.<!-- TODO --></para>
++the composer. If you want folders which are close to their quota
++(space allotment, usually used on IMAP servers) to be displayed in a different color,
++you can specify a percentage value as a threshold for this. The color to be used
++can be configured along with the other custom colors.<!-- TODO --></para>
+ 
+ </sect2>
+ 
+ <sect2 id="configure-appearance-layout">
+ <title>Layout</title>
+ 
++<para>If the <guilabel>Close message window after replying or forwarding</guilabel> option is
++activated, KMail will close the message window after replying to or forwarding the message that
++is displayed in the window. This only applies to the separate message window, not to the embedded
++message preview pane.</para>
++
+ <para><guilabel>Show HTML status bar</guilabel> activates a bar at the left side of the reader
+ pane that tells you if a message is &html; or not. This is important because
+ &html; messages might imitate the look of a signed and encrypted message, so
+@@ -1124,7 +1130,7 @@
+ 		  <para>
+ 		    Attaches the complete message to the disposition
+ 		    notification. Usually, this is overkill. It does
+-		    not add any valueable information that cannot be
++		    not add any valuable information that cannot be
+ 		    deduced from the message headers alone, but people
+ 		    sometimes insist on this, since it is much easier
+ 		    for humans to correlate the content of the message
+@@ -1298,7 +1304,7 @@
+ 	  </term>
+ 	  <listitem>
+ 	    <para>
+-	      If checked, everytime you encrypt a message, a dialog
++	      If checked, every time you encrypt a message, a dialog
+ 	      will appear that presents you with the encryption keys
+ 	      that will be used for each recipient. You can then
+ 	      review the choice of keys, change them, and approve or
+@@ -1408,7 +1414,7 @@
+ 	  <listitem>
+ 	    <para>
+ 	      If checked, &kmail; will emit a warning if an &smime;
+-	      certifciate or &openpgp; key will be used for a recipient
++	      certificate or &openpgp; key will be used for a recipient
+ 	      whose email address is not listed in the email addresses
+ 	      stored in the certificate.
+ 	    </para>
+@@ -1720,7 +1726,7 @@
+ 	backends. Below each backend entry, you can see what protocols
+ 	(&openpgp; and/or &smime;) the backend supports. If a protocol
+ 	is not listed, the backend does not support it. If it is
+-	listed, but greyed out, the backend supports the protocol, but
++	listed, but grayed out, the backend supports the protocol, but
+ 	some required programs were not found, or other errors
+ 	occurred during initialization. If you press
+ 	<guibutton>Rescan</guibutton>, a dialog box will appear that
+@@ -1815,13 +1821,30 @@
+ </varlistentry>
+ 
+ <varlistentry>
+-<term><guilabel>Jump to first unread message when entering a folder</guilabel></term>
++
++<term><guilabel>When entering a folder</guilabel></term>
+ <listitem>
+-<para>If this option is enabled &kmail; will go to the first unread message
+-when you enter a folder; if it is not enabled, &kmail; will go to first
+-new message or, if there is no new message, to the message
+-that was selected when you last left the folder.</para>
++<para>This option controls what happens if you open a folder.
++<itemizedlist>
++<listitem>
++<para>If <guilabel>Jump to First New Message</guilabel> is selected then &kmail; will select the
++first message it finds that is marked as new.
++</para>
+ </listitem>
++<listitem>
++<para>If <guilabel>Jump to First Unread or New Message</guilabel> is selected then &kmail; will
++select the first message it finds that is marked either as new or as unread.
++</para>
++</listitem>
++<listitem>
++<para>If <guilabel>Jump to Last Selected Message</guilabel> is selected then &kmail; will select
++the message that was selected when the folder was open the last time.
++</para>
++</listitem>
++</itemizedlist>
++
++</para>
++</listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+@@ -1918,6 +1941,14 @@
+ <para>You should not need to see the folders that hold the  <guilabel>IMAP</guilabel> resources. However if you want to see them, you can set that by enabling this option.</para>
+ </listitem>
+ </varlistentry>
++</variablelist>
++</sect2>
++
++<sect2 id="configure-misc-invitation">
++<title>Invitations</title>
++
++<variablelist>
++
+ <varlistentry>
+ <term><guilabel>Mangle From:/To: headers in replies to invitations</guilabel></term>
+ <listitem>
+@@ -1942,9 +1973,26 @@
+ <varlistentry>
+ <term><guilabel>Outlook compatible invitation reply comments</guilabel></term>
+ <listitem>
+-<para>When the user provides comments when responding to invitations, send the comment in way that Microsoft Outlook(tm) understands. If this option is not enabled, the reponse comments will not be seen in Outlook.</para>
++<para>When the user provides comments when responding to invitations, send the comment in way that Microsoft Outlook(tm) understands. If this option is not enabled, the response comments will not be seen in Outlook.</para>
+ </listitem>
+ </varlistentry>
++<varlistentry>
++<term><guilabel>Automatic invitation sending</guilabel></term>
++<listitem>
++<para>When this is checked, you will not see the mail composer window. Instead, 
++all invitation mails are sent automatically. If you want to see the mail 
++before sending it, you can uncheck this option. However, be aware that the 
++text in the composer window is in iCalendar syntax, and you should not try 
++modifying it by hand.</para>
++</listitem>
++</varlistentry>
++<varlistentry>
++<term><guilabel>Delete invitation emails after the reply to them has been sent</guilabel></term>
++<listitem>
++<para>When this is checked, received invitation emails that have been replied to 
++will be moved to the Trash folder, once the reply has been successfully sent.</para>
++</listitem>
++</varlistentry>
+ </variablelist>
+ </sect2>
+ 
+@@ -1991,7 +2039,7 @@
+ to the [MDN] section of the kmail configuration file. If there is no such section, simply add "[MDN]" on
+ a line by itself just above the option.
+ 
+-Note that the default setting of "false" strictly speaking violates internet standards, but is
++Note that the default setting of "false" strictly speaking violates Internet standards, but is
+ set that way for practical reasons, to avoid servers rejecting MDNs that KMail
+ generates because they think they are SPAM.
+ </para>
+@@ -2142,6 +2190,16 @@
+ </varlistentry>
+ 
+ <varlistentry>
++<term><guilabel>AutoLostFoundMove</guilabel></term>
++<listitem><para>Activate this option to automate the handling of not yet uploaded messages in disconnected IMAP
++folders that can not be uploaded. This can happen if the folder was removed from the server or your access
++rights have been restricted. Such messages will automatically moved to a newly created lost+found folder if
++this option is enabled, you will be ask how to proceed every time otherwise.
++</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
+ <term><guilabel>ShowUserAgent</guilabel></term>
+ <listitem>
+ <para>
+Index: doc/kmail/getting-started.docbook
+===================================================================
+--- doc/kmail/getting-started.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ doc/kmail/getting-started.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -49,14 +49,14 @@
+ messages.</para>
+ 
+ <para>The Configure window consists of six sections:
+-<guilabel>Identities</guilabel>, <guilabel>Network</guilabel>,
++<guilabel>Identities</guilabel>, <guilabel>Accounts</guilabel>,
+ <guilabel>Appearance</guilabel>, <guilabel>Composer</guilabel>,
+ <guilabel>Security</guilabel>, and
+ <guilabel>Misc</guilabel>.</para>
+ 
+ <para>To begin sending and receiving messages you will only have to
+ change some settings in the <guilabel>Identities</guilabel> and
+-<guilabel>Network</guilabel> pages.</para>
++<guilabel>Accounts</guilabel> pages.</para>
+ 
+   <sect1 id="setting-your-identity">
+     <title>
+@@ -94,7 +94,7 @@
+ <sect1 id="setting-up-your-account">
+ <title>Setting up your Account</title>
+ 
+-<para>The <guilabel>Network</guilabel> page contains the settings that
++<para>The <guilabel>Accounts</guilabel> page contains the settings that
+ tell &kmail; how to send and receive your email messages. Many of these settings
+ can vary greatly depending on the setup of your system and on the kind
+ of network that your mail server is located in. If you do not know what
+@@ -116,8 +116,8 @@
+ working &Sendmail; configuration, choose
+ <guilabel>SMTP</guilabel> and fill in the <guilabel>Name</guilabel>
+ field with a descriptive name
+-(&eg; <userinput>My Mail Account</userinput>)
+-and the <guilabel>Host</guilabel>
++(&eg; <userinput>My Mail Account</userinput>). Click the <guibutton>Create and Configure</guibutton>
++and fill the <guilabel>Outgoing mail server</guilabel>
+ field with the name and domain of your mail server
+ (&eg; <userinput>smtp.provider.com</userinput>). You will probably
+ not need to change the <guilabel>Port</guilabel> setting (the default is
+@@ -159,10 +159,10 @@
+ about file locking</link>.</para>
+ 
+ <para>You will then be presented with
+-the <guilabel>Add account</guilabel> window. First, fill in the
+-<guilabel>Name</guilabel> field to name your account. You can choose any name
++the <guilabel>Add Account</guilabel> window. First, fill in the
++<guilabel>Account name</guilabel> field to name your account. You can choose any name
+ you like.  <guilabel>Login</guilabel>, <guilabel>Password</guilabel>, and
+-<guilabel>Host</guilabel> should be filled in with the appropriate information
++<guilabel>Incoming mail server</guilabel> should be filled in with the appropriate information
+ from your <acronym>ISP</acronym> or system administrator. You should not
+ need to change the <guilabel>Port</guilabel> setting (the default for POP3 is
+ <userinput>110</userinput>, the default for <acronym>IMAP</acronym> is
+@@ -234,12 +234,12 @@
+ <link linkend="filters">filter</link>, which has nothing to do with this
+ option.</para>
+ 
+-<para>With <guilabel>Precommand</guilabel> you can specify any program that &kmail;
++<para>With <guilabel>Pre-command</guilabel> you can specify any program that &kmail;
+ will execute just before fetching mail. Please specify the full path
+ (do not use <quote>~</quote>) and note that &kmail; will not continue
+ until the program returns.</para>
+ 
+-<para>On the <guilabel>Extras</guilabel> tab you can select <guilabel>Use
++<para>On the <guilabel>POP Settings</guilabel> tab you can select <guilabel>Use
+ pipelining for faster mail download</guilabel> if this is supported by your
+ server. You should carefully test this to make sure it works safely.</para>
+ </sect3>
+@@ -248,9 +248,9 @@
+ <title>Options for both <acronym>IMAP</acronym> and POP3</title>
+ 
+ <!-- TODO: move all this, this isn't important for beginners?! -->
+-<para>If you select <guilabel>Store POP password in configuration
+-file</guilabel> or <guilabel>Store IMAP password in configuration
+-file</guilabel> &kmail; will remember your password so you will not have to
++<para>If you select <guilabel>Store POP password</guilabel> or 
++<guilabel>Store IMAP Password</guilabel> &kmail; will remember 
++your password so you will not have to
+ type it every time you start &kmail; and fetch new mail.</para>
+ 
+ <warning><para>Be warned that &kmail; cannot really encrypt your password, so
+@@ -282,7 +282,7 @@
+ authentication methods. Additionally, for <acronym>IMAP</acronym>
+ <guilabel>Anonymous</guilabel> is supported, but <guilabel>APOP</guilabel>
+ is not. Use the <guibutton>Check what the server supports</guibutton> button
+-on the <guilabel>Extras</guilabel> or <guilabel>Security</guilabel> tab
++on the <guilabel>Security</guilabel> tab
+ to automatically select the most secure settings supported by your server.</para>
+ 
+ <para>You are now ready to send and receive mail. For
+@@ -310,7 +310,7 @@
+ <link linkend="the-composer-window">composer window</link> will appear. Fill in the
+ <guilabel>To:</guilabel> field with your email address and type
+ something in the <guilabel>Subject</guilabel> field. Send the message by
+-selecting <menuchoice><guimenu>Message</guimenu> <guimenuitem>Send</guimenuitem>
++selecting <menuchoice><guimenu>Message</guimenu> <guimenuitem>Send Mail</guimenuitem>
+ </menuchoice>.</para>
+ 
+ <para>To check your email, select
+Index: doc/kmail/faq.docbook
+===================================================================
+--- doc/kmail/faq.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ doc/kmail/faq.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -492,7 +492,7 @@
+ <answer><para>See the <link linkend="popfilters">Download filters</link> chapter.
+ If you want to leave all messages on the server: open up the
+ <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &kmail;...</guimenuitem>
+-</menuchoice> window. Click on the <guilabel>Network</guilabel> page. Select your
++</menuchoice> window. Click on the <guilabel>Accounts</guilabel> page. Select your
+ account from the account list and click the <guibutton>Modify...</guibutton>
+ button. This dialog contains the <guilabel>Leave fetched messages on the server</guilabel>
+ setting which you must enable.</para></answer>
+Index: doc/kmail/menus.docbook
+===================================================================
+--- doc/kmail/menus.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ doc/kmail/menus.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -83,6 +83,22 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
++<guimenu>Tools</guimenu>
++<guimenuitem>Import Messages...</guimenuitem>
++</menuchoice>
++</term>
++<listitem>
++<para>
++Starts up <application>kmailcvt</application> (which is
++part of kdepim). This application lets you import
++messages from several email clients &kmail;.
++</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term>
++<menuchoice>
+ <shortcut><keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo></shortcut>
+ <guimenu>File</guimenu>
+ <guimenuitem>Print...</guimenuitem>
+@@ -92,7 +108,7 @@
+ <para>Display a dialog that lets you prints the currently displayed message.</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- NOT IN 4.4.0
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -104,7 +120,7 @@
+ on disk according to how you have moved and deleted them in &kmail;.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -233,22 +249,8 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycap>T</keycap></shortcut>
++<shortcut><keycap>Del</keycap></shortcut>
+ <guimenu>Edit</guimenu>
+-<guimenuitem>Edit Message</guimenuitem>
+-</menuchoice>
+-</term>
+-<listitem>
+-<para>Edits the selected message if it is editable. Only messages in the
+-<guilabel>outbox</guilabel> and <guilabel>drafts</guilabel> folder can be edited.</para>
+-</listitem>
+-</varlistentry>
+-
+-<varlistentry>
+-<term>
+-<menuchoice>
+-<shortcut><keycap>Delete</keycap></shortcut>
+-<guimenu>Edit</guimenu>
+ <guimenuitem>Move to Trash</guimenuitem>
+ </menuchoice>
+ </term>
+@@ -257,7 +259,7 @@
+ messages are already in the trash folder, they will really be deleted.</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -271,7 +273,7 @@
+ once they are deleted with this command.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -301,9 +303,9 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>A</keycap></keycombo></shortcut>
++<shortcut><keycombo action="simul">&Ctrl;<keycap>T</keycap></keycombo></shortcut>
+ <guimenu>Edit</guimenu>
+-<guimenuitem>Select Message Text</guimenuitem>
++<guimenuitem>Select All Text</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+@@ -356,7 +358,7 @@
+ </para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -384,7 +386,7 @@
+ of messages per folder.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -559,7 +561,7 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycombo action="simul">&Ctrl;<keycap>+</keycap></keycombo></shortcut>
++<shortcut><keycombo action="simul">&Alt;<keycap>+</keycap></keycombo></shortcut>
+ <guimenu>Go</guimenu>
+ <guimenuitem>Next Unread Folder</guimenuitem>
+ </menuchoice>
+@@ -572,7 +574,7 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycombo action="simul">&Ctrl;<keycap>-</keycap></keycombo></shortcut>
++<shortcut><keycombo action="simul">&Alt;<keycap>-</keycap></keycombo></shortcut>
+ <guimenu>Go</guimenu>
+ <guimenuitem>Previous Unread Folder</guimenuitem>
+ </menuchoice>
+@@ -634,14 +636,14 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
++<shortcut><keycap>F5</keycap></shortcut>
+ <guimenu>Folder</guimenu>
+-<guimenuitem>Compact</guimenuitem>
++<guimenuitem>Check Mail in This Folder</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>Compacts the folder file to reduce its disk space usage. Usually
+-&kmail; compacts all folders automatically, but under certain circumstances
+-you might want to compact a folder manually.</para>
++<para>Checks whether new mail arrived in the currently selected folder.
++This is only available for &imap; folders.</para>
+ </listitem>
+ </varlistentry>
+ 
+@@ -649,59 +651,60 @@
+ <term>
+ <menuchoice>
+ <guimenu>Folder</guimenu>
+-<guimenuitem>Expire</guimenuitem>
++<guimenuitem>Move All Messages to Trash</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>Deletes old messages from the current folder or moves them to another
+-folder, according to the rules in the folder's <guilabel>Properties</guilabel> dialog (the default is not to delete or move old messages). Usually &kmail;
+-does this automatically, but under certain circumstances you might want to
+-expire a folder manually...</para>
++<para>Moves all of the messages in the selected folder into the trash folder.
++This is only available if the currently selected folder is not a trash
++folder.</para>
+ </listitem>
+ </varlistentry>
+ 
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycombo action="simul">&Ctrl;<keycap>*</keycap></keycombo></shortcut>
+ <guimenu>Folder</guimenu>
+-<guimenuitem>Remove Duplicate Messages</guimenuitem>
++<guimenuitem>Compact</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>Searches the folder for duplicate messages and deletes the
+-duplicates.</para>
++<para>Compacts the folder file to reduce its disk space usage. Usually
++&kmail; compacts all folders automatically, but under certain circumstances
++you might want to compact a folder manually.</para>
+ </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycap>F5</keycap></shortcut>
+ <guimenu>Folder</guimenu>
+-<guimenuitem>Check Mail in This Folder</guimenuitem>
++<guimenuitem>Expire</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>Checks whether new mail arrived in the currently selected folder.
+-This is only available for &imap; folders.</para>
++<para>Deletes old messages from the current folder or moves them to another
++folder, according to the rules in the folder's <guilabel>Properties</guilabel> dialog (the default is not to delete or move old messages). Usually &kmail;
++does this automatically, but under certain circumstances you might want to
++expire a folder manually...</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
++<shortcut><keycombo action="simul">&Ctrl;<keycap>*</keycap></keycombo></shortcut>
+ <guimenu>Folder</guimenu>
+-<guimenuitem>Move All Messages to Trash</guimenuitem>
++<guimenuitem>Remove Duplicate Messages</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>Moves all of the messages in the selected folder into the trash folder.
+-This is only available if the currently selected folder is not a trash
+-folder.</para>
++<para>Searches the folder for duplicate messages and deletes the
++duplicates.</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -714,7 +717,7 @@
+ currently selected folder is a trash folder.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -742,7 +745,7 @@
+ activate this for folders which only contain trusted messages.</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -773,7 +776,7 @@
+ </para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -873,6 +876,7 @@
+ <menuchoice>
+ <shortcut><keycombo action="simul">&Shift;<keycap>A</keycap></keycombo></shortcut>
+ <guimenu>Message</guimenu>
++<guisubmenu>Reply Special</guisubmenu>
+ <guimenuitem>Reply to Author...</guimenuitem>
+ </menuchoice>
+ </term>
+@@ -890,6 +894,7 @@
+ <menuchoice>
+ <shortcut><keycap>L</keycap></shortcut>
+ <guimenu>Message</guimenu>
++<guisubmenu>Reply Special</guisubmenu>
+ <guimenuitem>Reply to Mailing-List...</guimenuitem>
+ </menuchoice>
+ </term>
+@@ -910,6 +915,7 @@
+ <menuchoice>
+ <shortcut><keycombo action="simul">&Shift;<keycap>R</keycap></keycombo></shortcut>
+ <guimenu>Message</guimenu>
++<guisubmenu>Reply Special</guisubmenu>
+ <guimenuitem>Reply Without Quote...</guimenuitem>
+ </menuchoice>
+ </term>
+@@ -956,7 +962,21 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
++<shortcut><keycap>T</keycap></shortcut>
+ <guimenu>Message</guimenu>
++<guimenuitem>Edit Message</guimenuitem>
++</menuchoice>
++</term>
++<listitem>
++<para>Edits the selected message if it is editable. Only messages in the
++<guilabel>outbox</guilabel> and <guilabel>drafts</guilabel> folder can be edited.</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term>
++<menuchoice>
++<guimenu>Message</guimenu>
+ <guisubmenu>Copy To</guisubmenu>
+ </menuchoice>
+ </term>
+@@ -1071,7 +1091,7 @@
+ <guimenuitem>Mark Message</guimenuitem></menuchoice>.</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1097,7 +1117,7 @@
+ to this thread will automatically be marked as read.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1214,21 +1234,6 @@
+       </listitem>
+     </varlistentry>
+ 
+-    <varlistentry id="reader-tools-import-messages">
+-      <term>
+-        <menuchoice>
+-          <guimenu>Tools</guimenu>
+-          <guimenuitem>Import Messages...</guimenuitem>
+-        </menuchoice>
+-      </term>
+-      <listitem>
+-        <para>
+-          Starts up <application>kmailcvt</application> (which is
+-          part of kdepim). This application lets you import
+-          messages from several email clients &kmail;.
+-        </para>
+-      </listitem>
+-    </varlistentry>
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1273,7 +1278,6 @@
+ </listitem>
+ </varlistentry>
+ 
+-<!--
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1286,7 +1290,6 @@
+ you to set up scanning messages for viruses.</para>
+ </listitem>
+ </varlistentry>
+--->
+ 
+ </variablelist>
+ 
+@@ -1310,7 +1313,7 @@
+ to compose a new message &etc;).</para>
+ </listitem>
+ </varlistentry>
+-
++<!-- not in 440
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1323,7 +1326,7 @@
+ for messages matching a search text is visible.</para>
+ </listitem>
+ </varlistentry>
+-
++-->
+ <varlistentry>
+ <term>
+ <menuchoice>
+@@ -1482,7 +1485,7 @@
+ <menuchoice>
+ <shortcut><keycombo action="simul">&Ctrl;<keycap>Return</keycap></keycombo></shortcut>
+ <guimenu>Message</guimenu>
+-<guimenuitem>Send Now</guimenuitem>
++<guimenuitem>Send Mail</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+@@ -1645,6 +1648,18 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
++<guimenu>Edit</guimenu>
++<guimenuitem>Paste as Quotation</guimenuitem>
++</menuchoice>
++</term>
++<listitem>
++<para>Pastes the text from the clipboard marked as quotation.</para>
++</listitem>
++</varlistentry>
++
++<varlistentry>
++<term>
++<menuchoice>
+ <shortcut><keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo></shortcut>
+ <guimenu>Edit</guimenu>
+ <guimenuitem>Select All</guimenuitem>
+@@ -1671,7 +1686,7 @@
+ <varlistentry>
+ <term>
+ <menuchoice>
+-<shortcut><keycombo action="simul">&Ctrl;<keycap>F</keycap></keycombo></shortcut>
++<shortcut><keycap>F3</keycap></shortcut>
+ <guimenu>Edit</guimenu>
+ <guimenuitem>Find Next</guimenuitem>
+ </menuchoice>
+@@ -1711,18 +1726,6 @@
+ <term>
+ <menuchoice>
+ <guimenu>Edit</guimenu>
+-<guimenuitem>Paste as Quotation</guimenuitem>
+-</menuchoice>
+-</term>
+-<listitem>
+-<para>Pastes the text from the clipboard marked as quotation.</para>
+-</listitem>
+-</varlistentry>
+-
+-<varlistentry>
+-<term>
+-<menuchoice>
+-<guimenu>Edit</guimenu>
+ <guimenuitem>Add Quote Characters</guimenuitem>
+ </menuchoice>
+ </term>
+@@ -2100,24 +2103,12 @@
+ <term>
+ <menuchoice>
+ <guimenu>Settings</guimenu>
+-<guimenuitem>Show Main Toolbar</guimenuitem>
++<guimenuitem>Toolbars Shown</guimenuitem>
+ </menuchoice>
+ </term>
+ <listitem>
+-<para>If enabled, the Main Toolbar is visible, &ie; the one with the icon
+-to send the message &etc;.</para>
+-</listitem>
+-</varlistentry>
+-
+-<varlistentry>
+-<term>
+-<menuchoice>
+-<guimenu>Settings</guimenu>
+-<guimenuitem>Show HTML Toolbar</guimenuitem>
+-</menuchoice>
+-</term>
+-<listitem>
+-<para>If enabled, the &html; Toolbar is visible, &ie; the one which with the
++<para>Enables and disables the Main Toolbar, &ie; the one with the icon
++to send the message &etc; and the &html; Toolbar, &ie; the one which with the
+ tools to change certain properties of the composed text.</para>
+ </listitem>
+ </varlistentry>
+Index: doc/kmail/importing.docbook
+===================================================================
+--- doc/kmail/importing.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ doc/kmail/importing.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -25,8 +25,8 @@
+ <title>Using other Mailbox Files with &kmail;</title>
+ 
+ <para>&kmail; offers an import tool for the messages and address books of some
+-other email clients. You can access it using <menuchoice><guimenu>Tools</guimenu>
+-<guimenuitem>Import...</guimenuitem></menuchoice>. Please make sure that you 
++other email clients. You can access it using <menuchoice><guimenu>File</guimenu>
++<guimenuitem>Import Messages</guimenuitem></menuchoice>. Please make sure that you 
+ compact your folders in the other email client, no matter if you are going to use
+ the import utility or if you are going to copy files manually.
+ You only need to read this chapter if this tool does not work for you.</para>
+@@ -46,7 +46,7 @@
+ &kmail;. The mailboxes should now show up correctly in &kmail;.</para>
+ 
+ <para>Please have a look at the
+-<ulink url="http://kontact.kde.org/kmail/tools.html">Tools section of &kmail;'s
++<ulink url="http://userbase.kde.org/KMail/Tools">Tools section of &kmail;'s
+ homepage</ulink> first, to see if there is a tool that imports your mailbox
+ and maybe even address book.</para>
+ 
+@@ -241,7 +241,7 @@
+ <term>Maildir / Outlook Express / xfmail</term>
+ <listitem>
+ <para>Tools to convert these formats are available at the
+-<ulink url="http://kontact.kde.org/kmail/tools.html">Tools section of &kmail;'s
++<ulink url="http://userbase.kde.org/KMail/Tools">Tools section of &kmail;'s
+ homepage</ulink>.</para>
+ </listitem>
+ </varlistentry>
+@@ -251,7 +251,7 @@
+ Mail</application>, &etc;...</term>
+ <listitem>
+ <para>First you should have a look at <ulink
+-url="http://kontact.kde.org/kmail/tools.html">Tools section of &kmail;'s homepage</ulink> if 
++url="http://userbase.kde.org/KMail/Tools">Tools section of &kmail;'s homepage</ulink> if 
+ there are tools to convert your messages.</para>
+ <para>Mail programs not listed here or on the homepage probably do not work with &kmail; as they use
+ proprietary mail formats that &kmail; cannot understand. However, there is no
+Index: doc/kmail/intro.docbook
+===================================================================
+--- doc/kmail/intro.docbook	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ doc/kmail/intro.docbook	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -45,7 +45,7 @@
+ </itemizedlist>
+ 
+ <para>&kmail;'s homepage can be found at <ulink
+-url="http://kontact.kde.org/kmail/">http://kontact.kde.org/kmail/</ulink>. There you will
++url="http://userbase.kde.org/KMail">http://userbase.kde.org/KMail</ulink>. There you will
+ find useful links, &eg; to the user and developer mailing lists.
+ Please report bugs in &kmail; using
+ <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
+Index: kalarm/editdlgtypes.cpp
+===================================================================
+--- kalarm/editdlgtypes.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kalarm/editdlgtypes.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -1,7 +1,7 @@
+ /*
+  *  editdlgtypes.cpp  -  dialogs to create or edit alarm or alarm template types
+  *  Program:  kalarm
+- *  Copyright © 2001-2009 by David Jarvie <djarvie@kde.org>
++ *  Copyright © 2001-2010 by David Jarvie <djarvie@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+  *  it under the terms of the GNU General Public License as published by
+@@ -846,6 +846,7 @@
+ */
+ void EditCommandAlarmDlg::setAction(KAEventData::Action action, const AlarmText& alarmText)
+ {
++	Q_UNUSED(action);
+ 	Q_ASSERT(action == KAEventData::COMMAND);
+ 	mCmdEdit->setText(alarmText);
+ }
+@@ -1177,6 +1178,7 @@
+ */
+ void EditEmailAlarmDlg::setAction(KAEventData::Action action, const AlarmText& alarmText)
+ {
++	Q_UNUSED(action);
+ 	Q_ASSERT(action == KAEventData::EMAIL);
+ 	if (alarmText.isEmail())
+ 	{
+@@ -1505,6 +1507,7 @@
+ */
+ void EditAudioAlarmDlg::setAction(KAEventData::Action action, const AlarmText& alarmText)
+ {
++	Q_UNUSED(action);
+ 	Q_ASSERT(action == KAEventData::AUDIO);
+ 	mSoundConfig->set(alarmText.displayText(), Preferences::defaultSoundVolume());
+ }
+Index: kalarm/resources/localdir.desktop
+===================================================================
+--- kalarm/resources/localdir.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kalarm/resources/localdir.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -53,6 +53,7 @@
+ Comment[en_GB]=Provides access to an alarm calendar stored in a local directory, in which each calendar item is stored in a separate file
+ Comment[es]=Provee acceso a un calendario de alarmas almacenado en un directorio local, en el cual cada elemento del calendario es almacenado en un archivo separado
+ Comment[et]=Võimaldab kasutada kohalikku kataloogi salvestatud häirete kalendrit, kus iga kalender on salvestatud eraldi faili
++Comment[fi]=Tarjoaa pääsyn paikalliseen kansioon tallennettuun hälytyskalenteriin, jossa jokainen kalenteritietue on erillinen tiedosto
+ Comment[fr]=Fourni l'accès aux alarmes de calendrier stockées dans un dossier ; chaque entrée du calendrier étant stockée dans un fichier distinct
+ Comment[gl]=Permite acceder a un calendario de alarmas almacenado nun directorio local no que cada elemento do calendario se almacena nun ficheiro diferente
+ Comment[hu]=Helyi mappában tárolt emlékeztetőkhöz biztosít hozzáférést (minden bejegyzés külön fájlban található)
+Index: kalarm/resources/local.desktop
+===================================================================
+--- kalarm/resources/local.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kalarm/resources/local.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -53,6 +53,7 @@
+ Comment[en_GB]=Provides access to an alarm calendar stored in a single local file
+ Comment[es]=Provee acceso al calendario de alarmas almacenado en un solo archivo local
+ Comment[et]=Võimaldab kasutada kohalikku faili salvestatud häirete kalendrit
++Comment[fi]=Tarjoaa pääsyn yksittäiseen paikalliseen tiedostoon tallennettuun hälytyskalenteriin
+ Comment[fr]=Fourni l'accès aux alarmes de calendrier stockées dans un unique fichier
+ Comment[gl]=Dá aceso a un calendario de alarmas gardado nun ficheiro local
+ Comment[hu]=Helyi fájlban tárolt emlékeztetőkhöz biztosít hozzáférést
+Index: kalarm/resources/remote.desktop
+===================================================================
+--- kalarm/resources/remote.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kalarm/resources/remote.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -53,6 +53,7 @@
+ Comment[en_GB]=Provides access to an alarm calendar in a remote file using KDE's network framework KIO
+ Comment[es]=Provee acceso a un calendario de alarmas en un archivo remoto utilizando la infraestructura KIO de red de KDE
+ Comment[et]=Võimaldab kasutada võrgufailis leiduvat häirete kalendrit KDE võrguraamistiku KIO vahendusel
++Comment[fi]=Tarjoaa pääsyn etätiedostoon tallennettuun hälytyskalenteriin käyttäen KDE:n verkkorajapintaa (KIO)
+ Comment[fr]=Fourni l'accès aux alarmes de calendrier stockées dans un fichier distant en utilisant les composants réseaux KIO de KDE
+ Comment[gl]=Permite acceder a un calendario de alarmas dun ficheiro remoto empregando a infraestrutura de rede KIO do KDE
+ Comment[hu]=Távoli fájlban tárolt emlékeztetőkhöz biztosít hozzáférést a KIO keretrendszer segítségével
+Index: kalarm/kalarm.autostart.desktop
+===================================================================
+--- kalarm/kalarm.autostart.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kalarm/kalarm.autostart.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -77,6 +77,7 @@
+ Comment[en_GB]=KAlarm autostart at login
+ Comment[es]=Inicio automático de KAlarm al iniciar sesión
+ Comment[et]=KAlarmi automaatne käivitamine sisselogimisel
++Comment[fi]=KAlarmin automaattikäynnistys kirjauduttaessa
+ Comment[fr]=Démarrage à la connexion de KAlarm
+ Comment[ga]=Tosaigh KAlarm go huathoibríoch ag am logála isteach
+ Comment[gl]=Inicio automático do KAlarm
+Index: kalarm/akonadi/kalarmresource_active.desktop
+===================================================================
+--- kalarm/akonadi/kalarmresource_active.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kalarm/akonadi/kalarmresource_active.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -8,6 +8,7 @@
+ Name[en_GB]=KAlarm Active Alarms
+ Name[es]=Alarmas activas en KAlarm
+ Name[et]=KAlarmi aktiivsed häired
++Name[fi]=KAlarmin aktiiviset hälytykset
+ Name[fr]=Alarmes actives KAlarm
+ Name[gl]=Alarmas activas do KAlarm
+ Name[it]=Avvisi attivi di KAlarm
+@@ -37,6 +38,7 @@
+ Comment[en_GB]=Loads data from a KAlarm active alarm calendar file
+ Comment[es]=Carga datos de un archivo de calendario de alarmas activas de KAlarm
+ Comment[et]=Andmete laadimine KAlarmi aktiivsete häirete kalendrifailist
++Comment[fi]=Noutaa tietoa KAlarmin aktiivisten hälytysten kalenteritiedostosta
+ Comment[fr]=Charge les données d'une alarme active KAlarm depuis un fichier d'agenda
+ Comment[gl]=Carrega datos desde un ficheiro de calendario de alarmas activas do KAlarm
+ Comment[it]=Carica dati da un calendario per avvisi attivi di KAlarm
+Index: kalarm/akonadi/kalarmresource_template.desktop
+===================================================================
+--- kalarm/akonadi/kalarmresource_template.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kalarm/akonadi/kalarmresource_template.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -8,6 +8,7 @@
+ Name[en_GB]=KAlarm Templates
+ Name[es]=Plantillas de KAlarm
+ Name[et]=KAlarmi mallid
++Name[fi]=KAlarm-mallipohjat
+ Name[fr]=Modèles KAlarm
+ Name[gl]=Modelos do KAlarm
+ Name[it]=Modelli di KAlarm
+@@ -37,6 +38,7 @@
+ Comment[en_GB]=Loads data from a KAlarm alarm template file
+ Comment[es]=Carga datos de un archivo de plantillas de alarmas de KAlarm
+ Comment[et]=Andmete laadimine KAlarmi häiremallide failist
++Comment[fi]=Noutaa tietoa KAlarmin mallipohjatiedostosta
+ Comment[fr]=Charge des données depuis un fichier modèle KAlarm
+ Comment[gl]=Carrega datos desde un ficheiro de de modelos de alarma do KAlarm
+ Comment[it]=Carica dati da un modello di avviso di KAlarm
+Index: kalarm/akonadi/kalarmresource.desktop
+===================================================================
+--- kalarm/akonadi/kalarmresource.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kalarm/akonadi/kalarmresource.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -8,6 +8,7 @@
+ Name[en_GB]=KAlarm Calendar File
+ Name[es]=Archivo de calendario de KAlarm
+ Name[et]=KAlarmi kalendrifail
++Name[fi]=KAlarm-kalenteritiedosto
+ Name[fr]=Fichier d'agenda KAlarm
+ Name[gl]=Ficheiro de calendario de KAlarm
+ Name[it]=Calendario di KAlarm
+@@ -17,6 +18,7 @@
+ Name[nb]=KAlarm kalenderfil
+ Name[nds]=KAlarm-Kalennerdatei
+ Name[nl]=KAlarm-agendabestand
++Name[nn]=KAlarm-kalenderfil
+ Name[pa]=ਕੇ-ਅਲਾਰਮ ਕੈਲੰਡਰ ਫਾਇਲ
+ Name[pl]=Plik kalendarza KAlarm
+ Name[pt]=Ficheiro de Calendário do KAlarm
+@@ -37,6 +39,7 @@
+ Comment[en_GB]=Loads data from a KAlarm calendar file
+ Comment[es]=Carga datos de un archivo de calendario de KAlarm
+ Comment[et]=Andmete laadimine KAlarmi kalendrifailist
++Comment[fi]=Noutaa tietoa KAlarmin kalenteritiedostosta
+ Comment[fr]=Charge les données depuis un fichier d'agenda KAlarm
+ Comment[gl]=Carrega datos desde un ficheiro de calendario do KAlarm
+ Comment[it]=Carica dati da un calendario di KAlarm
+Index: kalarm/akonadi/kalarmresource_archived.desktop
+===================================================================
+--- kalarm/akonadi/kalarmresource_archived.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kalarm/akonadi/kalarmresource_archived.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -8,6 +8,7 @@
+ Name[en_GB]=KAlarm Archived Alarms
+ Name[es]=Alarmas archivadas de KAlarm
+ Name[et]=KAlarmi aegunud häired
++Name[fi]=KAlarmin arkistoidut hälytykset
+ Name[fr]=Alarmes KAlarm archivées
+ Name[gl]=Alarmas arquivadas do KAlarm
+ Name[it]=Avvisi archiviati di KAlarm
+@@ -36,6 +37,7 @@
+ Comment[en_GB]=Loads data from a KAlarm archived alarm calendar file
+ Comment[es]=Carga datos de un archivo de calendario de alarmas archivadas de KAlarm
+ Comment[et]=Andmete laadimine KAlarmi aegunud häirete kalendrifailist
++Comment[fi]=Noutaa tietoa KAlarmin arkistoitujen hälytysten kalenteritiedostosta
+ Comment[fr]=Charge les données d'une alarme archivée KAlarm depuis un fichier d'agenda
+ Comment[gl]=Carrega datos desde un ficheiro de calendario de alarmas arquivadas do KAlarm
+ Comment[it]=Carica dati da un calendario per avvisi archiviati di KAlarm
+Index: kalarm/akonadi/akonadi_serializer_kalarm.desktop
+===================================================================
+--- kalarm/akonadi/akonadi_serializer_kalarm.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kalarm/akonadi/akonadi_serializer_kalarm.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -8,6 +8,7 @@
+ Name[en_GB]=KAlarm Event Serialiser
+ Name[es]=Serializador de eventos de KAlarm
+ Name[et]=KAlarmi sündmuste jadasti
++Name[fi]=KAlarm-tapahtumasarjoittaja
+ Name[fr]=Sérialiseur d'évènement KAlarm
+ Name[gl]=Serializador de Eventos KAlarm
+ Name[it]=Serializzatore degli eventi di KAlarm
+@@ -17,6 +18,7 @@
+ Name[nb]=KAlarm hendelsesserialiserer
+ Name[nds]=KAlarm-Begeefnis-Reegmoduul
+ Name[nl]=KAlarm gebeurtenissen in volgorde zetten
++Name[nn]=Serialisator for KAlarm-hendingar
+ Name[pa]=ਕੇਅਲਾਰਮ ਈਵੈਂਟ ਸੀਰੀਅਲਾਈਜ਼ਰ
+ Name[pl]=Serializacja zdarzeń KAlarm
+ Name[pt]=Serializador de Eventos do KAlarm
+@@ -36,6 +38,7 @@
+ Comment[en_GB]=An Akonadi serialiser plugin for KAlarm events
+ Comment[es]=Un complemento serializador de Akonadi para eventos de KAlarm
+ Comment[et]=Akonadi KAlarmi sündmuste jadastamisplugin
++Comment[fi]=Akonadi-sarjoitusliitännäinen KAlarmin tapahtumille
+ Comment[fr]=Un module externe Akonadi pour la sérialisation des évènements KAlarm
+ Comment[gl]=Un engadido serializador de Akonadi para os eventos de KAlarm
+ Comment[it]=Un'estensione di Akonadi per la serializzazione di eventi di KAlarm
+@@ -45,6 +48,7 @@
+ Comment[nb]=Et Akonadi serialiserer-programtillegg for KAlarm-hendelser
+ Comment[nds]=Akonadi-Inreegmoduul för KAlarm-Begeefnissen
+ Comment[nl]=Een Akonadi-plugin voor het in volgorde zetten van KAlarm gebeurtenissen
++Comment[nn]=Eit Akonadi-serialisatortillegg for KAlarm-hendingar
+ Comment[pl]=Wtyczka Akonadi do serializowania zdarzeń KAlarm
+ Comment[pt]=Um 'plugin' de serialização do Akonadi para os eventos do KAlarm
+ Comment[pt_BR]=Um plug-in de serialização do Akonadi para eventos do KAlarm
+Index: kaddressbook/kaddressbookpart.desktop
+===================================================================
+--- kaddressbook/kaddressbookpart.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kaddressbook/kaddressbookpart.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -18,7 +18,7 @@
+ Name[es]=KAddressBook
+ Name[et]=KDE aadressiraamat
+ Name[eu]=Helbide-liburua
+-Name[fi]=Osoitekirja
++Name[fi]=KAddressBook
+ Name[fr]=Carnet d'adresses
+ Name[fy]=KAddressBook
+ Name[ga]=KAddressBook
+Index: kaddressbook/kaddressbook.desktop
+===================================================================
+--- kaddressbook/kaddressbook.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kaddressbook/kaddressbook.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -17,7 +17,7 @@
+ Name[es]=KAddressBook
+ Name[et]=KDE aadressiraamat
+ Name[eu]=Helbide-liburua
+-Name[fi]=Osoitekirja
++Name[fi]=KAddressBook
+ Name[fr]=Carnet d'adresses
+ Name[fy]=KAddressBook
+ Name[ga]=KAddressBook
+Index: kaddressbook/xxport/ldap/kcmldap.desktop
+===================================================================
+--- kaddressbook/xxport/ldap/kcmldap.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kaddressbook/xxport/ldap/kcmldap.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -19,6 +19,7 @@
+ Name[en_GB]=LDAP Server Settings
+ Name[es]=Configuración del servidor LDAP
+ Name[et]=LDAP serveri seadistused
++Name[fi]=LDAP-palvelimen asetukset
+ Name[fr]=Configuration du serveur LDAP
+ Name[gl]=Configuración do servidor de LDAP
+ Name[it]=Impostazioni server LDAP
+@@ -28,6 +29,7 @@
+ Name[nb]=LDAP tjenerinnstillinger
+ Name[nds]=LDAP-Server instellen
+ Name[nl]=LDAP-serverinstellingen
++Name[nn]=Innstillingar for LDAP-tenar
+ Name[pa]=LDAP ਸਰਵਰ ਸੈਟਿੰਗ
+ Name[pl]=Ustawienia serwera LDAP
+ Name[pt]=Configuração do Servidor de LDAP
+@@ -49,6 +51,7 @@
+ Comment[en_GB]=Configure the available LDAP servers
+ Comment[es]=Configurar los servidores LDAP disponibles
+ Comment[et]=Saadaolevate LDAP serverite seadistamine
++Comment[fi]=Käytössä olevien LDAP-palvelinten asetukset
+ Comment[fr]=Configurer les serveurs LDAP disponibles
+ Comment[gl]=Configurar os servidores de LDAP dispoñíbeis
+ Comment[it]=Configura i server LDAP disponibili
+@@ -58,6 +61,7 @@
+ Comment[nb]=Sett opp de tilgjengelige LDAP-tjenerne
+ Comment[nds]=De verföögboren LDAP-Servers instellen
+ Comment[nl]=De beschikbare LDAP-servers configureren
++Comment[nn]=Set opp dei tilgjengelege LDAP-tenarane
+ Comment[pl]=Konfiguracja dostępnych serwerów LDAP
+ Comment[pt]=Configurar os servidores de LDAP disponíveis
+ Comment[pt_BR]=Configura os servidores LDAP disponíveis
+Index: ktimetracker/timetrackerstorage.cpp
+===================================================================
+--- ktimetracker/timetrackerstorage.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ ktimetracker/timetrackerstorage.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -779,7 +779,7 @@
+         // use the internal table itab to create the return value retval
+         for ( int y=0; y<=(taskview->count()); y++ )
+         {
+-            if (itab->item(y,0)) retval.append(itab->item(y,0)->text());  // task names
++            if (itab->item(y,0)) retval.append("\"").append(itab->item(y,0)->text().replace("\"","\"\"")).append("\"");  // task names
+             for ( int x=1; x<=from.daysTo(to)+1; x++ )
+             {
+                 retval.append(rc.delimiter);
+Index: ktimetracker/taskview.h
+===================================================================
+--- ktimetracker/taskview.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ ktimetracker/taskview.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -259,6 +259,7 @@
+   protected:
+     void mouseMoveEvent( QMouseEvent* );
+     void mousePressEvent( QMouseEvent* );
++    void dropEvent ( QDropEvent * event );
+ 
+   protected Q_SLOTS:
+     void minuteUpdate();
+Index: ktimetracker/ktimetracker_config_storage.desktop
+===================================================================
+--- ktimetracker/ktimetracker_config_storage.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ ktimetracker/ktimetracker_config_storage.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -61,7 +61,7 @@
+ Comment[et]=Salvesti seadistamine
+ Comment[fr]=Configuration du stockage
+ Comment[ga]=Cumraigh Stóras
+-Comment[gl]=Configurar o almacenamento
++Comment[gl]=Configure o almacenamento
+ Comment[hu]=A tároló beállításai
+ Comment[it]=Configura la memorizzazione
+ Comment[ja]=保存の設定
+Index: ktimetracker/taskview.cpp
+===================================================================
+--- ktimetracker/taskview.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ ktimetracker/taskview.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -583,6 +583,8 @@
+             }
+         }
+     }
++    for (int i=0; i<count(); i++) itemAt(i)->recalculatetotaltime();
++    for (int i=0; i<count(); i++) itemAt(i)->recalculatetotalsessiontime();
+     refresh();
+     kDebug(5970) << "Leaving TaskView::reFreshTimes()";
+     return err;
+@@ -642,7 +644,12 @@
+ long TaskView::count()
+ {
+     long n = 0;
+-    for (Task* t = itemAt(n); t; t=itemAt(++n)){};
++    QTreeWidgetItemIterator item( this );
++    while( *item )
++    {
++        ++item;
++        ++n;
++    }
+     return n;
+ }
+ 
+@@ -668,6 +675,12 @@
+     return result;
+ }
+ 
++void TaskView::dropEvent ( QDropEvent * event )
++              {
++                QTreeWidget::dropEvent(event);
++                reFreshTimes();
++              }
++
+ void TaskView::scheduleSave()
+ {
+     _manualSaveTimer->start( 10 );
+Index: ktimetracker/ktimetracker_config_display.desktop
+===================================================================
+--- ktimetracker/ktimetracker_config_display.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ ktimetracker/ktimetracker_config_display.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -90,7 +90,7 @@
+ Comment[et]=Välimuse seadistamine
+ Comment[fr]=Configuration de l'apparence
+ Comment[ga]=Cumraigh Cuma
+-Comment[gl]=Configurar a aparencia
++Comment[gl]=Configure a aparencia
+ Comment[hu]=A megjelenés beállítása
+ Comment[it]=Configura l'aspetto
+ Comment[ja]=外観の設定
+Index: ktimetracker/version.h
+===================================================================
+--- ktimetracker/version.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ ktimetracker/version.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -20,5 +20,5 @@
+  */
+ 
+ #ifndef KTIMETRACKER_VERSION
+-#define KTIMETRACKER_VERSION "4.4.0"
++#define KTIMETRACKER_VERSION "4.4.1"
+ #endif
+Index: ktimetracker/task.cpp
+===================================================================
+--- ktimetracker/task.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ ktimetracker/task.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -346,7 +346,30 @@
+     kDebug(5970) << "Leaving function";
+     return err;
+ }
++         long Task::recalculatetotaltime()
++              {
++                long result=0;
++                setTotalTime(0);
++                Task* child;
++                for (int i=0; i<this->childCount(); ++i)
++                  child=(Task*)this->child(i);
++                addTotalTime(time());
++                result=totalTime();
++                return result;
++              }
+ 
++QString Task::recalculatetotalsessiontime()
++              {
++                  QString result;
++                  setTotalSessionTime(0);
++                  Task* child;
++                  for (int i=0; i<this->childCount(); ++i)
++                      child=(Task*)this->child(i);
++                  addTotalSessionTime(time());
++                  return result;
++              }
++
++
+ QString Task::setSessionTime( long minutes )
+ {
+     kDebug(5970) << "Entering function";
+Index: ktimetracker/main.cpp
+===================================================================
+--- ktimetracker/main.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ ktimetracker/main.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -165,7 +165,6 @@
+             sto->load( 0, icsfile( args ) );
+             const QString& s=args->getOption("addtask");
+             QVector<int> vec;
+-            vec.push_back(0);
+             DesktopList dl=vec;
+             Task* task=new Task( s,(long int) 0,(long int) 0, dl, 0, true );
+             sto->addTask( task );
+Index: ktimetracker/task.h
+===================================================================
+--- ktimetracker/task.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ ktimetracker/task.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -154,7 +154,15 @@
+        *
+        */
+       QString addSessionTime( long minutes );
++      
++      /** Sets the total time, does not change the parent's total time.
++          This means the parent's total time can run out of sync.
++       */
++      void setTotalTime( long minutes ) { mTotalTime=minutes; };
+ 
++      /** A recursive function to calculate the total time of a task. */
++      long recalculatetotaltime();
++
+       /** Adds minutes to the task's and its supertasks' total session time. This does not add an event.
+        *
+        *  @param minutes          minutes to add to the session time
+@@ -163,6 +171,10 @@
+        */
+       QString addTotalSessionTime( long minutes );
+ 
++      void setTotalSessionTime( long minutes ) { mTotalSessionTime=minutes; };
++
++      QString recalculatetotalsessiontime();
++
+       /** Sets the time (not session time). This does not add an event.
+        *
+        *  @param minutes          minutes to set time to
+Index: ktimetracker/ktimetracker_config_behavior.desktop
+===================================================================
+--- ktimetracker/ktimetracker_config_behavior.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ ktimetracker/ktimetracker_config_behavior.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -62,7 +62,7 @@
+ Comment[et]=Käitumise seadistamine
+ Comment[fr]=Configuration du comportement
+ Comment[ga]=Cumraigh Oibriú
+-Comment[gl]=Configurar o comportamento
++Comment[gl]=Configure o comportamento
+ Comment[hu]=A működési mód beállítása
+ Comment[it]=Configura il comportamento
+ Comment[ja]=挙動の設定
+Index: kjots/Kjots.desktop
+===================================================================
+--- kjots/Kjots.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kjots/Kjots.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -12,6 +12,7 @@
+ Name[en_GB]=KJots
+ Name[es]=KJots
+ Name[et]=KJots
++Name[fi]=KJots
+ Name[fr]=KJots
+ Name[ga]=KJots
+ Name[gl]=KJots
+@@ -50,6 +51,7 @@
+ GenericName[en_GB]=Note Taker
+ GenericName[es]=Apuntador de notas
+ GenericName[et]=Märkmete rakendus
++GenericName[fi]=Note Taker
+ GenericName[fr]=Prise de note
+ GenericName[ga]=Eagarthóir Nótaí
+ GenericName[gl]=Caderno de notas
+Index: kjots/kjotspart.desktop
+===================================================================
+--- kjots/kjotspart.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kjots/kjotspart.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -11,6 +11,7 @@
+ Name[en_GB]=KJotsPart
+ Name[es]=KJotsPart
+ Name[et]=KJotsPart
++Name[fi]=KJots-osa
+ Name[fr]=KJotsPart
+ Name[ga]=KJotsPart
+ Name[gl]=KJotsPart
+Index: kjots/kjots_config_misc.desktop
+===================================================================
+--- kjots/kjots_config_misc.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kjots/kjots_config_misc.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -83,6 +83,7 @@
+ Comment[en_GB]=Setup misc for KJots
+ Comment[es]=Configuraciones varias de KJots
+ Comment[et]=KJotsi muud seadistused
++Comment[fi]=KJotsin sekalaiset asetukset
+ Comment[fr]=Configuration (divers) de KJots
+ Comment[gl]=Configuración de opcións varias do KJots
+ Comment[hu]=KJots-beállító
+Index: libkdepim/contactsfilterproxymodel.cpp
+===================================================================
+--- libkdepim/contactsfilterproxymodel.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ libkdepim/contactsfilterproxymodel.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -39,6 +39,8 @@
+ ContactsFilterModel::ContactsFilterModel( QObject *parent )
+   : QSortFilterProxyModel( parent ), d( new Private )
+ {
++  // contact names should be sorted correctly
++  setSortLocaleAware( true );
+ }
+ 
+ ContactsFilterModel::~ContactsFilterModel()
+Index: libkdepim/categoryeditdialog_base.ui
+===================================================================
+--- libkdepim/categoryeditdialog_base.ui	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ libkdepim/categoryeditdialog_base.ui	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -21,6 +21,9 @@
+    </property>
+    <item row="1" column="0" colspan="2" >
+     <widget class="KLineEdit" name="mEdit" >
++     <property name="ClearButtonShown" >
++      <bool>true</bool>
++     </property>
+      <property name="toolTip" >
+       <string>New category entry</string>
+      </property>
+Index: console/kabcclient/doc/examples/letters/work_address.desktop
+===================================================================
+--- console/kabcclient/doc/examples/letters/work_address.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ console/kabcclient/doc/examples/letters/work_address.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -13,6 +13,7 @@
+ Name[en_GB]=Letter business/work address
+ Name[es]=Dirección postal de negocios/del trabajo
+ Name[et]=Kirja äri/tööaadress
++Name[fi]=Työpostiosoite
+ Name[fr]=Adresse postale professionnelle
+ Name[ga]=Seoladh gnó/oibre
+ Name[gl]=Enderezo postal do traballo
+Index: console/kabcclient/doc/examples/letters/home_address.desktop
+===================================================================
+--- console/kabcclient/doc/examples/letters/home_address.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ console/kabcclient/doc/examples/letters/home_address.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -13,6 +13,7 @@
+ Name[en_GB]=Letter home/private address
+ Name[es]=Dirección postal personal/privada
+ Name[et]=Kirja kodune/era-aadress
++Name[fi]=Koti- tai yksityispostiosoite
+ Name[fr]=Adresse postale personnelle
+ Name[ga]=Seoladh baile/pearsanta
+ Name[gl]=Enderezo postal persoal/do fogar
+Index: knotes/knote_config_style.desktop
+===================================================================
+--- knotes/knote_config_style.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ knotes/knote_config_style.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -23,6 +23,7 @@
+ Name[en_GB]=Style
+ Name[es]=Estilo
+ Name[et]=Stiil
++Name[fi]=Tyyli
+ Name[fr]=Style
+ Name[ga]=Stíl
+ Name[gl]=Estilo
+@@ -60,6 +61,7 @@
+ Comment[en_GB]=Style Settings
+ Comment[es]=Preferencias del estilo
+ Comment[et]=Stiili seadistused
++Comment[fi]=Tyyliasetukset
+ Comment[fr]=Paramètres du style
+ Comment[ga]=Socruithe Stíle
+ Comment[gl]=Configuración do estilo
+Index: knotes/knote_config_display.desktop
+===================================================================
+--- knotes/knote_config_display.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ knotes/knote_config_display.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -24,6 +24,7 @@
+ Name[eo]=Vidigilo
+ Name[es]=Pantalla
+ Name[et]=Vaade
++Name[fi]=Näkymä
+ Name[fr]=Affichage
+ Name[ga]=Taispeáint
+ Name[gl]=Visualización
+@@ -60,6 +61,7 @@
+ Comment[en_GB]=Setup display for notes
+ Comment[es]=Configurar pantalla para las notas
+ Comment[et]=Märkmete vaate seadistamine
++Comment[fi]=Muistiinpanojen näkymäasetukset
+ Comment[fr]=Configuration de l'affichage pour les notes
+ Comment[ga]=Socraigh taispeáint na nótaí
+ Comment[gl]=Configuración da visualización das notas
+Index: knotes/local.desktop
+===================================================================
+--- knotes/local.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ knotes/local.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -17,7 +17,7 @@
+ Name[et]=Sedelid kohalikus failis
+ Name[eu]=Oharrak fitxategi lokalean
+ Name[fa]=یادداشتها در پروندۀ محلی
+-Name[fi]=Muistiot paikallisessa tiedostossa
++Name[fi]=Muistiinpanot paikallisessa tiedostossa
+ Name[fr]=Notes dans un fichier local
+ Name[fy]=Notysjes yn lokale triem
+ Name[ga]=Nótaí i gComhad Logánta
+Index: knotes/knote_config_editor.desktop
+===================================================================
+--- knotes/knote_config_editor.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ knotes/knote_config_editor.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -24,6 +24,7 @@
+ Name[eo]=Editor
+ Name[es]=Editor
+ Name[et]=Redaktor
++Name[fi]=Muokkain
+ Name[fr]=Éditeur 
+ Name[ga]=Eagarthóir
+ Name[gl]=Editor
+@@ -60,6 +61,7 @@
+ Comment[en_GB]=Setup editor
+ Comment[es]=Configurar editor
+ Comment[et]=Redaktori seadistamine
++Comment[fi]=Muokkaimen asetukset
+ Comment[fr]=Configuration de l'éditeur
+ Comment[ga]=Socraigh an t-eagarthóir
+ Comment[gl]=Configurar o editor
+Index: knotes/knote_config_network.desktop
+===================================================================
+--- knotes/knote_config_network.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ knotes/knote_config_network.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -24,6 +24,7 @@
+ Name[eo]=Reto
+ Name[es]=Red
+ Name[et]=Võrk
++Name[fi]=Verkko
+ Name[fr]=Réseau
+ Name[ga]=Líonra
+ Name[gl]=Rede
+@@ -60,6 +61,7 @@
+ Comment[en_GB]=Network Settings
+ Comment[es]=Preferencias de la red
+ Comment[et]=Võrguseadistused
++Comment[fi]=Verkkoasetukset
+ Comment[fr]=Configurations du réseau
+ Comment[ga]=Socruithe Líonra
+ Comment[gl]=Configuración da rede
+Index: knotes/knotes_manager.desktop
+===================================================================
+--- knotes/knotes_manager.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ knotes/knotes_manager.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -19,7 +19,7 @@
+ Name[et]=Sedelid
+ Name[eu]=Oharrak
+ Name[fa]=یادداشتها
+-Name[fi]=Muistio
++Name[fi]=Muistiinpanot
+ Name[fr]=Notes
+ Name[fy]=Notysjes
+ Name[ga]=Nótaí
+Index: knotes/knote_config_action.desktop
+===================================================================
+--- knotes/knote_config_action.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ knotes/knote_config_action.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -23,6 +23,7 @@
+ Name[en_GB]=Actions
+ Name[es]=Acciones
+ Name[et]=Toimingud
++Name[fi]=Toiminnot
+ Name[fr]=Actions
+ Name[ga]=Gníomhartha
+ Name[gl]=Accións
+@@ -60,6 +61,7 @@
+ Comment[en_GB]=Setup actions for notes
+ Comment[es]=Configurar acciones para las notas
+ Comment[et]=Märkmete toimingute seadistamine
++Comment[fi]=Muistiinpanotoimintojen asetukset
+ Comment[fr]=Configuration des actions pour les notes
+ Comment[gl]=Configurar as accións das notas
+ Comment[hu]=Műveletbeállítás feljegyzésekhez
+Index: kontact/plugins/akregator/akregator.setdlg
+===================================================================
+--- kontact/plugins/akregator/akregator.setdlg	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/plugins/akregator/akregator.setdlg	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -68,6 +68,7 @@
+ Comment[en_GB]=Feed Reader
+ Comment[es]=Lector de fuentes
+ Comment[et]=Uudistevoogude lugemisvahend
++Comment[fi]=Syötelukija
+ Comment[fr]=Lecteur de flux
+ Comment[ga]=Léitheoir Fothaí
+ Comment[gl]=Lector de novas
+Index: kontact/plugins/planner/planner.setdlg
+===================================================================
+--- kontact/plugins/planner/planner.setdlg	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/plugins/planner/planner.setdlg	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -10,6 +10,7 @@
+ Name[en_GB]=Planner
+ Name[es]=Calendario
+ Name[et]=Planeerija
++Name[fi]=Planner
+ Name[fr]=Agenda
+ Name[ga]=Pleanálaí
+ Name[gl]=Planificador
+@@ -49,6 +50,7 @@
+ Comment[en_GB]=Planner Summary
+ Comment[es]=Resumen de calendario
+ Comment[et]=Planeerija kokkuvõte
++Comment[fi]=Planner-yhteenveto
+ Comment[fr]=Résumé de l'agenda
+ Comment[ga]=Achoimre Pleanálaí
+ Comment[gl]=Resumo do planificador
+Index: kontact/plugins/planner/kcmplanner.desktop
+===================================================================
+--- kontact/plugins/planner/kcmplanner.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/plugins/planner/kcmplanner.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -22,6 +22,7 @@
+ Name[en_GB]=Planner
+ Name[es]=Calendario
+ Name[et]=Planeerija
++Name[fi]=Planner
+ Name[fr]=Agenda
+ Name[ga]=Pleanálaí
+ Name[gl]=Planificador
+@@ -61,6 +62,7 @@
+ Comment[en_GB]=Planner Setup
+ Comment[es]=Configuración inicial de calendario
+ Comment[et]=Planeerija seadistamine
++Comment[fi]=Plannerin asetukset
+ Comment[fr]=Configuration de l'agenda
+ Comment[ga]=Socrú Pleanálaí
+ Comment[gl]=Configuración do planificador
+Index: kontact/plugins/planner/plannerplugin.desktop
+===================================================================
+--- kontact/plugins/planner/plannerplugin.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/plugins/planner/plannerplugin.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -24,6 +24,7 @@
+ Name[en_GB]=Planner
+ Name[es]=Calendario
+ Name[et]=Planeerija
++Name[fi]=Planner
+ Name[fr]=Agenda
+ Name[ga]=Pleanálaí
+ Name[gl]=Planificador
+@@ -63,6 +64,7 @@
+ Comment[en_GB]=Planner Plugin
+ Comment[es]=Complemento de calendario
+ Comment[et]=Planeerija plugin
++Comment[fi]=Planner-liitännäinen
+ Comment[fr]=Module d'agenda
+ Comment[ga]=Breiseán Pleanálaí
+ Comment[gl]=Engadido do planificador
+Index: kontact/plugins/knotes/knotes.setdlg
+===================================================================
+--- kontact/plugins/knotes/knotes.setdlg	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/plugins/knotes/knotes.setdlg	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -10,6 +10,7 @@
+ Name[en_GB]=Popup Notes
+ Name[es]=Notas emergentes
+ Name[et]=Sedelid
++Name[fi]=Ponnahdusviestit
+ Name[fr]=Notes
+ Name[ga]=Preabnótaí
+ Name[gl]=Notas emerxentes
+@@ -49,6 +50,7 @@
+ Comment[en_GB]=Popup Notes Component
+ Comment[es]=Componente de las notas emergentes
+ Comment[et]=Sedelite komponent
++Comment[fi]=Ponnahdusviestiosa
+ Comment[fr]=Composant de petites de notes
+ Comment[ga]=Comhpháirt Preabnótaí
+ Comment[gl]=Compoñente de notas emerxentes
+Index: kontact/plugins/knotes/knotesplugin.desktop
+===================================================================
+--- kontact/plugins/knotes/knotesplugin.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/plugins/knotes/knotesplugin.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -84,6 +84,7 @@
+ Name[en_GB]=Popup Notes
+ Name[es]=Notas emergentes
+ Name[et]=Sedelid
++Name[fi]=Ponnahdusviestit
+ Name[fr]=Notes
+ Name[ga]=Preabnótaí
+ Name[gl]=Notas emerxentes
+Index: kontact/plugins/ktimetracker/ktimetracker.setdlg
+===================================================================
+--- kontact/plugins/ktimetracker/ktimetracker.setdlg	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/plugins/ktimetracker/ktimetracker.setdlg	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -10,6 +10,7 @@
+ Name[en_GB]=Time Tracker
+ Name[es]=Gestor de tiempo
+ Name[et]=Ajaarvesti
++Name[fi]=Time Tracker
+ Name[fr]=Suivi du temps
+ Name[ga]=TimeTracker
+ Name[gl]=Xestor temporal
+@@ -48,6 +49,7 @@
+ Comment[en_GB]=Time Tracker Component
+ Comment[es]=Componente de gestión de tiempo
+ Comment[et]=Ajaarvesti komponent
++Comment[fi]=Time Tracker -osa
+ Comment[fr]=Composant de suivi du temps
+ Comment[ga]=Comhpháirt TimeTracker
+ Comment[gl]=Compoñente de xestor temporal
+Index: kontact/plugins/ktimetracker/ktimetracker_plugin.desktop
+===================================================================
+--- kontact/plugins/ktimetracker/ktimetracker_plugin.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/plugins/ktimetracker/ktimetracker_plugin.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -25,6 +25,7 @@
+ Comment[en_GB]=TimeTracker Plugin
+ Comment[es]=Complemento de gestión del tiempo
+ Comment[et]=Ajaarvesti plugin
++Comment[fi]=TimeTracker-liitännäinen
+ Comment[fr]=Module de suivi du temps
+ Comment[ga]=Breiseán TimeTracker
+ Comment[gl]=Engadido TimeTracker
+@@ -63,6 +64,7 @@
+ Name[en_GB]=Time Tracker
+ Name[es]=Gestor de tiempo
+ Name[et]=Ajaarvesti
++Name[fi]=Time Tracker
+ Name[fr]=Suivi du temps
+ Name[ga]=TimeTracker
+ Name[gl]=Xestor temporal
+Index: kontact/plugins/kjots/kjots_plugin.desktop
+===================================================================
+--- kontact/plugins/kjots/kjots_plugin.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/plugins/kjots/kjots_plugin.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -27,6 +27,7 @@
+ Comment[en_GB]=Kontact KJots Plugin
+ Comment[es]=Complemento de KJots para Kontact
+ Comment[et]=Kontacti KJotsi plugin
++Comment[fi]=Kontactin KJots-liitännäinen
+ Comment[fr]=Module KJots pour Kontact
+ Comment[ga]=Breiseán KJots le haghaidh Kontact
+ Comment[gl]=Engadido de KJots para Kontact
+@@ -64,6 +65,7 @@
+ Name[en_GB]=Notebooks
+ Name[es]=Cuadernos de notas
+ Name[et]=Märkmed
++Name[fi]=Muistiot
+ Name[fr]=Carnets de notes
+ Name[ga]=Leabhair Nótaí
+ Name[gl]=Cadernos
+Index: kontact/plugins/kjots/kjots.setdlg
+===================================================================
+--- kontact/plugins/kjots/kjots.setdlg	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/plugins/kjots/kjots.setdlg	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -10,6 +10,7 @@
+ Name[en_GB]=Notebooks
+ Name[es]=Cuadernos de notas
+ Name[et]=Märkmed
++Name[fi]=Muistiot
+ Name[fr]=Carnets de notes
+ Name[ga]=Leabhair Nótaí
+ Name[gl]=Cadernos
+@@ -48,6 +49,7 @@
+ Comment[en_GB]=Notebooks Component
+ Comment[es]=Componente de los cuadernos de notas
+ Comment[et]=Märkmete komponent
++Comment[fi]=Muistio-osa
+ Comment[fr]=Composant de carnet de notes
+ Comment[ga]=Comhpháirt Leabhair Nótaí
+ Comment[gl]=Compoñente de Notebooks
+Index: kontact/src/kontactconfig.desktop
+===================================================================
+--- kontact/src/kontactconfig.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/src/kontactconfig.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -79,7 +79,9 @@
+ Comment[en_GB]=Default KDE Kontact Component
+ Comment[es]=Componente predeterminado de KDE Kontact
+ Comment[et]=KDE Kontacti vaikekomponent
++Comment[fi]=KDE:n oletusarvoinen Kontact-osa
+ Comment[fr]=Composant Kontact KDE par défaut
++Comment[gl]=Compoñente por omisión de Kontact de KDE
+ Comment[it]=Componente predefinito di KDE Kontact
+ Comment[km]=សមាសធាតុ​ Kontact របស់ KDE លំនាំដើម
+ Comment[lv]=Noklusētā KDE kontaktu komponente
+Index: kontact/src/main.cpp
+===================================================================
+--- kontact/src/main.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ kontact/src/main.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -138,7 +138,6 @@
+         mMainWindow->setInitialActivePluginModule( moduleName );
+       }
+       mMainWindow->show();
+-      Akonadi::Control::start( mMainWindow );
+       KontactInterface::UniqueAppHandler::setMainWidget( mMainWindow );
+       // --iconify is needed in kontact, although kstart can do that too,
+       // because kstart returns immediately so it's too early to talk D-Bus to the app.
+@@ -200,6 +199,10 @@
+ 
+   KontactApp app;
+ 
++  // KDE 4.4: do akonadi startup before creating any window, since creating
++  // the window loads kmail. In 4.5 we'll do this startup async instead.
++  Akonadi::Control::start( 0 );
++
+   // Qt doesn't treat the system tray as a window, and therefore Qt would quit
+   // the event loop when an error message is clicked away while Kontact is in the
+   // tray.
+Index: akonadi/kcal/Messages.sh
+===================================================================
+Index: korganizer/koeventviewerdialog.cpp
+===================================================================
+--- korganizer/koeventviewerdialog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/koeventviewerdialog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -33,7 +33,7 @@
+   setCaption( i18n( "Event Viewer" ) );
+   setButtons( Close | User1 | User2 );
+   setModal( false );
+-  setButtonGuiItem( User1, KGuiItem( i18n( "Edit..." ) ) );
++  setButtonGuiItem( User1, KGuiItem( i18n( "Edit..." ), KIcon( "document-edit" ) ) );
+   setButtonGuiItem( User2, KGuiItem( i18n( "Show in Context" ) ) );
+   mEventViewer = new KOEventViewer( calendar, this );
+   setMainWidget( mEventViewer );
+Index: korganizer/actionmanager.h
+===================================================================
+--- korganizer/actionmanager.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/actionmanager.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -404,6 +404,13 @@
+     KAction *mPublishEvent;
+     KAction *mForwardEvent;
+ 
++    KAction *mSendInvitation;
++    KAction *mSendCancel;
++    KAction *mSendStatusUpdate;
++
++    KAction *mRequestChange;
++    KAction *mRequestUpdate;
++
+     KAction *mUndoAction;
+     KAction *mRedoAction;
+     KMenuBar *mMenuBar;
+Index: korganizer/publishdialog.cpp
+===================================================================
+--- korganizer/publishdialog.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/publishdialog.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -92,7 +92,7 @@
+   Person person( attendee->name(), attendee->email() );
+   item->setText( person.fullName() );
+   mUI.mListWidget->addItem( item );
+-  mUI.mRemove->setEnabled( true );
++  mUI.mRemove->setEnabled( !mUI.mListWidget->selectedItems().isEmpty() );
+ }
+ 
+ QString PublishDialog::addresses()
+@@ -128,12 +128,13 @@
+ 
+ void PublishDialog::removeItem()
+ {
++  if ( mUI.mListWidget->selectedItems().isEmpty() ) {
++    return;
++  }
+   QListWidgetItem *item;
+   item = mUI.mListWidget->selectedItems().first();
+-  if ( !item ) {
+-    return;
+-  }
+ 
++
+   int row = mUI.mListWidget->row( item );
+   mUI.mListWidget->takeItem( row );
+ 
+Index: korganizer/kodaymatrix.h
+===================================================================
+--- korganizer/kodaymatrix.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/kodaymatrix.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -178,7 +178,7 @@
+     void setHighlightMode( bool highlightEvents,
+                            bool highlightTodos,
+                            bool highlightJournals );
+-
++    void setUpdateNeeded();
+   public slots:
+     /**
+      * Recalculates all the flags of the days in the matrix like holidays or
+Index: korganizer/dbuscalendar.desktop
+===================================================================
+--- korganizer/dbuscalendar.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/dbuscalendar.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -11,6 +11,7 @@
+ Name[en_GB]=DBUSCalendar
+ Name[es]=Calendario DBUS
+ Name[et]=DBUSCalendar
++Name[fi]=DBUSCalendar
+ Name[fr]=DBUSCalendar
+ Name[ga]=Féilire DBUS
+ Name[gl]=Calendario DBUS
+@@ -51,6 +52,7 @@
+ Comment[en_GB]=Organiser with a D-Bus interface
+ Comment[es]=Organizador con una interfaz D-Bus
+ Comment[et]=Korraldaja D-Busi liidesega
++Comment[fi]=D-Bus-rajapintainen ajanhallinta
+ Comment[fr]=Agenda avec une interface D-Bus
+ Comment[ga]=Eagraí a bhfuil comhéadan D-Bus aige
+ Comment[gl]=Organizador con interface D-Bus
+Index: korganizer/actionmanager.cpp
+===================================================================
+--- korganizer/actionmanager.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/actionmanager.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -568,40 +568,40 @@
+   connect( mPublishEvent, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_publish()) );
+   mPublishEvent->setEnabled( false );
+ 
+-  action = new KAction( KIcon( "mail-send" ), i18n( "Send &Invitation to Attendees" ), this );
+-  mACollection->addAction( "schedule_request", action );
+-  connect( action, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_request()) );
+-  action->setEnabled( false );
++  mSendInvitation = new KAction( KIcon( "mail-send" ), i18n( "Send &Invitation to Attendees" ), this );
++  mACollection->addAction( "schedule_request", mSendInvitation );
++  connect( mSendInvitation, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_request()) );
++  mSendInvitation->setEnabled( false );
+   connect( mCalendarView, SIGNAL(organizerEventsSelected(bool)),
+-           action, SLOT(setEnabled(bool)) );
++           mSendInvitation, SLOT(setEnabled(bool)) );
+ 
+-  action = new KAction( i18n( "Re&quest Update" ), this );
+-  mACollection->addAction( "schedule_refresh", action );
+-  connect( action, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_refresh()) );
+-  action->setEnabled( false );
++  mRequestUpdate = new KAction( i18n( "Re&quest Update" ), this );
++  mACollection->addAction( "schedule_refresh", mRequestUpdate );
++  connect( mRequestUpdate, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_refresh()) );
++  mRequestUpdate->setEnabled( false );
+   connect( mCalendarView, SIGNAL(groupEventsSelected(bool)),
+-           action, SLOT(setEnabled(bool)) );
++           mRequestUpdate, SLOT(setEnabled(bool)) );
+ 
+-  action = new KAction( i18n( "Send &Cancellation to Attendees" ), this );
+-  mACollection->addAction( "schedule_cancel", action );
+-  connect( action, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_cancel()) );
+-  action->setEnabled( false );
++  mSendCancel = new KAction( i18n( "Send &Cancellation to Attendees" ), this );
++  mACollection->addAction( "schedule_cancel", mSendCancel );
++  connect( mSendCancel, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_cancel()) );
++  mSendCancel->setEnabled( false );
+   connect( mCalendarView, SIGNAL(organizerEventsSelected(bool)),
+-           action, SLOT(setEnabled(bool)) );
++           mSendCancel, SLOT(setEnabled(bool)) );
+ 
+-  action = new KAction( KIcon( "mail-reply-sender" ), i18n( "Send Status &Update" ), this );
+-  mACollection->addAction( "schedule_reply", action );
+-  connect( action, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_reply()) );
+-  action->setEnabled( false );
++  mSendStatusUpdate = new KAction( KIcon( "mail-reply-sender" ), i18n( "Send Status &Update" ), this );
++  mACollection->addAction( "schedule_reply", mSendStatusUpdate );
++  connect( mSendStatusUpdate, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_reply()) );
++  mSendStatusUpdate->setEnabled( false );
+   connect( mCalendarView, SIGNAL(groupEventsSelected(bool)),
+-           action, SLOT(setEnabled(bool)) );
++           mSendStatusUpdate, SLOT(setEnabled(bool)) );
+ 
+-  action = new KAction( i18nc( "counter proposal", "Request Chan&ge" ), this );
+-  mACollection->addAction( "schedule_counter", action );
+-  connect( action, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_counter()) );
+-  action->setEnabled( false );
++  mRequestChange = new KAction( i18nc( "counter proposal", "Request Chan&ge" ), this );
++  mACollection->addAction( "schedule_counter", mRequestChange );
++  connect( mRequestChange, SIGNAL(triggered(bool)), mCalendarView, SLOT(schedule_counter()) );
++  mRequestChange->setEnabled( false );
+   connect( mCalendarView, SIGNAL(groupEventsSelected(bool)),
+-           action, SLOT(setEnabled(bool)) );
++           mRequestChange, SLOT(setEnabled(bool)) );
+ 
+   action = new KAction( i18n( "&Mail Free Busy Information..." ), this );
+   mACollection->addAction( "mail_freebusy", action );
+@@ -1698,6 +1698,11 @@
+   mDeleteAction->setEnabled( enabled );
+   mPublishEvent->setEnabled( enabled );
+   mForwardEvent->setEnabled( enabled );
++  mSendInvitation->setEnabled( enabled );
++  mSendCancel->setEnabled( enabled );
++  mSendStatusUpdate->setEnabled( enabled );
++  mRequestChange->setEnabled( enabled );
++  mRequestUpdate->setEnabled( enabled );
+ }
+ 
+ void ActionManager::keyBindings()
+Index: korganizer/calendarview.h
+===================================================================
+--- korganizer/calendarview.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/calendarview.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -651,6 +651,9 @@
+     // uncompleted subitems), notAllPurged is set to true.
+     bool purgeCompletedSubTodos( Todo *todo, bool &notAllPurged );
+ 
++    // Frees filters
++    void deleteFilters();
++
+     KOrg::History *mHistory;
+ 
+     CalPrinter *mCalPrinter;
+Index: korganizer/datenavigatorcontainer.h
+===================================================================
+--- korganizer/datenavigatorcontainer.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/datenavigatorcontainer.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -51,7 +51,7 @@
+     void setHighlightMode( bool highlightEvents,
+                            bool highlightTodos,
+                            bool highlightJournals ) const;
+-
++    void setUpdateNeeded();
+   public slots:
+     void selectDates( const KCal::DateList & );
+     void selectNextMonth();
+Index: korganizer/interfaces/calendar/calendarplugin.desktop
+===================================================================
+--- korganizer/interfaces/calendar/calendarplugin.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/interfaces/calendar/calendarplugin.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -10,6 +10,7 @@
+ Name[en_GB]=Calendar Plugin Interface
+ Name[es]=Complemento de interfaz del calendario
+ Name[et]=Kalendriplugina liides
++Name[fi]=Kalenteriliitännäisen käyttöliittymä
+ Name[fr]=Interface de module d'agenda
+ Name[ga]=Comhéadan Breiseáin Féilire
+ Name[gl]=Interface do engadido do Calendario
+Index: korganizer/interfaces/calendar/calendardecoration.desktop
+===================================================================
+--- korganizer/interfaces/calendar/calendardecoration.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/interfaces/calendar/calendardecoration.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -10,6 +10,7 @@
+ Name[en_GB]=Calendar Decoration Interface
+ Name[es]=Interfaz de decoración del calendario
+ Name[et]=Kalendri dekoratsiooni liides
++Name[fi]=Kalenteritekstin koristeluliitännäinen
+ Name[fr]=Interface de décoration d'agenda
+ Name[ga]=Comhéadan Maisíochta Féilire
+ Name[gl]=Interface de decoración de calendarios
+Index: korganizer/datenavigatorcontainer.cpp
+===================================================================
+--- korganizer/datenavigatorcontainer.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/datenavigatorcontainer.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -127,12 +127,22 @@
+   }
+ }
+ 
++void DateNavigatorContainer::setUpdateNeeded()
++{
++  mNavigatorView->setUpdateNeeded();
++  foreach ( KDateNavigator *n, mExtraViews ) {
++    if ( n ) {
++      n->setUpdateNeeded();
++    }
++  }
++}
++
+ void DateNavigatorContainer::updateView()
+ {
+   mNavigatorView->updateView();
+   foreach ( KDateNavigator *n, mExtraViews ) {
+     if ( n ) {
+-      n->updateView();
++      n->setUpdateNeeded();
+     }
+   }
+ }
+Index: korganizer/kodaymatrix.cpp
+===================================================================
+--- korganizer/kodaymatrix.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/kodaymatrix.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -209,12 +209,16 @@
+   updateView( mStartDate );
+ }
+ 
++void KODayMatrix::setUpdateNeeded()
++{
++  mPendingChanges = true;
++}
++
+ void KODayMatrix::updateView( const QDate &actdate )
+ {
+   if ( !actdate.isValid() ) {
+     return;
+   }
+-
+   //flag to indicate if the starting day of the matrix has changed by this call
+   bool daychanged = false;
+ 
+Index: korganizer/views/todoview/kotodoview.h
+===================================================================
+--- korganizer/views/todoview/kotodoview.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/views/todoview/kotodoview.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -28,6 +28,7 @@
+ #define KOTODOVIEW_H
+ 
+ #include "korganizer/baseview.h"
++#include "kotodoviewsortfilterproxymodel.h"
+ 
+ namespace KCal {
+   class Incidence;
+@@ -125,7 +126,7 @@
+ 
+     KOTodoViewView *mView;
+     KOTodoModel *mModel;
+-    QSortFilterProxyModel *mProxyModel;
++    KOTodoViewSortFilterProxyModel *mProxyModel;
+     KOTodoCategoriesDelegate *mCategoriesDelegate;
+ 
+     KOTodoViewQuickSearch *mQuickSearch;
+Index: korganizer/views/todoview/kotodomodel.cpp
+===================================================================
+--- korganizer/views/todoview/kotodomodel.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/views/todoview/kotodomodel.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -173,7 +173,7 @@
+ };
+ 
+ KOTodoModel::KOTodoModel( Calendar *cal, QObject *parent )
+-  : QAbstractItemModel( parent ), mColumnCount( DescriptionColumn + 1 )
++  : QAbstractItemModel( parent ), mColumnCount( DescriptionColumn + 1 ), mChanger( 0 )
+ {
+   mRootNode = new TodoTreeNode( 0, 0, this );
+   mFlatView = false;
+@@ -305,7 +305,8 @@
+ }
+ 
+ QModelIndex KOTodoModel::addTodo( const QString &summary,
+-                                  const QModelIndex &parent )
++                                  const QModelIndex &parent,
++                                  const QStringList &categories )
+ {
+   if ( !mChanger ) {
+     return QModelIndex();
+@@ -316,6 +317,9 @@
+     todo->setSummary( summary.trimmed() );
+     todo->setOrganizer( Person( KOPrefs::instance()->fullName(),
+                                 KOPrefs::instance()->email() ) );
++
++    todo->setCategories( categories );
++
+     if ( parent.isValid() ) {
+       TodoTreeNode *node = static_cast<TodoTreeNode *>( parent.internalPointer() );
+       if ( node->isValid() ) {
+Index: korganizer/views/todoview/kotodoviewsortfilterproxymodel.h
+===================================================================
+--- korganizer/views/todoview/kotodoviewsortfilterproxymodel.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/views/todoview/kotodoviewsortfilterproxymodel.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -39,6 +39,7 @@
+     KOTodoViewSortFilterProxyModel( QObject *parent = 0 );
+ 
+     void sort( int column, Qt::SortOrder order = Qt::AscendingOrder );
++    const QStringList& categories() const { return mCategories; }
+ 
+   protected:
+     bool filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const;
+Index: korganizer/views/todoview/kotodomodel.h
+===================================================================
+--- korganizer/views/todoview/kotodomodel.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/views/todoview/kotodomodel.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -26,6 +26,7 @@
+ #define KOTODOMODEL_H
+ 
+ #include <QAbstractItemModel>
++#include <QStringList>
+ #include <QString>
+ #include <QHash>
+ 
+@@ -84,7 +85,8 @@
+ 
+     /** Creates a new todo with the given text as summary under the given parent */
+     QModelIndex addTodo( const QString &summary,
+-                         const QModelIndex &parent = QModelIndex() );
++                         const QModelIndex &parent = QModelIndex(),
++                         const QStringList &categories = QStringList() );
+     /** Copy the todo with the given index to the given date */
+     void copyTodo( const QModelIndex &index, const QDate &date );
+ 
+Index: korganizer/views/todoview/kotodoview.cpp
+===================================================================
+--- korganizer/views/todoview/kotodoview.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/views/todoview/kotodoview.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -36,7 +36,6 @@
+ #include "kotodomodel.h"
+ #include "kotodoviewquickaddline.h"
+ #include "kotodoviewquicksearch.h"
+-#include "kotodoviewsortfilterproxymodel.h"
+ #include "kotodoviewview.h"
+ 
+ #include <libkdepim/kdatepickerpopup.h>
+@@ -414,7 +413,7 @@
+ void KOTodoView::addQuickTodo( Qt::KeyboardModifiers modifiers )
+ {
+   if ( modifiers == Qt::NoModifier ) {
+-    QModelIndex index = mModel->addTodo( mQuickAdd->text() );
++    QModelIndex index = mModel->addTodo( mQuickAdd->text(), QModelIndex(), mProxyModel->categories() );
+ 
+     QModelIndexList selection = mView->selectionModel()->selectedRows();
+     if ( selection.size() <= 1 ) {
+@@ -429,7 +428,7 @@
+     if ( selection.size() != 1 ) {
+       return;
+     }
+-    mModel->addTodo( mQuickAdd->text(), mProxyModel->mapToSource( selection[0] ) );
++    mModel->addTodo( mQuickAdd->text(), mProxyModel->mapToSource( selection[0] ), mProxyModel->categories() );
+   } else {
+     return;
+   }
+Index: korganizer/views/todoview/kotododelegates.cpp
+===================================================================
+--- korganizer/views/todoview/kotododelegates.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/views/todoview/kotododelegates.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -90,21 +90,23 @@
+ #warning QTreeView should now set State_Editing correctly, remove the workaround
+ #endif
+ #endif
+-  bool isEditing = false;
+-  KOTodoViewView *view = qobject_cast<KOTodoViewView*>( parent() );
+-  if ( view ) {
+-    isEditing = view->isEditing( index );
+-  }
++  if ( index.data( Qt::EditRole ).toInt() > 0 ) {
++    bool isEditing = false;
++    KOTodoViewView *view = qobject_cast<KOTodoViewView*>( parent() );
++    if ( view ) {
++      isEditing = view->isEditing( index );
++    }
+ 
+-  // TODO QTreeView does not set State_Editing. Qt task id 205051
+-  // should be fixed with Qt 4.5, but wasn't. According to the
+-  // task tracker the fix arrives in "Some future release".
+-  if ( !( opt.state & QStyle::State_Editing ) && !isEditing ) {
+-    QStyleOptionProgressBar pbOption;
+-    pbOption.QStyleOption::operator=( option );
+-    initStyleOptionProgressBar( &pbOption, index );
++    // TODO QTreeView does not set State_Editing. Qt task id 205051
++    // should be fixed with Qt 4.5, but wasn't. According to the
++    // task tracker the fix arrives in "Some future release".
++    if ( !( opt.state & QStyle::State_Editing ) && !isEditing ) {
++      QStyleOptionProgressBar pbOption;
++      pbOption.QStyleOption::operator=( option );
++      initStyleOptionProgressBar( &pbOption, index );
+ 
+-    style->drawControl( QStyle::CE_ProgressBar, &pbOption, painter );
++      style->drawControl( QStyle::CE_ProgressBar, &pbOption, painter );
++    }
+   }
+ }
+ 
+Index: korganizer/calendarview.cpp
+===================================================================
+--- korganizer/calendarview.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/calendarview.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -241,7 +241,7 @@
+ CalendarView::~CalendarView()
+ {
+   mCalendar->unregisterObserver( this );
+-  qDeleteAll( mFilters );
++  deleteFilters();
+   qDeleteAll( mExtensions );
+ 
+   delete mDialogManager;
+@@ -505,7 +505,7 @@
+ 
+ void CalendarView::readFilterSettings( KConfig *config )
+ {
+-  qDeleteAll( mFilters );
++  deleteFilters();
+   mFilters.clear();
+ 
+   KConfigGroup generalConfig( config, "General" );
+@@ -636,19 +636,8 @@
+ 
+   emit configChanged();
+ 
+-  // force reload and handle agenda view type switch
+-  const bool showMerged =
+-    KOPrefs::instance()->agendaViewCalendarDisplay() == KOPrefs::CalendarsMerged;
+-  const bool showSideBySide =
+-    KOPrefs::instance()->agendaViewCalendarDisplay() == KOPrefs::CalendarsSideBySide;
+-  KOrg::BaseView *view = mViewManager->currentView();
+-  mViewManager->showAgendaView();
+-  if ( view == mViewManager->agendaView() && showSideBySide ) {
+-    view = mViewManager->multiAgendaView();
+-  } else if ( view == mViewManager->multiAgendaView() && showMerged ) {
+-    view = mViewManager->agendaView();
+-  }
+-  mViewManager->showView( view );
++  //switch beetween merged, side by side and tabbed agenda if needed
++  mViewManager->updateMultiCalendarDisplay();
+ 
+   // To make the "fill window" configurations work
+   mViewManager->raiseCurrentView();
+@@ -1949,6 +1938,7 @@
+   }
+ 
+   if ( !incidence ) {
++   mSelectedIncidence = incidence;
+    return;
+   }
+   if ( incidence == mSelectedIncidence ) {
+@@ -2742,6 +2732,7 @@
+ void CalendarView::resourcesChanged()
+ {
+   mViewManager->setUpdateNeeded();
++  mDateNavigatorContainer->setUpdateNeeded();
+   updateView();
+ }
+ 
+@@ -2753,7 +2744,8 @@
+   return KOrg::CalendarViewBase::eventFilter( watched, event );
+ }
+ 
+-void CalendarView::updateHighlightModes() {
++void CalendarView::updateHighlightModes()
++{
+ 
+   KOrg::BaseView *view = mViewManager->currentView();
+   if ( view ) {
+@@ -2767,4 +2759,15 @@
+                                                hiJournals );
+   }
+ }
++
++void CalendarView::deleteFilters()
++{
++  if ( mCalendar ) {
++    // KCal::Calendar takes ownership of it's filter, and will free it.
++    mFilters.removeAll( mCalendar->filter() );
++  }
++
++  qDeleteAll( mFilters );
++}
++
+ #include "calendarview.moc"
+Index: korganizer/koviewmanager.h
+===================================================================
+--- korganizer/koviewmanager.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/koviewmanager.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -100,6 +100,8 @@
+     KOTodoView *todoView() const { return mTodoView; }
+     KOrg::MonthView *monthView() const { return mMonthView; }
+ 
++    void updateMultiCalendarDisplay();
++
+   signals:
+     void configChanged();
+ 
+Index: korganizer/kdatenavigator.h
+===================================================================
+--- korganizer/kdatenavigator.h	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/kdatenavigator.h	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -74,7 +74,7 @@
+     void setHighlightMode( bool highlightEvents,
+                            bool highlightTodos,
+                            bool highlightJournals ) const;
+-
++    void setUpdateNeeded();
+   public slots:
+     void selectDates( const KCal::DateList & );
+     void selectPreviousMonth();
+Index: korganizer/koviewmanager.cpp
+===================================================================
+--- korganizer/koviewmanager.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/koviewmanager.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -590,3 +590,14 @@
+     mAgendaSideBySideView->setUpdateNeeded();
+   }
+ }
++
++void KOViewManager::updateMultiCalendarDisplay()
++{
++  if ( mCurrentView == mAgendaView            ||
++       mCurrentView == mAgendaSideBySideView  ||
++       ( mAgendaViewTabs && mCurrentView == mAgendaViewTabs->currentWidget() ) ) {
++    showAgendaView();
++  } else {
++    updateView();
++  }
++}
+Index: korganizer/kcmconfigs/korganizer_configmain.desktop
+===================================================================
+--- korganizer/kcmconfigs/korganizer_configmain.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/kcmconfigs/korganizer_configmain.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -32,7 +32,7 @@
+ Name[et]=Üldine
+ Name[eu]=Orokorra
+ Name[fa]=عمومی
+-Name[fi]=Yleinen
++Name[fi]=Yleistä
+ Name[fr]=Général
+ Name[fy]=Algemien
+ Name[ga]=Ginearálta
+Index: korganizer/kdatenavigator.cpp
+===================================================================
+--- korganizer/kdatenavigator.cpp	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ korganizer/kdatenavigator.cpp	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -221,6 +221,11 @@
+   mDayMatrix->repaint();
+ }
+ 
++void KDateNavigator::setUpdateNeeded()
++{
++  mDayMatrix->setUpdateNeeded();
++}
++
+ void KDateNavigator::updateView()
+ {
+   updateDayMatrix();
+Index: examples/mailreader/kmail-plasma/plasma-applet-kpapplet.desktop
+===================================================================
+--- examples/mailreader/kmail-plasma/plasma-applet-kpapplet.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ examples/mailreader/kmail-plasma/plasma-applet-kpapplet.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -74,6 +74,7 @@
+ Comment[en_GB]=Your emails
+ Comment[es]=fjvinal@gmail.com
+ Comment[et]=Sinu e-kirjad
++Comment[fi]=translator@legisign.org
+ Comment[fr]=Vos adresses de courriel
+ Comment[gl]=proxecto@trasno.net
+ Comment[it]=La tua posta elettronica
+@@ -83,6 +84,7 @@
+ Comment[nb]=Dine e-poster
+ Comment[nds]=Dien Nettpost
+ Comment[nl]=Uw e-mailberichten
++Comment[nn]=E-postadressa di
+ Comment[pa]=ਤੁਹਾਡੇ ਈਮੇਲ
+ Comment[pl]=Twoja poczta
+ Comment[pt]=Os seus e-mails
+Index: examples/mailreader/mailreader.desktop
+===================================================================
+--- examples/mailreader/mailreader.desktop	(.../tags/KDE/4.4.0/kdepim)	(wersja 1091891)
++++ examples/mailreader/mailreader.desktop	(.../branches/KDE/4.4/kdepim)	(wersja 1091891)
+@@ -8,6 +8,7 @@
+ Name[en_GB]=mailreader
+ Name[es]=lector de correo
+ Name[et]=Kirjade lugeja
++Name[fi]=mailreader
+ Name[fr]=Lecteur de courriel
+ Name[gl]=lector de noticias
+ Name[it]=mailreader
+@@ -17,6 +18,7 @@
+ Name[nb]=e-postleser
+ Name[nds]=Nettpostkieker
+ Name[nl]=e-maillezer
++Name[nn]=e-postlesar
+ Name[pa]=mailreader
+ Name[pl]=mailreader
+ Name[pt]=mailreader
+@@ -41,6 +43,7 @@
+ GenericName[en_GB]=A KDE4 Application
+ GenericName[es]=Una aplicación de KDE4
+ GenericName[et]=KDE4 rakendus
++GenericName[fi]=KDE 4 -sovellus
+ GenericName[fr]=Une application KDE4
+ GenericName[gl]=Unha aplicación de KDE4
+ GenericName[it]=Un'applicazione KDE4
+@@ -50,6 +53,7 @@
+ GenericName[nb]=Et KDE4-program
+ GenericName[nds]=En Programm för KDE 4
+ GenericName[nl]=Een KDE4-programma
++GenericName[nn]=KDE 4-program
+ GenericName[pa]=ਇੱਕ KDE4 ਐਪਲੀਕੇਸ਼ਨ
+ GenericName[pl]=Program KDE4
+ GenericName[pt]=Uma Aplicação do KDE4
+
+Zmiany atrybutów dla: .
+___________________________________________________________________
+Dodane: svn:externals
+   + 
+
+
