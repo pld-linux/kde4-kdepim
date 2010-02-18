@@ -35,6 +35,7 @@ BuildRequires:	libassuan-devel
 BuildRequires:	libindicate-qt-devel >= 0.2.2
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
+BuildRequires:	pkgconfig
 BuildRequires:	qt4-build >= %{qtver}
 BuildRequires:	qt4-qmake >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.129
