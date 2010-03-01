@@ -9,13 +9,12 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.4.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	2e98fbd8270a95e7ab4e2dcee41cf40c
 Patch100:	%{name}-branch.diff
-Patch0:		%{name}-kpilot.patch
 URL:		http://www.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtDesigner-devel >= %{qtver}
@@ -47,6 +46,7 @@ BuildConflicts:	kdepim-kontact-libs
 BuildConflicts:	kdepim-libkmailprivate
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	%{name}-runtime >= %{version}
+Obsoletes:	%{name}-kpilot
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -569,61 +569,6 @@ pocztowych.
 %description korn -l pt_BR.UTF-8
 Miniaplicativo de monitoração da caixa de correio.
 
-%package kpilot
-Summary:	A sync tool for palmtops
-Summary(pl.UTF-8):	Narzędzie do synchronizacji z palmtopami
-Group:		X11/Applications
-Requires:	pilot-link
-
-%description kpilot
-KPilot is an equivalent for the Palm Desktop software from Palm Inc,
-which makes your Palm/Palm Pilot/Visor computer capable of exchanging
-information with your KDE powered computer. KPilot doesn't replace the
-Palm Desktop all by itself. It connects and integrates a number of
-fine KDE 3.x applications into a package that can do everything the
-Palm Desktop can, and more.
-
-KPilot has plugins that can exchange information between your Palm and
-other applications like KOrganizer or POP3/SMTP mail servers. In
-KPilot you can display and edit your contacts, write notes or install
-new programs on your Palm.
-
-It supports:
-- Palm Pilot, m100, m500, Zire, Tungsten series
-- Handspring Visor and Treo series
-- Sony Clié series (TJ35/E1, TJ25, T415, SJ120/333, S300, T625c,
-  T675c, 665c)
-- and Garmin iQue 3600
-- others might work, but have not been tested
-
-%description kpilot -l pl.UTF-8
-KPilot to odpowiednik oprogramowania Palm Desktop firmy Palm Inc,
-umożliwiający wymianę informacji między urządzeniami Palm, Palm Pilot
-i Visor a komputerem z KDE. KPilot jako taki nie zastępuje Palm
-Desktop - łączy i integruje wiele aplikacji KDE 3.x w pakiet, którym
-można zrobić tyle samo, a nawet więcej, co przy użyciu Palm Desktop.
-
-KPilot ma wtyczki do wymiany informacji między Palmem a innymi
-aplikacjami, takimi jak KOrganizer albo serwery POP3/SMTP. W KPilocie
-można wyświetlać i modyfikować kontakty, pisać notatki lub instalować
-nowe programy na Palmie.
-
-Obsługuje urządzenia serii:
-- Palm Pilot, m100, m500, Zire, Tungsten
-- Handspring Visor i Treo
-- Sony Clié (TJ35/E1, TJ25, T415, SJ120/333, S300, T625c, T675c, 665c)
-- Garmin iQue 3600
-- mogą działać także inne, ale nie były testowane.
-
-%description kpilot -l ru.UTF-8
-утилита для синхронизации с 3com Palm Pilots и совместимыми с ними
-устройствами,
-
-%description kpilot -l uk.UTF-8
-утиліта для синхронізації з 3com Palm Pilots та сумісними з ними
-пристроями.
-
-
 %package wizards
 Summary:	wizards
 Summary(pl.UTF-8):	wizards
@@ -714,18 +659,17 @@ Requires:	kde4-kdelibs >= %{version}
 
 %description libs
 Libraries shared between PIM applications in KDE, which include:
-libkdenetwork, libkdepim, libkmailprivate, libknodecommon, libkpilot,
+libkdenetwork, libkdepim, libkmailprivate, libknodecommon,
 libksieve, libmimelib and more
 
 %description libs -l pl.UTF-8
 Biblioteki współdzielone pomiędzy aplikacjami PIM w KDE, m.in.
-libkdenetwork, libkdepim, libkmailprivate, libknodecommon, libkpilot,
+libkdenetwork, libkdepim, libkmailprivate, libknodecommon,
 libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
 #%patch100 -p0
-#%patch0 -p0
 
 %build
 install -d build
@@ -760,7 +704,6 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang kontact --with-kde
 %find_lang korganizer --with-kde
 #%find_lang korn --with-kde
-#%find_lang kpilot --with-kde
 %find_lang ktimetracker --with-kde
 %find_lang kjots --with-kde
 
@@ -1270,46 +1213,6 @@ rm -rf $RPM_BUILD_ROOT
 %lang(en) %{_kdedocdir}/en/konsolekalendar
 %lang(en) %{_kdedocdir}/en/kabcclient
 %{_mandir}/man1/kabcclient.1.*
-
-#%files korn -f korn.lang
-#%defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/korn
-#%attr(755,root,root) %{_datadir}/apps/kconf_update/korn-3-5*.pl
-#%{_desktopdir}/kde4/KOrn.desktop
-#%{_datadir}/apps/kconf_update/korn-*.upd
-#%{_datadir}/dbus-1/interfaces/org.kde.korn.*.xml
-#%{_iconsdir}/*/*/*/korn.png
-
-#%files kpilot -f kpilot.lang
-#%files kpilot
-#%defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/kpilot
-#%attr(755,root,root) %{_bindir}/kpilotDaemon
-#%attr(755,root,root) %{_libdir}/kde4/kcm_kpilot.so
-#%attr(755,root,root) %{_libdir}/kde4/kpilot_*.so
-#%attr(755,root,root) %{_libdir}/libkpilot_akonadibase.so
-#%attr(755,root,root) %{_libdir}/libkpilot_conduit_base.so
-#%{_datadir}/apps/kconf_update/kpilot.upd
-#%{_datadir}/apps/kpilot
-#%{_datadir}/config.kcfg/calendarsettings.kcfg
-#%{_datadir}/config.kcfg/contactssettings.kcfg
-#%{_datadir}/config.kcfg/kpilot.kcfg
-#%{_datadir}/config.kcfg/kpilotlib.kcfg
-#%{_datadir}/config.kcfg/memofileconduit.kcfg
-#%{_datadir}/config.kcfg/timeconduit.kcfg
-#%{_datadir}/config.kcfg/todosettings.kcfg
-#%{_datadir}/kde4/services/kpilot-conduit-calendar.desktop
-#%{_datadir}/kde4/services/kpilot-conduit-contacts.desktop
-#%{_datadir}/kde4/services/kpilot-conduit-todo.desktop
-#%{_datadir}/kde4/services/kpilot_config.desktop
-#%{_datadir}/kde4/services/memofile-conduit.desktop
-#%{_datadir}/kde4/services/time_conduit.desktop
-#%{_datadir}/kde4/servicetypes/kpilotconduit.desktop
-#%{_desktopdir}/kde4/kpilot.desktop
-#%{_desktopdir}/kde4/kpilotdaemon.desktop
-#%{_iconsdir}/*/*/actions/kpilot_*.png
-#%{_iconsdir}/*/*/apps/kpilot.png
-#%{_iconsdir}/*/*/apps/kpilotdaemon.png
 
 %files kleopatra -f kleopatra.lang
 %defattr(644,root,root,755)
