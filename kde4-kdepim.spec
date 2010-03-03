@@ -9,7 +9,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.4.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -724,13 +724,15 @@ rm -rf $RPM_BUILD_ROOT
 # akonadi
 %attr(755,root,root) %{_bindir}/akonadi_nepomuk_email_feeder
 %{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
-%dir %{_datadir}/apps/akonadi/contact/editorpageplugins
-%{_datadir}/apps/akonadi/contact/editorpageplugins/cryptopageplugin.so
 %attr(755,root,root) %{_bindir}/akonadiconsole
 %attr(755,root,root) %ghost %{_libdir}/libakonadi-kcal_next.so.?
 %attr(755,root,root) %{_libdir}/libakonadi-kcal_next.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libakonadi_next.so.?
 %attr(755,root,root) %{_libdir}/libakonadi_next.so.*.*.*
+%dir %{_libdir}/akonadi
+%dir %{_libdir}/akonadi/contact
+%dir %{_libdir}/akonadi/contact/editorpageplugins
+%attr(755,root,root) %{_libdir}/akonadi/contact/editorpageplugins/cryptopageplugin.so
 %{_desktopdir}/kde4/akonadiconsole.desktop
 %{_datadir}/apps/akonadiconsole
 #
