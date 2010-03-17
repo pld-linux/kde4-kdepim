@@ -9,7 +9,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.4.1
-Release:	5
+Release:	6
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -722,8 +722,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 # akonadi
-%attr(755,root,root) %{_bindir}/akonadi_nepomuk_email_feeder
-%{_datadir}/akonadi/agents/nepomukemailfeeder.desktop
 %attr(755,root,root) %{_bindir}/akonadiconsole
 %attr(755,root,root) %ghost %{_libdir}/libakonadi-kcal_next.so.?
 %attr(755,root,root) %{_libdir}/libakonadi-kcal_next.so.*.*.*
