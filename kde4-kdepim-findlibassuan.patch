@@ -1,0 +1,77 @@
+--- cmake/modules/FindAssuan.cmake.orig	2010-03-29 12:11:20.104448147 +0200
++++ cmake/modules/FindAssuan.cmake	2010-03-29 13:19:58.257161100 +0200
+@@ -199,24 +199,15 @@
+ 	  set( _assuan_config_vanilla_libs )
+ 	endif()
+ 
+-        exec_program( ${_ASSUANCONFIG_EXECUTABLE} ARGS --thread=pthread --libs OUTPUT_VARIABLE _assuan_config_pthread_libs RETURN_VALUE _ret )
+-	if ( _ret )
+-	  set( _assuan_config_pthread_libs )
+-	endif()
+-
+-        exec_program( ${_ASSUANCONFIG_EXECUTABLE} ARGS --thread=pth     --libs OUTPUT_VARIABLE _assuan_config_pth_libs     RETURN_VALUE _ret )
+-	if ( _ret )
+-	  set( _assuan_config_pth_libs )
+-	endif()
+ 
+         # append -lgpg-error to the list of libraries, if necessary
+-        foreach ( _flavour vanilla pthread pth )
++        foreach ( _flavour vanilla )
+           if ( _assuan_config_${_flavour}_libs AND NOT _assuan_config_${_flavour}_libs MATCHES "lgpg-error" )
+             set( _assuan_config_${_flavour}_libs "${_assuan_config_${_flavour}_libs} -lgpg-error" )
+           endif()
+         endforeach()
+ 
+-        if ( _assuan_config_vanilla_libs OR _assuan_config_pthread_libs OR _assuan_config_pth_libs )
++        if ( _assuan_config_vanilla_libs )
+ 
+           exec_program( ${_ASSUANCONFIG_EXECUTABLE} ARGS --cflags OUTPUT_VARIABLE _ASSUAN_CFLAGS )
+ 
+@@ -225,7 +216,7 @@
+             string( REGEX REPLACE " *-I"      ";" ASSUAN_INCLUDES "${_ASSUAN_CFLAGS}" )
+           endif()
+ 
+-          foreach ( _flavour vanilla pthread pth )
++          foreach ( _flavour vanilla)
+             if ( _assuan_config_${_flavour}_libs )
+ 
+               set( _assuan_library_dirs )
+@@ -330,13 +321,6 @@
+ #  set( _assuan_flavours "${_assuan_flavours} Qt" )
+ #endif()
+ 
+-if ( ASSUAN_PTHREAD_FOUND )
+-  set( _assuan_flavours "${_assuan_flavours} pthread" )
+-endif()
+-
+-if ( ASSUAN_PTH_FOUND )
+-  set( _assuan_flavours "${_assuan_flavours} pth" )
+-endif()
+ 
+ 
+ if ( NOT Assuan_FIND_QUIETLY )
+--- kleopatra/ConfigureChecks.cmake.orig	2008-05-15 20:37:21.000000000 +0200
++++ kleopatra/ConfigureChecks.cmake	2010-03-29 13:26:02.850875733 +0200
+@@ -12,8 +12,7 @@
+   if ( WIN32 AND ASSUAN_VANILLA_FOUND )
+     set( CMAKE_REQUIRED_LIBRARIES ${ASSUAN_VANILLA_LIBRARIES} )
+     set( USABLE_ASSUAN_FOUND true )
+-  elseif( NOT WIN32 AND ASSUAN_PTHREAD_FOUND )
+-    set( CMAKE_REQUIRED_LIBRARIES ${ASSUAN_PTHREAD_LIBRARIES} )
++  elseif( NOT WIN32 AND ASSUAN_VANILLA_FOUND)
+     set( USABLE_ASSUAN_FOUND true )
+   endif( WIN32 AND ASSUAN_VANILLA_FOUND )
+ 
+--- kleopatra/ConfigureChecks.cmake~	2010-03-29 13:31:50.040423223 +0200
++++ kleopatra/ConfigureChecks.cmake	2010-03-29 13:33:02.182619853 +0200
+@@ -64,10 +64,6 @@
+   # check if assuan has assuan_inquire_ext, old style
+   check_function_exists( "assuan_inquire_ext" HAVE_ASSUAN_INQUIRE_EXT )
+ 
+-  if ( NOT HAVE_ASSUAN_INQUIRE_EXT )
+-    set( USABLE_ASSUAN_FOUND false )
+-  endif( NOT HAVE_ASSUAN_INQUIRE_EXT )
+-
+   # check if assuan has new-style assuan_inquire_ext:
+   check_cxx_source_compiles("
+         #include <assuan.h>
