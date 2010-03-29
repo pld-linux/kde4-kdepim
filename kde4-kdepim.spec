@@ -28,7 +28,7 @@ BuildRequires:	cyrus-sasl-devel
 BuildRequires:	gpgme-devel >= 1:1.2.0
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
-BuildRequires:	libassuan-devel
+BuildRequires:	libassuan1-devel
 BuildRequires:	libindicate-qt-devel >= 0.2.2
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
