@@ -46,6 +46,7 @@ BuildRequires:	zlib-devel
 BuildConflicts:	indexlib
 BuildConflicts:	kdepim-kontact-libs
 BuildConflicts:	kdepim-libkmailprivate
+BuildConflicts:	libassuan1-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	%{name}-runtime >= %{version}
 Obsoletes:	%{name}-kpilot
