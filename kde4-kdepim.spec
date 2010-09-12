@@ -9,12 +9,14 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.4.6
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/kdepim-%{version}/src/%{orgname}-%{version}.tar.bz2
 # Source0-md5:	dab253004c2660c75b61a3caeb117ed1
 Patch100:	%{name}-branch.diff
+# http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
+Patch0:		kleopatra-4.4.3-assuan2.patch
 URL:		http://www.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtDesigner-devel >= %{qtver}
@@ -28,7 +30,7 @@ BuildRequires:	cyrus-sasl-devel
 BuildRequires:	gpgme-devel >= 1:1.2.0
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
-BuildRequires:	libassuan1-devel
+BuildRequires:	libassuan-devel
 BuildRequires:	libindicate-qt-devel >= 0.2.2
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
@@ -670,6 +672,7 @@ libksieve, libmimelib.
 %prep
 %setup -q -n %{orgname}-%{version}
 #%patch100 -p0
+%patch0 -p0
 
 %build
 install -d build
