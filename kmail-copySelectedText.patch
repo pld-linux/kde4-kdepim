@@ -1,0 +1,28 @@
+--- kdepim-4.4.9/kmail/kmreaderwin.cpp.orig	2010-12-22 18:52:28.000000000 +0100
++++ kdepim-4.4.9/kmail/kmreaderwin.cpp	2011-01-18 22:58:03.202991913 +0100
+@@ -2187,22 +2187,9 @@
+ //-----------------------------------------------------------------------------
+ void KMReaderWin::slotCopySelectedText()
+ {
+-  QString selection;
+-  if ( htmlMail() ) {
+-    QMimeData *mimeData = new QMimeData();
+-    selection = mViewer->selectedTextAsHTML();
+-    mimeData->setText(selection);
+-    if(!selection.isEmpty()) {
+-      selection.replace( QChar::Nbsp, ' ' );
+-      mimeData->setHtml(selection);
+-    }
+-    QApplication::clipboard()->setMimeData( mimeData, QClipboard::Clipboard );
+-  } else {
+-    selection = mViewer->selectedText();
+-    selection.replace( QChar::Nbsp, ' ' );
+-    QApplication::clipboard()->setText( selection );
+-  }
+-
++  QString selection = mViewer->selectedText();
++  selection.replace( QChar::Nbsp, ' ' );
++  QApplication::clipboard()->setText( selection );
+ }
+ 
+ 
