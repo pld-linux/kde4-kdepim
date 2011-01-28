@@ -8,7 +8,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.4.10
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/kdepim-%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -678,7 +678,7 @@ libksieve, libmimelib.
 install -d build
 cd build
 %cmake \
-	-DKONTACT_ENABLE_MIXEDMODE_SUMMARY_PLUGINS=on" \
+	-DKONTACT_ENABLE_MIXEDMODE_SUMMARY_PLUGINS=on \
 	../
 
 %{__make}
