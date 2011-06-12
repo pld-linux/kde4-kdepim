@@ -721,6 +721,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # akonadi
 %attr(755,root,root) %{_bindir}/akonadiconsole
+%attr(755,root,root) %{_bindir}/akonadi_nepomuk_email_feeder
+%attr(755,root,root) %{_bindir}/kincidenceeditor
+%attr(755,root,root) %{_bindir}/tasks-mobile
 #%attr(755,root,root) %ghost %{_libdir}/libakonadi-kcal_next.so.?
 #%attr(755,root,root) %{_libdir}/libakonadi-kcal_next.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libakonadi_next.so.?
@@ -1069,6 +1072,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_archive.so
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_browser.so
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_advanced.so
+%attr(755,root,root) %{_libdir}/kde4/akregator_config_sharemicroblog.so
+%attr(755,root,root) %{_libdir}/kde4/akregator_sharemicroblog_plugin.so
 %attr(755,root,root) %{_libdir}/kde4/akregatorpart.so
 %{_desktopdir}/kde4/akregator.desktop
 %{_datadir}/apps/akregator
