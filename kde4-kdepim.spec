@@ -1,5 +1,5 @@
 %define		_state	stable
-%define		qtver	4.7.2
+%define		qtver	4.7.3
 %define		orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
 Summary(ko.UTF-8):	K 데스크탑 환경 - PIM (개인 정보 관리)
@@ -7,12 +7,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.6.0
+Version:	4.6.1
 Release:	0.1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/kdepim-%{version}/src/%{orgname}-%{version}.tar.bz2
-# Source0-md5:	72396ca638233f52fcc69cac74fcc06d
+# Source0-md5:	3886ae80ff15df5c1504ec3e8c410f63
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
 URL:		http://www.kde.org/
@@ -1332,7 +1332,7 @@ rm -rf $RPM_BUILD_ROOT
 # xxx - where is better place for this?
 %dir %{_libdir}/kde4/imports
 %dir %{_libdir}/kde4/imports/org
-%dir %{_libdir}/kde4/imports/kde
+%dir %{_libdir}/kde4/imports/org/kde
 %{_libdir}/kde4/imports/org/kde/pim
 #%{_iconsdir}/*/*/actions/button_more.png
 #%{_iconsdir}/*/*/actions/button_fewer.png
