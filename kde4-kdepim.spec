@@ -727,10 +727,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/tasks-mobile
 %{_desktopdir}/kde4/tasks-mobile.desktop
 %{_iconsdir}/*/*/apps/tasks-mobile.*
-#%attr(755,root,root) %ghost %{_libdir}/libakonadi-kcal_next.so.?
-#%attr(755,root,root) %{_libdir}/libakonadi-kcal_next.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libakonadi_next.so.?
-%attr(755,root,root) %{_libdir}/libakonadi_next.so.*.*.*
 %dir %{_libdir}/akonadi
 %dir %{_libdir}/akonadi/contact
 %dir %{_libdir}/akonadi/contact/editorpageplugins
@@ -1364,6 +1360,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/kde4/imports/org/kde/pim
 #%{_iconsdir}/*/*/actions/button_more.png
 #%{_iconsdir}/*/*/actions/button_fewer.png
+%attr(755,root,root) %ghost %{_libdir}/libakonadi_next.so.?                                                                                                  
+%attr(755,root,root) %{_libdir}/libakonadi_next.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libakregatorinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libakregatorprivate.so.?
