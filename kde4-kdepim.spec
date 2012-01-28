@@ -50,6 +50,7 @@ BuildConflicts:	kdepim-libkmailprivate
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	%{name}-runtime >= %{version}
 Obsoletes:	%{name}-kpilot
+Obsoletes:	kde4-kdepim-kontact-plugin-planner
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -251,19 +252,6 @@ Kaddressbook plugin for Kontact.
 
 %description kontact-plugin-kaddressbook -l pl.UTF-8
 Plugin Kaddressbook dla Kontakt.
-
-%package kontact-plugin-planner
-Summary:	Planner plugin for Kontact
-Summary(pl.UTF-8):	plugin Planner dla Kontakt
-Group:		X11/Applications
-Requires:	%{name}-kontact = %{version}-%{release}
-Provides:	kde4-kontact-plugin-planner
-
-%description kontact-plugin-planner
-Planner plugin for Kontact.
-
-%description kontact-plugin-planner -l pl.UTF-8
-Plugin Planner dla Kontakt.
 
 %package korganizer
 Summary:	Calendar and scheduling component of Kontact
