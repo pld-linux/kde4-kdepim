@@ -7,12 +7,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.8.4
+Version:	4.9.0
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
-# Source0-md5:	17f0bd3c55884c27cd7e1bb85eb9901f
+# Source0-md5:	8ca3d0ae6ee915c27ccf49c72d74d0c4
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
 URL:		http://www.kde.org/
@@ -692,6 +692,7 @@ rm -rf $RPM_BUILD_ROOT
 #%find_lang korn --with-kde
 %find_lang ktimetracker --with-kde
 %find_lang kjots --with-kde
+%find_lang ktnef --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -781,7 +782,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/knode
 %{_datadir}/apps/kconf_update/knode.upd
 %{_datadir}/dbus-1/interfaces/org.kde.knode.xml
-%{_datadir}/kde4/services/knewsservice.protocol
 %{_datadir}/kde4/services/knode_*.desktop
 %{_iconsdir}/*/*/apps/knode.png
 
@@ -808,7 +808,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files kmail -f kmail.lang
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/akonadi_archivemail_agent
 %attr(755,root,root) %{_bindir}/akonadi_mailfilter_agent
+%attr(755,root,root) %{_bindir}/backupmail
+%attr(755,root,root) %{_bindir}/importwizard
 %attr(755,root,root) %{_bindir}/kmail
 %attr(755,root,root) %{_bindir}/kmail-mobile
 %attr(755,root,root) %{_bindir}/kmailcvt
@@ -818,6 +821,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/kmail_antivir.sh
 %attr(755,root,root) %{_bindir}/ksendemail
 %attr(755,root,root) %{_bindir}/kabc2mutt
+%attr(755,root,root) %{_bindir}/ktnef
 %attr(755,root,root) %{_libdir}/kde4/kcm_kmail.so
 %attr(755,root,root) %{_libdir}/kde4/kmailpart.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_kpimidentities.so
@@ -825,9 +829,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/KMail2.desktop
 %{_desktopdir}/kde4/kmail_view.desktop
 %{_desktopdir}/kde4/kmail-mobile.desktop
+%{_datadir}/apps/akonadi_archivemail_agent
+%{_datadir}/apps/akonadi_mailfilter_agent
+%{_datadir}/apps/backupmail
 %{_datadir}/apps/kmail
 %{_datadir}/apps/kmail2
 %{_datadir}/apps/kmail-mobile
+%{_datadir}/apps/ktnef
 %{_datadir}/apps/mobileui
 %{_datadir}/config/kmail.antispamrc
 %{_datadir}/config/kmail.antivirusrc
@@ -848,10 +856,18 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kmail-*.pl
 %attr(755,root,root) %{_datadir}/apps/kconf_update/kmail-*.sh
 %{_datadir}/apps/kmailcvt
+%{_datadir}/akonadi/agents/archivemailagent.desktop
+%{_datadir}/applications/kde4/importwizard.desktop
+%{_datadir}/applications/kde4/ktnef.desktop
 %exclude %{_iconsdir}/*/scalable
 %{_iconsdir}/*/*/apps/kmail*.png
+%{_iconsdir}/*/*/apps/ktnef.png
+%{_iconsdir}/*/*/apps/kaddressbook-mobile-harmattan.png
+%{_iconsdir}/*/*/apps/korganizer-mobile-harmattan.png
+%{_iconsdir}/*/*/apps/notes-mobile-harmattan.png
+%{_iconsdir}/*/*/apps/tasks-mobile-harmattan.png
+%{_iconsdir}/*/*/actions/ktnef_extract*.png
 %{_iconsdir}/oxygen/*/mimetypes/x-mail-distribution-list.*
-
 %{_iconsdir}/oxygen/*/actions/smallclock.png
 %{_iconsdir}/oxygen/*/actions/upindicator.png
 %{_iconsdir}/oxygen/*/actions/checkmark.png
@@ -1060,6 +1076,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libksieve.so
 %attr(755,root,root) %{_libdir}/libksieveui.so
 %attr(755,root,root) %{_libdir}/libmailcommon.so
+%attr(755,root,root) %{_libdir}/libmailimporter.so
 %attr(755,root,root) %{_libdir}/libmessagecomposer.so
 %attr(755,root,root) %{_libdir}/libmessagecore.so
 %attr(755,root,root) %{_libdir}/libmessagelist.so
@@ -1171,6 +1188,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libksieveui.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmailcommon.so.?
 %attr(755,root,root) %{_libdir}/libmailcommon.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmailimporter.so.?
+%attr(755,root,root) %{_libdir}/libmailimporter.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmessagecomposer.so.?
 %attr(755,root,root) %{_libdir}/libmessagecomposer.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libtemplateparser.so.?
