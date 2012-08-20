@@ -1,0 +1,11 @@
+--- kdepim-4.4.11.1/libkleo/backends/qgpgme/threadedjobmixin.h~	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/libkleo/backends/qgpgme/threadedjobmixin.h	2012-08-20 08:47:10.263593287 +0200
+@@ -143,7 +143,7 @@
+ 
+     void lateInitialization() {
+       assert( m_ctx );
+-      connect( &m_thread, SIGNAL(finished()), this, SLOT(slotFinished()) );
++      QObject::connect( &m_thread, SIGNAL(finished()), this, SLOT(slotFinished()) );
+       m_ctx->setProgressProvider( this );
+     }
+ 
