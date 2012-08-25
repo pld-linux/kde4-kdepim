@@ -678,7 +678,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	kde_htmldir=%{_kdedocdir}
 
-%{__rm} -r %{_iconsdir}/locolor
+%{__rm} -r $RPM_BUILD_ROOT%{_iconsdir}/locolor
 
 %find_lang akregator --with-kde
 #%find_lang kaddressbook --with-kde
