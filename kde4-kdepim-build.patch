@@ -9,3 +9,13 @@
        m_ctx->setProgressProvider( this );
      }
  
+--- kdepim-4.4.11.1/akregator/plugins/mk4storage/metakit/src/string.cpp~	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/akregator/plugins/mk4storage/metakit/src/string.cpp	2012-09-20 22:28:51.926975650 +0200
+@@ -120,6 +120,7 @@
+   _value = new unsigned char[n + 3];
+ 
+   _value[0] = 1; // see Init() member
++  if (n)
+   memset(_value + 2, ch, n);
+   _value[1] = (unsigned char)(n <= 255 ? n : 255);
+   _value[n + 2] = 0;

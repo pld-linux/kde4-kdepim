@@ -8,7 +8,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.4.11.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/kdepim-%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -744,7 +744,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/strigi/strigiea_vcf.so
 ### kresources/slox/
 %attr(755,root,root) %{_libdir}/libkslox.so
-%attr(755,root,root) %{_libdir}/libkabc_slox.so
 %attr(755,root,root) %{_libdir}/kde4/kabc_slox.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_slox.so
 %{_datadir}/kde4/services/kresources/kabc/kabc_slox.desktop
@@ -752,7 +751,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/kabc/kabc_groupwise.desktop
 %dir %{_datadir}/kde4/services/kresources/knotes
 ### kresources/groupd1av
-%attr(755,root,root) %{_libdir}/libkcal_groupdav.so
 %attr(755,root,root) %{_libdir}/libkabc_groupdav.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_groupdav.so
 %attr(755,root,root) %{_libdir}/kde4/kabc_groupdav.so
@@ -762,13 +760,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/kcal/kcal_ox.desktop
 %{_datadir}/kde4/services/kresources/kcal/kcal_slox.desktop
 ### kresources/remote
-%attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_remote.so
 %{_datadir}/kde4/services/kresources/kcal/remote.desktop
 ### kresources/kolab
-%attr(755,root,root) %{_libdir}/libkcalkolab.so
-%attr(755,root,root) %{_libdir}/libkabckolab.so
-%attr(755,root,root) %{_libdir}/libknoteskolab.so
 %attr(755,root,root) %{_libdir}/kde4/knotes_kolab.so
 %attr(755,root,root) %{_libdir}/kde4/kabc_kolab.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_kolab.so
@@ -777,16 +771,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kresources/knotes/kolabresource.desktop
 %{_datadir}/apps/kconf_update/kolab-resource.upd
 %{_datadir}/apps/kconf_update/upgrade-resourcetype.pl
-### kresources/lib
-%attr(755,root,root) %{_libdir}/libkgroupwarebase.so
-%attr(755,root,root) %{_libdir}/libkgroupwaredav.so
 ### kresources/birthdays
 %attr(755,root,root) %{_libdir}/kde4/kcal_kabc.so
 %{_datadir}/kde4/services/kresources/kcal/kabc.desktop
 %{_datadir}/kde4/services/kresources/kabc/kabc_opengroupware.desktop
 %{_datadir}/kde4/services/kresources/kcal/kcal_opengroupware.desktop
 ### kresources/blog
-%attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_blog.so
 %{_datadir}/kde4/services/kresources/kcal/blog.desktop
 
@@ -866,6 +856,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/KMail.desktop
 %{_desktopdir}/kde4/kmail_view.desktop
 %{_datadir}/apps/kmail
+%exclude %{_datadir}/apps/kmail/plugins/bodypartformatter/text_vcard.desktop
+%exclude %{_datadir}/apps/kmail/plugins/bodypartformatter/text_calendar.desktop
+%exclude %{_datadir}/apps/kmail/plugins/bodypartformatter/text_xdiff.desktop
 %{_datadir}/config/kmail.antispamrc
 %{_datadir}/config/kmail.antivirusrc
 %{_datadir}/config.kcfg/kmail.kcfg
@@ -959,12 +952,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_korganizer.so
 %attr(755,root,root) %{_libdir}/kde4/korg_*.so
 %attr(755,root,root) %{_libdir}/kde4/korganizerpart.so
-%attr(755,root,root) %{_libdir}/libkorg_stdprinting.so
 %attr(755,root,root) %ghost %{_libdir}/libkorganizer_core.so.?
 %attr(755,root,root) %{_libdir}/libkorganizer_core.so.4.*.*
-%attr(755,root,root) %{_libdir}/libkorganizer_calendar.so
-%attr(755,root,root) %{_libdir}/libkorganizer_eventviewer.so
-%attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so
 %{_datadir}/apps/kconf_update/korganizer.upd
 %{_datadir}/apps/korgac
 %{_datadir}/apps/korganizer
@@ -1061,7 +1050,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/akregator
 %attr(755,root,root) %{_bindir}/akregatorstorageexporter
-%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
 %attr(755,root,root) %{_libdir}/kde4/akregator_mk4storage_plugin.so
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_general.so
 %attr(755,root,root) %{_libdir}/kde4/akregator_config_appearance.so
@@ -1096,6 +1084,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_knote.so
 %{_desktopdir}/kde4/knotes.desktop
 %{_datadir}/apps/knotes
+%exclude %{_datadir}/apps/knotes/knotes_part.rc
 %{_datadir}/config.kcfg/knoteconfig.kcfg
 %{_datadir}/config.kcfg/knotesglobalconfig.kcfg
 %{_datadir}/dbus-1/interfaces/org.kde.KNotes.xml
@@ -1137,7 +1126,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkalarm_resources.so
 %attr(755,root,root) %{_libdir}/libkalarm_calendar.so
 %attr(755,root,root) %{_libdir}/libgwsoap.so
-%attr(755,root,root) %{_libdir}/libkabc_groupdav.so
 %attr(755,root,root) %{_libdir}/libkabc_slox.so
 %attr(755,root,root) %{_libdir}/libkabcgroupwise.so
 %attr(755,root,root) %{_libdir}/libkabckolab.so
@@ -1153,6 +1141,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libknoteskolab.so
 %attr(755,root,root) %{_libdir}/libkorganizer_eventviewer.so
 %attr(755,root,root) %{_libdir}/libkorganizer_calendar.so
+%attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so
 %attr(755,root,root) %{_libdir}/libkorg_stdprinting.so
 %attr(755,root,root) %{_libdir}/libkpgp.so
 %attr(755,root,root) %{_libdir}/libksieve.so
@@ -1166,7 +1155,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkleopatraclientgui.so
 %attr(755,root,root) %{_libdir}/libknodecommon.so
 %attr(755,root,root) %{_libdir}/libkorganizer_core.so
-%{_datadir}/apps/libkleopatra
 
 %files kio-groupwise
 %defattr(644,root,root,755)
@@ -1258,7 +1246,6 @@ rm -rf $RPM_BUILD_ROOT
 #%{_datadir}/config.kcfg/egroupware.kcfg
 %{_datadir}/config.kcfg/slox.kcfg
 %{_datadir}/config.kcfg/kolab.kcfg
-%{_datadir}/config.kcfg/groupwise.kcfg
 #%{_datadir}/config.kcfg/scalix.kcfg
 
 %files plugins
@@ -1292,7 +1279,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libkdepim.so
 %attr(755,root,root) %{_libdir}/kde4/plugins/designer/kdepimwidgets.so
 %attr(755,root,root) %{_libdir}/kde4/kpartsdesignerplugin.so
 %{_datadir}/dbus-1/interfaces/org.kde.addressbook.service.xml
