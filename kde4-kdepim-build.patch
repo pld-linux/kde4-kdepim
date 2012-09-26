@@ -15,7 +15,7 @@
    _value = new unsigned char[n + 3];
  
    _value[0] = 1; // see Init() member
-+  if (n)
++  if (n > 0)
    memset(_value + 2, ch, n);
    _value[1] = (unsigned char)(n <= 255 ? n : 255);
    _value[n + 2] = 0;

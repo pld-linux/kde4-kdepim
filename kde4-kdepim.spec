@@ -8,7 +8,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.4.11.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/kdepim-%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -17,6 +17,9 @@ Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
 Patch0:		kleopatra-4.4.3-assuan2.patch
 Patch1:		%{name}-build.patch
+Patch2:		upstream_Bug-271580-Fix-crash-displaying-New-Alarm-dialog-fro.patch
+Patch3:		upstream_Fix-crash-in-Folder-destructor.patch
+Patch4:		displaying_only_unread_issue.diff
 URL:		http://www.kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtDesigner-devel >= %{qtver}
@@ -675,6 +678,9 @@ libksieve, libmimelib.
 #%patch100 -p0
 %patch0 -p0
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
 install -d build
