@@ -1,3 +1,6 @@
+# NOTE:
+# - kdepimlibs >= 4.9.2 break custom folders in identity configuration
+# due to http://quickgit.kde.org/index.php?p=kdepimlibs.git&a=commitdiff&h=33acd1d6cc5a48974fc1093700d70caf04ae9644
 %define		_state	stable
 %define		qtver	4.7.1
 %define		orgname	kdepim
