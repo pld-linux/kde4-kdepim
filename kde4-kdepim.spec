@@ -160,7 +160,6 @@ URL:		http://kontact.kde.org/kmail/
 # ? Requires:	kde4-kdebase >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	pinentry-qt4
-Conflicts:	kde4-kdepimlibs >= 4.9.2
 
 %description kmail
 This is electronic mail client for KDE with a huge amount of features:
