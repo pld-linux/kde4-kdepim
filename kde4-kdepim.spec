@@ -10,7 +10,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.9.4
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
@@ -1030,7 +1030,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/knote_config_network.desktop
 %{_datadir}/kde4/services/knote_config_style.desktop
 %{_iconsdir}/*/*/actions/knotes_*.png
-%{_iconsdir}/*/*/apps/knotes.png
+%{_iconsdir}/*/*/apps/knotes.*
 %{_iconsdir}/*/*/apps/notes-mobile.png
 
 %files kontact-plugin-knotes
@@ -1100,7 +1100,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/system-services/org.kde.kalarmrtcwake.service
 /etc/dbus-1/system.d/org.kde.kalarmrtcwake.conf
 %{_datadir}/polkit-1/actions/org.kde.kalarmrtcwake.policy
-%{_iconsdir}/*/*/apps/*kalarm.png
+%{_iconsdir}/*/*/apps/*kalarm.*
 %{_kdedocdir}/en/kalarm
 
 %files konsolekalendar
