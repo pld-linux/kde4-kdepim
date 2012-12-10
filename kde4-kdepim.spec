@@ -1,3 +1,5 @@
+# TODO: remove empty 'plugins' package?
+#
 %define		_state	stable
 %define		qtver	4.8.1
 %define		orgname	kdepim
@@ -740,7 +742,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/libmessageviewer
 %{_datadir}/apps/messagelist
 %{_datadir}/apps/messageviewer
-%attr(755,root,root) %{_libdir}/kde4/messageviewer_bodypartformatter_*.so 
+%attr(755,root,root) %{_libdir}/kde4/messageviewer_bodypartformatter_*.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_remote.so
 %{_datadir}/kde4/services/kresources/kcal/remote.desktop
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
@@ -771,7 +773,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kontact
 %{_datadir}/apps/kontact-touch
 %{_desktopdir}/kde4/kontact-admin.desktop
-%{_iconsdir}/*/*/*/kontact*.png
+%{_iconsdir}/*/*/*/kontact*.*
 %{_datadir}/dbus-1/interfaces/org.kde.kontact.KNotes.xml
 %lang(en) %{_kdedocdir}/en/kontact-admin
 
@@ -785,7 +787,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/kconf_update/knode.upd
 %{_datadir}/dbus-1/interfaces/org.kde.knode.xml
 %{_datadir}/kde4/services/knode_*.desktop
-%{_iconsdir}/*/*/apps/knode.png
+%{_iconsdir}/*/*/apps/knode.*
 
 %files kontact-plugin-knode
 %defattr(644,root,root,755)
@@ -861,20 +863,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/akonadi/agents/archivemailagent.desktop
 %{_datadir}/applications/kde4/importwizard.desktop
 %{_datadir}/applications/kde4/ktnef.desktop
-%exclude %{_iconsdir}/*/scalable
-%{_iconsdir}/*/*/apps/kmail*.png
-%{_iconsdir}/*/*/apps/ktnef.png
-%{_iconsdir}/*/*/apps/kaddressbook-mobile-harmattan.png
-%{_iconsdir}/*/*/apps/korganizer-mobile-harmattan.png
-%{_iconsdir}/*/*/apps/notes-mobile-harmattan.png
-%{_iconsdir}/*/*/apps/tasks-mobile-harmattan.png
-%{_iconsdir}/*/*/actions/ktnef_extract*.png
+%{_iconsdir}/*/*/apps/kmail*.*
+%{_iconsdir}/*/*/apps/ktnef.*
+%{_iconsdir}/*/*/apps/kaddressbook-mobile-harmattan.*
+%{_iconsdir}/*/*/apps/korganizer-mobile-harmattan.*
+%{_iconsdir}/*/*/apps/notes-mobile-harmattan.*
+%{_iconsdir}/*/*/apps/tasks-mobile-harmattan.*
+%{_iconsdir}/*/*/actions/ktnef_extract*.*
 %{_iconsdir}/oxygen/*/mimetypes/x-mail-distribution-list.*
-%{_iconsdir}/oxygen/*/actions/smallclock.png
-%{_iconsdir}/oxygen/*/actions/upindicator.png
-%{_iconsdir}/oxygen/*/actions/checkmark.png
+%{_iconsdir}/oxygen/*/actions/smallclock.*
+%{_iconsdir}/oxygen/*/actions/upindicator.*
+%{_iconsdir}/oxygen/*/actions/checkmark.*
 # conflicts with kde-icons-oxygen
-%{_iconsdir}/oxygen/*/actions/edit-delete-page.png
+%{_iconsdir}/oxygen/*/actions/edit-delete-page.*
 
 ### libkleo
 %attr(755,root,root) %{_libdir}/libkleo.so
@@ -946,7 +947,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/korganizer-mobile.desktop
 %{_iconsdir}/*/*/apps/korganizer.*
 %{_iconsdir}/*/*/apps/korganizer-mobile.*
-%{_iconsdir}/hicolor/*x*/apps/korg-*.*
+%{_iconsdir}/hicolor/*/apps/korg-*.*
 
 %files kontact-plugin-korganizer
 %defattr(644,root,root,755)
@@ -1035,7 +1036,6 @@ rm -rf $RPM_BUILD_ROOT
 %files kontact-plugin-knotes
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/kontact_knotesplugin.so
-%{_datadir}/apps/knotes/knotes_part.rc
 %{_datadir}/kde4/services/kontact/knotesplugin.desktop
 
 %files kjots -f kjots.lang
@@ -1053,21 +1053,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/akonotes_*.desktop
 %{_datadir}/kde4/services/kontact/kjots_plugin.desktop
 %{_datadir}/kde4/services/kjots_config_misc.desktop
-%{_iconsdir}/*/*/apps/kjots.png
+%{_iconsdir}/*/*/apps/kjots.*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libakonadi_next.so
-%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
+#%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
 %attr(755,root,root) %{_libdir}/libcalendarsupport.so
 %attr(755,root,root) %{_libdir}/libeventviews.so
 %attr(755,root,root) %{_libdir}/libincidenceeditorsng.so
 %attr(755,root,root) %{_libdir}/libincidenceeditorsngmobile.so
-%attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
-%attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
+#%attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
+#%attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
 %attr(755,root,root) %{_libdir}/libkdepimdbusinterfaces.so
 %attr(755,root,root) %{_libdir}/libkdepimmobileui.so
-%attr(755,root,root) %{_libdir}/libkdepim.so
+#%attr(755,root,root) %{_libdir}/libkdepim.so
 %attr(755,root,root) %{_libdir}/libkdgantt2.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientcore.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientgui.so
@@ -1084,7 +1084,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmessagelist.so
 %attr(755,root,root) %{_libdir}/libmessageviewer.so
 %attr(755,root,root) %{_libdir}/libtemplateparser.so
-%{_datadir}/apps/libkleopatra
 
 %files kalarm
 %defattr(644,root,root,755)
@@ -1145,12 +1144,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kleopatra_decryptverifyfolders.desktop
 %{_datadir}/kde4/services/kleopatra_signencryptfiles.desktop
 %{_datadir}/kde4/services/kleopatra_signencryptfolders.desktop
-%{_iconsdir}/hicolor/*x*/apps/kleopatra.png
+%{_iconsdir}/hicolor/*/apps/kleopatra.*
 %{_desktopdir}/kde4/kleopatra.desktop
 
 %files plugins
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde4/ktexteditorkabcbridge.so
 
 %files libs
 %defattr(644,root,root,755)
@@ -1164,15 +1162,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/kde4/imports/org
 %dir %{_libdir}/kde4/imports/org/kde
 %{_libdir}/kde4/imports/org/kde/pim
-%attr(755,root,root) %ghost %{_libdir}/libakonadi_next.so.?                                                                                                  
+%attr(755,root,root) %ghost %{_libdir}/libakonadi_next.so.?
 %attr(755,root,root) %{_libdir}/libakonadi_next.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libakregatorinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libakregatorinterfaces.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libakregatorprivate.so.?
 %attr(755,root,root) %{_libdir}/libakregatorprivate.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libcalendarsupport.so.?                                                                                              
+%attr(755,root,root) %ghost %{_libdir}/libcalendarsupport.so.?
 %attr(755,root,root) %{_libdir}/libcalendarsupport.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libeventviews.so.?                                                                                               
+%attr(755,root,root) %ghost %{_libdir}/libeventviews.so.?
 %attr(755,root,root) %{_libdir}/libeventviews.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libincidenceeditorsng.so.?
 %attr(755,root,root) %{_libdir}/libincidenceeditorsng.so.*.*.*
