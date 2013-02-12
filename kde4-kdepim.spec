@@ -1,5 +1,9 @@
 # TODO: remove empty 'plugins' package?
 #
+#/usr/bin/pimsettingexporter
+#/usr/lib64/kde4/plugins/accessible/messagevieweraccessiblewidgetfactory.so
+#/usr/share/apps/pimsettingexporter/pimsettingexporter.rc
+#
 %define		_state	stable
 %define		qtver	4.8.1
 %define		orgname	kdepim
@@ -1062,6 +1066,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmessagecore.so
 %attr(755,root,root) %{_libdir}/libmessagelist.so
 %attr(755,root,root) %{_libdir}/libmessageviewer.so
+%attr(755,root,root) %{_libdir}/libpimcommon.so
 %attr(755,root,root) %{_libdir}/libtemplateparser.so
 
 %files kalarm
@@ -1203,3 +1208,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}//libmessagelist.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmessageviewer.so.?
 %attr(755,root,root) %{_libdir}//libmessageviewer.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpimcommon.so.?
+%attr(755,root,root) %{_libdir}/libpimcommon.so.*.*.*
