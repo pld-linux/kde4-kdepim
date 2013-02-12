@@ -9,12 +9,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.9.4
-Release:	2
+Version:	4.10.0
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
-# Source0-md5:	6fbad17668735ea2ac6718085a6f5168
+# Source0-md5:	c9ebf0e7e917f5d6a2d3d61912c7028f
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
 URL:		http://www.kde.org/
@@ -33,6 +33,8 @@ BuildRequires:	gpgme-devel >= 1:1.2.0
 BuildRequires:	grantlee-devel
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
+BuildRequires:	kde4-nepomuk-core-devel >= %{version}
+BuildRequires:	kde4-nepomuk-widgets-devel >= %{version}
 BuildRequires:	libassuan-devel
 BuildRequires:	libindicate-qt-devel >= 0.2.2
 BuildRequires:	openssl-devel
@@ -52,6 +54,7 @@ BuildConflicts:	kdepim-libkmailprivate
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	%{name}-runtime >= %{version}
 Obsoletes:	%{name}-kpilot
+Obsoletes:	kde4-kdepim-kontact-plugin-ktimetracker
 Obsoletes:	kde4-kdepim-kontact-plugin-planner
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -210,22 +213,6 @@ Kmail plugin for Kontact.
 
 %description kontact-plugin-kmail -l pl.UTF-8
 Plugin Kmail dla Kontakt.
-
-%package kontact-plugin-ktimetracker
-Summary:	Ktimer plugin for Kontact
-Summary(pl.UTF-8):	plugin Ktimer dla Kontakt
-Group:		X11/Applications
-Requires:	%{name}-kontact = %{version}-%{release}
-Requires:	%{name}-ktimetracker = %{version}-%{release}
-Provides:	kde4-kontact-plugin-ktimetracker
-Obsoletes:	kde4-kontact-plugin-ktimetracker
-
-%description kontact-plugin-ktimetracker
-Ktimer plugin for Kontact.
-
-%description kontact-plugin-ktimetracker -l pl.UTF-8
-Plugin Ktimer dla Kontakt.
-
 
 %package kaddressbook
 Summary:	Address book
@@ -814,7 +801,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/akonadi_archivemail_agent
 %attr(755,root,root) %{_bindir}/akonadi_mailfilter_agent
-%attr(755,root,root) %{_bindir}/backupmail
 %attr(755,root,root) %{_bindir}/importwizard
 %attr(755,root,root) %{_bindir}/kmail
 %attr(755,root,root) %{_bindir}/kmail-mobile
@@ -835,8 +821,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/kmail-mobile.desktop
 %{_datadir}/apps/akonadi_archivemail_agent
 %{_datadir}/apps/akonadi_mailfilter_agent
-%{_datadir}/apps/backupmail
-%{_datadir}/apps/kmail
 %{_datadir}/apps/kmail2
 %{_datadir}/apps/kmail-mobile
 %{_datadir}/apps/ktnef
@@ -886,11 +870,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_kmailsummary.so
 %{_datadir}/kde4/services/kontact/kmailplugin.desktop
 %{_datadir}/kde4/services/kcmkmailsummary.desktop
-
-%files kontact-plugin-ktimetracker
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/kde4/kontact_ktimetrackerplugin.so
-%{_datadir}/kde4/services/kontact/ktimetracker_plugin.desktop
 
 %files kaddressbook
 %defattr(644,root,root,755)
