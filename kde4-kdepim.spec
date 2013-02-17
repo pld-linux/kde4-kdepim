@@ -37,7 +37,6 @@ BuildRequires:	gpgme-devel >= 1:1.2.0
 BuildRequires:	grantlee-devel
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
-BuildRequires:	kde4-nepomuk-core-devel >= %{version}
 BuildRequires:	kde4-nepomuk-widgets-devel >= %{version}
 BuildRequires:	libassuan-devel
 BuildRequires:	libindicate-qt-devel >= 0.2.2
