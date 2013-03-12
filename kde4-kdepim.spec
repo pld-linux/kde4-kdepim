@@ -81,6 +81,7 @@ Desktop Environment (KDE).
 Summary:	Kontact Personal Information Management
 Summary(pl.UTF-8):	Kontact Personal Information Management
 Group:		X11/Applications
+Requires:	kde4-kdepim-runtime
 Requires:	pinentry-qt4
 Provides:	kde4-kontact
 Obsoletes:	kde4-kontact
