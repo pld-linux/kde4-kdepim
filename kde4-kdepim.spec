@@ -1,8 +1,6 @@
-# TODO: remove empty 'plugins' package?
+# TODO:
 #
-#/usr/bin/pimsettingexporter
 #/usr/lib64/kde4/plugins/accessible/messagevieweraccessiblewidgetfactory.so
-#/usr/share/apps/pimsettingexporter/pimsettingexporter.rc
 #
 %define		_state	stable
 %define		qtver	4.8.1
@@ -14,7 +12,7 @@ Summary(ru.UTF-8):	Персональный планировщик (PIM) для 
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
 Version:	4.10.4
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
@@ -59,6 +57,7 @@ Requires:	%{name}-runtime >= %{version}
 Obsoletes:	%{name}-kpilot
 Obsoletes:	kde4-kdepim-kontact-plugin-ktimetracker
 Obsoletes:	kde4-kdepim-kontact-plugin-planner
+Obsoletes:	kde4-kdepim-plugins < 4.10.4-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -564,17 +563,6 @@ wizards.
 %description wizards -l pl.UTF-8
 wizards.
 
-%package plugins
-Summary:	plugins
-Summary(pl.UTF-8):	plugins
-Group:		X11/Applications
-
-%description plugins
-plugins.
-
-%description plugins -l pl.UTF-8
-plugins.
-
 %package ktnef
 Summary:	ktnef
 Summary(pl.UTF-8):	ktnef
@@ -740,6 +728,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcal_blog.so
 %{_datadir}/kde4/services/kresources/kcal/blog.desktop
 %{_datadir}/ontology/kde/messagetag.*
+
+%attr(755,root,root) %{_bindir}/pimsettingexporter
+%{_datadir}/apps/pimsettingexporter
 
 %files blogilo
 %defattr(644,root,root,755)
@@ -1130,9 +1121,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/kleopatra_signencryptfolders.desktop
 %{_iconsdir}/hicolor/*/apps/kleopatra.*
 %{_desktopdir}/kde4/kleopatra.desktop
-
-%files plugins
-%defattr(644,root,root,755)
 
 %files libs
 %defattr(644,root,root,755)
