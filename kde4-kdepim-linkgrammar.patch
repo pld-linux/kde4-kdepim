@@ -1,0 +1,11 @@
+--- kdepim-4.11.4/grammar/plugins/linkgrammar/grammarlinkplugin.cpp~	2013-08-28 19:05:42.000000000 +0200
++++ kdepim-4.11.4/grammar/plugins/linkgrammar/grammarlinkplugin.cpp	2013-12-19 13:02:03.000000000 +0100
+@@ -25,7 +25,7 @@
+ {
+     setlocale(LC_ALL, "");
+     mOpts = parse_options_create();
+-    mDict = dictionary_create_lang(language.toLatin1());
++    mDict = dictionary_create_lang(language.toLatin1().data());
+     if (!mDict) {
+         qDebug()<<" dictionary for language "<<language<<" not found";
+     }
