@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.11.4
-Release:	0.1
+Version:	4.12.0
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
-# Source0-md5:	c67fdee4633436ce60a7ff3258c5d69e
+# Source0-md5:	95c9c1c8506fb7166bdb6e0ba56812f9
 Patch0:		%{name}-linkgrammar.patch
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
@@ -696,6 +696,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # akonadi
 %attr(755,root,root) %{_bindir}/akonadiconsole
+%attr(755,root,root) %{_bindir}/akonadi_folderarchive_agent
 %attr(755,root,root) %{_bindir}/kincidenceeditor
 #%attr(755,root,root) %{_bindir}/tasks-mobile
 #%{_datadir}/apps/tasks-mobile
@@ -816,6 +817,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ksendemail
 %attr(755,root,root) %{_bindir}/kabc2mutt
 %attr(755,root,root) %{_bindir}/ktnef
+%attr(755,root,root) %{_bindir}/mboximporter
 %attr(755,root,root) %{_libdir}/kde4/kcm_kmail.so
 %attr(755,root,root) %{_libdir}/kde4/kmailpart.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_kpimidentities.so
@@ -823,6 +825,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/KMail2.desktop
 %{_desktopdir}/kde4/kmail_view.desktop
 #%{_desktopdir}/kde4/kmail-mobile.desktop
+%{_desktopdir}/kde4/mboximporter.desktop
 %{_datadir}/apps/akonadi_archivemail_agent
 %{_datadir}/apps/akonadi_mailfilter_agent
 %{_datadir}/apps/kmail2
@@ -841,6 +844,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/dbusmail.desktop
 %{_datadir}/kde4/services/ServiceMenus/kmail_addattachmentservicemenu.desktop
 %{_datadir}/dbus-1/interfaces/org.kde.kmail.*.xml
+%{_datadir}/akonadi/agents/folderarchiveagent.desktop
 %{_datadir}/akonadi/agents/mailfilteragent.desktop
 %{_datadir}/apps/kconf_update/kmail.upd
 %attr(755,root,root) %{_datadir}/apps/kconf_update/upgrade-transport.pl
@@ -871,7 +875,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadi_sendlater_agent
 %{_datadir}/akonadi/agents/sendlateragent.desktop
 %{_datadir}/apps/akonadi_sendlater_agent/akonadi_sendlater_agent.notifyrc
+%attr(755,root,root) %{_bindir}/contactthemeeditor
 %attr(755,root,root) %{_bindir}/headerthemeeditor
+%{_datadir}/applications/kde4/contactthemeeditor.desktop
 %{_datadir}/applications/kde4/headerthemeeditor.desktop
 %{_datadir}/apps/headerthemeeditor/headerthemeeditorui.rc
 %{_datadir}/apps/composereditor/composereditorinitialhtml
@@ -907,6 +913,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files korganizer -f korganizer.lang
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/calendarjanitor
 %attr(755,root,root) %{_bindir}/ical2vcal
 %attr(755,root,root) %{_bindir}/korgac
 %attr(755,root,root) %{_bindir}/korganizer
@@ -914,9 +921,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_korganizer.so
 %attr(755,root,root) %{_libdir}/kde4/korg_*.so
 %attr(755,root,root) %{_libdir}/kde4/korganizerpart.so
-%attr(755,root,root) %ghost %{_libdir}/libkorganizer_core.so.?
-%attr(755,root,root) %{_libdir}/libkorganizer_core.so.4.*.*
-%attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so
 %{_datadir}/apps/kconf_update/korganizer.upd
 %{_datadir}/apps/korgac
 %{_datadir}/apps/korganizer
@@ -1021,7 +1025,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/knote_config_display.desktop
 %{_datadir}/kde4/services/knote_config_editor.desktop
 %{_datadir}/kde4/services/knote_config_network.desktop
-%{_datadir}/kde4/services/knote_config_style.desktop
+#%{_datadir}/kde4/services/knote_config_style.desktop
 %{_iconsdir}/*/*/actions/knotes_*.png
 %{_iconsdir}/*/*/apps/knotes.*
 #%{_iconsdir}/*/*/apps/notes-mobile.png
@@ -1054,19 +1058,25 @@ rm -rf $RPM_BUILD_ROOT
 #%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
 %attr(755,root,root) %{_libdir}/libcalendarsupport.so
 %attr(755,root,root) %{_libdir}/libeventviews.so
+%attr(755,root,root) %{_libdir}/libfolderarchive.so
+%attr(755,root,root) %{_libdir}/libgrantleetheme.so
+%attr(755,root,root) %{_libdir}/libgrantleethemeeditor.so
 %attr(755,root,root) %{_libdir}/libincidenceeditorsng.so
 %attr(755,root,root) %{_libdir}/libincidenceeditorsngmobile.so
+#%attr(755,root,root) %{_libdir}/libkaddressbookgrantlee.so
 #%attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
 #%attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
 %attr(755,root,root) %{_libdir}/libkdepimdbusinterfaces.so
-#%attr(755,root,root) %{_libdir}/libkdepimmobileui.so
+%attr(755,root,root) %{_libdir}/libkdepimmobileui.so
 #%attr(755,root,root) %{_libdir}/libkdepim.so
 %attr(755,root,root) %{_libdir}/libkdgantt2.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientcore.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientgui.so
 %attr(755,root,root) %{_libdir}/libkmanagesieve.so
 %attr(755,root,root) %{_libdir}/libknodecommon.so
+#%attr(755,root,root) %{_libdir}/libknotesprivate.so
 %attr(755,root,root) %{_libdir}/libkorganizer_core.so
+%attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so
 %attr(755,root,root) %{_libdir}/libkpgp.so
 %attr(755,root,root) %{_libdir}/libksieve.so
 %attr(755,root,root) %{_libdir}/libksieveui.so
@@ -1167,14 +1177,22 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libcalendarsupport.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libeventviews.so.?
 %attr(755,root,root) %{_libdir}/libeventviews.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libfolderarchive.so.?
+%attr(755,root,root) %{_libdir}/libfolderarchive.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgrantleetheme.so.?
+%attr(755,root,root) %{_libdir}/libgrantleetheme.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgrantleethemeeditor.so.?
+%attr(755,root,root) %{_libdir}/libgrantleethemeeditor.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libincidenceeditorsng.so.?
 %attr(755,root,root) %{_libdir}/libincidenceeditorsng.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libincidenceeditorsngmobile.so.?
 %attr(755,root,root) %{_libdir}/libincidenceeditorsngmobile.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libkaddressbookgrantlee.so.?
+%attr(755,root,root) %{_libdir}/libkaddressbookgrantlee.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkdepimdbusinterfaces.so.?
 %attr(755,root,root) %{_libdir}/libkdepimdbusinterfaces.so.*.*.*
-#%attr(755,root,root) %ghost %{_libdir}/libkdepimmobileui.so.?
-#%attr(755,root,root) %{_libdir}/libkdepimmobileui.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libkdepimmobileui.so.?
+%attr(755,root,root) %{_libdir}/libkdepimmobileui.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkdgantt2.so.?
 %attr(755,root,root) %{_libdir}/libkdgantt2.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkmanagesieve.so.?
@@ -1203,8 +1221,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkmailprivate.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libknodecommon.so.?
 %attr(755,root,root) %{_libdir}/libknodecommon.so.4.*.*
+%attr(755,root,root) %ghost %{_libdir}/libknotesprivate.so.?
+%attr(755,root,root) %{_libdir}/libknotesprivate.so.4.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkontactprivate.so.?
 %attr(755,root,root) %{_libdir}/libkontactprivate.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libkorganizer_core.so.?
+%attr(755,root,root) %{_libdir}/libkorganizer_core.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkorganizer_interfaces.so.?
 %attr(755,root,root) %{_libdir}/libkorganizer_interfaces.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkorganizerprivate.so.?
@@ -1230,7 +1252,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libsendlater.so.?
 %attr(755,root,root) %{_libdir}/libsendlater.so.*.*.*
 
+%dir %{_libdir}/kde4/plugins/accessible
 %attr(755,root,root) %{_libdir}/kde4/plugins/accessible/messagevieweraccessiblewidgetfactory.so
 %attr(755,root,root) %{_libdir}/kde4/plugins/designer/mailcommonwidgets.so
 %attr(755,root,root) %{_libdir}/kde4/plugins/designer/pimcommonwidgets.so
+%dir %{_libdir}/kde4/plugins/grantlee
+%dir %{_libdir}/kde4/plugins/grantlee/0.3
 %attr(755,root,root) %{_libdir}/kde4/plugins/grantlee/0.3/grantlee_messageheaderfilters.so
