@@ -873,13 +873,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkleo.so
 
 %attr(755,root,root) %{_bindir}/akonadi_sendlater_agent
+%dir %{_datadir}/apps/akonadi_sendlater_agent
 %{_datadir}/akonadi/agents/sendlateragent.desktop
 %{_datadir}/apps/akonadi_sendlater_agent/akonadi_sendlater_agent.notifyrc
 %attr(755,root,root) %{_bindir}/contactthemeeditor
 %attr(755,root,root) %{_bindir}/headerthemeeditor
 %{_datadir}/applications/kde4/contactthemeeditor.desktop
 %{_datadir}/applications/kde4/headerthemeeditor.desktop
+%dir %{_datadir}/apps/headerthemeeditor
 %{_datadir}/apps/headerthemeeditor/headerthemeeditorui.rc
+%dir %{_datadir}/apps/composereditor
 %{_datadir}/apps/composereditor/composereditorinitialhtml
 
 %{_datadir}/config/messageviewer_header_themes.knsrc
