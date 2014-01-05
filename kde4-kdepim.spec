@@ -699,10 +699,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadiconsole
 %attr(755,root,root) %{_bindir}/akonadi_folderarchive_agent
 %attr(755,root,root) %{_bindir}/kincidenceeditor
-#%attr(755,root,root) %{_bindir}/tasks-mobile
-#%{_datadir}/apps/tasks-mobile
-#%{_desktopdir}/kde4/tasks-mobile.desktop
-#%{_iconsdir}/*/*/apps/tasks-mobile.*
+%attr(755,root,root) %{_bindir}/tasks-mobile
+%{_datadir}/apps/tasks-mobile
+%{_desktopdir}/kde4/tasks-mobile.desktop
+%{_iconsdir}/*/*/apps/tasks-mobile.*
 %dir %{_libdir}/akonadi
 %dir %{_libdir}/akonadi/contact
 %dir %{_libdir}/akonadi/contact/editorpageplugins
@@ -809,7 +809,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/akonadi_mailfilter_agent
 %attr(755,root,root) %{_bindir}/importwizard
 %attr(755,root,root) %{_bindir}/kmail
-#%attr(755,root,root) %{_bindir}/kmail-mobile
+%attr(755,root,root) %{_bindir}/kmail-mobile
 %attr(755,root,root) %{_bindir}/kmailcvt
 %attr(755,root,root) %{_bindir}/kmail_clamav.sh
 %attr(755,root,root) %{_bindir}/kmail_sav.sh
@@ -825,14 +825,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_desktopdir}/kde4/KMail2.desktop
 %{_desktopdir}/kde4/kmail_view.desktop
-#%{_desktopdir}/kde4/kmail-mobile.desktop
+%{_desktopdir}/kde4/kmail-mobile.desktop
 %{_desktopdir}/kde4/mboximporter.desktop
 %{_datadir}/apps/akonadi_archivemail_agent
 %{_datadir}/apps/akonadi_mailfilter_agent
 %{_datadir}/apps/kmail2
-#%{_datadir}/apps/kmail-mobile
+%{_datadir}/apps/kmail-mobile
 %{_datadir}/apps/ktnef
-#%{_datadir}/apps/mobileui
+%{_datadir}/apps/mobileui
 %{_datadir}/config/kmail.antispamrc
 %{_datadir}/config/kmail.antivirusrc
 %{_datadir}/config.kcfg/kmail.kcfg
@@ -858,10 +858,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/applications/kde4/ktnef.desktop
 %{_iconsdir}/*/*/apps/kmail*.*
 %{_iconsdir}/*/*/apps/ktnef.*
-#%{_iconsdir}/*/*/apps/kaddressbook-mobile-harmattan.*
-#%{_iconsdir}/*/*/apps/korganizer-mobile-harmattan.*
-#%{_iconsdir}/*/*/apps/notes-mobile-harmattan.*
-#%{_iconsdir}/*/*/apps/tasks-mobile-harmattan.*
+%{_iconsdir}/*/*/apps/kaddressbook-mobile-harmattan.*
+%{_iconsdir}/*/*/apps/korganizer-mobile-harmattan.*
+%{_iconsdir}/*/*/apps/notes-mobile-harmattan.*
+%{_iconsdir}/*/*/apps/tasks-mobile-harmattan.*
 %{_iconsdir}/*/*/actions/ktnef_extract*.*
 %{_iconsdir}/oxygen/*/mimetypes/x-mail-distribution-list.*
 %{_iconsdir}/oxygen/*/actions/smallclock.*
@@ -877,6 +877,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/akonadi_sendlater_agent
 %{_datadir}/akonadi/agents/sendlateragent.desktop
 %{_datadir}/apps/akonadi_sendlater_agent/akonadi_sendlater_agent.notifyrc
+%dir %{_datadir}/apps/akonadi_folderarchive_agent
+%{_datadir}/apps/akonadi_folderarchive_agent/akonadi_folderarchive_agent.notifyrc
 %attr(755,root,root) %{_bindir}/contactthemeeditor
 %attr(755,root,root) %{_bindir}/headerthemeeditor
 %{_datadir}/applications/kde4/contactthemeeditor.desktop
@@ -898,17 +900,17 @@ rm -rf $RPM_BUILD_ROOT
 %files kaddressbook
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kaddressbook
-#%attr(755,root,root) %{_bindir}/kaddressbook-mobile
+%attr(755,root,root) %{_bindir}/kaddressbook-mobile
 %attr(755,root,root) %{_libdir}/kde4/kcm_ldap.so
 %attr(755,root,root) %{_libdir}/kde4/kaddressbookpart.so
 %{_desktopdir}/kde4/kaddressbook.desktop
-#%{_desktopdir}/kde4/kaddressbook-mobile.desktop
+%{_desktopdir}/kde4/kaddressbook-mobile.desktop
 %{_datadir}/apps/kaddressbook
-#%{_datadir}/apps/kaddressbook-mobile
+%{_datadir}/apps/kaddressbook-mobile
 %{_datadir}/kde4/services/kcmldap.desktop
 %{_datadir}/kde4/services/kaddressbookpart.desktop
 %{_iconsdir}/*/*/apps/kaddressbook.*
-#%{_iconsdir}/*/*/apps/kaddressbook-mobile.*
+%{_iconsdir}/*/*/apps/kaddressbook-mobile.*
 
 %files kontact-plugin-kaddressbook
 %defattr(644,root,root,755)
@@ -921,14 +923,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ical2vcal
 %attr(755,root,root) %{_bindir}/korgac
 %attr(755,root,root) %{_bindir}/korganizer
-#%attr(755,root,root) %{_bindir}/korganizer-mobile
+%attr(755,root,root) %{_bindir}/korganizer-mobile
 %attr(755,root,root) %{_libdir}/kde4/kcm_korganizer.so
 %attr(755,root,root) %{_libdir}/kde4/korg_*.so
 %attr(755,root,root) %{_libdir}/kde4/korganizerpart.so
 %{_datadir}/apps/kconf_update/korganizer.upd
 %{_datadir}/apps/korgac
 %{_datadir}/apps/korganizer
-#%{_datadir}/apps/korganizer-mobile
+%{_datadir}/apps/korganizer-mobile
 %{_datadir}/autostart/korgac.desktop
 %{_datadir}/config.kcfg/korganizer.kcfg
 %{_datadir}/config/korganizer.knsrc
@@ -945,9 +947,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/korgprintplugin.desktop
 %{_desktopdir}/kde4/korganizer-import.desktop
 %{_desktopdir}/kde4/korganizer.desktop
-#%{_desktopdir}/kde4/korganizer-mobile.desktop
+%{_desktopdir}/kde4/korganizer-mobile.desktop
 %{_iconsdir}/*/*/apps/korganizer.*
-#%{_iconsdir}/*/*/apps/korganizer-mobile.*
+%{_iconsdir}/*/*/apps/korganizer-mobile.*
 %{_iconsdir}/hicolor/*/apps/korg-*.*
 
 %files kontact-plugin-korganizer
@@ -1012,13 +1014,13 @@ rm -rf $RPM_BUILD_ROOT
 %files knotes -f knotes.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/knotes
-#%attr(755,root,root) %{_bindir}/notes-mobile
+%attr(755,root,root) %{_bindir}/notes-mobile
 %attr(755,root,root) %{_libdir}/kde4/knotes_local.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_knote.so
 %{_desktopdir}/kde4/knotes.desktop
-#%{_desktopdir}/kde4/notes-mobile.desktop
+%{_desktopdir}/kde4/notes-mobile.desktop
 %{_datadir}/apps/knotes
-#%{_datadir}/apps/notes-mobile
+%{_datadir}/apps/notes-mobile
 %{_datadir}/apps/desktoptheme/default/widgets/stickynote.svgz
 %{_datadir}/config.kcfg/knoteconfig.kcfg
 %{_datadir}/config.kcfg/knotesglobalconfig.kcfg
@@ -1032,7 +1034,7 @@ rm -rf $RPM_BUILD_ROOT
 #%{_datadir}/kde4/services/knote_config_style.desktop
 %{_iconsdir}/*/*/actions/knotes_*.png
 %{_iconsdir}/*/*/apps/knotes.*
-#%{_iconsdir}/*/*/apps/notes-mobile.png
+%{_iconsdir}/*/*/apps/notes-mobile.png
 
 %files kontact-plugin-knotes
 %defattr(644,root,root,755)
