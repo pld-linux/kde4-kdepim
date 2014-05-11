@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.12.4
+Version:	4.13.0
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
-# Source0-md5:	ce77b8cf031f132274b97c7bf82d2874
+# Source0-md5:	766100bec2aa83a73b8b9316339db1e0
 Patch0:		%{name}-linkgrammar.patch
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
@@ -697,8 +697,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # akonadi
 %attr(755,root,root) %{_bindir}/akonadiconsole
-%attr(755,root,root) %{_bindir}/akonadi_folderarchive_agent
 %attr(755,root,root) %{_bindir}/kincidenceeditor
+%attr(755,root,root) %{_bindir}/sieveeditor
+%attr(755,root,root) %{_bindir}/storageservicemanager
 %attr(755,root,root) %{_bindir}/tasks-mobile
 %{_datadir}/apps/tasks-mobile
 %{_desktopdir}/kde4/tasks-mobile.desktop
@@ -708,8 +709,22 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/akonadi/contact/editorpageplugins
 %attr(755,root,root) %{_libdir}/akonadi/contact/editorpageplugins/cryptopageplugin.so
 %{_desktopdir}/kde4/akonadiconsole.desktop
+%{_desktopdir}/kde4/sieveeditor.desktop
+%{_desktopdir}/kde4/storageservicemanager.desktop
 %{_datadir}/apps/akonadiconsole
+%dir %{_datadir}/apps/sieve
+%dir %{_datadir}/apps/sieve/scripts
+%dir %{_datadir}/apps/sieve/scripts/copy
+%{_datadir}/apps/sieve/scripts/copy/template.desktop
+%{_datadir}/apps/sieve/scripts/copy/template.txt
+%{_datadir}/apps/sieveeditor
+%{_datadir}/apps/storageservicemanager
+%{_datadir}/config/kaddressbook_themes.knsrc
+%{_datadir}/config/knotes_printing_theme.knsrc
+%{_datadir}/config/ksieve_script.knsrc
+
 %{_iconsdir}/hicolor/*x*/apps/akonadiconsole.png
+%{_iconsdir}/hicolor/*x*/apps/kdepim-dropbox.png
 #
 %attr(755,root,root) %{_bindir}/kgpgconf
 %attr(755,root,root) %{_bindir}/kwatchgnupg
@@ -721,7 +736,6 @@ rm -rf $RPM_BUILD_ROOT
 #%attr(755,root,root) %{_libdir}/strigi/strigiea_ics.so
 #%attr(755,root,root) %{_libdir}/strigi/strigiea_vcf.so
 #%attr(755,root,root) %{_libdir}/strigi/strigiea_mail.so
-%dir %{_datadir}/kde4/services/kresources/knotes
 %attr(755,root,root) %{_libdir}/libkcal_resourceremote.so
 %{_datadir}/apps/libmessageviewer
 %{_datadir}/apps/messagelist
@@ -732,16 +746,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_blog.so
 %{_datadir}/kde4/services/kresources/kcal/blog.desktop
-%{_datadir}/ontology/kde/messagetag.*
-
 %attr(755,root,root) %{_libdir}/kde4/grammar_link.so
 %{_datadir}/kde4/services/grammar_link.desktop
 %attr(755,root,root) %{_libdir}/kde4/kcm_pimactivity.so
 %{_datadir}/kde4/services/kcmpimactivity.desktop
-
 %attr(755,root,root) 
 %attr(755,root,root) %{_bindir}/pimsettingexporter
 %{_datadir}/apps/pimsettingexporter
+%{_datadir}/apps/kconf_update/grantleetheme.upd
+%{_datadir}/apps/kconf_update/noteglobalsettings.upd
 
 %files blogilo
 %defattr(644,root,root,755)
@@ -763,8 +776,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kde4/Kontact.desktop
 %{_datadir}/config.kcfg/kontact.kcfg
 %{_datadir}/kde4/services/kontactconfig.desktop
+%{_datadir}/apps/contactthemeeditor
 %{_datadir}/apps/kontact
-#%{_datadir}/apps/kontact-touch
+%{_datadir}/apps/kontact-touch
 %{_desktopdir}/kde4/kontact-admin.desktop
 %{_iconsdir}/*/*/*/kontact*.*
 %{_datadir}/dbus-1/interfaces/org.kde.kontact.KNotes.xml
@@ -877,8 +891,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/akonadi_sendlater_agent
 %{_datadir}/akonadi/agents/sendlateragent.desktop
 %{_datadir}/apps/akonadi_sendlater_agent/akonadi_sendlater_agent.notifyrc
-%dir %{_datadir}/apps/akonadi_folderarchive_agent
-%{_datadir}/apps/akonadi_folderarchive_agent/akonadi_folderarchive_agent.notifyrc
 %attr(755,root,root) %{_bindir}/contactthemeeditor
 %attr(755,root,root) %{_bindir}/headerthemeeditor
 %{_datadir}/applications/kde4/contactthemeeditor.desktop
@@ -904,6 +916,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kcm_ldap.so
 %attr(755,root,root) %{_libdir}/kde4/kaddressbookpart.so
 %{_desktopdir}/kde4/kaddressbook.desktop
+%{_desktopdir}/kde4/kaddressbook-importer.desktop
 %{_desktopdir}/kde4/kaddressbook-mobile.desktop
 %{_datadir}/apps/kaddressbook
 %{_datadir}/apps/kaddressbook-mobile
@@ -943,8 +956,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/servicetypes/calendardecoration.desktop
 %{_datadir}/kde4/servicetypes/calendarplugin.desktop
 %{_datadir}/kde4/servicetypes/dbuscalendar.desktop
-%{_datadir}/kde4/servicetypes/korganizerpart.desktop
-%{_datadir}/kde4/servicetypes/korgprintplugin.desktop
 %{_desktopdir}/kde4/korganizer-import.desktop
 %{_desktopdir}/kde4/korganizer.desktop
 %{_desktopdir}/kde4/korganizer-mobile.desktop
@@ -1013,24 +1024,28 @@ rm -rf $RPM_BUILD_ROOT
 
 %files knotes -f knotes.lang
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/akonadi_notes_agent
 %attr(755,root,root) %{_bindir}/knotes
 %attr(755,root,root) %{_bindir}/notes-mobile
-%attr(755,root,root) %{_libdir}/kde4/knotes_local.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_knote.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_knotessummary.so
 %{_desktopdir}/kde4/knotes.desktop
 %{_desktopdir}/kde4/notes-mobile.desktop
+%{_datadir}/akonadi/agents/notesagent.desktop
+%{_datadir}/apps/akonadi_notes_agent
 %{_datadir}/apps/knotes
 %{_datadir}/apps/notes-mobile
 %{_datadir}/apps/desktoptheme/default/widgets/stickynote.svgz
-%{_datadir}/config.kcfg/knoteconfig.kcfg
 %{_datadir}/config.kcfg/knotesglobalconfig.kcfg
 %{_datadir}/dbus-1/interfaces/org.kde.KNotes.xml
-%{_datadir}/kde4/services/kresources/knotes_manager.desktop
-%{_datadir}/kde4/services/kresources/knotes/local.desktop
 %{_datadir}/kde4/services/knote_config_action.desktop
 %{_datadir}/kde4/services/knote_config_display.desktop
 %{_datadir}/kde4/services/knote_config_editor.desktop
 %{_datadir}/kde4/services/knote_config_network.desktop
+%{_datadir}/kde4/services/kcmknotessummary.desktop
+%{_datadir}/kde4/services/knote_config_collection.desktop
+%{_datadir}/kde4/services/knote_config_misc.desktop
+%{_datadir}/kde4/services/knote_config_print.desktop
 #%{_datadir}/kde4/services/knote_config_style.desktop
 %{_iconsdir}/*/*/actions/knotes_*.png
 %{_iconsdir}/*/*/apps/knotes.*
@@ -1064,7 +1079,6 @@ rm -rf $RPM_BUILD_ROOT
 #%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
 %attr(755,root,root) %{_libdir}/libcalendarsupport.so
 %attr(755,root,root) %{_libdir}/libeventviews.so
-%attr(755,root,root) %{_libdir}/libfolderarchive.so
 %attr(755,root,root) %{_libdir}/libgrantleetheme.so
 %attr(755,root,root) %{_libdir}/libgrantleethemeeditor.so
 %attr(755,root,root) %{_libdir}/libincidenceeditorsng.so
@@ -1092,6 +1106,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmessagecore.so
 %attr(755,root,root) %{_libdir}/libmessagelist.so
 %attr(755,root,root) %{_libdir}/libmessageviewer.so
+%attr(755,root,root) %{_libdir}/libnoteshared.so
 %attr(755,root,root) %{_libdir}/libpimcommon.so
 %attr(755,root,root) %{_libdir}/libtemplateparser.so
 %attr(755,root,root) %{_libdir}/libcomposereditorng.so
@@ -1169,10 +1184,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.kde.mailtransport.service.xml
 %{_datadir}/apps/kdepimwidgets
 # xxx - where is better place for this?
-#%dir %{_libdir}/kde4/imports
-#%dir %{_libdir}/kde4/imports/org
-#%dir %{_libdir}/kde4/imports/org/kde
-#%{_libdir}/kde4/imports/org/kde/pim
+%dir %{_libdir}/kde4/imports
+%dir %{_libdir}/kde4/imports/org
+%dir %{_libdir}/kde4/imports/org/kde
+%{_libdir}/kde4/imports/org/kde/pim
 %attr(755,root,root) %ghost %{_libdir}/libakonadi_next.so.?
 %attr(755,root,root) %{_libdir}/libakonadi_next.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libakregatorinterfaces.so.?
@@ -1183,8 +1198,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libcalendarsupport.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libeventviews.so.?
 %attr(755,root,root) %{_libdir}/libeventviews.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libfolderarchive.so.?
-%attr(755,root,root) %{_libdir}/libfolderarchive.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgrantleetheme.so.?
 %attr(755,root,root) %{_libdir}/libgrantleetheme.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgrantleethemeeditor.so.?
@@ -1211,6 +1224,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmailimporter.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmessagecomposer.so.?
 %attr(755,root,root) %{_libdir}/libmessagecomposer.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libnoteshared.so.?
+%attr(755,root,root) %{_libdir}/libnoteshared.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libtemplateparser.so.?
 %attr(755,root,root) %{_libdir}/libtemplateparser.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libkaddressbookprivate.so.?
