@@ -17,7 +17,6 @@ License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
 # Source0-md5:	052bc3f77ef0fc8245c3cfda2c3f7a07
-Patch0:		%{name}-linkgrammar.patch
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
 URL:		http://www.kde.org/
@@ -644,7 +643,6 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
-%patch0 -p1
 #%patch100 -p1
 
 %build
@@ -746,10 +744,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_blog.so
 %{_datadir}/kde4/services/kresources/kcal/blog.desktop
-%attr(755,root,root) %{_libdir}/kde4/grammar_link.so
-%{_datadir}/kde4/services/grammar_link.desktop
-%attr(755,root,root) %{_libdir}/kde4/kcm_pimactivity.so
-%{_datadir}/kde4/services/kcmpimactivity.desktop
 %attr(755,root,root) 
 %attr(755,root,root) %{_bindir}/pimsettingexporter
 %{_datadir}/apps/pimsettingexporter
@@ -1110,8 +1104,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpimcommon.so
 %attr(755,root,root) %{_libdir}/libtemplateparser.so
 %attr(755,root,root) %{_libdir}/libcomposereditorng.so
-%attr(755,root,root) %{_libdir}/libgrammar.so
-%attr(755,root,root) %{_libdir}/libpimactivity.so
 %attr(755,root,root) %{_libdir}/libsendlater.so
 
 %files kalarm
@@ -1266,10 +1258,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpimcommon.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libcomposereditorng.so.?
 %attr(755,root,root) %{_libdir}/libcomposereditorng.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgrammar.so.?
-%attr(755,root,root) %{_libdir}/libgrammar.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpimactivity.so.?
-%attr(755,root,root) %{_libdir}/libpimactivity.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libsendlater.so.?
 %attr(755,root,root) %{_libdir}/libsendlater.so.*.*.*
 
