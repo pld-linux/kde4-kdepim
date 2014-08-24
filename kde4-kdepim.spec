@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.13.2
+Version:	4.14.0
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
-# Source0-md5:	0e9840faba4be79e50dc30bf64f31880
+Source0:	http://download.kde.org/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
+# Source0-md5:	8ca97d2769f24afda2515c4bbc9873c3
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
 URL:		http://www.kde.org/
@@ -33,12 +33,13 @@ BuildRequires:	dblatex
 BuildRequires:	docbook-dtd42-xml
 BuildRequires:	gpgme-devel >= 1:1.2.0
 BuildRequires:	grantlee-devel
-BuildRequires:	kde4-kactivities-devel >= %{version}
+#BuildRequires:	kde4-kactivities-devel >= %{version}
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
 BuildRequires:	kde4-nepomuk-widgets-devel >= %{version}
 BuildRequires:	libassuan-devel
 BuildRequires:	libindicate-qt-devel >= 0.2.2
+BuildRequires:	libkgapi-devel >= 2.2.0
 BuildRequires:	link-grammar-devel
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
@@ -723,6 +724,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_iconsdir}/hicolor/*x*/apps/akonadiconsole.png
 %{_iconsdir}/hicolor/*x*/apps/kdepim-dropbox.png
+%{_iconsdir}/hicolor/*x*/apps/kdepim-googledrive.png
 #
 %attr(755,root,root) %{_bindir}/kgpgconf
 %attr(755,root,root) %{_bindir}/kwatchgnupg
@@ -814,6 +816,7 @@ rm -rf $RPM_BUILD_ROOT
 %files kmail -f kmail.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/akonadi_archivemail_agent
+%attr(755,root,root) %{_bindir}/akonadi_followupreminder_agent
 %attr(755,root,root) %{_bindir}/akonadi_mailfilter_agent
 %attr(755,root,root) %{_bindir}/importwizard
 %attr(755,root,root) %{_bindir}/kmail
@@ -854,6 +857,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kde4/services/ServiceMenus/kmail_addattachmentservicemenu.desktop
 %{_datadir}/dbus-1/interfaces/org.kde.kmail.*.xml
 %{_datadir}/akonadi/agents/folderarchiveagent.desktop
+%{_datadir}/akonadi/agents/followupreminder.desktop
 %{_datadir}/akonadi/agents/mailfilteragent.desktop
 %{_datadir}/apps/kconf_update/kmail.upd
 %attr(755,root,root) %{_datadir}/apps/kconf_update/upgrade-transport.pl
@@ -883,8 +887,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_bindir}/akonadi_sendlater_agent
 %dir %{_datadir}/apps/akonadi_sendlater_agent
+%dir %{_datadir}/apps/akonadi_followupreminder_agent
 %{_datadir}/akonadi/agents/sendlateragent.desktop
 %{_datadir}/apps/akonadi_sendlater_agent/akonadi_sendlater_agent.notifyrc
+%{_datadir}/apps/akonadi_followupreminder_agent/akonadi_followupreminder_agent.notifyrc
+
 %attr(755,root,root) %{_bindir}/contactthemeeditor
 %attr(755,root,root) %{_bindir}/headerthemeeditor
 %{_datadir}/applications/kde4/contactthemeeditor.desktop
@@ -1073,6 +1080,7 @@ rm -rf $RPM_BUILD_ROOT
 #%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
 %attr(755,root,root) %{_libdir}/libcalendarsupport.so
 %attr(755,root,root) %{_libdir}/libeventviews.so
+%attr(755,root,root) %{_libdir}/libfollowupreminder.so
 %attr(755,root,root) %{_libdir}/libgrantleetheme.so
 %attr(755,root,root) %{_libdir}/libgrantleethemeeditor.so
 %attr(755,root,root) %{_libdir}/libincidenceeditorsng.so
@@ -1190,6 +1198,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libcalendarsupport.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libeventviews.so.?
 %attr(755,root,root) %{_libdir}/libeventviews.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libfollowupreminder.so.?
+%attr(755,root,root) %{_libdir}/libfollowupreminder.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgrantleetheme.so.?
 %attr(755,root,root) %{_libdir}/libgrantleetheme.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgrantleethemeeditor.so.?
