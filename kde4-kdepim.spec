@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.14.3
+Version:	4.14.8
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://download.kde.org/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
-# Source0-md5:	32c5f1d29a56dc498013b54c06dd374e
+Source0:	http://download.kde.org/%{_state}/applications/15.04.1/src/%{orgname}-%{version}.tar.xz
+# Source0-md5:	ef71cd31b70cdd4233e0a712cfe06033
 Patch0:		kdepim-4.11.90-install_kleopatra_headers.patch
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
@@ -35,9 +35,9 @@ BuildRequires:	docbook-dtd42-xml
 BuildRequires:	gpgme-devel >= 1:1.2.0
 BuildRequires:	grantlee-devel
 #BuildRequires:	kde4-kactivities-devel >= %{version}
+BuildRequires:	kde4-baloo-widgets-devel >= 4.14.3
 BuildRequires:	kde4-kdelibs-devel >= %{version}
 BuildRequires:	kde4-kdepimlibs-devel >= %{version}
-BuildRequires:	kde4-nepomuk-widgets-devel >= %{version}
 BuildRequires:	libassuan-devel
 BuildRequires:	libindicate-qt-devel >= 0.2.2
 BuildRequires:	libkgapi-devel >= 2.2.0
@@ -603,7 +603,7 @@ Summary:	KDE Note taker
 Summary(pl.UTF-8):	Notatnik dla KDE
 Summary(pt_BR.UTF-8):	Ferramenta de armazenamento de livros
 Group:		X11/Applications
-Requires:	kde4-kdebase >= %{version}
+Requires:	kde4-kdebase >= 4.14.3
 
 %description kjots
 kjots is a small note taker program. Name and idea are taken from the
@@ -619,7 +619,7 @@ Ferramenta de armazenamento de livros.
 Summary:	A KDE blogging client
 Summary(pl.UTF-8):	Program do blogowania dla KDE
 Group:		X11/Applications
-Requires:	kde4-kdebase >= %{version}
+Requires:	kde4-kdebase >= 4.14.3
 
 %description blogilo
 A KDE blogging client.
@@ -1085,6 +1085,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libakonadi_next.so
 #%attr(755,root,root) %{_libdir}/libakregatorinterfaces.so
 %attr(755,root,root) %{_libdir}/libcalendarsupport.so
+%attr(755,root,root) %{_libdir}/libcalendarsupportcollectionpage.so
 %attr(755,root,root) %{_libdir}/libeventviews.so
 %attr(755,root,root) %{_libdir}/libfollowupreminder.so
 %attr(755,root,root) %{_libdir}/libgrantleetheme.so
@@ -1202,6 +1203,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libakregatorprivate.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libcalendarsupport.so.?
 %attr(755,root,root) %{_libdir}/libcalendarsupport.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcalendarsupportcollectionpage.so.?
+%attr(755,root,root) %{_libdir}/libcalendarsupportcollectionpage.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libeventviews.so.?
 %attr(755,root,root) %{_libdir}/libeventviews.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libfollowupreminder.so.?
@@ -1282,5 +1285,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/plugins/designer/mailcommonwidgets.so
 %attr(755,root,root) %{_libdir}/kde4/plugins/designer/pimcommonwidgets.so
 %dir %{_libdir}/kde4/plugins/grantlee
-%dir %{_libdir}/kde4/plugins/grantlee/0.4
-%attr(755,root,root) %{_libdir}/kde4/plugins/grantlee/0.4/grantlee_messageheaderfilters.so
+%dir %{_libdir}/kde4/plugins/grantlee/0.5
+%attr(755,root,root) %{_libdir}/kde4/plugins/grantlee/0.5/grantlee_messageheaderfilters.so
