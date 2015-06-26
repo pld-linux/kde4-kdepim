@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.14.8
+Version:	4.14.9
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://download.kde.org/%{_state}/applications/15.04.1/src/%{orgname}-%{version}.tar.xz
-# Source0-md5:	ef71cd31b70cdd4233e0a712cfe06033
+Source0:	http://download.kde.org/%{_state}/applications/15.04.2/src/%{orgname}-%{version}.tar.xz
+# Source0-md5:	758d09605020108a21867da94bdc1145
 Patch0:		kdepim-4.11.90-install_kleopatra_headers.patch
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
@@ -1279,6 +1279,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libcomposereditorng.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libsendlater.so.?
 %attr(755,root,root) %{_libdir}/libsendlater.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpimsettingexporterprivate.so.4
+%attr(755,root,root) %{_libdir}/libpimsettingexporterprivate.so.*.*.*
 
 %dir %{_libdir}/kde4/plugins/accessible
 %attr(755,root,root) %{_libdir}/kde4/plugins/accessible/messagevieweraccessiblewidgetfactory.so
