@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Zarządca informacji osobistej (PIM) dla KDE
 Summary(ru.UTF-8):	Персональный планировщик (PIM) для KDE
 Summary(uk.UTF-8):	Персональный планувальник (PIM) для KDE
 Name:		kde4-kdepim
-Version:	4.14.9
+Version:	4.14.10
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://download.kde.org/%{_state}/applications/15.04.2/src/%{orgname}-%{version}.tar.xz
-# Source0-md5:	758d09605020108a21867da94bdc1145
+Source0:	http://download.kde.org/Attic/applications/15.04.3/src/%{orgname}-%{version}.tar.xz
+# Source0-md5:	a09c9bd838cd71c16e9993e57653a7ad
 Patch0:		kdepim-4.11.90-install_kleopatra_headers.patch
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
