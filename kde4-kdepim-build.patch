@@ -19,3 +19,216 @@
    memset(_value + 2, ch, n);
    _value[1] = (unsigned char)(n <= 255 ? n : 255);
    _value[n + 2] = 0;
+--- kdepim-4.4.11.1/kresources/groupwise/soap/incidenceconverter.cpp~	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/kresources/groupwise/soap/incidenceconverter.cpp	2017-11-04 00:13:33.074733528 +0100
+@@ -462,7 +462,7 @@ void IncidenceConverter::setAttendees( K
+   item->distribution->sendoptions->statusTracking = soap_new_ngwt__StatusTracking( soap(),
+     -1 );
+ 
+-  item->distribution->sendoptions->statusTracking->autoDelete = false;
++  item->distribution->sendoptions->statusTracking->autoDelete = NULL;
+   item->distribution->sendoptions->statusTracking->__item = All_;
+ 
+   item->distribution->recipients = soap_new_ngwt__RecipientList( soap(), -1 );
+diff -urN kdepim-4.4.11.1.org/libkleo/backends/qgpgme/qgpgmekeylistjob.cpp kdepim-4.4.11.1/libkleo/backends/qgpgme/qgpgmekeylistjob.cpp
+--- kdepim-4.4.11.1.org/libkleo/backends/qgpgme/qgpgmekeylistjob.cpp	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/libkleo/backends/qgpgme/qgpgmekeylistjob.cpp	2017-11-04 00:17:41.004783127 +0100
+@@ -85,7 +85,7 @@
+   if ( pats.size() < 2 ) {
+     std::vector<Key> keys;
+     const KeyListResult r = do_list_keys( ctx, pats, keys, secretOnly );
+-    return make_tuple( r, keys, QString(), Error() );
++    return boost::make_tuple( r, keys, QString(), Error() );
+   }
+ 
+   // The communication channel between gpgme and gpgsm is limited in
+@@ -109,7 +109,7 @@
+       chunkSize /= 2;
+       if ( chunkSize < 1 )
+         // chunks smaller than one can't be -> return the error.
+-        return make_tuple( this_result, keys, QString(), Error() );
++        return boost::make_tuple( this_result, keys, QString(), Error() );
+       else
+         goto retry;
+     }
+@@ -119,7 +119,7 @@
+       break;
+     pats = pats.mid( chunkSize );
+   } while ( !pats.empty() );
+-  return make_tuple( result, keys, QString(), Error() );
++  return boost::make_tuple( result, keys, QString(), Error() );
+ }
+ 
+ Error QGpgMEKeyListJob::start( const QStringList & patterns, bool secretOnly ) {
+diff -urN kdepim-4.4.11.1.org/knode/knconfigwidgets.cpp kdepim-4.4.11.1/knode/knconfigwidgets.cpp
+--- kdepim-4.4.11.1.org/knode/knconfigwidgets.cpp	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/knode/knconfigwidgets.cpp	2017-11-04 00:23:17.527546706 +0100
+@@ -47,6 +47,7 @@
+ #include <kmimetypetrader.h>
+ #include <kmime/kmime_dateformatter.h>
+ #include <kcolordialog.h>
++#include <kfontchooser.h>
+ #include <kfontdialog.h>
+ #include <kfiledialog.h>
+ #include <kscoringeditor.h>
+@@ -821,7 +822,7 @@
+   if ( item ) {
+     FontListItem *fontItem = static_cast<FontListItem*>( item );
+     QFont font = fontItem->font();
+-    int result = KFontDialog::getFont(font,false,this);
++    int result = KFontDialog::getFont(font,KFontChooser::NoDisplayFlags,this);
+ 
+     if (result == KFontDialog::Accepted)
+       fontItem->setFont(font);
+diff -urN kdepim-4.4.11.1.org/knode/kngroup.cpp kdepim-4.4.11.1/knode/kngroup.cpp
+--- kdepim-4.4.11.1.org/knode/kngroup.cpp	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/knode/kngroup.cpp	2017-11-04 00:23:17.527546706 +0100
+@@ -161,15 +161,15 @@
+     if(i_dentity)
+       i_dentity->saveConfig(info);
+     else if(info.hasKey("Email")) {
+-      info.deleteEntry("Name", false);
+-      info.deleteEntry("Email", false);
+-      info.deleteEntry("Reply-To", false);
+-      info.deleteEntry("Mail-Copies-To", false);
+-      info.deleteEntry("Org", false);
+-      info.deleteEntry("UseSigFile", false);
+-      info.deleteEntry("UseSigGenerator", false);
+-      info.deleteEntry("sigFile", false);
+-      info.deleteEntry("sigText", false);
++      info.deleteEntry("Name", 0);
++      info.deleteEntry("Email", 0);
++      info.deleteEntry("Reply-To", 0);
++      info.deleteEntry("Mail-Copies-To", 0);
++      info.deleteEntry("Org", 0);
++      info.deleteEntry("UseSigFile", 0);
++      info.deleteEntry("UseSigGenerator", 0);
++      info.deleteEntry("sigFile", 0);
++      info.deleteEntry("sigText", 0);
+     }
+ 
+     mCleanupConf->saveConfig( info );
+diff -urN kdepim-4.4.11.1.org/knode/knnntpaccount.cpp kdepim-4.4.11.1/knode/knnntpaccount.cpp
+--- kdepim-4.4.11.1.org/knode/knnntpaccount.cpp	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/knode/knnntpaccount.cpp	2017-11-04 00:23:17.530880148 +0100
+@@ -147,15 +147,15 @@
+   if(i_dentity)
+     i_dentity->saveConfig(conf);
+   else if(conf.hasKey("Email")) {
+-    conf.deleteEntry("Name", false);
+-    conf.deleteEntry("Email", false);
+-    conf.deleteEntry("Reply-To", false);
+-    conf.deleteEntry("Mail-Copies-To", false);
+-    conf.deleteEntry("Org", false);
+-    conf.deleteEntry("UseSigFile", false);
+-    conf.deleteEntry("UseSigGenerator", false);
+-    conf.deleteEntry("sigFile", false);
+-    conf.deleteEntry("sigText", false);
++    conf.deleteEntry("Name", 0);
++    conf.deleteEntry("Email", 0);
++    conf.deleteEntry("Reply-To", 0);
++    conf.deleteEntry("Mail-Copies-To", 0);
++    conf.deleteEntry("Org", 0);
++    conf.deleteEntry("UseSigFile", 0);
++    conf.deleteEntry("UseSigGenerator", 0);
++    conf.deleteEntry("sigFile", 0);
++    conf.deleteEntry("sigText", 0);
+   }
+ 
+   mCleanupConf->saveConfig( conf );
+diff -urN kdepim-4.4.11.1.org/ktimetracker/taskview.cpp kdepim-4.4.11.1/ktimetracker/taskview.cpp
+--- kdepim-4.4.11.1.org/ktimetracker/taskview.cpp	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/ktimetracker/taskview.cpp	2017-11-04 00:28:56.478000628 +0100
+@@ -840,7 +840,7 @@
+ 
+ void TaskView::newTask( const QString &caption, Task *parent )
+ {
+-    EditTaskDialog *dialog = new EditTaskDialog( this, caption, false );
++    EditTaskDialog *dialog = new EditTaskDialog( this, caption, NULL );
+     long total, totalDiff, session, sessionDiff;
+     DesktopList desktopList;
+ 
+diff -urN kdepim-4.4.11.1.org/kleopatra/utils/stl_util.h kdepim-4.4.11.1/kleopatra/utils/stl_util.h
+--- kdepim-4.4.11.1.org/kleopatra/utils/stl_util.h	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/kleopatra/utils/stl_util.h	2017-11-04 00:33:52.599546299 +0100
+@@ -347,7 +347,7 @@
+     template <typename O, typename I, typename P>
+     O copy_if( const I & i, P p ) {
+         O o;
+-        copy_if( boost::begin( i ), boost::end( i ), std::back_inserter( o ), p );
++        kdtools::copy_if( boost::begin( i ), boost::end( i ), std::back_inserter( o ), p );
+         return o;
+     }
+ 
+@@ -385,12 +385,12 @@
+ 
+     template <typename C>
+     bool none_of( const C & c ) {
+-        return none_of( boost::begin( c ), boost::end( c ) );
++        return kdtools::none_of( boost::begin( c ), boost::end( c ) );
+     }
+ 
+     template <typename C, typename P>
+     bool none_of( const C & c, P p ) {
+-        return none_of( boost::begin( c ), boost::end( c ), p );
++        return kdtools::none_of( boost::begin( c ), boost::end( c ), p );
+     }
+ 
+     template <typename C, typename B>
+--- kdepim-4.4.11.1/kontact/plugins/planner/plannerplugin.h~	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/kontact/plugins/planner/plannerplugin.h	2017-11-04 01:24:34.361165722 +0100
+@@ -41,7 +41,7 @@ class PlannerPlugin : public KontactInte
+ 
+   protected:
+     virtual KParts::ReadOnlyPart *createPart()
+-    { return false; }
++    { return NULL; }
+ 
+   private:
+     mutable KAboutData *mAboutData;
+diff -urN kdepim-4.4.11.1.org/kmail/folderview.cpp kdepim-4.4.11.1/kmail/folderview.cpp
+--- kdepim-4.4.11.1.org/kmail/folderview.cpp	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/kmail/folderview.cpp	2017-11-04 01:34:37.834543951 +0100
+@@ -1907,7 +1907,7 @@
+            KGuiItem( i18n( "Go To" ) ),
+            KGuiItem( i18n( "Do Not Go To" ) ), // defaults
+            ":kmail_AskNextFolder",
+-           false
++           0
+          ) == KMessageBox::No
+      )
+     return true; // assume selected (do not continue looping)
+diff -urN kdepim-4.4.11.1.org/kmail/kmmainwidget.cpp kdepim-4.4.11.1/kmail/kmmainwidget.cpp
+--- kdepim-4.4.11.1.org/kmail/kmmainwidget.cpp	2017-11-04 01:25:08.552088932 +0100
++++ kdepim-4.4.11.1/kmail/kmmainwidget.cpp	2017-11-04 01:34:37.834543951 +0100
+@@ -1582,7 +1582,7 @@
+       i18n( "Security Warning" ),
+       KGuiItem(i18n( "Use HTML" )),
+       KStandardGuiItem::cancel(),
+-      "OverrideHtmlWarning", false);
++      "OverrideHtmlWarning", 0);
+     if( result == KMessageBox::Cancel ) {
+       mPreferHtmlAction->setChecked( false );
+       return;
+@@ -1611,7 +1611,7 @@
+       i18n( "Security Warning" ),
+       KGuiItem(i18n( "Load External References" )),
+       KStandardGuiItem::cancel(),
+-      "OverrideHtmlLoadExtWarning", false);
++      "OverrideHtmlLoadExtWarning", 0);
+     if( result == KMessageBox::Cancel ) {
+       mPreferHtmlLoadExtAction->setChecked( false );
+       return;
+diff -urN kdepim-4.4.11.1.org/kmail/kmsender.cpp kdepim-4.4.11.1/kmail/kmsender.cpp
+--- kdepim-4.4.11.1.org/kmail/kmsender.cpp	2011-04-20 22:03:31.000000000 +0200
++++ kdepim-4.4.11.1/kmail/kmsender.cpp	2017-11-04 01:34:37.834543951 +0100
+@@ -560,7 +560,7 @@
+         i18n( "Security Warning" ),
+         KGuiItem( i18n( "Send Unencrypted" ) ),
+         KStandardGuiItem::cancel(),
+-        "useCustomTransportWithoutAsking", false );
++        "useCustomTransportWithoutAsking", 0 );
+ 
+       if ( result == KMessageBox::Cancel ) {
+         mProgressItem->cancel();
+
