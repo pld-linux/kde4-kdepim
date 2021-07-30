@@ -58,8 +58,10 @@ BuildConflicts:	kdepim-libkmailprivate
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	%{name}-runtime >= %{version}
 Obsoletes:	kde4-kdepim-akonadi < 4.3
+Obsoletes:	kde4-kdepim-kitchensync < 4.2
 Obsoletes:	kde4-kdepim-kpilot < 4.4
 Obsoletes:	kde4-kdepim-plugins < 4.10.4-2
+Obsoletes:	kde4-kdepim-wizards < 4.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -171,6 +173,7 @@ URL:		https://kontact.kde.org/components/kmail.html
 # ? Requires:	kde4-kdebase >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	pinentry-qt4
+Obsoletes:	kde4-kdepim-ktnef < 4.8
 
 %description kmail
 This is electronic mail client for KDE with a huge amount of features:
@@ -581,39 +584,6 @@ pocztowych.
 %description korn -l pt_BR.UTF-8
 Miniaplicativo de monitoração da caixa de correio.
 
-%package wizards
-Summary:	wizards
-Summary(pl.UTF-8):	wizards
-Group:		X11/Applications
-
-%description wizards
-wizards.
-
-%description wizards -l pl.UTF-8
-wizards.
-
-%package ktnef
-Summary:	ktnef
-Summary(pl.UTF-8):	ktnef
-Group:		X11/Applications
-
-%description ktnef
-ktnef.
-
-%description ktnef -l pl.UTF-8
-ktnef.
-
-%package kitchensync
-Summary:	kitchensync
-Summary(pl.UTF-8):	kitchensync
-Group:		X11/Applications
-
-%description kitchensync
-kitchensync.
-
-%description kitchensync -l pl.UTF-8
-kitchensync.
-
 %package kleopatra
 Summary:	Kleopatra - certificate manager and crypto GUI for KDE
 Summary(pl.UTF-8):	Kleopatra - zarządca certyfikatów i graficzny interfejs kryptograficzny dla KDE
@@ -711,7 +681,6 @@ rm -rf $RPM_BUILD_ROOT
 #%find_lang korn --with-kde
 %find_lang ktimetracker --with-kde
 %find_lang kjots --with-kde
-%find_lang ktnef --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
