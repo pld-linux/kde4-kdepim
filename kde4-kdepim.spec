@@ -67,8 +67,8 @@ kdepim is a collection of Personal Information Management (PIM) tools
 for the K Desktop Environment (KDE).
 
 %description -l pl.UTF-8
-kdepim jest jest zestawem aplikacji PIM dla K Desktop Environment
-(KDE).
+kdepim jest zestawem aplikacji do zarządzania informacjami osobistymi
+(PIM) dla K Desktop Environment (KDE).
 
 %description -l ru.UTF-8
 kdepim - это набор утилит для управления персональной информацией для
@@ -80,7 +80,7 @@ Desktop Environment (KDE).
 
 %package kontact
 Summary:	Kontact Personal Information Management
-Summary(pl.UTF-8):	Kontact Personal Information Management
+Summary(pl.UTF-8):	Kontact - zarządca informacji osobistych (PIM)
 Group:		X11/Applications
 Requires:	kde4-kdepim-runtime
 Requires:	pinentry-qt4
@@ -95,7 +95,8 @@ Obsoletes:	kde4-kdepim-kontact-plugin-planner < 4.8
 Kontact Personal Information Management.
 
 %description kontact -l pl.UTF-8
-Kontact Personal Information Management.
+Kontact Personal Information Management - zarządca informacji
+osobistych.
 
 %package knode
 Summary:	KDE News Reader
@@ -113,7 +114,7 @@ Environment. It features:
 - support for multiple newsservers
 - reading and composing of MIME multipart messages
 - inline display of attachments (text and images)
-- support for sending mail via smtp
+- support for sending mail via SMTP
 - customizable filters, fonts, colors
 - full scoring
 - and more...
@@ -126,8 +127,9 @@ KNode to czytnik newsów zgodny ze specyfikacją GKNSA przeznaczony dla
 - obsługę wielu serwerów news
 - czytanie i tworzenie wieloczęściowych wiadomości MIME
 - wyświetlanie załączników w tekście (tekstowych i obrazków)
+- obsługę wysyłania poczty poprzez SMTP
 - konfigurowalne filtry, fonty i kolory
-- pełny scoring
+- pełne punktowanie wiadomości (score)
 - wiele więcej...
 
 %description knode -l pt_BR.UTF-8
@@ -135,7 +137,7 @@ Leitor de notícias (news) do KDE.
 
 %package kontact-plugin-knode
 Summary:	Knode plugin for Kontact
-Summary(pl.UTF-8):	plugin Knode dla Kontact
+Summary(pl.UTF-8):	Wtyczka Knode dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-knode = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
@@ -145,7 +147,7 @@ Obsoletes:	kde4-kontact-plugin-knode < 4.2
 Knode plugin for Kontact.
 
 %description kontact-plugin-knode -l pl.UTF-8
-Plugin Knode dla Kontact.
+Wtyczka Knode dla Kontacta.
 
 %package ktimetracker
 Summary:	Personal timetracker
@@ -201,7 +203,7 @@ Program pocztowy dla KDE o olbrzymich możliwościach, obejmujących:
 - przeszukiwanie wiadomości z prezentacją w wirtualnych folderach
 - usuwanie powtórzonych listów
 - wątkowanie wiadomości
-- kontrolę pisowni w locie
+- sprawdzanie pisowni w locie
 - import poczty z innych klientów
 - wiele więcej...
 
@@ -210,7 +212,7 @@ Poderoso cliente / leitor de e-mails para o KDE.
 
 %package kontact-plugin-kmail
 Summary:	Kmail plugin for Kontact
-Summary(pl.UTF-8):	plugin Kmail dla Kontakt
+Summary(pl.UTF-8):	Wtyczka Kmail dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-kmail = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
@@ -221,7 +223,7 @@ Obsoletes:	kde4-kontact-plugin-kmail < 4.2
 Kmail plugin for Kontact.
 
 %description kontact-plugin-kmail -l pl.UTF-8
-Plugin Kmail dla Kontakt.
+Wtyczka Kmail dla Kontacta.
 
 %package kaddressbook
 Summary:	Address book
@@ -238,7 +240,7 @@ Książka adresowa dla KDE.
 
 %package kontact-plugin-kaddressbook
 Summary:	Kaddressbook plugin for Kontact
-Summary(pl.UTF-8):	plugin Kaddressbook dla Kontakt
+Summary(pl.UTF-8):	Wtyczka Kaddressbook dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-kaddressbook = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
@@ -249,11 +251,11 @@ Obsoletes:	kde4-kontact-plugin-kaddressbook < 4.2
 Kaddressbook plugin for Kontact.
 
 %description kontact-plugin-kaddressbook -l pl.UTF-8
-Plugin Kaddressbook dla Kontakt.
+Wtyczka Kaddressbook dla Kontacta.
 
 %package korganizer
-Summary:	Calendar and scheduling component of Kontact
-Summary(pl.UTF-8):	korganizer
+Summary:	KOrganizer - calendar and scheduling component of Kontact
+Summary(pl.UTF-8):	KOrganizer - komponent Kontacta z kalendarzem i planowaniem
 Group:		X11/Applications
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	kde4-kdelibs >= %{version}
@@ -275,11 +277,24 @@ standards for storing and exchanging calendar data, vCalendar and
 iCalendar.
 
 %description korganizer -l pl.UTF-8
-Korganizer.
+KOrganizer to komponent Kontacta (zarządcy informacji osobistych KDE)
+z kalendarzem i planowaniem zadań.
+
+KOrganizer zapewnia zarządzanie wydarzeniami i zadaniami,
+powiadomienia, eksport przez WWW, przezroczystą sieciowo obsługę
+danych, planowanie grupowe, import i eksport plików kalendarza itp.
+Potrafi współpracować z wieloma serwerami pracy grupowej, jak Kolab,
+Open-Xchange, Citadel czy OpenGroupware.org.
+
+KOrganizer jest w pełni konfigurowalny do potrzeb i jest integralną
+częścią narzędzi KDE PIM, których celem jest zapewnienie kompletnego
+rozwiązania organizowania danych osobistych. KOrganizer obsługuje dwa
+dominujące standardy pzechowywania i wymiany danych kalendarza:
+vCalendar oraz iCalendar.
 
 %package kontact-plugin-korganizer
-Summary:	Korganizer plugin for Kontact
-Summary(pl.UTF-8):	plugin korganizer dla Kontakt
+Summary:	KOrganizer plugin for Kontact
+Summary(pl.UTF-8):	Wtyczka KOrganizer dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-kontact = %{version}-%{release}
 Requires:	%{name}-korganizer = %{version}-%{release}
@@ -287,10 +302,10 @@ Provides:	kde4-kontact-plugin-korganizer
 Obsoletes:	kde4-kontact-plugin-korganizer < 4.2
 
 %description kontact-plugin-korganizer
-Korganizer plugin for Kontact.
+KOrganizer plugin for Kontact.
 
 %description kontact-plugin-korganizer -l pl.UTF-8
-Plugin korganizer dla Kontakt.
+Wtyczka KOrganizer dla Kontacta.
 
 %package kmobiletools
 Summary:	Make your mobile phone communicate with your PC
@@ -305,7 +320,7 @@ Narzędzie do komunikacji między telefonem komórkowym a PC.
 
 %package kontact-plugin-kmobiletools
 Summary:	Kmobiletools plugin for Kontact
-Summary(pl.UTF-8):	plugin kmobiletools dla Kontakt
+Summary(pl.UTF-8):	Wtyczka kmobiletools dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-kmobiletools = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
@@ -316,11 +331,11 @@ Obsoletes:	kde4-kontact-plugin-kmobiletools < 4.2
 Kmobiletools plugin for Kontact.
 
 %description kontact-plugin-kmobiletools -l pl.UTF-8
-Plugin kmobiletools dla Kontakt.
+Wtyczka kmobiletools dla Kontacta.
 
 %package kontact-plugin-summary
 Summary:	Summary plugin for Kontact
-Summary(pl.UTF-8):	plugin Summary dla Kontakt
+Summary(pl.UTF-8):	Wtyczka podsumowania dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-summary
@@ -330,11 +345,11 @@ Obsoletes:	kde4-kontact-plugin-summary < 4.2
 Summary plugin for Kontact.
 
 %description kontact-plugin-summary -l pl.UTF-8
-Plugin Summary dla Kontakt.
+Wtyczka podsumowania dla Kontacta.
 
 %package kontact-plugin-specialdates
 Summary:	Specialdates plugin for Kontact
-Summary(pl.UTF-8):	plugin Specialdates dla Kontakt.
+Summary(pl.UTF-8):	Wtyczka Specialdates dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-specialdates
@@ -344,11 +359,11 @@ Obsoletes:	kde4-kontact-plugin-specialdates < 4.2
 Specialdates plugin for Kontact.
 
 %description kontact-plugin-specialdates -l pl.UTF-8
-Plugin Specialdates dla Kontakt.
+Wtyczka Specialdates dla Kontacta.
 
 %package kontact-plugin-newsticker
 Summary:	Newsticker plugin for Kontact
-Summary(pl.UTF-8):	plugin Newsticker dla Kontakt
+Summary(pl.UTF-8):	Wtyczka Newsticker dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-newsticker
@@ -358,11 +373,11 @@ Obsoletes:	kde4-kontact-plugin-newsticker < 4.2
 Newsticker plugin for Kontact.
 
 %description kontact-plugin-newsticker -l pl.UTF-8
-Plugin Newsticker dla Kontakt.
+Wtyczka Newsticker dla Kontacta.
 
 %package akregator
 Summary:	News feed reader for the KDE desktop
-Summary(pl.UTF-8):	Czytnik newsów dla KDE
+Summary(pl.UTF-8):	Czytnik aktualności dla środowiska KDE
 Group:		X11/Applications
 Requires:	%{name}-libs = %{version}-%{release}
 
@@ -376,11 +391,18 @@ integration for adding news feeds and with an internal browser for
 easy news reading.
 
 %description akregator -l pl.UTF-8
-Czytnik newsów dla KDE.
+Akregator to czytnik aktualności (news feed) dla środowiska KDE.
+Pozwala śledzić strony z wiadomościami, blogi oraz inne witryny z
+obsługą RSS/Atom bez potrzeby ręcznego sprawdzania uaktualnień przy
+użyciu przeglądarki WWW. Akregator jest zaprojektowany jako łatwy w
+użyciu, a jednocześnie wystarczająco potężny, by czytać wygodnie
+setki źródeł aktualności. Ma integrację z Konquerorem w celu dodawania
+nowych źródeł oraz z wewnętrzną przeglądarką w celu łatwego czytania
+wiadomości.
 
 %package kontact-plugin-akregator
 Summary:	Akregator plugin for Kontact
-Summary(pl.UTF-8):	plugin Akregator dla Kontakt
+Summary(pl.UTF-8):	Wtyczka Akregator dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-akregator = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
@@ -391,11 +413,11 @@ Obsoletes:	kde4-kontact-plugin-akregator < 4.2
 Akregator plugin for Kontact.
 
 %description kontact-plugin-akregator -l pl.UTF-8
-Plugin Akregator dla Kontakt.
+Wtyczka Akregator dla Kontacta.
 
 %package kontact-plugin-weather
 Summary:	Weather plugin for Kontact
-Summary(pl.UTF-8):	plugin Weather dla Kontakt
+Summary(pl.UTF-8):	Wtyczka Weather dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-weather
@@ -405,7 +427,7 @@ Obsoletes:	kde4-kontact-plugin-weather < 4.2
 Weather plugin for Kontact.
 
 %description kontact-plugin-weather -l pl.UTF-8
-Plugin Weather dla Kontakt.
+Wtyczka Weather dla Kontacta.
 
 %package knotes
 Summary:	Yellow cards
@@ -426,7 +448,7 @@ komputerów.
 
 %package kontact-plugin-knotes
 Summary:	Knotes plugin for Kontact
-Summary(pl.UTF-8):	plugin Knotes dla Kontakt
+Summary(pl.UTF-8):	Wtyczka Knotes dla Kontacta
 Group:		X11/Applications
 Requires:	%{name}-knotes = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
@@ -437,7 +459,7 @@ Obsoletes:	kde4-kontact-plugin-knotes < 4.2
 Knotes plugin for Kontact.
 
 %description kontact-plugin-knotes -l pl.UTF-8
-Plugin Knotes dla Kontakt.
+Wtyczka Knotes dla Kontacta.
 
 %package devel
 Summary:	Development files for KDE pim
@@ -593,13 +615,19 @@ kitchensync.
 kitchensync.
 
 %package kleopatra
-Summary:	Kleopatra
+Summary:	Kleopatra - certificate manager and crypto GUI for KDE
+Summary(pl.UTF-8):	Kleopatra - zarządca certyfikatów i graficzny interfejs kryptograficzny dla KDE
 Group:		X11/Applications
+URL:		https://apps.kde.org/kleopatra/
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dirmngr
 
 %description kleopatra
-Kleopatra.
+Kleopatra is a certificate manager and universal crypto GUI for KDE.
+
+%description kleopatra -l pl.UTF-8
+Kleopatra to zarządca certyfikatów i uniwersalny graficzny interfejs
+kryptograficzny dla KDE.
 
 %package kjots
 Summary:	KDE Note taker
