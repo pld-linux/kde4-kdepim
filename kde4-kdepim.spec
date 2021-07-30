@@ -57,9 +57,8 @@ BuildConflicts:	kdepim-kontact-libs
 BuildConflicts:	kdepim-libkmailprivate
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	%{name}-runtime >= %{version}
-Obsoletes:	%{name}-kpilot
-Obsoletes:	kde4-kdepim-kontact-plugin-ktimetracker
-Obsoletes:	kde4-kdepim-kontact-plugin-planner
+Obsoletes:	kde4-kdepim-akonadi < 4.3
+Obsoletes:	kde4-kdepim-kpilot < 4.4
 Obsoletes:	kde4-kdepim-plugins < 4.10.4-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -86,7 +85,11 @@ Group:		X11/Applications
 Requires:	kde4-kdepim-runtime
 Requires:	pinentry-qt4
 Provides:	kde4-kontact
-Obsoletes:	kde4-kontact
+Obsoletes:	kde4-kontact < 4.2
+Obsoletes:	kde4-kontact-plugin-ktimetracker < 4.2
+Obsoletes:	kde4-kontact-plugin-planner < 4.2
+Obsoletes:	kde4-kdepim-kontact-plugin-ktimetracker < 4.10
+Obsoletes:	kde4-kdepim-kontact-plugin-planner < 4.8
 
 %description kontact
 Kontact Personal Information Management.
@@ -130,13 +133,13 @@ KNode to czytnik newsów zgodny ze specyfikacją GKNSA przeznaczony dla
 %description knode -l pt_BR.UTF-8
 Leitor de notícias (news) do KDE.
 
-
 %package kontact-plugin-knode
 Summary:	Knode plugin for Kontact
 Summary(pl.UTF-8):	plugin Knode dla Kontact
 Group:		X11/Applications
 Requires:	%{name}-knode = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
+Obsoletes:	kde4-kontact-plugin-knode < 4.2
 
 %description kontact-plugin-knode
 Knode plugin for Kontact.
@@ -212,7 +215,7 @@ Group:		X11/Applications
 Requires:	%{name}-kmail = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-kmail
-Obsoletes:	kde4-kontact-plugin-kmail
+Obsoletes:	kde4-kontact-plugin-kmail < 4.2
 
 %description kontact-plugin-kmail
 Kmail plugin for Kontact.
@@ -240,7 +243,7 @@ Group:		X11/Applications
 Requires:	%{name}-kaddressbook = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-kaddressbook
-Obsoletes:	kde4-kontact-plugin-kaddressbook
+Obsoletes:	kde4-kontact-plugin-kaddressbook < 4.2
 
 %description kontact-plugin-kaddressbook
 Kaddressbook plugin for Kontact.
@@ -281,7 +284,7 @@ Group:		X11/Applications
 Requires:	%{name}-kontact = %{version}-%{release}
 Requires:	%{name}-korganizer = %{version}-%{release}
 Provides:	kde4-kontact-plugin-korganizer
-Obsoletes:	kde4-kontact-plugin-korganizer
+Obsoletes:	kde4-kontact-plugin-korganizer < 4.2
 
 %description kontact-plugin-korganizer
 Korganizer plugin for Kontact.
@@ -307,7 +310,7 @@ Group:		X11/Applications
 Requires:	%{name}-kmobiletools = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-kmobiletools
-Obsoletes:	kde4-kontact-plugin-kmobiletools
+Obsoletes:	kde4-kontact-plugin-kmobiletools < 4.2
 
 %description kontact-plugin-kmobiletools
 Kmobiletools plugin for Kontact.
@@ -321,7 +324,7 @@ Summary(pl.UTF-8):	plugin Summary dla Kontakt
 Group:		X11/Applications
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-summary
-Obsoletes:	kde4-kontact-plugin-summary
+Obsoletes:	kde4-kontact-plugin-summary < 4.2
 
 %description kontact-plugin-summary
 Summary plugin for Kontact.
@@ -335,7 +338,7 @@ Summary(pl.UTF-8):	plugin Specialdates dla Kontakt.
 Group:		X11/Applications
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-specialdates
-Obsoletes:	kde4-kontact-plugin-specialdates
+Obsoletes:	kde4-kontact-plugin-specialdates < 4.2
 
 %description kontact-plugin-specialdates
 Specialdates plugin for Kontact.
@@ -349,7 +352,7 @@ Summary(pl.UTF-8):	plugin Newsticker dla Kontakt
 Group:		X11/Applications
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-newsticker
-Obsoletes:	kde4-kontact-plugin-newsticker
+Obsoletes:	kde4-kontact-plugin-newsticker < 4.2
 
 %description kontact-plugin-newsticker
 Newsticker plugin for Kontact.
@@ -382,7 +385,7 @@ Group:		X11/Applications
 Requires:	%{name}-akregator = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-akregator
-Obsoletes:	kde4-kontact-plugin-akregator
+Obsoletes:	kde4-kontact-plugin-akregator < 4.2
 
 %description kontact-plugin-akregator
 Akregator plugin for Kontact.
@@ -396,7 +399,7 @@ Summary(pl.UTF-8):	plugin Weather dla Kontakt
 Group:		X11/Applications
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-weather
-Obsoletes:	kde4-kontact-plugin-weather
+Obsoletes:	kde4-kontact-plugin-weather < 4.2
 
 %description kontact-plugin-weather
 Weather plugin for Kontact.
@@ -428,7 +431,7 @@ Group:		X11/Applications
 Requires:	%{name}-knotes = %{version}-%{release}
 Requires:	%{name}-kontact = %{version}-%{release}
 Provides:	kde4-kontact-plugin-knotes
-Obsoletes:	kde4-kontact-plugin-knotes
+Obsoletes:	kde4-kontact-plugin-knotes < 4.2
 
 %description kontact-plugin-knotes
 Knotes plugin for Kontact.
@@ -445,6 +448,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-kleopatra = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	kde4-kdelibs-devel >= %{version}
+Obsoletes:	kde4-kdepim-apidocs < 4.0.61
 
 %description devel
 This package contains header files needed if you wish to build
@@ -466,7 +470,7 @@ bazujących na kdepim.
 Summary:	Groupwise protocol service
 Summary(pl.UTF-8):	Obsługa protokołu Groupwise
 Group:		X11/Libraries
-Obsoletes:	kde4-kio-groupwise
+Obsoletes:	kde4-kio-groupwise < 4.2.0
 
 %description kio-groupwise
 Groupwise protocol service.
@@ -478,7 +482,7 @@ Obsługa protokołu Groupwise.
 Summary:	IMAP4 protocol service
 Summary(pl.UTF-8):	Obsługa protokołu IMAP4
 Group:		X11/Libraries
-Obsoletes:	kde4-kio-imap4
+Obsoletes:	kde4-kio-imap4 < 4.2.0
 # for PLAIN authentication
 Suggests:	cyrus-sasl-plain
 
@@ -492,7 +496,7 @@ Obsługa protokołu IMAP4.
 Summary:	A personal alarm scheduler
 Summary(pl.UTF-8):	Osobisty program do przypominania
 Group:		X11/Libraries
-Obsoletes:	kalarm
+Obsoletes:	kalarm < 3
 
 %description kalarm
 KAlarm is a personal alarm message, command and email scheduler. It
