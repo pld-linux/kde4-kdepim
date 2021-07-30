@@ -2,7 +2,6 @@
 #
 #/usr/lib64/kde4/plugins/accessible/messagevieweraccessiblewidgetfactory.so
 #
-%define		_state	stable
 %define		qtver	4.8.1
 %define		orgname	kdepim
 Summary:	Personal Information Management (PIM) for KDE
@@ -15,12 +14,12 @@ Version:	4.14.10
 Release:	3
 License:	GPL
 Group:		X11/Applications
-Source0:	http://download.kde.org/Attic/applications/15.04.3/src/%{orgname}-%{version}.tar.xz
+Source0:	https://download.kde.org/Attic/applications/15.04.3/src/%{orgname}-%{version}.tar.xz
 # Source0-md5:	a09c9bd838cd71c16e9993e57653a7ad
 Patch0:		kdepim-4.11.90-install_kleopatra_headers.patch
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
-URL:		http://www.kde.org/
+URL:		https://kde.org/
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtDesigner-devel >= %{qtver}
 BuildRequires:	QtSvg-devel >= %{qtver}
@@ -163,7 +162,7 @@ Summary:	KDE Mail client
 Summary(pl.UTF-8):	Program pocztowy KDE
 Summary(pt_BR.UTF-8):	Cliente / leitor de e-mails para o KDE
 Group:		X11/Applications/Mail
-URL:		http://kontact.kde.org/kmail/
+URL:		https://kontact.kde.org/components/kmail.html
 # ? Requires:	kde4-kdebase >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	pinentry-qt4
