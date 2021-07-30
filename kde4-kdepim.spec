@@ -884,9 +884,6 @@ rm -rf $RPM_BUILD_ROOT
 # conflicts with kde-icons-oxygen
 %{_iconsdir}/oxygen/*/actions/edit-delete-page.*
 
-### libkleo
-%attr(755,root,root) %{_libdir}/libkleo.so
-
 %attr(755,root,root) %{_bindir}/akonadi_sendlater_agent
 %dir %{_datadir}/apps/akonadi_sendlater_agent
 %dir %{_datadir}/apps/akonadi_followupreminder_agent
@@ -1098,6 +1095,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkdepimmobileui.so
 #%attr(755,root,root) %{_libdir}/libkdepim.so
 %attr(755,root,root) %{_libdir}/libkdgantt2.so
+%attr(755,root,root) %{_libdir}/libkleo.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientcore.so
 %attr(755,root,root) %{_libdir}/libkleopatraclientgui.so
 %attr(755,root,root) %{_libdir}/libkmanagesieve.so
