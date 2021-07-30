@@ -17,6 +17,7 @@ Group:		X11/Applications
 Source0:	https://download.kde.org/Attic/applications/15.04.3/src/%{orgname}-%{version}.tar.xz
 # Source0-md5:	a09c9bd838cd71c16e9993e57653a7ad
 Patch0:		kdepim-4.11.90-install_kleopatra_headers.patch
+Patch1:		%{name}-qt.patch
 Patch100:	%{name}-branch.diff
 # http://mirrors.ludost.net/gentoo/distfiles/kleopatra-4.4.3-assuan2.patch.bz2
 URL:		https://kde.org/
@@ -46,7 +47,7 @@ BuildRequires:	pcre-devel
 BuildRequires:	pkgconfig
 BuildRequires:	qt4-build >= %{qtver}
 BuildRequires:	qt4-qmake >= %{qtver}
-BuildRequires:	rpmbuild(macros) >= 1.600
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	shared-desktop-ontologies-devel
 BuildRequires:	soprano-devel >= 2.3.0
 BuildRequires:	strigi-devel >= 0.6.5
@@ -647,38 +648,35 @@ libksieve, libmimelib.
 %prep
 %setup -q -n %{orgname}-%{version}
 %patch0 -p1
+%patch1 -p1
 #%patch100 -p1
+
+%{__sed} -i -e '1s, /usr/bin/env bash,/bin/bash,' kmail/kconf_update/kmail-*.sh
 
 %build
 install -d build
 cd build
-%cmake \
-	-DKONTACT_ENABLE_MIXEDMODE_SUMMARY_PLUGINS=on \
-	../
+%cmake .. \
+	-DKONTACT_ENABLE_MIXEDMODE_SUMMARY_PLUGINS=ON
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} -C build/ install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	kde_htmldir=%{_kdedocdir}
 
 %{__rm} -r $RPM_BUILD_ROOT%{_iconsdir}/locolor
 
 %find_lang akregator --with-kde
-#%find_lang kaddressbook --with-kde
-#%find_lang kalarm --with-kde
 %find_lang kleopatra --with-kde
 %find_lang kmail --with-kde
-#%find_lang kmobiletools --with-kde
 %find_lang knode --with-kde
 %find_lang knotes --with-kde
-#%find_lang konsolekalendar --with-kde
 %find_lang kontact --with-kde
 %find_lang korganizer --with-kde
-#%find_lang korn --with-kde
 %find_lang ktimetracker --with-kde
 %find_lang kjots --with-kde
 
@@ -749,11 +747,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkcal_resourceblog.so
 %attr(755,root,root) %{_libdir}/kde4/kcal_blog.so
 %{_datadir}/kde4/services/kresources/kcal/blog.desktop
-%attr(755,root,root) 
 %attr(755,root,root) %{_bindir}/pimsettingexporter
 %{_datadir}/apps/pimsettingexporter
 %{_datadir}/apps/kconf_update/grantleetheme.upd
 %{_datadir}/apps/kconf_update/noteglobalsettings.upd
+%lang(en) %{_kdedocdir}/en/kwatchgnupg
+%lang(en) %{_kdedocdir}/en/pimsettingexporter
+%lang(en) %{_kdedocdir}/en/sieveeditor
 
 %files blogilo
 %defattr(644,root,root,755)
@@ -766,7 +766,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*x*/actions/*-mark.png
 %{_iconsdir}/hicolor/*x*/actions/*-link.png
 %{_iconsdir}/hicolor/*x*/actions/*-media.png
-%{_kdedocdir}/en/blogilo
+%lang(en) %{_kdedocdir}/en/blogilo
 
 %files kontact -f kontact.lang
 %defattr(644,root,root,755)
@@ -794,6 +794,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/org.kde.knode.xml
 %{_datadir}/kde4/services/knode_*.desktop
 %{_iconsdir}/*/*/apps/knode.*
+# XXX: where to package?
+%lang(en) %{_kdedocdir}/en/kioslave/news
 
 %files kontact-plugin-knode
 %defattr(644,root,root,755)
@@ -884,6 +886,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/oxygen/*/actions/checkmark.*
 # conflicts with kde-icons-oxygen
 %{_iconsdir}/oxygen/*/actions/edit-delete-page.*
+%lang(en) %{_kdedocdir}/en/akonadi_archivemail_agent
+%lang(en) %{_kdedocdir}/en/importwizard
+%lang(en) %{_kdedocdir}/en/kmailcvt
+%lang(en) %{_kdedocdir}/en/ktnef
 
 %attr(755,root,root) %{_bindir}/akonadi_sendlater_agent
 %dir %{_datadir}/apps/akonadi_sendlater_agent
@@ -891,6 +897,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/akonadi/agents/sendlateragent.desktop
 %{_datadir}/apps/akonadi_sendlater_agent/akonadi_sendlater_agent.notifyrc
 %{_datadir}/apps/akonadi_followupreminder_agent/akonadi_followupreminder_agent.notifyrc
+%lang(en) %{_kdedocdir}/en/akonadi_followupreminder_agent
+%lang(en) %{_kdedocdir}/en/akonadi_sendlater_agent
 
 %attr(755,root,root) %{_bindir}/contactthemeeditor
 %attr(755,root,root) %{_bindir}/headerthemeeditor
@@ -900,6 +908,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/headerthemeeditor/headerthemeeditorui.rc
 %dir %{_datadir}/apps/composereditor
 %{_datadir}/apps/composereditor/composereditorinitialhtml
+%lang(en) %{_kdedocdir}/en/contactthemeeditor
+%lang(en) %{_kdedocdir}/en/headerthemeeditor
 
 %{_datadir}/config/messageviewer_header_themes.knsrc
 
@@ -1051,6 +1061,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/actions/knotes_*.png
 %{_iconsdir}/*/*/apps/knotes.*
 %{_iconsdir}/*/*/apps/notes-mobile.png
+%lang(en) %{_kdedocdir}/en/akonadi_notes_agent
 
 %files kontact-plugin-knotes
 %defattr(644,root,root,755)
@@ -1135,7 +1146,7 @@ rm -rf $RPM_BUILD_ROOT
 /etc/dbus-1/system.d/org.kde.kalarmrtcwake.conf
 %{_datadir}/polkit-1/actions/org.kde.kalarmrtcwake.policy
 %{_iconsdir}/*/*/apps/*kalarm.*
-%{_kdedocdir}/en/kalarm
+%lang(en) %{_kdedocdir}/en/kalarm
 
 %files konsolekalendar
 %defattr(644,root,root,755)
@@ -1147,7 +1158,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*x*/apps/konsolekalendar.png
 %lang(en) %{_kdedocdir}/en/konsolekalendar
 %lang(en) %{_kdedocdir}/en/kabcclient
-%{_mandir}/man1/kabcclient.1.*
+%{_mandir}/man1/kabcclient.1*
 
 %files kleopatra -f kleopatra.lang
 %defattr(644,root,root,755)

@@ -1,0 +1,22 @@
+--- kdepim-4.14.10/korganizer/kodaymatrix.cpp.orig	2015-06-25 19:47:38.000000000 +0200
++++ kdepim-4.14.10/korganizer/kodaymatrix.cpp	2021-07-29 22:23:11.122627522 +0200
+@@ -862,7 +862,7 @@ void KODayMatrix::paintEvent( QPaintEven
+       p.setPen( actcol );
+     }
+     // reset bold font to plain font
+-    if ( mEvents.contains( mDays[i] ) > 0 ) {
++    if ( mEvents.contains( mDays[i] ) ) {
+       QFont myFont = font();
+       myFont.setBold( false );
+       p.setFont( myFont );
+--- kdepim-4.14.10/knode/knfiltermanager.cpp.orig	2015-06-25 19:47:38.000000000 +0200
++++ kdepim-4.14.10/knode/knfiltermanager.cpp	2021-07-30 06:25:29.178413424 +0200
+@@ -201,7 +201,7 @@ void KNFilterManager::addFilter(KNArticl
+     foreach ( KNArticleFilter *filter, mFilterList )
+       activeFilters << filter->id();
+     int newId = 1;
+-    while ( activeFilters.contains( newId ) > 0 )
++    while ( activeFilters.contains( newId ) )
+       newId++;
+     f->setId( newId );
+   }
