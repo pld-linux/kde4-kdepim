@@ -647,8 +647,8 @@ libksieve, libmimelib.
 
 %prep
 %setup -q -n %{orgname}-%{version}
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 #%patch100 -p1
 
 %{__sed} -i -e '1s, /usr/bin/env bash,/bin/bash,' kmail/kconf_update/kmail-*.sh
